@@ -42,6 +42,7 @@ e de norma ABNT já estabelecidas no arquivo.
 9. **Idioma**: português brasileiro, exceto o Abstract que é em inglês.
 10. **IDs de âncora**: cada seção numerada recebe `id="sec-X"` ou `id="sec-X-Y"` no
     heading, para o sumário funcionar.
+11. **Ausência de Dados Emulados**: Todos os trechos textuais e lógicas geradas devem frisar a integração real. O front-end consome a API C# ASP.NET Core e realiza a persistência no banco SQL Server, eliminando localStorages para dados dinâmicos do aluno.
 
 ---
 
@@ -200,14 +201,11 @@ corpo: (AUTOR, ANO). Continue o parágrafo normalmente.</p>
 
 ## Tecnologias do Projeto (contexto para geração de conteúdo)
 
-- **Front-end**: HTML5 semântico, CSS Grid/Flexbox, Vanilla JavaScript, WAI-ARIA
-- **Back-end**: C# (.NET 10), OOP com 4 pilares
-- **Banco de Dados**: SQL Server, DDL/DML, relações N:N com tabelas associativas
-- **Algoritmo central**: SM-2 (Repetição Espaçada) in JavaScript
-- **Gamificação**: XP e Moedas Virtuais
-- **Metodologia**: Scrum + Kanban (Trello), MPS.BR
-- **Design/UX**: Figma, ISO/IEC 25010, Heurísticas de Nielsen, Alto Contraste, Zoom
-- **Perfis de usuário**: Aluno, Tutor, Admin
+- **Front-end**: HTML5 semântico, CSS3 Puro responsivo, Vanilla JavaScript, WAI-ARIA (Alto Contraste e Zoom), física de molas no Obsidian View (Mapa Neural) com JSON dinâmico.
+- **Back-end**: C# (.NET 10), APIs RESTful assíncronas baseadas em Minimal APIs, Entity Framework Core, autenticação baseada em JWT Bearer Token, ISm2Engine para repetição espaçada.
+- **Banco de Dados**: Microsoft SQL Server (SGBD Relacional) com restrições e relacionamentos N:N indexados.
+- **Módulos Centrais**: Simulado ENADE (Questões e Alternativas associadas), Gamificação (XP, Moedas Virtuais e Nível integrados ao usuário), Motor de Aprendizado SM-2.
+- **Metodologia e Qualidade**: Scrum + Kanban, normas ISO/IEC 25010 e conformidade com a LGPD.
 - **Tabelas principais do banco**: tb_usuarios, tb_flashcards, tb_revisoes_sm2,
   tb_questoes, tb_alternativas, tb_areas_conhecimento, tb_tags, tb_provas,
   tb_prova_questao, tb_questao_tag, tb_historico_simulado
