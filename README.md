@@ -1,7 +1,7 @@
 <div align="center">
   <img src="assets/branding/Logo UNIP.png" alt="Logo UNIP" width="150"/>
   <h1>Nex_TI – EdTech Learning Platform</h1>
-  <p><strong>Projeto Integrado Multidisciplinar (PIM III) - Análise e Desenvolvimento de Sistemas</strong></p>
+  <p><strong>Projeto Integrado Multidisciplinar (PIM IV) - Análise e Desenvolvimento de Sistemas</strong></p>
 
   <!-- Badges -->
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
@@ -17,33 +17,33 @@
 
 ---
 
-## 🔗 Ecossistema do Projeto (PIM III) / Project Ecosystem / Ecosistema del Proyecto
+## 🔗 Ecossistema do Projeto (PIM IV) / Project Ecosystem / Ecosistema del Proyecto
 
 <details open>
   <summary>🇧🇷 <b>Português</b></summary>
 
-  O ecossistema do projeto **Nex_TI** desenvolvido para o PIM III (UNIP) é estruturado em três repositórios complementares:
-  1. 📄 **[PIM_III-Parte_Teorica](file:///C:/Users/mayco/Documents/GitHub/PIM_III-Parte_Teorica)**: Contém a monografia acadêmica e o Relatório ABNT interativo (HTML/CSS), protótipos de interface, cronogramas e atas teóricas.
-  2. 📐 **[PIM_III-Documentacao_UML](file:///C:/Users/mayco/Documents/GitHub/PIM_III-Documentacao_UML)**: Abriga a modelagem UML completa e fonte no Astah (`.asta`), os diagramas globais exportados (Classes, Sequência, Casos de Uso) e a documentação detalhada em Markdown do Backlog do Produto e Sprints.
-  3. 💻 **[PIM_III-Parte_Pratica](file:///C:/Users/mayco/Documents/GitHub/PIM_III-Parte_Pratica)**: A implementação funcional em código, englobando o Frontend (HTML/CSS/JS com modo de acessibilidade e o mapa neural interativo), a API do Backend em C# (.NET 10 Minimal APIs) e os scripts do banco de dados (Microsoft SQL Server).
+  O ecossistema do projeto **Nex_TI** desenvolvido para o PIM IV (UNIP) é estruturado em três repositórios complementares:
+  1. 📄 **[PIM_IV-Parte_Teorica](file:///C:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Teorica)**: Contém a monografia acadêmica e o Relatório ABNT interativo (HTML/CSS), protótipos de interface, cronogramas e atas teóricas.
+  2. 📐 **[PIM_IV-Documentacao_UML](file:///C:/Users/mayco/Documents/GitHub/PIM_IV-Documentacao_UML)**: Abriga a modelagem UML completa e fonte no Astah (`.asta`), os diagramas globais exportados (Classes, Sequência, Casos de Uso) e a documentação detalhada em Markdown do Backlog do Produto e Sprints.
+  3. 💻 **[PIM_IV-Parte_Pratica](file:///C:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica)**: A implementação funcional em código, englobando o Frontend (HTML/CSS/JS com modo de acessibilidade e o mapa neural interativo), a API do Backend em C# (.NET 10 Minimal APIs) e os scripts do banco de dados (Microsoft SQL Server).
 </details>
 
 <details>
   <summary>🇺🇸 <b>English</b></summary>
 
-  The **Nex_TI** project ecosystem for PIM III (UNIP) is structured into three complementary repositories:
-  1. 📄 **[PIM_III-Parte_Teorica](file:///C:/Users/mayco/Documents/GitHub/PIM_III-Parte_Teorica)**: Contains the academic monograph and the interactive ABNT Report (HTML/CSS), interface prototypes, schedules, and theoretical minutes.
-  2. 📐 **[PIM_III-Documentacao_UML](file:///C:/Users/mayco/Documents/GitHub/PIM_III-Documentacao_UML)**: Hosts the complete UML modeling and Astah source (`.asta`), global exported diagrams (Class, Sequence, Use Case), and detailed Markdown documentation of Product and Sprint Backlogs.
-  3. 💻 **[PIM_III-Parte_Pratica](file:///C:/Users/mayco/Documents/GitHub/PIM_III-Parte_Pratica)**: The functional code implementation, encompassing the Frontend (HTML/CSS/JS with accessibility mode and interactive neural map), the Backend C# API (.NET 10 Minimal APIs), and database scripts (Microsoft SQL Server).
+  The **Nex_TI** project ecosystem for PIM IV (UNIP) is structured into three complementary repositories:
+  1. 📄 **[PIM_IV-Parte_Teorica](file:///C:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Teorica)**: Contains the academic monograph and the interactive ABNT Report (HTML/CSS), interface prototypes, schedules, and theoretical minutes.
+  2. 📐 **[PIM_IV-Documentacao_UML](file:///C:/Users/mayco/Documents/GitHub/PIM_IV-Documentacao_UML)**: Hosts the complete UML modeling and Astah source (`.asta`), global exported diagrams (Class, Sequence, Use Case), and detailed Markdown documentation of Product and Sprint Backlogs.
+  3. 💻 **[PIM_IV-Parte_Pratica](file:///C:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica)**: The functional code implementation, encompassing the Frontend (HTML/CSS/JS with accessibility mode and interactive neural map), the Backend C# API (.NET 10 Minimal APIs), and database scripts (Microsoft SQL Server).
 </details>
 
 <details>
   <summary>🇪🇸 <b>Español</b></summary>
 
-  El ecosistema del proyecto **Nex_TI** para PIM III (UNIP) está estructurado en tres repositorios complementarios:
-  1. 📄 **[PIM_III-Parte_Teorica](file:///C:/Users/mayco/Documents/GitHub/PIM_III-Parte_Teorica)**: Contiene la monografía académica y el Informe ABNT interactivo (HTML/CSS), prototipos de interfaz, cronogramas y actas teóricas.
-  2. 📐 **[PIM_III-Documentacao_UML](file:///C:/Users/mayco/Documents/GitHub/PIM_III-Documentacao_UML)**: Alberga el modelado UML completo y la fuente en Astah (`.asta`), los diagramas globales exportados (Clases, Secuencia, Casos de Uso) y la documentación detallada en Markdown del Backlog del Producto y Sprints.
-  3. 💻 **[PIM_III-Parte_Pratica](file:///C:/Users/mayco/Documents/GitHub/PIM_III-Parte_Pratica)**: La implementación funcional en código, que abarca el Frontend (HTML/CSS/JS con modo de accesibilidad y mapa neuronal interactivo), la API del Backend en C# (.NET 10 Minimal APIs) y los scripts de la base de datos (Microsoft SQL Server).
+  El ecosistema del proyecto **Nex_TI** para PIM IV (UNIP) está estructurado en tres repositorios complementarios:
+  1. 📄 **[PIM_IV-Parte_Teorica](file:///C:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Teorica)**: Contiene la monografía académica y el Informe ABNT interactivo (HTML/CSS), prototipos de interfaz, cronogramas y actas teóricas.
+  2. 📐 **[PIM_IV-Documentacao_UML](file:///C:/Users/mayco/Documents/GitHub/PIM_IV-Documentacao_UML)**: Alberga el modelado UML completo y la fuente en Astah (`.asta`), los diagramas globales exportados (Clases, Secuencia, Casos de Uso) y la documentación detallada en Markdown del Backlog del Producto y Sprints.
+  3. 💻 **[PIM_IV-Parte_Pratica](file:///C:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica)**: La implementación funcional en código, que abarca el Frontend (HTML/CSS/JS con modo de accesibilidad y mapa neuronal interactivo), la API del Backend en C# (.NET 10 Minimal APIs) y los scripts de la base de datos (Microsoft SQL Server).
 </details>
 
 ---
@@ -58,7 +58,7 @@ Para isso, a plataforma integra:
 - **Gamificação:** Distribuição de Pontos de Experiência (XP) e Moedas Virtuais para engajar o usuário.
 - **Acessibilidade Universal:** Foco total em semântica W3C e leitores de tela via WAI-ARIA.
 
-Este repositório abriga a **fase teórica e documental** do sistema (PIM III), incluindo protótipos visuais, diagramas UML, mapeamento relacional (DER) e a arquitetura POO base que será implementada no semestre seguinte.
+Este repositório abriga a **fase teórica e documental** do sistema (PIM IV), incluindo protótipos visuais, diagramas UML, mapeamento relacional (DER) e a arquitetura POO base implementada com sucesso no semestre atual.
 
 ### 🚀 Tecnologias e Arquitetura
 
@@ -72,7 +72,7 @@ O projeto foi construído seguindo as melhores práticas de Clean Code e Separa�
 ### 📂 Estrutura do Repositório
 
 ```text
-📦 PIM_III-Parte_Teorica
+📦 PIM_IV-Parte_Teorica
  ┣ 📂 .planning/      # Inteligência do projeto, roadmap e arquitetura (GSD Framework)
  ┣ 📂 assets/         # Recursos visuais organizados (branding, diagramas, protótipos, kanban)
  ┣ 📜 index.html      # O documento raiz (Relatório Acadêmico ABNT interativo)
@@ -99,7 +99,7 @@ To achieve this, the platform integrates:
 - **Gamification:** Distribution of Experience Points (XP) and Virtual Coins to boost user engagement.
 - **Universal Accessibility:** Strict adherence to W3C semantics and screen readers via WAI-ARIA.
 
-This repository hosts the **theoretical and documentary phase** of the system (PIM III), including visual prototypes, UML diagrams, relational database mapping (ERD), and the core OOP architecture scheduled for full implementation in the following semester.
+This repository hosts the **theoretical and documentary phase** of the system (PIM IV), including visual prototypes, UML diagrams, relational database mapping (ERD), and the core OOP architecture successfully implemented in the current semester.
 
 ### 🚀 Technologies and Architecture
 
@@ -113,7 +113,7 @@ The project was built adhering to Clean Code and Separation of Concerns best pra
 ### 📂 Repository Structure
 
 ```text
-📦 PIM_III-Parte_Teorica
+📦 PIM_IV-Parte_Teorica
  ┣ 📂 .planning/      # Project intelligence, roadmap, and architecture (GSD Framework)
  ┣ 📂 assets/         # Organized visual resources (branding, diagrams, prototypes, kanban)
  ┣ 📜 index.html      # The core document (Interactive Academic Report - ABNT standard)
@@ -141,21 +141,21 @@ Para lograr esto, la plataforma integra:
 - **Gamificación:** Distribución de Puntos de Experiencia (XP) y Monedas Virtuales para involucrar al usuario.
 - **Accesibilidad Universal:** Enfoque total en semántica W3C y lectores de pantalla a través de WAI-ARIA.
 
-Este repositorio alberga la **fase teórica y documental** del sistema (PIM III), que incluye prototipos visuales, diagramas UML, mapeo relacional (DER) y la arquitectura POO base que se implementará en el próximo semestre.
+Este repositorio alberga la **fase teórica y documental** del sistema (PIM IV), que incluye prototipos virtuales, diagramas UML, mapeo relacional (DER) y la arquitectura POO base implementada con éxito en el presente semestre.
 
-### 🚀 Tecnologías y Arquitectura
+### 🚀 Technologies and Architecture
 
 El proyecto fue construido siguiendo las mejores prácticas de Clean Code y Separación de Responsabilidades:
 
-* **Frontend Documental:** Desarrollado en HTML5 estrictamente semántico (`<main>`, `<article>`, `<nav>`) y adaptable a través de CSS Puro (Flexbox y Grid), sin el uso de librerías externas.
+* **Frontend Documental:** Desarrollado en HTML5 estrictamente semántico (`<main>`, `<article>`, `<nav>`) y adaptable a través de CSS Puro (Flexbox and Grid), sin el uso de librerías externas.
 * **Backend Diseñado:** Arquitectura Orientada a Objetos (POO) en `C# (.NET 10)` que abstrae las reglas de negocio de Alumnos, Tutores y Administradores.
 * **Base de Datos:** SGBD `SQL Server` estructurado en conformidad con la LGPD (Ley General de Protección de Datos).
-* **Gestión y Diseño:** Ciclo de vida ágil con Scrum/Kanban y prototipado de alta fidelidad en Figma.
+* **Gestão e Design:** Ciclo de vida ágil con Scrum/Kanban y prototipado de alta fidelidad en Figma.
 
-### 📂 Estructura del Repositorio
+### 📂 Repository Structure
 
 ```text
-📦 PIM_III-Parte_Teorica
+📦 PIM_IV-Parte_Teorica
  ┣ 📂 .planning/      # Inteligencia del proyecto, hoja de ruta y arquitectura (GSD Framework)
  ┣ 📂 assets/         # Recursos visuales organizados (marca, diagramas, prototipos, kanban)
  ┣ 📜 index.html      # El documento raíz (Informe Académico ABNT interactivo)
