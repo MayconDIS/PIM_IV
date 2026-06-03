@@ -2,12 +2,12 @@
 name: unip-ads-disciplinas
 description: >
   Contém a base conceitual, ementas, bibliografia e conexões interdisciplinares das
-  disciplinas do 3º semestre de Análise e Desenvolvimento de Sistemas (UNIP). Use esta
+  disciplinas do 4º semestre de Análise e Desenvolvimento de Sistemas (UNIP). Use esta
   skill como referência teórica sempre que for instruído a fundamentar o código ou
-  seções de relatórios (PIM III) com base nas matérias do curso.
+  seções de relatórios (PIM IV) com base nas matérias do curso.
 ---
 
-# Skill: Disciplinas de ADS (UNIP – 3º Semestre)
+# Skill: Disciplinas de ADS (UNIP – 4º Semestre)
 
 Esta skill consolida a base teórica e os eixos conceituais extraídos da Wiki de Estudos do usuário, servindo de guia para garantir a aderência do projeto e dos relatórios acadêmicos às ementas das disciplinas.
 
@@ -88,10 +88,10 @@ Esta skill consolida a base teórica e os eixos conceituais extraídos da Wiki d
 
 ---
 
-## 🔗 Conexões Interdisciplinares para o PIM III
+## 🔗 Conexões Interdisciplinares para o PIM IV
 
-*   **Banco de Dados + POO (C#):** A persistência relacional modelada fisicamente em DDL/DML no SQL Server (Etapa 3) é integrada diretamente ao backend C# por meio da modelagem orientada a objetos (Etapa 4), usando classes de entidade encapsuladas e mapeamento estruturado.
+*   **Banco de Dados + POO (C#):** A persistência relacional real modelada fisicamente em DDL/DML no SQL Server (Etapa 3) é integrada diretamente ao backend C# por meio da modelagem orientada a objetos com APIs RESTful (.NET 10) (Etapa 4 e Etapa 9), usando persistência em tempo real.
 *   **UX/UI + Desenvolvimento Web:** O design system e o protótipo de alta fidelidade desenhados no Figma em conformidade com as Heurísticas de Nielsen (Etapa 6) são traduzidos em código responsivo usando CSS Grid, Flexbox e acessibilidade WAI-ARIA (Etapa 5 e Etapa 8).
-*   **Engenharia de Software II + Gestão do Projeto:** A organização do projeto em Sprints Scrum utilizando o Kanban no Trello (Etapa 2) e o planejamento do escopo do MVP são validados e avaliados sob a ótica de garantia de qualidade (ISO 25010) e controle de mudanças.
-*   **Machine Learning + Repetição Espaçada:** O algoritmo matemático SM-2 implementado para calcular intervalos de estudo serve de insumo de dados históricos (etapa 7) que, futuramente, alimentarão os pipelines de análise de engajamento do aluno.
+*   **Engenharia de Software + Gestão do Projeto:** A organização do projeto em Sprints Scrum utilizando o Kanban no Trello (Etapa 2) e a garantia de qualidade (ISO 25010) são validadas e avaliadas sob a ótica de controle de mudanças no ciclo de vida de desenvolvimento do PIM IV.
+*   **Machine Learning + Repetição Espaçada:** O algoritmo matemático SM-2 implementado para calcular intervalos de estudo serve de insumo de dados históricos (etapa 7) que alimentam os pipelines de análise de engajamento do aluno no dashboard real do PIM IV.
 *   **Comunicação/Liderança + Scrum:** Os rituais de sprint e a liderança compartilhada do Scrum Master servem para mitigar conflitos no grupo conforme os estágios de Tuckman, garantindo o alinhamento das equipes.

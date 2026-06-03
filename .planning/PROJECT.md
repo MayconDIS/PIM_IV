@@ -4,11 +4,11 @@
 
 ## English Version
 
-# Project: Alinhamento e Finalização do Documento PIM III (Nex_TI)
+# Project: Alinhamento e Finalização do Documento PIM IV (Nex_TI)
 
 ### What This Is
 
-Este projeto visa a consolidação, refatoração e expansão técnica do documento acadêmico `index.html` (plataforma Nex_TI) para atender estritamente a todas as 9 Etapas exigidas pelo Manual do PIM III (2026) da UNIP, mantendo um design limpo, acessível (WAI-ARIA) e livre de prolixidade.
+Este projeto visa a consolidação, refatoração e expansão técnica do documento acadêmico `index.html` (plataforma Nex_TI) para atender estritamente a todas as Etapas exigidas pelo Manual do PIM IV (2026) da UNIP, mantendo um design limpo, acessível (WAI-ARIA) e livre de prolixidade.
 
 ### Core Value
 
@@ -46,11 +46,11 @@ Garantir que a documentação técnica sirva simultaneamente como um artefato ac
 
 ## Versão em Português
 
-# Projeto: Alinhamento e Finalização do Documento PIM III (Nex_TI)
+# Projeto: Alinhamento e Finalização do Documento PIM IV (Nex_TI)
 
 ### What This Is
 
-Este projeto visa a consolidação, refatoração e expansão técnica do documento acadêmico `index.html` (plataforma Nex_TI) para atender estritamente a todas as Etapas exigidas pelo Manual do PIM III (2026) da UNIP, mantendo um design limpo, acessível (WAI-ARIA) e livre de prolixidade.
+Este projeto visa a consolidação, refatoração e expansão técnica do documento acadêmico `index.html` (plataforma Nex_TI) para atender estritamente a todas as Etapas exigidas pelo Manual do PIM IV (2026) da UNIP, mantendo um design limpo, acessível (WAI-ARIA) e livre de prolixidade.
 
 ### Core Value
 

@@ -1,21 +1,21 @@
 ---
-name: pim3-nexti
+name: pim4-nexti
 description: >
-  Gera, expande ou edita seções do documento acadêmico HTML do PIM III – Nex_TI
-  (UNIP, ADS, 3º semestre). Use esta skill sempre que o usuário pedir para adicionar
+  Gera, expande ou edita seções do documento acadêmico HTML do PIM IV – Nex_TI
+  (UNIP, ADS, 4º semestre). Use esta skill sempre que o usuário pedir para adicionar
   uma nova página, nova seção, corrigir texto, inserir código SQL/C#, inserir diagrama,
-  adicionar tabela ou qualquer conteúdo ao relatório HTML do PIM III / Nex_TI.
+  adicionar tabela ou qualquer conteúdo ao relatório HTML do PIM IV / Nex_TI.
   Aplique também quando o usuário mencionar: "PIM", "Nex_TI", "relatório ABNT",
   "adicionar seção", "nova página", "atualizar o documento", "inserir diagrama UML",
   "inserir código", "UNIP", "folha A4 HTML" ou contexto equivalente.
 ---
 
-# Skill: PIM III – Nex_TI (Geração de Documento HTML ABNT)
+# Skill: PIM IV – Nex_TI (Geração de Documento HTML ABNT)
 
 ## Visão Geral
 
 Este skill ensina Claude a gerar ou editar **páginas e seções** do documento HTML
-`index.html` do PIM III – Nex_TI, respeitando todas as convenções visuais, semânticas
+`index.html` do PIM IV – Nex_TI, respeitando todas as convenções visuais, semânticas
 e de norma ABNT já estabelecidas no arquivo.
 
 ---
@@ -181,7 +181,7 @@ corpo: (AUTOR, ANO). Continue o parágrafo normalmente.</p>
 |---|---|
 | Instituição | UNIP – Universidade Paulista |
 | Curso | ADS – Análise e Desenvolvimento de Sistemas |
-| Disciplina | PIM III |
+| Disciplina | PIM IV |
 | Projeto | Nex_TI |
 | Cidade | São José dos Campos – SP |
 | Entrega | Novembro / 2026 |
@@ -235,7 +235,7 @@ corpo: (AUTOR, ANO). Continue o parágrafo normalmente.</p>
 | sec-2-6 | 2.6 Etapa 6 – UX e UI Design | 21 |
 | sec-2-7 | 2.7 Etapa 7 – Machine Learning e Análise de Dados | 23 |
 | sec-2-8 | 2.8 Etapa 8 – Comunicação e LIBRAS | 23 |
-| sec-2-9 | 2.9 Etapa 9 – Integração e avaliação final (Diagramas UML) | 23 |
+| sec-2-9 | 2.9 Etapa 9 – Integração e avaliação final (PIM IV) | 23 |
 | sec-3 | 3 CONCLUSÃO | 27 |
 | sec-ref | REFERÊNCIAS | 28 |
 
@@ -265,7 +265,7 @@ corpo: (AUTOR, ANO). Continue o parágrafo normalmente.</p>
 - ISO/IEC 25010 (2011) — Qualidade de Software
 - KRUG, Steve (2014) — Não Me Faça Pensar, 3ª ed.
 - PRESSMAN; MAXIM (2016) — Engenharia de Software, 8ª ed.
-- REPOSITÓRIO GitHub: https://github.com/MayconDIS/PIM_III (2026)
+- REPOSITÓRIO GitHub: https://github.com/MayconDIS/PIM_IV (2026)
 - SCHWABER; SUTHERLAND (2020) — The Scrum Guide
 - SOFTEX (2021) — MPS.BR Guia Geral
 - SOMMERVILLE, Ian (2019) — Engenharia de Software, 10ª ed.

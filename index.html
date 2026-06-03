@@ -368,7 +368,7 @@ CREATE TABLE tb_prova_questao (
 
 using System;
 
-namespace PIM_III {
+namespace PIM_IV {
     public class Usuario {
         public int Id { get; set; }
         public string Nome { get; set; }
@@ -396,7 +396,7 @@ namespace PIM_III {
 
 using System.Collections.Generic;
 
-namespace PIM_III {
+namespace PIM_IV {
     internal class Tutor : Usuario {
         public Tutor(int id, string n, string e, string s) : base(id,n,e,s) {}
         public void gerenciarConteudo() { Console.WriteLine("Acesso liberado."); }
@@ -423,13 +423,13 @@ namespace PIM_III {
         <div class="code-box">
             <pre><code>Figura 9 – Arquivo Principal
 
-namespace PIM_III {
+namespace PIM_IV {
     internal class XP { public int Pontos { get; set; } }
     internal class Moedas { public int Quantidade { get; set; } }
 }
 
 using System;
-using PIM_III;
+using PIM_IV;
 
 public class Program {
     public static void Main(string[] args) {
