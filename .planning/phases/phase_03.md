@@ -50,7 +50,7 @@ Consolidamos as mudanças em cada repositório local através de commits convenc
 
 ## 🧪 Validação dos Resultados
 
-- **Uniformidade de Dados**: As datas de trabalho nas capas (`Julho / 2026`), lista de integrantes (Gabriel, Maciel, Maycon, Miguel e Rafael) e estimativas de Story Points do Backlog coincidem 100% em todas as instâncias do projeto.
+- **Uniformidade de Dados**: As datas de trabalho nas capas (`Novembro / 2026`), lista de integrantes (Gabriel, Maciel, Maycon, Miguel e Rafael) e estimativas de Story Points do Backlog coincidem 100% em todas as instâncias do projeto.
 - **Rastreabilidade de Encontros**: Todas as pastas `.planning/meetings/` contêm os exatos 10 arquivos das reuniões Scrum.
 - **Resguardo de Escopo**: Os manuais práticos e técnicos possuem agora seções formais que delimitam claramente quais recursos pertencem ao MVP do 3º Semestre e quais são escopos futuros do 4º Semestre.
 - **Git Status Limpo**: Executamos `git status` nos três repositórios, confirmando que não existem pendências ou arquivos untracked no ambiente.

@@ -184,7 +184,7 @@ corpo: (AUTOR, ANO). Continue o parágrafo normalmente.</p>
 | Disciplina | PIM III |
 | Projeto | Nex_TI |
 | Cidade | São José dos Campos – SP |
-| Entrega | Julho / 2026 |
+| Entrega | Novembro / 2026 |
 | Grupo | 02 \| Período: Diurno |
 
 **Equipe (Alunos):**
