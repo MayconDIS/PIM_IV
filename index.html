@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIM III - Nex_TI</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300e6e6'><path d='M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z'/></svg>">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <section class="page" aria-label="Capa do Trabalho">
+        <header>
+            <img src="assets/branding/Logo UNIP.png" alt="Logo da Universidade Paulista" class="logo-unip" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/UNIP_Logo.svg/1200px-UNIP_Logo.svg.png'">
+            <div class="capa-header uppercase">
+                UNIVERSIDADE PAULISTA<br>
+                ICET - INSTITUTO DE CIÊNCIAS EXATAS E TECNOLOGIA<br>
+                CURSO SUPERIOR DE TECNOLOGIA EM ANÁLISE E DESENVOLVIMENTO DE SISTEMAS<br><br><br>
+                PROJETO INTEGRADO MULTIDISCIPLINAR<br>
+                PIM III<br><br><br>
+                DESENVOLVIMENTO DE PLATAFORMA WEB DE AVALIAÇÃO E APOIO À APRENDIZAGEM PARA UMA EMPRESA FICTÍCIA DE TECNOLOGIA EDUCACIONAL
+            </div>
+        </header>
+        
+        <table class="table-capa mt-1cm mb-3cm" aria-label="Tabela de Autores">
+            <tr><th class="col-width-70 th-left-no-bg">Nomes</th><th class="col-width-30 th-left-no-bg">R.A</th></tr>
+            <tr><td>Gabriel Alves Moreira</td><td>H67HJI4</td></tr>
+            <tr><td>Maciel Costa da Silva</td><td>R280985</td></tr>
+            <tr><td>Maycon Douglas Inácio Silva</td><td>H719CD3</td></tr>
+            <tr><td>Miguel Angel Fernandez Ortiz</td><td>H7858F9</td></tr>
+            <tr><td>Rafael Mesquita</td><td>H6722I0</td></tr>
+        </table>
+        <footer class="capa-footer uppercase">São José dos Campos - SP<br>Julho / 2026</footer>
+    </section>
+
+    <section class="page" aria-label="Folha de Rosto">
+        <table class="table-autores mt-1cm mb-3cm">
+            <tr><th class="col-width-70 th-no-bg">Nomes</th><th class="col-width-30 th-no-bg">R.A</th></tr>
+            <tr><td>Gabriel Alves Moreira</td><td>H67HJI4</td></tr>
+            <tr><td>Maciel Costa da Silva</td><td>R280985</td></tr>
+            <tr><td>Maycon Douglas Inácio Silva</td><td>H719CD3</td></tr>
+            <tr><td>Miguel Angel Fernandez Ortiz</td><td>H7858F9</td></tr>
+            <tr><td>Rafael Mesquita</td><td>H6722I0</td></tr>
+        </table>
+        <div class="capa-titulo uppercase">DESENVOLVIMENTO DE PLATAFORMA WEB DE AVALIAÇÃO E APOIO À APRENDIZAGEM PARA UMA EMPRESA FICTÍCIA DE TECNOLOGIA EDUCACIONAL</div>
+        <div class="recuo-rosto">Projeto Integrado Multidisciplinar (PIM) desenvolvido como exigência parcial dos requisitos obrigatórios à aprovação semestral no Curso Superior de Tecnologia em Análise e Desenvolvimento de Sistemas da UNIP (Universidade Paulista), orientado pelo corpo docente do curso.</div>
+        <footer class="capa-footer uppercase">São José dos Campos - SP<br>Julho / 2026</footer>
+    </section>
+
+    <section class="page" aria-label="Resumo">
+        <h2 class="center">RESUMO</h2>
+        <p class="paragrafo">O presente trabalho descreve o desenvolvimento do projeto Nex_TI, um sistema web voltado ao nivelamento acadêmico e apoio pedagógico de estudantes ingressantes na área de Tecnologia da Informação. O objetivo do sistema é mitigar as dificuldades de aprendizagem de conceitos técnicos iniciais e reduzir a evasão escolar por meio de uma plataforma baseada em estudo ativo. A arquitetura de software proposta utiliza o algoritmo de repetição espaçada SuperMemo-2 (SM-2) integrado a um sistema gamificado de incentivos. Metodologicamente, a engenharia do projeto foi estruturada sob os preceitos do desenvolvimento ágil (Scrum e Kanban), compreendendo: a especificação de requisitos funcionais e não funcionais; a modelagem conceitual e física de banco de dados relacional (SQL Server); o projeto lógico orientado a objetos em C# (.NET 10); e o protótipo de interface responsiva em HTML5 e CSS com técnicas de acessibilidade (WAI-ARIA). Os resultados demonstram a consistência lógica e a viabilidade da integração entre as disciplinas do semestre através de diagramas UML e protótipos interativos no Figma, fornecendo a base técnica para a consolidação de um MVP (Produto Mínimo Viável) em conformidade com a LGPD.</p>
+        <p><br>Palavras-chave: Nivelamento Acadêmico; Repetição Espaçada; Algoritmo SM-2; Modelagem UML; Banco de Dados.</p>
+    </section>
+
+    <section class="page" aria-label="Abstract">
+        <h2 class="center">ABSTRACT</h2>
+        <p class="paragrafo">This paper describes the development of the Nex_TI project, a web-based system designed for academic leveling and pedagogical support for incoming Information Technology students. The system aims to mitigate difficulties in learning initial technical concepts and reduce dropout rates through a platform based on active learning. The proposed software architecture employs the SuperMemo-2 (SM-2) spaced repetition algorithm integrated with a gamified incentive system. Methodologically, the engineering of the project was structured under the principles of agile development (Scrum and Kanban), comprising: the specification of functional and non-functional requirements; conceptual and physical relational database modeling (SQL Server); object-oriented logical design in C# (.NET 10); and a responsive interface prototype in HTML5 and CSS incorporating accessibility standards (WAI-ARIA). The results demonstrate the logical consistency and feasibility of integrating the semester's disciplines using UML diagrams and interactive Figma prototypes, establishing the technical foundation for a Minimum Viable Product (MVP) in compliance with the General Data Protection Regulation (LGPD).</p>
+        <p><br>Keywords: Academic Leveling; Spaced Repetition; SM-2 Algorithm; UML Modeling; Databases.</p>
+    </section>
+
+    <section class="page" aria-label="Página do Sumário">
+        <h2 class="center">SUMÁRIO</h2>
+        <nav class="sumario-container" role="navigation" aria-label="Navegação do Documento">
+            <a href="#sec-1" class="sumario-link"><div class="sumario-item"><span class="sumario-titulo">1 INTRODUÇÃO</span><span class="sumario-pontos"></span><span class="sumario-pagina">6</span></div></a>
+            <a href="#sec-1-1" class="sumario-link"><div class="sumario-item"><span class="sumario-titulo sumario-recuo-1">1.1 Objetivo Geral</span><span class="sumario-pontos"></span><span class="sumario-pagina">6</span></div></a>
+            <a href="#sec-1-2" class="sumario-link"><div class="sumario-item"><span class="sumario-titulo sumario-recuo-1">1.2 Objetivos Específicos</span><span class="sumario-pontos"></span><span class="sumario-pagina">6</span></div></a>
+            <a href="#sec-1-3" class="sumario-link"><div class="sumario-item"><span class="sumario-titulo sumario-recuo-1">1.3 Contextualização do Projeto</span><span class="sumario-pontos"></span><span class="sumario-pagina">7</span></div></a>
+            <a href="#sec-2" class="sumario-link"><div class="sumario-item"><span class="sumario-titulo">2 DESENVOLVIMENTO</span><span class="sumario-pontos"></span><span class="sumario-pagina">7</span></div></a>
+            <a href="#sec-2-1" class="sumario-link"><div class="sumario-item"><span class="sumario-titulo sumario-recuo-1">2.1 Etapa 1 – Definição e caracterização do negócio fictício</span><span class="sumario-pontos"></span><span class="sumario-pagina">7</span></div></a>
+            <a href="#sec-2-1-1" class="sumario-link"><div class="sumario-item"><span class="sumario-titulo sumario-recuo-2">2.1.1 Regras de Negócio</span><span class="sumario-pontos"></span><span class="sumario-pagina">8</span></div></a>
+            <a href="#sec-2-2" class="sumario-link"><div class="sumario-item"><span class="sumario-titulo sumario-recuo-1">2.2 Etapa 2 – Engenharia de Software Ágil Aplicada</span><span class="sumario-pontos"></span><span class="sumario-pagina">9</span></div></a>
+            <a href="#sec-2-2-1" class="sumario-link"><div class="sumario-item"><span class="sumario-titulo sumario-recuo-2">2.2.1 Requisitos Funcionais e Não Funcionais</span><span class="sumario-pontos"></span><span class="sumario-pagina">9</span></div></a>
+            <a href="#sec-2-2-2" class="sumario-link"><div class="sumario-item"><span class="sumario-titulo sumario-recuo-2">2.2.2 Product Backlog e Épicos</span><span class="sumario-pontos"></span><span class="sumario-pagina">11</span></div></a>
+            <a href="#sec-2-2-3" class="sumario-link"><div class="sumario-item"><span class="sumario-titulo sumario-recuo-2">2.2.3 Gestão Visual e Quadro Kanban</span><span class="sumario-pontos"></span><span class="sumario-pagina">11</span></div></a>
+            <a href="#sec-2-3" class="sumario-link"><div class="sumario-item"><span class="sumario-titulo sumario-recuo-1">2.3 Etapa 3 – Modelagem de Banco de Dados e NoSQL</span><span class="sumario-pontos"></span><span class="sumario-pagina">13</span></div></a>
+            <a href="#sec-2-4" class="sumario-link"><div class="sumario-item"><span class="sumario-titulo sumario-recuo-1">2.4 Etapa 4 – Desenvolvimento do sistema com POO (C#)</span><span class="sumario-pontos"></span><span class="sumario-pagina">17</span></div></a>
+            <a href="#sec-2-5" class="sumario-link"><div class="sumario-item"><span class="sumario-titulo sumario-recuo-1">2.5 Etapa 5 – Desenvolvimento Web Responsivo</span><span class="sumario-pontos"></span><span class="sumario-pagina">20</span></div></a>
+            <a href="#sec-2-6" class="sumario-link"><div class="sumario-item"><span class="sumario-titulo sumario-recuo-1">2.6 Etapa 6 – UX e UI Design</span><span class="sumario-pontos"></span><span class="sumario-pagina">21</span></div></a>
+            <a href="#sec-2-7" class="sumario-link"><div class="sumario-item"><span class="sumario-titulo sumario-recuo-1">2.7 Etapa 7 – Machine Learning e Análise de Dados</span><span class="sumario-pontos"></span><span class="sumario-pagina">23</span></div></a>
+            <a href="#sec-2-8" class="sumario-link"><div class="sumario-item"><span class="sumario-titulo sumario-recuo-1">2.8 Etapa 8 – Comunicação e LIBRAS</span><span class="sumario-pontos"></span><span class="sumario-pagina">23</span></div></a>
+            <a href="#sec-2-9" class="sumario-link"><div class="sumario-item"><span class="sumario-titulo sumario-recuo-1">2.9 Etapa 9 – Integração e avaliação final (Diagramas UML)</span><span class="sumario-pontos"></span><span class="sumario-pagina">23</span></div></a>
+            <a href="#sec-3" class="sumario-link"><div class="sumario-item"><span class="sumario-titulo">3 CONCLUSÃO</span><span class="sumario-pontos"></span><span class="sumario-pagina">27</span></div></a>
+            <a href="#sec-ref" class="sumario-link"><div class="sumario-item"><span class="sumario-titulo">REFERÊNCIAS</span><span class="sumario-pontos"></span><span class="sumario-pagina">28</span></div></a>
+        </nav>
+    </section>
+
+    <main role="main">
+
+    <section class="page page-numerada">
+        <span class="num-pagina">6</span>
+        <h2 id="sec-1">1 INTRODUÇÃO</h2>
+        <p class="paragrafo">O ingresso no ensino superior na área de Tecnologia da Informação frequentemente expõe os estudantes a uma quantidade expressiva de novos termos técnicos e jargões. A falta de familiaridade com esses conceitos fundamentais é apontada como um dos fatores que contribuem para o desinteresse acadêmico e as taxas de evasão em calouros. Para mitigar esse cenário, torna-se relevante a criação de ferramentas pedagógicas que facilitem a memorização e o estudo ativo contínuo de forma acessível.</p>
+        <p class="paragrafo">O projeto Nex_TI propõe o desenvolvimento de uma plataforma web de nivelamento baseada em flashcards e no algoritmo de repetição espaçada SuperMemo-2 (SM-2). Este trabalho documenta a engenharia do sistema, compreendendo a gestão ágil de requisitos, a modelagem de banco de dados relacional SQL Server e a arquitetura de programação orientada a objetos em C#. O projeto da interface web é estruturado a partir de protótipos de alta fidelidade e layouts responsivos em HTML e CSS, pautando-se pelas diretrizes de acessibilidade e segurança da informação aplicadas ao contexto de um MVP.</p>
+
+        <h3 id="sec-1-1">1.1 Objetivo Geral</h3>
+        <p class="paragrafo">Desenvolver e documentar uma plataforma web gamificada baseada em algoritmos de repetição espaçada, entregando uma arquitetura escalável, modelagem de banco de dados estruturada e protótipos focados no engajamento e retenção de conhecimento dos usuários.</p>
+        
+        <h3 id="sec-1-2">1.2 Objetivos Específicos</h3>
+        <ul>
+            <li>Modelar a estrutura de dados relacional e implementar a lógica via Orientação a Objetos (C#).</li>
+            <li>Gerenciar o ciclo de vida do software utilizando metodologias ágeis (Scrum e Kanban).</li>
+            <li>Projetar interfaces web responsivas com HTML Semântico, CSS Grid/Flexbox e foco em acessibilidade.</li>
+            <li>Garantir o tratamento seguro de dados em conformidade com a LGPD.</li>
+        </ul>
+    </section>
+
+    <section class="page page-numerada" aria-label="Caracterização do Negócio">
+        <span class="num-pagina">7</span>
+        <h3 id="sec-1-3">1.3 Contextualização do Projeto</h3>
+        <p class="paragrafo">O desenvolvimento da Nex_TI baseia-se em metodologias de engajamento comprovadas por grandes plataformas educacionais de mercado, que atestam o aumento da taxa de conclusão por meio de trilhas de conhecimento interativas. O diferencial do sistema reside na aplicação direta de algoritmos de repetição para automatizar os fluxos de revisão temporal, transformando a aprendizagem passiva em um processo quantificável e avaliativo.</p>
+
+        <h2 id="sec-2">2 DESENVOLVIMENTO</h2>
+        <h3 id="sec-2-1">2.1 Etapa 1 – Definição e caracterização do negócio fictício</h3>
+        <p class="paragrafo">Para estabelecer o contexto organizacional exigido no projeto, a Nex_TI foi concebida como uma startup de tecnologia educacional (EdTech). Suas características principais foram consolidadas para atender aos requisitos de mercado e solucionar lacunas de aprendizagem.</p>
+        <ul class="list-caracteristicas">
+            <li><strong>Denominação da Empresa:</strong> Nex_TI Educacional.</li>
+            <li><strong>Segmento de Atuação:</strong> Tecnologia Educacional (EdTech) / Software as a Service (SaaS).</li>
+            <li><strong>Público-Alvo:</strong> Instituições de ensino (B2B) e estudantes/profissionais (B2C) que necessitam de ferramentas de memorização e nivelamento.</li>
+            <li><strong>Produtos Oferecidos:</strong> Plataforma web gamificada com motor de repetição espaçada (SM-2), simulados interativos e relatórios de desempenho.</li>
+            <li><strong>Problemas que Justificam o Sistema:</strong> Elevada evasão de alunos por desmotivação, baixa retenção de conhecimento técnico a longo prazo e ausência de métricas precisas para acompanhamento de evolução.</li>
+        </ul>
+    </section>
+
+    <section class="page page-numerada" aria-label="Regras de Negócio">
+        <span class="num-pagina">8</span>
+        <h4 id="sec-2-1-1">2.1.1 Regras de Negócio</h4>
+        <div class="tabela-wrapper">
+            <p class="paragrafo">Para balizar a integridade do sistema, as regras fundamentais foram consolidadas na tabela a seguir:</p>
+            <table>
+                <tr>
+                    <th class="col-width-15">ID</th>
+                    <th class="col-width-25">Regra</th>
+                    <th class="col-width-60">Descrição e Condições</th>
+                </tr>
+                <tr>
+                    <td class="center">RN01</td>
+                    <td>Atribuição de Recompensas</td>
+                    <td>A bonificação em pontos de experiência (XP) e moedas virtuais ocorre apenas após a conclusão e validação integral de um módulo de flashcards.</td>
+                </tr>
+                <tr>
+                    <td class="center">RN02</td>
+                    <td>Níveis de Acesso Estritos</td>
+                    <td>O Administrador possui privilégios totais; o Tutor cria e avalia conteúdos; o Aluno atua exclusivamente na execução e consumo das atividades.</td>
+                </tr>
+                <tr>
+                    <td class="center">RN03</td>
+                    <td>Economia Virtual</td>
+                    <td>As moedas adquiridas são vinculadas ao usuário logado e destinam-se exclusivamente ao desbloqueio de módulos restritos na loja da plataforma.</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+    <section class="page page-numerada">
+        <span class="num-pagina">9</span>
+        <h3 id="sec-2-2">2.2 Etapa 2 – Engenharia de Software Ágil Aplicada e LGPD</h3>
+        <p class="paragrafo">A análise de requisitos e o ciclo de vida do software utilizaram as metodologias Scrum e Kanban, garantindo alinhamento de entregas e rastreabilidade. Em conformidade com a Lei Geral de Proteção de Dados (LGPD), o sistema exige o consentimento explícito para tratamento de dados pessoais, aplica anonimização em relatórios estatísticos e utiliza hash criptográfico para armazenamento de credenciais.</p>
+
+        <h4 id="sec-2-2-1">2.2.1 Requisitos Funcionais e Não Funcionais</h4>
+        <p class="paragrafo">A engenharia de requisitos dividiu o escopo do sistema de acordo com a prioridade de entrega (MVP) e implementações estruturais futuras. Para melhor legibilidade técnica, os requisitos foram categorizados em duas frentes distintas.</p>
+        
+        <div class="tabela-wrapper">
+            <p class="legenda-tabela">Tabela 1 – Requisitos Funcionais (RF)</p>
+            <table>
+                <tr>
+                    <th class="col-width-12">ID</th>
+                    <th class="col-width-73">Descrição do Requisito</th>
+                    <th class="col-width-15">Fase</th>
+                </tr>
+                <tr><td class="center">RF01</td><td>Gestão de autenticação e definição de perfis de sessão (Aluno, Tutor, Admin).</td><td class="center">MVP</td></tr>
+                <tr><td class="center">RF02</td><td>Motor algorítmico SM-2 para calcular automaticamente os intervalos de revisão.</td><td class="center">MVP</td></tr>
+                <tr><td class="center">RF03</td><td>Interface iterativa para estudo gamificado de flashcards (frente e verso).</td><td class="center">MVP</td></tr>
+                <tr><td class="center">RF04</td><td>CRUD completo para criação, edição e exclusão de decks de flashcards.</td><td class="center">MVP</td></tr>
+                <tr><td class="center">RF05</td><td>Módulo de gamificação para contabilizar e exibir XP e evolução de nível.</td><td class="center">MVP</td></tr>
+                <tr><td class="center">RF06</td><td>Dashboard gerencial com gráficos de retenção e métricas de alunos (Tutor).</td><td class="center">Futuro</td></tr>
+                <tr><td class="center">RF07</td><td>Módulo preparatório complexo integrado com banco de questões de múltipla escolha.</td><td class="center">Futuro</td></tr>
+                <tr><td class="center">RF08</td><td>Loja virtual para consumo de moedas e desbloqueio de módulos avançados.</td><td class="center">Futuro</td></tr>
+            </table>
+        </div>
+    </section>
+
+    <section class="page page-numerada">
+        <span class="num-pagina">10</span>
+        <div class="tabela-wrapper">
+            <p class="legenda-tabela">Tabela 2 – Requisitos Não Funcionais (RNF)</p>
+            <table>
+                <tr>
+                    <th class="col-width-12">ID</th>
+                    <th class="col-width-73">Descrição do Requisito</th>
+                    <th class="col-width-15">Fase</th>
+                </tr>
+                <tr><td class="center">RNF01</td><td>Responsividade estrita (Desktop First) com adaptação mobile via CSS Grid e Flexbox.</td><td class="center">MVP</td></tr>
+                <tr><td class="center">RNF02</td><td>Acessibilidade digital e suporte a leitores de tela através de atributos WAI-ARIA.</td><td class="center">MVP</td></tr>
+                <tr><td class="center">RNF03</td><td>Persistência primária de states via sessão e LocalStorage do navegador.</td><td class="center">MVP</td></tr>
+                <tr><td class="center">RNF04</td><td>Integração relacional no SQL Server com proteção de senhas via Hash (LGPD).</td><td class="center">MVP</td></tr>
+            </table>
+        </div>
+    </section>
+
+    <section class="page page-numerada" aria-label="Backlog e Trello 1">
+        <span class="num-pagina">11</span>
+        <h4 id="sec-2-2-2">2.2.2 Product Backlog e Épicos</h4>
+        <p class="paragrafo">As histórias de usuário foram pontuadas via sequência de Fibonacci. Os principais épicos estabelecidos foram: Autenticação, Nivelamento Acadêmico, Motor de Flashcards (SM-2), Economia de Recompensas e Acessibilidade Visual.</p>
+
+        <h4 id="sec-2-2-3">2.2.3 Gestão Visual e Quadro Kanban</h4>
+        <p class="paragrafo">O controle das sprints e a visibilidade das entregas ocorreram através da plataforma Trello. A Figura 1 ilustra as colunas de planejamento e refinamento do Backlog.</p>
+        
+        <div class="diagrama-container">
+            <p class="legenda-topo">Figura 1 – Quadro Kanban no Trello: Backlog</p>
+            <img src="assets/kanban/Trello 01.png" alt="Quadro Trello - Backlog" class="diagrama-img img-height-12" onerror="this.src='https://placehold.co/800x600/E8EAED/5F6368?text=Figura+1+-+Quadro+Kanban'">
+            <p class="legenda-fonte">Fonte: Autores, 2026.</p>
+        </div>
+    </section>
+
+    <section class="page page-numerada" aria-label="Trello Parte 2">
+        <span class="num-pagina">12</span>
+        <p class="paragrafo">A Figura 2 demonstra o fluxo contínuo de execução, evidenciando as etapas de desenvolvimento ativo (Doing), testes e tarefas finalizadas (Done).</p>
+        <div class="diagrama-container">
+            <p class="legenda-topo">Figura 2 – Quadro Kanban no Trello: Execução</p>
+            <img src="assets/kanban/Trello 02.png" alt="Quadro Trello - Execução" class="diagrama-img img-height-14" onerror="this.src='https://placehold.co/800x600/E8EAED/5F6368?text=Figura+2+-+Quadro+Kanban'">
+            <p class="legenda-fonte">Fonte: Autores, 2026.</p>
+        </div>
+    </section>
+
+    <section class="page page-numerada" aria-label="Banco de Dados">
+        <span class="num-pagina">13</span>
+        <h3 id="sec-2-3">2.3 Etapa 3 – Modelagem de Banco de Dados e NoSQL</h3>
+        <p class="paragrafo">Para a escolha da tecnologia de armazenamento de dados, o projeto comparou o modelo tradicional de tabelas (relacional) com modelos mais flexíveis (não-relacionais, conhecidos como NoSQL). O banco de dados implementado no projeto é exclusivamente o Microsoft SQL Server. A justificativa técnica para essa escolha baseia-se na necessidade de garantir que as transações ocorram de forma totalmente segura. Pense no saldo de moedas e na pontuação do aluno como uma transferência bancária: a operação deve acontecer por completo ou ser totalmente cancelada caso ocorra alguma falha no caminho. Isso impede que o saldo do usuário seja duplicado ou corrompido em acessos simultâneos.</p>
+        <p class="paragrafo">Além disso, a estrutura de tabelas interligadas do SQL Server garante que, se uma pergunta do simulado for removida, todas as suas alternativas de resposta sejam apagadas automaticamente do sistema, evitando que dados incorretos ou incompletos permaneçam na base de dados. Em relação às tecnologias NoSQL, embora apresentem grande flexibilidade e velocidade para lidar com volumes massivos de dados não-estruturados, elas não foram adotadas na implementação prática deste projeto. Isso ocorre porque os bancos NoSQL priorizam a rapidez de gravação e a distribuição de dados em rede em detrimento de relacionamentos rígidos e garantias transacionais perfeitas, características que são essenciais para as regras de pontuação e consistência do nosso sistema de nivelamento.</p>
+
+        <div class="tabela-wrapper">
+            <h4 class="mb-05cm">Dicionário de Dados Resumido</h4>
+            <table>
+                <tr>
+                    <th class="col-width-20">Tabela</th>
+                    <th class="col-width-45">Principais Atributos</th>
+                    <th class="col-width-35">Descrição</th>
+                </tr>
+                <tr>
+                    <td><strong>tb_usuarios</strong></td>
+                    <td>Id, nome, email, senha_hash, xp, moedas, perfil</td>
+                    <td>Entidade central de acesso e métricas.</td>
+                </tr>
+                <tr>
+                    <td><strong>tb_flashcards_sm2</strong></td>
+                    <td>Id, fk_usuario, frente, verso, intervalo, proxima_revisao</td>
+                    <td>Armazena as cartas e o status temporal.</td>
+                </tr>
+                <tr>
+                    <td><strong>tb_questoes</strong></td>
+                    <td>Id, fk_area, enunciado, origem, dificuldade</td>
+                    <td>Metadados base para avaliações teóricas.</td>
+                </tr>
+                <tr>
+                    <td><strong>tb_alternativas</strong></td>
+                    <td>Id, fk_questao, texto, is_correta</td>
+                    <td>Opções do gabarito das questões cadastradas.</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+    <section class="page page-numerada" aria-label="DER">
+        <span class="num-pagina">14</span>
+        <h4>Diagrama de Entidade-Relacionamento</h4>
+        <p class="paragrafo">Para assegurar a legibilidade das cardinalidades N:N mapeadas (como Prova x Questão), a Figura 3 exibe o Diagrama de Entidade-Relacionamento (DER) completo com todas as conexões conceituais do sistema Nex_TI.</p>
+
+        <div class="diagrama-container my-05cm">
+            <p class="legenda-topo">Figura 3 – Diagrama DER: Visão Geral</p>
+            <img src="assets/diagrams/DER_Nex_TI.png" alt="DER Completo" class="diagrama-img img-height-14" onerror="this.src='https://placehold.co/800x600/E8EAED/5F6368?text=Figura+3+-+DER+Completo'">
+            <p class="legenda-fonte">Fonte: Autores, 2026.</p>
+        </div>
+    </section>
+
+    <section class="page page-numerada" aria-label="DDL 1">
+        <span class="num-pagina">15</span>
+        <h4>Modelo Físico (Script DDL)</h4>
+        <p class="paragrafo mb-05cm">A Figura 5 apresenta a criação inicial das tabelas fortes no SQL Server, utilizando tipos de dados otimizados para garantir integridade e suporte Unicode nativo.</p>
+        
+        <div class="code-box" aria-label="Código DDL 1">
+            <pre><code>Figura 5 – Script DDL: Tabelas Principais
+
+CREATE DATABASE db_nexti;
+GO
+USE db_nexti;
+GO
+
+CREATE TABLE tb_usuarios (
+    id_usuario INT IDENTITY(1,1) PRIMARY KEY,
+    nome_completo VARCHAR(150) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    senha_hash VARCHAR(255) NOT NULL,
+    xp_acumulado INT DEFAULT 0,
+    moedas_virtuais INT DEFAULT 0,
+    perfil VARCHAR(20) DEFAULT 'Aluno'
+);
+
+CREATE TABLE tb_areas_conhecimento (
+    id_area INT IDENTITY(1,1) PRIMARY KEY,
+    nome_area VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE tb_provas (
+    id_prova INT IDENTITY(1,1) PRIMARY KEY,
+    ano INT NOT NULL, tipo VARCHAR(50) NOT NULL
+);</code></pre>
+        </div>
+        <p class="legenda-fonte legenda-fonte-left mb-0">Fonte: Autores, 2026.</p>
+    </section>
+
+    <section class="page page-numerada" aria-label="DDL 2">
+        <span class="num-pagina">16</span>
+        <p class="paragrafo">A Figura 6 exibe as tabelas com relacionamentos e chaves estrangeiras, implementando deleção em cascata (ON DELETE CASCADE) nas alternativas ligadas às questões deletadas.</p>
+
+        <div class="code-box" aria-label="Código DDL 2">
+            <pre><code>Figura 6 – Script DDL: Entidades Dependentes e Associativas
+
+CREATE TABLE tb_flashcards_sm2 (
+    id_flashcard INT IDENTITY(1,1) PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    frente_pergunta NVARCHAR(MAX) NOT NULL,
+    verso_resposta NVARCHAR(MAX) NOT NULL,
+    intervalo_dias INT DEFAULT 0,
+    data_proxima_revisao DATE DEFAULT GETDATE(),
+    CONSTRAINT FK_Flashcard_Usuario FOREIGN KEY (id_usuario) 
+      REFERENCES tb_usuarios(id_usuario)
+);
+
+CREATE TABLE tb_questoes (
+    id_questao INT IDENTITY(1,1) PRIMARY KEY,
+    id_area INT NOT NULL,
+    enunciado NVARCHAR(MAX) NOT NULL,
+    origem VARCHAR(50),
+    CONSTRAINT FK_Questao_Area FOREIGN KEY (id_area) REFERENCES tb_areas_conhecimento(id_area)
+);
+
+CREATE TABLE tb_alternativas (
+    id_alternativa INT IDENTITY(1,1) PRIMARY KEY,
+    id_questao INT NOT NULL,
+    texto NVARCHAR(MAX) NOT NULL,
+    is_correta BIT NOT NULL,
+    CONSTRAINT FK_Alt_Questao FOREIGN KEY (id_questao) 
+      REFERENCES tb_questoes(id_questao) ON DELETE CASCADE
+);
+
+CREATE TABLE tb_prova_questao (
+    id_prova INT NOT NULL, id_questao INT NOT NULL,
+    PRIMARY KEY (id_prova, id_questao),
+    CONSTRAINT FK_PQ_P FOREIGN KEY (id_prova) REFERENCES tb_provas(id_prova),
+    CONSTRAINT FK_PQ_Q FOREIGN KEY (id_questao) REFERENCES tb_questoes(id_questao)
+);</code></pre>
+        </div>
+        <p class="legenda-fonte legenda-fonte-left mb-1cm">Fonte: Autores, 2026.</p>
+    </section>
+
+    <section class="page page-numerada" aria-label="POO Parte 1">
+        <span class="num-pagina">17</span>
+        <h3 id="sec-2-4">2.4 Etapa 4 – Desenvolvimento do sistema com POO (C#)</h3>
+        <p class="paragrafo">A programação do sistema foi desenvolvida na linguagem C# baseando-se nos quatro princípios da Programação Orientada a Objetos:</p>
+        <p class="paragrafo"><strong>Abstração:</strong> Consiste em simplificar um objeto real para o sistema. Criamos o modelo básico <code>Usuario</code> (Figura 7) que armazena apenas as informações que o sistema realmente precisa para funcionar, como o nome, e-mail e senha de login do usuário, ocultando as engrenagens mais complexas do servidor.</p>
+        <p class="paragrafo"><strong>Encapsulamento:</strong> Funciona como uma proteção de segurança, semelhante a um cofre digital. Na classe do <code>Aluno</code> (Figura 8), os atributos de experiência e moedas possuem escrita trancada de forma que nenhuma parte externa do código consiga alterar o saldo diretamente. O saldo só pode ser modificado através de ações permitidas e controladas pelo próprio sistema.</p>
+        <p class="paragrafo"><strong>Herança:</strong> Permite que novos modelos aproveitem as características de modelos já existentes. Criamos perfis específicos para <code>Aluno</code> e <code>Tutor</code> (Figura 8) que aproveitam e estendem automaticamente a estrutura comum de cadastro definida no modelo de <code>Usuario</code>, evitando reescrever código desnecessariamente.</p>
+        <p class="paragrafo"><strong>Polimorfismo:</strong> Dá flexibilidade ao sistema ao permitir que uma mesma instrução se comporte de formas diferentes. Por exemplo, o comando de iniciar estudos se adapta de forma transparente caso a ação esteja sendo feita em um flashcard comum ou em uma atividade de simulado, mantendo a estrutura flexível.</p>
+        
+        <div class="code-box">
+            <pre><code>Figura 7 – Classe Base em C#
+
+using System;
+
+namespace PIM_III {
+    public class Usuario {
+        public int Id { get; set; }
+        public string Nome { get; set; }
+        public string Email { get; set; }
+        public string Senha { get; set; }
+
+        public Usuario(int id, string nome, string email, string senha) {
+            Id = id; Nome = nome; Email = email; Senha = senha;
+        }
+        public void Login() {
+            Console.WriteLine("Usuário autenticado.");
+        }
+    }
+}</code></pre>
+        </div>
+        <p class="legenda-fonte legenda-fonte-left mb-1cm">Fonte: Autores, 2026.</p>
+    </section>
+
+    <section class="page page-numerada" aria-label="POO Parte 2">
+        <span class="num-pagina">18</span>
+        <p class="paragrafo">Por meio de Herança e Composição, os perfis derivam ações específicas. A classe Aluno atua como nó central ao se associar estruturalmente aos módulos de desempenho e moedas (Figura 8).</p>
+        
+        <div class="code-box">
+            <pre><code>Figura 8 – Herança e Composição C#
+
+using System.Collections.Generic;
+
+namespace PIM_III {
+    internal class Tutor : Usuario {
+        public Tutor(int id, string n, string e, string s) : base(id,n,e,s) {}
+        public void gerenciarConteudo() { Console.WriteLine("Acesso liberado."); }
+    }
+
+    internal class Aluno : Usuario {
+        public Simulado Simulado { get; set; }
+        public XP XP { get; set; }
+        public Moedas Moedas { get; set; }
+
+        public Aluno(int id, string n, string e, string s) : base(id, n, e, s) {}
+
+        public void EstudarFlashCard() { Console.WriteLine("Card iniciado."); }
+    }
+}</code></pre>
+        </div>
+        <p class="legenda-fonte legenda-fonte-left mb-1cm">Fonte: Autores, 2026.</p>
+    </section>
+
+    <section class="page page-numerada" aria-label="POO Parte 3">
+        <span class="num-pagina">19</span>
+        <p class="paragrafo">A instanciação das regras de gamificação é tratada na rotina principal de execução, consolidando os objetos auxiliares.</p>
+        
+        <div class="code-box">
+            <pre><code>Figura 9 – Arquivo Principal
+
+namespace PIM_III {
+    internal class XP { public int Pontos { get; set; } }
+    internal class Moedas { public int Quantidade { get; set; } }
+}
+
+using System;
+using PIM_III;
+
+public class Program {
+    public static void Main(string[] args) {
+        Console.WriteLine("SISTEMA NEX_TI INICIADO");
+        Usuario aluno = new Usuario(1, "Aluno Teste", "aluno@nexti.com", "123");
+        aluno.Login();
+    }
+}</code></pre>
+        </div>
+        <p class="legenda-fonte legenda-fonte-left mb-1cm">Fonte: Autores, 2026.</p>
+    </section>
+
+    <section class="page page-numerada" aria-label="Web Responsivo">
+        <span class="num-pagina">20</span>
+        <h3 id="sec-2-5">2.5 Etapa 5 – Desenvolvimento Web Responsivo</h3>
+        <p class="paragrafo">A camada front-end prescindiu de frameworks pesados e adotou marcação HTML5 rigorosamente semântica, assegurando performance e leitura nativa por hardwares assistivos. A adaptação do layout baseou-se em media queries e alinhamentos Flexbox, otimizados primeiramente para resoluções de desktop (Tabela 1).</p>
+        
+        <div class="tabela-wrapper">
+            <p class="legenda-tabela">Tabela 1 – Estratégia Front-end</p>
+            <table>
+                <tr>
+                    <th class="col-width-30">Tecnologia</th>
+                    <th class="col-width-70">Aplicação no Projeto</th>
+                </tr>
+                <tr>
+                    <td>CSS Flexbox e Grid</td>
+                    <td>Alinhamento unidimensional (barras de navegação) e divisão cartesiana das telas principais de controle.</td>
+                </tr>
+                <tr>
+                    <td>HTML5 Semântico</td>
+                    <td>Uso de tags nativas (&lt;main&gt;, &lt;article&gt;, &lt;header&gt;) ao invés de blocos genéricos de divisão.</td>
+                </tr>
+                <tr>
+                    <td>Media Queries</td>
+                    <td>Transição adaptativa do layout para suporte a tablets e dispositivos menores sem bibliotecas externas.</td>
+                </tr>
+            </table>
+            <p class="legenda-fonte legenda-fonte-left mb-0">Fonte: Autores, 2026.</p>
+        </div>
+    </section>
+
+    <section class="page page-numerada" aria-label="UX UI 1">
+        <span class="num-pagina">21</span>
+        <h3 id="sec-2-6">2.6 Etapa 6 – UX e UI Design</h3>
+        <p class="paragrafo">Para guiar as decisões de usabilidade e arquitetura de informação, foi modelada a Persona principal do sistema, refletindo com exatidão o público-alvo da plataforma:</p>
+        <ul class="list-caracteristicas">
+            <li><strong>Persona Principal:</strong> Jovem de 18 a 20 anos, com o ensino médio recém-concluído.</li>
+            <li><strong>Perfil e Dores:</strong> Possui grande interesse em ingressar na área de tecnologia, mas enfrenta insegurança diante da enorme quantidade de jargões técnicos e da complexidade inicial das disciplinas abordadas nos cursos superiores de TI.</li>
+            <li><strong>A Jornada na Nex_TI:</strong> Utiliza a plataforma como ferramenta de nivelamento. Através de flashcards de nível introdutório e repetição espaçada, familiariza-se gradativamente com os fundamentos da área. A gamificação (XP e moedas) reduz a frustração comum no aprendizado inicial, mantendo o engajamento diário.</li>
+        </ul>
+        <p class="paragrafo">Com essa jornada de um usuário iniciante em mente, a prototipagem seguiu as heurísticas de Nielsen. A interface conta com <em>affordance</em> clara nos botões e contraste adequado para evitar sobrecarga cognitiva, garantindo que o foco permaneça estritamente no aprendizado introdutório. As telas foram elaboradas no Figma.</p>
+
+        <div class="diagrama-container">
+            <p class="legenda-topo">Figura 10 – Protótipo: Login e Acesso</p>
+            <img src="assets/prototypes/Prototipo_Login.png" alt="Tela de Login" class="diagrama-img img-height-10" onerror="this.src='https://placehold.co/800x600/E8EAED/5F6368?text=Figura+10+-+Login'">
+            <p class="legenda-fonte">Fonte: Autores, 2026.</p>
+        </div>
+    </section>
+
+    <section class="page page-numerada" aria-label="UX UI 2">
+        <span class="num-pagina">22</span>
+        <div class="diagrama-container">
+            <p class="legenda-topo">Figura 11 – Protótipo: Cadastro de Usuário</p>
+            <img src="assets/prototypes/Prototipo_Cadastro.png" alt="Tela de Cadastro" class="diagrama-img img-height-10" onerror="this.src='https://placehold.co/800x600/E8EAED/5F6368?text=Figura+11+-+Cadastro'">
+            <p class="legenda-fonte">Fonte: Autores, 2026.</p>
+        </div>
+        
+        <div class="diagrama-container">
+            <p class="legenda-topo">Figura 12 – Protótipo: Nivelamento Inicial</p>
+            <img src="assets/prototypes/Prototipo_Nivelamento.png" alt="Tela de Nivelamento" class="diagrama-img img-height-10" onerror="this.src='https://placehold.co/800x600/E8EAED/5F6368?text=Figura+12+-+Nivelamento'">
+            <p class="legenda-fonte">Fonte: Autores, 2026.</p>
+        </div>
+    </section>
+
+    <section class="page page-numerada" aria-label="Acessibilidade e ML">
+        <span class="num-pagina">23</span>
+        <h3 id="sec-2-7">2.7 Etapa 7 – Machine Learning e Análise de Dados</h3>
+        <p class="paragrafo">A plataforma Nex_TI utiliza uma técnica para ajudar os alunos a reterem o conhecimento de forma mais eficiente, calculando o melhor momento para revisar cada assunto e evitando que o conteúdo seja esquecido naturalmente. O processo funciona de forma personalizada com cartões de estudo (flashcards): após responder a uma pergunta, o aluno indica o quanto foi fácil responder.</p>
+        <p class="paragrafo">O sistema define o tempo de espera do cartão a partir de duas regras simples:</p>
+        <p class="paragrafo">1. <strong>Complexidade:</strong> Se o aluno achou o assunto fácil, o tempo para a próxima revisão aumenta. Se achou difícil, o cartão retorna rapidamente para a rotina diária até que seja fixado.</p>
+        <p class="paragrafo">2. <strong>Tempo de Revisão:</strong> A próxima exibição é agendada em dias. O intervalo aumenta progressivamente a cada acerto, garantindo que o estudante revise mais o que ainda não domina totalmente.</p>
+        <p class="paragrafo">Todo esse histórico fica registrado no banco de dados, servindo como base para que futuramente inteligências artificiais analisem o engajamento e alertem tutores caso algum estudante apresente dificuldades constantes.</p>
+        
+        <h3 id="sec-2-8">2.8 Etapa 8 – Comunicação e LIBRAS</h3>
+        <p class="paragrafo">Garantindo a acessibilidade digital, o projeto integrou atributos essenciais da iniciativa WAI-ARIA. O sistema apresenta leitura de rótulos por software assistivo (aria-label), indicativos nativos de processamento e opções de redimensionamento e contraste exigidos pelas normativas inclusivas.</p>
+
+        <h3 id="sec-2-9">2.9 Etapa 9 – Integração e avaliação final</h3>
+        <p class="paragrafo">O desenvolvimento consolidou a conexão entre a usabilidade front-end, a arquitetura back-end orientada a objetos e o processamento relacional de dados. O fluxo arquitetural está plenamente documentado através da modelagem UML.</p>
+        <p class="paragrafo">Cabe salientar que o escopo funcional finalizado para avaliação no 3º Semestre engloba o fluxo de autenticação, acessibilidade, motor matemático de repetição espaçada SM-2 (flashcards) e visualização gráfica via Mapa Neural (Obsidian View). As tabelas do banco de dados relacional e os modelos em C# vinculados a simulados ENADE (como tb_questoes, tb_alternativas) e economia virtual estendida já foram criados de forma antecipada para manter a consistência conceitual da documentação UML, mas a sua lógica de aplicação e interfaces estão omitidas/em desenvolvimento e serão concluídas oficialmente no 4º Semestre.</p>
+    </section>
+
+    <section class="page page-numerada" aria-label="Caso de Uso - Visão Geral">
+        <span class="num-pagina">24</span>
+        <p class="paragrafo">A delimitação funcional das interações entre os atores do sistema (Aluno, Tutor e Admin) foi estabelecida nos Casos de Uso (Figura 13), restringindo claramente os privilégios operacionais na interface.</p>
+
+        <div class="diagrama-container">
+            <p class="legenda-topo">Figura 13 – Diagrama de Casos de Uso: Visão Geral</p>
+            <img src="assets/diagrams/UseCase Diagrams Nex_TI.png" alt="Caso de Uso Completo" class="diagrama-img img-height-14" onerror="this.src='https://placehold.co/800x600/E8EAED/5F6368?text=Figura+13+-+Caso+Uso+Completo'">
+            <p class="legenda-fonte">Fonte: Autores, 2026.</p>
+        </div>
+    </section>
+
+
+
+    <section class="page page-numerada" aria-label="Diagrama de Classes - Visão Geral">
+        <span class="num-pagina">25</span>
+        <p class="paragrafo">O diagrama de classes consolida a fundação estrutural do código-fonte, declarando as composições e dependências necessárias para sustentar as regras de economia virtual. A Figura 14 exibe a Visão Geral de todas as entidades do sistema e suas interações conceituais.</p>
+
+        <div class="diagrama-container">
+            <p class="legenda-topo">Figura 14 – Diagrama de Classes: Visão Geral</p>
+            <img src="assets/diagrams/Class Diagram Nex_TI.png" alt="Diagrama de Classes Completo" class="diagrama-img img-height-14" onerror="this.src='https://placehold.co/800x600/E8EAED/5F6368?text=Figura+14+-+Classes+Completo'">
+            <p class="legenda-fonte">Fonte: Autores, 2026.</p>
+        </div>
+    </section>
+
+
+
+    <section class="page page-numerada" aria-label="Diagrama de Sequência - Visão Geral">
+        <span class="num-pagina">26</span>
+        <p class="paragrafo">A validação temporal e o fluxo das regras de negócio foram mapeados pelo Diagrama de Sequência (Figura 15), ilustrando a interação do cliente web com as validações de servidor até a consolidação dos pontos de experiência.</p>
+
+        <div class="diagrama-container">
+            <p class="legenda-topo">Figura 15 – Diagrama de Sequência: Visão Geral</p>
+            <img src="assets/diagrams/Sequence Diagram Nex_TI.png" alt="Diagrama de Sequência Completo" class="diagrama-img img-height-14" onerror="this.src='https://placehold.co/800x600/E8EAED/5F6368?text=Figura+15+-+Sequencia+Completa'">
+            <p class="legenda-fonte">Fonte: Autores, 2026.</p>
+        </div>
+    </section>
+
+
+
+    <section class="page page-numerada" aria-label="Conclusao">
+        <span class="num-pagina">27</span>
+        <h2 id="sec-3" class="mt-1cm">3 CONCLUSÃO</h2>
+        <p class="paragrafo">A especificação técnica e a modelagem da plataforma Nex_TI evidenciam a viabilidade de integrar conceitos pedagógicos de estudo ativo e repetição espaçada em uma infraestrutura digital de apoio acadêmico. A aplicação prática das metodologias ágeis Scrum e Kanban permitiu coordenar as entregas do projeto com clareza, desde a elicitação de requisitos funcionais e não funcionais até o mapeamento arquitetural do sistema.</p>
+        <p class="paragrafo">No âmbito do desenvolvimento, os resultados obtidos consolidam o projeto conceitual de banco de dados relacional em SQL Server e a especificação das regras de negócio através dos pilares da orientação a objetos em C#. A construção de protótipos responsivos demonstra a aderência do layout a diferentes dispositivos, enquanto o uso planejado de marcações semânticas e diretrizes WAI-ARIA viabiliza o acesso inclusivo ao portal.</p>
+        <p class="paragrafo">Conclui-se que o trabalho atinge as metas propostas para o PIM III, estruturando a documentação física e lógica (diagramas UML e DER) e validando a consistência dos fluxos de dados, o que prepara o sistema para o desenvolvimento e a implementação funcional das etapas subsequentes.</p>
+    </section>
+
+    <section class="page page-numerada" aria-label="Referencias">
+        <span class="num-pagina">28</span>
+        <h2 id="sec-ref" class="center mb-15cm">REFERÊNCIAS</h2>
+        <p>ANKI. <strong>Powerful, intelligent flashcards</strong>, 2026. Disponível em: &lt;<a href="https://apps.ankiweb.net/" target="_blank" rel="noopener" class="ref-link">ankiweb.net</a>&gt;.</p>
+        <br>
+        <p>BRASIL. <strong>Lei Geral de Proteção de Dados (LGPD)</strong>, 2018. Disponível em: &lt;<a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm" target="_blank" rel="noopener" class="ref-link">planalto.gov.br</a>&gt;.</p>
+        <br>
+        <p>ELMASRI, R.; NAVATHE, S. <strong>Sistemas de Banco de Dados</strong>. 6. ed. Pearson, 2011. Disponível em: &lt;<a href="https://books.google.com.br/books?id=01b4oAEACAAJ" target="_blank" rel="noopener" class="ref-link">books.google.com</a>&gt;.</p>
+        <br>
+        <p>FOWLER, Martin. <strong>UML Essencial</strong>. 3. ed. Bookman, 2014. Disponível em: &lt;<a href="https://books.google.com.br/books?id=7N62BAAAQBAJ" target="_blank" rel="noopener" class="ref-link">books.google.com</a>&gt;.</p>
+        <br>
+        <p>ISO/IEC. <strong>ISO/IEC 25010 (Quality Requirements)</strong>, 2011. Disponível em: &lt;<a href="https://www.iso.org/standard/35733.html" target="_blank" rel="noopener" class="ref-link">iso.org</a>&gt;.</p>
+        <br>
+        <p>KRUG, Steve. <strong>Não Me Faça Pensar</strong>. 3. ed. Alta Books, 2014. Disponível em: &lt;<a href="https://books.google.com.br/books?id=n_g-AwAAQBAJ" target="_blank" rel="noopener" class="ref-link">books.google.com</a>&gt;.</p>
+        <br>
+        <p>PRESSMAN, R.; MAXIM, B. <strong>Engenharia de Software</strong>. 8. ed. AMGH, 2016. Disponível em: &lt;<a href="https://books.google.com.br/books?id=8sK9CgAAQBAJ" target="_blank" rel="noopener" class="ref-link">books.google.com</a>&gt;.</p>
+        <br>
+        <p>SILVA, M. D. I. et al. <strong>PIM III - Nex_TI (Documentação UML)</strong>. GitHub, 2026. Disponível em: &lt;<a href="https://github.com/MayconDIS/PIM_III-Documentacao_UML" target="_blank" rel="noopener" class="ref-link">github.com</a>&gt;.</p>
+        <br>
+        <p>SILVA, M. D. I. et al. <strong>PIM III - Nex_TI (Parte Teórica)</strong>. GitHub, 2026. Disponível em: &lt;<a href="https://github.com/MayconDIS/PIM_III-Parte_Teorica" target="_blank" rel="noopener" class="ref-link">github.com</a>&gt;.</p>
+        <br>
+        <p>SCHWABER, K.; SUTHERLAND, J. <strong>The Scrum Guide</strong>, 2020. Disponível em: &lt;<a href="https://scrumguides.org/scrum-guide.html" target="_blank" rel="noopener" class="ref-link">scrumguides.org</a>&gt;.</p>
+        <br>
+        <p>SOFTEX. <strong>MPS.BR - Guia Geral</strong>, 2021. Disponível em: &lt;<a href="https://softex.br/mpsbr/" target="_blank" rel="noopener" class="ref-link">softex.br</a>&gt;.</p>
+        <br>
+        <p>SOMMERVILLE, Ian. <strong>Engenharia de Software</strong>. 10. ed. Pearson, 2019. Disponível em: &lt;<a href="https://books.google.com.br/books?id=s6e5CwAAQBAJ" target="_blank" rel="noopener" class="ref-link">books.google.com</a>&gt;.</p>
+    </section>
+
+    <section class="page" aria-label="Ficha">
+        <h2 class="center">FICHA DE CONTROLE DO PIM</h2>
+        <p>Grupo Nº: 02 &nbsp;&nbsp; Ano: 2026 &nbsp;&nbsp; Período: Diurno</p>
+        <p>Tema: Desenvolvimento de plataforma web de avaliação e apoio à aprendizagem</p>
+        <br>
+        <div class="tabela-wrapper">
+            <p>Alunos:</p>
+            <table>
+                <tr><th>RA</th><th>Nome</th><th>Visto do aluno</th></tr>
+                <tr><td>H67HJI4</td><td>Gabriel Alves Moreira</td><td></td></tr>
+                <tr><td>R280985</td><td>Maciel Costa da Silva</td><td></td></tr>
+                <tr><td>H719CD3</td><td>Maycon Douglas Inácio Silva</td><td></td></tr>
+                <tr><td>H7858F9</td><td>Miguel Angel Fernandez Ortiz</td><td></td></tr>
+                <tr><td>H6722I0</td><td>Rafael Mesquita</td><td></td></tr>
+            </table>
+        </div>
+        <br>
+        <div class="tabela-wrapper">
+            <p>Registros:</p>
+            <table>
+                <tr><th class="col-width-20">Data do encontro</th><th>Observações</th></tr>
+                <tr><td>05/03</td><td>1ª Reunião: Leitura do Manual do PIM e definição técnica.</td></tr>
+                <tr><td>12/03</td><td>2ª Reunião: Criação do Backlog, C# e SQL.</td></tr>
+                <tr><td>18/03</td><td>3ª Reunião: UX/UI e WAI-ARIA.</td></tr>
+                <tr><td>22/03</td><td>4ª Reunião: Alinhamento final da prototipagem e ABNT.</td></tr>
+                <tr><td>26/03</td><td>5ª Reunião: Injeção do C# e estruturação final.</td></tr>
+                <tr><td>29/03</td><td>6ª Reunião: Finalização e integração dos diagramas UML.</td></tr>
+                <tr><td>05/04</td><td>7ª Reunião: Integração dos protótipos WEB.</td></tr>
+                <tr><td>17/04</td><td>8ª Reunião: Reformulação do DER e Script SQL Server.</td></tr>
+                <tr><td>03/05</td><td>9ª Reunião: Alinhamento de manuais de extensão e física do Mapa Neural.</td></tr>
+                <tr><td>24/05</td><td>10ª Reunião: Refatoração SOLID da API backend em C#.</td></tr>
+            </table>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- Modal Lightbox para visualização ampliada de imagens -->
+    <div id="image-lightbox" class="lightbox" role="dialog" aria-hidden="true" aria-label="Visualizador de Imagem">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Fechar visualizador">&times;</button>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="Imagem ampliada do diagrama">
+            <p id="lightbox-caption" class="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Lógica do Visualizador Lightbox
+            const lightbox = document.getElementById('image-lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            const closeBtn = document.getElementById('lightbox-close');
+            
+            const diagramImages = document.querySelectorAll('.diagrama-img');
+            let currentScale = 1.0;
+            
+            diagramImages.forEach(img => {
+                img.addEventListener('click', () => {
+                    const src = img.getAttribute('src');
+                    const alt = img.getAttribute('alt') || 'Diagrama';
+                    
+                    // Busca a legenda correspondente subindo para o contêiner imediato
+                    const parent = img.closest('.diagrama-container') || img.parentElement;
+                    const topoCaption = parent.querySelector('.legenda-topo');
+                    const captionText = topoCaption ? topoCaption.textContent : alt;
+                    
+                    lightboxImg.setAttribute('src', src);
+                    lightboxImg.setAttribute('alt', alt);
+                    lightboxCaption.textContent = captionText;
+                    
+                    currentScale = 1.0;
+                    lightboxImg.style.transform = 'scale(1)';
+                    lightboxImg.style.transition = ''; // Usa a transição do CSS para animação de abertura
+                    
+                    lightbox.classList.add('active');
+                    lightbox.setAttribute('aria-hidden', 'false');
+                    document.body.style.overflow = 'hidden'; // Impede scroll do body
+                });
+            });
+            
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                lightbox.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = ''; // Restaura scroll
+                setTimeout(() => {
+                    lightboxImg.setAttribute('src', '');
+                    lightboxImg.setAttribute('alt', '');
+                    lightboxCaption.textContent = '';
+                    lightboxImg.style.transform = '';
+                    lightboxImg.style.transition = '';
+                    currentScale = 1.0;
+                }, 200); // Aguarda o fim da animação de fade-out
+            }
+            
+            closeBtn.addEventListener('click', closeLightbox);
+            
+            lightbox.addEventListener('click', (e) => {
+                // Fecha se clicar no fundo (overlay), mas não na imagem ou legenda
+                if (e.target === lightbox || e.target.classList.contains('lightbox-content')) {
+                    closeLightbox();
+                }
+            });
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+
+            // Lógica de Zoom com Ctrl + Scroll do Mouse
+            lightbox.addEventListener('wheel', (e) => {
+                if (lightbox.classList.contains('active') && e.ctrlKey) {
+                    e.preventDefault(); // Impede o zoom nativo da página
+                    
+                    lightboxImg.style.transition = 'transform 0.08s ease-out'; // Transição rápida para zoom suave
+                    
+                    if (e.deltaY < 0) {
+                        currentScale += 0.1; // Zoom In (Scroll para frente)
+                    } else {
+                        currentScale -= 0.1; // Zoom Out (Scroll para trás)
+                    }
+                    
+                    // Limita o zoom entre 0.6x e 4.0x para usabilidade
+                    currentScale = Math.max(0.6, Math.min(currentScale, 4.0));
+                    lightboxImg.style.transform = `scale(${currentScale})`;
+                }
+            }, { passive: false });
+        });
+    </script>
+</body>
+</html>
