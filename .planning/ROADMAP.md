@@ -1,6 +1,6 @@
-# ROADMAP: PIM III (Nex_TI)
+# ROADMAP: PIM IV (Nex_TI)
 
-Este documento acompanha a progressão das fases de desenvolvimento e documentação do PIM III, garantindo que o cronograma não se perca durante a integração do código, design e teorias acadêmicas.
+Este documento acompanha a progressão das fases de desenvolvimento e documentação do PIM IV, garantindo que o cronograma não se perca durante a integração do código, design e teorias acadêmicas.
 
 ## 🎯 Marco Atual: Integração Final (Milestone 1)
 
