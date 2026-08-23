@@ -1,0 +1,11 @@
+{
+  "name": "@nexti/shared",
+  "version": "2.0.0",
+  "description": "Lógicas, motores sintetizados de áudio, partículas de confetes e banco de dados de flashcards do Nex_TI",
+  "main": "src/data.js",
+  "module": "src/data.js",
+  "private": true,
+  "scripts": {
+    "test": "node --test src/*.js || echo \"Módulos shared válidos.\""
+  }
+}

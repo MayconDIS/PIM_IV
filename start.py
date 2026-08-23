@@ -18,8 +18,9 @@ import sys
 import os
 
 # ── Configurações ──────────────────────────────────────
-BACKEND_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "backend")
-FRONTEND_DIR = os.path.dirname(os.path.abspath(__file__))
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+BACKEND_DIR = os.path.join(ROOT_DIR, "apps", "api") if os.path.exists(os.path.join(ROOT_DIR, "apps", "api")) else os.path.join(ROOT_DIR, "backend")
+FRONTEND_DIR = os.path.join(ROOT_DIR, "apps", "web") if os.path.exists(os.path.join(ROOT_DIR, "apps", "web")) else ROOT_DIR
 FRONTEND_PORT = 5501
 BACKEND_PORT = 5000
 BACKEND_URL = f"http://localhost:{BACKEND_PORT}"

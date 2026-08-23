@@ -20,19 +20,29 @@ Este arquivo contém as diretrizes e instruções de contexto específicas para 
 
 ---
 
+* **Estrutura Monorepo**:
+  - `apps/web/`: Frontend Web (HTML5, CSS3, JS Vanilla, Mapa Neural, SM-2).
+  - `apps/api/`: Backend C# (.NET 10 Minimal APIs, EF Core).
+  - `packages/shared/`: Motores compartilhados (Áudio Web Audio API, Confetti Canvas, Data).
+  - `packages/design-dna/`: Design System e Tokens CSS/JSON.
+  - `database/`: Scripts SQL (`NexTI_DB.sql`).
+  - `docs/`: Documentação acadêmica e manuais do PIM IV.
+
+---
+
 ## 🎯 Diretrizes de Engenharia e Código
 1. **Padrão SOLID**:
    - Manter as responsabilidades de rotas (HTTP) separadas da lógica de negócios e persistência.
-   - Usar `ISm2Engine` em `backend/Services/` para qualquer cálculo matemático do algoritmo SM-2 (SRP/DIP).
-   - Manter novos endpoints mapeados de forma extensível em classes separadas (ex: `EndpointExtensions.cs`), evitando inflar o `Program.cs`.
+   - Usar `ISm2Engine` em `apps/api/Services/` para qualquer cálculo matemático do algoritmo SM-2 (SRP/DIP).
+   - Manter novos endpoints mapeados de forma extensível em classes separadas (ex: `apps/api/Endpoints/EndpointExtensions.cs`), evitando inflar o `Program.cs`.
 2. **Sem Placeholders**:
    - Nunca utilizar códigos ou comentários temporários (TBD, TODO, "implementar depois") em arquivos de produção.
 3. **Padrão de Commits**:
-   - Commitar alterações usando mensagens convencionais (*Conventional Commits*) em português (ex: `feat(backend):`, `refactor(backend):`, `docs(readme):`).
+   - Commitar alterações usando mensagens convencionais (*Conventional Commits*) em português (ex: `feat(api):`, `refactor(web):`, `docs(readme):`).
 
 ---
 
 ## 💬 Preferências de Comunicação com o Usuário
 * **Idioma**: Sempre responder em **Português (PT-BR)**.
 * **Estilo**: Manter respostas concisas, focadas e estruturadas em Markdown.
-* **Rastreabilidade**: Sempre que mencionar um arquivo ou classe nas respostas, usar links markdown clicáveis usando o esquema `file://` (ex: `[Program.cs](file:///C:/.../backend/Program.cs)`).
+* **Rastreabilidade**: Sempre que mencionar um arquivo ou classe nas respostas, usar links markdown clicáveis usando o esquema `file://` (ex: `[Program.cs](file:///C:/.../apps/api/Program.cs)`).

@@ -38,7 +38,14 @@
         
     </main>
 
-    <script src="assets/js/splash.js"></script>
+    <script src="apps/web/assets/js/splash.js" onerror="this.src='assets/js/splash.js'"></script>
+    <script>
+        setTimeout(function() {
+            if (window.location.pathname.indexOf('apps/web') === -1) {
+                window.location.href = "apps/web/pages/login/login.html";
+            }
+        }, 4000);
+    </script>
 
     <!-- VLibras Widget -->
     <div vw class="enabled">

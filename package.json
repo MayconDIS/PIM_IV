@@ -1,0 +1,34 @@
+{
+  "name": "nexti-monorepo",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Nex_TI Monorepo — Frontend Web (Vanilla JS, SM-2, Mapa Neural) + Backend C# (.NET 10 Minimal APIs) + SQL Server / Azure SQL.",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "python start.py",
+    "dev:web": "npm run dev --prefix apps/web",
+    "dev:mobile": "npm run start --prefix apps/mobile",
+    "dev:api": "npm run dev --prefix apps/api",
+    "build": "dotnet build apps/api/NexTI_API.csproj",
+    "test": "npm run test:estrutura && npm run test:unit",
+    "test:estrutura": "node scripts/verificarEstrutura.js",
+    "test:unit": "dotnet test tests/NexTI_API.Tests/NexTI_API.Tests.csproj",
+    "test:shared": "npm test --prefix packages/shared"
+  },
+  "keywords": [
+    "edtech",
+    "gamification",
+    "spaced-repetition",
+    "sm-2",
+    "dotnet10",
+    "minimal-apis",
+    "sql-server",
+    "monorepo"
+  ],
+  "author": "Nex_TI Academy (Gabriel Moreira, Maciel Silva, Maycon Douglas, Miguel Ortiz, Rafael Mesquita)",
+  "license": "MIT"
+}

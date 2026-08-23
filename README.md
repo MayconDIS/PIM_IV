@@ -98,17 +98,18 @@ O projeto foi construído seguindo as melhores práticas do mercado:
  ┣ 📂 .planning/      # Inteligência do projeto, roadmap e arquitetura
  ┣ 📂 assets/         # Recursos globais e Design System
  ┃ ┣ 📂 css/          # global.css, splash.css
- ┃ ┗ 📂 js/           # api.js, auth.js, splash.js
- ┣ 📂 backend/        # API C# .NET 10 (Controllers, Models, DbContext)
+ ┃ ┗ 📂 js/           # api.js, auth.js, audio.js (Web Audio API), confetti.js, data.js, splash.js
+ ┣ 📂 backend/        # API C# .NET 10 (Endpoints, Models, Services, DbContext)
+ ┃ ┣ 📂 Services/     # ISm2Engine, Sm2Engine, IDatabaseSeeder, DatabaseSeeder (SOLID)
  ┃ ┗ 📂 Certificados/ # Scripts Python, fontes e modelos de geração de PDF
- ┣ 📂 database/       # Script SQL do banco de dados (NexTI_DB.sql)
+ ┣ 📂 database/       # Script SQL do banco de dados (NexTI_DB.sql / Azure SQL)
  ┣ 📂 docs/           # Documentação, manuais da banca e apresentação
  ┃ ┣ 📂 apresentation/# Apresentação estática em HTML do projeto
  ┃ ┣ 📜 MANUAL_DE_EXECUCAO.md  # Guia para a banca rodar o projeto
  ┃ ┣ 📜 MANUAL_PRATICO.md      # Guia do Usuário final (Extensão Universitária)
  ┃ ┗ 📜 MANUAL_TECNICO.md      # Guia de Arquitetura e Engenharia de Software
  ┣ 📂 pages/          # Telas e módulos do Frontend
- ┃ ┣ 📂 dashboard/    # Interface principal, Motor SM-2 e Mapa Neural
+ ┃ ┣ 📂 dashboard/    # Interface principal, Motor SM-2, Barra de Nível e Mapa Neural
  ┃ ┣ 📂 login/        # Autenticação do usuário
  ┃ ┗ 📂 sobre/        # Página informativa da plataforma
  ┣ 📜 index.html      # Ponto de entrada / Splash Screen
@@ -150,28 +151,39 @@ The project was built adhering to industry best practices:
 - **Backend:** RESTful API developed in `C# (.NET 10)` using **Minimal APIs** and **Entity Framework Core**, including CORS policies and vulnerability mitigations (OWASP).
 - **Database:** `SQL Server` RDBMS structured (`NexTI_DB.sql`) ensuring gamification constraints at the database level.
 
-### 📂 Repository Structure
+### 📂 Repository Structure (Monorepo)
 
 ```text
 📦 PIM_IV-Parte_Pratica
- ┣ 📂 .planning/      # Project intelligence, roadmap, and architecture
- ┣ 📂 assets/         # Global resources and Design System
- ┃ ┣ 📂 css/          # global.css, splash.css
- ┃ ┗ 📂 js/           # api.js, auth.js, splash.js
- ┣ 📂 backend/        # C# .NET 10 API (Controllers, Models, DbContext)
- ┃ ┗ 📂 Certificados/ # Python scripts, fonts, and PDF generation templates
- ┣ 📂 database/       # Database SQL script (NexTI_DB.sql)
- ┣ 📂 docs/           # Documentation, board manuals, and presentation
- ┃ ┣ 📂 apresentation/# Static HTML presentation of the project
- ┃ ┣ 📜 MANUAL_DE_EXECUCAO.md  # Guide for the board to run the project
- ┃ ┣ 📜 MANUAL_PRATICO.md      # End-User Guide (University Extension)
- ┃ ┗ 📜 MANUAL_TECNICO.md      # Architecture and Software Engineering Guide
- ┣ 📂 pages/          # Frontend screens and modules
- ┃ ┣ 📂 dashboard/    # Main interface, SM-2 Engine, and Neural Map
- ┃ ┣ 📂 login/        # User authentication
- ┃ ┗ 📂 sobre/        # Platform informational page
- ┣ 📜 index.html      # Entry point / Splash Screen
- ┗ 📜 start.py        # Ecosystem initialization script
+ ┣ 📂 apps/
+ ┃ ┣ 📂 web/                  # Frontend Web Application (HTML5, CSS3, Vanilla JS)
+ ┃ ┃ ┣ 📂 assets/             # Global stylesheets and scripts (api.js, auth.js, splash.js)
+ ┃ ┃ ┣ 📂 pages/              # Screens (dashboard, login, sobre)
+ ┃ ┃ ┣ 📜 index.html          # Splash screen & entry point
+ ┃ ┃ ┗ 📜 package.json        # Web app workspace configuration
+ ┃ ┗ 📂 api/                  # Backend API (.NET 10 Minimal APIs & EF Core)
+ ┃   ┣ 📂 Data/               # AppDbContext & entity mappings
+ ┃   ┣ 📂 Endpoints/          # EndpointExtensions & route modules
+ ┃   ┣ 📂 Models/             # Domain entities & request/response DTOs
+ ┃   ┣ 📂 Services/           # ISm2Engine & DatabaseSeeder
+ ┃   ┣ 📂 Certificados/       # Python certificate generators & PDF templates
+ ┃   ┣ 📜 Program.cs          # API host, CORS, JWT & DI setup
+ ┃   ┗ 📜 package.json        # API workspace configuration
+ ┣ 📂 packages/
+ ┃ ┣ 📂 shared/               # Shared engines (SM-2, Web Audio API, Canvas Confetti)
+ ┃ ┃ ┗ 📂 js/                 # audio.js, confetti.js, data.js
+ ┃ ┗ 📂 design-dna/           # Design System tokens & palette specifications
+ ┃   ┣ 📜 tokens.css          # CSS Variables & Glassmorphism classes
+ ┃   ┗ 📜 paleta.json         # Design tokens JSON mirror
+ ┣ 📂 database/               # Database SQL DDL/DML script (NexTI_DB.sql)
+ ┣ 📂 docs/                   # Academic documentation, board manuals & presentations
+ ┃ ┣ 📂 apresentation/        # Static HTML presentation of the project
+ ┃ ┣ 📜 MANUAL_DE_EXECUCAO.md  # Guide for the evaluation board
+ ┃ ┣ 📜 MANUAL_PRATICO.md      # End-User Guide
+ ┃ ┗ 📜 MANUAL_TECNICO.md      # Architecture & Software Engineering Guide
+ ┣ 📜 package.json            # Monorepo root with NPM Workspaces
+ ┣ 📜 start.py                # Unified launcher (.NET 10 + HTTP Server)
+ ┗ 📜 README.md               # Official documentation
 ```
 
 ### 👥 Development Team
