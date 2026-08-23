@@ -12,7 +12,7 @@
     "dev": "python start.py",
     "dev:web": "npm run dev --prefix apps/web",
     "dev:react": "npm run dev --prefix apps/react-web",
-    "dev:mobile": "npm run start --prefix apps/mobile",
+    "dev:mobile": "npm run start --prefix apps/react-mobile",
     "dev:api": "npm run dev --prefix apps/api",
     "build": "dotnet build apps/api/NexTI_API.csproj",
     "build:react": "npm run build --prefix apps/react-web",

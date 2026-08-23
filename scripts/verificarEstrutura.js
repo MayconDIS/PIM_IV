@@ -25,9 +25,9 @@ const caminhosObrigatorios = [
     'apps/react-web/src/App.jsx',
     'apps/react-web/src/main.jsx',
     // Apps: Mobile (React Native / Expo)
-    'apps/mobile/package.json',
-    'apps/mobile/app.json',
-    'apps/mobile/App.js',
+    'apps/react-mobile/package.json',
+    'apps/react-mobile/app.json',
+    'apps/react-mobile/App.js',
     // Apps: API (.NET 10 Minimal APIs)
     'apps/api/package.json',
     'apps/api/NexTI_API.csproj',
