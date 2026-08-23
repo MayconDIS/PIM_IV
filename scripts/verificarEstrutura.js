@@ -18,6 +18,12 @@ const caminhosObrigatorios = [
     'apps/web/assets/js/audio.js',
     'apps/web/assets/js/confetti.js',
     'apps/web/assets/js/data.js',
+    // Apps: React Web (React + Vite)
+    'apps/react-web/package.json',
+    'apps/react-web/vite.config.js',
+    'apps/react-web/index.html',
+    'apps/react-web/src/App.jsx',
+    'apps/react-web/src/main.jsx',
     // Apps: Mobile (React Native / Expo)
     'apps/mobile/package.json',
     'apps/mobile/app.json',

@@ -1,0 +1,138 @@
+:root {
+  --nexti-bg: #0b0c10;
+  --nexti-card: #12161f;
+  --nexti-card-hover: #181d28;
+  --nexti-border: #1f293d;
+  --nexti-border-glow: #00f0ff;
+  
+  --nexti-cyan: #00f0ff;
+  --nexti-green: #00ff88;
+  --nexti-purple: #8a2be2;
+  --nexti-gold: #ffd700;
+  --nexti-red: #ff5555;
+  --nexti-blue: #3b82f6;
+  
+  --nexti-text: #ffffff;
+  --nexti-text-sec: #c5c6c7;
+  --nexti-text-muted: #8b92a5;
+  
+  --font-tech: 'Fira Code', monospace;
+  --font-display: 'Orbitron', sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--nexti-bg);
+  color: var(--nexti-text-sec);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(0, 240, 255, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(138, 43, 226, 0.04) 0%, transparent 40%),
+    linear-gradient(rgba(0, 240, 255, 0.02) 1px, transparent 1px), 
+    linear-gradient(90deg, rgba(0, 240, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 30px 30px, 30px 30px;
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: rgba(18, 22, 31, 0.85);
+  border: 1px solid var(--nexti-border);
+  border-radius: 12px;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.tech-font {
+  font-family: var(--font-tech);
+}
+
+.display-font {
+  font-family: var(--font-display);
+}
+
+.heading-font {
+  font-family: var(--font-heading);
+}
+
+/* Scrollbar Personalizada */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #090a0d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f293d;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--nexti-cyan);
+}
+
+/* Animações e Efeitos */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 15px rgba(0, 240, 255, 0.3); }
+  50% { box-shadow: 0 0 25px rgba(0, 240, 255, 0.6); }
+}
+
+@keyframes floatAnim {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+.glow-cyan {
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+}
+
+.glow-green {
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+}
+
+/* Estilo do 3D Flip Card */
+.flip-card-container {
+  perspective: 1200px;
+  width: 100%;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  min-height: 320px;
+}
+
+.flip-card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 14px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
