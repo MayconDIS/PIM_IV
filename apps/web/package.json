@@ -1,0 +1,14 @@
+{
+  "name": "@nexti/web",
+  "version": "2.0.0",
+  "description": "Frontend Web da plataforma Nex_TI (HTML5 Semântico, CSS3 Puro, Vanilla JS, Motor SM-2, Mapa Neural)",
+  "private": true,
+  "scripts": {
+    "dev": "python -m http.server 5501",
+    "serve": "python -m http.server 5500"
+  },
+  "dependencies": {
+    "@nexti/shared": "*",
+    "@nexti/design-dna": "*"
+  }
+}
