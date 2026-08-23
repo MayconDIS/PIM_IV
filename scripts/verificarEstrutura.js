@@ -8,17 +8,7 @@ const rootDir = path.resolve(__dirname, '..');
 console.log('\n🔍 [Nex_TI Monorepo] Verificando integridade da estrutura...\n');
 
 const caminhosObrigatorios = [
-    // Apps
-    'apps/web/package.json',
-    'apps/web/index.html',
-    'apps/web/pages/dashboard/index.html',
-    'apps/web/pages/dashboard/js/app.js',
-    'apps/web/pages/login/login.html',
-    'apps/web/assets/js/api.js',
-    'apps/web/assets/js/audio.js',
-    'apps/web/assets/js/confetti.js',
-    'apps/web/assets/js/data.js',
-    // Apps: React Web (React + Vite)
+    // Apps: React Web (React 18 + Vite)
     'apps/react-web/package.json',
     'apps/react-web/vite.config.js',
     'apps/react-web/index.html',

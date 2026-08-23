@@ -101,48 +101,43 @@ def aguardar_backend(timeout=30):
         time.sleep(1)
     return False
 
-# ── Frontend (HTTP Server) ─────────────────────────────
-servidor_frontend = None
+# ── Frontend (Vite / React Web) ───────────────────────
+processo_frontend = None
 
 def iniciar_frontend():
-    global servidor_frontend
+    global processo_frontend
 
     if porta_ocupada(FRONTEND_PORT):
         log("⚠️", f"Porta {FRONTEND_PORT} já está em uso. O frontend pode já estar rodando.", Cor.AMARELO)
         return
 
-    handler = http.server.SimpleHTTPRequestHandler
+    log("⚡", f"Iniciando React Web com Vite em {FRONTEND_URL} ...", Cor.CYAN)
+    
+    # Inicia o Vite na pasta apps/react-web
+    cmd = ["npx", "vite", "--port", str(FRONTEND_PORT)]
+    if sys.platform == "win32":
+        cmd = ["cmd", "/c", "npx", "vite", "--port", str(FRONTEND_PORT)]
 
-    class SilentHandler(handler):
-        """Suprime os logs e garante charset UTF-8 nos arquivos de texto."""
-        extensions_map = {
-            **handler.extensions_map,
-            '.js': 'text/javascript; charset=utf-8',
-            '.mjs': 'text/javascript; charset=utf-8',
-            '.css': 'text/css; charset=utf-8',
-            '.html': 'text/html; charset=utf-8',
-            '.json': 'application/json; charset=utf-8',
-            '.svg': 'image/svg+xml; charset=utf-8',
-        }
-        def log_message(self, format, *args):
-            pass
+    processo_frontend = subprocess.Popen(
+        cmd,
+        cwd=FRONTEND_DIR,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        encoding="utf-8",
+        errors="replace"
+    )
 
-    os.chdir(FRONTEND_DIR)
-    servidor_frontend = http.server.HTTPServer(("", FRONTEND_PORT), SilentHandler)
-
-    thread_frontend = threading.Thread(target=servidor_frontend.serve_forever, daemon=True)
-    thread_frontend.start()
-
-    log("✅", f"Frontend online: {FRONTEND_URL}", Cor.VERDE)
+    log("✅", f"Frontend React online: {FRONTEND_URL}", Cor.VERDE)
 
 # ── Shutdown gracioso ──────────────────────────────────
 def encerrar(sig=None, frame=None):
     print()
     log("🛑", "Encerrando Nex_TI...", Cor.AMARELO)
 
-    if servidor_frontend:
-        servidor_frontend.shutdown()
-        log("✔️", "Frontend encerrado.", Cor.VERDE)
+    if processo_frontend:
+        processo_frontend.terminate()
+        log("✔️", "Frontend React encerrado.", Cor.VERDE)
 
     if processo_backend:
         processo_backend.terminate()
