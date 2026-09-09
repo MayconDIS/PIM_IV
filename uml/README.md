@@ -1,7 +1,7 @@
 # 🎓 Nex_TI: Plataforma de Aprendizado Adaptativo com Gamificação e IA
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Projeto-PIM_III-blue.svg" alt="PIM III">
+  <img src="https://img.shields.io/badge/Projeto-PIM_IV-blue.svg" alt="PIM IV">
   <img src="https://img.shields.io/badge/UML-Astah_10.1-orange.svg" alt="Astah">
   <img src="https://img.shields.io/badge/Documenta%C3%A7%C3%A3o-PlantUML-green.svg" alt="PlantUML">
 </p>
@@ -10,40 +10,40 @@
 
 ---
 
-## 🔗 Ecossistema do Projeto (PIM III) / Project Ecosystem / Ecosistema del Proyecto
+## 🔗 Ecossistema do Projeto (PIM IV) / Project Ecosystem / Ecosistema del Proyecto
 
 <details open>
   <summary>🇧🇷 <b>Português</b></summary>
 
-  O ecossistema do projeto **Nex_TI** desenvolvido para o PIM III (UNIP) é estruturado em três repositórios complementares:
-  1. 📄 **[PIM_III-Parte_Teorica](file:///C:/Users/mayco/Documents/GitHub/PIM_III-Parte_Teorica)**: Contém a monografia acadêmica e o Relatório ABNT interativo (HTML/CSS), protótipos de interface, cronogramas e atas teóricas.
-  2. 📐 **[PIM_III-Documentacao_UML](file:///C:/Users/mayco/Documents/GitHub/PIM_III-Documentacao_UML)**: Abriga a modelagem UML completa e fonte no Astah (`.asta`), os diagramas globais exportados (Classes, Sequência, Casos de Uso) e a documentação detalhada em Markdown do Backlog do Produto e Sprints.
-  3. 💻 **[PIM_III-Parte_Pratica](file:///C:/Users/mayco/Documents/GitHub/PIM_III-Parte_Pratica)**: A implementação funcional em código, englobando o Frontend (HTML/CSS/JS com modo de acessibilidade e o mapa neural interativo), a API do Backend em C# (.NET 10 Minimal APIs) e os scripts do banco de dados (Microsoft SQL Server).
+  O ecossistema do projeto **Nex_TI** desenvolvido para o PIM IV (UNIP) é estruturado em três partes complementares deste monorepo:
+  1. 📄 **[teorica/](../teorica)**: Contém a monografia acadêmica e o Relatório ABNT interativo (HTML/CSS), protótipos de interface, cronogramas e atas teóricas.
+  2. 📐 **[uml/](../uml)**: Abriga a modelagem UML completa e fonte no Astah (`.asta`), os diagramas globais exportados (Classes, Sequência, Casos de Uso) e a documentação detalhada em Markdown do Backlog do Produto e Sprints.
+  3. 💻 **[pratica/](../pratica)**: A implementação funcional em código, englobando o Frontend (HTML/CSS/JS com modo de acessibilidade e o mapa neural interativo), a API do Backend em C# (.NET 10 Minimal APIs) e os scripts do banco de dados (Microsoft SQL Server).
 </details>
 
 <details>
   <summary>🇺🇸 <b>English</b></summary>
 
-  The **Nex_TI** project ecosystem for PIM III (UNIP) is structured into three complementary repositories:
-  1. 📄 **[PIM_III-Parte_Teorica](file:///C:/Users/mayco/Documents/GitHub/PIM_III-Parte_Teorica)**: Contains the academic monograph and the interactive ABNT Report (HTML/CSS), interface prototypes, schedules, and theoretical minutes.
-  2. 📐 **[PIM_III-Documentacao_UML](file:///C:/Users/mayco/Documents/GitHub/PIM_III-Documentacao_UML)**: Hosts the complete UML modeling and Astah source (`.asta`), global exported diagrams (Class, Sequence, Use Case), and detailed Markdown documentation of Product and Sprint Backlogs.
-  3. 💻 **[PIM_III-Parte_Pratica](file:///C:/Users/mayco/Documents/GitHub/PIM_III-Parte_Pratica)**: The functional code implementation, encompassing the Frontend (HTML/CSS/JS with accessibility mode and interactive neural map), the Backend C# API (.NET 10 Minimal APIs), and database scripts (Microsoft SQL Server).
+  The **Nex_TI** project ecosystem for PIM IV (UNIP) is structured into three complementary parts of this monorepo:
+  1. 📄 **[teorica/](../teorica)**: Contains the academic monograph and the interactive ABNT Report (HTML/CSS), interface prototypes, schedules, and theoretical minutes.
+  2. 📐 **[uml/](../uml)**: Hosts the complete UML modeling and Astah source (`.asta`), global exported diagrams (Class, Sequence, Use Case), and detailed Markdown documentation of Product and Sprint Backlogs.
+  3. 💻 **[pratica/](../pratica)**: The functional code implementation, encompassing the Frontend (HTML/CSS/JS with accessibility mode and interactive neural map), the Backend C# API (.NET 10 Minimal APIs), and database scripts (Microsoft SQL Server).
 </details>
 
 <details>
   <summary>🇪🇸 <b>Español</b></summary>
 
-  El ecosistema del proyecto **Nex_TI** para PIM III (UNIP) está estructurado en tres repositórios complementarios:
-  1. 📄 **[PIM_III-Parte_Teorica](file:///C:/Users/mayco/Documents/GitHub/PIM_III-Parte_Teorica)**: Contiene la monografía académica y el Informe ABNT interactivo (HTML/CSS), prototipos de interfaz, cronogramas y actas teóricas.
-  2. 📐 **[PIM_III-Documentacao_UML](file:///C:/Users/mayco/Documents/GitHub/PIM_III-Documentacao_UML)**: Alberga el modelado UML completo y la fuente en Astah (`.asta`), los diagramas globales exportados (Clases, Secuencia, Casos de Uso) y la documentación detallada en Markdown del Backlog del Producto y Sprints.
-  3. 💻 **[PIM_III-Parte_Pratica](file:///C:/Users/mayco/Documents/GitHub/PIM_III-Parte_Pratica)**: La implementación funcional en código, que abarca el Frontend (HTML/CSS/JS con modo de accesibilidad y mapa neuronal interactivo), la API del Backend en C# (.NET 10 Minimal APIs) y los scripts de la base de datos (Microsoft SQL Server).
+  El ecosistema del proyecto **Nex_TI** para PIM IV (UNIP) está estructurado en tres partes complementarias de este monorepo:
+  1. 📄 **[teorica/](../teorica)**: Contiene la monografía académica y el Informe ABNT interactivo (HTML/CSS), prototipos de interfaz, cronogramas y actas teóricas.
+  2. 📐 **[uml/](../uml)**: Alberga el modelado UML completo y la fuente en Astah (`.asta`), los diagramas globales exportados (Clases, Secuencia, Casos de Uso) y la documentación detallada en Markdown del Backlog del Producto y Sprints.
+  3. 💻 **[pratica/](../pratica)**: La implementación funcional en código, que abarca el Frontend (HTML/CSS/JS con modo de accesibilidad y mapa neuronal interactivo), la API del Backend en C# (.NET 10 Minimal APIs) y los scripts de la base de datos (Microsoft SQL Server).
 </details>
 
 ---
 
 ## 🇧🇷 Versão em Português
 
-Bem-vindo ao repositório oficial da **Documentação UML e Arquitetura do Sistema Nex_TI**, desenvolvido como parte do Projeto Integrado Multidisciplinar (PIM III) da UNIP. 
+Bem-vindo ao repositório oficial da **Documentação UML e Arquitetura do Sistema Nex_TI**, desenvolvido como parte do Projeto Integrado Multidisciplinar (PIM IV) da UNIP. 
 
 O **Nex_TI** é um sistema educacional revolucionário que utiliza o algoritmo de Repetição Espaçada (SM-2), mecânicas de gamificação (XP e Moedas) e um Agente Especialista baseado em Inteligência Artificial para otimizar a jornada de aprendizado do aluno.
 
@@ -60,7 +60,7 @@ Para facilitar a navegação pelos principais artefatos do projeto:
 Organizamos este repositório focando na simplicidade, clareza e separação de conceitos:
 
 ```text
-📁 PIM_III-Documentacao_UML/
+📁 uml/
 ├── 📁 .planning/                      # Gerenciamento ágil GSD (Roadmaps, Fases, Specs)
 ├── 📁 01_Documentacao_Teorica/        # Documentações teóricas e atas de planejamento em PDF/MD
 ├── 📁 02_Modelagem_UML/               # Modelagem fonte do Astah (.asta) e imagens globais (.png)
@@ -78,7 +78,7 @@ A nossa modelagem foi desenvolvida estritamente sobre as melhores práticas da *
 
 ## 🇺🇸 English Version
 
-Welcome to the official repository for **UML Documentation and System Architecture of Nex_TI**, developed as part of the Multidisciplinary Integrated Project (PIM III) at UNIP.
+Welcome to the official repository for **UML Documentation and System Architecture of Nex_TI**, developed as part of the Multidisciplinary Integrated Project (PIM IV) at UNIP.
 
 **Nex_TI** is a revolutionary educational system that utilizes the Spaced Repetition algorithm (SM-2), gamification mechanics (XP and Coins), and an AI-based Specialist Agent to optimize the student learning journey.
 
@@ -95,7 +95,7 @@ To facilitate navigation through the main project artifacts:
 We organized this repository focusing on simplicity, clarity, and separation of concerns:
 
 ```text
-📁 PIM_III-Documentacao_UML/
+📁 uml/
 ├── 📁 .planning/                      # Agile GSD management (Roadmaps, Phases, Specs)
 ├── 📁 01_Documentacao_Teorica/        # Theoretical documentations and Sprint minutes in PDF/MD
 ├── 📁 02_Modelagem_UML/               # Astah source modeling (.asta) and global images (.png)
@@ -113,7 +113,7 @@ Our modeling was developed strictly following **Object-Oriented Software Enginee
 
 ## 🇪🇸 Versión en Español
 
-Bienvenido al repositorio oficial de la **Documentación UML y Arquitectura del Sistema Nex_TI**, desarrollado como parte del Proyecto Integrado Multidisciplinar (PIM III) de la UNIP.
+Bienvenido al repositorio oficial de la **Documentación UML y Arquitectura del Sistema Nex_TI**, desarrollado como parte del Proyecto Integrado Multidisciplinar (PIM IV) de la UNIP.
 
 **Nex_TI** es un sistema educativo revolucionario que utiliza el algoritmo de Repetición Espaciada (SM-2), mecánicas de gamificación (XP y Monedas) y un Agente Especialista basado en Inteligencia Artificial para optimizar la jornada de aprendizaje del alumno.
 
@@ -130,7 +130,7 @@ Para facilitar la navegación por los principales artefactos del proyecto:
 Organizamos este repositorio enfocándonos en la simplicidad, claridad y separación de conceptos:
 
 ```text
-📁 PIM_III-Documentacao_UML/
+📁 uml/
 ├── 📁 .planning/                      # Gestión ágil GSD (Roadmaps, Fases, Specs)
 ├── 📁 01_Documentacao_Teorica/        # Documentaciones teóricas y actas de planificación en PDF/MD
 ├── 📁 02_Modelagem_UML/               # Modelado fuente de Astah (.asta) y imágenes globales (.png)

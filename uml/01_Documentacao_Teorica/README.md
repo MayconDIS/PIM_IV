@@ -1,6 +1,6 @@
 # 📄 Documentação Teórica e Planejamento do Projeto Nex_TI
 
-Esta pasta centraliza os principais artefatos teóricos, atas de sprints e o backlog do produto desenvolvidos para o sistema **Nex_TI**, em conformidade com as diretrizes do PIM III (UNIP).
+Esta pasta centraliza os principais artefatos teóricos, atas de sprints e o backlog do produto desenvolvidos para o sistema **Nex_TI**, herdados do PIM III e adotados como base em conformidade com as diretrizes do PIM IV (UNIP).
 
 Abaixo, apresentamos o sumário detalhado e o conteúdo textual dos artefatos oficiais em PDF disponíveis nesta pasta:
 

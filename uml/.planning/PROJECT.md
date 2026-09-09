@@ -1,7 +1,7 @@
 # Projeto: Nex_TI UML Documentation
 
 ## 🎯 Visão
-Transformar requisitos de negócio em uma documentação técnica UML de alta fidelidade para o sistema Nex_TI, servindo como base sólida para a implementação e para a entrega do PIM III.
+Transformar requisitos de negócio em uma documentação técnica UML de alta fidelidade para o sistema Nex_TI, servindo como base sólida para a implementação e para a entrega do PIM IV.
 
 ## 💻 Tech Stack
 - **Documentação:** Markdown (GFM)
