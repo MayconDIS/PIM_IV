@@ -1,0 +1,51 @@
+###############################################################################
+# Finais de linha
+#
+# O Git for Windows ativa core.autocrlf=true no config de sistema, o que
+# converte LF para CRLF no checkout. As regras abaixo fixam LF no repositorio
+# e no disco, para que o conteudo seja identico em qualquer maquina.
+###############################################################################
+* text=auto eol=lf
+
+###############################################################################
+# Binarios - nunca aplicar conversao de fim de linha.
+###############################################################################
+
+# Documentos
+*.pdf   binary
+*.doc   binary
+*.docx  binary
+*.ppt   binary
+*.pptx  binary
+*.xls   binary
+*.xlsx  binary
+
+# Imagens
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.bmp   binary
+*.ico   binary
+*.webp  binary
+*.svgz  binary
+
+# Fontes
+*.ttf   binary
+*.otf   binary
+*.woff  binary
+*.woff2 binary
+
+# Audio e video
+*.mp3   binary
+*.mp4   binary
+*.wav   binary
+
+# Modelagem UML (Astah)
+*.asta  binary
+
+# Compilados e artefatos
+*.dll   binary
+*.exe   binary
+*.pdb   binary
+*.zip   binary
