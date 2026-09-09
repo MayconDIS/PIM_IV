@@ -1,0 +1,11 @@
+{
+  "name": "@nexti/api",
+  "version": "2.0.0",
+  "description": "Backend .NET 10 Minimal APIs & EF Core para a plataforma Nex_TI",
+  "private": true,
+  "scripts": {
+    "dev": "dotnet watch run --project NexTI_API.csproj",
+    "build": "dotnet build NexTI_API.csproj",
+    "publish": "dotnet publish -c Release -o dist"
+  }
+}
