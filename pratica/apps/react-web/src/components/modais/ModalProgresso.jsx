@@ -33,6 +33,7 @@ function calcularMetricas(srsData, decks) {
 }
 
 const limparCsv = (texto) => (texto || '').replace(/;/g, ',').replace(/\n/g, ' ');
+const umaLinha = (texto) => (texto || '').replace(/\s*\n\s*/g, ' ').trim();
 
 export function ModalProgresso() {
   const {
@@ -117,9 +118,67 @@ export function ModalProgresso() {
       });
     });
     const carimbo = new Date().toISOString().slice(0, 10);
-    baixarArquivo(`﻿${linhas.join('\r\n')}`, `NexTI_Relatorio_Flashcards_${carimbo}.csv`, 'text/csv;charset=utf-8;');
+    baixarArquivo(`\uFEFF${linhas.join('\r\n')}`, `NexTI_Relatorio_Flashcards_${carimbo}.csv`, 'text/csv;charset=utf-8;');
     som('playUnlock');
     toast('success', 'Planilha Excel Baixada', 'Relatório formatado com UTF-8 BOM e compatível com Excel baixado com sucesso!');
+  };
+
+  const exportarTxt = () => {
+    const agora = new Date();
+    const linha = '='.repeat(64);
+    const partes = [
+      linha,
+      'NEX_TI — RELATÓRIO DE ESTUDOS',
+      linha,
+      `Aluno: ${nomeUsuario}`,
+      `Gerado em: ${agora.toLocaleString('pt-BR')}`,
+      `${rank}`,
+      '',
+      'RESUMO',
+      `  Nível acadêmico ....... ${xp} XP`,
+      `  Moedas Dev ............ ${moedas}`,
+      `  Cards no sistema ...... ${m.totalCartas}`,
+      `  Taxa de retenção ...... ${m.retencao}%`,
+      '',
+      'MOTOR ANKI (SM-2)',
+      `  Maduras (retidas) ..... ${m.maduras}`,
+      `  Em aprendizado ........ ${m.aprendendo}`,
+      `  Devidas hoje .......... ${m.devidas}`,
+      `  Facilidade média ...... ${m.facilidadeMedia}`,
+      '',
+      'PROGRESSO DOS MÓDULOS',
+      ...MODULOS.map((modulo) => {
+        const liberadas = modulo.fases.filter((f) => fasesDesbloqueadas.includes(f.id)).length;
+        const pct = Math.round((liberadas / modulo.fases.length) * 100);
+        return `  ${modulo.nome.padEnd(32, '.')} ${String(pct).padStart(3)}% (${liberadas}/${modulo.fases.length})`;
+      }),
+      '',
+      linha,
+      'FLASHCARDS',
+      linha,
+    ];
+
+    Object.entries(decks).forEach(([fase, cartas]) => {
+      if (!Array.isArray(cartas) || !cartas.length) return;
+      partes.push('', `[ ${fase.toUpperCase()} ] — ${cartas.length} carta(s)`);
+      cartas.forEach((c, i) => {
+        const srs = srsData[c.frente];
+        const agenda = srs?.next
+          ? `revisão em ${new Date(srs.next).toLocaleDateString('pt-BR')} · ${srs.rep} rep · intervalo ${srs.interval}d · facilidade ${Number(srs.ease).toFixed(2)}`
+          : 'ainda não estudada';
+        partes.push(
+          `  ${i + 1}. P: ${umaLinha(c.frente)}`,
+          `     R: ${umaLinha(c.verso)}`,
+          ...(c.dica ? [`     Dica: ${umaLinha(c.dica)}`] : []),
+          `     SM-2: ${agenda}`,
+        );
+      });
+    });
+
+    const carimbo = agora.toISOString().slice(0, 10);
+    baixarArquivo(`\uFEFF${partes.join('\r\n')}\r\n`, `NexTI_Relatorio_${nomeUsuario}_${carimbo}.txt`, 'text/plain;charset=utf-8;');
+    som('playUnlock');
+    toast('success', 'Relatório .TXT Baixado', 'Relatório de estudos em texto simples baixado com sucesso!');
   };
 
   const cartao = (rotulo, valor, { destaque, cor } = {}) => (
@@ -137,7 +196,7 @@ export function ModalProgresso() {
   );
 
   return (
-    <Modal aberto icone="monitoring" titulo="Seu Histórico Acadêmico" onFechar={fecharModal}>
+    <Modal aberto classeConteudo="modal-progresso" icone="monitoring" titulo="Seu Histórico Acadêmico" onFechar={fecharModal}>
       <div className="modal-body">
         <div className="stats-analytics-container">
           <div className="stats-grid-analytics">
@@ -185,6 +244,9 @@ export function ModalProgresso() {
             <input ref={inputRef} type="file" accept=".json" style={{ display: 'none' }} onChange={importarJson} />
             <button className="btn-backup-action" onClick={exportarCsv}>
               <span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }}>table_view</span> Excel (.CSV)
+            </button>
+            <button className="btn-backup-action" onClick={exportarTxt}>
+              <span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }}>description</span> Relatório (.TXT)
             </button>
           </div>
         </div>
