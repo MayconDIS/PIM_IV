@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using NexTI_API.Data;
 using NexTI_API.Services;
+using NexTI_API.Services.Seed;
 using NexTI_API.Endpoints;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -8,22 +9,34 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuração de CORS Resiliente (Suporte Local e Nuvem)
+// Alguns hosts de contêiner informam a porta pela variável PORT; o App Service não precisa.
+var porta = Environment.GetEnvironmentVariable("PORT");
+if (!string.IsNullOrWhiteSpace(porta)) builder.WebHost.UseUrls($"http://0.0.0.0:{porta}");
+
+// CORS: localhost sempre; domínios de produção em Cors:Origens (separados por vírgula)
+// e, opcionalmente, os previews *.vercel.app.
+var origensPermitidas = (builder.Configuration["Cors:Origens"] ?? string.Empty)
+    .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+    .Select(o => o.TrimEnd('/'))
+    .ToHashSet(StringComparer.OrdinalIgnoreCase);
+var permitirPreviewsVercel = builder.Configuration.GetValue("Cors:PermitirPreviewsVercel", false);
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",
         policy => policy.SetIsOriginAllowed(origin =>
             {
-                if (string.IsNullOrEmpty(origin)) return false;
-                var uri = new Uri(origin);
-                return uri.Host == "localhost" || uri.Host == "127.0.0.1";
+                if (string.IsNullOrEmpty(origin) || !Uri.TryCreate(origin, UriKind.Absolute, out var uri)) return false;
+                if (uri.Host == "localhost" || uri.Host == "127.0.0.1") return true;
+                if (origensPermitidas.Contains(origin.TrimEnd('/'))) return true;
+                return permitirPreviewsVercel && uri.Scheme == "https" && uri.Host.EndsWith(".vercel.app", StringComparison.OrdinalIgnoreCase);
             })
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials());
 });
 
-// Configuração de Autenticação JWT
+// Autenticação JWT — em produção a chave vem da variável Jwt__Key.
 var jwtKey = builder.Configuration["Jwt:Key"]
     ?? "NexTI_Secret_Key_2026_Super_Secure_Key_123!";
 var key = Encoding.ASCII.GetBytes(jwtKey);
@@ -46,26 +59,29 @@ builder.Services.AddAuthorization();
 
 // Injeção de Dependências Customizadas (SOLID - SRP / DIP)
 builder.Services.AddSingleton<ISm2Engine, Sm2Engine>();
+builder.Services.AddScoped<IEtapaSeed>(_ => new ConteudoSeeder());
+builder.Services.AddScoped<IEtapaSeed, SimuladoSeeder>();
 builder.Services.AddScoped<IDatabaseSeeder, DatabaseSeeder>();
 
-// Configuração do Entity Framework (Compatível com LocalDB e Azure SQL Database)
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-    ?? builder.Configuration["AZURE_SQL_CONNECTIONSTRING"]
-    ?? "Server=(localdb)\\mssqllocaldb;Database=NexTI_DB;Trusted_Connection=True;TrustServerCertificate=True;";
+// Entity Framework + SQL Server (Azure SQL Database em produção, LocalDB local).
+// Tabelas e colunas em snake_case. O retry cobre o "acordar" do banco serverless.
+var connectionString = ConexaoBanco.Resolver(builder.Configuration);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(connectionString, sqlOptions =>
-    {
-        sqlOptions.EnableRetryOnFailure(
-            maxRetryCount: 5,
+    options.UseSqlServer(connectionString, sql => sql.EnableRetryOnFailure(
+            maxRetryCount: 6,
             maxRetryDelay: TimeSpan.FromSeconds(30),
-            errorNumbersToAdd: null
-        );
-    }));
+            errorNumbersToAdd: null))
+        .UseSnakeCaseNamingConvention());
 
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+
+if (!app.Environment.IsDevelopment() && jwtKey.StartsWith("NexTI_Secret_Key_2026"))
+{
+    app.Logger.LogWarning("Jwt:Key está com o valor padrão do repositório. Defina a variável Jwt__Key em produção.");
+}
 
 app.UseCors("AllowFrontend");
 
@@ -74,24 +90,21 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-if (!app.Environment.IsDevelopment())
-{
-    app.UseHttpsRedirection();
-}
-
 app.UseAuthentication();
 app.UseAuthorization();
 
 // Registro Modular de Endpoints (SOLID - SRP)
 app.MapNexTiEndpoints(key);
 
-// Inicialização automática do banco e auto-seeding
-using (var scope = app.Services.CreateScope())
+// Aplica as migrations pendentes e povoa o banco (idempotente).
+// Desative com Database__MigrarAoIniciar=false se o schema for gerenciado fora da API.
+if (app.Configuration.GetValue("Database:MigrarAoIniciar", true))
 {
+    using var scope = app.Services.CreateScope();
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     var seeder = scope.ServiceProvider.GetRequiredService<IDatabaseSeeder>();
 
-    db.Database.EnsureCreated();
+    await db.Database.MigrateAsync();
     await seeder.SeedAsync(db);
 }
 

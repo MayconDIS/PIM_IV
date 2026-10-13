@@ -1,74 +1,101 @@
-import React, { useState, useEffect } from 'react';
-import { Header } from '../components/Header';
-import { LevelBar } from '../components/LevelBar';
-import { SidebarModules } from '../components/SidebarModules';
-import { FlashcardDeck } from '../components/FlashcardDeck';
-import { EnadeQuiz } from '../components/EnadeQuiz';
-import { NeuralMapModal } from '../components/NeuralMapModal';
-import { ProgressModal } from '../components/ProgressModal';
-import { CreateCardModal } from '../components/CreateCardModal';
-import { ToastContainer } from '../components/ToastContainer';
-import { useStudy } from '../context/StudyContext';
+import React, { useEffect, useRef } from 'react';
+import '@nexti/shared/css/global.css';
+import '@nexti/shared/css/dashboard.css';
+import { EstudoProvider, useEstudo } from '../context/EstudoContext';
+import { aplicarPreferencias } from '../lib/acessibilidade';
+import { Topo } from '../components/dashboard/Topo';
+import { PainelUsuario } from '../components/dashboard/PainelUsuario';
+import { Trilhas } from '../components/dashboard/Trilhas';
+import { Rodape } from '../components/dashboard/Rodape';
+import { BotaoTopo, WidgetAcessibilidade } from '../components/dashboard/Flutuantes';
+import { ModalCriacao } from '../components/modais/ModalCriacao';
+import { ModalProgresso } from '../components/modais/ModalProgresso';
+import { ModalNivelamento } from '../components/modais/ModalNivelamento';
+import { ModalMapaNeural } from '../components/modais/ModalMapaNeural';
+import { ModalCertificado } from '../components/modais/ModalCertificado';
+import { Toasts } from '../components/ui/Toasts';
+import { CyberDialog } from '../components/ui/CyberDialog';
 
-export function DashboardPage({ onNavigateLogin }) {
-  const { activeTab, flipCard, submitSm2Answer, isFlipped } = useStudy();
+/** Atalhos de teclado do vanilla: Esc, "/" e Espaço/1–4 durante o estudo. */
+function useAtalhos(refBusca) {
+  const estudo = useEstudo();
+  const atual = useRef(estudo);
+  atual.current = estudo;
 
-  const [isMapOpen, setIsMapOpen] = useState(false);
-  const [isProgressOpen, setIsProgressOpen] = useState(false);
-  const [isCreateOpen, setIsCreateOpen] = useState(false);
-
-  // Atalhos de Teclado Globais (Espaço para virar, 1-4 para responder, Esc para fechar modais)
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    const aoTeclar = (e) => {
+      const s = atual.current;
+      const editando = ['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName);
 
       if (e.key === 'Escape') {
-        setIsMapOpen(false);
-        setIsProgressOpen(false);
-        setIsCreateOpen(false);
-      } else if (e.code === 'Space') {
+        if (s.dialogo) s.responderDialogo(false);
+        else if (s.modal) s.fecharModal();
+        return;
+      }
+
+      if (e.key === '/' && !editando) {
         e.preventDefault();
-        flipCard();
-      } else if (isFlipped) {
-        if (e.key === '1') submitSm2Answer(1);
-        if (e.key === '2') submitSm2Answer(3);
-        if (e.key === '3') submitSm2Answer(4);
-        if (e.key === '4') submitSm2Answer(5);
+        refBusca.current?.focus();
+        refBusca.current?.select();
+        return;
+      }
+
+      if (!s.faseAtiva || !s.cartaAtual || s.enade || editando || s.modal || s.dialogo) return;
+
+      if (e.code === 'Space') {
+        e.preventDefault();
+        if (!s.virada) s.virarCarta();
+        else s.responder('good');
+      } else if (s.virada) {
+        const mapa = { 1: 'again', 2: 'hard', 3: 'good', 4: 'easy' };
+        if (mapa[e.key]) s.responder(mapa[e.key]);
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isFlipped]);
+    document.addEventListener('keydown', aoTeclar);
+    return () => document.removeEventListener('keydown', aoTeclar);
+  }, [refBusca]);
+}
+
+function Dashboard() {
+  const refBusca = useRef(null);
+  useAtalhos(refBusca);
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', paddingBottom: '30px' }}>
-      <Header
-        onOpenMap={() => setIsMapOpen(true)}
-        onOpenProgress={() => setIsProgressOpen(true)}
-        onOpenCreate={() => setIsCreateOpen(true)}
-      />
-
-      <LevelBar />
-
-      <main style={{
-        flex: 1,
-        display: 'flex',
-        gap: '20px',
-        margin: '16px 24px 0 24px'
-      }}>
-        <SidebarModules />
-
-        <section style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-          {activeTab === 'flashcards' ? <FlashcardDeck /> : <EnadeQuiz />}
-        </section>
+    <>
+      <Topo />
+      <main className="container" role="main" aria-label="Dashboard Principal">
+        <PainelUsuario />
+        <div className="main-content">
+          <Trilhas refBusca={refBusca} />
+        </div>
       </main>
 
-      {/* Modais */}
-      <NeuralMapModal isOpen={isMapOpen} onClose={() => setIsMapOpen(false)} />
-      <ProgressModal isOpen={isProgressOpen} onClose={() => setIsProgressOpen(false)} />
-      <CreateCardModal isOpen={isCreateOpen} onClose={() => setIsCreateOpen(false)} />
-      <ToastContainer />
-    </div>
+      <ModalCriacao />
+      <ModalProgresso />
+      <ModalNivelamento />
+      <ModalMapaNeural />
+      <ModalCertificado />
+
+      <Rodape />
+      <BotaoTopo />
+      <WidgetAcessibilidade />
+      <Toasts />
+      <CyberDialog />
+    </>
+  );
+}
+
+export default function DashboardPage() {
+  useEffect(() => {
+    document.title = 'Nex_TI';
+    window.scrollTo(0, 0);
+    aplicarPreferencias();
+  }, []);
+
+  return (
+    <EstudoProvider>
+      <Dashboard />
+    </EstudoProvider>
   );
 }

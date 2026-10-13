@@ -668,7 +668,7 @@ async function carregarAula(faseId, nomeAula, elementoClicado) {
                         dica: c.dica
                     };
                     if (c.opcoes) {
-                        cardObj.opcoes = c.opcoes.split(';');
+                        cardObj.opcoes = Array.isArray(c.opcoes) ? c.opcoes : String(c.opcoes).split(';');
                         cardObj.correta = c.correta;
                     }
                     return cardObj;

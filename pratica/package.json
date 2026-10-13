@@ -19,7 +19,9 @@
     "test": "npm run test:estrutura && npm run test:unit",
     "test:estrutura": "node scripts/verificarEstrutura.js",
     "test:unit": "dotnet test tests/NexTI_API.Tests/NexTI_API.Tests.csproj",
-    "test:shared": "npm test --prefix packages/shared"
+    "test:shared": "npm test --prefix packages/shared",
+    "sync:content": "node scripts/sync-content.mjs",
+    "sync:content:check": "node scripts/sync-content.mjs --check"
   },
   "keywords": [
     "edtech",

@@ -1,216 +1,147 @@
-import React, { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
-import { ApiService } from '../services/api';
-import { Lock, Mail, User as UserIcon, ArrowRight, ShieldCheck } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import '@nexti/shared/css/global.css';
+import '@nexti/shared/css/login.css';
+import { ApiService } from '@nexti/shared';
+import { AudioEngine } from '@nexti/shared/audio';
 
-export function LoginPage({ onLoginSuccess }) {
-  const { login } = useAuth();
-  const [isRegister, setIsRegister] = useState(false);
+/** Porte de pages/login (login.html + auth.js). */
+const som = (metodo) => {
+  try {
+    AudioEngine?.[metodo]?.();
+  } catch {
+    /* áudio é opcional */
+  }
+};
 
+function salvarSessao({ token, user }) {
+  localStorage.setItem('quest_jwt_token', token);
+  localStorage.setItem('quest_user_id', user.id);
+  localStorage.setItem('quest_user_name', user.username);
+  localStorage.setItem('quest_user_nivel', user.nivel);
+}
+
+export default function LoginPage() {
+  const [modoLogin, setModoLogin] = useState(true);
   const [nome, setNome] = useState('');
-  const [email, setEmail] = useState('aluno@nexti.edu');
-  const [senha, setSenha] = useState('Senha@123');
-  const [loading, setLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
+  const [credencial, setCredencial] = useState('');
+  const [senha, setSenha] = useState('');
+  const [botao, setBotao] = useState({ texto: null, estado: 'normal', ocupado: false });
+  const timerErro = useRef(null);
 
-  const handleSubmit = async (e) => {
+  useEffect(() => {
+    document.title = 'Login - Nex_TI';
+    return () => clearTimeout(timerErro.current);
+  }, []);
+
+  const textoPadrao = modoLogin ? '> INITIALIZE_LOGIN()' : 'Criar Conta';
+
+  const alternarModo = (e) => {
     e.preventDefault();
-    setErrorMsg('');
-    setLoading(true);
+    som('playClick');
+    setModoLogin((v) => !v);
+    setBotao({ texto: null, estado: 'normal', ocupado: false });
+  };
 
-    try {
-      if (isRegister) {
-        await ApiService.register(nome, email, senha);
+  const mostrarErro = (mensagem) => {
+    setBotao({ texto: `⚠ ${mensagem}`, estado: 'erro', ocupado: false });
+    clearTimeout(timerErro.current);
+    timerErro.current = setTimeout(() => setBotao({ texto: null, estado: 'normal', ocupado: false }), 3000);
+  };
+
+  const entrar = (textoSucesso, atraso) => {
+    setBotao({ texto: textoSucesso, estado: 'ok', ocupado: true });
+    // recarrega como o vanilla trocava de página: assim só o CSS do dashboard fica ativo
+    setTimeout(() => window.location.reload(), atraso);
+  };
+
+  const autenticar = async (e) => {
+    e.preventDefault();
+    som('playClick');
+
+    if (modoLogin) {
+      setBotao({ texto: 'Autenticando...', estado: 'normal', ocupado: true });
+      try {
+        salvarSessao(await ApiService.login(credencial.trim(), senha));
+        som('playCorrect');
+        entrar('✓ Acesso Autorizado!', 600);
+      } catch (erro) {
+        som('playError');
+        mostrarErro(erro.message || 'Acesso Bloqueado!');
       }
-      await login(email, senha);
-      if (onLoginSuccess) onLoginSuccess();
-    } catch (err) {
-      setErrorMsg(err.message || 'Erro ao conectar à API.');
-    } finally {
-      setLoading(false);
+      return;
+    }
+
+    setBotao({ texto: 'Criando Conta...', estado: 'normal', ocupado: true });
+    try {
+      await ApiService.register(nome.trim(), credencial.trim(), senha);
+      salvarSessao(await ApiService.login(nome.trim(), senha));
+      som('playUnlock');
+      entrar('✓ Conta Criada!', 800);
+    } catch (erro) {
+      som('playError');
+      mostrarErro(erro.message || 'Erro no Cadastro');
     }
   };
 
+  const corBotao = { erro: '#ff5555', ok: 'var(--nexti-green)' }[botao.estado];
+
   return (
-    <div style={{
-      minHeight: '100vh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '20px'
-    }}>
-      <div className="glass-panel" style={{
-        width: '420px',
-        maxWidth: '100%',
-        padding: '32px',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '20px',
-        borderColor: 'var(--nexti-cyan)',
-        boxShadow: '0 0 40px rgba(0, 240, 255, 0.2)'
-      }}>
-        {/* Brand */}
-        <div style={{ textAlign: 'center' }}>
-          <h1 className="display-font" style={{ fontSize: '26px', color: '#fff' }}>
-            Nex_<span style={{ color: 'var(--nexti-cyan)' }}>TI</span>
-          </h1>
-          <p style={{ fontSize: '11px', color: 'var(--nexti-text-muted)', marginTop: '4px', letterSpacing: '1px' }}>
-            {isRegister ? 'CRIAR NOVA CONTA ACADÊMICA' : 'ACESSO AO SISTEMA NEURAL DE APRENDIZADO'}
-          </p>
+    <main className="login-container" aria-labelledby="form-title">
+      <header className="login-header">
+        <h1 id="form-title" className="logo-title">
+          {modoLogin ? 'Nex_' : 'New_'}
+          <span className="tech-text">{modoLogin ? 'TI' : 'Access'}</span>
+        </h1>
+        <p className="subtitle">{modoLogin ? 'Welcome back, developer.' : 'Join the Quest.'}</p>
+      </header>
+
+      <form className="login-form" onSubmit={autenticar} aria-label="Formulário de Autenticação">
+        <div className="form-group" style={{ display: modoLogin ? 'none' : 'block' }}>
+          <label htmlFor="nome" className="tech-font">Nickname</label>
+          <div className="input-with-icon">
+            <input type="text" id="nome" placeholder="Ex: Maycon" aria-label="Seu nickname" required={!modoLogin} value={nome} onChange={(e) => setNome(e.target.value)} />
+          </div>
         </div>
 
-        {errorMsg && (
-          <div style={{
-            background: 'rgba(255, 85, 85, 0.1)',
-            border: '1px solid var(--nexti-red)',
-            padding: '8px 12px',
-            borderRadius: '6px',
-            color: 'var(--nexti-red)',
-            fontSize: '12px'
-          }}>
-            {errorMsg}
+        <div className="form-group">
+          <label htmlFor="email" className="tech-font">{modoLogin ? 'E-mail ou Nickname' : 'E-mail'}</label>
+          <div className="input-with-icon">
+            <input
+              type="text"
+              id="email"
+              placeholder={modoLogin ? 'dev@quest.com ou Nickname' : 'dev@quest.com'}
+              required
+              aria-required="true"
+              value={credencial}
+              onChange={(e) => setCredencial(e.target.value)}
+            />
           </div>
-        )}
-
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-          {isRegister && (
-            <div>
-              <label style={{ fontSize: '11px', color: 'var(--nexti-text-muted)', display: 'block', marginBottom: '4px' }}>
-                Nome Completo:
-              </label>
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                background: 'rgba(0, 0, 0, 0.4)',
-                border: '1px solid var(--nexti-border)',
-                borderRadius: '6px',
-                padding: '8px 12px',
-                gap: '8px'
-              }}>
-                <UserIcon size={16} color="var(--nexti-text-muted)" />
-                <input
-                  type="text"
-                  required
-                  value={nome}
-                  onChange={(e) => setNome(e.target.value)}
-                  placeholder="Seu nome"
-                  style={{
-                    background: 'transparent',
-                    border: 'none',
-                    outline: 'none',
-                    color: '#fff',
-                    fontSize: '13px',
-                    width: '100%'
-                  }}
-                />
-              </div>
-            </div>
-          )}
-
-          <div>
-            <label style={{ fontSize: '11px', color: 'var(--nexti-text-muted)', display: 'block', marginBottom: '4px' }}>
-              E-mail Institucional:
-            </label>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              background: 'rgba(0, 0, 0, 0.4)',
-              border: '1px solid var(--nexti-border)',
-              borderRadius: '6px',
-              padding: '8px 12px',
-              gap: '8px'
-            }}>
-              <Mail size={16} color="var(--nexti-text-muted)" />
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="aluno@nexti.edu"
-                style={{
-                  background: 'transparent',
-                  border: 'none',
-                  outline: 'none',
-                  color: '#fff',
-                  fontSize: '13px',
-                  width: '100%'
-                }}
-              />
-            </div>
-          </div>
-
-          <div>
-            <label style={{ fontSize: '11px', color: 'var(--nexti-text-muted)', display: 'block', marginBottom: '4px' }}>
-              Senha de Acesso:
-            </label>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              background: 'rgba(0, 0, 0, 0.4)',
-              border: '1px solid var(--nexti-border)',
-              borderRadius: '6px',
-              padding: '8px 12px',
-              gap: '8px'
-            }}>
-              <Lock size={16} color="var(--nexti-text-muted)" />
-              <input
-                type="password"
-                required
-                value={senha}
-                onChange={(e) => setSenha(e.target.value)}
-                placeholder="••••••••"
-                style={{
-                  background: 'transparent',
-                  border: 'none',
-                  outline: 'none',
-                  color: '#fff',
-                  fontSize: '13px',
-                  width: '100%'
-                }}
-              />
-            </div>
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            style={{
-              marginTop: '8px',
-              background: 'var(--nexti-cyan)',
-              border: 'none',
-              borderRadius: '6px',
-              color: '#000',
-              padding: '12px',
-              fontSize: '13px',
-              fontWeight: 800,
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '8px'
-            }}
-          >
-            {loading ? 'Conectando...' : (isRegister ? 'Criar Cadastro' : 'Entrar no Sistema')}
-            <ArrowRight size={16} />
-          </button>
-        </form>
-
-        <div style={{ textAlign: 'center', borderTop: '1px solid var(--nexti-border)', paddingTop: '14px' }}>
-          <button
-            onClick={() => setIsRegister(!isRegister)}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              color: 'var(--nexti-cyan)',
-              fontSize: '12px',
-              cursor: 'pointer',
-              textDecoration: 'underline'
-            }}
-          >
-            {isRegister ? 'Já possui conta? Fazer login' : 'Não tem conta? Cadastre-se aqui'}
-          </button>
         </div>
-      </div>
-    </div>
+
+        <div className="form-group">
+          <label htmlFor="password" className="tech-font">Password</label>
+          <div className="input-with-icon">
+            <input type="password" id="password" placeholder="••••••••" required aria-required="true" value={senha} onChange={(e) => setSenha(e.target.value)} />
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          className="btn-login tech-font"
+          aria-live="assertive"
+          disabled={botao.ocupado}
+          style={corBotao ? { color: corBotao, borderColor: corBotao } : undefined}
+        >
+          {botao.texto ?? textoPadrao}
+        </button>
+      </form>
+
+      <footer className="extra-links">
+        <p>
+          {modoLogin ? 'Ainda não tem acesso? ' : 'Já tem acesso? '}
+          <a href="#" onClick={alternarModo}>{modoLogin ? 'Cadastre-se' : 'Faça Login'}</a>
+        </p>
+      </footer>
+    </main>
   );
 }

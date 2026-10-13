@@ -1,3 +1,8 @@
+/**
+ * ARQUIVO GERADO a partir de apps/web/assets/js/confetti.js - não edite à mão.
+ * Regenere com: npm run sync:content
+ */
+
 // ==========================================
 // MOTOR DE CONFETES & PARTÍCULAS NEON — Nex_TI
 // ==========================================
@@ -117,4 +122,7 @@ const ConfettiEngine = (() => {
     };
 })();
 
-window.ConfettiEngine = ConfettiEngine;
+if (typeof window !== 'undefined') window.ConfettiEngine = ConfettiEngine;
+
+export { ConfettiEngine };
+export default ConfettiEngine;

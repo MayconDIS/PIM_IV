@@ -9,21 +9,33 @@ const API_CANDIDATE_URLS = [
     'https://127.0.0.1:5001/api'
 ];
 
-let activeApiBaseUrl = 'http://localhost:5000/api';
+// Em produção a página define window.NEXTI_API_URL (ex.: https://nexti-api.azurewebsites.net/api).
+// Lido sob demanda para valer mesmo quando definido depois do carregamento deste arquivo.
+function apiConfigurada() {
+    const url = typeof globalThis !== 'undefined' ? globalThis.NEXTI_API_URL : null;
+    return url ? String(url).replace(/\/+$/, '') : null;
+}
+
+let apiDetectada = null;
+const baseAtual = () => apiDetectada || apiConfigurada() || 'http://localhost:5000/api';
 
 const ApiService = {
-    getBaseUrl: () => activeApiBaseUrl,
+    getBaseUrl: () => baseAtual(),
 
     // 1. Verifica se a API está online e detecta a porta ativa
     checkStatus: async () => {
-        for (const candidate of API_CANDIDATE_URLS) {
+        const configurada = apiConfigurada();
+        const candidatas = configurada ? [configurada] : API_CANDIDATE_URLS;
+        // planos gratuitos (App Service F1 + Azure SQL serverless) podem levar ~1 min para acordar
+        const limiteMs = configurada ? 60000 : 1200;
+        for (const candidate of candidatas) {
             try {
                 const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 1200);
+                const timeoutId = setTimeout(() => controller.abort(), limiteMs);
                 const response = await fetch(`${candidate}/status`, { signal: controller.signal });
                 clearTimeout(timeoutId);
                 if (response.ok) {
-                    activeApiBaseUrl = candidate;
+                    apiDetectada = candidate;
                     return true;
                 }
             } catch (e) {
@@ -36,7 +48,7 @@ const ApiService = {
     // 2. Autenticação: Login
     login: async (username, password) => {
         try {
-            const response = await fetch(`${activeApiBaseUrl}/auth/login`, {
+            const response = await fetch(`${baseAtual()}/auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password })
@@ -55,7 +67,7 @@ const ApiService = {
     // 3. Autenticação: Registro
     register: async (username, email, password) => {
         try {
-            const response = await fetch(`${activeApiBaseUrl}/auth/register`, {
+            const response = await fetch(`${baseAtual()}/auth/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, email, password })
@@ -74,7 +86,7 @@ const ApiService = {
     // 4. Busca o Usuário no Banco de Dados
     getUsuario: async (username) => {
         try {
-            const response = await fetch(`${activeApiBaseUrl}/usuarios/${encodeURIComponent(username)}`);
+            const response = await fetch(`${baseAtual()}/usuarios/${encodeURIComponent(username)}`);
             if (!response.ok) throw new Error("Usuário não encontrado");
             return await response.json();
         } catch (error) {
@@ -86,7 +98,7 @@ const ApiService = {
     // 4.1 Busca estatísticas detalhadas do usuário
     getEstatisticasDetalhadas: async (username) => {
         try {
-            const response = await fetch(`${activeApiBaseUrl}/usuarios/${encodeURIComponent(username)}/stats-detalhadas`);
+            const response = await fetch(`${baseAtual()}/usuarios/${encodeURIComponent(username)}/stats-detalhadas`);
             if (!response.ok) return null;
             return await response.json();
         } catch (error) {
@@ -98,7 +110,7 @@ const ApiService = {
     // 5. Busca todas as Fases cadastradas
     getFases: async () => {
         try {
-            const response = await fetch(`${activeApiBaseUrl}/fases`);
+            const response = await fetch(`${baseAtual()}/fases`);
             return await response.json();
         } catch (error) {
             console.error("Erro ao buscar fases:", error);
@@ -109,7 +121,7 @@ const ApiService = {
     // 6. Busca os Flashcards de uma Fase específica
     getFlashcardsPorFase: async (codigoFase) => {
         try {
-            const response = await fetch(`${activeApiBaseUrl}/fases/${encodeURIComponent(codigoFase)}/flashcards`);
+            const response = await fetch(`${baseAtual()}/fases/${encodeURIComponent(codigoFase)}/flashcards`);
             if (!response.ok) throw new Error("Flashcards não encontrados");
             return await response.json();
         } catch (error) {
@@ -122,7 +134,7 @@ const ApiService = {
     criarFlashcard: async (codigoFase, frente, verso, dica) => {
         const token = localStorage.getItem('quest_jwt_token');
         try {
-            const response = await fetch(`${activeApiBaseUrl}/flashcards`, {
+            const response = await fetch(`${baseAtual()}/flashcards`, {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -143,7 +155,7 @@ const ApiService = {
         const token = localStorage.getItem('quest_jwt_token');
         if (!token) return [];
         try {
-            const response = await fetch(`${activeApiBaseUrl}/progresso/usuario`, {
+            const response = await fetch(`${baseAtual()}/progresso/usuario`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (!response.ok) return [];
@@ -158,7 +170,7 @@ const ApiService = {
     atualizarProgresso: async (usuarioId, flashcardId, qualidade) => {
         const token = localStorage.getItem('quest_jwt_token');
         try {
-            const response = await fetch(`${activeApiBaseUrl}/progresso/atualizar`, {
+            const response = await fetch(`${baseAtual()}/progresso/atualizar`, {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -178,7 +190,7 @@ const ApiService = {
     updateUserStats: async (xp, moedas, nivel) => {
         const token = localStorage.getItem('quest_jwt_token');
         try {
-            const response = await fetch(`${activeApiBaseUrl}/usuarios/stats`, {
+            const response = await fetch(`${baseAtual()}/usuarios/stats`, {
                 method: 'PUT',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -197,7 +209,7 @@ const ApiService = {
     // 11. Busca todas as questões de simulados ENADE (UML)
     getSimuladoQuestoes: async () => {
         try {
-            const response = await fetch(`${activeApiBaseUrl}/simulados/questoes`);
+            const response = await fetch(`${baseAtual()}/simulados/questoes`);
             return await response.json();
         } catch (error) {
             console.error("Erro ao buscar questões de simulado:", error);
@@ -208,7 +220,7 @@ const ApiService = {
     // 12. Resumo de estatísticas globais
     getEstatisticasResumo: async () => {
         try {
-            const response = await fetch(`${activeApiBaseUrl}/estatisticas/resumo`);
+            const response = await fetch(`${baseAtual()}/estatisticas/resumo`);
             if (!response.ok) return null;
             return await response.json();
         } catch (error) {
@@ -219,7 +231,7 @@ const ApiService = {
 
     // 13. Download do Certificado em PDF
     baixarCertificadoPDF: async (nome, data, codigo) => {
-        const url = `${activeApiBaseUrl}/certificado/pdf?nome=${encodeURIComponent(nome)}&data=${encodeURIComponent(data)}&codigo=${encodeURIComponent(codigo)}`;
+        const url = `${baseAtual()}/certificado/pdf?nome=${encodeURIComponent(nome)}&data=${encodeURIComponent(data)}&codigo=${encodeURIComponent(codigo)}`;
         const response = await fetch(url);
         if (!response.ok) throw new Error("Erro ao gerar certificado PDF no servidor.");
         return await response.blob();

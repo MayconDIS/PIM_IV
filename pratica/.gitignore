@@ -27,3 +27,7 @@ temp_certs/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Variáveis de ambiente locais
+.env
+.env.local

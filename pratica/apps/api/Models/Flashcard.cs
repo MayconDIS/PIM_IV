@@ -22,8 +22,10 @@ namespace NexTI_API.Models
         [MaxLength(255)]
         public string? Dica { get; set; }
 
-        public string? Opcoes { get; set; }
+        /// <summary>Alternativas das cartas ENADE (A..D). No SQL Server o EF guarda a lista como JSON.</summary>
+        public List<string>? Opcoes { get; set; }
 
+        /// <summary>Índice (0-based) da alternativa correta em <see cref="Opcoes"/>.</summary>
         public int? Correta { get; set; }
 
         [ForeignKey("CodigoFase")]

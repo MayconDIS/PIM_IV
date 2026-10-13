@@ -1,3 +1,8 @@
+/**
+ * ARQUIVO GERADO a partir de apps/web/assets/js/audio.js - não edite à mão.
+ * Regenere com: npm run sync:content
+ */
+
 // ==========================================
 // MOTOR DE ÁUDIO SINTETIZADO (Web Audio API) — Nex_TI
 // ==========================================
@@ -180,4 +185,7 @@ const AudioEngine = (() => {
     };
 })();
 
-window.AudioEngine = AudioEngine;
+if (typeof window !== 'undefined') window.AudioEngine = AudioEngine;
+
+export { AudioEngine };
+export default AudioEngine;

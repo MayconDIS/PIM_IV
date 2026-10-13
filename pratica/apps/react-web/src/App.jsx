@@ -1,28 +1,14 @@
-import React, { useState } from 'react';
-import { AuthProvider, useAuth } from './context/AuthContext';
-import { StudyProvider } from './context/StudyContext';
-import { DashboardPage } from './pages/DashboardPage';
-import { LoginPage } from './pages/LoginPage';
+import React, { Suspense, lazy } from 'react';
 
-function MainApp() {
-  const { user } = useAuth();
-  const [currentPage, setCurrentPage] = useState('dashboard'); // 'dashboard' | 'login'
-
-  if (currentPage === 'login') {
-    return <LoginPage onLoginSuccess={() => setCurrentPage('dashboard')} />;
-  }
-
-  return (
-    <StudyProvider>
-      <DashboardPage onNavigateLogin={() => setCurrentPage('login')} />
-    </StudyProvider>
-  );
-}
+/*
+ * login.css e dashboard.css redefinem <body> de jeitos incompatíveis. Cada
+ * página é carregada sob demanda e a troca entre elas recarrega a aba (como o
+ * vanilla navegava entre login.html e dashboard), então só uma folha fica ativa.
+ */
+const LoginPage = lazy(() => import('./pages/LoginPage'));
+const DashboardPage = lazy(() => import('./pages/DashboardPage'));
 
 export default function App() {
-  return (
-    <AuthProvider>
-      <MainApp />
-    </AuthProvider>
-  );
+  const logado = Boolean(localStorage.getItem('quest_user_name'));
+  return <Suspense fallback={null}>{logado ? <DashboardPage /> : <LoginPage />}</Suspense>;
 }
