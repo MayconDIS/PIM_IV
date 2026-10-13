@@ -19,6 +19,7 @@
     "./css/global.css": "./css/global.css",
     "./css/dashboard.css": "./css/dashboard.css",
     "./css/login.css": "./css/login.css",
+    "./css/splash.css": "./css/splash.css",
     "./img/*": "./img/*"
   },
   "scripts": {

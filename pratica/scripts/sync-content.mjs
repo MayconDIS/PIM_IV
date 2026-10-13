@@ -172,6 +172,7 @@ const ARQUIVOS_CSS = [
   ['assets/css/global.css', 'css/global.css'],
   ['pages/dashboard/style.css', 'css/dashboard.css'],
   ['pages/login/login.css', 'css/login.css'],
+  ['assets/css/splash.css', 'css/splash.css'],
 ];
 
 // Imagens usadas pelas telas portadas (cabeçalho, rodapé, frase motivacional).
