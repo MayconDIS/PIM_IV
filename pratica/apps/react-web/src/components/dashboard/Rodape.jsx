@@ -2,10 +2,20 @@ import React from 'react';
 import logo from '@nexti/shared/img/logo.png';
 import { useEstudo } from '../../context/EstudoContext';
 
+/** Cada link abre a seção correspondente da página Sobre (?pagina=sobre#secao). */
 const COLUNAS = [
-  { titulo: 'Institucional', links: ['Sobre a Nex_TI', 'Metodologia de Ensino', 'Manifesto Open Source', 'Carreiras & Vagas'] },
-  { titulo: 'Ecossistema', links: ['Trilhas e Disciplinas', 'Simulado ENADE', 'Comunidade Devs', 'Loja de Bônus (Coins)'] },
-  { titulo: 'Suporte & Legal', links: ['Central de Ajuda (FAQ)', 'Termos de Uso', 'Aviso de Privacidade', 'Contato'] },
+  {
+    titulo: 'Institucional',
+    links: [['Sobre a Nex_TI', 'sobre'], ['Metodologia de Ensino', 'metodologia'], ['Manifesto Open Source', 'opensource'], ['Carreiras & Vagas', 'carreiras']],
+  },
+  {
+    titulo: 'Ecossistema',
+    links: [['Trilhas e Disciplinas', 'trilhas'], ['Simulado ENADE', 'enade'], ['Comunidade Devs', 'comunidade'], ['Loja de Bônus (Coins)', 'loja']],
+  },
+  {
+    titulo: 'Suporte & Legal',
+    links: [['Central de Ajuda (FAQ)', 'faq'], ['Termos de Uso', 'termos'], ['Aviso de Privacidade', 'privacidade'], ['Contato', 'contato']],
+  },
 ];
 
 export function Rodape() {
@@ -42,9 +52,9 @@ export function Rodape() {
           <div className="footer-links" key={coluna.titulo}>
             <h3 className="footer-title tech-font">{coluna.titulo}</h3>
             <ul>
-              {coluna.links.map((texto) => (
-                <li key={texto}>
-                  <a href="#" onClick={emDesenvolvimento}>{texto}</a>
+              {coluna.links.map(([texto, secao]) => (
+                <li key={secao}>
+                  <a href={`?pagina=sobre#${secao}`}>{texto}</a>
                 </li>
               ))}
             </ul>

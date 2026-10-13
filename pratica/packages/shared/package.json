@@ -20,6 +20,7 @@
     "./css/dashboard.css": "./css/dashboard.css",
     "./css/login.css": "./css/login.css",
     "./css/splash.css": "./css/splash.css",
+    "./css/sobre.css": "./css/sobre.css",
     "./img/*": "./img/*"
   },
   "scripts": {

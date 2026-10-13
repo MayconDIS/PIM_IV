@@ -225,6 +225,21 @@ function gerarSementeApi({ banco, modulos }) {
 
 const SEMENTE_API = path.join(ROOT, 'apps', 'api', 'Data', 'Seed', 'conteudo.json');
 
+// A página Sobre guarda o CSS num <style> embutido; vira um arquivo próprio no shared.
+function extrairCssSobre() {
+  const html = read(WEB, 'pages', 'sobre', 'index.html');
+  const inicio = html.indexOf('<style>');
+  const fim = html.indexOf('</style>');
+  if (inicio < 0 || fim < 0) throw new Error('pages/sobre/index.html: bloco <style> não encontrado');
+  const corpo = html
+    .slice(inicio + '<style>'.length, fim)
+    .split(/\r?\n/)
+    .map((linha) => linha.replace(/^ {8}/, ''))
+    .join('\n')
+    .trim();
+  return `/* ARQUIVO GERADO a partir do <style> de apps/web/pages/sobre/index.html - não edite à mão. */\n\n${corpo}\n`;
+}
+
 function main() {
   const conteudo = gerarArquivo(montarConteudo());
   const destino = path.join(SHARED, 'src', 'content.js');
@@ -236,6 +251,7 @@ function main() {
   const gerados = [
     ...ARQUIVOS_CSS.map(([origem, alvo]) => [alvo, read(WEB, ...origem.split('/'))]),
     ...MOTORES.map(([origem, alvo, nome]) => [alvo, gerarMotor(origem, nome)]),
+    ['css/sobre.css', extrairCssSobre()],
     [path.relative(SHARED, SEMENTE_API), gerarSementeApi(montarConteudo())],
   ];
 

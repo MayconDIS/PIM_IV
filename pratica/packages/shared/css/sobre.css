@@ -1,0 +1,210 @@
+/* ARQUIVO GERADO a partir do <style> de apps/web/pages/sobre/index.html - não edite à mão. */
+
+body {
+    background-color: #0b0c10;
+    color: #c5c6c7;
+    padding-top: 80px;
+    background-image: 
+        linear-gradient(rgba(0, 230, 230, 0.03) 1px, transparent 1px), 
+        linear-gradient(90deg, rgba(0, 230, 230, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+
+.logo { 
+    font-size: 1.4rem; 
+    font-weight: bold; 
+    letter-spacing: 1px; 
+    display: flex; 
+    align-items: center;
+}
+
+.logo-image-header {
+    height: 26px;
+    display: block;
+    object-fit: contain;
+}
+
+.logo-header-box {
+    background-image: 
+        linear-gradient(rgba(0, 230, 230, 0.03) 1px, transparent 1px), 
+        linear-gradient(90deg, rgba(0, 230, 230, 0.03) 1px, transparent 1px),
+        linear-gradient(145deg, rgba(18, 24, 32, 0.85), rgba(11, 12, 16, 0.85));
+    background-size: 20px 20px, 20px 20px, auto;
+    background-position: center center;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 6px 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo-header-box:hover {
+    border-color: rgba(0, 230, 230, 0.3);
+    background-image: 
+        linear-gradient(rgba(0, 230, 230, 0.05) 1px, transparent 1px), 
+        linear-gradient(90deg, rgba(0, 230, 230, 0.05) 1px, transparent 1px),
+        linear-gradient(145deg, rgba(22, 30, 39, 0.9), rgba(14, 16, 21, 0.9));
+    background-size: 20px 20px, 20px 20px, auto;
+    background-position: center center;
+    box-shadow: 0 0 15px rgba(0, 230, 230, 0.15);
+}
+
+.tech-text { 
+    background: linear-gradient(90deg, var(--nexti-cyan, #00e6e6), var(--nexti-purple, #8a2be2)); 
+    -webkit-background-clip: text; 
+    background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    font-weight: 800; 
+}
+
+header {
+    background-color: rgba(22, 27, 34, 0.9); 
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    padding: 0 40px; 
+    height: 80px; 
+    display: flex; 
+    justify-content: space-between;
+    align-items: center; 
+    border-bottom: 1px solid #30363d; 
+    position: fixed; 
+    top: 0; 
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.container-docs {
+    display: flex;
+    max-width: 1200px;
+    margin: 30px auto;
+    gap: 30px;
+    padding: 0 20px;
+}
+
+.left-panel {
+    width: 320px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.right-panel {
+    flex-grow: 1;
+    background: var(--nexti-card, #161b22);
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    padding: 40px;
+    min-height: 500px;
+}
+
+.dia-header {
+    display: flex; 
+    align-items: center;
+    gap: 15px;
+    font-size: 0.9rem; 
+    font-weight: bold; 
+    color: #fff; 
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+    margin-top: 20px; 
+    margin-bottom: 5px; 
+}
+
+.dia-line {
+    flex-grow: 1; 
+    height: 1px; 
+}
+
+.mod-inst span { color: var(--nexti-green, #00ff88); }
+.mod-inst .dia-line { background: linear-gradient(90deg, var(--nexti-green, #00ff88), transparent); }
+
+.mod-ecos span { color: #ffd700; }
+.mod-ecos .dia-line { background: linear-gradient(90deg, #ffd700, transparent); }
+
+.mod-sup span { color: #ff4500; }
+.mod-sup .dia-line { background: linear-gradient(90deg, #ff4500, transparent); }
+
+.aula-item {
+    background-color: var(--nexti-card, #161b22); 
+    border: 1px solid #30363d; 
+    border-left: 4px solid #30363d; 
+    padding: 15px 20px; 
+    border-radius: 8px; 
+    display: flex; 
+    align-items: center; 
+    gap: 15px;
+    cursor: pointer; 
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: #fff;
+}
+
+.aula-item:hover {
+    border-color: #30363d; 
+    border-left-color: var(--nexti-cyan, #00e6e6); 
+    background-color: rgba(0, 230, 230, 0.05);
+    transform: translateX(5px); 
+}
+
+.aula-item.active {
+    border-left-color: var(--nexti-cyan, #00e6e6); 
+    background-color: rgba(0, 230, 230, 0.1);
+}
+
+.content-section {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.content-section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.content-section h1 {
+    color: #fff;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #30363d;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.content-section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #c5c6c7;
+}
+
+.btn-back {
+    color: var(--nexti-cyan, #00e6e6);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.btn-back:hover {
+    text-shadow: 0 0 10px rgba(0, 230, 230, 0.5);
+}
+
+.logo-white { color: #fff; }
+.icon-green { color: var(--nexti-green, #00ff88); }
+.icon-yellow { color: #ffd700; }
+.icon-red { color: #ff4500; }
+.title-icon-green { font-size: 2rem; color: var(--nexti-green, #00ff88); }
+.title-icon-yellow { font-size: 2rem; color: #ffd700; }
+.title-icon-red { font-size: 2rem; color: #ff4500; }
