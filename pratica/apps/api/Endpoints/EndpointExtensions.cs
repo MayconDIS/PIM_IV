@@ -18,6 +18,12 @@ namespace NexTI_API.Endpoints
 {
     public static class EndpointExtensions
     {
+        /// <summary>Nome da política de rate limiting de login/cadastro (registrada no Program.cs).</summary>
+        public const string PoliticaDeAutenticacao = "autenticacao";
+
+        private static readonly Regex NicknameValido = new(@"^[\p{L}\p{N}_.\-]{3,30}$", RegexOptions.Compiled);
+        private static readonly Regex EmailValido = new(@"^[^\s@]+@[^\s@]+\.[^\s@]{2,}$", RegexOptions.Compiled);
+
         public static void MapNexTiEndpoints(this IEndpointRouteBuilder app, byte[] key)
         {
             // Status Route
@@ -28,28 +34,41 @@ namespace NexTI_API.Endpoints
             })).WithName("GetStatus");
 
             // --- AUTENTICAÇÃO ---
-            app.MapPost("/api/auth/register", async (RegisterRequest request, AppDbContext db) =>
+            app.MapPost("/api/auth/register", async (RegisterRequest request, AppDbContext db, IPoliticaDeSenha politica) =>
             {
                 if (string.IsNullOrWhiteSpace(request.Username) || string.IsNullOrWhiteSpace(request.Password))
                     return Results.BadRequest(new { message = "Username e senha são obrigatórios." });
 
-                if (await db.Usuarios.AnyAsync(u => u.Username == request.Username)) 
-                    return Results.BadRequest(new { message = "Usuário já existe" });
-                if (await db.Usuarios.AnyAsync(u => u.Email == request.Email)) 
-                    return Results.BadRequest(new { message = "Email já cadastrado" });
+                var username = request.Username.Trim();
+                var email = (request.Email ?? string.Empty).Trim();
+
+                if (!NicknameValido.IsMatch(username))
+                    return Results.BadRequest(new { message = "O nickname deve ter de 3 a 30 caracteres: letras, números, ponto, hífen ou sublinhado." });
+                if (!EmailValido.IsMatch(email) || email.Length > 100)
+                    return Results.BadRequest(new { message = "Informe um e-mail válido." });
+
+                var faltando = politica.Validar(request.Password, username, email);
+                if (faltando.Count > 0)
+                    return Results.BadRequest(new { message = PoliticaDeSenha.Mensagem(faltando) });
+
+                // Compara com os valores já normalizados — os mesmos que serão gravados.
+                if (await db.Usuarios.AnyAsync(u => u.Username == username))
+                    return Results.BadRequest(new { message = "Este nickname já está em uso." });
+                if (await db.Usuarios.AnyAsync(u => u.Email == email))
+                    return Results.BadRequest(new { message = "Este e-mail já está cadastrado." });
 
                 var user = new Usuario
                 {
-                    Username = request.Username.Trim(),
-                    Email = request.Email.Trim(),
+                    Username = username,
+                    Email = email,
                     SenhaHash = BCrypt.Net.BCrypt.HashPassword(request.Password)
                 };
 
                 db.Usuarios.Add(user);
                 await db.SaveChangesAsync();
-                
+
                 return Results.Ok(new { message = "Usuário criado com sucesso!", userId = user.Id });
-            });
+            }).RequireRateLimiting(PoliticaDeAutenticacao);
 
             app.MapPost("/api/auth/login", async (LoginRequest request, AppDbContext db) =>
             {
@@ -84,10 +103,10 @@ namespace NexTI_API.Endpoints
                         username = user.Username, 
                         nivel = user.Nivel, 
                         xp = user.XP, 
-                        moedas = user.Moedas 
+                        moedas = user.Moedas
                     }
                 });
-            });
+            }).RequireRateLimiting(PoliticaDeAutenticacao);
 
             // --- USUÁRIOS ---
             app.MapGet("/api/usuarios/{username}", async (string username, AppDbContext db) =>

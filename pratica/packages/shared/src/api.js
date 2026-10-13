@@ -24,6 +24,27 @@ function apiConfigurada() {
 let apiDetectada = null;
 const baseAtual = () => apiDetectada || apiConfigurada() || 'http://localhost:5000/api';
 
+// POST de login/cadastro. Falha de rede vira uma frase que a tela pode mostrar
+// (o "Failed to fetch" do navegador não diz nada a quem está tentando entrar).
+async function requisicaoDeAutenticacao(rota, corpo) {
+    try {
+        return await fetch(`${baseAtual()}/auth/${rota}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(corpo)
+        });
+    } catch (erro) {
+        console.error(`[auth] ${rota}: servidor inacessível`, { motivo: erro?.message });
+        throw new Error('Servidor indisponível. Tente de novo em instantes — ele pode estar acordando.');
+    }
+}
+
+function mensagemDeErroDeAutenticacao(status, mensagemDoServidor, padrao) {
+    if (status === 429) return 'Muitas tentativas seguidas. Aguarde um minuto e tente de novo.';
+    if (status === 401) return 'Usuário ou senha incorretos.';
+    return mensagemDoServidor || padrao;
+}
+
 const ApiService = {
     getBaseUrl: () => baseAtual(),
 
@@ -52,40 +73,22 @@ const ApiService = {
 
     // 2. Autenticação: Login
     login: async (username, password) => {
-        try {
-            const response = await fetch(`${baseAtual()}/auth/login`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password })
-            });
-            if (!response.ok) {
-                const errData = await response.json().catch(() => ({}));
-                throw new Error(errData.message || "Credenciais inválidas");
-            }
-            return await response.json();
-        } catch (error) {
-            console.error("Erro no login:", error);
-            throw error;
+        const response = await requisicaoDeAutenticacao('login', { username, password });
+        if (!response.ok) {
+            const errData = await response.json().catch(() => ({}));
+            throw new Error(mensagemDeErroDeAutenticacao(response.status, errData.message, 'Usuário ou senha incorretos.'));
         }
+        return await response.json();
     },
 
     // 3. Autenticação: Registro
     register: async (username, email, password) => {
-        try {
-            const response = await fetch(`${baseAtual()}/auth/register`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, email, password })
-            });
-            if (!response.ok) {
-                const data = await response.json().catch(() => ({}));
-                throw new Error(data.message || "Erro ao registrar usuário.");
-            }
-            return await response.json();
-        } catch (error) {
-            console.error("Erro no registro:", error);
-            throw error;
+        const response = await requisicaoDeAutenticacao('register', { username, email, password });
+        if (!response.ok) {
+            const data = await response.json().catch(() => ({}));
+            throw new Error(mensagemDeErroDeAutenticacao(response.status, data.message, 'Não foi possível criar a conta.'));
         }
+        return await response.json();
     },
 
     // 4. Busca o Usuário no Banco de Dados

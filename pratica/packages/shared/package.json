@@ -13,6 +13,8 @@
     "./deck": "./src/deck.js",
     "./gamificacao": "./src/gamificacao.js",
     "./diagnostico": "./src/diagnostico.js",
+    "./senha": "./src/senha.js",
+    "./senhaVazada": "./src/senhaVazada.js",
     "./api": "./src/api.js",
     "./audio": "./src/audio.js",
     "./confetti": "./src/confetti.js",

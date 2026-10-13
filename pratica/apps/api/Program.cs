@@ -6,6 +6,8 @@ using NexTI_API.Endpoints;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Threading.RateLimiting;
+using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -59,6 +61,34 @@ builder.Services.AddAuthorization();
 
 // Injeção de Dependências Customizadas (SOLID - SRP / DIP)
 builder.Services.AddSingleton<ISm2Engine, Sm2Engine>();
+builder.Services.AddSingleton<IPoliticaDeSenha, PoliticaDeSenha>();
+
+// Login e cadastro: 30 tentativas por minuto por IP (força bruta / criação em massa).
+// Não é menor porque uma turma inteira sai pelo mesmo IP do Wi-Fi da faculdade.
+builder.Services.AddRateLimiter(opcoes =>
+{
+    opcoes.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+    opcoes.AddPolicy(EndpointExtensions.PoliticaDeAutenticacao, contexto =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            contexto.Connection.RemoteIpAddress?.ToString() ?? "desconhecido",
+            _ => new FixedWindowRateLimiterOptions
+            {
+                PermitLimit = 30,
+                Window = TimeSpan.FromMinutes(1),
+                QueueLimit = 0,
+            }));
+});
+
+// Atrás do front-end do App Service o IP do cliente chega em X-Forwarded-For.
+// ForwardLimit = 1 usa só a última entrada — a que o próprio proxy da Azure
+// acrescenta —, então o cliente não consegue forjar o IP do rate limiting.
+builder.Services.Configure<ForwardedHeadersOptions>(opcoes =>
+{
+    opcoes.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+    opcoes.ForwardLimit = 1;
+    opcoes.KnownIPNetworks.Clear();
+    opcoes.KnownProxies.Clear();
+});
 builder.Services.AddScoped<IEtapaSeed>(_ => new ConteudoSeeder());
 builder.Services.AddScoped<IEtapaSeed, SimuladoSeeder>();
 builder.Services.AddScoped<IDatabaseSeeder, DatabaseSeeder>();
@@ -83,7 +113,9 @@ if (!app.Environment.IsDevelopment() && jwtKey.StartsWith("NexTI_Secret_Key_2026
     app.Logger.LogWarning("Jwt:Key está com o valor padrão do repositório. Defina a variável Jwt__Key em produção.");
 }
 
+app.UseForwardedHeaders();
 app.UseCors("AllowFrontend");
+app.UseRateLimiter();
 
 if (app.Environment.IsDevelopment())
 {

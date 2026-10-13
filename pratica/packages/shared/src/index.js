@@ -64,3 +64,12 @@ export {
 } from './gamificacao.js';
 
 export { PERGUNTAS_DIAGNOSTICO, resultadoDoDiagnostico } from './diagnostico.js';
+
+export {
+  TAMANHO_MINIMO_DE_SENHA,
+  avaliarSenha,
+  senhaEhForte,
+  mensagemDeSenhaFraca,
+} from './senha.js';
+
+export { verificarSenhaVazada, mensagemDeSenhaVazada, sha1HexWeb } from './senhaVazada.js';
