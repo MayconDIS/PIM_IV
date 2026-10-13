@@ -1,6 +1,6 @@
 /**
- * ARQUIVO GERADO a partir de apps/web/assets/js/audio.js - não edite à mão.
- * Regenere com: npm run sync:content
+ * Efeitos sonoros sintetizados (Web Audio API). Toca em window/localStorage ao
+ * carregar, por isso é importado só pelo app web (@nexti/shared/audio).
  */
 
 // ==========================================

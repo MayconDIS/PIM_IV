@@ -1,5 +1,5 @@
 /**
- * Motor do Mapa Neural (Obsidian View) — porte de apps/web/pages/dashboard/js/neural-map.js.
+ * Motor do Mapa Neural (Obsidian View) — porte do neural-map.js do dashboard vanilla original.
  *
  * Continua sendo DOM imperativo (centenas de nós com física de mola a 60 fps
  * não ganham nada passando pelo React); a diferença é que tudo vive num

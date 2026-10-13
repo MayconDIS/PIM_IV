@@ -1,10 +1,8 @@
 /**
- * ARQUIVO GERADO - não edite à mão.
+ * Conteúdo canônico do Nex_TI: 26 fases, 620 cards e 5 módulos.
  *
- * Fonte: apps/web (data.js, app.js e dashboard/index.html).
- * Regenere com: npm run sync:content
- *
- * 26 fases - 620 cards - 5 módulos.
+ * Fonte da verdade para o React (web e mobile). Depois de editar, rode
+ * `npm run seed:api` para atualizar a semente do banco da API C#.
  */
 
 export const BANCO_DE_DADOS = {

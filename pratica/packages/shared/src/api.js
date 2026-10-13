@@ -1,6 +1,6 @@
 /**
- * ARQUIVO GERADO a partir de apps/web/assets/js/api.js - não edite à mão.
- * Regenere com: npm run sync:content
+ * Cliente HTTP da API C# do Nex_TI. A URL vem de globalThis.NEXTI_API_URL
+ * (definida pelo app a partir de VITE_API_URL) ou de localhost.
  */
 
 // ==========================================

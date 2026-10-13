@@ -26,7 +26,7 @@ import { AudioEngine } from '@nexti/shared/audio';
 import { ConfettiEngine } from '@nexti/shared/confetti';
 
 /**
- * Estado do dashboard — porte de apps/web/pages/dashboard/js/app.js.
+ * Estado do dashboard — porte do dashboard vanilla original (app.js).
  *
  * As chaves do localStorage, as recompensas, a ordem de desbloqueio e o fluxo
  * das cartas são os mesmos do app vanilla; o que muda é só a forma de pintar

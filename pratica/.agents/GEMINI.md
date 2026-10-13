@@ -21,9 +21,10 @@ Este arquivo contém as diretrizes e instruções de contexto específicas para 
 ---
 
 * **Estrutura Monorepo**:
-  - `apps/web/`: Frontend Web (HTML5, CSS3, JS Vanilla, Mapa Neural, SM-2).
-  - `apps/api/`: Backend C# (.NET 10 Minimal APIs, EF Core).
-  - `packages/shared/`: Motores compartilhados (Áudio Web Audio API, Confetti Canvas, Data).
+  - `apps/react-web/`: Frontend Web (React 18 + Vite, Mapa Neural, SM-2) — deploy na Vercel.
+  - `apps/react-mobile/`: App mobile (React Native / Expo).
+  - `apps/api/`: Backend C# (.NET 10 Minimal APIs, EF Core, Azure SQL) — deploy no Azure App Service.
+  - `packages/shared/`: Conteúdo canônico (cards), regras (SM-2, gamificação), CSS, áudio, confete e cliente da API.
   - `packages/design-dna/`: Design System e Tokens CSS/JSON.
   - `database/`: Scripts SQL (`NexTI_DB.sql`).
   - `docs/`: Documentação acadêmica e manuais do PIM IV.

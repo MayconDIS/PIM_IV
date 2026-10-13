@@ -11,8 +11,9 @@ using NexTI_API.Models;
 namespace NexTI_API.Services.Seed
 {
     /// <summary>
-    /// Povoa Fases e Flashcards a partir de Data/Seed/conteudo.json — arquivo gerado
-    /// por scripts/sync-content.mjs a partir do mesmo conteúdo canônico do front-end.
+    /// Povoa Fases e Flashcards a partir de Data/Seed/conteudo.json — arquivo gerado por
+    /// scripts/gerar-semente-api.mjs a partir de packages/shared/src/content.js, o mesmo
+    /// conteúdo que o front-end usa.
     /// Nunca apaga nada: cartas já existentes (e o progresso ligado a elas) são preservadas.
     /// </summary>
     public class ConteudoSeeder : IEtapaSeed
@@ -73,7 +74,7 @@ namespace NexTI_API.Services.Seed
         public async Task<SementeConteudo> LerAsync()
         {
             if (!File.Exists(_caminhoArquivo))
-                throw new FileNotFoundException("Semente de conteúdo não encontrada. Rode: npm run sync:content", _caminhoArquivo);
+                throw new FileNotFoundException("Semente de conteúdo não encontrada. Rode: npm run seed:api", _caminhoArquivo);
 
             await using var arquivo = File.OpenRead(_caminhoArquivo);
             return await JsonSerializer.DeserializeAsync<SementeConteudo>(arquivo, OpcoesJson)

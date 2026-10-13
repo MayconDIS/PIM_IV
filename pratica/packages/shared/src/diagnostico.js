@@ -1,6 +1,6 @@
 /**
- * Diagnóstico de nivelamento — porte de "SISTEMA DE NIVELAMENTO ENADE"
- * (apps/web/pages/dashboard/js/app.js).
+ * Diagnóstico de nivelamento — porte do "SISTEMA DE NIVELAMENTO ENADE"
+ * do dashboard vanilla original.
  *
  * São as 10 perguntas do primeiro acesso e a regra que, conforme os acertos,
  * define o rank inicial e quais fases já começam liberadas.

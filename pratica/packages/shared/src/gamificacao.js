@@ -2,7 +2,7 @@
  * Regras de progressão do Nex_TI: ordem das fases, desbloqueio, XP, moedas,
  * ranks e aprovação nos testes de módulo.
  *
- * Porte fiel de apps/web/pages/dashboard/js/app.js (`ordemFases`,
+ * Porte fiel do dashboard vanilla original (`ordemFases`,
  * `atualizarBarraNivel`, `finalizarTesteModulo` e `irParaProximaAula`).
  */
 

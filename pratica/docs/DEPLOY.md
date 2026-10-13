@@ -89,19 +89,19 @@ dotnet ef migrations script --idempotent -o ../../database/azure-sql/schema.sql
 
 `database/NexTI_DB.sql` é o script T-SQL original do projeto e não é usado pela API.
 
-## Conteúdo sincronizado
+## Conteúdo
 
-`apps/web` é a fonte do conteúdo. Depois de editar cards, rode:
+`packages/shared/src/content.js` é a fonte do conteúdo: o React (web e mobile) o
+importa direto. Depois de editar cards, atualize a semente da API:
 
 ```bash
-npm run sync:content
+npm run seed:api
 ```
 
-Isso regenera `packages/shared` (usado pelo React) **e**
-`apps/api/Data/Seed/conteudo.json` (usado pelo `ConteudoSeeder` da API). No próximo
-start, a API insere só as cartas novas e não apaga nada, então o progresso SM-2
-dos alunos é preservado. `npm run sync:content:check` falha se algo estiver
-desatualizado (útil no CI).
+Isso regenera `apps/api/Data/Seed/conteudo.json`, lido pelo `ConteudoSeeder`. No
+próximo start, a API insere só as cartas novas e não apaga nada, então o progresso
+SM-2 dos alunos é preservado. `npm run seed:api:check` falha se a semente estiver
+desatualizada (útil no CI).
 
 ## Rodando local
 

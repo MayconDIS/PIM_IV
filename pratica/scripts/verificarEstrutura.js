@@ -8,16 +8,6 @@ const rootDir = path.resolve(__dirname, '..');
 console.log('\n🔍 [Nex_TI Monorepo] Verificando integridade da estrutura...\n');
 
 const caminhosObrigatorios = [
-    // Apps: Web Clássico (HTML5, CSS3, Vanilla JS)
-    'apps/web/package.json',
-    'apps/web/index.html',
-    'apps/web/pages/dashboard/index.html',
-    'apps/web/pages/dashboard/js/app.js',
-    'apps/web/pages/login/login.html',
-    'apps/web/assets/js/api.js',
-    'apps/web/assets/js/audio.js',
-    'apps/web/assets/js/confetti.js',
-    'apps/web/assets/js/data.js',
     // Apps: React Web (React 18 + Vite)
     'apps/react-web/package.json',
     'apps/react-web/vite.config.js',
@@ -36,6 +26,8 @@ const caminhosObrigatorios = [
     'apps/api/Endpoints/EndpointExtensions.cs',
     'apps/api/Services/Sm2Engine.cs',
     'apps/api/Services/DatabaseSeeder.cs',
+    'apps/api/Data/Seed/conteudo.json',
+    'apps/api/Data/Migrations',
     // Packages
     'packages/shared/package.json',
     'packages/shared/src/index.js',
@@ -44,7 +36,8 @@ const caminhosObrigatorios = [
     'packages/shared/src/gamificacao.js',
     'packages/shared/src/audio.js',
     'packages/shared/src/confetti.js',
-    'scripts/sync-content.mjs',
+    'packages/shared/css/dashboard.css',
+    'scripts/gerar-semente-api.mjs',
     'design-dna/style.css',
     'design-dna/paleta.json',
     'design-dna/diretrizes.md',

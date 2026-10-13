@@ -2,9 +2,9 @@
  * Motor de repetição espaçada (SM-2, no estilo Anki) do Nex_TI.
  *
  * Porte fiel das funções `formatarIntervalo`, `gerarBotoesRepeticao` e
- * `processarResposta` de apps/web/pages/dashboard/js/app.js. As fórmulas e os
- * limites são os mesmos; aqui elas viram funções puras para que o web vanilla,
- * o react-web e o react-mobile cheguem sempre ao mesmo resultado.
+ * `processarResposta` do dashboard vanilla original. As fórmulas e os limites
+ * são os mesmos; aqui elas viram funções puras para que o react-web e o
+ * react-mobile cheguem sempre ao mesmo resultado.
  */
 
 /** Estado inicial de uma carta nunca estudada. */

@@ -3,7 +3,7 @@ import '@nexti/shared/css/splash.css';
 import { ApiService } from '@nexti/shared';
 import { CHAVE_SPLASH_EXIBIDO } from '../lib/sessao';
 
-/** Porte de apps/web/index.html + splash.js: tela de inicialização do sistema. */
+/** Porte do splash (index.html + splash.js) do app vanilla original: tela de inicialização do sistema. */
 const LOGS = [
   '> Estabelecendo conexão...',
   '> Carregando módulos de segurança...',

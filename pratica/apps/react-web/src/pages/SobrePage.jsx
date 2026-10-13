@@ -3,7 +3,7 @@ import '@nexti/shared/css/global.css';
 import '@nexti/shared/css/sobre.css';
 import logo from '@nexti/shared/img/logo.png';
 
-/** Porte de apps/web/pages/sobre/index.html: páginas institucionais, de ecossistema e legais. */
+/** Porte da página Sobre do app vanilla original: páginas institucionais, de ecossistema e legais. */
 const GRUPOS = [
   {
     titulo: 'Institucional',

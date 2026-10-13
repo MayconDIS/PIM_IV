@@ -1,13 +1,10 @@
 /**
  * Ponto de entrada do @nexti/shared.
  *
- * Tudo o que o apps/web (vanilla) define como conteúdo e regra do Nex_TI vive
- * aqui em módulos ESM, para que apps/react-web e apps/react-mobile mostrem
- * exatamente o mesmo material e se comportem da mesma forma.
- *
- * `content.js`, `audio.js` e `confetti.js` são gerados a partir de apps/web
- * por `npm run sync:content`; `sm2.js` e `gamificacao.js` são portes revisados
- * à mão da lógica do dashboard.
+ * Conteúdo e regras do Nex_TI em módulos ESM, para que apps/react-web e
+ * apps/react-mobile mostrem exatamente o mesmo material e se comportem da
+ * mesma forma. A API C# recebe o mesmo conteúdo pela semente gerada com
+ * `npm run seed:api`.
  *
  * `audio.js` e `confetti.js` tocam em window/localStorage ao carregar, por isso
  * NÃO são reexportados aqui: o app web importa `@nexti/shared/audio` e

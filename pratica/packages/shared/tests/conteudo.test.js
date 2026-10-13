@@ -17,7 +17,7 @@ import {
   recompensa,
 } from '../src/gamificacao.js';
 
-test('o conteúdo gerado tem o material completo do apps/web', () => {
+test('o conteúdo canônico tem o material completo', () => {
   assert.equal(Object.keys(BANCO_DE_DADOS).length, 26);
   const total = Object.values(BANCO_DE_DADOS).reduce((soma, cards) => soma + cards.length, 0);
   assert.equal(total, 620);

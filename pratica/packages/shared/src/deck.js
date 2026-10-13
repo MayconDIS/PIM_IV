@@ -1,7 +1,7 @@
 /**
  * Montagem dos decks de estudo.
  *
- * Porte fiel da função `carregarAula` de apps/web/pages/dashboard/js/app.js:
+ * Porte fiel da função `carregarAula` do dashboard vanilla original:
  * fases ordenam cartas novas/devidas antes das já revisadas, e testes de módulo
  * sorteiam 20 questões de múltipla escolha com distratores tirados do próprio
  * módulo. `aleatorio` é injetável para que os testes sejam determinísticos.

@@ -33,7 +33,7 @@ repositórios distintos, vivem aqui como pastas de primeiro nível:
 | Pasta | Conteúdo |
 |---|---|
 | [`teorica/`](teorica) | Relatório ABNT em HTML/CSS, `examples/`, `assets/`, `design_DNA/` e documentação acadêmica |
-| [`pratica/`](pratica) | Monorepo npm: `apps/web`, `apps/react-web`, `apps/react-mobile`, `apps/api` (.NET), `packages/`, `database/`, `tests/` |
+| [`pratica/`](pratica) | Monorepo npm: `apps/react-web`, `apps/react-mobile`, `apps/api` (.NET), `packages/`, `database/`, `tests/` |
 | [`uml/`](uml) | `01_Documentacao_Teorica/`, `02_Modelagem_UML/` (fonte `.asta` + PNGs), `03_Codigo_Gerado/` |
 
 ## 🚀 Como executar a parte prática
