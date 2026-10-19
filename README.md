@@ -59,6 +59,32 @@ A pasta `modelagem-uml/` foi herdada do PIM III e serve de base para a modelagem
 reunião em `modelagem-uml/.planning/meetings/` são registros datados das sprints do PIM III e foram
 mantidas na íntegra, sem reescrita, por serem documentos históricos.
 
+## 🔁 Do PIM III ao PIM IV
+
+O PIM IV é a continuação do [PIM III](https://github.com/MayconDIS/PIM_III): o mesmo produto
+(Nex_TI), a mesma documentação e a mesma modelagem, evoluídos com as exigências técnicas do
+PIM IV e os itens do Product Backlog definidos pelo Scrum Master. Todo o conteúdo do PIM III
+está neste repositório; o front em HTML/JS puro foi portado para React e depois removido.
+
+| Área | PIM III (herdado) | PIM IV (adicionado) |
+|---|---|---|
+| **Front-end** | HTML/CSS/JS puro (dashboard, login, sobre, mapa neural) | React + Vite (`sistema/apps/react-web`), conteúdo compartilhado em `packages/shared`, publicado na Vercel |
+| **Mobile** | — | App React Native/Expo (`sistema/apps/react-mobile`) com estudo SM-2 |
+| **API .NET** | 7 endpoints com a lógica dentro dos endpoints | 14 endpoints em camadas: Endpoints → Services → Data → Models |
+| **Domínio** | Usuario, Aluno, Tutor, Fase, Flashcard, ProgressoFlashcard | + Prova, Questao, Alternativa, AreaConhecimento (simulados ENADE) |
+| **Regras de negócio** | `Sm2Engine` | + `AuthService`, `ProgressoService`, `GamificacaoService`, `ConteudoService`, política de senha |
+| **Banco de dados** | Script `NexTI_DB.sql` | Migrations do EF Core, seed automático e Azure SQL em produção |
+| **Segurança** | BCrypt e JWT | + política de senha, checagem de senha vazada, rate limiting, dados só para o dono, CORS restrito, CSP/HSTS |
+| **Acessibilidade** | Modo de acessibilidade no front | + VLibras |
+| **Testes** | — | 62 testes automatizados da API (xUnit) e testes do `packages/shared` |
+| **Nuvem e DevOps** | Execução local | GitHub Actions → Azure App Service, script de provisionamento e guia de deploy |
+| **UML** | Caso de uso, classes (conceitual) e sequência | + atividade e classes do código implementado (Camadas e Entidades), em PlantUML |
+| **Gestão ágil** | Atas e sprints do PIM III | Scrum no Kanban (Trello) com Product Backlog PB01–PB22 e Sprints 1–5 |
+
+O que o PIM III indicou como "implementação futura" e o PIM IV entregou: módulo preparatório
+(PB13, simulados ENADE) e economia virtual (PB14, disciplinas bônus pagas com moedas). O painel
+gerencial do Tutor (PB15) continua no backlog.
+
 ## 📄 Licença
 
 Distribuído sob a licença do arquivo [LICENSE](LICENSE).
