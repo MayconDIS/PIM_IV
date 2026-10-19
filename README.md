@@ -61,29 +61,27 @@ mantidas na íntegra, sem reescrita, por serem documentos históricos.
 
 ## 🔁 Do PIM III ao PIM IV
 
-O PIM IV é a continuação do [PIM III](https://github.com/MayconDIS/PIM_III): o mesmo produto
-(Nex_TI), a mesma documentação e a mesma modelagem, evoluídos com as exigências técnicas do
-PIM IV e os itens do Product Backlog definidos pelo Scrum Master. Todo o conteúdo do PIM III
-está neste repositório; o front em HTML/JS puro foi portado para React e depois removido.
+O PIM IV é a continuação do [PIM III](https://github.com/MayconDIS/PIM_III). É o mesmo projeto,
+o Nex_TI: trouxemos tudo o que fizemos no PIM III e fomos melhorando com o que o PIM IV pede
+e com o que o nosso Scrum Master colocou no backlog.
 
-| Área | PIM III (herdado) | PIM IV (adicionado) |
+| O quê | No PIM III | No PIM IV |
 |---|---|---|
-| **Front-end** | HTML/CSS/JS puro (dashboard, login, sobre, mapa neural) | React + Vite (`sistema/apps/react-web`), conteúdo compartilhado em `packages/shared`, publicado na Vercel |
-| **Mobile** | — | App React Native/Expo (`sistema/apps/react-mobile`) com estudo SM-2 |
-| **API .NET** | 7 endpoints com a lógica dentro dos endpoints | 14 endpoints em camadas: Endpoints → Services → Data → Models |
-| **Domínio** | Usuario, Aluno, Tutor, Fase, Flashcard, ProgressoFlashcard | + Prova, Questao, Alternativa, AreaConhecimento (simulados ENADE) |
-| **Regras de negócio** | `Sm2Engine` | + `AuthService`, `ProgressoService`, `GamificacaoService`, `ConteudoService`, política de senha |
-| **Banco de dados** | Script `NexTI_DB.sql` | Migrations do EF Core, seed automático e Azure SQL em produção |
-| **Segurança** | BCrypt e JWT | + política de senha, checagem de senha vazada, rate limiting, dados só para o dono, CORS restrito, CSP/HSTS |
-| **Acessibilidade** | Modo de acessibilidade no front | + VLibras |
-| **Testes** | — | 62 testes automatizados da API (xUnit) e testes do `packages/shared` |
-| **Nuvem e DevOps** | Execução local | GitHub Actions → Azure App Service, script de provisionamento e guia de deploy |
-| **UML** | Caso de uso, classes (conceitual) e sequência | + atividade e classes do código implementado (Camadas e Entidades), em PlantUML |
-| **Gestão ágil** | Atas e sprints do PIM III | Scrum no Kanban (Trello) com Product Backlog PB01–PB22 e Sprints 1–5 |
+| **Site** | Feito em HTML, CSS e JavaScript | Refeito em React e publicado na internet (Vercel) |
+| **Celular** | Não tinha | Começamos o app, com a tela de estudo de flashcards |
+| **API em C#** | 7 rotas, com todo o código junto | 14 rotas, com o código separado em camadas (cada parte cuida de uma coisa) |
+| **Simulados** | Ficou para o futuro | Simulados no estilo ENADE, com questões de múltipla escolha |
+| **Moedas** | Ficou para o futuro | Dá para usar as moedas para liberar disciplinas bônus |
+| **Banco de dados** | Um script SQL | O banco é criado sozinho quando a API sobe, e roda na nuvem (Azure) |
+| **Segurança** | Senha criptografada e login | Senha forte obrigatória, aviso de senha vazada, limite de tentativas de login e cada aluno só vê os próprios dados |
+| **Acessibilidade** | Modo de acessibilidade | Também o VLibras (tradução para Libras) |
+| **Testes** | Não tinha | 62 testes automáticos que conferem se a API funciona |
+| **Nuvem** | Rodava só no computador | A API sobe sozinha para a Azure a cada atualização no GitHub |
+| **UML** | Caso de uso, classes e sequência | Também o diagrama de atividade e o diagrama de classes do código que fizemos |
+| **Organização** | Atas das reuniões | Scrum no Trello, com o backlog (PB01 a PB22) e as sprints |
 
-O que o PIM III indicou como "implementação futura" e o PIM IV entregou: módulo preparatório
-(PB13, simulados ENADE) e economia virtual (PB14, disciplinas bônus pagas com moedas). O painel
-gerencial do Tutor (PB15) continua no backlog.
+Ainda falta: o painel do Tutor (PB15), o login no app de celular (PB11) e os perfis de
+Aluno, Tutor e Administrador (PB01).
 
 ## 📄 Licença
 
