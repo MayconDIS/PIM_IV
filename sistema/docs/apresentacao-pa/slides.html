@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nex_TI — Apresentação P.A. em .NET</title>
+    <!--
+      Slides da apresentação de P.A. em .NET (27/10/2026), 12 folhas em A4 PAISAGEM.
+      Para projetar: abrir no Chrome, Ctrl+P, papel A4, orientação paisagem,
+      margens "Nenhuma", "Gráficos de segundo plano" marcado, salvar como PDF
+      e apresentar o PDF em tela cheia. O que falar em cada slide está em
+      ROTEIRO_DO_PALESTRANTE.md, nesta mesma pasta.
+      As imagens dos diagramas vêm de modelagem-uml/02_Modelagem_UML/.
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Cores do Nex_TI (design-dna/paleta.json), escurecidas onde o texto cai no
+           papel branco: o oliva #a8b865 do app não tem contraste sobre fundo claro. */
+        :root {
+            --nx-primary: #5f6f24;
+            --nx-primary-2: #8a9a3f;
+            --nx-grad: linear-gradient(135deg, #5f6f24 0%, #8a9a3f 100%);
+            --nx-gold: #8c6d2c;
+            --nx-ink: #161b22;
+            --nx-txt-2: #555c68;
+            --nx-txt-3: #8c8c96;
+            --nx-paper: #fbfbf8;
+            --nx-card: #ffffff;
+            --nx-card-2: #f3f4ee;
+            --nx-border: #e1e3db;
+            --nx-code: #0b6e75;
+            --nx-font: 'Inter', system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
+            --nx-title: 'Space Grotesk', 'Inter', Arial, sans-serif;
+            --nx-mono: 'Fira Code', Consolas, monospace;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* Na tela: o fundo escuro do app em volta das folhas. */
+        body {
+            background: radial-gradient(1100px 620px at 12% -5%, rgba(168, 184, 101, 0.25), transparent 62%), #0b0c10;
+            background-attachment: fixed;
+            font-family: var(--nx-font);
+            color: var(--nx-ink);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12mm;
+            padding: 12mm 0;
+        }
+
+        /* ── Folha do slide: A4 paisagem ─────────────────────────────────────── */
+        .slide {
+            position: relative;
+            width: 297mm;
+            height: 210mm;
+            background: var(--nx-paper);
+            padding: 12mm 16mm 14mm;
+            display: flex;
+            flex-direction: column;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+            overflow: hidden;
+        }
+
+        .slide-header {
+            border-bottom: 2.5px solid var(--nx-ink);
+            padding-bottom: 2.5mm;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .slide-tag {
+            background: var(--nx-grad);
+            color: #ffffff;
+            font-size: 8pt;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 1.5mm 3.5mm;
+            border-radius: 3px;
+        }
+        .slide-meta { font-size: 8pt; color: var(--nx-txt-2); font-weight: 600; }
+
+        .slide-body {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 4mm;
+            padding: 4mm 0;
+        }
+        .slide-title {
+            font-family: var(--nx-title);
+            font-size: 24pt;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+        }
+        .slide-subtitle { font-size: 13pt; color: var(--nx-txt-2); font-weight: 500; line-height: 1.35; }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4.5mm; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; }
+
+        .card {
+            background: var(--nx-card);
+            border: 1.5px solid var(--nx-border);
+            border-left: 4px solid var(--nx-primary);
+            border-radius: 6px;
+            padding: 4mm 5mm;
+        }
+        .card h3 { font-family: var(--nx-title); font-size: 13pt; margin-bottom: 1.5mm; }
+        .card p, .card li { font-size: 10.5pt; color: var(--nx-txt-2); line-height: 1.45; }
+        .card code { display: block; margin-top: 2mm; }
+
+        code {
+            font-family: var(--nx-mono);
+            font-size: 9.5pt;
+            color: var(--nx-code);
+            font-weight: 600;
+        }
+
+        .destaque {
+            background: var(--nx-card-2);
+            border: 1.5px solid var(--nx-border);
+            border-radius: 6px;
+            padding: 3mm 5mm;
+            font-size: 11pt;
+            line-height: 1.45;
+        }
+        .destaque strong { color: var(--nx-primary); }
+
+        /* Diagrama: imagem inteira, sem cortar, sobre fundo branco. */
+        .diagrama { display: flex; gap: 6mm; align-items: center; }
+        .diagrama figure {
+            flex: 0 0 auto;
+            background: #ffffff;
+            border: 1.5px solid var(--nx-border);
+            border-radius: 6px;
+            padding: 2mm;
+        }
+        .diagrama img { display: block; height: 112mm; max-width: 165mm; object-fit: contain; }
+        .diagrama .lado { display: flex; flex-direction: column; gap: 3mm; }
+        .diagrama .lado p, .diagrama .lado li { font-size: 11pt; color: var(--nx-txt-2); line-height: 1.45; }
+        .diagrama .lado b { color: var(--nx-ink); }
+        .diagrama ol { padding-left: 5mm; display: flex; flex-direction: column; gap: 2mm; }
+
+        .numero { font-family: var(--nx-title); font-size: 34pt; font-weight: 700; color: var(--nx-gold); line-height: 1; }
+        .numero + p { font-size: 10.5pt; color: var(--nx-txt-2); margin-top: 1mm; }
+
+        table { width: 100%; border-collapse: collapse; font-size: 11pt; }
+        th { text-align: left; font-size: 9pt; text-transform: uppercase; letter-spacing: 0.06em; color: var(--nx-txt-2); padding: 2mm 3mm; border-bottom: 2px solid var(--nx-ink); }
+        td { padding: 2.2mm 3mm; border-bottom: 1px solid var(--nx-border); color: var(--nx-txt-2); }
+        td:first-child { width: 45%; }
+
+        .fluxo { display: flex; align-items: center; gap: 3mm; flex-wrap: wrap; }
+        .fluxo span { background: var(--nx-card); border: 1.5px solid var(--nx-border); border-radius: 6px; padding: 2mm 4mm; font-size: 10.5pt; font-weight: 600; }
+        .fluxo i { color: var(--nx-primary); font-style: normal; font-weight: 700; }
+
+        .slide-footer {
+            border-top: 1px solid var(--nx-border);
+            padding-top: 2mm;
+            display: flex;
+            justify-content: space-between;
+            font-size: 8pt;
+            color: var(--nx-txt-3);
+        }
+        .slide-footer strong { color: var(--nx-ink); }
+        .progresso { position: absolute; left: 0; bottom: 0; height: 3px; width: 100%; background: var(--nx-border); }
+        .progresso i { display: block; height: 100%; background: var(--nx-grad); }
+
+        /* Capa e encerramento */
+        .capa .slide-body { align-items: center; text-align: center; }
+        .capa h1 { font-family: var(--nx-title); font-size: 54pt; font-weight: 700; letter-spacing: -0.03em; line-height: 1; }
+        .capa h1 span { color: var(--nx-primary-2); }
+        .capa .regua { width: 50mm; height: 4px; background: var(--nx-grad); border-radius: 2px; }
+        .capa .equipe { font-size: 11pt; line-height: 1.6; }
+        .capa .equipe span { color: var(--nx-txt-2); }
+        .selo { background: var(--nx-ink); color: #ffffff; font-size: 9pt; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 2mm 5mm; border-radius: 4px; }
+
+        /* No papel: uma folha por slide, sem a moldura da tela. */
+        @page { size: A4 landscape; margin: 0; }
+        @media print {
+            body { background: none; padding: 0; gap: 0; display: block; }
+            .slide { border-radius: 0; box-shadow: none; break-after: page; }
+            .slide:last-child { break-after: auto; }
+            * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ SLIDE 1: CAPA (Maciel) ═══════════════════════════ -->
+<section class="slide capa" id="slide-1">
+    <div class="slide-header">
+        <span class="slide-tag">PIM IV · P.A. em .NET</span>
+        <span class="slide-meta">UNIP · CST em ADS · 27/10/2026</span>
+    </div>
+    <div class="slide-body">
+        <span class="selo">Plataforma de estudo com flashcards</span>
+        <h1>Nex<span>_</span>TI</h1>
+        <div class="regua"></div>
+        <p class="slide-subtitle">Estudar TI com cartas que voltam na hora certa.</p>
+        <p class="equipe"><strong>DevTime:</strong> Maciel Silva · Maycon Douglas · Rafa<br>
+            <span>github.com/MayconDIS/PIM_IV</span></p>
+    </div>
+    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Maciel</strong> · Slide 1 / 12</span></div>
+    <div class="progresso"><i style="width:8%"></i></div>
+</section>
+
+<!-- ═══════════════════════════ SLIDE 2: O PROJETO (Maciel) ═══════════════════════════ -->
+<section class="slide" id="slide-2">
+    <div class="slide-header">
+        <span class="slide-tag">01 · O projeto</span>
+        <span class="slide-meta">O que é o Nex_TI</span>
+    </div>
+    <div class="slide-body">
+        <h2 class="slide-title">Um app para estudar TI um pouco por dia</h2>
+        <p class="slide-subtitle">O aluno estuda por flashcards, e o sistema decide quando cada carta volta.</p>
+        <div class="grid-3">
+            <div class="card">
+                <h3>Flashcards com SM-2</h3>
+                <p>Errou, a carta volta amanhã. Acertou, ela demora mais para voltar.</p>
+            </div>
+            <div class="card">
+                <h3>Trilha de estudo</h3>
+                <p>26 fases e 620 cartas sobre TI, liberadas em ordem. No fim, simulado no estilo ENADE.</p>
+            </div>
+            <div class="card">
+                <h3>XP e moedas</h3>
+                <p>Cada fase dá XP e moedas. As moedas liberam disciplinas bônus.</p>
+            </div>
+        </div>
+        <p class="destaque"><strong>O PIM IV continua o PIM III:</strong> mesmo projeto, agora com a API em camadas, app de celular e nuvem.</p>
+    </div>
+    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Maciel</strong> · Slide 2 / 12</span></div>
+    <div class="progresso"><i style="width:17%"></i></div>
+</section>
+
+<!-- ═══════════════════════════ SLIDE 3: CASO DE USO (Maciel) ═══════════════════════════ -->
+<section class="slide" id="slide-3">
+    <div class="slide-header">
+        <span class="slide-tag">02 · UML 1 de 4</span>
+        <span class="slide-meta">Diagrama de caso de uso</span>
+    </div>
+    <div class="slide-body">
+        <h2 class="slide-title">Quem usa o sistema e para quê</h2>
+        <div class="diagrama">
+            <figure><img src="../../../modelagem-uml/02_Modelagem_UML/UseCase%20Diagrams%20Nex_TI.png" alt="Diagrama de caso de uso do Nex_TI com os atores Usuário, Aluno, Tutor, Admin e Agente Especialista (IA)" style="height:132mm;max-width:190mm"></figure>
+            <div class="lado">
+                <p><b>Aluno:</b> estuda os flashcards, faz simulados e vê o próprio desempenho.</p>
+                <p><b>Tutor:</b> cria conteúdo e acompanha os alunos.</p>
+                <p><b>Admin:</b> gerencia quem tem acesso.</p>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Maciel</strong> · Slide 3 / 12</span></div>
+    <div class="progresso"><i style="width:25%"></i></div>
+</section>
+
+<!-- ═══════════════════════════ SLIDE 4: POO (Rafa) ═══════════════════════════ -->
+<section class="slide" id="slide-4">
+    <div class="slide-header">
+        <span class="slide-tag">03 · Orientação a objetos</span>
+        <span class="slide-meta">Os quatro pilares no nosso código</span>
+    </div>
+    <div class="slide-body">
+        <h2 class="slide-title">Onde a POO aparece no Nex_TI</h2>
+        <div class="grid-2">
+            <div class="card">
+                <h3>Herança</h3>
+                <p>Aluno e Tutor herdam login, XP e moedas de Usuario.</p>
+                <code>class Aluno : Usuario</code>
+            </div>
+            <div class="card">
+                <h3>Interface</h3>
+                <p>ISm2Engine diz o que o SM-2 faz; Sm2Engine é quem faz.</p>
+                <code>class Sm2Engine : ISm2Engine</code>
+            </div>
+            <div class="card">
+                <h3>Polimorfismo</h3>
+                <p>A carga inicial do banco roda o conteúdo e os simulados pelo mesmo método, sem saber qual é qual.</p>
+                <code>etapa.ExecutarAsync(db)</code>
+            </div>
+            <div class="card">
+                <h3>Encapsulamento</h3>
+                <p>A regra do XP fica dentro do serviço: só sobe, e no máximo 200 por vez.</p>
+                <code>GamificacaoService.ValidarAtualizacao()</code>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Rafa</strong> · Slide 4 / 12</span></div>
+    <div class="progresso"><i style="width:33%"></i></div>
+</section>
+
+<!-- ═══════════════════════════ SLIDE 5: CLASSES — ENTIDADES (Rafa) ═══════════════════════════ -->
+<section class="slide" id="slide-5">
+    <div class="slide-header">
+        <span class="slide-tag">04 · UML 2 de 4</span>
+        <span class="slide-meta">Diagrama de classes · entidades</span>
+    </div>
+    <div class="slide-body">
+        <h2 class="slide-title">As classes que estão no código</h2>
+        <div class="diagrama">
+            <figure><img src="../../../modelagem-uml/02_Modelagem_UML/Class%20Diagram%20Nex_TI%20-%20Entidades.png" alt="Diagrama de classes das entidades: Usuario com Aluno e Tutor, Fase, Flashcard, ProgressoFlashcard, AreaConhecimento, Questao, Alternativa e Prova"></figure>
+            <div class="lado">
+                <p><b>Usuario</b> é a classe pai de Aluno e Tutor.</p>
+                <p><b>ProgressoFlashcard</b> guarda o SM-2 de cada aluno em cada carta.</p>
+                <p><b>Novas no PIM IV:</b> Prova, Questao, Alternativa e AreaConhecimento, para os simulados.</p>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Rafa</strong> · Slide 5 / 12</span></div>
+    <div class="progresso"><i style="width:42%"></i></div>
+</section>
+
+<!-- ═══════════════════════════ SLIDE 6: ATIVIDADE (Rafa) ═══════════════════════════ -->
+<section class="slide" id="slide-6">
+    <div class="slide-header">
+        <span class="slide-tag">05 · UML 3 de 4</span>
+        <span class="slide-meta">Diagrama de atividade</span>
+    </div>
+    <div class="slide-body">
+        <h2 class="slide-title">Uma sessão de estudo, passo a passo</h2>
+        <div class="diagrama">
+            <figure><img src="../../../modelagem-uml/02_Modelagem_UML/Activity%20Diagram%20Nex_TI.png" alt="Diagrama de atividade da sessão de estudo em quatro raias: Aluno, Front-end, API e Banco de Dados"></figure>
+            <div class="lado">
+                <ol>
+                    <li>O aluno escolhe uma fase. Se estiver bloqueada, aparece um aviso.</li>
+                    <li>O site busca as cartas na API. Sem internet, usa as cartas guardadas.</li>
+                    <li>O aluno responde e o SM-2 calcula quando a carta volta.</li>
+                    <li>Errou? A carta volta no fim da sessão.</li>
+                    <li>Acabou: ganha XP e moedas e libera a próxima fase.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Rafa</strong> · Slide 6 / 12</span></div>
+    <div class="progresso"><i style="width:50%"></i></div>
+</section>
+
+<!-- ═══════════════════════════ SLIDE 7: CAMADAS (Maycon) ═══════════════════════════ -->
+<section class="slide" id="slide-7">
+    <div class="slide-header">
+        <span class="slide-tag">06 · Arquitetura</span>
+        <span class="slide-meta">A API em camadas</span>
+    </div>
+    <div class="slide-body">
+        <h2 class="slide-title">Cada parte da API cuida de uma coisa</h2>
+        <div class="grid-4">
+            <div class="card"><h3>Rotas</h3><p>Recebem o pedido e devolvem a resposta.</p><code>Endpoints/</code></div>
+            <div class="card"><h3>Serviços</h3><p>As regras: login, SM-2, XP e conteúdo.</p><code>Services/</code></div>
+            <div class="card"><h3>Dados</h3><p>Conversam com o banco SQL Server.</p><code>Data/</code></div>
+            <div class="card"><h3>Modelos</h3><p>As classes: Usuario, Flashcard, Fase…</p><code>Models/</code></div>
+        </div>
+        <p class="destaque"><strong>Antes:</strong> as rotas faziam tudo, num arquivo de 338 linhas. <strong>Agora:</strong> 142 linhas, e só os serviços mexem no banco.</p>
+    </div>
+    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Maycon</strong> · Slide 7 / 12</span></div>
+    <div class="progresso"><i style="width:58%"></i></div>
+</section>
+
+<!-- ═══════════════════════════ SLIDE 8: CLASSES — CAMADAS (Maycon) ═══════════════════════════ -->
+<section class="slide" id="slide-8">
+    <div class="slide-header">
+        <span class="slide-tag">06 · UML 2 de 4 (continuação)</span>
+        <span class="slide-meta">Diagrama de classes · camadas</span>
+    </div>
+    <div class="slide-body">
+        <h2 class="slide-title">As camadas no diagrama de classes</h2>
+        <div class="diagrama" style="justify-content:center">
+            <figure><img src="../../../modelagem-uml/02_Modelagem_UML/Class%20Diagram%20Nex_TI%20-%20Camadas.png" alt="Diagrama de classes da API em pacotes: Apresentação (Endpoints), Serviços de aplicação, Serviços de apoio e Dados" style="height:118mm;max-width:255mm"></figure>
+        </div>
+    </div>
+    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Maycon</strong> · Slide 8 / 12</span></div>
+    <div class="progresso"><i style="width:67%"></i></div>
+</section>
+
+<!-- ═══════════════════════════ SLIDE 9: PASTAS (Maycon) ═══════════════════════════ -->
+<section class="slide" id="slide-9">
+    <div class="slide-header">
+        <span class="slide-tag">07 · Modularização</span>
+        <span class="slide-meta">O projeto em pastas</span>
+    </div>
+    <div class="slide-body">
+        <h2 class="slide-title">Um repositório, cada parte na sua pasta</h2>
+        <table>
+            <tr><th>Pasta</th><th>O que tem</th></tr>
+            <tr><td><code>sistema/apps/api</code></td><td>API em C# (.NET 10)</td></tr>
+            <tr><td><code>sistema/apps/react-web</code></td><td>O site, em React</td></tr>
+            <tr><td><code>sistema/apps/react-mobile</code></td><td>O app de celular</td></tr>
+            <tr><td><code>sistema/packages/shared</code></td><td>Cartas e código usados pelo site e pelo app</td></tr>
+            <tr><td><code>sistema/tests</code></td><td>62 testes automáticos da API</td></tr>
+            <tr><td><code>relatorio/</code></td><td>A monografia (ABNT)</td></tr>
+            <tr><td><code>modelagem-uml/</code></td><td>Os diagramas (Astah e PlantUML)</td></tr>
+        </table>
+    </div>
+    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Maycon</strong> · Slide 9 / 12</span></div>
+    <div class="progresso"><i style="width:75%"></i></div>
+</section>
+
+<!-- ═══════════════════════════ SLIDE 10: SEQUÊNCIA (Maycon) ═══════════════════════════ -->
+<section class="slide" id="slide-10">
+    <div class="slide-header">
+        <span class="slide-tag">08 · UML 4 de 4</span>
+        <span class="slide-meta">Diagrama de sequência</span>
+    </div>
+    <div class="slide-body">
+        <h2 class="slide-title">O SM-2 em ação</h2>
+        <div class="diagrama">
+            <figure><img src="../../../modelagem-uml/02_Modelagem_UML/Sequence%20Diagram%20Nex_TI.png" alt="Diagrama de sequência: Aluno, Interface, Controle de Estado, Motor SM-2, Gamificação e Banco de Dados durante a revisão de uma carta"></figure>
+            <div class="lado">
+                <p>O aluno dá uma nota de 0 a 5 para a própria resposta.</p>
+                <div class="card"><h3>Nota 3 ou mais</h3><p>Volta em 1 dia, depois em 6, depois cada vez mais longe.</p></div>
+                <div class="card"><h3>Nota menor que 3</h3><p>Volta amanhã e recomeça a contagem.</p></div>
+                <code>Sm2Engine.Calcular()</code>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Maycon</strong> · Slide 10 / 12</span></div>
+    <div class="progresso"><i style="width:83%"></i></div>
+</section>
+
+<!-- ═══════════════════════════ SLIDE 11: GITHUB (Maycon) ═══════════════════════════ -->
+<section class="slide" id="slide-11">
+    <div class="slide-header">
+        <span class="slide-tag">09 · GitHub</span>
+        <span class="slide-meta">github.com/MayconDIS/PIM_IV</span>
+    </div>
+    <div class="slide-body">
+        <h2 class="slide-title">Como o código chega na nuvem</h2>
+        <div class="grid-4">
+            <div><p class="numero">62</p><p>testes automáticos</p></div>
+            <div><p class="numero">14</p><p>rotas na API</p></div>
+            <div><p class="numero">22</p><p>itens no backlog</p></div>
+            <div><p class="numero">5</p><p>sprints no Trello</p></div>
+        </div>
+        <div class="fluxo">
+            <span>Pull Request</span><i>→</i><span>Merge na main</span><i>→</i><span>Testes rodam</span><i>→</i><span>API na Azure, site na Vercel</span>
+        </div>
+    </div>
+    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Maycon</strong> · Slide 11 / 12</span></div>
+    <div class="progresso"><i style="width:92%"></i></div>
+</section>
+
+<!-- ═══════════════════════════ SLIDE 12: ENCERRAMENTO (todos) ═══════════════════════════ -->
+<section class="slide capa" id="slide-12">
+    <div class="slide-header">
+        <span class="slide-tag">Encerramento</span>
+        <span class="slide-meta">DevTime · Maciel · Maycon · Rafa</span>
+    </div>
+    <div class="slide-body">
+        <h1>Obrigado!</h1>
+        <div class="regua"></div>
+        <p class="slide-subtitle">Perguntas?</p>
+        <p class="equipe"><code>github.com/MayconDIS/PIM_IV</code></p>
+    </div>
+    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Todos</strong> · Slide 12 / 12</span></div>
+    <div class="progresso"><i style="width:100%"></i></div>
+</section>
+
+</body>
+</html>
