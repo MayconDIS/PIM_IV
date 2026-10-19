@@ -15,6 +15,8 @@ param(
     [Parameter(Mandatory)] [string] $Sufixo,
     [Parameter(Mandatory)] [string] $SenhaSql,
     [string] $OrigemFront = '',
+    # Previews do PRÓPRIO projeto na Vercel; '*' casa só letras, números e hífen.
+    [string] $PreviewsVercel = 'nexti-pim-*-dev-maycon.vercel.app',
     [string] $Regiao = 'spaincentral',
     [string] $Grupo = 'rg-nexti-pim-iv'
 )
@@ -60,7 +62,10 @@ $chaveJwt = [Convert]::ToBase64String([System.Security.Cryptography.RandomNumber
 Invoke-Az webapp config appsettings set --name $app --resource-group $Grupo --output none --settings `
     "Jwt__Key=$chaveJwt" `
     "Cors__Origens=$OrigemFront" `
-    "Cors__PermitirPreviewsVercel=true"
+    "Cors__PreviewsVercel=$PreviewsVercel"
+
+# Só HTTPS: requisição em HTTP é redirecionada pelo próprio App Service.
+Invoke-Az webapp update --name $app --resource-group $Grupo --https-only true --output none
 
 # Necessário para o deploy por publish profile do GitHub Actions.
 Invoke-Az resource update --resource-group $Grupo --name scm --namespace Microsoft.Web `

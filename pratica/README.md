@@ -101,7 +101,6 @@ O projeto foi construído seguindo as melhores práticas do mercado:
  ┃ ┗ 📂 js/           # api.js, auth.js, audio.js (Web Audio API), confetti.js, data.js, splash.js
  ┣ 📂 backend/        # API C# .NET 10 (Endpoints, Models, Services, DbContext)
  ┃ ┣ 📂 Services/     # ISm2Engine, Sm2Engine, IDatabaseSeeder, DatabaseSeeder (SOLID)
- ┃ ┗ 📂 Certificados/ # Scripts Python, fontes e modelos de geração de PDF
  ┣ 📂 database/       # Script SQL do banco de dados (NexTI_DB.sql / Azure SQL)
  ┣ 📂 docs/           # Documentação, manuais da banca e apresentação
  ┃ ┣ 📂 apresentation/# Apresentação estática em HTML do projeto
@@ -166,7 +165,6 @@ The project was built adhering to industry best practices:
  ┃   ┣ 📂 Endpoints/          # EndpointExtensions & route modules
  ┃   ┣ 📂 Models/             # Domain entities & request/response DTOs
  ┃   ┣ 📂 Services/           # ISm2Engine & DatabaseSeeder
- ┃   ┣ 📂 Certificados/       # Python certificate generators & PDF templates
  ┃   ┣ 📜 Program.cs          # API host, CORS, JWT & DI setup
  ┃   ┗ 📜 package.json        # API workspace configuration
  ┣ 📂 packages/
@@ -230,7 +228,6 @@ El proyecto fue construido siguiendo las mejores prácticas del mercado:
  ┃ ┣ 📂 css/          # global.css, splash.css
  ┃ ┗ 📂 js/           # api.js, auth.js, splash.js
  ┣ 📂 backend/        # API C# .NET 10 (Controllers, Models, DbContext)
- ┃ ┗ 📂 Certificados/ # Scripts de Python, fuentes y plantillas de generación de PDF
  ┣ 📂 database/       # Script SQL de la base de datos (NexTI_DB.sql)
  ┣ 📂 docs/           # Documentación, manuales de la junta y presentación
  ┃ ┣ 📂 apresentation/# Presentación estática en HTML del proyecto

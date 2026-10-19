@@ -24,6 +24,12 @@ function apiConfigurada() {
 let apiDetectada = null;
 const baseAtual = () => apiDetectada || apiConfigurada() || 'http://localhost:5000/api';
 
+// Os dados de um aluno só são entregues ao próprio aluno (a API exige o JWT).
+function cabecalhoDeAutenticacao() {
+    const token = typeof localStorage !== 'undefined' ? localStorage.getItem('quest_jwt_token') : null;
+    return token ? { Authorization: `Bearer ${token}` } : {};
+}
+
 // POST de login/cadastro. Falha de rede vira uma frase que a tela pode mostrar
 // (o "Failed to fetch" do navegador não diz nada a quem está tentando entrar).
 async function requisicaoDeAutenticacao(rota, corpo) {
@@ -94,7 +100,7 @@ const ApiService = {
     // 4. Busca o Usuário no Banco de Dados
     getUsuario: async (username) => {
         try {
-            const response = await fetch(`${baseAtual()}/usuarios/${encodeURIComponent(username)}`);
+            const response = await fetch(`${baseAtual()}/usuarios/${encodeURIComponent(username)}`, { headers: cabecalhoDeAutenticacao() });
             if (!response.ok) throw new Error("Usuário não encontrado");
             return await response.json();
         } catch (error) {
@@ -106,7 +112,7 @@ const ApiService = {
     // 4.1 Busca estatísticas detalhadas do usuário
     getEstatisticasDetalhadas: async (username) => {
         try {
-            const response = await fetch(`${baseAtual()}/usuarios/${encodeURIComponent(username)}/stats-detalhadas`);
+            const response = await fetch(`${baseAtual()}/usuarios/${encodeURIComponent(username)}/stats-detalhadas`, { headers: cabecalhoDeAutenticacao() });
             if (!response.ok) return null;
             return await response.json();
         } catch (error) {
@@ -235,14 +241,6 @@ const ApiService = {
             console.error("Erro ao buscar resumo de estatísticas:", error);
             return null;
         }
-    },
-
-    // 13. Download do Certificado em PDF
-    baixarCertificadoPDF: async (nome, data, codigo) => {
-        const url = `${baseAtual()}/certificado/pdf?nome=${encodeURIComponent(nome)}&data=${encodeURIComponent(data)}&codigo=${encodeURIComponent(codigo)}`;
-        const response = await fetch(url);
-        if (!response.ok) throw new Error("Erro ao gerar certificado PDF no servidor.");
-        return await response.blob();
     }
 };
 

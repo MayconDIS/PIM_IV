@@ -24,6 +24,10 @@ namespace NexTI_API.Endpoints
         private static readonly Regex NicknameValido = new(@"^[\p{L}\p{N}_.\-]{3,30}$", RegexOptions.Compiled);
         private static readonly Regex EmailValido = new(@"^[^\s@]+@[^\s@]+\.[^\s@]{2,}$", RegexOptions.Compiled);
 
+        /// <summary>O usuário autenticado é o dono do recurso pedido na rota?</summary>
+        public static bool EhOProprioUsuario(ClaimsPrincipal usuario, string username) =>
+            string.Equals(usuario.FindFirst(ClaimTypes.Name)?.Value, username, StringComparison.Ordinal);
+
         public static void MapNexTiEndpoints(this IEndpointRouteBuilder app, byte[] key)
         {
             // Status Route
@@ -109,15 +113,18 @@ namespace NexTI_API.Endpoints
             }).RequireRateLimiting(PoliticaDeAutenticacao);
 
             // --- USUÁRIOS ---
-            app.MapGet("/api/usuarios/{username}", async (string username, AppDbContext db) =>
+            // Só o próprio aluno lê os próprios dados: o nome do token tem de bater com a rota.
+            app.MapGet("/api/usuarios/{username}", async (string username, AppDbContext db, ClaimsPrincipal userClaims) =>
             {
+                if (!EhOProprioUsuario(userClaims, username)) return Results.Forbid();
+
                 var user = await db.Usuarios
                     .Where(u => u.Username == username)
                     .Select(u => new { u.Id, u.Username, u.Nivel, u.XP, u.Moedas })
                     .FirstOrDefaultAsync();
                     
                 return user is not null ? Results.Ok(user) : Results.NotFound(new { message = "Usuário não encontrado" });
-            });
+            }).RequireAuthorization();
 
             // --- FASES ---
             app.MapGet("/api/fases", async (AppDbContext db) =>
@@ -220,8 +227,10 @@ namespace NexTI_API.Endpoints
             }).RequireAuthorization();
 
             // Estatísticas Detalhadas do Usuário
-            app.MapGet("/api/usuarios/{username}/stats-detalhadas", async (string username, AppDbContext db) =>
+            app.MapGet("/api/usuarios/{username}/stats-detalhadas", async (string username, AppDbContext db, ClaimsPrincipal userClaims) =>
             {
+                if (!EhOProprioUsuario(userClaims, username)) return Results.Forbid();
+
                 var user = await db.Usuarios
                     .Include(u => u.Progressos)
                     .FirstOrDefaultAsync(u => u.Username == username);
@@ -248,7 +257,7 @@ namespace NexTI_API.Endpoints
                     CartasDevidasHoje = cartasDevidasHoje,
                     FacilidadeMedia = Math.Round(facilidadeMedia, 2)
                 });
-            });
+            }).RequireAuthorization();
 
             // --- ATUALIZAR ESTATÍSTICAS DO USUÁRIO (PROTEGIDO) ---
             app.MapPut("/api/usuarios/stats", async (UserStatsUpdate request, AppDbContext db, ClaimsPrincipal userClaims) =>
@@ -316,90 +325,6 @@ namespace NexTI_API.Endpoints
                     totalUsuarios,
                     topAlunos
                 });
-            });
-
-            // --- GERAÇÃO DE CERTIFICADO EM PDF ---
-            app.MapGet("/api/certificado/pdf", async (string nome, string data, string codigo) =>
-            {
-                if (string.IsNullOrEmpty(nome) || string.IsNullOrEmpty(data) || string.IsNullOrEmpty(codigo))
-                {
-                    return Results.BadRequest(new { message = "Parâmetros 'nome', 'data' e 'codigo' são obrigatórios." });
-                }
-
-                // Sanitização contra OS Command Injection (CRIT-01)
-                static string SanitizarParametro(string input)
-                {
-                    if (string.IsNullOrEmpty(input)) return string.Empty;
-                    return Regex.Replace(input, @"[""&|;`$(){}\\<>!\n\r]", "");
-                }
-
-                string nomeSafe = SanitizarParametro(nome);
-                string dataSafe = SanitizarParametro(data);
-                string codigoSafe = SanitizarParametro(codigo);
-
-                if (nomeSafe.Length > 100 || dataSafe.Length > 80 || codigoSafe.Length > 50)
-                    return Results.BadRequest(new { message = "Parâmetros excedem o comprimento permitido." });
-
-                string tempDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp_certs");
-                Directory.CreateDirectory(tempDir);
-                
-                string uniqueId = Guid.NewGuid().ToString("N");
-                string pdfFileName = $"certificado_{uniqueId}.pdf";
-                string pdfPath = Path.Combine(tempDir, pdfFileName);
-
-                try
-                {
-                    string scriptPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Certificados", "gerar_certificado.py");
-                    if (!File.Exists(scriptPath))
-                    {
-                        scriptPath = Path.Combine(Directory.GetCurrentDirectory(), "Certificados", "gerar_certificado.py");
-                    }
-
-                    string pythonExecutable = "python";
-                    
-                    var processInfo = new System.Diagnostics.ProcessStartInfo
-                    {
-                        FileName = pythonExecutable,
-                        Arguments = $"\"{scriptPath}\" \"{nomeSafe}\" \"{dataSafe}\" \"{codigoSafe}\" \"{pdfPath}\"",
-                        RedirectStandardOutput = true,
-                        RedirectStandardError = true,
-                        UseShellExecute = false,
-                        CreateNoWindow = true
-                    };
-
-                    using (var process = System.Diagnostics.Process.Start(processInfo))
-                    {
-                        if (process == null)
-                        {
-                            return Results.Problem("Não foi possível iniciar o interpretador Python.");
-                        }
-
-                        await process.WaitForExitAsync();
-                        string output = await process.StandardOutput.ReadToEndAsync();
-                        string error = await process.StandardError.ReadToEndAsync();
-
-                        if (process.ExitCode != 0)
-                        {
-                            Console.WriteLine($"Erro do Python: {error}");
-                            return Results.Problem("Ocorreu um erro ao gerar o certificado PDF.");
-                        }
-                    }
-
-                    if (!File.Exists(pdfPath))
-                    {
-                        return Results.Problem("O arquivo PDF do certificado não foi gerado pelo script.");
-                    }
-
-                    byte[] pdfBytes = await File.ReadAllBytesAsync(pdfPath);
-                    try { File.Delete(pdfPath); } catch { }
-
-                    return Results.File(pdfBytes, "application/pdf", $"certificado_{nomeSafe.Replace(" ", "_")}.pdf");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Erro interno no certificado: {ex.Message}");
-                    return Results.Problem("Erro interno do servidor ao gerar o certificado.");
-                }
             });
         }
     }

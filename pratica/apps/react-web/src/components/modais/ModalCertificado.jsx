@@ -1,45 +1,25 @@
-import React, { useMemo, useState } from 'react';
-import { ApiService } from '@nexti/shared';
+import React, { useMemo } from 'react';
 import { useEstudo } from '../../context/EstudoContext';
-import { baixarArquivo } from '../../lib/arquivos';
+import { dadosDoCertificado, gerarCertificadoHtml } from '../../lib/certificado';
+import { imprimirDocumento } from '../../lib/imprimir';
 import { Modal } from '../ui/Modal';
-
-/** Código de autenticidade determinístico por aluno + data (mesmo hash de `tentarAbrirCertificado`). */
-function dadosDoCertificado(nomeAluno) {
-  const hoje = new Date();
-  const dataNumerica = hoje.toLocaleDateString('pt-BR');
-  const dataPorExtenso = hoje.toLocaleDateString('pt-BR', { year: 'numeric', month: 'long', day: 'numeric' });
-
-  let hash = 0;
-  const base = `${nomeAluno}${dataNumerica}NexTI_Academy_Enade_PIMIV`;
-  for (let i = 0; i < base.length; i++) {
-    hash = (hash << 5) - hash + base.charCodeAt(i);
-    hash |= 0;
-  }
-  const hex = Math.abs(hash).toString(16).toUpperCase().padStart(8, '0');
-  return { dataPorExtenso, codigo: `NEX-${hex.slice(0, 4)}-${hex.slice(4, 8)}-${dataNumerica.replace(/\//g, '')}` };
-}
 
 export function ModalCertificado() {
   const { modal, fecharModal, nomeUsuario, toast, som, confete } = useEstudo();
   const aberto = modal === 'modalCertificado';
-  const [gerando, setGerando] = useState(false);
   const { dataPorExtenso, codigo } = useMemo(() => dadosDoCertificado(nomeUsuario), [nomeUsuario, aberto]);
 
-  const baixarPdf = async () => {
-    setGerando(true);
-    try {
-      const blob = await ApiService.baixarCertificadoPDF(nomeUsuario, dataPorExtenso, codigo);
-      baixarArquivo(blob, `Certificado_${nomeUsuario.replace(/\s+/g, '_')}.pdf`);
-      som('playLevelUp');
-      confete('celebrate');
-      toast('success', 'Download Concluído', 'Certificado digital premium baixado com sucesso!');
-    } catch {
-      som('playError');
-      toast('error', 'Erro no Download', 'Não foi possível baixar o PDF. Certifique-se de que o backend (.NET 10) está rodando.');
-    } finally {
-      setGerando(false);
-    }
+  // Gerado no navegador: o diálogo de impressão oferece "Salvar como PDF".
+  const imprimir = () => {
+    imprimirDocumento(gerarCertificadoHtml({ nome: nomeUsuario, dataPorExtenso, codigo }), {
+      aoFalhar: () => {
+        som('playError');
+        toast('error', 'Impressão bloqueada', 'O navegador não abriu o diálogo de impressão. Tente novamente.');
+      },
+    });
+    som('playLevelUp');
+    confete('celebrate');
+    toast('info', 'Certificado pronto', 'No diálogo, escolha "Salvar como PDF" para guardar o arquivo.');
   };
 
   return (
@@ -95,12 +75,8 @@ export function ModalCertificado() {
           </div>
         </div>
         <div className="certificado-actions">
-          <button className="btn-action btn-gold tech-font flex-align-center" onClick={() => window.print()}>
-            <span className="material-symbols-outlined control-icon-spacing">print</span> IMPRIMIR()
-          </button>
-          <button className="btn-action btn-gold tech-font flex-align-center" onClick={baixarPdf} disabled={gerando}>
-            <span className="material-symbols-outlined control-icon-spacing">{gerando ? 'sync' : 'download'}</span>
-            {gerando ? ' GERANDO...' : ' BAIXAR_PDF()'}
+          <button className="btn-action btn-gold tech-font flex-align-center" onClick={imprimir}>
+            <span className="material-symbols-outlined control-icon-spacing">picture_as_pdf</span> IMPRIMIR / SALVAR_PDF()
           </button>
           <button className="btn-action btn-right tech-font flex-align-center" onClick={fecharModal}>
             <span className="material-symbols-outlined control-icon-spacing">close</span> FECHAR()

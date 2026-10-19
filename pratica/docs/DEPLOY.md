@@ -47,10 +47,12 @@ próximos passos.
 3. App Service → **Environment variables**:
    - *Connection strings*: `DefaultConnection`, tipo **SQLAzure**, com a string ADO.NET
      do banco (aba *Connection strings* do banco).
-   - *App settings*: `Jwt__Key` (texto aleatório longo), `Cors__Origens`
-     (`https://seu-app.vercel.app`) e `Cors__PermitirPreviewsVercel` = `true`.
-4. App Service → Configuration → General settings → **SCM Basic Auth Publishing
-   Credentials: On**.
+   - *App settings*: `Jwt__Key` (texto aleatório com 32+ caracteres; **a API não
+     sobe sem ela** fora do ambiente de desenvolvimento), `Cors__Origens`
+     (`https://seu-app.vercel.app`) e `Cors__PreviewsVercel`
+     (`nexti-pim-*-dev-maycon.vercel.app` — só os previews do seu projeto).
+4. App Service → Configuration → General settings → **HTTPS Only: On** e **SCM
+   Basic Auth Publishing Credentials: On**.
 
 ### Publicar a API
 
@@ -116,9 +118,16 @@ npm run dev:react   # http://localhost:5501
 Para apontar para o Azure SQL, defina `AZURE_SQL_CONNECTIONSTRING` antes do `dev:api`.
 Lembre de liberar o seu IP no firewall do servidor SQL.
 
-## Pendência conhecida
+## Segurança
 
-O endpoint `/api/certificado/pdf` chama um script Python (`Certificados/gerar_certificado.py`,
-que usa `fpdf2`). A imagem .NET do App Service não garante Python. Se faltar, o
-botão **BAIXAR_PDF()** mostra erro, mas **IMPRIMIR()** (impressão do navegador para
-PDF) continua funcionando.
+- **Front (Vercel):** `apps/react-web/vercel.json` envia CSP, HSTS, `nosniff`,
+  `X-Frame-Options: DENY`, `Referrer-Policy` e `Permissions-Policy`. A CSP só
+  libera a API da Azure, o HaveIBeenPwned, o Google Fonts e o VLibras — **se a URL
+  da API mudar, atualize o `connect-src`**. Não há script embutido no HTML: o
+  VLibras é carregado por `src/lib/vlibras.js`.
+- **API:** login/cadastro limitados a 30 tentativas por minuto por IP; política de
+  senha no servidor (`Services/PoliticaDeSenha.cs`); dados de usuário só para o
+  próprio dono (JWT); CORS restrito a `Cors__Origens` e aos previews do projeto.
+- **Certificado:** gerado no navegador (`src/lib/certificado.js`) e impresso por um
+  iframe (`src/lib/imprimir.js`) — o aluno escolhe "Salvar como PDF". O endpoint
+  antigo, que executava Python no servidor, foi removido.

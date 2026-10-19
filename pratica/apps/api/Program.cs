@@ -15,32 +15,32 @@ var builder = WebApplication.CreateBuilder(args);
 var porta = Environment.GetEnvironmentVariable("PORT");
 if (!string.IsNullOrWhiteSpace(porta)) builder.WebHost.UseUrls($"http://0.0.0.0:{porta}");
 
-// CORS: localhost sempre; domínios de produção em Cors:Origens (separados por vírgula)
-// e, opcionalmente, os previews *.vercel.app.
-var origensPermitidas = (builder.Configuration["Cors:Origens"] ?? string.Empty)
-    .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
-    .Select(o => o.TrimEnd('/'))
-    .ToHashSet(StringComparer.OrdinalIgnoreCase);
-var permitirPreviewsVercel = builder.Configuration.GetValue("Cors:PermitirPreviewsVercel", false);
+// CORS: ver PoliticaDeCors (localhost, Cors:Origens e os previews do próprio projeto).
+// Sem AllowCredentials: a API autentica por header Authorization, não por cookie.
+var politicaDeCors = new PoliticaDeCors(
+    builder.Configuration["Cors:Origens"],
+    builder.Configuration["Cors:PreviewsVercel"]);
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",
-        policy => policy.SetIsOriginAllowed(origin =>
-            {
-                if (string.IsNullOrEmpty(origin) || !Uri.TryCreate(origin, UriKind.Absolute, out var uri)) return false;
-                if (uri.Host == "localhost" || uri.Host == "127.0.0.1") return true;
-                if (origensPermitidas.Contains(origin.TrimEnd('/'))) return true;
-                return permitirPreviewsVercel && uri.Scheme == "https" && uri.Host.EndsWith(".vercel.app", StringComparison.OrdinalIgnoreCase);
-            })
+        policy => policy.SetIsOriginAllowed(politicaDeCors.Permite)
             .AllowAnyMethod()
-            .AllowAnyHeader()
-            .AllowCredentials());
+            .AllowAnyHeader());
 });
 
-// Autenticação JWT — em produção a chave vem da variável Jwt__Key.
-var jwtKey = builder.Configuration["Jwt:Key"]
-    ?? "NexTI_Secret_Key_2026_Super_Secure_Key_123!";
+// Autenticação JWT. Fora do ambiente de desenvolvimento a chave TEM de vir da
+// configuração (Jwt__Key no App Service): subir com uma chave conhecida
+// deixaria qualquer um forjar tokens válidos.
+var jwtKey = builder.Configuration["Jwt:Key"];
+if (string.IsNullOrWhiteSpace(jwtKey))
+{
+    if (!builder.Environment.IsDevelopment())
+        throw new InvalidOperationException("Jwt:Key não configurada. Defina a variável de ambiente Jwt__Key.");
+    jwtKey = "NexTI_chave_somente_para_desenvolvimento_local_2026";
+}
+if (Encoding.ASCII.GetByteCount(jwtKey) < 32)
+    throw new InvalidOperationException("Jwt:Key precisa ter pelo menos 32 caracteres (HMAC-SHA256).");
 var key = Encoding.ASCII.GetBytes(jwtKey);
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -107,11 +107,6 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
-
-if (!app.Environment.IsDevelopment() && jwtKey.StartsWith("NexTI_Secret_Key_2026"))
-{
-    app.Logger.LogWarning("Jwt:Key está com o valor padrão do repositório. Defina a variável Jwt__Key em produção.");
-}
 
 app.UseForwardedHeaders();
 app.UseCors("AllowFrontend");
