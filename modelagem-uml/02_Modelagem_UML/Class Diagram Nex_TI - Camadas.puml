@@ -1,5 +1,5 @@
 @startuml Class Diagram Nex_TI - Camadas
-' Diagrama de Classes — reflete o código atual de pratica/apps/api (NexTI_API, .NET 10)
+' Diagrama de Classes — reflete o código atual de sistema/apps/api (NexTI_API, .NET 10)
 ' Organizado pelas camadas da API: Apresentação (Endpoints) → Serviços → Dados → Modelo
 skinparam monochrome true
 skinparam shadowing false

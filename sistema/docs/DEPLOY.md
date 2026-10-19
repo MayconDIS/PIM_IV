@@ -30,7 +30,7 @@ antes de cair para o modo offline (localStorage).
 
 ```powershell
 az login
-cd pratica/infra/azure
+cd sistema/infra/azure
 ./provisionar.ps1 -Sufixo seunome -SenhaSql 'Uma$enhaForte123' -OrigemFront 'https://nexti.vercel.app'
 ```
 
@@ -71,7 +71,7 @@ os 620 flashcards e o simulado ENADE. Para testar, abra
 ## 2. Vercel (front-end)
 
 1. Vercel → **Add New → Project** → este repositório.
-2. **Root Directory:** `pratica/apps/react-web` (o `vercel.json` cuida do install no
+2. **Root Directory:** `sistema/apps/react-web` (o `vercel.json` cuida do install no
    workspace e do build).
 3. **Environment Variables:** `VITE_API_URL = https://<app>.azurewebsites.net/api`
 4. Faça o deploy. Depois, confira se o domínio final está em `Cors__Origens` no App Service.

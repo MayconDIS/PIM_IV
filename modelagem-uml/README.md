@@ -16,27 +16,27 @@
   <summary>🇧🇷 <b>Português</b></summary>
 
   O ecossistema do projeto **Nex_TI** desenvolvido para o PIM IV (UNIP) é estruturado em três partes complementares deste monorepo:
-  1. 📄 **[teorica/](../teorica)**: Contém a monografia acadêmica e o Relatório ABNT interativo (HTML/CSS), protótipos de interface, cronogramas e atas teóricas.
-  2. 📐 **[uml/](../uml)**: Abriga a modelagem UML completa e fonte no Astah (`.asta`), os diagramas globais exportados (Classes, Sequência, Casos de Uso) e a documentação detalhada em Markdown do Backlog do Produto e Sprints.
-  3. 💻 **[pratica/](../pratica)**: A implementação funcional em código, englobando o Frontend (HTML/CSS/JS com modo de acessibilidade e o mapa neural interativo), a API do Backend em C# (.NET 10 Minimal APIs) e os scripts do banco de dados (Microsoft SQL Server).
+  1. 📄 **[relatorio/](../relatorio)**: Contém a monografia acadêmica e o Relatório ABNT interativo (HTML/CSS), protótipos de interface, cronogramas e atas teóricas.
+  2. 📐 **[modelagem-uml/](../modelagem-uml)**: Abriga a modelagem UML completa e fonte no Astah (`.asta`), os diagramas globais exportados (Classes, Sequência, Casos de Uso) e a documentação detalhada em Markdown do Backlog do Produto e Sprints.
+  3. 💻 **[sistema/](../sistema)**: A implementação funcional em código, englobando o Frontend (HTML/CSS/JS com modo de acessibilidade e o mapa neural interativo), a API do Backend em C# (.NET 10 Minimal APIs) e os scripts do banco de dados (Microsoft SQL Server).
 </details>
 
 <details>
   <summary>🇺🇸 <b>English</b></summary>
 
   The **Nex_TI** project ecosystem for PIM IV (UNIP) is structured into three complementary parts of this monorepo:
-  1. 📄 **[teorica/](../teorica)**: Contains the academic monograph and the interactive ABNT Report (HTML/CSS), interface prototypes, schedules, and theoretical minutes.
-  2. 📐 **[uml/](../uml)**: Hosts the complete UML modeling and Astah source (`.asta`), global exported diagrams (Class, Sequence, Use Case), and detailed Markdown documentation of Product and Sprint Backlogs.
-  3. 💻 **[pratica/](../pratica)**: The functional code implementation, encompassing the Frontend (HTML/CSS/JS with accessibility mode and interactive neural map), the Backend C# API (.NET 10 Minimal APIs), and database scripts (Microsoft SQL Server).
+  1. 📄 **[relatorio/](../relatorio)**: Contains the academic monograph and the interactive ABNT Report (HTML/CSS), interface prototypes, schedules, and theoretical minutes.
+  2. 📐 **[modelagem-uml/](../modelagem-uml)**: Hosts the complete UML modeling and Astah source (`.asta`), global exported diagrams (Class, Sequence, Use Case), and detailed Markdown documentation of Product and Sprint Backlogs.
+  3. 💻 **[sistema/](../sistema)**: The functional code implementation, encompassing the Frontend (HTML/CSS/JS with accessibility mode and interactive neural map), the Backend C# API (.NET 10 Minimal APIs), and database scripts (Microsoft SQL Server).
 </details>
 
 <details>
   <summary>🇪🇸 <b>Español</b></summary>
 
   El ecosistema del proyecto **Nex_TI** para PIM IV (UNIP) está estructurado en tres partes complementarias de este monorepo:
-  1. 📄 **[teorica/](../teorica)**: Contiene la monografía académica y el Informe ABNT interactivo (HTML/CSS), prototipos de interfaz, cronogramas y actas teóricas.
-  2. 📐 **[uml/](../uml)**: Alberga el modelado UML completo y la fuente en Astah (`.asta`), los diagramas globales exportados (Clases, Secuencia, Casos de Uso) y la documentación detallada en Markdown del Backlog del Producto y Sprints.
-  3. 💻 **[pratica/](../pratica)**: La implementación funcional en código, que abarca el Frontend (HTML/CSS/JS con modo de accesibilidad y mapa neuronal interactivo), la API del Backend en C# (.NET 10 Minimal APIs) y los scripts de la base de datos (Microsoft SQL Server).
+  1. 📄 **[relatorio/](../relatorio)**: Contiene la monografía académica y el Informe ABNT interactivo (HTML/CSS), prototipos de interfaz, cronogramas y actas teóricas.
+  2. 📐 **[modelagem-uml/](../modelagem-uml)**: Alberga el modelado UML completo y la fuente en Astah (`.asta`), los diagramas globales exportados (Clases, Secuencia, Casos de Uso) y la documentación detallada en Markdown del Backlog del Producto y Sprints.
+  3. 💻 **[sistema/](../sistema)**: La implementación funcional en código, que abarca el Frontend (HTML/CSS/JS con modo de accesibilidad y mapa neuronal interactivo), la API del Backend en C# (.NET 10 Minimal APIs) y los scripts de la base de datos (Microsoft SQL Server).
 </details>
 
 ---
@@ -60,7 +60,7 @@ Para facilitar a navegação pelos principais artefatos do projeto:
 Organizamos este repositório focando na simplicidade, clareza e separação de conceitos:
 
 ```text
-📁 uml/
+📁 modelagem-uml/
 ├── 📁 .planning/                      # Gerenciamento ágil GSD (Roadmaps, Fases, Specs)
 ├── 📁 01_Documentacao_Teorica/        # Documentações teóricas e atas de planejamento em PDF/MD
 ├── 📁 02_Modelagem_UML/               # Modelagem fonte do Astah (.asta) e imagens globais (.png)
@@ -95,7 +95,7 @@ To facilitate navigation through the main project artifacts:
 We organized this repository focusing on simplicity, clarity, and separation of concerns:
 
 ```text
-📁 uml/
+📁 modelagem-uml/
 ├── 📁 .planning/                      # Agile GSD management (Roadmaps, Phases, Specs)
 ├── 📁 01_Documentacao_Teorica/        # Theoretical documentations and Sprint minutes in PDF/MD
 ├── 📁 02_Modelagem_UML/               # Astah source modeling (.asta) and global images (.png)
@@ -130,7 +130,7 @@ Para facilitar la navegación por los principales artefactos del proyecto:
 Organizamos este repositorio enfocándonos en la simplicidad, claridad y separación de conceptos:
 
 ```text
-📁 uml/
+📁 modelagem-uml/
 ├── 📁 .planning/                      # Gestión ágil GSD (Roadmaps, Fases, Specs)
 ├── 📁 01_Documentacao_Teorica/        # Documentaciones teóricas y actas de planificación en PDF/MD
 ├── 📁 02_Modelagem_UML/               # Modelado fuente de Astah (.asta) y imágenes globales (.png)

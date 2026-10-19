@@ -1,8 +1,8 @@
 @startuml Activity Diagram Nex_TI
 ' Diagrama de Atividade — Sessão de estudo com flashcards (SM-2)
-' Fonte: pratica/apps/react-web/src/context/EstudoContext.jsx
-'        pratica/apps/api/Endpoints/EndpointExtensions.cs (/api/fases/{codigoFase}/flashcards, /api/progresso/atualizar)
-'        pratica/apps/api/Services/Sm2Engine.cs
+' Fonte: sistema/apps/react-web/src/context/EstudoContext.jsx
+'        sistema/apps/api/Endpoints/EndpointExtensions.cs (/api/fases/{codigoFase}/flashcards, /api/progresso/atualizar)
+'        sistema/apps/api/Services/Sm2Engine.cs
 skinparam monochrome true
 skinparam shadowing false
 skinparam defaultFontName Arial
