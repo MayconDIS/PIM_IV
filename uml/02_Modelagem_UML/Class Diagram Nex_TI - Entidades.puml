@@ -1,0 +1,95 @@
+@startuml Class Diagram Nex_TI - Entidades
+' Diagrama de Classes — reflete o código atual de pratica/apps/api (NexTI_API, .NET 10)
+' Organizado pelas camadas da API: Apresentação (Endpoints) → Serviços → Dados → Modelo
+skinparam monochrome true
+skinparam shadowing false
+skinparam linetype ortho
+skinparam defaultFontName Arial
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+hide empty members
+
+
+title Diagrama de Classes 2/2 — NexTI_API: entidades do domínio (Models)
+
+package "Modelo (entidades)" {
+  class Usuario {
+    + Id : int
+    + Username : string
+    + Email : string
+    + SenhaHash : string
+    + Nivel : int = 1
+    + XP : int = 0
+    + Moedas : int = 0
+    + DataCriacao : DateTime
+  }
+  class Aluno {
+    + EstudarFlashCard() : void
+  }
+  class Tutor {
+    + GerenciarConteudo() : void
+  }
+
+  class Fase {
+    + CodigoFase : string
+    + Descricao : string
+  }
+  class Flashcard {
+    + Id : int
+    + CodigoFase : string
+    + Frente : string
+    + Verso : string
+    + Dica : string [0..1]
+    + Opcoes : List<string> [0..1]
+    + Correta : int [0..1]
+  }
+  class ProgressoFlashcard {
+    + UsuarioId : int
+    + FlashcardId : int
+    + Repeticoes : int = 0
+    + IntervaloDias : double = 0
+    + FatorFacilidade : double = 2.5
+    + DataProximaRevisao : DateTime
+  }
+
+  class AreaConhecimento {
+    + Id : int
+    + NomeArea : string
+  }
+  class Questao {
+    + Id : int
+    + IdArea : int
+    + Enunciado : string
+    + Origem : string [0..1]
+  }
+  class Alternativa {
+    + Id : int
+    + IdQuestao : int
+    + Texto : string
+    + IsCorreta : bool
+  }
+  class Prova {
+    + Id : int
+    + Ano : int
+    + Tipo : string
+  }
+}
+
+' --- Herança (POO) ---
+Usuario <|-- Aluno
+Usuario <|-- Tutor
+
+' --- Associações entre entidades ---
+Fase "1" *-- "0..*" Flashcard : contém >
+Usuario "1" -- "0..*" ProgressoFlashcard : possui >
+Flashcard "1" -- "0..*" ProgressoFlashcard : revisado em >
+AreaConhecimento "1" -- "0..*" Questao : classifica >
+Questao "1" *-- "0..*" Alternativa : tem >
+Questao "0..*" -- "0..*" Prova : aparece em >
+
+note bottom of ProgressoFlashcard
+  Estado do SM-2 por aluno e carta
+  (chave composta UsuarioId + FlashcardId).
+  Calculado pelo Sm2Engine — ver diagrama 1/2.
+end note
+@enduml

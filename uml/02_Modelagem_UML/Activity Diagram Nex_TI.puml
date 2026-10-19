@@ -1,0 +1,93 @@
+@startuml Activity Diagram Nex_TI
+' Diagrama de Atividade — Sessão de estudo com flashcards (SM-2)
+' Fonte: pratica/apps/react-web/src/context/EstudoContext.jsx
+'        pratica/apps/api/Endpoints/EndpointExtensions.cs (/api/fases/{codigoFase}/flashcards, /api/progresso/atualizar)
+'        pratica/apps/api/Services/Sm2Engine.cs
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam ActivityFontSize 12
+skinparam SwimlaneTitleFontStyle bold
+
+title Diagrama de Atividade — Sessão de Estudo com Flashcards (Nex_TI)
+
+|Aluno|
+start
+:Seleciona uma fase na trilha;
+
+|Front-end (React)|
+if (Fase liberada?) then (não)
+  :Exibe aviso "Acesso Bloqueado";
+  |Aluno|
+  stop
+else (sim)
+endif
+
+|Front-end (React)|
+if (API online?) then (sim)
+  |API (.NET)|
+  :GET /api/fases/{codigoFase}/flashcards;
+  |Banco de Dados|
+  :Consulta Flashcards da fase;
+  |API (.NET)|
+  :Retorna lista de cartas;
+  |Front-end (React)|
+else (não)
+  :Usa deck local (packages/shared);
+endif
+:Monta deck priorizando cartas
+com revisão vencida (SM-2);
+
+repeat
+repeat
+  :Exibe a frente da carta;
+  |Aluno|
+  :Pensa na resposta e vira a carta;
+  :Avalia a própria resposta
+  (Errei / Difícil / Bom / Fácil);
+  |Front-end (React)|
+  :Atualiza estado SM-2 local;
+  if (Errou?) then (sim)
+    :Devolve a carta para a
+    fila de revisão;
+  else (não)
+  endif
+  fork
+    :Avança para a próxima carta;
+  fork again
+    if (Usuário autenticado e API online?) then (sim)
+      |API (.NET)|
+      :POST /api/progresso/atualizar
+      (valida JWT);
+      :Sm2Engine.Calcular(progresso, qualidade);
+      note right
+        qualidade >= 3 → intervalo 1, 6, depois × fator
+        qualidade < 3  → reinicia (intervalo = 1)
+      end note
+      |Banco de Dados|
+      :Grava Progresso_Flashcards
+      (DataProximaRevisao);
+      |Front-end (React)|
+    else (não)
+    endif
+  end fork
+repeat while (Ainda há cartas no deck?) is (sim)
+->não;
+backward :Novo deck = cartas da fila de revisão;
+repeat while (Há cartas na fila de revisão?) is (sim)
+->não;
+
+:Exibe tela de fase concluída;
+|Aluno|
+:Clica em "Concluir";
+|Front-end (React)|
+:Concede XP e Moedas;
+:Recalcula rank (Iniciante / Intermediário / Expert);
+:Libera a próxima fase;
+|API (.NET)|
+:PUT /api/usuarios/stats;
+|Banco de Dados|
+:Atualiza XP, Moedas e Nível do Usuário;
+|Aluno|
+stop
+@enduml

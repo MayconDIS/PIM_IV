@@ -1,0 +1,199 @@
+@startuml Class Diagram Nex_TI - Camadas
+' Diagrama de Classes — reflete o código atual de pratica/apps/api (NexTI_API, .NET 10)
+' Organizado pelas camadas da API: Apresentação (Endpoints) → Serviços → Dados → Modelo
+skinparam monochrome true
+skinparam shadowing false
+skinparam linetype ortho
+skinparam defaultFontName Arial
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+hide empty members
+
+
+title Diagrama de Classes 1/2 — NexTI_API: camadas e serviços
+
+package "Apresentação (Endpoints)" {
+  class EndpointExtensions <<static>> {
+    + PoliticaDeAutenticacao : string {readOnly}
+    + {static} MapNexTiEndpoints(app : IEndpointRouteBuilder) : void
+    + {static} EhOProprioUsuario(usuario : ClaimsPrincipal, username : string) : bool
+    + {static} IdDoUsuario(usuario : ClaimsPrincipal) : int [0..1]
+    + {static} ParaHttp<T>(resultado : Resultado<T>, sucesso : Func<T, IResult>) : IResult
+    --
+    POST /api/auth/register
+    POST /api/auth/login
+    GET  /api/fases/{codigo}/flashcards
+    POST /api/flashcards
+    POST /api/progresso/atualizar
+    PUT  /api/usuarios/stats
+    GET  /api/simulados/questoes
+  }
+}
+
+package "Serviços de aplicação (regras de negócio)" {
+  interface IAuthService {
+    + CadastrarAsync(username : string, email : string, senha : string) : Task<Resultado<Usuario>>
+    + EntrarAsync(usernameOuEmail : string, senha : string) : Task<Resultado<Sessao>>
+  }
+  class AuthService {
+    + Emissor : string {readOnly}
+    + Publico : string {readOnly}
+    + CadastrarAsync(...) : Task<Resultado<Usuario>>
+    + EntrarAsync(...) : Task<Resultado<Sessao>>
+    - GerarToken(usuario : Usuario) : string
+  }
+
+  interface IProgressoService {
+    + ListarAsync(usuarioId : int) : Task<List<ProgressoResumo>>
+    + RegistrarRespostaAsync(usuarioId : int, flashcardId : int, qualidade : int) : Task<ProgressoFlashcard>
+    + EstatisticasAsync(username : string) : Task<Resultado<EstatisticasDetalhadas>>
+  }
+  class ProgressoService {
+    + DiasParaCartaMadura : int = 21 {readOnly}
+    + RegistrarRespostaAsync(...) : Task<ProgressoFlashcard>
+  }
+
+  interface IGamificacaoService {
+    + PerfilAsync(username : string) : Task<PerfilUsuario>
+    + AtualizarAsync(usuarioId : int, xp : int, moedas : int, nivel : int) : Task<Resultado<Usuario>>
+    + ResumoAsync(tamanhoDoRanking : int) : Task<ResumoGeral>
+  }
+  class GamificacaoService {
+    + IncrementoMaximo : int = 200 {readOnly}
+    + {static} ValidarAtualizacao(atual : Usuario, xp : int, moedas : int, nivel : int) : string
+    + AtualizarAsync(...) : Task<Resultado<Usuario>>
+  }
+
+  interface IConteudoService {
+    + ListarFasesAsync() : Task<List<Fase>>
+    + ListarFlashcardsAsync(codigoFase : string) : Task<List<Flashcard>>
+    + CriarFlashcardAsync(...) : Task<Resultado<Flashcard>>
+    + ListarQuestoesAsync() : Task<List<QuestaoDto>>
+  }
+  class ConteudoService
+
+  class "Resultado<T>" as Resultado <<record>> {
+    + Valor : T [0..1]
+    + Falha : TipoFalha [0..1]
+    + Mensagem : string
+    + Sucesso : bool
+  }
+  enum TipoFalha {
+    Invalido
+    NaoEncontrado
+    NaoAutorizado
+  }
+}
+
+package "Serviços de apoio (algoritmo, segurança e carga inicial)" {
+  interface ISm2Engine {
+    + Calcular(progresso : ProgressoFlashcard, qualidade : int) : void
+  }
+  class Sm2Engine {
+    + Calcular(progresso : ProgressoFlashcard, qualidade : int) : void
+  }
+
+  interface IPoliticaDeSenha {
+    + Validar(senha : string, nickname : string, email : string) : IReadOnlyList<string>
+  }
+  class PoliticaDeSenha {
+    + TamanhoMinimo : int = 8 {readOnly}
+    + TamanhoMaximo : int = 72 {readOnly}
+    + Validar(senha : string, nickname : string, email : string) : IReadOnlyList<string>
+    - UsaDadosPessoais(senha : string, nickname : string, email : string) : bool
+    + {static} Mensagem(faltando : IReadOnlyList<string>) : string
+  }
+
+  class PoliticaDeCors {
+    - _origens : HashSet<string>
+    - _previews : List<Regex>
+    + PoliticaDeCors(origens : string, padroesDePreview : string)
+    + Permite(origem : string) : bool
+  }
+
+  interface IDatabaseSeeder {
+    + SeedAsync(db : AppDbContext) : Task
+  }
+  class DatabaseSeeder {
+    - _etapas : IEnumerable<IEtapaSeed>
+    + SeedAsync(db : AppDbContext) : Task
+  }
+
+  interface IEtapaSeed {
+    + Nome : string
+    + ExecutarAsync(db : AppDbContext) : Task<int>
+  }
+  class ConteudoSeeder {
+    + Nome : string
+    + ExecutarAsync(db : AppDbContext) : Task<int>
+  }
+  class SimuladoSeeder {
+    + Nome : string
+    + ExecutarAsync(db : AppDbContext) : Task<int>
+  }
+}
+
+package "Dados (persistência)" {
+  class AppDbContext {
+    + Usuarios : DbSet<Usuario>
+    + Fases : DbSet<Fase>
+    + Flashcards : DbSet<Flashcard>
+    + Progresso_Flashcards : DbSet<ProgressoFlashcard>
+    + AreasConhecimento : DbSet<AreaConhecimento>
+    + Provas : DbSet<Prova>
+    + Questoes : DbSet<Questao>
+    + Alternativas : DbSet<Alternativa>
+    # OnModelCreating(builder : ModelBuilder) : void
+  }
+  class ConexaoBanco <<static>> {
+    + LocalPadrao : string {readOnly}
+    + Resolver(config : IConfiguration) : string
+    + Normalizar(bruta : string) : string
+  }
+  class DbContext <<EF Core>>
+}
+
+' --- Herança e realização (POO) ---
+DbContext <|-- AppDbContext
+IAuthService <|.. AuthService
+IProgressoService <|.. ProgressoService
+IGamificacaoService <|.. GamificacaoService
+IConteudoService <|.. ConteudoService
+Resultado --> TipoFalha
+ISm2Engine <|.. Sm2Engine
+IPoliticaDeSenha <|.. PoliticaDeSenha
+IDatabaseSeeder <|.. DatabaseSeeder
+IEtapaSeed <|.. ConteudoSeeder
+IEtapaSeed <|.. SimuladoSeeder
+
+' --- Dependências entre camadas (injeção de dependência) ---
+EndpointExtensions ..> IAuthService : <<usa>>
+EndpointExtensions ..> IProgressoService : <<usa>>
+EndpointExtensions ..> IGamificacaoService : <<usa>>
+EndpointExtensions ..> IConteudoService : <<usa>>
+EndpointExtensions ..> Resultado : traduz em HTTP
+AuthService ..> IPoliticaDeSenha : <<usa>>
+ProgressoService ..> ISm2Engine : <<usa>>
+AuthService ..> AppDbContext
+ProgressoService ..> AppDbContext
+GamificacaoService ..> AppDbContext
+ConteudoService ..> AppDbContext
+DatabaseSeeder o-- "1..*" IEtapaSeed : executa >
+ConexaoBanco ..> AppDbContext : fornece connection string
+
+' --- Layout: camadas empilhadas de cima para baixo ---
+EndpointExtensions -[hidden]down- IGamificacaoService
+GamificacaoService -[hidden]down- ISm2Engine
+
+note bottom of Sm2Engine
+  Algoritmo SM-2 (repetição espaçada):
+  qualidade >= 3 → intervalo 1, 6, depois × fator
+  qualidade < 3  → reinicia (intervalo = 1, fator - 0.2, mín. 1.3)
+end note
+
+note bottom of IEtapaSeed
+  Polimorfismo: DatabaseSeeder percorre
+  as etapas sem conhecer a classe concreta
+  (Open/Closed — nova etapa = nova classe).
+end note
+@enduml
