@@ -1,331 +1,135 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Linq;
-using System.Text.RegularExpressions;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using NexTI_API.Data;
-using NexTI_API.Models;
 using NexTI_API.Services;
 
 namespace NexTI_API.Endpoints
 {
+    /// <summary>
+    /// Camada de apresentação: só HTTP. Lê a requisição e o token, chama o serviço
+    /// e traduz o resultado em status code. Regra de negócio e banco ficam em Services.
+    /// </summary>
     public static class EndpointExtensions
     {
         /// <summary>Nome da política de rate limiting de login/cadastro (registrada no Program.cs).</summary>
         public const string PoliticaDeAutenticacao = "autenticacao";
 
-        private static readonly Regex NicknameValido = new(@"^[\p{L}\p{N}_.\-]{3,30}$", RegexOptions.Compiled);
-        private static readonly Regex EmailValido = new(@"^[^\s@]+@[^\s@]+\.[^\s@]{2,}$", RegexOptions.Compiled);
-
         /// <summary>O usuário autenticado é o dono do recurso pedido na rota?</summary>
         public static bool EhOProprioUsuario(ClaimsPrincipal usuario, string username) =>
             string.Equals(usuario.FindFirst(ClaimTypes.Name)?.Value, username, StringComparison.Ordinal);
 
-        public static void MapNexTiEndpoints(this IEndpointRouteBuilder app, byte[] key)
+        /// <summary>Id do usuário autenticado, lido do token; null se ausente ou inválido.</summary>
+        public static int? IdDoUsuario(ClaimsPrincipal usuario) =>
+            int.TryParse(usuario.FindFirst(ClaimTypes.NameIdentifier)?.Value, out var id) ? id : null;
+
+        /// <summary>Traduz a falha de um serviço no status HTTP correspondente.</summary>
+        public static IResult ParaHttp<T>(Resultado<T> resultado, Func<T, IResult> sucesso) => resultado.Falha switch
+        {
+            null => sucesso(resultado.Valor!),
+            TipoFalha.NaoEncontrado => Results.NotFound(new { message = resultado.Mensagem }),
+            TipoFalha.NaoAutorizado => Results.Unauthorized(),
+            _ => Results.BadRequest(new { message = resultado.Mensagem })
+        };
+
+        public static void MapNexTiEndpoints(this IEndpointRouteBuilder app)
         {
             // Status Route
-            app.MapGet("/api/status", () => Results.Ok(new { 
+            app.MapGet("/api/status", () => Results.Ok(new {
                 status = "online",
                 message = "NexTI API está online e conectada!",
                 timestamp = DateTime.UtcNow
             })).WithName("GetStatus");
 
             // --- AUTENTICAÇÃO ---
-            app.MapPost("/api/auth/register", async (RegisterRequest request, AppDbContext db, IPoliticaDeSenha politica) =>
-            {
-                if (string.IsNullOrWhiteSpace(request.Username) || string.IsNullOrWhiteSpace(request.Password))
-                    return Results.BadRequest(new { message = "Username e senha são obrigatórios." });
+            app.MapPost("/api/auth/register", async (RegisterRequest request, IAuthService auth) =>
+                ParaHttp(await auth.CadastrarAsync(request.Username, request.Email, request.Password),
+                    usuario => Results.Ok(new { message = "Usuário criado com sucesso!", userId = usuario.Id }))
+            ).RequireRateLimiting(PoliticaDeAutenticacao);
 
-                var username = request.Username.Trim();
-                var email = (request.Email ?? string.Empty).Trim();
-
-                if (!NicknameValido.IsMatch(username))
-                    return Results.BadRequest(new { message = "O nickname deve ter de 3 a 30 caracteres: letras, números, ponto, hífen ou sublinhado." });
-                if (!EmailValido.IsMatch(email) || email.Length > 100)
-                    return Results.BadRequest(new { message = "Informe um e-mail válido." });
-
-                var faltando = politica.Validar(request.Password, username, email);
-                if (faltando.Count > 0)
-                    return Results.BadRequest(new { message = PoliticaDeSenha.Mensagem(faltando) });
-
-                // Compara com os valores já normalizados — os mesmos que serão gravados.
-                if (await db.Usuarios.AnyAsync(u => u.Username == username))
-                    return Results.BadRequest(new { message = "Este nickname já está em uso." });
-                if (await db.Usuarios.AnyAsync(u => u.Email == email))
-                    return Results.BadRequest(new { message = "Este e-mail já está cadastrado." });
-
-                var user = new Usuario
-                {
-                    Username = username,
-                    Email = email,
-                    SenhaHash = BCrypt.Net.BCrypt.HashPassword(request.Password)
-                };
-
-                db.Usuarios.Add(user);
-                await db.SaveChangesAsync();
-
-                return Results.Ok(new { message = "Usuário criado com sucesso!", userId = user.Id });
-            }).RequireRateLimiting(PoliticaDeAutenticacao);
-
-            app.MapPost("/api/auth/login", async (LoginRequest request, AppDbContext db) =>
-            {
-                if (string.IsNullOrWhiteSpace(request.Username) || string.IsNullOrWhiteSpace(request.Password))
-                    return Results.BadRequest(new { message = "Credenciais não informadas." });
-
-                var search = request.Username.Trim();
-                var user = await db.Usuarios.FirstOrDefaultAsync(u => u.Username == search || u.Email == search);
-                if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.SenhaHash))
-                    return Results.Unauthorized();
-
-                // Geração do Token JWT
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var tokenDescriptor = new SecurityTokenDescriptor
-                {
-                    Subject = new ClaimsIdentity(new[] { 
-                        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                        new Claim(ClaimTypes.Name, user.Username)
-                    }),
-                    Issuer = "NexTI_API",
-                    Audience = "NexTI_Frontend",
-                    Expires = DateTime.UtcNow.AddHours(24),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-                };
-                var token = tokenHandler.CreateToken(tokenDescriptor);
-                var tokenString = tokenHandler.WriteToken(token);
-
-                return Results.Ok(new { 
-                    token = tokenString,
-                    user = new { 
-                        id = user.Id, 
-                        username = user.Username, 
-                        nivel = user.Nivel, 
-                        xp = user.XP, 
-                        moedas = user.Moedas
-                    }
-                });
-            }).RequireRateLimiting(PoliticaDeAutenticacao);
+            app.MapPost("/api/auth/login", async (LoginRequest request, IAuthService auth) =>
+                ParaHttp(await auth.EntrarAsync(request.Username, request.Password),
+                    sessao => Results.Ok(new {
+                        token = sessao.Token,
+                        user = new {
+                            id = sessao.Usuario.Id,
+                            username = sessao.Usuario.Username,
+                            nivel = sessao.Usuario.Nivel,
+                            xp = sessao.Usuario.XP,
+                            moedas = sessao.Usuario.Moedas
+                        }
+                    }))
+            ).RequireRateLimiting(PoliticaDeAutenticacao);
 
             // --- USUÁRIOS ---
             // Só o próprio aluno lê os próprios dados: o nome do token tem de bater com a rota.
-            app.MapGet("/api/usuarios/{username}", async (string username, AppDbContext db, ClaimsPrincipal userClaims) =>
+            app.MapGet("/api/usuarios/{username}", async (string username, IGamificacaoService gamificacao, ClaimsPrincipal userClaims) =>
             {
                 if (!EhOProprioUsuario(userClaims, username)) return Results.Forbid();
 
-                var user = await db.Usuarios
-                    .Where(u => u.Username == username)
-                    .Select(u => new { u.Id, u.Username, u.Nivel, u.XP, u.Moedas })
-                    .FirstOrDefaultAsync();
-                    
-                return user is not null ? Results.Ok(user) : Results.NotFound(new { message = "Usuário não encontrado" });
+                var perfil = await gamificacao.PerfilAsync(username);
+                return perfil is not null ? Results.Ok(perfil) : Results.NotFound(new { message = "Usuário não encontrado" });
             }).RequireAuthorization();
 
             // --- FASES ---
-            app.MapGet("/api/fases", async (AppDbContext db) =>
-            {
-                var fases = await db.Fases.ToListAsync();
-                return Results.Ok(fases);
-            });
+            app.MapGet("/api/fases", async (IConteudoService conteudo) => Results.Ok(await conteudo.ListarFasesAsync()));
 
             // --- FLASHCARDS ---
-            app.MapGet("/api/fases/{codigoFase}/flashcards", async (string codigoFase, AppDbContext db) =>
-            {
-                var flashcards = await db.Flashcards.Where(f => f.CodigoFase == codigoFase).ToListAsync();
-                return Results.Ok(flashcards);
-            });
+            app.MapGet("/api/fases/{codigoFase}/flashcards", async (string codigoFase, IConteudoService conteudo) =>
+                Results.Ok(await conteudo.ListarFlashcardsAsync(codigoFase)));
 
             // Criar Novo Flashcard (Protegido por JWT)
-            app.MapPost("/api/flashcards", async (NovoFlashcardRequest request, AppDbContext db, ClaimsPrincipal userClaims) =>
+            app.MapPost("/api/flashcards", async (NovoFlashcardRequest request, IConteudoService conteudo, ClaimsPrincipal userClaims) =>
             {
-                var userIdClaim = userClaims.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                if (string.IsNullOrEmpty(userIdClaim)) return Results.Unauthorized();
+                if (string.IsNullOrEmpty(userClaims.FindFirst(ClaimTypes.NameIdentifier)?.Value)) return Results.Unauthorized();
 
-                if (string.IsNullOrWhiteSpace(request.CodigoFase) || string.IsNullOrWhiteSpace(request.Frente) || string.IsNullOrWhiteSpace(request.Verso))
-                {
-                    return Results.BadRequest(new { message = "Fase, Frente e Verso são campos obrigatórios." });
-                }
-
-                // Verifica se a fase existe
-                var faseExiste = await db.Fases.AnyAsync(f => f.CodigoFase == request.CodigoFase);
-                if (!faseExiste)
-                {
-                    return Results.BadRequest(new { message = $"A disciplina '{request.CodigoFase}' não foi encontrada." });
-                }
-
-                var flashcard = new Flashcard
-                {
-                    CodigoFase = request.CodigoFase.Trim().ToLower(),
-                    Frente = request.Frente.Trim(),
-                    Verso = request.Verso.Trim(),
-                    Dica = string.IsNullOrWhiteSpace(request.Dica) ? null : request.Dica.Trim()
-                };
-
-                db.Flashcards.Add(flashcard);
-                await db.SaveChangesAsync();
-
-                return Results.Created($"/api/fases/{flashcard.CodigoFase}/flashcards", flashcard);
+                return ParaHttp(await conteudo.CriarFlashcardAsync(request.CodigoFase, request.Frente, request.Verso, request.Dica),
+                    flashcard => Results.Created($"/api/fases/{flashcard.CodigoFase}/flashcards", flashcard));
             }).RequireAuthorization();
 
             // --- SM-2 PROGRESSO (PROTEGIDO) ---
-            app.MapGet("/api/progresso/usuario", async (AppDbContext db, ClaimsPrincipal userClaims) =>
+            app.MapGet("/api/progresso/usuario", async (IProgressoService progresso, ClaimsPrincipal userClaims) =>
             {
-                var userIdClaim = userClaims.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int currentUserId))
-                    return Results.Unauthorized();
+                if (IdDoUsuario(userClaims) is not int currentUserId) return Results.Unauthorized();
 
-                var progressos = await db.Progresso_Flashcards
-                    .Where(p => p.UsuarioId == currentUserId)
-                    .Join(db.Flashcards,
-                          p => p.FlashcardId,
-                          f => f.Id,
-                          (p, f) => new {
-                              p.FlashcardId,
-                              f.Frente,
-                              f.CodigoFase,
-                              p.Repeticoes,
-                              p.IntervaloDias,
-                              p.FatorFacilidade,
-                              p.DataProximaRevisao
-                          })
-                    .ToListAsync();
-
-                return Results.Ok(progressos);
+                return Results.Ok(await progresso.ListarAsync(currentUserId));
             }).RequireAuthorization();
 
-            app.MapPost("/api/progresso/atualizar", async (ProgressoUpdate request, AppDbContext db, ClaimsPrincipal userClaims, ISm2Engine sm2Engine) =>
+            app.MapPost("/api/progresso/atualizar", async (ProgressoUpdate request, IProgressoService progresso, ClaimsPrincipal userClaims) =>
             {
-                var userIdClaim = userClaims.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int currentUserId))
-                    return Results.Unauthorized();
-                
+                if (IdDoUsuario(userClaims) is not int currentUserId) return Results.Unauthorized();
                 if (request.UsuarioId > 0 && currentUserId != request.UsuarioId) return Results.Forbid();
 
-                var progresso = await db.Progresso_Flashcards.FindAsync(currentUserId, request.FlashcardId);
-                
-                if (progresso == null)
-                {
-                    progresso = new ProgressoFlashcard { 
-                        UsuarioId = currentUserId, 
-                        FlashcardId = request.FlashcardId,
-                        FatorFacilidade = 2.5
-                    };
-                    db.Progresso_Flashcards.Add(progresso);
-                }
-
-                // Inversão de dependência para aplicar cálculo do SM-2 (DIP)
-                sm2Engine.Calcular(progresso, request.Qualidade);
-
-                await db.SaveChangesAsync();
-
-                return Results.Ok(progresso);
+                return Results.Ok(await progresso.RegistrarRespostaAsync(currentUserId, request.FlashcardId, request.Qualidade));
             }).RequireAuthorization();
 
             // Estatísticas Detalhadas do Usuário
-            app.MapGet("/api/usuarios/{username}/stats-detalhadas", async (string username, AppDbContext db, ClaimsPrincipal userClaims) =>
+            app.MapGet("/api/usuarios/{username}/stats-detalhadas", async (string username, IProgressoService progresso, ClaimsPrincipal userClaims) =>
             {
                 if (!EhOProprioUsuario(userClaims, username)) return Results.Forbid();
 
-                var user = await db.Usuarios
-                    .Include(u => u.Progressos)
-                    .FirstOrDefaultAsync(u => u.Username == username);
-
-                if (user == null) return Results.NotFound(new { message = "Usuário não encontrado" });
-
-                var hoje = DateTime.UtcNow.Date;
-                var totalEstudados = user.Progressos.Count;
-                var cartasMaduras = user.Progressos.Count(p => p.IntervaloDias >= 21);
-                var cartasEmAprendizado = user.Progressos.Count(p => p.IntervaloDias < 21);
-                var cartasDevidasHoje = user.Progressos.Count(p => p.DataProximaRevisao <= hoje);
-                var facilidadeMedia = user.Progressos.Any() ? user.Progressos.Average(p => p.FatorFacilidade) : 2.5;
-
-                return Results.Ok(new
-                {
-                    user.Id,
-                    user.Username,
-                    user.Nivel,
-                    user.XP,
-                    user.Moedas,
-                    TotalEstudados = totalEstudados,
-                    CartasMaduras = cartasMaduras,
-                    CartasEmAprendizado = cartasEmAprendizado,
-                    CartasDevidasHoje = cartasDevidasHoje,
-                    FacilidadeMedia = Math.Round(facilidadeMedia, 2)
-                });
+                return ParaHttp(await progresso.EstatisticasAsync(username), Results.Ok);
             }).RequireAuthorization();
 
             // --- ATUALIZAR ESTATÍSTICAS DO USUÁRIO (PROTEGIDO) ---
-            app.MapPut("/api/usuarios/stats", async (UserStatsUpdate request, AppDbContext db, ClaimsPrincipal userClaims) =>
+            app.MapPut("/api/usuarios/stats", async (UserStatsUpdate request, IGamificacaoService gamificacao, ClaimsPrincipal userClaims) =>
             {
-                var userIdClaim = userClaims.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                if (string.IsNullOrEmpty(userIdClaim)) return Results.Unauthorized();
-                
-                if (!int.TryParse(userIdClaim, out int currentUserId))
+                if (string.IsNullOrEmpty(userClaims.FindFirst(ClaimTypes.NameIdentifier)?.Value)) return Results.Unauthorized();
+                if (IdDoUsuario(userClaims) is not int currentUserId)
                     return Results.BadRequest(new { message = "Identificador de usuário inválido no token." });
-                var user = await db.Usuarios.FindAsync(currentUserId);
-                if (user == null) return Results.NotFound(new { message = "Usuário não encontrado" });
-                
-                if (request.XP < user.XP) return Results.BadRequest(new { message = "O progresso de XP não pode diminuir." });
-                if (request.Nivel < user.Nivel) return Results.BadRequest(new { message = "O nível não pode diminuir." });
-                
-                int xpDelta = request.XP - user.XP;
-                if (xpDelta > 200) return Results.BadRequest(new { message = "Incremento de XP suspeito detectado." });
-                
-                int moedasDelta = request.Moedas - user.Moedas;
-                if (moedasDelta > 200) return Results.BadRequest(new { message = "Incremento de Moedas suspeito detectado." });
 
-                user.XP = request.XP;
-                user.Moedas = request.Moedas;
-                user.Nivel = request.Nivel;
-                
-                await db.SaveChangesAsync();
-                return Results.Ok(new { message = "Estatísticas atualizadas!", xp = user.XP, moedas = user.Moedas, nivel = user.Nivel });
+                return ParaHttp(await gamificacao.AtualizarAsync(currentUserId, request.XP, request.Moedas, request.Nivel),
+                    usuario => Results.Ok(new { message = "Estatísticas atualizadas!", xp = usuario.XP, moedas = usuario.Moedas, nivel = usuario.Nivel }));
             }).RequireAuthorization();
 
             // --- SIMULADOS (UML PIM IV) ---
-            app.MapGet("/api/simulados/areas", async (AppDbContext db) =>
-            {
-                var areas = await db.AreasConhecimento.ToListAsync();
-                return Results.Ok(areas);
-            });
+            app.MapGet("/api/simulados/areas", async (IConteudoService conteudo) => Results.Ok(await conteudo.ListarAreasAsync()));
 
-            app.MapGet("/api/simulados/questoes", async (AppDbContext db) =>
-            {
-                var questoes = await db.Questoes
-                    .Include(q => q.Alternativas)
-                    .Select(q => new {
-                        q.Id,
-                        q.IdArea,
-                        q.Enunciado,
-                        q.Origem,
-                        Alternativas = q.Alternativas.Select(a => new { a.Id, a.Texto, a.IsCorreta })
-                    })
-                    .ToListAsync();
-                return Results.Ok(questoes);
-            });
+            app.MapGet("/api/simulados/questoes", async (IConteudoService conteudo) => Results.Ok(await conteudo.ListarQuestoesAsync()));
 
             // --- ESTATÍSTICAS GERAIS E LEADERBOARD ---
-            app.MapGet("/api/estatisticas/resumo", async (AppDbContext db) =>
-            {
-                var totalCards = await db.Flashcards.CountAsync();
-                var totalUsuarios = await db.Usuarios.CountAsync();
-                var topAlunos = await db.Usuarios
-                    .OrderByDescending(u => u.XP)
-                    .Take(5)
-                    .Select(u => new { u.Username, u.XP, u.Nivel, u.Moedas })
-                    .ToListAsync();
-
-                return Results.Ok(new {
-                    totalCards,
-                    totalUsuarios,
-                    topAlunos
-                });
-            });
+            app.MapGet("/api/estatisticas/resumo", async (IGamificacaoService gamificacao) => Results.Ok(await gamificacao.ResumoAsync()));
         }
     }
 

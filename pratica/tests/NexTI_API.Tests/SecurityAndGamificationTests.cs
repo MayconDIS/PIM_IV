@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using NexTI_API.Endpoints;
+using NexTI_API.Models;
 using NexTI_API.Services;
 using Xunit;
 
@@ -60,25 +61,29 @@ namespace NexTI_API.Tests
         [Fact]
         public void Gamificacao_ValidacaoDeDelta_DeveDetectarIncrementoSuspeito()
         {
-            int xpAnterior = 100;
-            int xpNovoInvalido = 400; // Delta de 300 (> 200 permitido por requisição)
-            int xpDelta = xpNovoInvalido - xpAnterior;
+            var atual = new Usuario { XP = 100, Moedas = 10, Nivel = 1 };
 
-            bool isSuspeito = xpDelta > 200;
-
-            Assert.True(isSuspeito);
+            // Delta de 300 (> 200 permitido por requisição)
+            Assert.Equal("Incremento de XP suspeito detectado.", GamificacaoService.ValidarAtualizacao(atual, 400, 10, 1));
+            Assert.Equal("Incremento de Moedas suspeito detectado.", GamificacaoService.ValidarAtualizacao(atual, 100, 211, 1));
         }
 
         [Fact]
         public void Gamificacao_ValidacaoDeDelta_DevePermitirIncrementoValido()
         {
-            int xpAnterior = 100;
-            int xpNovoValido = 150; // Delta de 50
-            int xpDelta = xpNovoValido - xpAnterior;
+            var atual = new Usuario { XP = 100, Moedas = 10, Nivel = 1 };
 
-            bool isSuspeito = xpDelta > 200;
+            Assert.Null(GamificacaoService.ValidarAtualizacao(atual, 150, 60, 2));
+            Assert.Null(GamificacaoService.ValidarAtualizacao(atual, 100 + GamificacaoService.IncrementoMaximo, 10, 1));
+        }
 
-            Assert.False(isSuspeito);
+        [Fact]
+        public void Gamificacao_XpENivelNaoPodemDiminuir()
+        {
+            var atual = new Usuario { XP = 100, Moedas = 10, Nivel = 3 };
+
+            Assert.Equal("O progresso de XP não pode diminuir.", GamificacaoService.ValidarAtualizacao(atual, 99, 10, 3));
+            Assert.Equal("O nível não pode diminuir.", GamificacaoService.ValidarAtualizacao(atual, 100, 10, 2));
         }
     }
 }

@@ -51,9 +51,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(key),
             ValidateIssuer = true,
-            ValidIssuer = "NexTI_API",
+            ValidIssuer = AuthService.Emissor,
             ValidateAudience = true,
-            ValidAudience = "NexTI_Frontend"
+            ValidAudience = AuthService.Publico
         };
     });
 
@@ -62,6 +62,13 @@ builder.Services.AddAuthorization();
 // Injeção de Dependências Customizadas (SOLID - SRP / DIP)
 builder.Services.AddSingleton<ISm2Engine, Sm2Engine>();
 builder.Services.AddSingleton<IPoliticaDeSenha, PoliticaDeSenha>();
+builder.Services.AddSingleton(new ChaveJwt(key));
+
+// Camada de serviços: regra de negócio fora dos endpoints (um por requisição, como o DbContext).
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IProgressoService, ProgressoService>();
+builder.Services.AddScoped<IGamificacaoService, GamificacaoService>();
+builder.Services.AddScoped<IConteudoService, ConteudoService>();
 
 // Login e cadastro: 30 tentativas por minuto por IP (força bruta / criação em massa).
 // Não é menor porque uma turma inteira sai pelo mesmo IP do Wi-Fi da faculdade.
@@ -121,7 +128,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 // Registro Modular de Endpoints (SOLID - SRP)
-app.MapNexTiEndpoints(key);
+app.MapNexTiEndpoints();
 
 // Aplica as migrations pendentes e povoa o banco (idempotente).
 // Desative com Database__MigrarAoIniciar=false se o schema for gerenciado fora da API.
