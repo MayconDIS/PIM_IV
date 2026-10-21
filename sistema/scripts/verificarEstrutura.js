@@ -38,9 +38,9 @@ const caminhosObrigatorios = [
     'packages/shared/src/confetti.js',
     'packages/shared/css/dashboard.css',
     'scripts/gerar-semente-api.mjs',
-    'design-dna/style.css',
-    'design-dna/paleta.json',
-    'design-dna/diretrizes.md',
+    'packages/design-dna/style.css',
+    'packages/design-dna/paleta.json',
+    'packages/design-dna/diretrizes.md',
     // Database & Docs
     'database/NexTI_DB.sql',
     'docs/MANUAL_DE_EXECUCAO.md',

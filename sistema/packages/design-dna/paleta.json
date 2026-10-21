@@ -1,43 +1,44 @@
 {
+  "fonte": "sistema/packages/shared/css/global.css e dashboard.css",
   "theme": "dark",
   "colors": {
     "background": {
       "main": "#0b0c10",
       "card": "#161b22",
-      "card_header": "#18181c"
+      "input": "#0d1117"
     },
     "borders": {
-      "default": "rgba(255, 255, 255, 0.05)",
-      "accent_olive": "rgba(168, 184, 101, 0.25)"
+      "default": "#30363d"
+    },
+    "text": {
+      "main": "#c5c6c7",
+      "muted": "#8b92a5",
+      "dim": "#6e7681",
+      "strong": "#ffffff"
     },
     "brand": {
-      "olive_text": "#a8b865",
-      "olive_bg": "#353822",
-      "gold": "#c9b177",
-      "gold_dim": "rgba(201, 177, 119, 0.6)",
-      "cyan": "#00e6e6"
+      "cyan": "#00e6e6",
+      "green": "#00ff88",
+      "purple": "#8a2be2"
+    },
+    "status": {
+      "success": "#00ff88",
+      "error": "#ff5555",
+      "coins": "#ffd700",
+      "info": "#2f81f7"
     },
     "glows": {
-      "purple": "rgba(168, 85, 247, 0.15)",
-      "cyan": "rgba(0, 230, 230, 0.11)"
+      "cyan": "rgba(0, 230, 230, 0.4)",
+      "purple": "rgba(138, 43, 226, 0.15)"
     },
-    "accents": {
-      "success": "#00ff88",
-      "success_dark": "#84cc16",
-      "purple": "#8a2be2",
-      "purple_light": "#c084fc",
-      "blue": "#2f81f7",
-      "blue_light": "#60a5fa",
-      "warning": "#f59e0b",
-      "warning_light": "#fbbf24",
-      "danger": "#f43f5e",
-      "danger_light": "#fb7185",
-      "muted": "#8c8c96",
-      "dark_muted": "#585860"
+    "high_contrast": {
+      "accent": "#ffff00",
+      "background": "#000000"
     }
   },
   "typography": {
-    "serif": "Lora, serif",
+    "brand": "Orbitron, sans-serif",
+    "title": "Space Grotesk, sans-serif",
     "sans": "Inter, sans-serif",
     "mono": "Fira Code, monospace"
   }

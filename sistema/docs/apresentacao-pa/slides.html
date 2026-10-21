@@ -14,33 +14,36 @@
     -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700&family=Orbitron:wght@700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <style>
-        /* Cores do Nex_TI (design-dna/paleta.json), escurecidas onde o texto cai no
-           papel branco: o oliva #a8b865 do app não tem contraste sobre fundo claro. */
+        /* Cores e fontes do site (packages/shared/css/global.css e dashboard.css),
+           as mesmas de relatorio/design_DNA: fundo escuro, ciano de acento,
+           verde para destaque e roxo no brilho de fundo. */
         :root {
-            --nx-primary: #5f6f24;
-            --nx-primary-2: #8a9a3f;
-            --nx-grad: linear-gradient(135deg, #5f6f24 0%, #8a9a3f 100%);
-            --nx-gold: #8c6d2c;
-            --nx-ink: #161b22;
-            --nx-txt-2: #555c68;
-            --nx-txt-3: #8c8c96;
-            --nx-paper: #fbfbf8;
-            --nx-card: #ffffff;
-            --nx-card-2: #f3f4ee;
-            --nx-border: #e1e3db;
-            --nx-code: #0b6e75;
+            --nx-primary: #00e6e6;
+            --nx-green: #00ff88;
+            --nx-purple: #8a2be2;
+            --nx-grad: linear-gradient(90deg, #00e6e6 0%, #00ff88 100%);
+            --nx-ink: #ffffff;
+            --nx-txt-2: #c5c6c7;
+            --nx-txt-3: #8b92a5;
+            --nx-paper: #0b0c10;
+            --nx-card: #161b22;
+            --nx-card-2: rgba(0, 230, 230, 0.07);
+            --nx-border: #30363d;
+            --nx-rule: rgba(0, 230, 230, 0.45);
+            --nx-code: #00ff88;
             --nx-font: 'Inter', system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
             --nx-title: 'Space Grotesk', 'Inter', Arial, sans-serif;
+            --nx-brand: 'Orbitron', 'Space Grotesk', Arial, sans-serif;
             --nx-mono: 'Fira Code', Consolas, monospace;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* Na tela: o fundo escuro do app em volta das folhas. */
+        /* Na tela: fundo mais escuro que as folhas, para separar um slide do outro. */
         body {
-            background: radial-gradient(1100px 620px at 12% -5%, rgba(168, 184, 101, 0.25), transparent 62%), #0b0c10;
+            background: #050608;
             background-attachment: fixed;
             font-family: var(--nx-font);
             color: var(--nx-ink);
@@ -56,7 +59,12 @@
             position: relative;
             width: 297mm;
             height: 210mm;
-            background: var(--nx-paper);
+            /* Os dois brilhos do app: roxo à esquerda, ciano à direita. */
+            background:
+                radial-gradient(160mm 110mm at 0% 0%, rgba(138, 43, 226, 0.16), transparent 70%),
+                radial-gradient(160mm 110mm at 100% 100%, rgba(0, 230, 230, 0.10), transparent 70%),
+                var(--nx-paper);
+            color: var(--nx-ink);
             padding: 12mm 16mm 14mm;
             display: flex;
             flex-direction: column;
@@ -66,15 +74,15 @@
         }
 
         .slide-header {
-            border-bottom: 2.5px solid var(--nx-ink);
+            border-bottom: 2px solid var(--nx-rule);
             padding-bottom: 2.5mm;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         .slide-tag {
-            background: var(--nx-grad);
-            color: #ffffff;
+            background: var(--nx-primary);
+            color: #0b0c10;
             font-size: 8pt;
             font-weight: 700;
             letter-spacing: 0.1em;
@@ -148,11 +156,11 @@
         .diagrama .lado b { color: var(--nx-ink); }
         .diagrama ol { padding-left: 5mm; display: flex; flex-direction: column; gap: 2mm; }
 
-        .numero { font-family: var(--nx-title); font-size: 34pt; font-weight: 700; color: var(--nx-gold); line-height: 1; }
+        .numero { font-family: var(--nx-brand); font-size: 32pt; font-weight: 900; color: var(--nx-primary); line-height: 1; text-shadow: 0 0 12px rgba(0, 230, 230, 0.4); }
         .numero + p { font-size: 10.5pt; color: var(--nx-txt-2); margin-top: 1mm; }
 
         table { width: 100%; border-collapse: collapse; font-size: 11pt; }
-        th { text-align: left; font-size: 9pt; text-transform: uppercase; letter-spacing: 0.06em; color: var(--nx-txt-2); padding: 2mm 3mm; border-bottom: 2px solid var(--nx-ink); }
+        th { text-align: left; font-size: 9pt; text-transform: uppercase; letter-spacing: 0.06em; color: var(--nx-txt-2); padding: 2mm 3mm; border-bottom: 2px solid var(--nx-rule); }
         td { padding: 2.2mm 3mm; border-bottom: 1px solid var(--nx-border); color: var(--nx-txt-2); }
         td:first-child { width: 45%; }
 
@@ -174,12 +182,12 @@
 
         /* Capa e encerramento */
         .capa .slide-body { align-items: center; text-align: center; }
-        .capa h1 { font-family: var(--nx-title); font-size: 54pt; font-weight: 700; letter-spacing: -0.03em; line-height: 1; }
-        .capa h1 span { color: var(--nx-primary-2); }
+        .capa h1 { font-family: var(--nx-brand); font-size: 50pt; font-weight: 900; letter-spacing: 0.02em; line-height: 1; }
+        .capa h1 span { color: var(--nx-primary); text-shadow: 0 0 14px rgba(0, 230, 230, 0.45); }
         .capa .regua { width: 50mm; height: 4px; background: var(--nx-grad); border-radius: 2px; }
         .capa .equipe { font-size: 11pt; line-height: 1.6; }
         .capa .equipe span { color: var(--nx-txt-2); }
-        .selo { background: var(--nx-ink); color: #ffffff; font-size: 9pt; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 2mm 5mm; border-radius: 4px; }
+        .selo { background: var(--nx-card); border: 1px solid var(--nx-rule); color: var(--nx-primary); font-size: 9pt; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 2mm 5mm; border-radius: 4px; }
 
         /* No papel: uma folha por slide, sem a moldura da tela. */
         @page { size: A4 landscape; margin: 0; }
@@ -201,7 +209,7 @@
     </div>
     <div class="slide-body">
         <span class="selo">Plataforma de estudo com flashcards</span>
-        <h1>Nex<span>_</span>TI</h1>
+        <h1>Nex<span>_TI</span></h1>
         <div class="regua"></div>
         <p class="slide-subtitle">Estudar TI com cartas que voltam na hora certa.</p>
         <p class="equipe"><strong>DevTime</strong><br>

@@ -1,29 +1,32 @@
 /* ==========================================================================
-   Your Project DNA — Estilo Fiel às Imagens Modelo
+   Nex_TI — Design_DNA
+   Cores e fontes tiradas do site (sistema/packages/shared/css/global.css e
+   dashboard.css). Ao mudar uma cor lá, mude aqui e em paleta.json.
    ========================================================================== */
 
 :root {
-    --bg-color: #0b0c10;
-    --card-bg: #161b22;
-    --card-bg-header: #18181c;
-    --border-color: rgba(255, 255, 255, 0.05);
-    
-    /* Cores Específicas do Modelo */
-    --accent-olive-bg: #353822; /* Fundo do add a logo e botões de lápis */
-    --accent-olive-text: #a8b865; /* Texto amarelo-oliva */
-    --accent-gold: #c9b177; /* Cor dourada/amarela das abas */
-    --accent-gold-dim: rgba(201, 177, 119, 0.6);
-    --link-cyan: #00e6e6; /* Cor do link e do círculo ciano */
-    
+    --bg-color: #0b0c10;          /* fundo da página */
+    --card-bg: #161b22;           /* cartões e modais */
+    --card-bg-header: #0d1117;    /* campos e botões de opção */
+    --border-color: #30363d;      /* bordas */
+
+    --link-cyan: #00e6e6;         /* acento principal: links, bordas ativas, brilho */
+    --accent-green: #00ff88;      /* acerto, sucesso, XP */
+    --accent-purple: #8a2be2;     /* acento secundário e brilho de fundo */
+    --accent-gold: #ffd700;       /* moedas */
+    --accent-danger: #ff5555;     /* erro */
+    --accent-bg: rgba(0, 230, 230, 0.1);
+
     /* Tipografia */
-    --font-serif: 'Lora', serif;
+    --font-title: 'Space Grotesk', sans-serif;
+    --font-brand: 'Orbitron', sans-serif;
     --font-sans: 'Inter', sans-serif;
     --font-mono: 'Fira Code', monospace;
-    
+
     /* Textos */
-    --text-main: #e8e8ec;
-    --text-muted: #8c8c96;
-    --text-dark: #585860;
+    --text-main: #c5c6c7;
+    --text-muted: #8b92a5;
+    --text-dark: #6e7681;
 }
 
 /* Reset Geral */
@@ -61,7 +64,7 @@ body {
 .glow-left {
     top: -25vh;
     left: -20vw;
-    background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+    background: radial-gradient(circle, rgba(138, 43, 226, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
     animation: floatGlowLeft 22s infinite alternate ease-in-out;
 }
 
@@ -115,7 +118,7 @@ body {
 }
 
 .dna-title {
-    font-family: var(--font-serif);
+    font-family: var(--font-title);
     font-size: 2.2rem;
     font-weight: 500;
     letter-spacing: 0.5px;
@@ -123,8 +126,8 @@ body {
 }
 
 .italic-serif {
-    font-style: italic;
-    font-family: var(--font-serif);
+    font-family: var(--font-brand);
+    color: var(--link-cyan);
 }
 
 .dna-subtitle {
@@ -258,7 +261,8 @@ body {
 
 .fonts-preview-container {
     display: flex;
-    gap: 4rem;
+    flex-wrap: wrap;
+    gap: 2.5rem;
 }
 
 .font-preview-item {
@@ -281,6 +285,14 @@ body {
     font-family: var(--font-sans);
 }
 
+.font-grotesk {
+    font-family: var(--font-title);
+}
+
+.font-orbitron {
+    font-family: var(--font-brand);
+}
+
 .font-name-sub {
     font-size: 0.75rem;
     color: var(--text-muted);
@@ -294,7 +306,8 @@ body {
 
 .colors-list {
     display: flex;
-    gap: 3rem;
+    flex-wrap: wrap;
+    gap: 2rem;
 }
 
 .color-item {
@@ -317,6 +330,9 @@ body {
 .color-circle.c-00e6e6 { background-color: #00e6e6; }
 .color-circle.c-8a2be2 { background-color: #8a2be2; }
 .color-circle.c-2f81f7 { background-color: #2f81f7; }
+.color-circle.c-ffd700 { background-color: #ffd700; }
+.color-circle.c-ff5555 { background-color: #ff5555; }
+.color-circle.c-c5c6c7 { background-color: #c5c6c7; }
 
 .color-hex-text {
     font-family: var(--font-sans);
@@ -332,7 +348,7 @@ body {
 }
 
 .tagline-text {
-    font-family: var(--font-serif);
+    font-family: var(--font-title);
     font-style: italic;
     font-size: 1.3rem;
     color: var(--link-cyan);
@@ -432,7 +448,7 @@ body {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background-color: var(--accent-olive-bg);
+    background-color: var(--accent-bg);
     border: none;
     outline: none;
     display: flex;
@@ -443,13 +459,13 @@ body {
 }
 
 .edit-btn:hover {
-    background-color: #3b3f27;
+    background-color: rgba(0, 230, 230, 0.2);
     transform: scale(1.05);
 }
 
 .pen-icon {
     font-size: 0.72rem;
-    color: var(--accent-olive-text);
+    color: var(--link-cyan);
 }
 
 

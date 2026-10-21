@@ -2,6 +2,6 @@
   "name": "@nexti/design-dna",
   "version": "2.0.0",
   "description": "Tokens de cores, glassmorphism, paleta neon e design system da Nex_TI",
-  "style": "tokens.css",
+  "style": "style.css",
   "private": true
 }
