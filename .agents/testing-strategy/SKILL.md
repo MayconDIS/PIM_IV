@@ -25,12 +25,12 @@ O objetivo é garantir **confiança no código** através de uma cobertura de te
 ## 📝 Referências Detalhadas Disponíveis
 
 ### Fundamentos de Teste
-* [test-pyramid.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/testing-strategy/references/test-pyramid.md) - Pirâmide de testes (Unit → Integration → E2E), proporções recomendadas e quando usar cada tipo.
-* [naming-and-structure.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/testing-strategy/references/naming-and-structure.md) - Padrão AAA (Arrange-Act-Assert), nomenclatura de métodos de teste e organização de pastas.
+* [test-pyramid.md](references/test-pyramid.md) - Pirâmide de testes (Unit → Integration → E2E), proporções recomendadas e quando usar cada tipo.
+* [naming-and-structure.md](references/naming-and-structure.md) - Padrão AAA (Arrange-Act-Assert), nomenclatura de métodos de teste e organização de pastas.
 
 ### Diretrizes por Linguagem
-* [csharp-xunit.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/testing-strategy/languages/csharp-xunit.md) - Testes com xUnit no .NET 10, mocking com Moq, testes de Minimal APIs com `WebApplicationFactory` e cobertura do SM-2 Engine.
-* [javascript-vanilla.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/testing-strategy/languages/javascript-vanilla.md) - Testes para JavaScript Vanilla sem dependências pesadas, validação de DOM e fluxos de autenticação.
+* [csharp-xunit.md](languages/csharp-xunit.md) - Testes com xUnit no .NET 10, mocking com Moq, testes de Minimal APIs com `WebApplicationFactory` e cobertura do SM-2 Engine.
+* [javascript-vanilla.md](languages/javascript-vanilla.md) - Testes para JavaScript Vanilla sem dependências pesadas, validação de DOM e fluxos de autenticação.
 
 ---
 

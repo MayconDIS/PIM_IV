@@ -20,10 +20,10 @@ repositórios distintos, vivem aqui como pastas de primeiro nível:
 
 ```text
 📁 PIM_IV/
-├── 📁 teorica/     # Monografia ABNT interativa (HTML/CSS), protótipos, cronogramas e atas
-├── 📁 pratica/     # Implementação: frontend, API C# (.NET 10) e scripts SQL Server
-├── 📁 uml/         # Modelagem UML (Astah), diagramas exportados e backlog do produto
-├── 📁 .agents/     # Skills e instruções de agentes de IA, compartilhadas pelas três frentes
+├── 📁 sistema/        # Implementação: frontend, API C# (.NET 10) e scripts SQL Server
+├── 📁 relatorio/      # Monografia ABNT interativa (HTML/CSS), protótipos, cronogramas e atas
+├── 📁 modelagem-uml/  # Modelagem UML (Astah + PlantUML), diagramas exportados e backlog do produto
+├── 📁 .agents/        # Skills e instruções de agentes de IA, compartilhadas pelas três frentes
 ├── 📁 .vscode/     # Configuração do editor para o workspace inteiro
 └── 📄 .gitattributes, .gitignore, LICENSE
 ```
@@ -32,32 +32,56 @@ repositórios distintos, vivem aqui como pastas de primeiro nível:
 
 | Pasta | Conteúdo |
 |---|---|
-| [`teorica/`](teorica) | Relatório ABNT em HTML/CSS, `examples/`, `assets/`, `design_DNA/` e documentação acadêmica |
-| [`pratica/`](pratica) | Monorepo npm: `apps/react-web`, `apps/react-mobile`, `apps/api` (.NET), `packages/`, `database/`, `tests/` |
-| [`uml/`](uml) | `01_Documentacao_Teorica/`, `02_Modelagem_UML/` (fonte `.asta` + PNGs), `03_Codigo_Gerado/` |
+| [`sistema/`](sistema) | Monorepo npm: `apps/react-web`, `apps/react-mobile`, `apps/api` (.NET), `packages/`, `database/`, `tests/` |
+| [`relatorio/`](relatorio) | Relatório ABNT em HTML/CSS, `examples/`, `assets/`, `design_DNA/` e documentação acadêmica |
+| [`modelagem-uml/`](modelagem-uml) | `01_Documentacao_Teorica/`, `02_Modelagem_UML/` (fonte `.asta`, `.puml` e PNGs), `03_Codigo_Gerado/` |
 
-## 🚀 Como executar a parte prática
+## 🚀 Como executar o sistema
 
 ```bash
-cd pratica
+cd sistema
 npm install
-npm start
+npm run dev   # sobe a API (porta 5000) e o site (porta 5501)
 ```
 
-Detalhes de portas, banco de dados e API estão em [`pratica/README.md`](pratica/README.md).
+Detalhes de portas, banco de dados e API estão em [`sistema/README.md`](sistema/README.md).
 
 ## 🧬 Histórico
 
 Este repositório foi formado a partir de três repositórios anteriores, com o histórico de
 commits preservado via `git subtree`:
 
-- `PIM_IV-Parte_Teorica` → `teorica/`
-- `PIM_IV-Parte_Pratica` → `pratica/`
-- `PIM_IV-Documentacao_UML` → `uml/`
+- `PIM_IV-Parte_Teorica` → `relatorio/` (antes `teorica/`)
+- `PIM_IV-Parte_Pratica` → `sistema/` (antes `pratica/`)
+- `PIM_IV-Documentacao_UML` → `modelagem-uml/` (antes `uml/`)
 
-A pasta `uml/` foi herdada do PIM III e serve de base para a modelagem do PIM IV. As atas de
-reunião em `uml/.planning/meetings/` são registros datados das sprints do PIM III e foram
+A pasta `modelagem-uml/` foi herdada do PIM III e serve de base para a modelagem do PIM IV. As atas de
+reunião em `modelagem-uml/.planning/meetings/` são registros datados das sprints do PIM III e foram
 mantidas na íntegra, sem reescrita, por serem documentos históricos.
+
+## 🔁 Do PIM III ao PIM IV
+
+O PIM IV é a continuação do [PIM III](https://github.com/MayconDIS/PIM_III). É o mesmo projeto,
+o Nex_TI: trouxemos tudo o que fizemos no PIM III e fomos melhorando com o que o PIM IV pede
+e com o que o nosso Scrum Master colocou no backlog.
+
+| O quê | No PIM III | No PIM IV |
+|---|---|---|
+| **Site** | Feito em HTML, CSS e JavaScript | Refeito em React e publicado na internet (Vercel) |
+| **Celular** | Não tinha | Começamos o app, com a tela de estudo de flashcards |
+| **API em C#** | 7 rotas, com todo o código junto | 14 rotas, com o código separado em camadas (cada parte cuida de uma coisa) |
+| **Simulados** | Ficou para o futuro | Simulados no estilo ENADE, com questões de múltipla escolha |
+| **Moedas** | Ficou para o futuro | Dá para usar as moedas para liberar disciplinas bônus |
+| **Banco de dados** | Um script SQL | O banco é criado sozinho quando a API sobe, e roda na nuvem (Azure) |
+| **Segurança** | Senha criptografada e login | Senha forte obrigatória, aviso de senha vazada, limite de tentativas de login e cada aluno só vê os próprios dados |
+| **Acessibilidade** | Modo de acessibilidade | Também o VLibras (tradução para Libras) |
+| **Testes** | Não tinha | Testes automatizados da API e das regras JavaScript |
+| **Nuvem** | Rodava só no computador | A API sobe sozinha para a Azure a cada atualização no GitHub |
+| **UML** | Caso de uso, classes e sequência | Também o diagrama de atividade e o diagrama de classes do código que fizemos |
+| **Organização** | Atas das reuniões | Scrum no Trello, com o backlog (PB01 a PB22) e as sprints |
+
+Ainda falta: o painel do Tutor (PB15), o login no app de celular (PB11) e os perfis de
+Aluno, Tutor e Administrador (PB01).
 
 ## 📄 Licença
 

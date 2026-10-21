@@ -1,4 +1,4 @@
-# Publica a API C# do Nex_TI (pratica/apps/api) no Azure App Service.
+# Publica a API C# do Nex_TI (sistema/apps/api) no Azure App Service.
 #
 # Configuração no GitHub (Settings → Secrets and variables → Actions):
 #   - Variable  AZURE_WEBAPP_NAME             nome do App Service (ex.: nexti-api)
@@ -12,8 +12,8 @@ on:
   push:
     branches: [main]
     paths:
-      - 'pratica/apps/api/**'
-      - 'pratica/tests/NexTI_API.Tests/**'
+      - 'sistema/apps/api/**'
+      - 'sistema/tests/NexTI_API.Tests/**'
       - '.github/workflows/api-azure.yml'
   workflow_dispatch:
 
@@ -32,10 +32,10 @@ jobs:
           dotnet-version: '10.0.x'
 
       - name: Testes
-        run: dotnet test pratica/tests/NexTI_API.Tests/NexTI_API.Tests.csproj -c Release
+        run: dotnet test sistema/tests/NexTI_API.Tests/NexTI_API.Tests.csproj -c Release
 
       - name: Publicar
-        run: dotnet publish pratica/apps/api/NexTI_API.csproj -c Release -o ${{ runner.temp }}/api
+        run: dotnet publish sistema/apps/api/NexTI_API.csproj -c Release -o ${{ runner.temp }}/api
 
       - name: Deploy no App Service
         uses: azure/webapps-deploy@v3

@@ -1,0 +1,45 @@
+{
+  "fonte": "sistema/packages/shared/css/global.css e dashboard.css",
+  "theme": "dark",
+  "colors": {
+    "background": {
+      "main": "#0b0c10",
+      "card": "#161b22",
+      "input": "#0d1117"
+    },
+    "borders": {
+      "default": "#30363d"
+    },
+    "text": {
+      "main": "#c5c6c7",
+      "muted": "#8b92a5",
+      "dim": "#6e7681",
+      "strong": "#ffffff"
+    },
+    "brand": {
+      "cyan": "#00e6e6",
+      "green": "#00ff88",
+      "purple": "#8a2be2"
+    },
+    "status": {
+      "success": "#00ff88",
+      "error": "#ff5555",
+      "coins": "#ffd700",
+      "info": "#2f81f7"
+    },
+    "glows": {
+      "cyan": "rgba(0, 230, 230, 0.4)",
+      "purple": "rgba(138, 43, 226, 0.15)"
+    },
+    "high_contrast": {
+      "accent": "#ffff00",
+      "background": "#000000"
+    }
+  },
+  "typography": {
+    "brand": "Orbitron, sans-serif",
+    "title": "Space Grotesk, sans-serif",
+    "sans": "Inter, sans-serif",
+    "mono": "Fira Code, monospace"
+  }
+}
