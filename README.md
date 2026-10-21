@@ -41,7 +41,7 @@ repositórios distintos, vivem aqui como pastas de primeiro nível:
 ```bash
 cd sistema
 npm install
-npm start
+npm run dev   # sobe a API (porta 5000) e o site (porta 5501)
 ```
 
 Detalhes de portas, banco de dados e API estão em [`sistema/README.md`](sistema/README.md).
@@ -75,7 +75,7 @@ e com o que o nosso Scrum Master colocou no backlog.
 | **Banco de dados** | Um script SQL | O banco é criado sozinho quando a API sobe, e roda na nuvem (Azure) |
 | **Segurança** | Senha criptografada e login | Senha forte obrigatória, aviso de senha vazada, limite de tentativas de login e cada aluno só vê os próprios dados |
 | **Acessibilidade** | Modo de acessibilidade | Também o VLibras (tradução para Libras) |
-| **Testes** | Não tinha | 62 testes automáticos que conferem se a API funciona |
+| **Testes** | Não tinha | Testes automatizados da API e das regras JavaScript |
 | **Nuvem** | Rodava só no computador | A API sobe sozinha para a Azure a cada atualização no GitHub |
 | **UML** | Caso de uso, classes e sequência | Também o diagrama de atividade e o diagrama de classes do código que fizemos |
 | **Organização** | Atas das reuniões | Scrum no Trello, com o backlog (PB01 a PB22) e as sprints |

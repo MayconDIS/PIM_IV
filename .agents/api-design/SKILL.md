@@ -20,9 +20,9 @@ Esta habilidade orienta o assistente de IA na criação e padronização de endp
 ## 📝 Referências Detalhadas Disponíveis
 
 ### Convenções e Padrões
-* [rest-conventions.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/api-design/references/rest-conventions.md) - Convenções de nomenclatura de rotas, verbos HTTP corretos, códigos de status semânticos, paginação e filtros.
-* [error-handling.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/api-design/references/error-handling.md) - Formato padronizado de respostas de erro (RFC 7807 Problem Details), middleware global de exceções e logging estruturado.
-* [dto-patterns.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/api-design/references/dto-patterns.md) - Separação Model vs DTO vs Request/Response, validação de entrada com Data Annotations e FluentValidation, uso de Records imutáveis.
+* [rest-conventions.md](references/rest-conventions.md) - Convenções de nomenclatura de rotas, verbos HTTP corretos, códigos de status semânticos, paginação e filtros.
+* [error-handling.md](references/error-handling.md) - Formato padronizado de respostas de erro (RFC 7807 Problem Details), middleware global de exceções e logging estruturado.
+* [dto-patterns.md](references/dto-patterns.md) - Separação Model vs DTO vs Request/Response, validação de entrada com Data Annotations e FluentValidation, uso de Records imutáveis.
 
 ---
 

@@ -1,46 +1,64 @@
-# 🚀 Manual de Execução - Nex_TI (PIM IV)
+# ▶️ Manual de Execução — Nex_TI
 
-Bem-vindo ao guia de execução do projeto **Nex_TI**. Este manual foi criado para guiar a banca avaliadora da UNIP no processo de rodar a aplicação localmente, cobrindo o Banco de Dados, o Backend em C# e o Frontend em HTML/JS.
+Como rodar o Nex_TI no seu computador.
 
----
+## 1. O que precisa estar instalado
 
-## 1️⃣ Configurando o Banco de Dados (SQL Server)
-O projeto utiliza o **Microsoft SQL Server** para armazenamento seguro dos dados e do algoritmo de repetição espaçada.
+| Programa | Para quê |
+|---|---|
+| [.NET 10 SDK](https://dotnet.microsoft.com/download) | Rodar a API em C# |
+| [Node.js](https://nodejs.org) 22 ou mais novo | Rodar o site |
+| SQL Server LocalDB (vem com o Visual Studio) | O banco de dados local |
+| Python 3, disponível pelo comando `python` | Necessário para `npm run dev`; dispensável ao iniciar cada app separadamente |
 
-1. Abra o **SQL Server Management Studio (SSMS)** ou o **Azure Data Studio**.
-2. Conecte-se à sua instância de servidor local (`localhost` ou `.\SQLEXPRESS`).
-3. Vá em **File > Open > File...** e selecione o script localizado na pasta do projeto:
-   `database/NexTI_DB.sql`
-4. Pressione **F5** (ou clique em "Execute"). 
-   *O script irá criar automaticamente o banco `NexTI_DB`, as tabelas `Usuarios`, `Fases`, `Flashcards`, e a tabela de ligação `Progresso_Flashcards` (Algoritmo SM-2), além de inserir todos os dados base das disciplinas.*
+## 2. Rodar tudo de uma vez
 
----
+Na pasta `sistema/`:
 
-## 2️⃣ Rodando a API / Backend (C# .NET)
-A API REST foi desenvolvida com **ASP.NET Core 10** e **Entity Framework Core**. Ela atua como a ponte entre o banco de dados e as telas do usuário.
+```bash
+npm install
+npm run dev
+```
 
-1. Abra o **Visual Studio 2022** (ou VS Code).
-2. Abra a pasta `backend/` do projeto.
-3. Se necessário, abra o arquivo `backend/appsettings.json` e verifique a linha `"DefaultConnection"`. Caso o seu SQL Server exija senha (Autenticação SQL), altere a string para:
-   `"Server=localhost;Database=NexTI_DB;User Id=SEU_USUARIO;Password=SUA_SENHA;TrustServerCertificate=True;"`
-4. Abra o terminal na pasta `backend/` e execute os comandos:
-   ```bash
-   dotnet restore
-   dotnet run
-   ```
-5. A API iniciará, geralmente no endereço `https://localhost:5001`. Você pode testar se está online acessando no navegador: `https://localhost:5001/api/status`.
+O `start.py` sobe a API em http://localhost:5000 e o site em
+http://localhost:5501, e abre o navegador. Para parar: `Ctrl+C`.
 
----
+## 3. Rodar cada parte separada
 
-## 3️⃣ Rodando o Frontend (Vanilla Web)
-O Frontend foi construído com as melhores práticas de **WAI-ARIA** e semântica **HTML5**, operando sem a necessidade de frameworks pesados (apenas HTML, CSS Global e JavaScript Puro).
+```bash
+npm run dev:api      # API em http://localhost:5000
+npm run dev:react    # site em http://localhost:5501
+npm run dev:mobile   # app de celular (Expo)
+```
 
-1. Abra a pasta raiz do projeto (`PIM_IV-Parte_Pratica`) no **VS Code**.
-2. Utilize a extensão **Live Server** (clicando com o botão direito no arquivo `index.html` > *Open with Live Server*).
-3. A experiência do aplicativo será iniciada através da *Splash Screen*, que fará o redirecionamento para o fluxo de **Login** e, posteriormente, para o **Terminal de Dashboard** e sistema de Flashcards.
+## 4. Banco de dados
 
-*Nota: O script `assets/js/api.js` está configurado para buscar os dados diretamente na porta `:5001` (da API C#).*
+Não precisa criar nada. Quando a API sobe, ela:
 
----
-> **Projeto Desenvolvido para o Projeto Integrado Multidisciplinar (PIM IV) - UNIP.**
-> *Foco em Engenharia de Software, Modelagem de Banco de Dados e UX/UI.*
+1. cria o banco `NexTI_Local` no LocalDB (`(localdb)\mssqllocaldb`), se ainda não existir;
+2. aplica as migrations (as tabelas);
+3. carrega as 26 fases, as 620 cartas e os simulados ENADE.
+
+Esse é o comportamento padrão, sem outra conexão configurada e com
+`Database:MigrarAoIniciar` habilitado. Para usar outro SQL Server, defina
+`ConnectionStrings__DefaultConnection`. A variável `AZURE_SQL_CONNECTIONSTRING`,
+quando presente, tem precedência. Não grave credenciais de produção em arquivos
+versionados. O LocalDB é específico do Windows; em outros sistemas, configure
+uma instância SQL Server acessível.
+
+## 5. Testes
+
+```bash
+npm test             # confere a estrutura do projeto e roda os testes da API
+npm run test:shared  # testes do packages/shared (SM-2 do navegador, senha)
+```
+
+## 6. Se algo der errado
+
+| Problema | Solução |
+|---|---|
+| "Porta 5000 já está em uso" | A API já está rodando em outro terminal. Feche-o ou use a que está aberta. |
+| O site abre, mas não sincroniza o progresso | Confira a API e a sessão. Uma sessão já salva pode estudar com cartas locais; cadastro e login exigem a API. Falhas de envio não são reenviadas automaticamente. |
+| O comando `python` não funciona | Instale/configure o Python 3 ou inicie a API e o site separadamente, como na seção 3. |
+| Erro de conexão com o banco | Confira se o LocalDB está instalado: `sqllocaldb info` deve listar `MSSQLLocalDB`. |
+| Depois de mover ou renomear a pasta, o site não compila | Rode `npm install` de novo (o npm guarda o caminho antigo dos pacotes do projeto). |

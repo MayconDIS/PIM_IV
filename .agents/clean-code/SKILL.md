@@ -20,13 +20,13 @@ Esta habilidade incorpora os princípios fundamentais descritos por Robert C. Ma
 ## 📝 Referências Detalhadas Disponíveis
 
 ### Diretrizes de Código Limpo
-* [naming-and-formatting.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/clean-code/references/naming-and-formatting.md) - Padrões de nomenclatura clara de variáveis/funções e a Metáfora do Jornal para formatação vertical.
-* [functions-and-classes.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/clean-code/references/functions-and-classes.md) - Regras para funções curtas com apenas uma responsabilidade (Do One Thing) e classes coesas baseadas no princípio SRP.
-* [error-handling-and-tests.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/clean-code/references/error-handling-and-tests.md) - Boas práticas de tratamento de exceções (evitar retorno de `null`), injeções limpas e os princípios F.I.R.S.T. para TDD e testes unitários.
+* [naming-and-formatting.md](references/naming-and-formatting.md) - Padrões de nomenclatura clara de variáveis/funções e a Metáfora do Jornal para formatação vertical.
+* [functions-and-classes.md](references/functions-and-classes.md) - Regras para funções curtas com apenas uma responsabilidade (Do One Thing) e classes coesas baseadas no princípio SRP.
+* [error-handling-and-tests.md](references/error-handling-and-tests.md) - Boas práticas de tratamento de exceções (evitar retorno de `null`), injeções limpas e os princípios F.I.R.S.T. para TDD e testes unitários.
 
 ### Diretrizes por Linguagem
-* [javascript.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/clean-code/languages/javascript.md) - Clean Code e boas práticas para JavaScript frontend vanilla.
-* [csharp.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/clean-code/languages/csharp.md) - Padrões de nomenclatura C#, Primary Constructors e tratamento de exceções limpo no .NET.
+* [javascript.md](languages/javascript.md) - Clean Code e boas práticas para JavaScript frontend vanilla.
+* [csharp.md](languages/csharp.md) - Padrões de nomenclatura C#, Primary Constructors e tratamento de exceções limpo no .NET.
 
 ---
 

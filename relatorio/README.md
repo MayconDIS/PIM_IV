@@ -22,28 +22,28 @@
 <details open>
   <summary>🇧🇷 <b>Português</b></summary>
 
-  O ecossistema do projeto **Nex_TI** desenvolvido para o PIM IV (UNIP) é estruturado em três repositórios complementares:
-  1. 📄 **[PIM_IV-Parte_Teorica](file:///C:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Teorica)**: Contém a monografia acadêmica e o Relatório ABNT interativo (HTML/CSS), protótipos de interface, cronogramas e atas teóricas.
-  2. 📐 **[PIM_IV-Documentacao_UML](file:///C:/Users/mayco/Documents/GitHub/PIM_IV-Documentacao_UML)**: Abriga a modelagem UML completa e fonte no Astah (`.asta`), os diagramas globais exportados (Classes, Sequência, Casos de Uso) e a documentação detalhada em Markdown do Backlog do Produto e Sprints.
-  3. 💻 **[PIM_IV-Parte_Pratica](file:///C:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica)**: A implementação funcional em código, englobando o Frontend (HTML/CSS/JS com modo de acessibilidade e o mapa neural interativo), a API do Backend em C# (.NET 10 Minimal APIs) e os scripts do banco de dados (Microsoft SQL Server).
+  O ecossistema do projeto **Nex_TI** desenvolvido para o PIM IV (UNIP) é organizado em três pastas deste repositório:
+  1. 📄 **[relatorio/](.)**: Contém a monografia acadêmica e o Relatório ABNT interativo (HTML/CSS), protótipos de interface, cronogramas e atas teóricas.
+  2. 📐 **[modelagem-uml/](../modelagem-uml)**: Abriga a modelagem UML completa e fonte no Astah (`.asta`), os diagramas globais exportados (Classes, Sequência, Casos de Uso) e a documentação detalhada em Markdown do Backlog do Produto e Sprints.
+  3. 💻 **[sistema/](../sistema)**: A implementação funcional em código, englobando o Frontend (React, com modo de acessibilidade e o mapa neural interativo), a API do Backend em C# (.NET 10 Minimal APIs) e os scripts do banco de dados (Microsoft SQL Server).
 </details>
 
 <details>
   <summary>🇺🇸 <b>English</b></summary>
 
-  The **Nex_TI** project ecosystem for PIM IV (UNIP) is structured into three complementary repositories:
-  1. 📄 **[PIM_IV-Parte_Teorica](file:///C:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Teorica)**: Contains the academic monograph and the interactive ABNT Report (HTML/CSS), interface prototypes, schedules, and theoretical minutes.
-  2. 📐 **[PIM_IV-Documentacao_UML](file:///C:/Users/mayco/Documents/GitHub/PIM_IV-Documentacao_UML)**: Hosts the complete UML modeling and Astah source (`.asta`), global exported diagrams (Class, Sequence, Use Case), and detailed Markdown documentation of Product and Sprint Backlogs.
-  3. 💻 **[PIM_IV-Parte_Pratica](file:///C:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica)**: The functional code implementation, encompassing the Frontend (HTML/CSS/JS with accessibility mode and interactive neural map), the Backend C# API (.NET 10 Minimal APIs), and database scripts (Microsoft SQL Server).
+  The **Nex_TI** project ecosystem for PIM IV (UNIP) is organized into three folders of this repository:
+  1. 📄 **[relatorio/](.)**: Contains the academic monograph and the interactive ABNT Report (HTML/CSS), interface prototypes, schedules, and theoretical minutes.
+  2. 📐 **[modelagem-uml/](../modelagem-uml)**: Hosts the complete UML modeling and Astah source (`.asta`), global exported diagrams (Class, Sequence, Use Case), and detailed Markdown documentation of Product and Sprint Backlogs.
+  3. 💻 **[sistema/](../sistema)**: The functional code implementation, encompassing the Frontend (React, with accessibility mode and interactive neural map), the Backend C# API (.NET 10 Minimal APIs), and database scripts (Microsoft SQL Server).
 </details>
 
 <details>
   <summary>🇪🇸 <b>Español</b></summary>
 
-  El ecosistema del proyecto **Nex_TI** para PIM IV (UNIP) está estructurado en tres repositorios complementarios:
-  1. 📄 **[PIM_IV-Parte_Teorica](file:///C:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Teorica)**: Contiene la monografía académica y el Informe ABNT interactivo (HTML/CSS), prototipos de interfaz, cronogramas y actas teóricas.
-  2. 📐 **[PIM_IV-Documentacao_UML](file:///C:/Users/mayco/Documents/GitHub/PIM_IV-Documentacao_UML)**: Alberga el modelado UML completo y la fuente en Astah (`.asta`), los diagramas globales exportados (Clases, Secuencia, Casos de Uso) y la documentación detallada en Markdown del Backlog del Producto y Sprints.
-  3. 💻 **[PIM_IV-Parte_Pratica](file:///C:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica)**: La implementación funcional en código, que abarca el Frontend (HTML/CSS/JS con modo de accesibilidad y mapa neuronal interactivo), la API del Backend en C# (.NET 10 Minimal APIs) y los scripts de la base de datos (Microsoft SQL Server).
+  El ecosistema del proyecto **Nex_TI** para PIM IV (UNIP) está organizado en tres carpetas de este repositorio:
+  1. 📄 **[relatorio/](.)**: Contiene la monografía académica y el Informe ABNT interactivo (HTML/CSS), prototipos de interfaz, cronogramas y actas teóricas.
+  2. 📐 **[modelagem-uml/](../modelagem-uml)**: Alberga el modelado UML completo y la fuente en Astah (`.asta`), los diagramas globales exportados (Clases, Secuencia, Casos de Uso) y la documentación detallada en Markdown del Backlog del Producto y Sprints.
+  3. 💻 **[sistema/](../sistema)**: La implementación funcional en código, que abarca el Frontend (React, con modo de accesibilidad y mapa neuronal interactivo), la API del Backend en C# (.NET 10 Minimal APIs) y los scripts de la base de datos (Microsoft SQL Server).
 </details>
 
 ---
@@ -72,7 +72,7 @@ O projeto foi construído seguindo as melhores práticas de Clean Code e Separa�
 ### 📂 Estrutura do Repositório
 
 ```text
-📦 PIM_IV-Parte_Teorica
+📦 relatorio/
  ┣ 📂 .planning/      # Inteligência do projeto, roadmap e arquitetura (GSD Framework)
  ┣ 📂 assets/         # Recursos visuais organizados (branding, diagramas, protótipos, kanban)
  ┣ 📜 index.html      # O documento raiz (Relatório Acadêmico ABNT interativo)
@@ -113,7 +113,7 @@ The project was built adhering to Clean Code and Separation of Concerns best pra
 ### 📂 Repository Structure
 
 ```text
-📦 PIM_IV-Parte_Teorica
+📦 relatorio/
  ┣ 📂 .planning/      # Project intelligence, roadmap, and architecture (GSD Framework)
  ┣ 📂 assets/         # Organized visual resources (branding, diagrams, prototypes, kanban)
  ┣ 📜 index.html      # The core document (Interactive Academic Report - ABNT standard)
@@ -155,7 +155,7 @@ El proyecto fue construido siguiendo las mejores prácticas de Clean Code y Sepa
 ### 📂 Repository Structure
 
 ```text
-📦 PIM_IV-Parte_Teorica
+📦 relatorio/
  ┣ 📂 .planning/      # Inteligencia del proyecto, hoja de ruta y arquitectura (GSD Framework)
  ┣ 📂 assets/         # Recursos visuales organizados (marca, diagramas, prototipos, kanban)
  ┣ 📜 index.html      # El documento raíz (Informe Académico ABNT interactivo)

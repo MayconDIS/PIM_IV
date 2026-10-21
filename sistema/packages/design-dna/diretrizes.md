@@ -37,7 +37,7 @@ suave à esquerda e um ciano à direita.
 
 ## Regras
 
-- Tema sempre escuro. Fundo claro só no modo de alto contraste, que é uma opção de acessibilidade.
+- A interface usa tema escuro. No alto contraste do painel, o fundo é preto, o texto é branco e os destaques são amarelos, sem brilhos. A monografia mantém fundo branco e tipografia acadêmica para leitura e impressão.
 - Ciano é a cor principal. Verde só para coisa boa (acertou, ganhou XP). Vermelho só para erro.
 - Cor nunca sozinha: o acerto também diz "Acertou", o erro diz o que deu errado.
 - Moedas sempre em dourado, com o ícone de moeda.

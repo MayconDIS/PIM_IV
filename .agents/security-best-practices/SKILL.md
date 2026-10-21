@@ -52,21 +52,21 @@ Ao realizar uma auditoria de segurança ou aplicar melhores práticas:
 ## 📝 Referências Disponíveis (.agents/security-best-practices/)
 
 ### Guias de Vulnerabilidade (`references/`)
-* [injection.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/security-best-practices/references/injection.md) - SQL, OS Command e Template Injections.
-* [xss.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/security-best-practices/references/xss.md) - Reflected, Stored e DOM XSS.
-* [authorization.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/security-best-practices/references/authorization.md) - Broken Object Level Authorization, IDOR.
-* [authentication.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/security-best-practices/references/authentication.md) - Sessões, JWT e armazenamento seguro de senhas.
-* [cryptography.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/security-best-practices/references/cryptography.md) - Algoritmos criptográficos e chaves.
-* [file-security.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/security-best-practices/references/file-security.md) - Path Traversal e upload de arquivos.
-* [ssrf.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/security-best-practices/references/ssrf.md) - Server-Side Request Forgery.
-* [csrf.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/security-best-practices/references/csrf.md) - Cross-Site Request Forgery.
+* [injection.md](references/injection.md) - SQL, OS Command e Template Injections.
+* [xss.md](references/xss.md) - Reflected, Stored e DOM XSS.
+* [authorization.md](references/authorization.md) - Broken Object Level Authorization, IDOR.
+* [authentication.md](references/authentication.md) - Sessões, JWT e armazenamento seguro de senhas.
+* [cryptography.md](references/cryptography.md) - Algoritmos criptográficos e chaves.
+* [file-security.md](references/file-security.md) - Path Traversal e upload de arquivos.
+* [ssrf.md](references/ssrf.md) - Server-Side Request Forgery.
+* [csrf.md](references/csrf.md) - Cross-Site Request Forgery.
 
 ### Melhores Práticas por Linguagem e Stack (`references/` & `languages/`)
-* [javascript-general-web-frontend-security.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/security-best-practices/references/javascript-general-web-frontend-security.md) - Boas práticas para o frontend JS.
-* [javascript.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/security-best-practices/languages/javascript.md) - Regras de Node.js, Express, React e Next.js.
-* [python-fastapi-web-server-security.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/security-best-practices/references/python-fastapi-web-server-security.md) - Boas práticas para servidores Python.
-* [python.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/security-best-practices/languages/python.md) - Regras de segurança gerais do Python.
-* [csharp.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/security-best-practices/languages/csharp.md) - Melhores práticas para C# e .NET (Minimal APIs e EF Core).
+* [javascript-general-web-frontend-security.md](references/javascript-general-web-frontend-security.md) - Boas práticas para o frontend JS.
+* [javascript.md](languages/javascript.md) - Regras de Node.js, Express, React e Next.js.
+* [python-fastapi-web-server-security.md](references/python-fastapi-web-server-security.md) - Boas práticas para servidores Python.
+* [python.md](languages/python.md) - Regras de segurança gerais do Python.
+* [csharp.md](languages/csharp.md) - Melhores práticas para C# e .NET (Minimal APIs e EF Core).
 
 ---
 

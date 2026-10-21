@@ -12,12 +12,12 @@ Esta habilidade consolida as melhores práticas de arquitetura, otimização de 
 ## 📝 Referências Detalhadas Disponíveis
 
 ### Diretrizes de Arquitetura e Estruturação
-* [solid-and-architecture.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/dotnet-best-practices/references/solid-and-architecture.md) - Princípios SOLID aplicados e Clean Architecture no .NET.
-* [dependency-injection.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/dotnet-best-practices/references/dependency-injection.md) - Ciclos de vida de serviços no IoC (Transient, Scoped, Singleton) e injeção via construtor.
-* [ef-core-optimization.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/dotnet-best-practices/references/ef-core-optimization.md) - Otimização de acesso a banco de dados com EF Core (`AsNoTracking()`, queries assíncronas e N+1).
+* [solid-and-architecture.md](references/solid-and-architecture.md) - Princípios SOLID aplicados e Clean Architecture no .NET.
+* [dependency-injection.md](references/dependency-injection.md) - Ciclos de vida de serviços no IoC (Transient, Scoped, Singleton) e injeção via construtor.
+* [ef-core-optimization.md](references/ef-core-optimization.md) - Otimização de acesso a banco de dados com EF Core (`AsNoTracking()`, queries assíncronas e N+1).
 
 ### Diretrizes de Sintaxe e Código
-* [csharp-modern-patterns.md](file:///c:/Users/mayco/Documents/GitHub/PIM_IV-Parte_Pratica/.agents/dotnet-best-practices/languages/csharp-modern-patterns.md) - Padrões de C# 12+ (Primary Constructors, File-scoped Namespaces, Pattern Matching).
+* [csharp-modern-patterns.md](languages/csharp-modern-patterns.md) - Padrões de C# 12+ (Primary Constructors, File-scoped Namespaces, Pattern Matching).
 
 ---
 
