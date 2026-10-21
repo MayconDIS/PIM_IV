@@ -22,7 +22,9 @@ fala só com a API; o banco não é exposto ao navegador.
 
 A primeira requisição depois de um tempo parado pode levar ~1 min (App Service +
 banco acordando). A API tenta de novo automaticamente e o front espera até 60 s
-antes de cair para o modo offline (localStorage).
+antes de indicar indisponibilidade. Uma sessão já salva pode continuar com
+as cartas locais; cadastro e login exigem a API. Não há fila de reenvio
+automático das respostas que falharem.
 
 ## 1. Azure (banco + API)
 

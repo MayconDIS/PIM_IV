@@ -5,14 +5,16 @@ Bem-vindo ao **Nex_TI**, a sua plataforma acadêmica focada no aprendizado de Te
 ---
 
 ## 🎯 1. O que é o Nex_TI?
-O Nex_TI não é apenas um site de estudos, é uma ferramenta construída com base em evidências neurocientíficas de aprendizado. Utilizamos o **Algoritmo SM-2 (Repetição Espaçada)** para garantir que você revise os conceitos de TI e Engenharia de Software pouco antes do momento em que seu cérebro iria esquecê-los.
+O Nex_TI organiza revisões de conceitos de TI e Engenharia de Software com
+repetição espaçada baseada no **SM-2**. O intervalo é estimado a partir das
+respostas; ele não prevê exatamente quando uma pessoa esquecerá um conteúdo.
 
 ---
 
 ## 🚀 2. Acesso à Plataforma
 A entrada do sistema simula um terminal de comandos.
 1. Na tela de **Splash Screen**, você verá o carregamento simulado de módulos (apenas por imersão).
-2. Na tela de **Acesso**, você encontrará o formulário de Login. Insira o seu usuário institucional.
+2. Na tela de **Acesso**, cadastre uma conta ou entre com seu nickname ou e-mail e senha. Cadastro e login precisam da API disponível.
 3. Após a autenticação, você será redirecionado para o seu **Dashboard Principal**.
 
 ---
@@ -30,9 +32,17 @@ No Dashboard, o menu esquerdo ("Missões de Aprendizagem") exibe todas as discip
 
 ### Como estudar:
 1. Clique em uma **Fase/Disciplina** ou no **Simulado ENADE**.
-2. O sistema fará o download dos **Flashcards/Questões** daquela disciplina direto do banco de dados oficial.
+2. O sistema consulta as cartas da fase na API. Se ela estiver indisponível e sua sessão já estiver salva, usa o conteúdo local; testes de módulo são montados no navegador.
 3. Você verá a **Frente da Carta** com uma pergunta. Pense na resposta!
 4. Clique na carta para revelar o **Verso** (A resposta correta).
 5. **A Mágica acontece aqui:** Você deve ser honesto e informar ao sistema quão fácil foi lembrar a resposta. O algoritmo agendará automaticamente o momento em que esta carta deverá voltar para a sua tela!
 
 > *Dica: Use os Flashcards 10 minutos por dia. O conhecimento contínuo é muito mais forte que o estudo intensivo de última hora!*
+
+## 5. Dados salvos neste navegador
+
+Fases liberadas, compras de bônus e posições do Mapa Neural ficam neste
+navegador. Limpar os dados do site ou trocar de dispositivo pode perder essas
+informações. O progresso das cartas pode ser enviado à API, mas respostas cujo
+envio falhou não são reenviadas automaticamente. O aplicativo móvel ainda é
+demonstrativo e não compartilha a sessão ou o progresso do site.
