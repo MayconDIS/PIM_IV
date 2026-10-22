@@ -1,9 +1,12 @@
 /**
- * Conteúdo canônico do Nex_TI: 26 fases, 620 cards e 5 módulos.
+ * Conteúdo canônico do Nex_TI: 29 fases, 702 cards e 5 módulos.
  *
  * Fonte da verdade para o React (web e mobile). Depois de editar, rode
  * `npm run seed:api` para atualizar a semente do banco da API C#.
+ * A fase 23 (guia de estudos) e as fases 24 e 25 (provas oficiais do ENADE) vêm de enadeOficial.js.
  */
+
+import { GUIA_DE_ESTUDOS, cartasDaProva } from './enadeOficial.js';
 
 export const BANCO_DE_DADOS = {
   "fase1": [
@@ -3250,6 +3253,9 @@ export const BANCO_DE_DADOS = {
       "dica": "Princípio da Responsabilidade Única."
     }
   ],
+  "fase23": GUIA_DE_ESTUDOS.map((carta) => ({ ...carta })),
+  "fase24": cartasDaProva(2017),
+  "fase25": cartasDaProva(2021),
   "bonus1": [
     {
       "frente": "Bônus 01: O que é a 'Deep Web'?",
@@ -4140,6 +4146,30 @@ export const MODULOS = [
         "xp": 30,
         "moedas": 70,
         "totalCards": 50
+      },
+      {
+        "id": "fase23",
+        "nome": "ENADE: Guia de Estudos",
+        "titulo": "Fase 23: Guia de Estudos para o ENADE",
+        "xp": 30,
+        "moedas": 70,
+        "totalCards": 36
+      },
+      {
+        "id": "fase24",
+        "nome": "ENADE 2017: Prova Oficial de ADS",
+        "titulo": "Fase 24: ENADE 2017 (prova oficial)",
+        "xp": 30,
+        "moedas": 70,
+        "totalCards": 23
+      },
+      {
+        "id": "fase25",
+        "nome": "ENADE 2021: Prova Oficial de ADS",
+        "titulo": "Fase 25: ENADE 2021 (prova oficial)",
+        "xp": 30,
+        "moedas": 70,
+        "totalCards": 23
       }
     ],
     "teste": {

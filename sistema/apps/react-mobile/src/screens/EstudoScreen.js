@@ -89,6 +89,7 @@ export default function EstudoScreen({ fase, api, sinc, onSair, onErroDeSessao }
       <TouchableOpacity activeOpacity={0.9} onPress={() => setVirada(!virada)} style={[styles.carta, virada && styles.cartaVirada]} accessibilityRole="button" accessibilityHint="Vira a carta">
         <Text style={styles.etiqueta}>{virada ? '✓ RESPOSTA' : '? PERGUNTA'}</Text>
         <Text style={styles.textoCarta}>{virada ? carta.verso : carta.frente}</Text>
+        {!virada && carta.opcoes?.length ? carta.opcoes.map((opcao) => <Text key={opcao} style={styles.opcao}>{opcao}</Text>) : null}
         {!virada && carta.dica ? <Text style={styles.dica}>💡 {carta.dica}</Text> : null}
       </TouchableOpacity>
 
@@ -127,6 +128,7 @@ const styles = StyleSheet.create({
   cartaVirada: { borderColor: tokens.colors.green },
   etiqueta: { fontSize: 10, fontWeight: '700', color: tokens.colors.textMuted, letterSpacing: 1 },
   textoCarta: { fontSize: 17, lineHeight: 25, color: tokens.colors.textPrimary },
+  opcao: { color: tokens.colors.textSecondary, fontSize: 15, lineHeight: 21, marginTop: 10 },
   dica: { fontSize: 12, color: tokens.colors.textSecondary, fontStyle: 'italic' },
   botoes: { flexDirection: 'row', gap: 8 },
   botaoSm2: { flex: 1, backgroundColor: tokens.colors.bgCard, borderWidth: 1, borderRadius: tokens.borderRadius.sm, paddingVertical: 10, alignItems: 'center' },

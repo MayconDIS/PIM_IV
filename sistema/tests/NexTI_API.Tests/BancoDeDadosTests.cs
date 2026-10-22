@@ -74,12 +74,12 @@ namespace NexTI_API.Tests
                 .Options);
 
         [Fact]
-        public async Task Semente_TemAsMesmas26FasesE620CartasDoFront()
+        public async Task Semente_TemAsMesmas29FasesE702CartasDoFront()
         {
             var semente = await new ConteudoSeeder().LerAsync();
 
-            Assert.Equal(26, semente.Fases.Count);
-            Assert.Equal(620, semente.Flashcards.Count);
+            Assert.Equal(29, semente.Fases.Count);
+            Assert.Equal(702, semente.Flashcards.Count);
             Assert.All(semente.Flashcards, c => Assert.Contains(semente.Fases, f => f.Codigo == c.CodigoFase));
             Assert.All(semente.Flashcards.Where(c => c.Opcoes is not null), c =>
                 Assert.InRange(c.Correta ?? -1, 0, c.Opcoes!.Count - 1));
@@ -94,9 +94,9 @@ namespace NexTI_API.Tests
             var primeira = await seeder.ExecutarAsync(db);
             var segunda = await seeder.ExecutarAsync(db);
 
-            Assert.Equal(26 + 620, primeira);
+            Assert.Equal(29 + 702, primeira);
             Assert.Equal(0, segunda);
-            Assert.Equal(620, await db.Flashcards.CountAsync());
+            Assert.Equal(702, await db.Flashcards.CountAsync());
         }
 
         [Fact]
@@ -110,11 +110,11 @@ namespace NexTI_API.Tests
             await db.SaveChangesAsync();
             await seeder.ExecutarAsync(db);
 
-            Assert.Equal(621, await db.Flashcards.CountAsync());
+            Assert.Equal(703, await db.Flashcards.CountAsync());
         }
 
         [Fact]
-        public async Task SimuladoSeeder_CriaProvaComSeisQuestoesUmaSoVez()
+        public async Task SimuladoSeeder_CriaAsProvasOficiaisUmaSoVez()
         {
             using var db = NovoBanco();
             var seeder = new SimuladoSeeder();
@@ -122,10 +122,34 @@ namespace NexTI_API.Tests
             await seeder.ExecutarAsync(db);
             Assert.Equal(0, await seeder.ExecutarAsync(db));
 
-            Assert.Equal(1, await db.Provas.CountAsync());
-            Assert.Equal(6, await db.Questoes.CountAsync());
-            Assert.All(await db.Questoes.Include(q => q.Alternativas).ToListAsync(),
-                q => Assert.Single(q.Alternativas, a => a.IsCorreta));
+            Assert.Equal(new[] { 2017, 2021 }, await db.Provas.OrderBy(p => p.Ano).Select(p => p.Ano).ToArrayAsync());
+            Assert.Equal(46, await db.Questoes.CountAsync());
+            Assert.All(await db.Questoes.Include(q => q.Alternativas).Include(q => q.Provas).ToListAsync(), q =>
+            {
+                Assert.Equal(5, q.Alternativas.Count);
+                Assert.Single(q.Alternativas, a => a.IsCorreta);
+                Assert.Single(q.Provas);
+                Assert.StartsWith($"ENADE {q.Provas.Single().Ano} - questão ", q.Origem);
+            });
+        }
+
+        [Fact]
+        public async Task SimuladoSeeder_TrocaAsQuestoesDeExemploPelasOficiais()
+        {
+            using var db = NovoBanco();
+            var area = new NexTI_API.Models.AreaConhecimento { NomeArea = "Engenharia de Software" };
+            var antiga = new NexTI_API.Models.Questao { Area = area, Enunciado = "Questão escrita pela equipe", Origem = SimuladoSeeder.OrigemDasQuestoesDeExemplo };
+            antiga.Alternativas.Add(new NexTI_API.Models.Alternativa { Texto = "A) Sim", IsCorreta = true });
+            antiga.Provas.Add(new NexTI_API.Models.Prova { Ano = 2021, Tipo = "ENADE" });
+            db.Questoes.Add(antiga);
+            await db.SaveChangesAsync();
+
+            await new SimuladoSeeder().ExecutarAsync(db);
+
+            Assert.False(await db.Questoes.AnyAsync(q => q.Origem == SimuladoSeeder.OrigemDasQuestoesDeExemplo));
+            Assert.Equal(2, await db.Provas.CountAsync());   // reaproveita a prova de 2021 que já existia
+            Assert.Equal(46, await db.Questoes.CountAsync());
+            Assert.Equal(46 * 5, await db.Alternativas.CountAsync());
         }
     }
 }
