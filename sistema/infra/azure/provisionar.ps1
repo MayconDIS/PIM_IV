@@ -1,7 +1,8 @@
 <#
 .SYNOPSIS
   Cria os recursos do Nex_TI na Azure usando só camadas gratuitas:
-  Azure SQL Database (oferta gratuita, pausa ao atingir o limite) + App Service F1 (Linux, .NET 10).
+  Azure SQL Database (oferta gratuita, pausa ao atingir o limite) + App Service F1 (Linux, .NET 10)
+  + Application Insights com teste de disponibilidade (monitoramento).
 
 .EXAMPLE
   az login
@@ -70,6 +71,32 @@ Invoke-Az webapp update --name $app --resource-group $Grupo --https-only true --
 # Necessário para o deploy por publish profile do GitHub Actions.
 Invoke-Az resource update --resource-group $Grupo --name scm --namespace Microsoft.Web `
     --resource-type basicPublishingCredentialsPolicies --parent "sites/$app" --set properties.allow=true --output none
+
+# Monitoramento: Application Insights (sobre um Log Analytics com limite de 0,1 GB/dia)
+# e um teste de disponibilidade em /api/status a cada 15 min (a rota não acorda o banco).
+Write-Host "==> Monitoramento: Application Insights e teste de disponibilidade"
+Invoke-Az provider register --namespace Microsoft.Insights --wait --output none
+$workspace = Invoke-Az monitor log-analytics workspace create --resource-group $Grupo --name "log-nexti-$Sufixo" `
+    --location $Regiao --quota 0.1 --retention-time 30 --query id --output tsv
+$arquivoTemp = New-TemporaryFile
+@{ location = $Regiao; kind = 'web'; properties = @{
+    Application_Type = 'web'; WorkspaceResourceId = $workspace; IngestionMode = 'LogAnalytics'; RetentionInDays = 30 } } |
+    ConvertTo-Json -Depth 5 | Set-Content $arquivoTemp
+$insights = Invoke-Az resource create --resource-group $Grupo --name "appi-nexti-$Sufixo" --resource-type Microsoft.Insights/components `
+    --is-full-object --properties "@$arquivoTemp" --query '{id: id, conexao: properties.ConnectionString}' --output json | ConvertFrom-Json
+Invoke-Az webapp config appsettings set --name $app --resource-group $Grupo --output none `
+    --settings "APPLICATIONINSIGHTS_CONNECTION_STRING=$($insights.conexao)"
+@{ location = $Regiao; kind = 'standard'; tags = @{ "hidden-link:$($insights.id)" = 'Resource' }; properties = @{
+    SyntheticMonitorId = 'api-status-nexti'; Name = 'API Nex_TI - /api/status'; Enabled = $true; Frequency = 900; Timeout = 30
+    Kind = 'standard'; RetryEnabled = $true
+    Locations = @(@{ Id = 'emea-nl-ams-azr' }, @{ Id = 'emea-gb-db3-azr' }, @{ Id = 'emea-fr-pra-edge' })
+    Request = @{ RequestUrl = "https://$app.azurewebsites.net/api/status"; HttpVerb = 'GET'; ParseDependentRequests = $false }
+    ValidationRules = @{ ExpectedHttpStatusCode = 200; SSLCheck = $true; SSLCertRemainingLifetimeCheck = 7
+        ContentValidation = @{ ContentMatch = 'online'; IgnoreCase = $true; PassIfTextFound = $true } } } } |
+    ConvertTo-Json -Depth 6 | Set-Content $arquivoTemp
+Invoke-Az resource create --resource-group $Grupo --name 'api-status-nexti' --resource-type Microsoft.Insights/webtests `
+    --is-full-object --properties "@$arquivoTemp" --output none
+Remove-Item $arquivoTemp
 
 Write-Host ""
 Write-Host "Pronto. API: https://$app.azurewebsites.net/api/status"
