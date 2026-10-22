@@ -53,6 +53,9 @@ npm test           # confere a estrutura e roda os testes da API
 npm run test:shared # testa as regras JavaScript compartilhadas
 ```
 
+Com Docker, `docker compose up --build` sobe banco, API e site sem instalar mais nada
+(site em http://localhost:8080).
+
 O passo a passo, com o banco de dados, está em
 [`docs/MANUAL_DE_EXECUCAO.md`](docs/MANUAL_DE_EXECUCAO.md). Como publicar na
 Azure e na Vercel: [`docs/DEPLOY.md`](docs/DEPLOY.md).
