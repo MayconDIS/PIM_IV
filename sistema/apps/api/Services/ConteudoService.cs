@@ -16,6 +16,8 @@ namespace NexTI_API.Services
         Task<List<Fase>> ListarFasesAsync();
         Task<List<Flashcard>> ListarFlashcardsAsync(string codigoFase);
         Task<Resultado<Flashcard>> CriarFlashcardAsync(string? codigoFase, string? frente, string? verso, string? dica);
+        Task<Resultado<Flashcard>> EditarFlashcardAsync(int id, string? frente, string? verso, string? dica);
+        Task<Resultado<bool>> ExcluirFlashcardAsync(int id);
         Task<List<AreaConhecimento>> ListarAreasAsync();
         Task<List<QuestaoDto>> ListarQuestoesAsync();
     }
@@ -53,6 +55,47 @@ namespace NexTI_API.Services
             _db.Flashcards.Add(flashcard);
             await _db.SaveChangesAsync();
             return Resultado<Flashcard>.Ok(flashcard);
+        }
+
+        public async Task<Resultado<Flashcard>> EditarFlashcardAsync(int id, string? frente, string? verso, string? dica)
+        {
+            if (string.IsNullOrWhiteSpace(frente) || string.IsNullOrWhiteSpace(verso))
+                return Resultado<Flashcard>.Erro(TipoFalha.Invalido, "Frente e Verso são campos obrigatórios.");
+
+            var flashcard = await _db.Flashcards.FindAsync(id);
+            if (flashcard is null)
+                return Resultado<Flashcard>.Erro(TipoFalha.NaoEncontrado, "Carta não encontrada.");
+
+            if (flashcard.Frente != frente.Trim()) await LembrarModeracaoAsync(flashcard);
+            flashcard.Frente = frente.Trim();
+            flashcard.Verso = verso.Trim();
+            flashcard.Dica = string.IsNullOrWhiteSpace(dica) ? null : dica.Trim();
+            await _db.SaveChangesAsync();
+            return Resultado<Flashcard>.Ok(flashcard);
+        }
+
+        /// <summary>Apaga a carta; o progresso dos alunos nela sai junto (ON DELETE CASCADE).</summary>
+        public async Task<Resultado<bool>> ExcluirFlashcardAsync(int id)
+        {
+            var flashcard = await _db.Flashcards.FindAsync(id);
+            if (flashcard is null)
+                return Resultado<bool>.Erro(TipoFalha.NaoEncontrado, "Carta não encontrada.");
+
+            await LembrarModeracaoAsync(flashcard);
+            _db.Flashcards.Remove(flashcard);
+            await _db.SaveChangesAsync();
+            return Resultado<bool>.Ok(true);
+        }
+
+        /// <summary>
+        /// Guarda a frente original para o seed (que roda a cada vez que a API sobe)
+        /// não recriar a carta que o Tutor editou ou excluiu.
+        /// </summary>
+        private async Task LembrarModeracaoAsync(Flashcard original)
+        {
+            var jaGuardada = await _db.CartasModeradas.AnyAsync(m => m.CodigoFase == original.CodigoFase && m.Frente == original.Frente);
+            if (!jaGuardada)
+                _db.CartasModeradas.Add(new CartaModerada { CodigoFase = original.CodigoFase, Frente = original.Frente });
         }
 
         public Task<List<AreaConhecimento>> ListarAreasAsync() => _db.AreasConhecimento.ToListAsync();

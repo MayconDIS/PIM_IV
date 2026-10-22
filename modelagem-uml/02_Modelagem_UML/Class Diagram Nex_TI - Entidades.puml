@@ -18,6 +18,7 @@ package "Modelo (entidades)" {
     + Username : string
     + Email : string
     + SenhaHash : string
+    + Perfil : string = "Aluno"
     + Nivel : int = 1
     + XP : int = 0
     + Moedas : int = 0
@@ -68,12 +69,20 @@ package "Modelo (entidades)" {
     + Texto : string
     + IsCorreta : bool
   }
+  class CartaModerada {
+    + Id : int
+    + CodigoFase : string
+    + Frente : string
+    + DataModeracao : DateTime
+  }
   class Prova {
     + Id : int
     + Ano : int
     + Tipo : string
   }
 }
+
+Fase "1" -- "0..*" CartaModerada : lembra >
 
 ' --- Herança (POO) ---
 Usuario <|-- Aluno

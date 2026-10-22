@@ -453,3 +453,46 @@ END;
 COMMIT;
 GO
 
+BEGIN TRANSACTION;
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [migration_id] = N'20261022201301_AreaAdministrativa'
+)
+BEGIN
+    ALTER TABLE [usuarios] ADD [perfil] nvarchar(20) NOT NULL DEFAULT N'Aluno';
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [migration_id] = N'20261022201301_AreaAdministrativa'
+)
+BEGIN
+    CREATE TABLE [cartas_moderadas] (
+        [id] int NOT NULL IDENTITY,
+        [codigo_fase] nvarchar(20) NOT NULL,
+        [frente] nvarchar(max) NOT NULL,
+        [data_moderacao] datetime2 NOT NULL,
+        CONSTRAINT [pk_cartas_moderadas] PRIMARY KEY ([id])
+    );
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [migration_id] = N'20261022201301_AreaAdministrativa'
+)
+BEGIN
+    EXEC(N'ALTER TABLE [usuarios] ADD CONSTRAINT [ck_usuarios_perfil] CHECK (perfil IN (''Aluno'', ''Tutor'', ''Admin''))');
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [migration_id] = N'20261022201301_AreaAdministrativa'
+)
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([migration_id], [product_version])
+    VALUES (N'20261022201301_AreaAdministrativa', N'10.0.12');
+END;
+
+COMMIT;
+GO
+

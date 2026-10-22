@@ -46,11 +46,14 @@ namespace NexTI_API.Services.Seed
             }
             await db.SaveChangesAsync();
 
+            // Existentes + as que um Tutor editou ou excluiu: nenhuma delas é recriada.
             var cartasExistentes = (await db.Flashcards
                     .Select(f => new { f.CodigoFase, f.Frente })
                     .ToListAsync())
                 .Select(f => Chave(f.CodigoFase, f.Frente))
                 .ToHashSet();
+            foreach (var moderada in await db.CartasModeradas.Select(m => new { m.CodigoFase, m.Frente }).ToListAsync())
+                cartasExistentes.Add(Chave(moderada.CodigoFase, moderada.Frente));
 
             foreach (var carta in semente.Flashcards)
             {

@@ -74,6 +74,36 @@ namespace NexTI_API.Data.Migrations
                     b.ToTable("tb_areas_conhecimento", (string)null);
                 });
 
+            modelBuilder.Entity("NexTI_API.Models.CartaModerada", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CodigoFase")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasColumnName("codigo_fase");
+
+                    b.Property<DateTime>("DataModeracao")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("data_moderacao");
+
+                    b.Property<string>("Frente")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("frente");
+
+                    b.HasKey("Id")
+                        .HasName("pk_cartas_moderadas");
+
+                    b.ToTable("cartas_moderadas", (string)null);
+                });
+
             modelBuilder.Entity("NexTI_API.Models.Fase", b =>
                 {
                     b.Property<string>("CodigoFase")
@@ -264,6 +294,14 @@ namespace NexTI_API.Data.Migrations
                         .HasColumnType("int")
                         .HasColumnName("nivel");
 
+                    b.Property<string>("Perfil")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasDefaultValue("Aluno")
+                        .HasColumnName("perfil");
+
                     b.Property<string>("SenhaHash")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -294,6 +332,8 @@ namespace NexTI_API.Data.Migrations
                     b.ToTable("usuarios", null, t =>
                         {
                             t.HasTrigger("tg_usuarios_protege_gamificacao");
+
+                            t.HasCheckConstraint("ck_usuarios_perfil", "perfil IN ('Aluno', 'Tutor', 'Admin')");
                         });
 
                     b.HasAnnotation("SqlServer:UseSqlOutputClause", false);

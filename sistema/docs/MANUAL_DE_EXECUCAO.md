@@ -62,3 +62,17 @@ npm run test:shared  # testes do packages/shared (SM-2 do navegador, senha)
 | O comando `python` não funciona | Instale/configure o Python 3 ou inicie a API e o site separadamente, como na seção 3. |
 | Erro de conexão com o banco | Confira se o LocalDB está instalado: `sqllocaldb info` deve listar `MSSQLLocalDB`. |
 | Depois de mover ou renomear a pasta, o site não compila | Rode `npm install` de novo (o npm guarda o caminho antigo dos pacotes do projeto). |
+
+## 7. Primeiro Administrador
+
+Todo cadastro nasce como **Aluno**, e só um Admin promove outros usuários. O
+primeiro Admin é definido direto no banco (LocalDB ou, na Azure, pelo editor de
+consultas do Azure SQL):
+
+```sql
+UPDATE usuarios SET perfil = 'Admin' WHERE username = 'seu_nickname';
+```
+
+Depois, entre de novo no site: o menu do usuário passa a mostrar **Painel do Admin**,
+onde dá para tornar outros usuários Tutor ou Admin. O perfil vai no token de login,
+então quem for promovido precisa sair e entrar de novo.

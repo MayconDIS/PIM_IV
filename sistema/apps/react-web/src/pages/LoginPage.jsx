@@ -37,6 +37,7 @@ function salvarSessao({ token, user }) {
   localStorage.setItem('quest_user_id', user.id);
   localStorage.setItem('quest_user_name', user.username);
   localStorage.setItem('quest_user_nivel', user.nivel);
+  localStorage.setItem('quest_user_perfil', user.perfil ?? 'Aluno');
 }
 
 /** A lista de regras: aparece só depois da primeira tecla, pendentes primeiro. */

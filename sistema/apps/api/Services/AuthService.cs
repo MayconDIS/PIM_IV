@@ -96,7 +96,8 @@ namespace NexTI_API.Services
             {
                 Subject = new ClaimsIdentity(new[] {
                     new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
-                    new Claim(ClaimTypes.Name, usuario.Username)
+                    new Claim(ClaimTypes.Name, usuario.Username),
+                    new Claim(ClaimTypes.Role, usuario.Perfil)
                 }),
                 Issuer = Emissor,
                 Audience = Publico,
