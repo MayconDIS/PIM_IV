@@ -245,6 +245,7 @@ td { padding: 10px; text-align: left; vertical-align: middle; }
 .col-width-73 { width: 73%; }
 
 /* Alturas de Imagens de Diagramas */
+.referencia { text-align: left; text-indent: 0; line-height: 1.15; margin-bottom: 0.45cm; }
 .img-height-7 { max-height: 7.5cm; }
 .img-height-10 { max-height: 10cm; }
 .img-height-12 { max-height: 12cm; }
@@ -290,3 +291,8 @@ td { padding: 10px; text-align: left; vertical-align: middle; }
 .mb-15cm {
     margin-bottom: 1.5cm;
 }
+
+/* Ficha de controle: tabela compacta para caber numa página */
+.ficha-compacta table { font-size: 10pt; margin-bottom: 0.6rem; }
+.ficha-compacta th, .ficha-compacta td { padding: 4px 8px; }
+.ficha-compacta p { margin-bottom: 0.3cm; }
