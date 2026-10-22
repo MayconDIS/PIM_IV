@@ -1,0 +1,96 @@
+@startchen MER Nex_TI
+' MER (modelo conceitual) do banco do Nex_TI — notação de Chen.
+' Fonte: sistema/apps/api/Data (migrations InicialAzureSql e ObjetosDoBanco).
+
+entity USUARIO {
+  Id <<key>>
+  Username
+  Email
+  SenhaHash
+  XP
+  Moedas
+  Nivel
+  DataCriacao
+}
+
+entity FASE {
+  CodigoFase <<key>>
+  Descricao
+}
+
+entity FLASHCARD {
+  Id <<key>>
+  Frente
+  Verso
+  Dica
+}
+
+entity HISTORICO_REVISAO {
+  IdHistorico <<key>>
+  DataRevisao
+  IntervaloDias
+  FatorFacilidade
+}
+
+entity AREA_CONHECIMENTO {
+  IdArea <<key>>
+  NomeArea
+}
+
+entity QUESTAO {
+  IdQuestao <<key>>
+  Enunciado
+  Origem
+}
+
+entity ALTERNATIVA {
+  IdAlternativa <<key>>
+  Texto
+  IsCorreta
+}
+
+entity PROVA {
+  IdProva <<key>>
+  Ano
+  Tipo
+}
+
+relationship CONTEM {
+}
+relationship ESTUDA {
+  Repeticoes
+  IntervaloDias
+  FatorFacilidade
+  DataProximaRevisao
+}
+relationship GERA {
+}
+relationship REFERE {
+}
+relationship CLASSIFICA {
+}
+relationship POSSUI {
+}
+relationship COMPOE {
+}
+
+FASE -1- CONTEM
+CONTEM -N- FLASHCARD
+
+USUARIO -N- ESTUDA
+ESTUDA -N- FLASHCARD
+
+USUARIO -1- GERA
+GERA -N- HISTORICO_REVISAO
+FLASHCARD -1- REFERE
+REFERE -N- HISTORICO_REVISAO
+
+AREA_CONHECIMENTO -1- CLASSIFICA
+CLASSIFICA -N- QUESTAO
+
+QUESTAO -1- POSSUI
+POSSUI -N- ALTERNATIVA
+
+PROVA -N- COMPOE
+COMPOE -N- QUESTAO
+@endchen

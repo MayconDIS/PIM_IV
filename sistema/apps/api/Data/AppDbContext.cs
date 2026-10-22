@@ -24,6 +24,13 @@ namespace NexTI_API.Data
             modelBuilder.Entity<ProgressoFlashcard>()
                 .HasKey(p => new { p.UsuarioId, p.FlashcardId });
 
+            // Tabelas com trigger (migration ObjetosDoBanco). O EF Core precisa saber,
+            // senão grava com OUTPUT, que o SQL Server recusa em tabela com trigger.
+            modelBuilder.Entity<ProgressoFlashcard>()
+                .ToTable(t => t.HasTrigger("tg_progresso_historico"));
+            modelBuilder.Entity<Usuario>()
+                .ToTable(t => t.HasTrigger("tg_usuarios_protege_gamificacao"));
+
             // Unique Constraints for Usuario
             modelBuilder.Entity<Usuario>()
                 .HasIndex(u => u.Username)
