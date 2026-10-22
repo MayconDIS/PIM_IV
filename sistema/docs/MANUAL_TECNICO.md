@@ -62,8 +62,10 @@ fator. Nota menor que 3: volta para 1 dia e o fator cai 0,2.
 O navegador usa `packages/shared/src/sm2.js`, com regras diferentes: uma carta
 nova marcada como fácil recebe 3 dias, enquanto a API recebe qualidade 5 e
 agenda 1 dia. Na segunda resposta boa, o navegador multiplica o intervalo pelo
-fator, enquanto a API agenda 6 dias. O mobile tem outro motor local em
-`apps/react-mobile/src/services/sm2.js` e ainda não sincroniza com a API.
+fator, enquanto a API agenda 6 dias. O mobile usa o mesmo motor do navegador
+(`@nexti/shared/sm2`) e, ao sincronizar, adota o agendamento que a API devolve.
+Sem internet, o mobile guarda as respostas numa fila no aparelho e as envia na
+próxima sincronização (`apps/react-mobile/src/services/sincronizacao.js`).
 
 O painel calcula a revisão localmente e envia a resposta quando a carta tem ID
 da API. Ao carregar o painel, o progresso remoto pode substituir o estado local.
