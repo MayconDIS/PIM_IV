@@ -224,10 +224,11 @@ namespace NexTI_API.Tests
             db.Fases.Add(new Fase { CodigoFase = "logica", Descricao = "Lógica" });
             await db.SaveChangesAsync();
 
-            var resultado = await new ConteudoService(db).CriarFlashcardAsync("logica", "  O que é SM-2? ", " Repetição espaçada ", "   ");
+            var resultado = await new ConteudoService(db).CriarFlashcardAsync("  LOGICA ", "  O que é SM-2? ", " Repetição espaçada ", "   ");
 
             Assert.True(resultado.Sucesso);
-            Assert.Equal("O que é SM-2?", resultado.Valor!.Frente);
+            Assert.Equal("logica", resultado.Valor!.CodigoFase);
+            Assert.Equal("O que é SM-2?", resultado.Valor.Frente);
             Assert.Equal("Repetição espaçada", resultado.Valor.Verso);
             Assert.Null(resultado.Valor.Dica);
         }

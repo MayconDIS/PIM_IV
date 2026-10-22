@@ -172,7 +172,12 @@ namespace NexTI_API.Data.Migrations
                     b.HasIndex("FlashcardId")
                         .HasDatabaseName("ix_progresso_flashcards_flashcard_id");
 
-                    b.ToTable("progresso_flashcards", (string)null);
+                    b.ToTable("progresso_flashcards", null, t =>
+                        {
+                            t.HasTrigger("tg_progresso_historico");
+                        });
+
+                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
                 });
 
             modelBuilder.Entity("NexTI_API.Models.Prova", b =>
@@ -286,7 +291,12 @@ namespace NexTI_API.Data.Migrations
                         .IsUnique()
                         .HasDatabaseName("ix_usuarios_username");
 
-                    b.ToTable("usuarios", (string)null);
+                    b.ToTable("usuarios", null, t =>
+                        {
+                            t.HasTrigger("tg_usuarios_protege_gamificacao");
+                        });
+
+                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
                 });
 
             modelBuilder.Entity("tb_prova_questao", b =>

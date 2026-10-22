@@ -1,0 +1,111 @@
+@startuml Modelo Logico Nex_TI
+' Modelo lógico do banco do Nex_TI: tabelas, chaves primárias (PK) e estrangeiras (FK).
+' Fonte: sistema/apps/api/Data (migrations InicialAzureSql e ObjetosDoBanco).
+skinparam monochrome true
+skinparam shadowing false
+skinparam linetype ortho
+skinparam defaultFontName Arial
+hide circle
+hide methods
+
+title Modelo Lógico — Nex_TI
+
+entity usuarios {
+  * id <<PK>>
+  --
+  * username <<único>>
+  * email <<único>>
+  * senha_hash
+  * nivel
+  * xp
+  * moedas
+  * data_criacao
+}
+
+entity fases {
+  * codigo_fase <<PK>>
+  --
+  * descricao
+}
+
+entity flashcards {
+  * id <<PK>>
+  --
+  * codigo_fase <<FK>>
+  * frente
+  * verso
+  dica
+  opcoes
+  correta
+}
+
+entity progresso_flashcards {
+  * usuario_id <<PK, FK>>
+  * flashcard_id <<PK, FK>>
+  --
+  * repeticoes
+  * intervalo_dias
+  * fator_facilidade
+  * data_proxima_revisao
+}
+
+entity tb_historico_revisoes {
+  * id_historico <<PK>>
+  --
+  * usuario_id <<FK>>
+  * flashcard_id <<FK>>
+  * repeticoes
+  * intervalo_dias
+  * fator_facilidade
+  * data_proxima_revisao
+  * data_revisao
+}
+
+entity tb_areas_conhecimento {
+  * id_area <<PK>>
+  --
+  * nome_area
+}
+
+entity tb_questoes {
+  * id_questao <<PK>>
+  --
+  * id_area <<FK>>
+  * enunciado
+  origem
+}
+
+entity tb_alternativas {
+  * id_alternativa <<PK>>
+  --
+  * id_questao <<FK>>
+  * texto
+  * is_correta
+}
+
+entity tb_provas {
+  * id_prova <<PK>>
+  --
+  * ano
+  * tipo
+}
+
+entity tb_prova_questao {
+  * id_prova <<PK, FK>>
+  * id_questao <<PK, FK>>
+}
+
+fases ||--o{ flashcards
+usuarios ||--o{ progresso_flashcards
+flashcards ||--o{ progresso_flashcards
+usuarios ||--o{ tb_historico_revisoes
+flashcards ||--o{ tb_historico_revisoes
+tb_areas_conhecimento ||--o{ tb_questoes
+tb_questoes ||--o{ tb_alternativas
+tb_provas ||--o{ tb_prova_questao
+tb_questoes ||--o{ tb_prova_questao
+
+legend right
+  * = obrigatório (NOT NULL)
+endlegend
+@enduml
