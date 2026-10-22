@@ -245,6 +245,7 @@ td { padding: 10px; text-align: left; vertical-align: middle; }
 .col-width-73 { width: 73%; }
 
 /* Alturas de Imagens de Diagramas */
+.img-height-7 { max-height: 7.5cm; }
 .img-height-10 { max-height: 10cm; }
 .img-height-12 { max-height: 12cm; }
 .img-height-14 { max-height: 14cm; }
