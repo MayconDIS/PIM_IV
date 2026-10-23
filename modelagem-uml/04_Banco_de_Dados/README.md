@@ -4,10 +4,9 @@ O que o Manual do PIM IV pede na Etapa 7 e onde está cada coisa.
 
 | Pedido | Onde está |
 |---|---|
-| MER | [`MER Nex_TI.png`](MER%20Nex_TI.png) (notação de Chen) |
-| DER | [`DER Nex_TI.png`](DER%20Nex_TI.png) (tabelas, PK/FK e cardinalidade em pé de galinha) |
-| Modelo lógico | [`Modelo Logico Nex_TI.png`](Modelo%20Logico%20Nex_TI.png) |
-| Modelo físico | [`Modelo Fisico Nex_TI.png`](Modelo%20Fisico%20Nex_TI.png) |
+| MER (modelo conceitual) | [`MER Nex_TI.png`](MER%20Nex_TI.png) |
+| DER (modelo lógico) | [`DER Nex_TI.png`](DER%20Nex_TI.png): tabelas, colunas, PK, FK e cardinalidade |
+| Modelo físico | [`Modelo Fisico Nex_TI.png`](Modelo%20Fisico%20Nex_TI.png): as mesmas tabelas com os tipos do SQL Server |
 | Procedures e triggers | No script e na migration `ObjetosDoBanco` (lista abaixo) |
 | Script completo | [`sistema/database/NexTI_DB.sql`](../../sistema/database/NexTI_DB.sql): estrutura, objetos e todos os dados |
 

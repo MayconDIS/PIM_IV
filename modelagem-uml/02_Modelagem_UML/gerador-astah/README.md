@@ -1,7 +1,7 @@
 # Gerador do `Diagrams Nex_TI - PIM IV.asta`
 
 O `GerarDiagramasPimIV.java` monta, pela API do Astah, o arquivo com a modelagem do Nex_TI.
-São 36 diagramas:
+São 37 diagramas:
 
 | Diagrama | O que mostra |
 |---|---|
@@ -10,7 +10,8 @@ São 36 diagramas:
 | 3. Classes – camadas da API | Endpoints → interfaces dos serviços → classes → `AppDbContext` |
 | 4. Atividade | A sessão de estudo, com raias para Aluno, site/app, API e banco |
 | 5. MER | Entidades e relacionamentos do negócio, com cardinalidade |
-| 6. DER | As tabelas do SQL Server com tipos, PK, FK e cardinalidade |
+| 6. DER – modelo lógico | As tabelas com colunas, PK, FK e cardinalidade, com tipos genéricos |
+| 7. Modelo físico | As mesmas tabelas com os tipos do SQL Server |
 | Casos de uso/… | Para **cada um dos 15 casos de uso**, um diagrama de classes e um de sequência, tirados do código |
 
 Todo elemento de todo diagrama tem a explicação no campo **Definition**: classes, atributos,
@@ -21,10 +22,10 @@ Nos diagramas de classes (incluindo MER e DER) as caixas não se sobrepõem e as
 ângulo reto (retas ou em L), escolhidas para não passar por cima de outras caixas. Em cada caso
 de uso as classes ficam em camadas, de cima para baixo: tela → API → serviço → entidade.
 
-As imagens da pasta de cima (`*.png`) saem dos `.puml` do PlantUML. O Astah UML não tem o
-diagrama entidade-relacionamento próprio (só o Astah Professional), então o MER e o DER aqui são
-diagramas de classes com «entidade» e «tabela». As imagens em notação de Chen (MER) e pé de
-galinha (DER), e os modelos lógico e físico, ficam em `../../04_Banco_de_Dados`.
+Todos os diagramas do projeto saem daqui. As imagens principais da pasta de cima e as de
+`../../04_Banco_de_Dados` são cópias das exportadas para `../imagens-astah`. O Astah UML não tem
+diagrama entidade-relacionamento próprio, então o MER, o DER e o modelo físico são diagramas de
+classes com «entidade» e «tabela».
 
 ## Como gerar de novo
 
