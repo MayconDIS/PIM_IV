@@ -199,6 +199,33 @@
       }
     },
     {
+      "faseId": "fase23",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 30,
+        "moedas": 70
+      }
+    },
+    {
+      "faseId": "fase24",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 30,
+        "moedas": 70
+      }
+    },
+    {
+      "faseId": "fase25",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 30,
+        "moedas": 70
+      }
+    },
+    {
       "faseId": "bonus1",
       "acertos": 0,
       "total": 0,
