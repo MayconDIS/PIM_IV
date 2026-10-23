@@ -93,6 +93,7 @@ builder.Services.AddSingleton(new ChaveJwt(key));
 // Camada de serviços: regra de negócio fora dos endpoints (um por requisição, como o DbContext).
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IProgressoService, ProgressoService>();
+builder.Services.AddSingleton(TabelaDeRecompensas.Carregar());   // Data/Seed/recompensas.json
 builder.Services.AddScoped<IGamificacaoService, GamificacaoService>();
 builder.Services.AddScoped<IConteudoService, ConteudoService>();
 builder.Services.AddScoped<IAdminService, AdminService>();

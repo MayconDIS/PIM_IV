@@ -1,0 +1,498 @@
+{
+  "premios": [
+    {
+      "faseId": "fase1",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 5,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase2",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 5,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase3",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 5,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase4",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 5,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase5",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 5,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase6",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 10,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase7",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 10,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase8",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 10,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase9",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 10,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase10",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 10,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase11",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 15,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase12",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 15,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase13",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 15,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase14",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 15,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase15",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 15,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase16",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 20,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase17",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 20,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase18",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 20,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase19",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 20,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase20",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 20,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase21",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 30,
+        "moedas": 70
+      }
+    },
+    {
+      "faseId": "fase22",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 30,
+        "moedas": 70
+      }
+    },
+    {
+      "faseId": "bonus1",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 25,
+        "moedas": 15
+      }
+    },
+    {
+      "faseId": "bonus2",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 25,
+        "moedas": 15
+      }
+    },
+    {
+      "faseId": "bonus3",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 25,
+        "moedas": 15
+      }
+    },
+    {
+      "faseId": "bonus4",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 25,
+        "moedas": 15
+      }
+    },
+    {
+      "faseId": "teste-mod1",
+      "acertos": 20,
+      "total": 20,
+      "esperado": {
+        "xp": 25,
+        "moedas": 0
+      }
+    },
+    {
+      "faseId": "teste-mod1",
+      "acertos": 16,
+      "total": 20,
+      "esperado": {
+        "xp": 25,
+        "moedas": 0
+      }
+    },
+    {
+      "faseId": "teste-mod1",
+      "acertos": 14,
+      "total": 20,
+      "esperado": {
+        "xp": 25,
+        "moedas": 0
+      }
+    },
+    {
+      "faseId": "teste-mod1",
+      "acertos": 13,
+      "total": 20,
+      "esperado": {
+        "xp": 0,
+        "moedas": 0
+      }
+    },
+    {
+      "faseId": "teste-mod1",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 0,
+        "moedas": 0
+      }
+    },
+    {
+      "faseId": "teste-mod2",
+      "acertos": 20,
+      "total": 20,
+      "esperado": {
+        "xp": 25,
+        "moedas": 0
+      }
+    },
+    {
+      "faseId": "teste-mod2",
+      "acertos": 16,
+      "total": 20,
+      "esperado": {
+        "xp": 25,
+        "moedas": 0
+      }
+    },
+    {
+      "faseId": "teste-mod2",
+      "acertos": 14,
+      "total": 20,
+      "esperado": {
+        "xp": 25,
+        "moedas": 0
+      }
+    },
+    {
+      "faseId": "teste-mod2",
+      "acertos": 13,
+      "total": 20,
+      "esperado": {
+        "xp": 0,
+        "moedas": 0
+      }
+    },
+    {
+      "faseId": "teste-mod2",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 0,
+        "moedas": 0
+      }
+    },
+    {
+      "faseId": "teste-mod3",
+      "acertos": 20,
+      "total": 20,
+      "esperado": {
+        "xp": 25,
+        "moedas": 0
+      }
+    },
+    {
+      "faseId": "teste-mod3",
+      "acertos": 16,
+      "total": 20,
+      "esperado": {
+        "xp": 25,
+        "moedas": 0
+      }
+    },
+    {
+      "faseId": "teste-mod3",
+      "acertos": 14,
+      "total": 20,
+      "esperado": {
+        "xp": 25,
+        "moedas": 0
+      }
+    },
+    {
+      "faseId": "teste-mod3",
+      "acertos": 13,
+      "total": 20,
+      "esperado": {
+        "xp": 0,
+        "moedas": 0
+      }
+    },
+    {
+      "faseId": "teste-mod3",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 0,
+        "moedas": 0
+      }
+    },
+    {
+      "faseId": "teste-mod4",
+      "acertos": 20,
+      "total": 20,
+      "esperado": {
+        "xp": 25,
+        "moedas": 0
+      }
+    },
+    {
+      "faseId": "teste-mod4",
+      "acertos": 16,
+      "total": 20,
+      "esperado": {
+        "xp": 25,
+        "moedas": 0
+      }
+    },
+    {
+      "faseId": "teste-mod4",
+      "acertos": 14,
+      "total": 20,
+      "esperado": {
+        "xp": 25,
+        "moedas": 0
+      }
+    },
+    {
+      "faseId": "teste-mod4",
+      "acertos": 13,
+      "total": 20,
+      "esperado": {
+        "xp": 0,
+        "moedas": 0
+      }
+    },
+    {
+      "faseId": "teste-mod4",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 0,
+        "moedas": 0
+      }
+    },
+    {
+      "faseId": "teste-mod5",
+      "acertos": 20,
+      "total": 20,
+      "esperado": {
+        "xp": 50,
+        "moedas": 0
+      }
+    },
+    {
+      "faseId": "teste-mod5",
+      "acertos": 16,
+      "total": 20,
+      "esperado": {
+        "xp": 50,
+        "moedas": 0
+      }
+    },
+    {
+      "faseId": "teste-mod5",
+      "acertos": 14,
+      "total": 20,
+      "esperado": {
+        "xp": 0,
+        "moedas": 0
+      }
+    },
+    {
+      "faseId": "teste-mod5",
+      "acertos": 13,
+      "total": 20,
+      "esperado": {
+        "xp": 0,
+        "moedas": 0
+      }
+    },
+    {
+      "faseId": "teste-mod5",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 0,
+        "moedas": 0
+      }
+    },
+    {
+      "faseId": "fase-que-nao-existe",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 0,
+        "moedas": 0
+      }
+    }
+  ],
+  "niveis": [
+    {
+      "xp": 0,
+      "nivel": 1
+    },
+    {
+      "xp": 99,
+      "nivel": 1
+    },
+    {
+      "xp": 100,
+      "nivel": 3
+    },
+    {
+      "xp": 299,
+      "nivel": 3
+    },
+    {
+      "xp": 300,
+      "nivel": 6
+    },
+    {
+      "xp": 5000,
+      "nivel": 6
+    }
+  ]
+}
