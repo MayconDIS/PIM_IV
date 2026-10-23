@@ -48,7 +48,7 @@ test('deck de fase preserva todas as cartas', () => {
 
 test('fasesDoModulo segue a composição dos módulos', () => {
   assert.deepEqual(fasesDoModulo('teste-mod1'), ['fase1', 'fase2', 'fase3', 'fase4', 'fase5']);
-  assert.deepEqual(fasesDoModulo('teste-mod5'), ['fase21', 'fase22']);
+  assert.deepEqual(fasesDoModulo('teste-mod5'), ['fase21', 'fase22', 'fase23', 'fase24', 'fase25']);
   assert.deepEqual(fasesDoModulo('teste-mod9'), []);
 });
 
@@ -68,7 +68,8 @@ test('teste de módulo sorteia 20 questões de múltipla escolha', () => {
 });
 
 test('o teste do módulo 5 usa apenas as fases do ENADE', () => {
-  const frentesDoModulo = new Set([...BANCO_DE_DADOS.fase21, ...BANCO_DE_DADOS.fase22].map((c) => c.frente));
+  const fasesEnade = ['fase21', 'fase22', 'fase23', 'fase24', 'fase25'];
+  const frentesDoModulo = new Set(fasesEnade.flatMap((f) => BANCO_DE_DADOS[f]).map((c) => c.frente));
   for (const questao of montarTesteDoModulo('teste-mod5', { aleatorio: semSorteio })) {
     assert.ok(frentesDoModulo.has(questao.frente), `questão fora do módulo: ${questao.frente}`);
   }

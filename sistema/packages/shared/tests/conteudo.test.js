@@ -18,11 +18,11 @@ import {
 } from '../src/gamificacao.js';
 
 test('o conteúdo canônico tem o material completo', () => {
-  assert.equal(Object.keys(BANCO_DE_DADOS).length, 26);
+  assert.equal(Object.keys(BANCO_DE_DADOS).length, 29);
   const total = Object.values(BANCO_DE_DADOS).reduce((soma, cards) => soma + cards.length, 0);
-  assert.equal(total, 620);
+  assert.equal(total, 702);
   assert.equal(MODULOS.length, 5);
-  assert.equal(FASES.length, 22);
+  assert.equal(FASES.length, 25);
   assert.equal(BONUS.length, 4);
   assert.equal(TESTES.length, 5);
 });
@@ -62,7 +62,7 @@ test('cada card tem frente e verso, e os do ENADE têm alternativas', () => {
       }
     }
   }
-  assert.equal(comAlternativas, 100);
+  assert.equal(comAlternativas, 146); // 100 no estilo ENADE + 46 das provas oficiais
 });
 
 test('moduloDaFase devolve o módulo dono da fase', () => {
@@ -117,7 +117,8 @@ test('teste de módulo só paga quando o aluno passa', () => {
 test('a trilha avança na ordem e o ENADE libera o certificado', () => {
   assert.equal(proximaFase('fase5'), 'teste-mod1');
   assert.equal(proximaFase('teste-mod1'), 'fase6');
-  assert.equal(proximaFase('fase22'), 'teste-mod5');
+  assert.equal(proximaFase('fase22'), 'fase23');
+  assert.equal(proximaFase('fase25'), 'teste-mod5');
   assert.equal(proximaFase('teste-mod5'), null);
   assert.ok(liberaCertificado('teste-mod5'));
   assert.ok(!liberaCertificado('teste-mod4'));
