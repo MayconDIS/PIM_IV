@@ -1,19 +1,22 @@
 # Gerador do `Diagrams Nex_TI - PIM IV.asta`
 
-O `GerarDiagramasPimIV.java` monta, pela API do Astah, o arquivo com os diagramas do
-código atual do PIM IV.
+O `GerarDiagramasPimIV.java` monta, pela API do Astah, o arquivo com a modelagem do PIM IV:
+o PIM III melhorado. São 34 diagramas:
 
 | Diagrama | O que mostra |
 |---|---|
-| 1. Casos de Uso | Aluno, Tutor e Administrador (cada um herda do anterior) e o que cada perfil faz |
+| 1. Casos de Uso | Os 15 casos de uso do PIM III com os mesmos nomes, mais 2 novos; os não implementados ficam «planejado» |
 | 2. Classes – entidades | As classes de `sistema/apps/api/Models`, com atributos, herança e multiplicidades |
 | 3. Classes – camadas da API | Endpoints → interfaces dos serviços → classes → `AppDbContext` |
 | 4. Atividade | A sessão de estudo, com raias para Aluno, site/app, API e banco |
+| Casos de uso/… | Para cada caso de uso implementado, um diagrama de classes e um de sequência, tirados do código |
 
-As imagens da pasta de cima (`*.png`) saem dos `.puml` do PlantUML, que têm o mesmo
-conteúdo, mais o diagrama de sequência. O MER e os modelos lógico e físico ficam em
-`../../04_Banco_de_Dados`: o Astah UML não tem diagrama entidade-relacionamento (só o
-Astah Professional tem).
+Todo elemento (classe, interface, ator, caso de uso, pacote e diagrama) tem a explicação no
+campo **Definition**. A comparação caso a caso com o PIM III está em
+[`../RASTREABILIDADE_PIM3_PIM4.md`](../RASTREABILIDADE_PIM3_PIM4.md).
+
+As imagens da pasta de cima (`*.png`) saem dos `.puml` do PlantUML. O MER e os modelos lógico
+e físico ficam em `../../04_Banco_de_Dados`: o Astah UML não tem diagrama entidade-relacionamento.
 
 ## Como gerar de novo
 

@@ -1,6 +1,7 @@
 @startuml UseCase Diagram Nex_TI
-' Diagrama de Casos de Uso — o que cada perfil faz no Nex_TI (site, app e API)
-' Fonte: perfis em sistema/apps/api/Models/Perfis.cs e políticas de acesso em Program.cs
+' Diagrama de Casos de Uso — o PIM III melhorado: os mesmos 15 casos de uso, com os mesmos
+' nomes, ligados ao código atual; «planejado» = ainda não implementado; «novo no PIM IV» = não
+' existia no PIM III. Perfis em sistema/apps/api/Models/Perfis.cs.
 ' Sem 'monochrome': no servidor do PlantUML ele apaga os textos dos casos de uso e dos atores.
 skinparam NoteBackgroundColor #F5F5F5
 skinparam UsecaseBackgroundColor #F5F5F5
@@ -10,45 +11,55 @@ skinparam defaultFontName Arial
 skinparam packageStyle rectangle
 left to right direction
 
-title Diagrama de Casos de Uso — perfis do Nex_TI (PIM IV)
+title Diagrama de Casos de Uso — Nex_TI (o PIM III melhorado)
 
+actor "Usuário" as Usuario
 actor Aluno
 actor Tutor
 actor Administrador
+Aluno -|> Usuario
 Tutor -|> Aluno
 Administrador -|> Tutor
 
 rectangle "Sistema Nex_TI (site, app e API)" {
-  usecase "Cadastrar-se e fazer login" as UC_Login
-  usecase "Fazer diagnóstico de nivelamento" as UC_Diag
-  usecase "Estudar flashcards" as UC_Estudar
-  usecase "Realizar simulado ENADE" as UC_Enade
-  usecase "Ver estatísticas e progresso" as UC_Stats
-  usecase "Ajustar acessibilidade" as UC_A11y
-  usecase "Gerenciar minha conta" as UC_Conta
-  usecase "Calcular revisão (SM-2)" as UC_Sm2
-  usecase "Estudar sem internet\n(fila no app)" as UC_Offline
-  usecase "Exportar ou excluir\nmeus dados" as UC_Dados
-  usecase "Acompanhar alunos\n(painel do Tutor)" as UC_Painel
-  usecase "Editar ou excluir cartas" as UC_Moderar
-  usecase "Definir perfis de acesso" as UC_Perfis
+  usecase "Cadastrar Novo Usuário" as UC_Cadastro
+  usecase "Realizar Login" as UC_Login
+  usecase "Ajustar Acessibilidade" as UC_A11y
+  usecase "Gerenciar Minha Conta\n«novo no PIM IV»" as UC_Conta
+  usecase "Estudar Flashcards" as UC_Estudar
+  usecase "Realizar Teste de Nivelamento" as UC_Nivel
+  usecase "Realizar Simulado ENADE" as UC_Enade
+  usecase "Visualizar Painel de Desempenho" as UC_Painel
+  usecase "Criar Flashcards" as UC_Criar
+  usecase "Atribuir XP e Moedas" as UC_XP
+  usecase "Desbloquear Fases e Módulos" as UC_Fases
+  usecase "Estudar sem Internet (app)\n«novo no PIM IV»" as UC_Offline
+  usecase "Acompanhar Desempenho\ndos Usuários" as UC_Acompanhar
+  usecase "Gerenciar Conteúdo das Cartas" as UC_Conteudo
+  usecase "Gerenciar Perfis e Acessos" as UC_Perfis
+  usecase "Consultar Agente Especialista (IA)\n«planejado»" as UC_IA
+  usecase "Escalar Dúvida para Tutor\n«planejado»" as UC_Escalar
 }
 
-Aluno --> UC_Login
-Aluno --> UC_Diag
+Usuario --> UC_Cadastro
+Usuario --> UC_Login
+Usuario --> UC_A11y
+Usuario --> UC_Conta
 Aluno --> UC_Estudar
+Aluno --> UC_Nivel
 Aluno --> UC_Enade
-Aluno --> UC_Stats
-Aluno --> UC_A11y
-Aluno --> UC_Conta
-Tutor --> UC_Painel
-Tutor --> UC_Moderar
+Aluno --> UC_Painel
+Aluno --> UC_Criar
+Aluno --> UC_IA
+Tutor --> UC_Acompanhar
+Tutor --> UC_Conteudo
 Administrador --> UC_Perfis
 
-UC_Estudar ..> UC_Sm2 : <<include>>
-UC_Enade ..> UC_Sm2 : <<include>>
+UC_Estudar ..> UC_XP : <<include>>
+UC_Enade ..> UC_XP : <<include>>
 UC_Offline ..> UC_Estudar : <<extend>>
-UC_Dados ..> UC_Conta : <<extend>>
+UC_Fases ..> UC_Estudar : <<extend>>
+UC_Escalar ..> UC_IA : <<extend>>
 
-note "O Tutor faz tudo o que o Aluno faz,\ne o Administrador tudo o que o Tutor faz.\nA API confere o perfil gravado no token." as N1
+note "Cada perfil herda o anterior:\nUsuário → Aluno → Tutor → Administrador.\nA API confere o perfil gravado no banco.\n<<planejado>>: previsto no PIM III, ainda não feito." as N1
 @enduml
