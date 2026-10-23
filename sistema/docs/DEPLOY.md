@@ -66,8 +66,8 @@ publica a cada push em `main` que mexa na API. Configure no GitHub:
 | Variable | `AZURE_WEBAPP_NAME` | nome do App Service |
 | Secret | `AZURE_WEBAPP_PUBLISH_PROFILE` | App Service → *Download publish profile* (o XML inteiro) |
 
-No primeiro start, a API aplica a migration `InicialAzureSql` e insere as 26 fases,
-os 620 flashcards e o simulado ENADE. Para testar, abra
+No primeiro start, a API aplica a migration `InicialAzureSql` e insere as 29 fases,
+os 702 flashcards e as provas oficiais do ENADE (2017 e 2021). Para testar, abra
 `https://<app>.azurewebsites.net/api/status`.
 
 ## 2. Vercel (front-end)

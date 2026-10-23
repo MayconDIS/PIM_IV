@@ -1,0 +1,614 @@
+{
+  "provas": [
+    {
+      "ano": 2017,
+      "tipo": "ENADE",
+      "questoes": [
+        {
+          "numero": 10,
+          "area": "Matemática e Lógica",
+          "enunciado": "A álgebra booleana possui o operador unário ~ (NÃO) e os operadores binários * (E) e + (OU). A tabela verdade da fórmula G, para as proposições p, q e r, é:\n\np q r | G\nV V V | V\nV V F | F\nV F V | F\nV F F | F\nF V V | V\nF V F | V\nF F V | V\nF F F | V\n\nConsiderando a ordem de precedência dos operadores booleanos, a fórmula G possui a mesma tabela verdade da proposição",
+          "alternativas": [
+            "p + ~q * r.",
+            "p + q * ~r.",
+            "~p + q * r.",
+            "~p + ~q * r.",
+            "~p + q * ~r."
+          ],
+          "correta": 2
+        },
+        {
+          "numero": 11,
+          "area": "Banco de Dados",
+          "enunciado": "Num sistema para um clube recreativo, o diagrama de classes tem: Tipo_Associado (codigo, descricao, valorMensalidade) ligado a Associado com multiplicidade 1 para 0..*; e Associado (codigo, nome, endereco, telefone) ligado a Mensalidade (codigo, anomesreferencia, valormensalidade, datavencimento, valorpago, datapagamento) com multiplicidade 1 para 1..*.\n\nAvalie as afirmações:\nI. Haverá somente 12 mensalidades para cada associado, ou seja, elas não poderão ultrapassar os 12 meses do ano.\nII. Não existem associados sem mensalidades, nem mensalidades sem associado a elas relacionado.\nIII. Alterando-se o valor da mensalidade definido para cada tipo de associado, o sistema automaticamente altera os valores das mensalidades geradas anteriormente.\nIV. Poderão existir tipos de associados que não terão nenhum associado relacionado a eles.\n\nÉ correto apenas o que se afirma em",
+          "alternativas": [
+            "I e II.",
+            "I e III.",
+            "II e IV.",
+            "I, III e IV.",
+            "II, III e IV."
+          ],
+          "correta": 2
+        },
+        {
+          "numero": 12,
+          "area": "Engenharia de Software",
+          "enunciado": "Considere os requisitos de um sistema acadêmico de uma universidade:\nR1: o sistema deve permitir que cada professor realize o lançamento de notas das turmas nas quais lecionou;\nR2: o sistema deverá ser desenvolvido de forma a possibilitar seu transporte para outro sistema operacional em, no máximo, sessenta dias;\nR3: o sistema deve permitir que um estudante realize a sua matrícula nas disciplinas oferecidas em um semestre letivo;\nR4: o sistema atualiza a nota do estudante, permitindo sua visualização, em até dois segundos depois do momento que o professor a registra;\nR5: o sistema deve permitir que o auxiliar de serviços acadêmicos realize o cadastro de um estudante em não mais do que dez minutos de orientação.\n\nRepresentam requisitos não funcionais apenas os requisitos",
+          "alternativas": [
+            "R1, R2 e R3.",
+            "R1, R2 e R5.",
+            "R1, R3 e R4.",
+            "R2, R4 e R5.",
+            "R3, R4 e R5."
+          ],
+          "correta": 3
+        },
+        {
+          "numero": 13,
+          "area": "Engenharia de Software",
+          "enunciado": "Sobre o modelo CMMI, avalie as asserções e a relação proposta entre elas.\n\nI. O CMMI fornece diretrizes para a melhoria dos processos e habilidades organizacionais, incluindo o ciclo de vida de produtos e serviços, que abrange as fases de concepção, desenvolvimento, aquisição, entrega e manutenção.\n\nPORQUE\n\nII. As empresas brasileiras estão aderindo a programas de fomento à melhoria da qualidade de software, por meio da aplicação do modelo de maturidade CMMI, que é mais direcionado às pequenas e médias empresas, apesar de também ser aplicável em grandes organizações.",
+          "alternativas": [
+            "As asserções I e II são verdadeiras, e a II é uma justificativa correta da I.",
+            "As asserções I e II são verdadeiras, mas a II não é uma justificativa correta da I.",
+            "A asserção I é verdadeira, e a II é falsa.",
+            "A asserção I é falsa, e a II é verdadeira.",
+            "As asserções I e II são falsas."
+          ],
+          "correta": 2
+        },
+        {
+          "numero": 14,
+          "area": "Gestão de Projetos",
+          "enunciado": "A tabela apresenta as atividades de um projeto (predecessora; duração em dias):\nA (--; 3), B (A; 5), C (--; 12), D (--; 4), E (D; 2), F (D; 5), G (F; 7), H (E e G; 8), I (B; 11), J (C, H e I; 3).\n\nAvalie as afirmações:\nI. O caminho crítico é composto pelas atividades A, B, I e J.\nII. O caminho crítico tem 27 dias.\nIII. A atividade H faz parte do caminho crítico.\nIV. O projeto em pauta possui dois caminhos críticos.\n\nÉ correto apenas o que se afirma em",
+          "alternativas": [
+            "I e II.",
+            "I e IV.",
+            "II e III.",
+            "I, III e IV.",
+            "II, III e IV."
+          ],
+          "correta": 2
+        },
+        {
+          "numero": 16,
+          "area": "Programação Orientada a Objetos",
+          "enunciado": "Um diagrama de classes modela a transferência de materiais entre funcionários. RequisicaoTransferencia (dataRequisicao: date) tem duas associações navegáveis para Funcionario (nome: string), com os papéis \"origem\" e \"destino\" e multiplicidade 1. RequisicaoTransferencia também tem uma composição (losango cheio do seu lado) com Material (descricao: string, preco: double), navegável para Material, com papel \"material\" e multiplicidade 0..1 do lado da requisição e 1..* do lado de Material.\n\nAvalie as afirmações:\nI. A classe Funcionario é abstrata.\nII. Uma RequisicaoTransferencia só existe se estiver vinculada a um Material.\nIII. A classe Funcionario, em razão de sua associação, possui um atributo do tipo RequisicaoTransferencia.\nIV. Em uma implementação da classe RequisicaoTransferencia, é necessário adicionar um atributo simples do tipo Material.\n\nÉ correto o que se afirma em",
+          "alternativas": [
+            "II, apenas.",
+            "I e II, apenas.",
+            "III e IV, apenas.",
+            "I, III e IV, apenas.",
+            "I, II, III e IV."
+          ],
+          "correta": 0
+        },
+        {
+          "numero": 17,
+          "area": "Engenharia de Software",
+          "enunciado": "Considerando a etapa de manutenção no processo de desenvolvimento de software, avalie as afirmações:\nI. A fase de manutenção é uma parte explícita do modelo em cascata do processo de desenvolvimento de software.\nII. A atualização do sistema para inserir customizações é considerada um tipo de manutenção.\nIII. A depuração do programa é um processo específico da fase de desenvolvimento e um tipo de manutenção.\nIV. O acréscimo de novas funções a um sistema existente, sem perturbar sua operação, é considerado um tipo de manutenção.\nV. A manutenção do sistema está relacionada ao aumento do ciclo de vida do software.\n\nÉ correto apenas o que se afirma em",
+          "alternativas": [
+            "I e III.",
+            "IV e V.",
+            "I, II e III.",
+            "I, II, IV e V.",
+            "II, III, IV e V."
+          ],
+          "correta": 3
+        },
+        {
+          "numero": 18,
+          "area": "Redes e Sistemas Distribuídos",
+          "enunciado": "As redes de computadores estão por toda parte e compartilham recursos por meio de sistemas distribuídos, que comunicam e coordenam vários dispositivos.\n\nAssinale a opção que apresenta exemplos atuais de sistemas distribuídos.",
+          "alternativas": [
+            "Pesquisa na web, jogos on-line, e-commerce e o banco de dados das agências bancárias.",
+            "Jogos on-line, e-commerce, pesquisa no Windows e e-mails.",
+            "E-commerce, jogos em mídia física, pesquisa no Windows e redes sociais.",
+            "Pesquisa na web, jogos em mídia física, e-commerce e e-mails.",
+            "Pesquisa no Windows, pesquisa na web, jogos on-line e o banco de dados das agências bancárias."
+          ],
+          "correta": 0
+        },
+        {
+          "numero": 19,
+          "area": "Sistemas Operacionais",
+          "enunciado": "Conceitualmente, cada processo tem sua própria CPU virtual. Na realidade, a CPU troca a execução, a todo momento, de um processo para outro, mas é muito mais fácil pensar em um conjunto de processos sendo executados (pseudo) paralelamente do que tentar controlar o modo como a CPU faz esses chaveamentos. (Tanenbaum, adaptado)\n\nDe acordo com o exposto, o conceito descrito denomina-se",
+          "alternativas": [
+            "thread.",
+            "multiprocessador.",
+            "multiprogramação.",
+            "processo monothread.",
+            "máquina de estados finitos."
+          ],
+          "correta": 2
+        },
+        {
+          "numero": 21,
+          "area": "Engenharia de Software",
+          "enunciado": "A respeito dos modelos de processo de software, avalie as afirmações:\nI. São atividades do modelo incremental: especificação, desenvolvimento e validação.\nII. No modelo espiral, a fase de modelagem é responsável, entre outras atividades, pela estimativa, cronograma e análise de risco.\nIII. O modelo cascata sugere uma abordagem sequencial e sistemática para o desenvolvimento de software, iniciando na especificação de requisitos e finalizando com a entrega do software concluído.\n\nÉ correto o que se afirma em",
+          "alternativas": [
+            "II, apenas.",
+            "III, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "I, II e III."
+          ],
+          "correta": 3
+        },
+        {
+          "numero": 22,
+          "area": "Engenharia de Software",
+          "enunciado": "Um desenvolvedor recém-formado recebeu explicações sobre como a gerência de configuração funcionava. Avalie as afirmações:\nI. Inicialmente, para ter acesso à base de desenvolvimento, o profissional deve realizar uma operação de checkout para baixar os arquivos do projeto que estão armazenados no servidor.\nII. Quando mais de um desenvolvedor estiver modificando um mesmo documento, ao se tentar realizar um commit, pode ser necessário realizar uma operação de tag (release) para resolução do conflito entre a versão local e a versão mais recente no repositório.\nIII. No desenvolvimento de um novo caso de uso, em que diversos arquivos sejam modificados, é recomendada a criação de uma ramificação (branch).\nIV. A versão estável é o ramo principal de desenvolvimento, que segue do começo do desenvolvimento até o momento presente.\n\nÉ correto apenas o que se afirma em",
+          "alternativas": [
+            "I e II.",
+            "I e III.",
+            "II e IV.",
+            "I, III e IV.",
+            "II, III e IV."
+          ],
+          "correta": 1
+        },
+        {
+          "numero": 23,
+          "area": "Engenharia de Software",
+          "enunciado": "Verificações, validações e testes são fundamentais para certificar a qualidade do software. Avalie as afirmações:\nI. O teste funcional certifica se o software desempenha as funções especificadas nos requisitos.\nII. O teste de desempenho valida a conformidade da especificação do processo de desenvolvimento de software.\nIII. O teste de aceitação é realizado pelo cliente a fim de validar se aquilo que foi implementado é o que foi solicitado.\nIV. O teste de instalação, invariavelmente, é executado no local determinado pelo cliente para instalação do software.\nV. As técnicas de verificação e validação de software asseguram que o sistema que está sendo desenvolvido seja adequado ao seu propósito.\n\nÉ correto apenas o que se afirma em",
+          "alternativas": [
+            "I e IV.",
+            "I, III e V.",
+            "II, III e IV.",
+            "II, IV e V.",
+            "I, II, III e V."
+          ],
+          "correta": 1
+        },
+        {
+          "numero": 24,
+          "area": "Engenharia de Software",
+          "enunciado": "Muitos sistemas corporativos das décadas de 1970 e 1980 foram feitos em Cobol, com ADABAS e arquivos ISAM e VSAM, produtos que estão sendo descontinuados. A reengenharia desses sistemas com linguagens e bancos mais modernos é uma oportunidade de negócio. Avalie as afirmações:\nI. A dificuldade de reengenharia de sistemas antigos deve-se ao fato de que, na maioria das vezes, o desenvolvedor definia o sistema e esse já era o próprio processo da organização.\nII. O custo de alteração para modernização de uma linha de código em Cobol é alto; por isso, fazer a manutenção desses sistemas é menos dispendioso.\nIII. Uma estratégia de conversão dos referidos sistemas para uma linguagem orientada a objetos é definir uma estrutura de classes e métodos e realizar o refatoramento do código.\n\nÉ correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "III, apenas.",
+            "I e II, apenas.",
+            "II e III, apenas.",
+            "I, II e III."
+          ],
+          "correta": 4
+        },
+        {
+          "numero": 25,
+          "area": "Algoritmos e Estruturas de Dados",
+          "enunciado": "O fragmento C++ a seguir insere um nó em uma árvore binária.\n\nstruct noArvore {\n    int dado;\n    noArvore *esquerda;\n    noArvore *direita;\n};\n\nnoArvore *insere(noArvore *arvore, int valor) {\n    if (arvore == NULL) {\n        arvore = new noArvore;\n        arvore->esquerda = NULL;\n        arvore->direita = NULL;\n        arvore->dado = valor;\n    } else if (valor < arvore->dado) {\n        arvore->esquerda = insere(arvore->esquerda, valor);\n    } else {\n        arvore->direita = insere(arvore->direita, valor);\n    }\n    return arvore;\n}\n\nAssinale a opção que imprime os valores dos nós percorrendo a árvore em pré-ordem.",
+          "alternativas": [
+            "if (raiz != NULL) {\n    cout << raiz->dado << \" \";\n    preorder(raiz->esquerda);\n    preorder(raiz->direita);\n}",
+            "if (raiz != NULL) {\n    preorder(raiz->direita);\n    preorder(raiz->esquerda);\n    cout << raiz->dado << \" \";\n}",
+            "if (raiz != NULL) {\n    preorder(raiz->esquerda);\n    cout << raiz->dado << \" \";\n    preorder(raiz->direita);\n}",
+            "if (raiz != NULL) {\n    preorder(raiz->esquerda);\n    preorder(raiz->direita);\n    cout << raiz->dado << \" \";\n}",
+            "if (raiz != NULL) {\n    preorder(raiz->direita);\n    cout << raiz->dado << \" \";\n    preorder(raiz->esquerda);\n}"
+          ],
+          "correta": 0
+        },
+        {
+          "numero": 26,
+          "area": "Programação Orientada a Objetos",
+          "enunciado": "Uma calculadora feita com MVC tem dois modos: comum e probabilista. A classe Calculadora guarda uma variável c do tipo CalculadoraController; o método multiplica(valores) apenas retorna c.multiplica(valores), e alteraModo() faz c = new ProbabilistaController() se modo == 1, senão c = new OrdinarioController(). ProbabilistaController e OrdinarioController herdam de CalculadoraController e implementam multiplica(valores: double[]): double, formando uma família de algoritmos intercambiáveis.\n\nAvalie as afirmações:\nI. A hierarquia exibida ilustra o uso do padrão de projetos Strategy.\nII. O padrão composto MVC define a existência de um único controller e, portanto, a solução proposta não caracteriza o uso desse padrão.\nIII. O método multiplica da classe Calculadora chama o método multiplica de CalculadoraController, o que caracteriza uma conversão de interfaces e, portanto, o uso do padrão de projetos Adapter.\n\nÉ correto o que se afirma em",
+          "alternativas": [
+            "I, apenas.",
+            "II, apenas.",
+            "I e III, apenas.",
+            "II e III, apenas.",
+            "I, II e III."
+          ],
+          "correta": 0
+        },
+        {
+          "numero": 28,
+          "area": "Engenharia de Software",
+          "enunciado": "O processo de descobrir, analisar, documentar e verificar os serviços e restrições de um sistema é denominado engenharia de requisitos (Sommerville). Avalie as atribuições listadas, no que se refere à etapa de especificação de requisitos:\nI. Identificar as expectativas e necessidades dos stakeholders com relação ao software a ser desenvolvido.\nII. Distribuir os requisitos em categorias, explorar as relações entre eles e classificar sua importância para os stakeholders.\nIII. Produzir um documento de especificação de requisitos, de forma que todos os stakeholders possam entendê-lo.\nIV. Examinar a especificação do software para assegurar que todos os requisitos foram definidos sem inconsistências.\n\nSão atribuições na etapa de especificação de requisitos os itens",
+          "alternativas": [
+            "I e III, apenas.",
+            "I e IV, apenas.",
+            "II e III, apenas.",
+            "II e IV, apenas.",
+            "I, II, III e IV."
+          ],
+          "correta": 4
+        },
+        {
+          "numero": 29,
+          "area": "Matemática e Lógica",
+          "enunciado": "Uma pesquisa usa os conjuntos A (\"possui ensino superior\"), B (\"possui pós-graduação\") e C (\"possui pelo menos 5 anos de experiência\"). As expressões são:\nExpressão 1: x ∈ A ∧ x ∉ (B ∪ C)\nExpressão 2: x ∈ A − (B ∪ C)\nExpressão 3: x ∈ A ∧ x ∈ B ∧ x ∈ C\n\nUm programa em C usa a função contem(conjunto, p):\n/* condição 1 */\nif (contem(A, p) && !contem(B, p) && !contem(C, p)) { ... }\n/* condição 2 */\nelse if (contem(A, p) || contem(B, p) || contem(C, p)) { ... }\n\nAssinale a opção correta.",
+          "alternativas": [
+            "A condição 2 do programa é equivalente à expressão 3.",
+            "Pessoas com pós-graduação pertencem ao conjunto definido pela expressão 2.",
+            "A condição 1 do programa é verdadeira para todas as pessoas com ensino superior.",
+            "A condição 1 do programa e as expressões 1 e 2, que representam o mesmo subconjunto, são equivalentes.",
+            "A condição 2 do programa define o conjunto de pessoas que tem ensino superior, pós-graduação e pelo menos cinco anos de experiência em sua área de atuação."
+          ],
+          "correta": 3
+        },
+        {
+          "numero": 30,
+          "area": "Programação Orientada a Objetos",
+          "enunciado": "Considere o código Java:\n\npublic abstract class Impressora {\n    String nome;\n    public void imprimir() {}\n}\npublic class Laser extends Impressora {\n    public void imprimir() { System.out.println(\"Imprimindo na Laser\"); }\n}\nclass Matricial extends Impressora {\n    public void imprimir() { System.out.println(\"Imprimindo na Matricial\"); }\n}\npublic class JatoDeTinta extends Impressora {\n    public void imprimir() { System.out.println(\"Imprimindo na Jato de tinta\"); }\n}\npublic class Main {\n    public static void main(String args[]) {\n        Impressora imp[] = new Impressora[3];\n        imp[0] = new Laser();\n        imp[1] = new JatoDeTinta();\n        imp[2] = new Matricial();\n        for (int i = imp.length - 1; i >= 0; i--) {\n            imp[i].imprimir();\n        }\n    }\n}\n\nAvalie as afirmações:\nI. A execução resulta em: Imprimindo na Laser / Imprimindo na Matricial / Imprimindo na Jato de tinta.\nII. O código faz uso da técnica denominada polimorfismo.\nIII. O código não será compilado, pois o vetor imp foi instanciado por meio da classe abstrata Impressora.\n\nÉ correto o que se afirma em",
+          "alternativas": [
+            "II, apenas.",
+            "III, apenas.",
+            "I e II, apenas.",
+            "I e III, apenas.",
+            "I, II e III."
+          ],
+          "correta": 0
+        },
+        {
+          "numero": 31,
+          "area": "UX/UI e Requisitos",
+          "enunciado": "À medida que o projeto de uma interface evolui, quatro questões quase sempre aparecem: tempo de resposta, recursos de ajuda, tratamento de erros e nomes de comandos (Pressman). Avalie as afirmações:\nI. A análise de interfaces tem por objetivo identificar o perfil dos usuários e auxiliar na especificação do requisito não funcional de segurança pertinente ao perfil de acesso dos usuários.\nII. O requisito não funcional de segurança descreve as características relacionadas a inteligibilidade, modo de usar ou operar o sistema.\nIII. O requisito não funcional de confiabilidade descreve as características relacionadas ao tempo de resposta para processamento de dados ou informações.\nIV. O requisito não funcional de usabilidade descreve diretrizes de acessibilidade para pessoas com deficiência.\n\nÉ correto apenas o que se afirma em",
+          "alternativas": [
+            "I e III.",
+            "I e IV.",
+            "II e IV.",
+            "I, II e III.",
+            "II, III e IV."
+          ],
+          "correta": 1
+        },
+        {
+          "numero": 32,
+          "area": "Banco de Dados",
+          "enunciado": "Um banco guarda o resultado de uma eleição nas tabelas Partido (numero, nome, sigla), Candidato (numero, nome), em que o número do candidato é o número do seu partido, e Votacao (partido, votos, estado), com os votos de cada partido em cada estado.\n\nQual comando SQL seleciona os nomes dos candidatos, seus partidos e o total de votos de cada partido?",
+          "alternativas": [
+            "SELECT c.nome, p.nome, SUM(v.votos) FROM Partido p, Candidato c, Votacao v WHERE c.numero = p.numero and v.partido = c.numero;",
+            "SELECT c.nome, p.nome, COUNT(v.votos) FROM Partido p, Candidato c, Votacao v WHERE c.numero = p.numero and v.partido = c.numero GROUP BY c.nome, p.nome;",
+            "SELECT c.nome, p.nome, SUM(v.votos) FROM Partido p, Candidato c, Votacao v WHERE c.numero = p.numero and v.partido = c.numero GROUP BY c.nome, p.nome;",
+            "SELECT c.nome, p.nome, v.votos FROM Partido p, Candidato c, Votacao v WHERE c.numero = p.numero and v.partido = c.numero GROUP BY c.nome, p.nome, SUM(v.votos);",
+            "SELECT c.nome, p.nome, COUNT(v.votos) FROM Partido p, Candidato c, Votacao v WHERE c.numero = p.numero and v.partido = c.numero GROUP BY c.nome, p.nome, v.votos;"
+          ],
+          "correta": 2
+        },
+        {
+          "numero": 33,
+          "area": "Algoritmos e Estruturas de Dados",
+          "enunciado": "Um programador implementou a ordenação por inserção para vetor[1..9], mas o algoritmo não funciona:\n\n01 para i <- 2 até 9 faça\n02    valor <- vetor[i]\n03    j <- i - 1\n04    enquanto ((j >= 1) e (valor < vetor[j])) faça\n05       vetor[i] <- vetor[j]\n06       j <- j - 1\n07       se (j = 0) então\n08          interrompa\n09       fim se\n10    fim enquanto\n11    vetor[j + 1] <- valor\n12 fim para\n\nQual linha e comando devem ser substituídos para que o algoritmo ordene o vetor de forma crescente?",
+          "alternativas": [
+            "Linha 01; para i <- 1 até 9 faça",
+            "Linha 03; j <- i",
+            "Linha 04; enquanto ((j >= 1) ou (valor < vetor[j])) faça",
+            "Linha 05; vetor[j + 1] <- vetor[j]",
+            "Linha 11; vetor[j] <- valor"
+          ],
+          "correta": 3
+        },
+        {
+          "numero": 34,
+          "area": "Banco de Dados",
+          "enunciado": "Inspirado no diálogo entre Chicó e João Grilo (Auto da Compadecida), um modelo de dados tem a entidade pessoa (codigo, que é o identificador; rg; cpf; nome) ligada pelo relacionamento possui à entidade cavalo (codigo, que é o identificador; raca; eBento?). A cardinalidade (1,1) aparece junto de pessoa e (0,1) junto de cavalo.\n\nAvalie as afirmações:\nI. O Chicó e a velha poderão ser cadastrados na entidade pessoa.\nII. O Chicó e a velha poderão ter mais que um cavalo cadastrados.\nIII. O atributo rg da entidade pessoa pode ter a função de chave primária nessa entidade.\nIV. O cavalo deverá ter no mínimo uma pessoa e uma pessoa poderá ser cadastrada sem a necessidade de ter um cavalo.\n\nÉ correto apenas o que se afirma em",
+          "alternativas": [
+            "I e III.",
+            "I e IV.",
+            "II e III.",
+            "I, II e IV.",
+            "II, III e IV."
+          ],
+          "correta": 1
+        },
+        {
+          "numero": 35,
+          "area": "UX/UI e Requisitos",
+          "enunciado": "Num site de venda de ingressos, os links para cada show são imagens. O web designer implementou cada link assim, para que usuários de leitores de tela recebam um texto informativo:\n\n<a href=\"link-area-venda-ingresso\">\n    <img src=\"imagem-show.jpg\" alt=\"identificação do show\" />\n</a>\n\nConsiderando o uso do atributo alt e a interação humano-computador, o web designer atendeu o requisito de",
+          "alternativas": [
+            "segurança no uso, pois se uma imagem tiver baixa resolução, o texto associado possibilita identificar o conteúdo do link.",
+            "facilidade de aprendizado, pois imagens aliadas a textos informativos ajudam o usuário a aprender os caminhos de navegação.",
+            "acessibilidade, pois a possibilidade de acesso à página por pessoas com deficiência visual oferece condições de igualdade na interação com o sistema web.",
+            "ergonomia, pois imagens em links causam cansaço visual em smartphones e o atributo alt substitui a imagem por texto.",
+            "comunicabilidade, pois se uma imagem não comunica adequadamente a informação, o texto alternativo deve complementá-la."
+          ],
+          "correta": 2
+        }
+      ]
+    },
+    {
+      "ano": 2021,
+      "tipo": "ENADE",
+      "questoes": [
+        {
+          "numero": 9,
+          "area": "Engenharia de Software",
+          "enunciado": "A etapa de definição de requisitos estabelece quais funções são requeridas pelo sistema e as restrições sobre a operação e o desenvolvimento do software. Os requisitos podem ser funcionais ou não funcionais (Sommerville).\n\nAssinale a alternativa em que o item é um requisito funcional.",
+          "alternativas": [
+            "O software deve ser operacionalizado no sistema Linux.",
+            "O tempo de desenvolvimento não deve ultrapassar seis meses.",
+            "O software deve emitir relatórios de compras a cada quinze dias.",
+            "O tempo de resposta do sistema não deve ultrapassar 30 segundos.",
+            "A base de dados deve ser protegida para acesso apenas de usuários autorizados."
+          ],
+          "correta": 2
+        },
+        {
+          "numero": 11,
+          "area": "Algoritmos e Estruturas de Dados",
+          "enunciado": "O código Java a seguir implementa uma Pilha encadeada.\n\npublic class No {\n    public int dado;\n    public No prox;\n    public No(int dado) { this.dado = dado; }\n}\npublic class PilhaEncadeada {\n    private No topo;\n    public int pop() {\n        if (topo == null) return -1;\n        No lixo = topo;\n        topo = topo.prox;\n        lixo.prox = null;\n        return lixo.dado;\n    }\n    public int top() {\n        if (topo == null) return -1;\n        return topo.dado;\n    }\n}\n\nAssinale a opção com a implementação correta do método push.",
+          "alternativas": [
+            "No novo = new No(elemento);\nif (topo == null) topo = novo;\nelse topo.prox = novo;",
+            "No novo = new No(elemento);\ntopo = novo;",
+            "topo.dado = elemento;",
+            "No novo = new No(elemento);\nwhile (topo != null) topo = topo.prox;\ntopo.prox = novo;",
+            "No novo = new No(elemento);\nnovo.prox = topo;\ntopo = novo;"
+          ],
+          "correta": 4
+        },
+        {
+          "numero": 12,
+          "area": "Engenharia de Software",
+          "enunciado": "Uma fábrica de software usa Scrum, eXtreme Programming (XP) e quadro Kanban. Avalie as afirmações:\nI. Métodos ágeis são baseados em ciclos iterativos e incrementais que se concentram no desenvolvimento rápido e na flexibilidade às mudanças, com a participação do cliente no processo de software.\nII. Uma forte característica da XP é a garantia da qualidade do código produzido e, para isso, os desenvolvedores produzem testes automatizados antes mesmo de codificar uma funcionalidade.\nIII. O planejamento no Scrum é baseado na elaboração dos itens do product backlog, que é uma lista de funcionalidades desejadas pelo cliente, sendo o Scrum Master o responsável por gerenciá-lo.\nIV. O quadro Kanban permite monitorar a evolução das tarefas necessárias durante o processo ágil, possibilitando um acompanhamento visual das atividades em construção.\n\nÉ correto apenas o que se afirma em",
+          "alternativas": [
+            "II.",
+            "I e III.",
+            "I, II e IV.",
+            "I, III e IV.",
+            "II, III e IV."
+          ],
+          "correta": 2
+        },
+        {
+          "numero": 13,
+          "area": "Algoritmos e Estruturas de Dados",
+          "enunciado": "As variáveis pilha e fila são uma Pilha e uma Fila. Um programador executou:\n\npilha.push('A'); pilha.push('B'); pilha.push('C');\nfila.enqueue(pilha.top());\nfila.enqueue(pilha.top());\nfila.enqueue('D');\npilha.push(fila.dequeue());\nfila.enqueue(fila.dequeue());\nfila.enqueue(pilha.pop());\npilha.push('E');\nfila.enqueue('E');\npilha.pop();\n\nAo imprimir o conteúdo de pilha e fila, respectivamente, seria exibido:",
+          "alternativas": [
+            "pilha: topo → C → A → E; fila: início → D → A → A → E",
+            "pilha: topo → A; fila: início → D → B → C → E",
+            "pilha: topo → C → B → A; fila: início → D → C → C → E",
+            "pilha: topo → B → A; fila: início → D → B → C → E",
+            "pilha: topo → C → B → A; fila: início → D → B → C → E"
+          ],
+          "correta": 2
+        },
+        {
+          "numero": 14,
+          "area": "Gestão de Projetos",
+          "enunciado": "Um projeto de integração de um ERP com um CRM não implementou todos os serviços esperados e há falhas nos já implementados. Uma auditoria identificou desentendimentos entre os membros da equipe; os membros da qualidade não compreendem o que deve ser avaliado; demandas de novos solicitantes aparecem constantemente; e o patrocinador demora muito a responder às solicitações. Tudo isso atrasou o projeto e estourou o orçamento.\n\nO gerente de projeto deve priorizar o gerenciamento de",
+          "alternativas": [
+            "custo.",
+            "tempo.",
+            "escopo.",
+            "qualidade.",
+            "partes interessadas."
+          ],
+          "correta": 4
+        },
+        {
+          "numero": 17,
+          "area": "Banco de Dados",
+          "enunciado": "Um banco de dados bancário tem, entre outras, as tabelas CLIENTE (COD_CLIENTE, NOM_CLIENTE, ...), CONTA (NUM_CONTA, COD_CLIENTE, ...) e HISTORICO_MOVIMENTACAO (COD_HISTORICO_MOVIMENTACAO, NUM_CONTA, VAL_MOVIMENTACAO, DTA_MOVIMENTACAO, ...).\n\nIndique a consulta SQL que recupera o nome dos clientes e o valor médio movimentado por eles em sua conta até o momento, exibindo primeiro os clientes com maior média.",
+          "alternativas": [
+            "SELECT CL.NOME, HM.VAL_MOVIMENTADO FROM CLIENTE CL INNER JOIN CONTA CO ON CL.COD_CLIENTE = CO.COD_CLIENTE INNER JOIN HISTORICO_MOVIMENTACAO HM ON CO.NUM_CONTA = HM.NUM_CONTA ORDER BY HM.VAL_MOVIMENTADO",
+            "SELECT CL.NOME, AVG(HM.VAL_MOVIMENTADO) FROM CLIENTE CL INNER JOIN CONTA CO ON CL.COD_CLIENTE = CO.COD_CLIENTE INNER JOIN HISTORICO_MOVIMENTACAO HM ON CO.NUM_CONTA = HM.NUM_CONTA ORDER BY HM.VAL_MOVIMENTADO DESC",
+            "SELECT CL.NOME, AVG(HM.VAL_MOVIMENTADO) FROM CLIENTE CL INNER JOIN CONTA CO ON CL.COD_CLIENTE = CO.COD_CLIENTE INNER JOIN HISTORICO_MOVIMENTACAO HM ON CO.NUM_CONTA = HM.NUM_CONTA GROUP BY CL.COD_CLIENTE, CL.NOME ORDER BY AVG(HM.VAL_MOVIMENTADO) DESC",
+            "SELECT CL.NOME, AVG(HM.VAL_MOVIMENTADO) FROM CLIENTE CL LEFT OUTER JOIN CONTA CO ON CL.COD_CLIENTE = CO.NUM_CONTA LEFT OUTER JOIN HISTORICO_MOVIMENTACAO HM ON CO.NUM_CONTA = HM.COD_HISTORICO_MOVIMENTACAO GROUP BY CL.NOME ORDER BY AVG(HM.VAL_MOVIMENTADO) DESC",
+            "SELECT CL.NOME, AVG(HM.VAL_MOVIMENTADO) FROM CLIENTE CL LEFT OUTER JOIN CONTA CO ON CL.COD_CLIENTE = CO.COD_CLIENTE LEFT OUTER JOIN HISTORICO_MOVIMENTACAO HM ON CO.NUM_CONTA = HM.NUM_CONTA GROUP BY CL.NOME ORDER BY AVG(HM.VAL_MOVIMENTADO) DESC"
+          ],
+          "correta": 2
+        },
+        {
+          "numero": 18,
+          "area": "Engenharia de Software",
+          "enunciado": "A engenharia de requisitos tem quatro subprocessos: estudo de viabilidade, elicitação, especificação e validação (Sommerville). Uma equipe vai desenvolver um software de Suporte Técnico; o estudo de viabilidade já foi aprovado e ela seguirá os outros três subprocessos.\n\nQuais artefatos podem ser usados nesses três subprocessos?",
+          "alternativas": [
+            "Documento de entrevista com usuários; modelo de caso de uso para os requisitos funcionais; prototipação de telas.",
+            "Documento de estudo de viabilidade; modelo de caso de uso para os requisitos funcionais; prototipação de telas.",
+            "Matriz de rastreabilidade; modelo de caso de uso para os requisitos não-funcionais; prototipação de telas.",
+            "Documento de entrevista com usuários; modelo de caso de uso para os requisitos não-funcionais; matriz de rastreabilidade.",
+            "Documento de estudo de viabilidade; modelo de caso de uso para os requisitos funcionais; matriz de rastreabilidade."
+          ],
+          "correta": 0
+        },
+        {
+          "numero": 19,
+          "area": "Engenharia de Software",
+          "enunciado": "A respeito dos estilos e padrões arquiteturais, avalie as afirmações:\nI. Em arquiteturas orientadas a objetos, a comunicação entre os componentes do software é realizada por intermédio da troca de mensagens.\nII. As arquiteturas monolíticas consistem de um sistema dividido em pequenas partes, possibilitando que estas tenham sua manutenção, execução e evolução individual.\nIII. No padrão MVC, a camada de Modelo armazena as interações realizadas no Controle, podendo ser apresentadas/manipuladas posteriormente na Visão.\nIV. Nas arquiteturas de microsserviços, o software possui componentes altamente acoplados, dificultando a manutenção.\n\nÉ correto apenas o que se afirma em",
+          "alternativas": [
+            "I e III.",
+            "II e III.",
+            "II e IV.",
+            "I, II e IV.",
+            "I, III e IV."
+          ],
+          "correta": 0
+        },
+        {
+          "numero": 20,
+          "area": "UX/UI e Requisitos",
+          "enunciado": "Uma secretaria municipal vai criar um site para pessoas da terceira idade, com orientações de saúde, eventos esportivos e publicação de fotos que podem ser curtidas e comentadas. A maioria desse público acessa a internet pelo celular ou tablet, e uma parte prefere computadores.\n\nAvalie as afirmações:\nI. A segurança no uso é um fator crítico de usabilidade a ser considerado no projeto, tendo em vista que pessoas da terceira idade são temerosas quanto ao registro de dados pessoais e confidenciais em sites e aplicativos.\nII. A responsividade, que pressupõe o uso de valores relativos para definir as dimensões de elementos na estilização de páginas HTML, deve ser considerada, tendo em vista o acesso por dispositivos com diferentes tamanhos de tela.\nIII. A construção de protótipos pode antecipar problemas de design de interação e minimizar custos, e é viável para uma comunicação mais objetiva com o público-alvo, possibilitando validar a usabilidade e a experiência do usuário.\nIV. O design participativo é um processo de design de IHC viável para direcionar o projeto, pois o público-alvo tende a apresentar dificuldades no manuseio de tecnologias da informação e da comunicação.\n\nÉ correto apenas o que se afirma em",
+          "alternativas": [
+            "I e II.",
+            "I e III.",
+            "II e IV.",
+            "I, III e IV.",
+            "II, III e IV."
+          ],
+          "correta": 4
+        },
+        {
+          "numero": 21,
+          "area": "Engenharia de Software",
+          "enunciado": "A Gestão de Configuração de Software estabelece um conjunto de atividades para gerenciar alterações durante todo o ciclo de vida de um software (Pressman).\n\nAssinale a opção correta acerca das atividades de gestão de configuração de software.",
+          "alternativas": [
+            "Identificação de itens na configuração de software, gerenciamento de alterações, validação de versões e controle de qualidade.",
+            "Identificação de objetos na configuração de software, controle de versão, controle de alterações, auditoria de configuração e relatório de status.",
+            "Gerência de projeto, gerência de configuração de software, ciclo de vida do projeto, processo de software e evolução das configurações.",
+            "Construção de modelo de requisitos, métricas para modelo de projeto, métricas de controle de versão e relatório de manutenção.",
+            "Identificação de alterações, controle de versão, mapeamento de alteração e notificação da alteração aos envolvidos."
+          ],
+          "correta": 1
+        },
+        {
+          "numero": 22,
+          "area": "Engenharia de Software",
+          "enunciado": "Sobre o processo de Gerência de Configuração de Software (GCS), avalie as afirmações:\nI. O controle de versão possibilita o compartilhamento de dados e a edição colaborativa, permitindo a gestão de diferentes ramos de desenvolvimento e a existência de diferentes versões de forma simultânea.\nII. A auditoria de configuração é uma atividade de garantia de qualidade que tem por objetivo assegurar que a qualidade do software seja mantida quando feitas alterações requisitadas.\nIII. O relatório de status de configuração tem por objetivo manter o cliente informado sobre as alterações, e deve ser gerado ao final do processo.\nIV. A GCS proporciona atividades de acompanhamento e controle de mudanças que se iniciam logo depois que o software for fornecido ao cliente e colocado em operação.\n\nÉ correto apenas o que se afirma em",
+          "alternativas": [
+            "I e II.",
+            "II e III.",
+            "III e IV.",
+            "I, II e IV.",
+            "I, III e IV."
+          ],
+          "correta": 0
+        },
+        {
+          "numero": 23,
+          "area": "Engenharia de Software",
+          "enunciado": "A evolução de sistemas legados se divide em manutenção, modernização e substituição. Um ERP já implantado integra todos os departamentos de uma empresa, e surgiu a necessidade de criar um relatório gerencial de comissão da equipe de vendas.\n\nNesse contexto, a manutenção a ser realizada é",
+          "alternativas": [
+            "corretiva.",
+            "evolutiva.",
+            "funcional.",
+            "preventiva.",
+            "adaptativa."
+          ],
+          "correta": 1
+        },
+        {
+          "numero": 24,
+          "area": "Engenharia de Software",
+          "enunciado": "Num sistema web de delivery, o analista de teste descreveu:\n01 – Verificar se o método \"Finalizar Pedido\" da classe \"Pedido\" está funcionando corretamente.\n02 – Garantir que o sistema funcione corretamente em diferentes navegadores.\n03 – O sistema deve passar por testes rigorosos na estrutura lógica interna do software.\n04 – O sistema deve garantir, no mínimo, o registro de 100 pedidos simultâneos.\n05 – O usuário deve testar o sistema em um ambiente controlado sob a supervisão dos desenvolvedores.\n\nAvalie as afirmações:\nI. A descrição 01 deve ser verificada com teste unitário.\nII. A descrição 02 deve ser executada com a abordagem caixa-branca.\nIII. A descrição 03 deve ser executada com a abordagem caixa-preta.\nIV. A descrição 04 deve ser verificada com teste de carga.\nV. A descrição 05 deve ser classificada como teste alfa.\n\nÉ correto apenas o que se afirma em",
+          "alternativas": [
+            "II e III.",
+            "I, II e IV.",
+            "I, III e V.",
+            "I, IV e V.",
+            "II, III, IV e V."
+          ],
+          "correta": 3
+        },
+        {
+          "numero": 25,
+          "area": "Engenharia de Software",
+          "enunciado": "Uma empresa de piscicultura pediu com extrema urgência um sistema para gerenciar a criação dos peixes, das fases de alevino e engorda até a venda, registrando mortandade e rações.\n\nAvalie as afirmações sobre o processo de desenvolvimento a usar:\nI. Deve ser adotado um processo baseado no modelo cascata, pois ele se adapta melhor a cenários com muitas mudanças.\nII. Por se tratar de uma aplicação com escopo pequeno, o modelo espiral deverá ser utilizado, já que reduzirá riscos por meio da prototipação de cada fase dos peixes e diminuirá o tempo de entrega.\nIII. O modelo incremental deve ser utilizado, já que partes do sistema referentes à fase inicial dos peixes poderiam ser disponibilizadas, enquanto as demais estão nas etapas de concepção e desenvolvimento.\nIV. Em razão da extrema urgência, a empresa deve elaborar seu processo utilizando o modelo RAD (Rapid Application Development).\n\nÉ correto apenas o que se afirma em",
+          "alternativas": [
+            "I.",
+            "IV.",
+            "I e II.",
+            "II e III.",
+            "III e IV."
+          ],
+          "correta": 4
+        },
+        {
+          "numero": 26,
+          "area": "Cibersegurança e LGPD",
+          "enunciado": "Empreender em computação exige observar a legislação, como a Lei Geral de Proteção de Dados Pessoais (LGPD, Lei n. 13.709/2018).\n\nAssinale os fundamentos da disciplina da proteção de dados pessoais, previstos no art. 2º da LGPD.",
+          "alternativas": [
+            "O direito ao usuário; as obrigações das organizações nacionais ou estrangeiras; obrigatoriedade do consentimento; a livre iniciativa, a livre concorrência e a defesa do consumidor; os direitos humanos e a cidadania; e a regulação da ANPD.",
+            "O direito à revogação de um consentimento; a transferência de dados para outro fornecedor; a solicitação de remoção de dados pessoais; a inviolabilidade da intimidade, da honra e da imagem; o desenvolvimento econômico e tecnológico e a inovação; a preservação da vida e da integridade física.",
+            "O respeito à privacidade; obrigatoriedade do consentimento; os deveres dos usuários finais; os deveres das organizações nacionais ou estrangeiras; o código de defesa do consumidor; e a obrigatoriedade do respeito à honra e à imagem.",
+            "O direito ao anonimato; a liberdade de expressão; a inviolabilidade da intimidade; medidas preventivas de segurança; o direito ao recurso e revisão; a administração de riscos e falhas; os agentes de tratamento; e a regulação da ANPD.",
+            "O respeito à privacidade; a autodeterminação informativa; a liberdade de expressão, de informação, de comunicação e de opinião; a inviolabilidade da intimidade, da honra e da imagem; o desenvolvimento econômico e tecnológico e a inovação; a livre iniciativa, a livre concorrência e a defesa do consumidor; e os direitos humanos, o livre desenvolvimento da personalidade, a dignidade e o exercício da cidadania."
+          ],
+          "correta": 4
+        },
+        {
+          "numero": 27,
+          "area": "Matemática e Lógica",
+          "enunciado": "Os profissionais de TI precisam converter números entre as bases binária (2), octal (8), decimal (10) e hexadecimal (16).\n\nFazendo a conversão da soma (1001)₂ + (15)₈ + (FF)₁₆, qual é o número equivalente na base decimal?",
+          "alternativas": [
+            "(188)₁₀",
+            "(215)₁₀",
+            "(277)₁₀",
+            "(316)₁₀",
+            "(345)₁₀"
+          ],
+          "correta": 2
+        },
+        {
+          "numero": 28,
+          "area": "Sistemas Operacionais",
+          "enunciado": "O sistema operacional é um gerenciador de recursos. É uma péssima ideia permitir que os programas tenham acesso sem restrição à memória uns dos outros: um programa com defeito ou malicioso pode travar outro, produzir resultados incorretos ou afetar todo o sistema (Stuart, adaptado).\n\nA atividade com que o sistema operacional garante essa proteção é",
+          "alternativas": [
+            "o programa antivírus.",
+            "o gerenciamento de memória.",
+            "o gerenciamento de arquivos.",
+            "o gerenciamento de processos.",
+            "o gerenciamento de entrada e saída."
+          ],
+          "correta": 1
+        },
+        {
+          "numero": 29,
+          "area": "Algoritmos e Estruturas de Dados",
+          "enunciado": "Considere o algoritmo:\n\nmat[1..3][1..5] = {{1, 2, -1, 2, 3}, {1, -3, 4, 2, 0}, {-3, 5, 2, 3, 4}}\nsl[1..3] = {0, 0, 0}\nx <- 0\npara i <- 1 até 3 faça\n    para j <- 1 até 5 faça\n        sl[i] <- sl[i] + mat[i][j]\n    fimpara\n    x <- x + sl[i]\nfimpara\nimprima x\n\nNo fim da execução, será exibido o valor",
+          "alternativas": [
+            "4.",
+            "7.",
+            "11.",
+            "22.",
+            "30."
+          ],
+          "correta": 3
+        },
+        {
+          "numero": 30,
+          "area": "Redes e Sistemas Distribuídos",
+          "enunciado": "Na sala dos professores há 3 máquinas na rede:\nPROFESSORES01: IP 175.16.10.200, máscara 255.255.255.0, gateway 175.16.1.1\nPROFESSORES02: IP 175.16.20.200, máscara 255.255.0.0, gateway 175.16.1.1\nPROFESSORES03: IP 175.16.30.200, máscara 255.255.0.0, gateway 175.16.1.1\n\nA estação PROFESSORES01 não consegue imprimir na impressora compartilhada pela PROFESSORES03. Que alteração resolve o problema?",
+          "alternativas": [
+            "Alterar o gateway da estação PROFESSORES03 para 175.16.10.200.",
+            "Alterar o endereço de IP da estação PROFESSORES01 para 175.16.30.200.",
+            "Alterar a máscara de sub-rede da estação PROFESSORES01 para 255.255.0.0.",
+            "Alterar a máscara de sub-rede da estação PROFESSORES03 para 255.255.255.0.",
+            "Alterar o gateway da estação PROFESSORES01 para o endereço de IP 175.16.30.200."
+          ],
+          "correta": 2
+        },
+        {
+          "numero": 31,
+          "area": "Engenharia de Software",
+          "enunciado": "Um software de matrículas tem este diagrama de casos de uso: o ator Aluno se liga a \"Realizar Matrícula\"; \"Realizar Matrícula Fora do Prazo\" estende (<<extend>>) \"Realizar Matrícula\"; \"Realizar Matrícula Fora do Prazo\" inclui (<<include>>) \"Validar Aluno\"; e \"Validar via Retina\" e \"Validar via Digital\" são especializações de \"Validar Aluno\".\n\nAvalie as afirmações:\nI. O aluno poderá realizar a matrícula fora do prazo e as tratativas são as mesmas da matrícula feita dentro do prazo.\nII. O aluno poderá, opcionalmente, realizar a matrícula fora do prazo.\nIII. O sistema, obrigatoriamente, deverá validar o aluno que realizar a matrícula fora do prazo.\nIV. A validação do aluno deverá ser feita a partir da sua matrícula informada no sistema.\nV. A validação do aluno, a ser feita por retina, é diferente da validação feita pela digital.\n\nÉ correto apenas o que se afirma em",
+          "alternativas": [
+            "I e IV.",
+            "I, II e IV.",
+            "I, III e V.",
+            "II, III e V.",
+            "II, III, IV e V."
+          ],
+          "correta": 3
+        },
+        {
+          "numero": 32,
+          "area": "Gestão e Empreendedorismo",
+          "enunciado": "O Canvas de Osterwalder divide o modelo de negócio em nove componentes: segmentos de clientes, proposta de valor, canais, relacionamento com cliente, fontes de receita, recursos principais, atividades-chave, parcerias principais e estrutura de custo. É muito usado por startups.\n\nDiante deste contexto, conclui-se que as startups",
+          "alternativas": [
+            "financeiras desenvolvem primeiro o plano de negócios, para em seguida partir para o Canvas.",
+            "de big data utilizam o Canvas para a modelagem da validação da ideia de negócio, ou seja, do problema a ser resolvido.",
+            "de educação dispensam a utilização do Canvas, ou seja, os modelos de negócios deste segmento já nascem validados.",
+            "de logística utilizam o plano de negócios ao invés do Canvas, ou seja, elas nascem a partir de um produto mínimo viável (MVP).",
+            "de impacto social podem desconsiderar o componente 1 (segmentos de clientes), pois possuem somente um segmento."
+          ],
+          "correta": 1
+        },
+        {
+          "numero": 33,
+          "area": "Engenharia de Software",
+          "enunciado": "O CMMI descreve práticas, processos e atividades de gestão que guiam a melhoria do processo de software até o nível mais alto de maturidade. Avalie as afirmações:\nI. A maturidade implica no crescimento da capacidade e indica tanto a efetividade do processo de software quanto o grau de consistência com que este é aplicado nos diferentes projetos da organização.\nII. A maturidade do processo de software implica melhorias contínuas com base em etapas evolutivas que se caracterizam pela capacidade de inovação e absorção de novas tecnologias.\nIII. A maturidade do processo de software implica na sua institucionalização por meio de políticas e padrões organizacionais, levando a uma cultura corporativa de métodos, práticas e procedimentos com efetividade plenamente reconhecida.\nIV. Cada nível do CMMI implica na satisfação de um conjunto de metas de processo que estabilizam um componente importante do processo de software e representa o seu estágio de maturidade.\n\nÉ correto apenas o que se afirma em",
+          "alternativas": [
+            "III.",
+            "I e II.",
+            "II e IV.",
+            "I, III e IV.",
+            "I, II, III e IV."
+          ],
+          "correta": 3
+        },
+        {
+          "numero": 34,
+          "area": "Inteligência Artificial",
+          "enunciado": "Um sistema especialista para diagnóstico de dengue usa a regra de produção:\n\nSe ((temperatura > 38º) e (dores musculares intensas))\nentão (quadro de dengue, com 70% de chance);\nsenão (quadro de resfriado comum com 30% de chance);\n\nLevando em conta essa regra, é correto afirmar que",
+          "alternativas": [
+            "cada pessoa que procura atendimento apresentando ambos os sintomas possui a probabilidade 0,7 de estar contaminada pela dengue.",
+            "se 50 pessoas procurarem o atendimento apresentando um dos dois sintomas, provavelmente 15 pessoas estarão com resfriado comum.",
+            "se 100 pessoas procurarem o atendimento apresentando ambos os sintomas, a quantidade de pessoas com dengue será igual a 70.",
+            "cada pessoa que chega apresentando um dos dois sintomas estará com resfriado comum.",
+            "a cada 100 pessoas que procuram atendimento, no máximo 30 estarão doentes."
+          ],
+          "correta": 0
+        }
+      ]
+    }
+  ]
+}

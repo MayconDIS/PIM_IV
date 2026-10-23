@@ -64,7 +64,12 @@ function carregarDecks(chave) {
     const amostra = JSON.stringify(salvos.fase1 || []) + JSON.stringify(salvos.fase2 || []);
     if (/Ã|Ã§|Ã£|Ã©/.test(amostra)) integros = false;
   }
-  return integros ? salvos : structuredClone(BANCO_DE_DADOS);
+  if (!integros) return structuredClone(BANCO_DE_DADOS);
+  // Fases criadas depois que o deck foi salvo (ex.: provas oficiais do ENADE) entram do banco canônico.
+  for (const [faseId, cartas] of Object.entries(BANCO_DE_DADOS)) {
+    if (!salvos[faseId]) salvos[faseId] = structuredClone(cartas);
+  }
+  return salvos;
 }
 
 /** Nível enviado à API: o maior entre o que o rank salvo indica e o que o XP garante. */
