@@ -1,0 +1,21 @@
+# O deploy da Vercel entrega apenas o frontend e seus pacotes compartilhados.
+.git
+.vercel
+**/.env*
+**/node_modules
+**/bin
+**/obj
+**/dist
+**/__pycache__
+**/.agents
+**/.planning
+.github
+.vscode
+relatorio
+modelagem-uml
+sistema/apps/api
+sistema/apps/react-mobile
+sistema/tests
+sistema/docs
+sistema/database
+sistema/infra

@@ -7,6 +7,7 @@ entity USUARIO {
   Username
   Email
   SenhaHash
+  Perfil
   XP
   Moedas
   Nivel

@@ -1,0 +1,10 @@
+.conta-body { overflow-wrap: anywhere; }
+.conta-body fieldset, .conta-body section { min-width: 0; margin: 0 0 1.5rem; padding: 1rem; border: 1px solid currentColor; border-radius: 8px; }
+.conta-body legend { padding: 0 .4rem; font-weight: bold; }
+.conta-body p { line-height: 1.5; margin-bottom: 1rem; }
+.conta-body .btn-action { white-space: normal; max-width: 100%; }
+.conta-body button:disabled { opacity: .55; cursor: not-allowed; }
+.conta-body .conta-excluir, .conta-erro { color: var(--nexti-red, #ff7777); }
+.conta-confirmar { display: flex; align-items: flex-start; gap: .6rem; margin: 1rem 0; }
+.conta-confirmar input { flex: 0 0 auto; margin-top: .25rem; }
+.conta-body input:focus-visible, .conta-body button:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }

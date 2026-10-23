@@ -16,6 +16,10 @@ namespace NexTI_API.Endpoints
         /// <summary>Nome da política de rate limiting de login/cadastro (registrada no Program.cs).</summary>
         public const string PoliticaDeAutenticacao = "autenticacao";
 
+        /// <summary>Políticas de acesso por perfil (registradas no Program.cs).</summary>
+        public const string PoliticaDeConteudo = "tutor-ou-admin";
+        public const string PoliticaDeAdmin = "admin";
+
         /// <summary>O usuário autenticado é o dono do recurso pedido na rota?</summary>
         public static bool EhOProprioUsuario(ClaimsPrincipal usuario, string username) =>
             string.Equals(usuario.FindFirst(ClaimTypes.Name)?.Value, username, StringComparison.Ordinal);
@@ -57,7 +61,8 @@ namespace NexTI_API.Endpoints
                             username = sessao.Usuario.Username,
                             nivel = sessao.Usuario.Nivel,
                             xp = sessao.Usuario.XP,
-                            moedas = sessao.Usuario.Moedas
+                            moedas = sessao.Usuario.Moedas,
+                            perfil = sessao.Usuario.Perfil
                         }
                     }))
             ).RequireRateLimiting(PoliticaDeAutenticacao);
@@ -87,6 +92,30 @@ namespace NexTI_API.Endpoints
                 return ParaHttp(await conteudo.CriarFlashcardAsync(request.CodigoFase, request.Frente, request.Verso, request.Dica),
                     flashcard => Results.Created($"/api/fases/{flashcard.CodigoFase}/flashcards", flashcard));
             }).RequireAuthorization();
+
+            // Editar e excluir carta: as cartas são de todos, então só Tutor e Admin moderam.
+            app.MapPut("/api/flashcards/{id:int}", async (int id, EditarFlashcardRequest request, IConteudoService conteudo) =>
+                ParaHttp(await conteudo.EditarFlashcardAsync(id, request.Frente, request.Verso, request.Dica), Results.Ok)
+            ).RequireAuthorization(PoliticaDeConteudo);
+
+            app.MapDelete("/api/flashcards/{id:int}", async (int id, IConteudoService conteudo) =>
+                ParaHttp(await conteudo.ExcluirFlashcardAsync(id), _ => Results.NoContent())
+            ).RequireAuthorization(PoliticaDeConteudo);
+
+            // --- ESTRUTURA ADMINISTRATIVA ---
+            // Painel do Tutor: como cada aluno está indo no SM-2.
+            app.MapGet("/api/tutor/alunos", async (IAdminService admin) => Results.Ok(await admin.PainelDosAlunosAsync()))
+                .RequireAuthorization(PoliticaDeConteudo);
+
+            // Admin: lista os usuários e define o perfil de cada um.
+            app.MapGet("/api/admin/usuarios", async (IAdminService admin) => Results.Ok(await admin.ListarUsuariosAsync()))
+                .RequireAuthorization(PoliticaDeAdmin);
+
+            app.MapPut("/api/admin/usuarios/{id:int}/perfil", async (int id, PerfilRequest request, IAdminService admin, ClaimsPrincipal userClaims) =>
+            {
+                if (IdDoUsuario(userClaims) is not int quemPede) return Results.Unauthorized();
+                return ParaHttp(await admin.DefinirPerfilAsync(quemPede, id, request.Perfil), Results.Ok);
+            }).RequireAuthorization(PoliticaDeAdmin);
 
             // --- SM-2 PROGRESSO (PROTEGIDO) ---
             app.MapGet("/api/progresso/usuario", async (IProgressoService progresso, ClaimsPrincipal userClaims) =>
@@ -139,4 +168,6 @@ namespace NexTI_API.Endpoints
     public record ProgressoUpdate(int UsuarioId, int FlashcardId, int Qualidade);
     public record UserStatsUpdate(int XP, int Moedas, int Nivel);
     public record NovoFlashcardRequest(string CodigoFase, string Frente, string Verso, string? Dica);
+    public record EditarFlashcardRequest(string Frente, string Verso, string? Dica);
+    public record PerfilRequest(string Perfil);
 }

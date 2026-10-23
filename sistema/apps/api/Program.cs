@@ -1,11 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using NexTI_API.Data;
+using NexTI_API.Models;
 using NexTI_API.Services;
 using NexTI_API.Services.Seed;
 using NexTI_API.Endpoints;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Security.Claims;
 using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.HttpOverrides;
 
@@ -55,9 +57,33 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = true,
             ValidAudience = AuthService.Publico
         };
+        options.Events = new JwtBearerEvents
+        {
+            OnTokenValidated = async contexto =>
+            {
+                var id = EndpointExtensions.IdDoUsuario(contexto.Principal!);
+                var db = contexto.HttpContext.RequestServices.GetRequiredService<AppDbContext>();
+                var usuario = id is int valor
+                    ? await db.Usuarios.AsNoTracking().SingleOrDefaultAsync(u => u.Id == valor) : null;
+                if (!SessaoAtual.Valida(contexto.Principal, usuario, new ChaveJwt(key)))
+                {
+                    contexto.Fail("Sessão revogada. Entre novamente.");
+                    return;
+                }
+                // Mudanças de perfil valem já na próxima requisição, mesmo com JWT antigo.
+                var identidade = (ClaimsIdentity)contexto.Principal!.Identity!;
+                foreach (var claim in identidade.FindAll(ClaimTypes.Role).ToList()) identidade.RemoveClaim(claim);
+                identidade.AddClaim(new Claim(ClaimTypes.Role, usuario!.Perfil));
+            }
+        };
     });
 
-builder.Services.AddAuthorization();
+// Perfis (claim de papel no JWT): Tutor e Admin moderam conteúdo; só Admin muda perfis.
+builder.Services.AddAuthorization(opcoes =>
+{
+    opcoes.AddPolicy(EndpointExtensions.PoliticaDeConteudo, p => p.RequireRole(Perfis.Tutor, Perfis.Admin));
+    opcoes.AddPolicy(EndpointExtensions.PoliticaDeAdmin, p => p.RequireRole(Perfis.Admin));
+});
 
 // Injeção de Dependências Customizadas (SOLID - SRP / DIP)
 builder.Services.AddSingleton<ISm2Engine, Sm2Engine>();
@@ -69,6 +95,9 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IProgressoService, ProgressoService>();
 builder.Services.AddScoped<IGamificacaoService, GamificacaoService>();
 builder.Services.AddScoped<IConteudoService, ConteudoService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<IContaService, ContaService>();
+builder.Services.AddScoped<IHistoricoConta, HistoricoConta>();
 
 // Login e cadastro: 30 tentativas por minuto por IP (força bruta / criação em massa).
 // Não é menor porque uma turma inteira sai pelo mesmo IP do Wi-Fi da faculdade.
@@ -129,6 +158,7 @@ app.UseAuthorization();
 
 // Registro Modular de Endpoints (SOLID - SRP)
 app.MapNexTiEndpoints();
+app.MapContaEndpoints();
 
 // Aplica as migrations pendentes e povoa o banco (idempotente).
 // Desative com Database__MigrarAoIniciar=false se o schema for gerenciado fora da API.

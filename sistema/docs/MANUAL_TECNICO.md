@@ -21,8 +21,8 @@ Endpoints (HTTP)  →  Services (regras)  →  Data (EF Core)  →  Models (clas
 
 | Camada | Arquivos | O que faz |
 |---|---|---|
-| Rotas | `Endpoints/EndpointExtensions.cs` | Lê o pedido e o token, chama o serviço e devolve o status HTTP. Não acessa o banco. |
-| Serviços | `AuthService`, `ProgressoService`, `GamificacaoService`, `ConteudoService` | Regras do sistema; usam `Resultado<T>` nas operações com falhas de negócio previstas e retornam dados diretamente nas demais. |
+| Rotas | `Endpoints/EndpointExtensions.cs`, `ContaEndpoints.cs` | Lê o pedido e o token, chama o serviço e devolve o status HTTP. Não acessa o banco. |
+| Serviços | `AuthService`, `ProgressoService`, `GamificacaoService`, `ConteudoService`, `AdminService`, `ContaService` | Regras do sistema; usam `Resultado<T>` nas operações com falhas de negócio previstas e retornam dados diretamente nas demais. |
 | Apoio | `Sm2Engine`, `PoliticaDeSenha`, `PoliticaDeCors`, seeders | Algoritmo SM-2, regras de senha, CORS e carga inicial do banco. |
 | Dados | `Data/AppDbContext.cs` | As tabelas e as relações. |
 | Modelos | `Models/` | `Usuario`, `Aluno`, `Tutor`, `Fase`, `Flashcard`, `ProgressoFlashcard`, `Questao`… |
@@ -42,9 +42,33 @@ interface, não da classe.
 | `PUT /api/usuarios/stats` | Grava XP, moedas e nível | Sim |
 | `GET /api/fases` · `GET /api/fases/{codigo}/flashcards` | Fases e cartas | Não |
 | `POST /api/flashcards` | Cria uma carta | Sim |
+| `PUT /api/flashcards/{id}` · `DELETE /api/flashcards/{id}` | Edita ou exclui uma carta | Tutor ou Admin |
+| `GET /api/tutor/alunos` | Painel do Tutor: XP e números do SM-2 de cada aluno | Tutor ou Admin |
+| `GET /api/admin/usuarios` · `PUT /api/admin/usuarios/{id}/perfil` | Lista os usuários e define o perfil | Admin |
 | `GET /api/progresso/usuario` · `POST /api/progresso/atualizar` | Progresso do SM-2 | Sim |
 | `GET /api/simulados/areas` · `GET /api/simulados/questoes` | Simulados ENADE | Não |
 | `GET /api/estatisticas/resumo` | Total de cartas, de alunos e o ranking | Não |
+| `GET /api/conta/` · `GET /api/conta/dados` | Cadastro próprio e exportação do progresso/histórico | Sim, só o titular |
+| `PUT /api/conta/email` · `PUT /api/conta/senha` | Altera e-mail ou senha | Sim + senha atual |
+| `POST /api/conta/excluir` | Exclui a própria conta e dados dependentes | Sim + senha atual |
+
+### 3.1 Gestão da própria conta (PB02)
+
+Os endpoints de conta obtêm o ID exclusivamente do JWT e enviam `Cache-Control:
+no-store`. A exportação usa DTOs explícitos sem hashes de senha ou tokens. Inclui
+cadastro, progresso e histórico de revisões do titular; o site acrescenta os dados
+locais desta conta no navegador. O único Admin não pode excluir sua conta. A
+contagem e a exclusão usam transação serializável, também aplicada à alteração
+administrativa de perfis para preservar essa regra em concorrência.
+
+Cada requisição autenticada confere a existência do usuário e uma assinatura HMAC
+da credencial atual, armazenada como claim `credencial`. Trocar a senha invalida
+tokens anteriores; excluir a conta invalida todos os seus tokens. O papel é
+recarregado do banco, portanto rebaixamentos não aguardam o JWT expirar.
+**Após implantar esta versão, sessões emitidas antes do PB02 precisam de novo
+login.** Não há nova migration: são usados o hash e as tabelas existentes.
+
+Contratos, limites e execução dos testes: [PB02 — Gestão de conta](PB02_GESTAO_CONTA.md).
 
 ## 4. O algoritmo SM-2
 
@@ -83,7 +107,9 @@ O diagrama de classes do PIM III é a ideia inicial; os diagramas *Camadas* e
    chave composta (aluno + carta).
 3. **`Motor_SM2` e `Gamificacao` do PIM III:** viraram `Sm2Engine` e
    `GamificacaoService`.
-4. **Ainda não implementadas:** `Admin`, `Duvidas`, `Agente Especialista (IA)` e
+4. **Perfis do caso de uso (Aluno, Tutor, Admin):** viraram o campo `Perfil` de `Usuario`,
+   enviado no JWT; as rotas de Tutor e Admin conferem esse perfil.
+5. **Ainda não implementadas:** `Duvidas`, `Agente Especialista (IA)` e
    `Acessibilidade` como classe (a acessibilidade existe no site).
 
 ## 6. O que fica salvo onde

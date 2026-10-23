@@ -4,6 +4,7 @@ import logo from '@nexti/shared/img/logo.png';
 import iconeTerminal from '@nexti/shared/img/terminal-icon.png';
 import { useEstudo } from '../../context/EstudoContext';
 import { alternarAltoContraste, mudarZoom } from '../../lib/acessibilidade';
+import { perfilAtual, podeAdministrar } from '../modais/ModalAdmin';
 
 /** <header> do dashboard: frase motivacional, áudio, criação de carta e menu do usuário. */
 export function Topo() {
@@ -118,6 +119,14 @@ export function Topo() {
             <a className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalMapaMental'))}>
               <span className="material-symbols-outlined">hub</span> Mapa Neural
             </a>
+            <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalConta'))}>
+              <span className="material-symbols-outlined">manage_accounts</span> Minha conta
+            </button>
+            {podeAdministrar() && (
+              <a className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalAdmin'))}>
+                <span className="material-symbols-outlined">admin_panel_settings</span> Painel do {perfilAtual() === 'Admin' ? 'Admin' : 'Tutor'}
+              </a>
+            )}
             <a className="dropdown-item danger flex-align" onClick={acao(resetarProgresso)}>
               <span className="material-symbols-outlined">warning</span> Formatar Sistema
             </a>
