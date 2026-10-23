@@ -101,10 +101,10 @@ app guarda as respostas numa fila no aparelho
 ## 5. Da UML para o código
 
 Os diagramas estão em [`../../modelagem-uml/02_Modelagem_UML`](../../modelagem-uml/02_Modelagem_UML).
-Todos saem do código atual. Em PlantUML: casos de uso, classes (*Camadas* e
-*Entidades*), atividade e sequência. No `Diagrams Nex_TI - PIM IV.asta`: os mesmos,
-mais um diagrama de classes e um de sequência para cada caso de uso, MER e DER
-(imagens em `imagens-astah/`).
+Todos saem do código atual e estão no `Diagrams Nex_TI - PIM IV.asta` (Astah): casos de
+uso, classes (*Camadas* e *Entidades*), atividade, um diagrama de classes e um de sequência
+para cada caso de uso, MER, DER (modelo lógico) e modelo físico. As imagens estão em
+`imagens-astah/`; as principais também ficam soltas na pasta e em `04_Banco_de_Dados`.
 
 1. **Herança:** `Aluno` e `Tutor` herdam de `Usuario`. XP, moedas e nível ficam
    em `Usuario` para o login e as consultas usarem uma tabela só.

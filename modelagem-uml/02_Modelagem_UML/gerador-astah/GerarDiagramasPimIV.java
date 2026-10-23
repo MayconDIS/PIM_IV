@@ -240,7 +240,7 @@ public class GerarDiagramasPimIV {
         String[][] pares = {
             {"IAuthService", "AuthService", "CadastrarAsync(...) : Task<Resultado<Usuario>>", "EntrarAsync(...) : Task<Resultado<Sessao>>"},
             {"IProgressoService", "ProgressoService", "RegistrarRespostaAsync(...) : Task<ProgressoFlashcard>", "EstatisticasAsync(username : string) : Task<Resultado<...>>"},
-            {"IGamificacaoService", "GamificacaoService", "PerfilAsync(username : string) : Task<PerfilUsuario>", "AtualizarAsync(...) : Task<Resultado<Usuario>>"},
+            {"IGamificacaoService", "GamificacaoService", "ConcluirFaseAsync(...) : Task<Resultado<Conclusao>>", "ComprarBonusAsync(...) : Task<Resultado<Usuario>>"},
             {"IConteudoService", "ConteudoService", "ListarFlashcardsAsync(codigoFase : string) : Task<List<Flashcard>>", "EditarFlashcardAsync(...) : Task<Resultado<Flashcard>>"},
             {"IAdminService", "AdminService", "PainelDosAlunosAsync() : Task<List<AlunoNoPainel>>", "DefinirPerfilAsync(...) : Task<Resultado<UsuarioResumo>>"},
             {"IContaService", "ContaService", "AlterarSenhaAsync(...) : Task<Resultado<bool>>", "ExcluirAsync(...) : Task<Resultado<bool>>"},
@@ -354,9 +354,9 @@ public class GerarDiagramasPimIV {
         naRaia.put(join, FRONT);
         INodePresentation resta = a.createDecisionMergeNode(null, ponto(centro[FRONT] - 15, 1240));
         naRaia.put(resta, FRONT);
-        INodePresentation premio = acao(a, "Dá XP e moedas e libera a próxima fase", centro[FRONT], 1300);
+        INodePresentation premio = acao(a, "Mostra o prêmio e libera a próxima fase", centro[FRONT], 1300);
         naRaia.put(premio, FRONT);
-        INodePresentation stats = acao(a, "PUT /api/usuarios/stats", centro[API], 1360);
+        INodePresentation stats = acao(a, "POST /api/progresso/concluir-fase: calcula XP e moedas", centro[API], 1360);
         naRaia.put(stats, API);
         INodePresentation salva = acao(a, "Atualiza XP, moedas e nível (trigger: nunca diminuem)", centro[BANCO], 1420);
         naRaia.put(salva, BANCO);
@@ -426,7 +426,8 @@ public class GerarDiagramasPimIV {
             {"IProgressoService", "Contrato do progresso de estudo (SM-2) e das estatísticas do aluno."},
             {"ProgressoService", "Grava cada resposta do aluno, aplica o SM-2 pelo Sm2Engine e calcula as estatísticas."},
             {"IGamificacaoService", "Contrato de XP, moedas, nível e ranking."},
-            {"GamificacaoService", "Atualiza XP, moedas e nível aceitando só aumentos de até 200 por vez (regra contra trapaça)."},
+            {"GamificacaoService", "Calcula o XP e as moedas de cada fase pela tabela de recompensas, cobra os bônus conferindo o saldo e mantém nível e ranking."},
+            {"TabelaDeRecompensas", "XP e moedas de cada fase, teste e bônus, e as faixas de nível. Vem de Data/Seed/recompensas.json, gerado do gamificacao.js: site, app e API pagam o mesmo valor."},
             {"IConteudoService", "Contrato do conteúdo: fases, flashcards e questões dos simulados."},
             {"ConteudoService", "Lista fases, cartas e questões; cria, edita e exclui cartas, registrando as moderadas."},
             {"IAdminService", "Contrato da área administrativa: painel do Tutor e perfis de acesso."},
@@ -488,11 +489,13 @@ public class GerarDiagramasPimIV {
 
     private static void apoioEFrontEnd(IPackage pimIV) throws Exception {
         IPackage apoio = modelo.createPackage(classes.get("AppDbContext").getOwner() instanceof IPackage p ? (IPackage) p.getOwner() : pimIV, "Services (apoio)");
-        apoio.setDefinition("Serviços de apoio da API: regras de senha e algoritmo SM-2.");
+        apoio.setDefinition("Serviços de apoio da API: regras de senha, algoritmo SM-2 e tabela de recompensas.");
         elemento(apoio, "IPoliticaDeSenha", null, true, new String[] {"Validar(senha : string, nickname : string, email : string) : IReadOnlyList<string>"});
         elemento(apoio, "PoliticaDeSenha", null, false, new String[] {"Validar(senha : string, nickname : string, email : string) : IReadOnlyList<string>"});
         elemento(apoio, "ISm2Engine", null, true, new String[] {"Calcular(progresso : ProgressoFlashcard, qualidade : int) : void"});
         elemento(apoio, "Sm2Engine", null, false, new String[] {"Calcular(progresso : ProgressoFlashcard, qualidade : int) : void"});
+        elemento(apoio, "TabelaDeRecompensas", null, false, new String[] {"Carregar() : TabelaDeRecompensas",
+            "PremioDe(faseId : string, acertos : int, total : int) : Premio", "NivelPorXp(xp : int) : int"});
 
         IPackage front = modelo.createPackage(pimIV, "Front-end (site e app)");
         front.setDefinition("Telas e módulos JavaScript do site (React), do app (React Native) e do pacote compartilhado packages/shared.");
@@ -501,6 +504,7 @@ public class GerarDiagramasPimIV {
             "concluirRotina() : void", "concluirDiagnostico(acertos : int) : void", "criarCarta(dados : object) : bool"});
         elemento(front, "ApiService", "módulo JS", false, new String[] {"login(usuario : string, senha : string) : Promise", "register(nickname : string, email : string, senha : string) : Promise",
             "getFlashcardsPorFase(codigo : string) : Promise", "atualizarProgresso(usuarioId : int, flashcardId : int, qualidade : int) : Promise",
+            "concluirFase(faseId : string, acertos : int, total : int) : Promise", "comprarBonus(bonusId : string) : Promise",
             "updateUserStats(xp : int, moedas : int, nivel : int) : Promise", "getEstatisticasDetalhadas(username : string) : Promise"});
         elemento(front, "senha.js", "módulo JS", false, new String[] {"senhaEhForte(senha : string) : bool"});
         elemento(front, "senhaVazada.js", "módulo JS", false, new String[] {"verificarSenhaVazada(senha : string) : Promise<int>"});
@@ -668,29 +672,36 @@ public class GerarDiagramasPimIV {
             "Sm2Engine na API, com 5 testes, e histórico gravado por trigger.");
 
         detalhe(casos, "Atribuir XP e Moedas",
-            "Ao concluir uma fase, o aluno ganha XP e moedas; a API só aceita aumentos de até 200 por vez.",
-            new String[] {"EstudoContext", "gamificacao.js", "ApiService", "EndpointExtensions", "IGamificacaoService", "GamificacaoService", "Usuario"},
+            "Ao concluir uma fase, a API calcula o XP e as moedas pela tabela de recompensas, a mesma do site, e devolve os totais.",
+            new String[] {"EstudoContext", "gamificacao.js", "ApiService", "EndpointExtensions", "IGamificacaoService", "GamificacaoService", "TabelaDeRecompensas", "Usuario"},
             new String[][] {{"usa", "EstudoContext", "gamificacao.js"}, {"usa", "EstudoContext", "ApiService"},
-                {"implementa", "GamificacaoService", "IGamificacaoService"}, {"usa", "GamificacaoService", "Usuario", "atualiza"},
+                {"implementa", "GamificacaoService", "IGamificacaoService"}, {"usa", "GamificacaoService", "TabelaDeRecompensas", "consulta"},
+                {"usa", "GamificacaoService", "Usuario", "atualiza"},
                 {"usa", "ApiService", "EndpointExtensions", "HTTP"}, {"usa", "EndpointExtensions", "IGamificacaoService"}},
-            new String[] {"a=:Aluno", "ctx=:EstudoContext", "gam=:gamificacao.js", "rota=:EndpointExtensions", "gs=:GamificacaoService", "bd=:SQL Server"},
+            new String[] {"a=:Aluno", "ctx=:EstudoContext", "gam=:gamificacao.js", "rota=:EndpointExtensions", "gs=:GamificacaoService", "tab=:TabelaDeRecompensas", "bd=:SQL Server"},
             new String[][] {{"a", "ctx", "conclui a fase (concluirRotina)"}, {"ctx", "gam", "recompensa(faseId, acertos, total)"},
-                {"gam", "ctx", "+XP e +moedas", "retorno"}, {"ctx", "ctx", "recalcula o rank"},
-                {"ctx", "rota", "PUT /api/usuarios/stats (xp, moedas, nivel)"}, {"rota", "gs", "AtualizarAsync(usuarioId, xp, moedas, nivel)"},
-                {"gs", "gs", "ValidarAtualizacao(): só sobe, no máximo +200"}, {"gs", "bd", "UPDATE usuarios (trigger: XP e nível não diminuem)"},
-                {"gs", "rota", "Usuario (ou recusa)", "retorno"}, {"rota", "ctx", "200 OK (ou 400)", "retorno"}},
-            "Valores por fase em gamificacao.js e proteção no servidor e no banco.");
+                {"gam", "ctx", "prêmio para mostrar na hora", "retorno"},
+                {"ctx", "rota", "POST /api/progresso/concluir-fase (faseId, acertos, total)"},
+                {"rota", "gs", "ConcluirFaseAsync(usuarioId, faseId, acertos, total)"}, {"gs", "tab", "PremioDe(faseId, acertos, total)"},
+                {"tab", "gs", "XP e moedas", "retorno"}, {"gs", "bd", "UPDATE usuarios (trigger: XP e nível não diminuem)"},
+                {"gs", "rota", "Conclusao(prêmio, XP, moedas, nível)", "retorno"}, {"rota", "ctx", "200: totais do servidor", "retorno"},
+                {"ctx", "ctx", "fica com o XP e as moedas do servidor"}},
+            "A tabela vem do gamificacao.js (npm run seed:api): site, app e API pagam o mesmo valor; o cliente não manda o XP.");
 
         detalhe(casos, "Desbloquear Fases e Módulos",
             "Concluir uma fase (ou passar no teste do módulo) libera a próxima; moedas compram fases bônus.",
-            new String[] {"EstudoContext", "gamificacao.js"},
-            new String[][] {{"usa", "EstudoContext", "gamificacao.js"}},
-            new String[] {"a=:Aluno", "ctx=:EstudoContext", "gam=:gamificacao.js"},
+            new String[] {"EstudoContext", "gamificacao.js", "ApiService", "EndpointExtensions", "IGamificacaoService", "GamificacaoService"},
+            new String[][] {{"usa", "EstudoContext", "gamificacao.js"}, {"usa", "EstudoContext", "ApiService"},
+                {"usa", "ApiService", "EndpointExtensions", "HTTP"}, {"usa", "EndpointExtensions", "IGamificacaoService"},
+                {"implementa", "GamificacaoService", "IGamificacaoService"}},
+            new String[] {"a=:Aluno", "ctx=:EstudoContext", "gam=:gamificacao.js", "rota=:EndpointExtensions", "gs=:GamificacaoService", "bd=:SQL Server"},
             new String[][] {{"a", "ctx", "conclui a fase ou o teste do módulo"}, {"ctx", "gam", "passouNoTeste(faseId, acertos, total)"},
                 {"gam", "ctx", "aprovado pela nota de corte?", "retorno"}, {"ctx", "gam", "proximaFase(faseId)"},
                 {"gam", "ctx", "próxima fase da ORDEM_FASES", "retorno"}, {"ctx", "ctx", "libera a fase e salva no navegador"},
-                {"a", "ctx", "compra uma fase bônus"}, {"ctx", "gam", "podeComprarBonus(moedas, custo)"}, {"gam", "ctx", "sim ou não", "retorno"}},
-            "A liberação é automática ao concluir a fase anterior.");
+                {"a", "ctx", "compra uma fase bônus"}, {"ctx", "rota", "POST /api/usuarios/bonus/{id}/comprar"},
+                {"rota", "gs", "ComprarBonusAsync(usuarioId, bonusId)"}, {"gs", "bd", "confere o saldo e desconta as moedas"},
+                {"gs", "rota", "Usuario com o novo saldo (ou saldo insuficiente)", "retorno"}, {"rota", "ctx", "200: moedas restantes (ou 400)", "retorno"}},
+            "A liberação é automática ao concluir a fase anterior; a compra de bônus é conferida no servidor.");
 
         detalhe(casos, "Realizar Teste de Nivelamento",
             "No primeiro acesso, 10 perguntas definem por qual fase o aluno começa.",
@@ -837,9 +848,9 @@ public class GerarDiagramasPimIV {
 
     /**
      * O Astah UML não tem diagrama entidade-relacionamento (só o Astah Professional tem).
-     * Aqui o MER e o DER são diagramas de classes com os estereótipos «entidade» e «tabela»,
-     * a forma usual nessa edição; as imagens em notação de Chen e pé de galinha ficam em
-     * modelagem-uml/04_Banco_de_Dados.
+     * Aqui o MER, o DER (modelo lógico) e o modelo físico são diagramas de classes com os
+     * estereótipos «entidade» e «tabela», a forma usual nessa edição. As imagens exportadas
+     * também ficam em modelagem-uml/04_Banco_de_Dados.
      */
     private static void bancoDeDados(IPackage pimIV) throws Exception {
         IPackage banco = pacote(pimIV, "Banco de dados",
@@ -887,11 +898,6 @@ public class GerarDiagramasPimIV {
         for (String[] r : relacoesMer) ligar(d, e.get(r[0]), p.get(r[0]), r[1], e.get(r[2]), p.get(r[2]), r[3], r[4]);
 
         // DER: {tabela, definição, x, y, colunas...}; o sufixo " {PK}", " {FK}" ou " {PK, FK}" marca a chave
-        IPackage der = pacote(banco, "DER (tabelas)", "As tabelas do SQL Server, com tipos, chaves primárias (PK) e estrangeiras (FK).");
-        d.createClassDiagram(der, "6. DER - tabelas e relacionamentos").setDefinition(
-            "Diagrama entidade-relacionamento das tabelas criadas pelas migrations: colunas com tipo do SQL Server, PK, FK e a cardinalidade de cada relacionamento.");
-        p.clear();
-        e.clear();
         String[][] tabelas = {
             {"fases", "Disciplinas da trilha.", "30", "30", "codigo_fase : NVARCHAR(20) {PK}", "descricao : NVARCHAR(100)"},
             {"flashcards", "Cartas de estudo.", "30", "240", "id : INT {PK}", "codigo_fase : NVARCHAR(20) {FK}", "frente : NVARCHAR(MAX)", "verso : NVARCHAR(MAX)", "dica : NVARCHAR(255)", "opcoes : NVARCHAR(MAX)", "correta : INT"},
@@ -905,11 +911,28 @@ public class GerarDiagramasPimIV {
             {"tb_provas", "Provas oficiais (ano e tipo).", "1650", "30", "id_prova : INT {PK}", "ano : INT", "tipo : NVARCHAR(50)"},
             {"tb_prova_questao", "Tabela associativa: resolve o N:N entre provas e questões.", "1650", "250", "id_prova : INT {PK, FK}", "id_questao : INT {PK, FK}"},
         };
+        // A mesma lista gera os dois diagramas: o lógico (sem tipos) e o físico (com os tipos do SQL Server).
+        String[][] versoes = {
+            {"DER (modelo lógico)", "As tabelas com as colunas, chaves primárias (PK) e estrangeiras (FK), sem depender do SGBD.",
+                "6. DER - modelo lógico", "Diagrama entidade-relacionamento: as tabelas, suas colunas, PK, FK e a cardinalidade de cada relacionamento.", "nao"},
+            {"Modelo físico (SQL Server)", "As mesmas tabelas como estão no SQL Server, com o tipo de cada coluna.",
+                "7. Modelo físico - SQL Server", "Modelo físico das tabelas criadas pelas migrations no SQL Server (Azure SQL): tipo de cada coluna, PK, FK e cardinalidade.", "sim"},
+        };
+        for (String[] v : versoes) {
+        boolean comTipos = v[4].equals("sim");
+        IPackage der = pacote(banco, v[0], v[1]);
+        d.createClassDiagram(der, v[2]).setDefinition(v[3]);
+        p.clear();
+        e.clear();
         for (String[] t : tabelas) {
             IClass c = modelo.createClass(der, t[0]);
             c.addStereotype("tabela");
             c.setDefinition(t[1]);
             String[] colunas = java.util.Arrays.copyOfRange(t, 4, t.length);
+            if (!comTipos)   // no lógico, tipos genéricos, que não dependem do SGBD
+                for (int i = 0; i < colunas.length; i++) colunas[i] = colunas[i]
+                    .replaceAll(" : NVARCHAR\\([0-9A-Z]+\\)", " : texto").replaceAll(" : INT\\b", " : inteiro")
+                    .replaceAll(" : FLOAT\\b", " : decimal").replaceAll(" : DATETIME2\\b", " : data e hora").replaceAll(" : BIT\\b", " : lógico");
             String[] semChave = new String[colunas.length];
             for (int i = 0; i < colunas.length; i++) semChave[i] = colunas[i].replaceAll(" \\{[^}]*\\}$", "");
             membros(c, semChave, new String[0]);
@@ -932,8 +955,10 @@ public class GerarDiagramasPimIV {
             {"tb_provas", "1", "tb_prova_questao", "0..*", "reúne"},
         };
         for (String[] r : relacoesDer) ligar(d, e.get(r[0]), p.get(r[0]), r[1], e.get(r[2]), p.get(r[2]), r[3], r[4]);
-        d.createNote("PK = chave primária · FK = chave estrangeira.\ncartas_moderadas se liga a fases só pelo código (sem FK).\nImagens em notação de Chen e pé de galinha: modelagem-uml/04_Banco_de_Dados.",
+        d.createNote("PK = chave primária · FK = chave estrangeira.\ncartas_moderadas se liga a fases só pelo código (sem FK)."
+            + (comTipos ? "\nTipos do SQL Server; o script completo está em sistema/database/NexTI_DB.sql." : ""),
             ponto(30, 760));
+        }
     }
 
     private static void ligar(ClassDiagramEditor d, IClass a, INodePresentation pa, String multA,
