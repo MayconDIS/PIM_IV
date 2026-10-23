@@ -1,0 +1,42 @@
+@startuml Sequence Diagram Nex_TI - Responder Carta
+' Diagrama de Sequência — o aluno responde uma carta e o SM-2 agenda a próxima revisão
+' Fonte: sistema/apps/react-web/src/context/EstudoContext.jsx (responder)
+'        sistema/apps/api/Endpoints/EndpointExtensions.cs (POST /api/progresso/atualizar)
+'        sistema/apps/api/Services/ProgressoService.cs e Sm2Engine.cs
+'        trigger tg_progresso_historico (migration ObjetosDoBanco)
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam sequenceMessageAlign left
+
+title Diagrama de Sequência — responder uma carta (SM-2)
+
+actor Aluno
+participant "Site (React)\nEstudoContext" as Site
+participant "EndpointExtensions\nPOST /api/progresso/atualizar" as Rota
+participant "ProgressoService" as Servico
+participant "Sm2Engine" as Sm2
+database "SQL Server\nprogresso_flashcards" as Banco
+
+Aluno -> Site : avalia a carta\n(Errei, Difícil, Bom ou Fácil)
+Site -> Site : atualiza o SM-2 local\ne mostra a próxima carta
+
+alt aluno logado e API online
+  Site -> Rota : POST {flashcardId, qualidade}\n+ token JWT
+  Rota -> Rota : IdDoUsuario(token)\n(sem token: 401; outro usuário: 403)
+  Rota -> Servico : RegistrarRespostaAsync(usuarioId, flashcardId, qualidade)
+  Servico -> Banco : FindAsync(usuarioId, flashcardId)
+  Banco --> Servico : progresso (ou nada)
+  opt primeira resposta desta carta
+    Servico -> Servico : novo ProgressoFlashcard\n(fator de facilidade 2,5)
+  end
+  Servico -> Sm2 : Calcular(progresso, qualidade)
+  Sm2 --> Servico : repetições, intervalo,\nfator e próxima revisão
+  Servico -> Banco : SaveChangesAsync()
+  Banco -> Banco : trigger tg_progresso_historico\ngrava em tb_historico_revisoes
+  Servico --> Rota : ProgressoFlashcard
+  Rota --> Site : 200 OK
+else sem login ou sem API
+  Site -> Site : segue só com o estado local\n(no app, a resposta espera numa fila)
+end
+@enduml

@@ -31,6 +31,13 @@ package "Apresentação (Endpoints)" {
     GET  /api/tutor/alunos  (Tutor, Admin)
     GET|PUT /api/admin/usuarios  (Admin)
   }
+  class ContaEndpoints <<static>> {
+    + {static} MapContaEndpoints(app : IEndpointRouteBuilder) : void
+    --
+    GET  /api/conta  ·  GET /api/conta/dados
+    PUT  /api/conta/email  ·  PUT /api/conta/senha
+    POST /api/conta/excluir  (só o titular)
+  }
 }
 
 package "Serviços de aplicação (regras de negócio)" {
@@ -81,6 +88,15 @@ package "Serviços de aplicação (regras de negócio)" {
     + PainelDosAlunosAsync() : Task<List<AlunoNoPainel>>
   }
   class AdminService
+
+  interface IContaService {
+    + LerAsync(usuarioId : int) : Task<Resultado<ContaDados>>
+    + AlterarEmailAsync(...) : Task<Resultado<ContaDados>>
+    + AlterarSenhaAsync(...) : Task<Resultado<bool>>
+    + ExportarAsync(usuarioId : int) : Task<Resultado<ExportacaoConta>>
+    + ExcluirAsync(...) : Task<Resultado<bool>>
+  }
+  class ContaService
 
   class "Resultado<T>" as Resultado <<record>> {
     + Valor : T [0..1]
@@ -153,6 +169,7 @@ package "Dados (persistência)" {
     + Provas : DbSet<Prova>
     + Questoes : DbSet<Questao>
     + Alternativas : DbSet<Alternativa>
+    + CartasModeradas : DbSet<CartaModerada>
     # OnModelCreating(builder : ModelBuilder) : void
   }
   class ConexaoBanco <<static>> {
@@ -170,6 +187,7 @@ IProgressoService <|.. ProgressoService
 IGamificacaoService <|.. GamificacaoService
 IConteudoService <|.. ConteudoService
 IAdminService <|.. AdminService
+IContaService <|.. ContaService
 Resultado --> TipoFalha
 ISm2Engine <|.. Sm2Engine
 IPoliticaDeSenha <|.. PoliticaDeSenha
@@ -183,6 +201,7 @@ EndpointExtensions ..> IProgressoService : <<usa>>
 EndpointExtensions ..> IGamificacaoService : <<usa>>
 EndpointExtensions ..> IConteudoService : <<usa>>
 EndpointExtensions ..> IAdminService : <<usa>>
+ContaEndpoints ..> IContaService : <<usa>>
 EndpointExtensions ..> Resultado : traduz em HTTP
 AuthService ..> IPoliticaDeSenha : <<usa>>
 ProgressoService ..> ISm2Engine : <<usa>>
@@ -191,6 +210,8 @@ ProgressoService ..> AppDbContext
 GamificacaoService ..> AppDbContext
 ConteudoService ..> AppDbContext
 AdminService ..> AppDbContext
+ContaService ..> AppDbContext
+ContaService ..> IPoliticaDeSenha : <<usa>>
 DatabaseSeeder o-- "1..*" IEtapaSeed : executa >
 ConexaoBanco ..> AppDbContext : fornece connection string
 

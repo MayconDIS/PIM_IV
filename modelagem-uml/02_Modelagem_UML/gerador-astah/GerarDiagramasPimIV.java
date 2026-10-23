@@ -28,7 +28,7 @@ import java.util.Map;
  * atividade da sessão de estudo. O arquivo do PIM III não é tocado.
  *
  * A API exige Java 21; o Astah já traz um (pasta jre). Uso:
- *   "C:\Program Files\astah-uml\jre\bin\java.exe" -cp "C:\Program Files\astah-uml\astah-uml.jar;C:\Program Files\astah-uml\astah-api.jar;C:\Program Files\astah-uml\lib\*" GerarDiagramasPimIV.java "<saida.asta>" "<base.asta>"
+ *   "C:\Program Files\astah-uml\jre\bin\java.exe" -cp "C:\Program Files\astah-uml\astah-uml.jar;C:\Program Files\astah-uml\astah-api.jar;C:\Program Files\astah-uml\lib\*" GerarDiagramasPimIV.java "<saida.asta>" ["<base.asta>"]
  */
 public class GerarDiagramasPimIV {
 
@@ -38,18 +38,19 @@ public class GerarDiagramasPimIV {
 
     public static void main(String[] args) throws Exception {
         // Com a licença acadêmica, a API não salva um projeto criado do zero (LicenseNotFoundException),
-        // mas salva um arquivo aberto. Por isso parte de uma CÓPIA de um .asta existente (args[1]),
-        // apaga todo o conteúdo dela e monta os diagramas. O arquivo-base não é alterado.
-        java.nio.file.Files.copy(java.nio.file.Path.of(args[1]), java.nio.file.Path.of(args[0]),
-            java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+        // mas salva um arquivo aberto. Por isso abre um .asta existente, apaga todo o conteúdo e monta
+        // os diagramas. Sem base (ou com a base igual à saída), reaproveita o próprio arquivo de saída.
+        java.nio.file.Path saida = java.nio.file.Path.of(args[0]).toAbsolutePath().normalize();
+        java.nio.file.Path base = args.length > 1 ? java.nio.file.Path.of(args[1]).toAbsolutePath().normalize() : saida;
+        if (!base.equals(saida))
+            java.nio.file.Files.copy(base, saida, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
         projeto = AstahAPI.getAstahAPI().getProjectAccessor();
         projeto.open(args[0], true, false, false);
         try {
             TransactionManager.beginTransaction();
             modelo = ModelEditorFactory.getBasicModelEditor();
             IModel raiz = projeto.getProject();
-            for (IElement antigo : raiz.getDiagrams()) modelo.delete(antigo);
-            for (IElement antigo : raiz.getOwnedElements()) modelo.delete(antigo);
+            limpar(raiz);
             IPackage pimIV = modelo.createPackage(raiz, "Nex_TI - PIM IV");
 
             casosDeUso(modelo.createPackage(pimIV, "Casos de uso"));
@@ -68,6 +69,23 @@ public class GerarDiagramasPimIV {
             System.exit(1);
         } finally {
             projeto.close();
+        }
+    }
+
+    /** Apaga tudo o que havia no arquivo. Um elemento pode sumir junto com o pacote dele, então
+     *  os que já foram removidos são ignorados; no fim a raiz precisa estar vazia. */
+    private static void limpar(IModel raiz) throws Exception {
+        for (IElement antigo : raiz.getDiagrams()) apagar(antigo);
+        for (IElement antigo : raiz.getOwnedElements()) apagar(antigo);
+        if (raiz.getDiagrams().length > 0 || raiz.getOwnedElements().length > 0)
+            throw new IllegalStateException("Não consegui limpar o arquivo-base.");
+    }
+
+    private static void apagar(IElement elemento) {
+        try {
+            modelo.delete(elemento);
+        } catch (com.change_vision.jude.api.inf.exception.InvalidEditingException jaRemovido) {
+            // removido junto com o pacote que o continha
         }
     }
 

@@ -259,11 +259,11 @@
     <div class="slide-body">
         <h2 class="slide-title">Quem usa o sistema e para quê</h2>
         <div class="diagrama">
-            <figure><img src="../../../modelagem-uml/02_Modelagem_UML/UseCase%20Diagrams%20Nex_TI.png" alt="Diagrama de caso de uso do Nex_TI com os atores Usuário, Aluno, Tutor, Admin e Agente Especialista (IA)" style="height:132mm;max-width:190mm"></figure>
+            <figure><img src="../../../modelagem-uml/02_Modelagem_UML/UseCase%20Diagram%20Nex_TI.png" alt="Diagrama de casos de uso do Nex_TI: o Administrador herda do Tutor, que herda do Aluno, e o que cada perfil faz" style="height:132mm;max-width:190mm"></figure>
             <div class="lado">
                 <p><b>Aluno:</b> estuda os flashcards, faz simulados e vê o próprio desempenho.</p>
-                <p><b>Tutor:</b> cria conteúdo e acompanha os alunos.</p>
-                <p><b>Admin:</b> gerencia quem tem acesso.</p>
+                <p><b>Tutor:</b> tudo do Aluno, mais o painel dos alunos e editar ou excluir cartas.</p>
+                <p><b>Admin:</b> tudo do Tutor, mais definir o perfil de cada usuário.</p>
             </div>
         </div>
     </div>
@@ -420,9 +420,9 @@
     <div class="slide-body">
         <h2 class="slide-title">O SM-2 em ação</h2>
         <div class="diagrama">
-            <figure><img src="../../../modelagem-uml/02_Modelagem_UML/Sequence%20Diagram%20Nex_TI.png" alt="Diagrama de sequência: Aluno, Interface, Controle de Estado, Motor SM-2, Gamificação e Banco de Dados durante a revisão de uma carta"></figure>
+            <figure><img src="../../../modelagem-uml/02_Modelagem_UML/Sequence%20Diagram%20Nex_TI%20-%20Responder%20Carta.png" alt="Diagrama de sequência: o aluno responde uma carta; o site chama a rota, que chama o ProgressoService, o Sm2Engine calcula e o banco grava, com a trigger guardando o histórico"></figure>
             <div class="lado">
-                <p>O aluno dá uma nota de 0 a 5 para a própria resposta.</p>
+                <p>O aluno avalia a resposta: Errei (1), Difícil (3), Bom (4) ou Fácil (5).</p>
                 <div class="card"><h3>Nota 3 ou mais</h3><p>Volta em 1 dia, depois em 6, depois cada vez mais longe.</p></div>
                 <div class="card"><h3>Nota menor que 3</h3><p>Volta amanhã e recomeça a contagem.</p></div>
                 <code>Sm2Engine.Calcular()</code>

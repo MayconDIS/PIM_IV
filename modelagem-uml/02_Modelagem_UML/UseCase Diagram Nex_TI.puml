@@ -1,0 +1,54 @@
+@startuml UseCase Diagram Nex_TI
+' Diagrama de Casos de Uso — o que cada perfil faz no Nex_TI (site, app e API)
+' Fonte: perfis em sistema/apps/api/Models/Perfis.cs e políticas de acesso em Program.cs
+' Sem 'monochrome': no servidor do PlantUML ele apaga os textos dos casos de uso e dos atores.
+skinparam NoteBackgroundColor #F5F5F5
+skinparam UsecaseBackgroundColor #F5F5F5
+skinparam ActorBackgroundColor #F5F5F5
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam packageStyle rectangle
+left to right direction
+
+title Diagrama de Casos de Uso — perfis do Nex_TI (PIM IV)
+
+actor Aluno
+actor Tutor
+actor Administrador
+Tutor -|> Aluno
+Administrador -|> Tutor
+
+rectangle "Sistema Nex_TI (site, app e API)" {
+  usecase "Cadastrar-se e fazer login" as UC_Login
+  usecase "Fazer diagnóstico de nivelamento" as UC_Diag
+  usecase "Estudar flashcards" as UC_Estudar
+  usecase "Realizar simulado ENADE" as UC_Enade
+  usecase "Ver estatísticas e progresso" as UC_Stats
+  usecase "Ajustar acessibilidade" as UC_A11y
+  usecase "Gerenciar minha conta" as UC_Conta
+  usecase "Calcular revisão (SM-2)" as UC_Sm2
+  usecase "Estudar sem internet\n(fila no app)" as UC_Offline
+  usecase "Exportar ou excluir\nmeus dados" as UC_Dados
+  usecase "Acompanhar alunos\n(painel do Tutor)" as UC_Painel
+  usecase "Editar ou excluir cartas" as UC_Moderar
+  usecase "Definir perfis de acesso" as UC_Perfis
+}
+
+Aluno --> UC_Login
+Aluno --> UC_Diag
+Aluno --> UC_Estudar
+Aluno --> UC_Enade
+Aluno --> UC_Stats
+Aluno --> UC_A11y
+Aluno --> UC_Conta
+Tutor --> UC_Painel
+Tutor --> UC_Moderar
+Administrador --> UC_Perfis
+
+UC_Estudar ..> UC_Sm2 : <<include>>
+UC_Enade ..> UC_Sm2 : <<include>>
+UC_Offline ..> UC_Estudar : <<extend>>
+UC_Dados ..> UC_Conta : <<extend>>
+
+note "O Tutor faz tudo o que o Aluno faz,\ne o Administrador tudo o que o Tutor faz.\nA API confere o perfil gravado no token." as N1
+@enduml

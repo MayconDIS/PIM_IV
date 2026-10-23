@@ -49,8 +49,9 @@
 - **Objetivo:** mostrar os atores e o que cada um faz.
 - **Tópicos-chave:**
   - **Aluno:** estuda, faz simulado e vê o desempenho.
-  - **Tutor:** cria conteúdo e acompanha os alunos.
-  - **Admin:** controla o acesso.
+  - **Tutor:** tudo do Aluno, mais o painel dos alunos e editar ou excluir cartas.
+  - **Admin:** tudo do Tutor, mais definir o perfil de cada usuário.
+  - A seta de herança entre os atores mostra isso: o Admin herda do Tutor, que herda do Aluno.
 - **Se perguntarem:** os três perfis existem: o Tutor tem um painel com os alunos e modera as cartas; o Admin também define o perfil de cada usuário.
 
 ---
@@ -117,7 +118,8 @@
 
 - **Objetivo:** mostrar a ordem das mensagens quando o aluno revisa uma carta.
 - **Tópicos-chave:**
-  - A tela pede as cartas → o SM-2 filtra as vencidas → o aluno responde → o SM-2 calcula a nova data → o banco grava → a gamificação dá XP.
+  - O aluno avalia a carta → o site manda a nota para `POST /api/progresso/atualizar` → a rota confere o token → o `ProgressoService` busca o progresso → o `Sm2Engine` calcula a nova data → o banco grava, e uma trigger guarda o histórico.
+  - Sem login ou sem internet, o site segue só com o estado local (no app, a resposta espera numa fila).
   - Regra em `Services/Sm2Engine.cs`, com 5 testes. Nota 3 ou mais: 1 dia, 6 dias, depois multiplica pelo fator de facilidade. Menor que 3: volta para 1 dia e o fator cai (mínimo 1,3).
 
 ---

@@ -98,8 +98,9 @@ Unificar esses cálculos e tratar falhas de sincronização continua pendente.
 ## 5. Da UML para o código
 
 Os diagramas estão em [`../../modelagem-uml/02_Modelagem_UML`](../../modelagem-uml/02_Modelagem_UML).
-O diagrama de classes do PIM III é a ideia inicial; os diagramas *Camadas* e
-*Entidades* mostram o que foi implementado.
+São cinco, todos do código atual: casos de uso, classes (*Camadas* e
+*Entidades*), atividade e sequência. O `Diagrams Nex_TI - PIM IV.asta` tem os
+mesmos diagramas para abrir no Astah.
 
 1. **Herança:** `Aluno` e `Tutor` herdam de `Usuario`. XP, moedas e nível ficam
    em `Usuario` para o login e as consultas usarem uma tabela só.
