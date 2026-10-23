@@ -1,0 +1,12 @@
+{
+  "name": "relatorio-word",
+  "private": true,
+  "description": "Gera o relatório em Word (.docx) a partir do index.html, no padrão ABNT.",
+  "scripts": {
+    "gerar": "node gerar-docx.js .. ../Relatorio_PIM_IV_Nex_TI.docx"
+  },
+  "dependencies": {
+    "docx": "^9.14.0",
+    "node-html-parser": "^7.1.0"
+  }
+}
