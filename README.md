@@ -69,7 +69,7 @@ e com o que o nosso Scrum Master colocou no backlog.
 |---|---|---|
 | **Site** | Feito em HTML, CSS e JavaScript | Refeito em React e publicado na internet (Vercel) |
 | **Celular** | Não tinha | Começamos o app, com a tela de estudo de flashcards |
-| **API em C#** | 7 rotas, com todo o código junto | 14 rotas, com o código separado em camadas (cada parte cuida de uma coisa) |
+| **API em C#** | 7 rotas, com todo o código junto | 24 rotas, com o código separado em camadas (cada parte cuida de uma coisa) |
 | **Simulados** | Ficou para o futuro | Simulados no estilo ENADE, com questões de múltipla escolha |
 | **Moedas** | Ficou para o futuro | Dá para usar as moedas para liberar disciplinas bônus |
 | **Banco de dados** | Um script SQL | O banco é criado sozinho quando a API sobe, e roda na nuvem (Azure) |
