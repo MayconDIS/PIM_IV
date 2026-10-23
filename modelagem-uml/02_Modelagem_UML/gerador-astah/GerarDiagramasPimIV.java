@@ -110,12 +110,14 @@ public class GerarDiagramasPimIV {
         UseCaseDiagramEditor d = projeto.getDiagramEditorFactory().getUseCaseDiagramEditor();
         d.createUseCaseDiagram(pacote, "1. Casos de Uso - PIM III melhorado").setDefinition("Os casos de uso do PIM III com os mesmos nomes, agora ligados ao código; «planejado» = ainda não feito, «novo no PIM IV» = não existia.");
 
-        d.createRect(new Point2D.Double(250, 20), 640, 840);
+        d.createRect(new Point2D.Double(250, 20), 640, 950);
         d.createText("Sistema Nex_TI (site, app e API)", new Point2D.Double(270, 30));
 
         Map<String, IClass> atores = new HashMap<>();
         Map<String, INodePresentation> pAtores = new HashMap<>();
-        double[][] posicao = {{70, 150}, {70, 400}, {70, 640}, {70, 770}};
+        // O Aluno fica à esquerda e na altura do meio dos seus casos de uso: assim nenhuma linha
+        // dele passa por cima de outro caso de uso (conferido com a geometria das elipses).
+        double[][] posicao = {{0, 150}, {0, 461}, {0, 770}, {0, 880}};
         String[] nomesAtores = {"Usuário", "Aluno", "Tutor", "Administrador"};
         for (int i = 0; i < nomesAtores.length; i++) {
             atores.put(nomesAtores[i], uc.createActor(pacote, nomesAtores[i]));
@@ -132,19 +134,20 @@ public class GerarDiagramasPimIV {
             {"Realizar Login", "Usuário", "300", "115", ""},
             {"Ajustar Acessibilidade", "Usuário", "300", "170", ""},
             {"Gerenciar Minha Conta", "Usuário", "300", "225", "novo no PIM IV"},
-            {"Estudar Flashcards", "Aluno", "300", "320", ""},
-            {"Realizar Teste de Nivelamento", "Aluno", "300", "375", ""},
-            {"Realizar Simulado ENADE", "Aluno", "300", "430", ""},
-            {"Visualizar Painel de Desempenho", "Aluno", "300", "485", ""},
-            {"Criar Flashcards", "Aluno", "300", "540", ""},
-            {"Acompanhar Desempenho dos Usuários", "Tutor", "300", "625", ""},
-            {"Gerenciar Conteúdo das Cartas", "Tutor", "300", "680", ""},
-            {"Gerenciar Perfis e Acessos", "Administrador", "300", "780", ""},
-            {"Estudar sem Internet (app)", "", "620", "250", "novo no PIM IV"},
-            {"Atribuir XP e Moedas", "", "620", "340", ""},
-            {"Desbloquear Fases e Módulos", "", "620", "420", ""},
-            {"Consultar Agente Especialista (IA)", "Aluno", "620", "560", "planejado"},
-            {"Escalar Dúvida para Tutor", "", "620", "680", "planejado"},
+            {"Estudar Flashcards", "Aluno", "300", "300", ""},
+            {"Realizar Simulado ENADE", "Aluno", "300", "375", ""},
+            {"Realizar Teste de Nivelamento", "Aluno", "300", "450", ""},
+            {"Visualizar Painel de Desempenho", "Aluno", "300", "525", ""},
+            {"Criar Flashcards", "Aluno", "300", "600", ""},
+            {"Consultar Agente Especialista (IA)", "Aluno", "300", "675", "planejado"},
+            {"Acompanhar Desempenho dos Usuários", "Tutor", "300", "765", ""},
+            {"Gerenciar Conteúdo das Cartas", "Tutor", "300", "820", ""},
+            {"Gerenciar Perfis e Acessos", "Administrador", "300", "890", ""},
+            // à direita, na altura do caso base: as setas de «extend» e «include» saem quase retas
+            {"Estudar sem Internet (app)", "", "620", "225", "novo no PIM IV"},
+            {"Desbloquear Fases e Módulos", "", "620", "295", ""},
+            {"Atribuir XP e Moedas", "", "620", "360", ""},
+            {"Escalar Dúvida para Tutor", "", "620", "675", "planejado"},
         };
         Map<String, IUseCase> casos = new HashMap<>();
         Map<String, INodePresentation> pCasos = new HashMap<>();
@@ -173,7 +176,7 @@ public class GerarDiagramasPimIV {
             d.createLinkPresentation(uc.createExtend(casos.get(r[1]), casos.get(r[0]), ""), pCasos.get(r[0]), pCasos.get(r[1]));
 
         d.createNote("Mesmos casos de uso do PIM III, agora ligados ao código.\n«planejado»: ainda não implementado.\n«novo no PIM IV»: não existia no PIM III.\nCada perfil herda o anterior (Usuário → Aluno → Tutor → Administrador).",
-            ponto(560, 770));
+            ponto(600, 790));
     }
 
     // ------------------------------------------------------------------ classes: entidades
@@ -579,20 +582,52 @@ public class GerarDiagramasPimIV {
                 ((com.change_vision.jude.api.inf.model.INamedElement) l.getModel()).setDefinition("O ator " + base + " (perfil " + base + " do Nex_TI).");
             vida.put(kv[0], l);
         }
-        Map<String, ILinkPresentation> ultimaChamada = new HashMap<>();
+        // 1ª passada: a altura de cada mensagem e, para cada chamada, a altura da sua resposta.
+        double[] alturas = new double[msgs.length];
+        int[] respostaDe = new int[msgs.length];
+        java.util.Arrays.fill(respostaDe, -1);
+        Map<String, java.util.Deque<Integer>> abertas = new HashMap<>();
         double y = 110;
-        for (String[] m : msgs) {
+        for (int i = 0; i < msgs.length; i++) {
+            String[] m = msgs[i];
+            alturas[i] = y;
+            boolean retorno = m.length > 3 && m[3].equals("retorno");
+            if (retorno) {
+                java.util.Deque<Integer> pilha = abertas.get(m[1] + ">" + m[0]);
+                if (pilha != null && !pilha.isEmpty()) respostaDe[pilha.pop()] = i;
+            } else if (!m[0].equals(m[1])) {
+                abertas.computeIfAbsent(m[0] + ">" + m[1], k -> new java.util.ArrayDeque<>()).push(i);
+            }
+            y += retorno ? 35 : 45;
+        }
+        // 2ª passada: cria as mensagens. Quem está atendendo uma chamada faz as chamadas
+        // internas a partir da sua ativação: o Astah estica a ativação e a resposta sai
+        // depois delas, e não logo em seguida (a altura da ativação não pode ser mudada).
+        Map<Integer, ILinkPresentation> chamadas = new HashMap<>();
+        Map<String, java.util.Deque<INodePresentation>> ativas = new HashMap<>();
+        for (int i = 0; i < msgs.length; i++) {
+            String[] m = msgs[i];
             if (m.length > 3 && m[3].equals("retorno")) {
-                ILinkPresentation chamada = ultimaChamada.get(m[1] + ">" + m[0]);
-                if (chamada != null) sd.createReturnMessage(m[2], chamada);
-                y += 30;
+                for (var c : chamadas.entrySet())
+                    if (respostaDe[c.getKey()] == i) {
+                        sd.createReturnMessage(m[2], c.getValue());
+                        java.util.Deque<INodePresentation> pilha = ativas.get(m[0]);
+                        if (pilha != null && !pilha.isEmpty()) pilha.pop();
+                        break;
+                    }
                 continue;
             }
-            ILinkPresentation msg = sd.createMessage(m[2], vida.get(m[0]), vida.get(m[1]), y);
-            ultimaChamada.put(m[0] + ">" + m[1], msg);
-            y += 45;
+            java.util.regex.Matcher chamada = java.util.regex.Pattern.compile("^([A-Za-z_][\\w.]*)\\((.*)\\)$").matcher(m[2]);
+            java.util.Deque<INodePresentation> daOrigem = ativas.get(m[0]);
+            INodePresentation origem = daOrigem != null && !daOrigem.isEmpty() ? daOrigem.peek() : vida.get(m[0]);
+            ILinkPresentation msg = sd.createMessage(chamada.matches() ? chamada.group(1) : m[2], origem, vida.get(m[1]), alturas[i]);
+            if (chamada.matches()) ((com.change_vision.jude.api.inf.model.IMessage) msg.getModel()).setArgument(chamada.group(2));
+            else msg.setProperty("parameter_visibility", "false");   // texto livre: sem o "()" que o Astah acrescenta
+            if (respostaDe[i] >= 0) ativas.computeIfAbsent(m[1], k -> new java.util.ArrayDeque<>()).push(msg.getTarget());
+            chamadas.put(i, msg);
         }
-        if (nota != null) sd.createNote(nota, ponto(30, y + 40));
+        for (INodePresentation l : vida.values()) l.setProperty("lifeline_length", String.valueOf(y + 20 - l.getLocation().getY()));
+        if (nota != null) sd.createNote(nota, ponto(30, y + 60));
     }
 
     private static void casosDetalhados(IPackage casos) throws Exception {
@@ -848,15 +883,15 @@ public class GerarDiagramasPimIV {
         Map<String, IClass> e = new HashMap<>();
         String[][] entidades = {
             {"Fase", "Disciplina da trilha de estudo.", "30", "30", "código : texto", "descrição : texto"},
-            {"Flashcard", "Carta de estudo de uma fase; pode ser de múltipla escolha.", "30", "220", "frente : texto", "verso : texto", "dica : texto", "alternativas : texto", "resposta certa : número"},
-            {"Carta moderada", "Carta que um Tutor editou ou excluiu.", "330", "220", "frente original : texto", "data : data"},
-            {"Usuário", "Pessoa com conta no sistema, com perfil Aluno, Tutor ou Admin.", "620", "220", "nome de usuário : texto", "e-mail : texto", "perfil : texto", "senha (hash) : texto", "XP : número", "moedas : número", "nível : número"},
-            {"Progresso de estudo", "Como um aluno está numa carta (SM-2).", "30", "470", "repetições : número", "intervalo : número", "fator de facilidade : número", "próxima revisão : data"},
-            {"Revisão registrada", "Cada resposta do aluno, guardada pela trigger.", "330", "470", "intervalo : número", "data da revisão : data"},
-            {"Área de conhecimento", "Área das questões do ENADE.", "950", "30", "nome : texto"},
-            {"Questão", "Questão de prova do ENADE.", "950", "220", "enunciado : texto", "origem : texto"},
-            {"Alternativa", "Uma das alternativas de uma questão.", "950", "470", "texto : texto", "correta : lógico"},
-            {"Prova", "Prova oficial do ENADE.", "1250", "220", "ano : número", "tipo : texto"},
+            {"Flashcard", "Carta de estudo de uma fase; pode ser de múltipla escolha.", "30", "240", "frente : texto", "verso : texto", "dica : texto", "alternativas : texto", "resposta certa : número"},
+            {"Carta moderada", "Carta que um Tutor editou ou excluiu.", "400", "30", "frente original : texto", "data : data"},
+            {"Usuário", "Pessoa com conta no sistema, com perfil Aluno, Tutor ou Admin.", "800", "240", "nome de usuário : texto", "e-mail : texto", "perfil : texto", "senha (hash) : texto", "XP : número", "moedas : número", "nível : número"},
+            {"Progresso de estudo", "Como um aluno está numa carta (SM-2).", "400", "240", "repetições : número", "intervalo : número", "fator de facilidade : número", "próxima revisão : data"},
+            {"Revisão registrada", "Cada resposta do aluno, guardada pela trigger.", "400", "500", "intervalo : número", "data da revisão : data"},
+            {"Área de conhecimento", "Área das questões do ENADE.", "1200", "30", "nome : texto"},
+            {"Questão", "Questão de prova do ENADE.", "1200", "240", "enunciado : texto", "origem : texto"},
+            {"Alternativa", "Uma das alternativas de uma questão.", "1200", "480", "texto : texto", "correta : lógico"},
+            {"Prova", "Prova oficial do ENADE.", "1550", "240", "ano : número", "tipo : texto"},
         };
         for (String[] en : entidades) {
             IClass c = modelo.createClass(mer, en[0]);
@@ -888,16 +923,16 @@ public class GerarDiagramasPimIV {
         e.clear();
         String[][] tabelas = {
             {"fases", "Disciplinas da trilha.", "30", "30", "codigo_fase : NVARCHAR(20) {PK}", "descricao : NVARCHAR(100)"},
-            {"flashcards", "Cartas de estudo.", "30", "220", "id : INT {PK}", "codigo_fase : NVARCHAR(20) {FK}", "frente : NVARCHAR(MAX)", "verso : NVARCHAR(MAX)", "dica : NVARCHAR(255)", "opcoes : NVARCHAR(MAX)", "correta : INT"},
-            {"cartas_moderadas", "Cartas editadas ou excluídas por tutores (ligação lógica com fases, sem FK).", "380", "30", "id : INT {PK}", "codigo_fase : NVARCHAR(20)", "frente : NVARCHAR(MAX)", "data_moderacao : DATETIME2"},
-            {"usuarios", "Contas; o CHECK limita o perfil a Aluno, Tutor ou Admin.", "720", "220", "id : INT {PK}", "username : NVARCHAR(50)", "email : NVARCHAR(100)", "perfil : NVARCHAR(20)", "senha_hash : NVARCHAR(255)", "nivel : INT", "xp : INT", "moedas : INT", "data_criacao : DATETIME2"},
-            {"progresso_flashcards", "Estado do SM-2 por aluno e carta (chave composta).", "30", "520", "usuario_id : INT {PK, FK}", "flashcard_id : INT {PK, FK}", "repeticoes : INT", "intervalo_dias : FLOAT", "fator_facilidade : FLOAT", "data_proxima_revisao : DATETIME2"},
-            {"tb_historico_revisoes", "Uma linha por revisão, gravada pela trigger tg_progresso_historico.", "380", "520", "id_historico : INT {PK}", "usuario_id : INT {FK}", "flashcard_id : INT {FK}", "intervalo_dias : FLOAT", "data_revisao : DATETIME2"},
-            {"tb_areas_conhecimento", "Áreas das questões do ENADE.", "1100", "30", "id_area : INT {PK}", "nome_area : NVARCHAR(100)"},
-            {"tb_questoes", "Questões das provas.", "1100", "220", "id_questao : INT {PK}", "id_area : INT {FK}", "enunciado : NVARCHAR(MAX)", "origem : NVARCHAR(50)"},
-            {"tb_alternativas", "Alternativas de cada questão.", "1100", "450", "id_alternativa : INT {PK}", "id_questao : INT {FK}", "texto : NVARCHAR(MAX)", "is_correta : BIT"},
-            {"tb_provas", "Provas oficiais (ano e tipo).", "1450", "30", "id_prova : INT {PK}", "ano : INT", "tipo : NVARCHAR(50)"},
-            {"tb_prova_questao", "Tabela associativa: resolve o N:N entre provas e questões.", "1450", "250", "id_prova : INT {PK, FK}", "id_questao : INT {PK, FK}"},
+            {"flashcards", "Cartas de estudo.", "30", "240", "id : INT {PK}", "codigo_fase : NVARCHAR(20) {FK}", "frente : NVARCHAR(MAX)", "verso : NVARCHAR(MAX)", "dica : NVARCHAR(255)", "opcoes : NVARCHAR(MAX)", "correta : INT"},
+            {"cartas_moderadas", "Cartas editadas ou excluídas por tutores (ligação lógica com fases, sem FK).", "420", "30", "id : INT {PK}", "codigo_fase : NVARCHAR(20)", "frente : NVARCHAR(MAX)", "data_moderacao : DATETIME2"},
+            {"usuarios", "Contas; o CHECK limita o perfil a Aluno, Tutor ou Admin.", "820", "240", "id : INT {PK}", "username : NVARCHAR(50)", "email : NVARCHAR(100)", "perfil : NVARCHAR(20)", "senha_hash : NVARCHAR(255)", "nivel : INT", "xp : INT", "moedas : INT", "data_criacao : DATETIME2"},
+            {"progresso_flashcards", "Estado do SM-2 por aluno e carta (chave composta).", "420", "240", "usuario_id : INT {PK, FK}", "flashcard_id : INT {PK, FK}", "repeticoes : INT", "intervalo_dias : FLOAT", "fator_facilidade : FLOAT", "data_proxima_revisao : DATETIME2"},
+            {"tb_historico_revisoes", "Uma linha por revisão, gravada pela trigger tg_progresso_historico.", "420", "520", "id_historico : INT {PK}", "usuario_id : INT {FK}", "flashcard_id : INT {FK}", "intervalo_dias : FLOAT", "data_revisao : DATETIME2"},
+            {"tb_areas_conhecimento", "Áreas das questões do ENADE.", "1250", "30", "id_area : INT {PK}", "nome_area : NVARCHAR(100)"},
+            {"tb_questoes", "Questões das provas.", "1250", "240", "id_questao : INT {PK}", "id_area : INT {FK}", "enunciado : NVARCHAR(MAX)", "origem : NVARCHAR(50)"},
+            {"tb_alternativas", "Alternativas de cada questão.", "1250", "480", "id_alternativa : INT {PK}", "id_questao : INT {FK}", "texto : NVARCHAR(MAX)", "is_correta : BIT"},
+            {"tb_provas", "Provas oficiais (ano e tipo).", "1650", "30", "id_prova : INT {PK}", "ano : INT", "tipo : NVARCHAR(50)"},
+            {"tb_prova_questao", "Tabela associativa: resolve o N:N entre provas e questões.", "1650", "250", "id_prova : INT {PK, FK}", "id_questao : INT {PK, FK}"},
         };
         for (String[] t : tabelas) {
             IClass c = modelo.createClass(der, t[0]);
@@ -927,7 +962,7 @@ public class GerarDiagramasPimIV {
         };
         for (String[] r : relacoesDer) ligar(d, e.get(r[0]), p.get(r[0]), r[1], e.get(r[2]), p.get(r[2]), r[3], r[4]);
         d.createNote("PK = chave primária · FK = chave estrangeira.\ncartas_moderadas se liga a fases só pelo código (sem FK).\nImagens em notação de Chen e pé de galinha: modelagem-uml/04_Banco_de_Dados.",
-            ponto(30, 720));
+            ponto(30, 760));
     }
 
     private static void ligar(ClassDiagramEditor d, IClass a, INodePresentation pa, String multA,
@@ -1054,8 +1089,13 @@ public class GerarDiagramasPimIV {
      */
     private static void linhasEmL() throws Exception {
         for (com.change_vision.jude.api.inf.model.INamedElement e : projeto.findElements(com.change_vision.jude.api.inf.model.IDiagram.class)) {
-            // Só diagramas de classes (inclui MER e DER): no de atividade, mexer nos pontos
-            // dos fluxos faz o Astah abrir um alerta de erro interno.
+            // No de atividade, mexer nos pontos dos fluxos faz o Astah abrir um alerta de erro
+            // interno; lá basta o formato em ângulo reto, e o Astah traça o caminho sozinho.
+            if (e instanceof com.change_vision.jude.api.inf.model.IActivityDiagram atividade) {
+                for (com.change_vision.jude.api.inf.presentation.IPresentation p : atividade.getPresentations())
+                    if (p instanceof ILinkPresentation l) l.setProperty("line.shape", "line_right_angle");
+                continue;
+            }
             if (!(e instanceof com.change_vision.jude.api.inf.model.IClassDiagram)) continue;
             com.change_vision.jude.api.inf.model.IDiagram diagrama = (com.change_vision.jude.api.inf.model.IDiagram) e;
             Map<INodePresentation, Integer> saidas = new HashMap<>();

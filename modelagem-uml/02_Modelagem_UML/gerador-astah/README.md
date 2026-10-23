@@ -1,7 +1,7 @@
 # Gerador do `Diagrams Nex_TI - PIM IV.asta`
 
 O `GerarDiagramasPimIV.java` monta, pela API do Astah, o arquivo com a modelagem do PIM IV:
-o PIM III melhorado. São 38 diagramas:
+o PIM III melhorado. São 40 diagramas:
 
 | Diagrama | O que mostra |
 |---|---|
@@ -44,7 +44,17 @@ segundo argumento: ele é copiado e usado só como base, sem ser alterado.
 
 ## Imagens
 
-A linha de comando do Astah (`astah-command -image`) para na verificação de licença.
-Para exportar do Astah, abra o `.asta` e use *Ferramentas → Exportar imagem*. Vale
-arrastar as linhas que se cruzarem: a API posiciona as caixas, mas o traçado fica com
-o Astah.
+As imagens de todos os diagramas do `.asta` ficam em [`../imagens-astah`](../imagens-astah),
+uma pasta por pacote (casos de uso, banco de dados, camadas, entidades). Para gerar de novo,
+no PowerShell, a partir da pasta do Astah (ele procura a licença ali):
+
+```powershell
+$A = "C:\Program Files\astah-uml"; $P = "<caminho desta pasta>"
+cd $A
+& "$A\jre\bin\java.exe" "-Djava.library.path=lib\rlm" -cp "$A\astah-uml.jar;$A\astah-api.jar;$A\lib\*" `
+  "$P\ExportarImagens.java" "$P\..\Diagrams Nex_TI - PIM IV.asta" "$P\..\imagens-astah"
+```
+
+A exportação da API só funciona com o Astah aberto, então o `ExportarImagens.java` abre a
+janela do Astah, espera o projeto carregar, exporta e fecha sozinho. A linha de comando do
+Astah (`astah-command -image`) não serve: ela para na verificação da licença acadêmica.
