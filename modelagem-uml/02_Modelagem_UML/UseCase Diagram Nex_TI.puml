@@ -9,6 +9,9 @@ skinparam ActorBackgroundColor #F5F5F5
 skinparam shadowing false
 skinparam defaultFontName Arial
 skinparam packageStyle rectangle
+skinparam linetype ortho
+skinparam nodesep 28
+skinparam ranksep 90
 left to right direction
 
 title Diagrama de Casos de Uso — Nex_TI (o PIM III melhorado)
@@ -57,9 +60,15 @@ Administrador --> UC_Perfis
 
 UC_Estudar ..> UC_XP : <<include>>
 UC_Enade ..> UC_XP : <<include>>
-UC_Offline ..> UC_Estudar : <<extend>>
-UC_Fases ..> UC_Estudar : <<extend>>
-UC_Escalar ..> UC_IA : <<extend>>
+' Os casos que estendem ficam à direita do caso base (ligação invisível só para a
+' posição) e o «extend» é desenhado com norank, sem mexer no layout. Assim os casos
+' do Aluno ficam numa coluna só e as linhas dele saem retas.
+UC_Estudar -[hidden]-> UC_Offline
+UC_Estudar -[hidden]-> UC_Fases
+UC_IA -[hidden]-> UC_Escalar
+UC_Offline .[norank].> UC_Estudar : <<extend>>
+UC_Fases .[norank].> UC_Estudar : <<extend>>
+UC_Escalar .[norank].> UC_IA : <<extend>>
 
 note "Cada perfil herda o anterior:\nUsuário → Aluno → Tutor → Administrador.\nA API confere o perfil gravado no banco.\n<<planejado>>: previsto no PIM III, ainda não feito." as N1
 @enduml

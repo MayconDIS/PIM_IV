@@ -1,6 +1,7 @@
 @startchen MER Nex_TI
 ' MER (modelo conceitual) do banco do Nex_TI — notação de Chen.
 ' Fonte: sistema/apps/api/Data (migrations InicialAzureSql e ObjetosDoBanco).
+' CARTA_MODERADA: carta que um Tutor editou ou excluiu (ligada à fase só pelo código, sem FK).
 
 entity USUARIO {
   Id <<key>>
@@ -24,6 +25,12 @@ entity FLASHCARD {
   Frente
   Verso
   Dica
+}
+
+entity CARTA_MODERADA {
+  Id <<key>>
+  Frente
+  DataModeracao
 }
 
 entity HISTORICO_REVISAO {
@@ -64,6 +71,8 @@ relationship ESTUDA {
   FatorFacilidade
   DataProximaRevisao
 }
+relationship LEMBRA {
+}
 relationship GERA {
 }
 relationship REFERE {
@@ -77,6 +86,9 @@ relationship COMPOE {
 
 FASE -1- CONTEM
 CONTEM -N- FLASHCARD
+
+FASE -1- LEMBRA
+LEMBRA -N- CARTA_MODERADA
 
 USUARIO -N- ESTUDA
 ESTUDA -N- FLASHCARD
