@@ -24,7 +24,7 @@ import java.util.Map;
 
 /**
  * Gera "Diagrams Nex_TI - PIM IV.asta" pela API do Astah UML (10.1), com os diagramas
- * do código atual, como o PIM III melhorado: os mesmos casos de uso, cada um com um diagrama
+ * do código atual: os casos de uso do Nex_TI, cada um com um diagrama
  * de classes e um de sequência, mais as classes globais (entidades e camadas da API) e a
  * atividade da sessão de estudo, e o MER e o DER do banco. Todo elemento recebe uma Definition.
  *
@@ -54,8 +54,8 @@ public class GerarDiagramasPimIV {
             limpar(raiz);
             IPackage pimIV = modelo.createPackage(raiz, "Nex_TI - PIM IV");
 
-            pimIV.setDefinition("Modelagem do Nex_TI no PIM IV: o PIM III melhorado, com cada diagrama ligado ao código atual.");
-            IPackage pacoteCasos = pacote(pimIV, "Casos de uso", "Os 15 casos de uso do PIM III, com os mesmos nomes, mais os 2 novos do PIM IV. Cada um tem um diagrama de classes e um de sequência.");
+            pimIV.setDefinition("Modelagem do Nex_TI (PIM IV), com cada diagrama ligado ao código atual.");
+            IPackage pacoteCasos = pacote(pimIV, "Casos de uso", "Os 15 casos de uso do Nex_TI. Cada um tem um diagrama de classes e um de sequência.");
             casosDeUso(pacoteCasos);
             entidades(pacote(pimIV, "Modelo (entidades)", "Classes de domínio da API (pasta Models), mapeadas para as tabelas do SQL Server."));
             camadas(pacote(pimIV, "API (camadas)", "Camadas da API em .NET 10: rotas, serviços (com interfaces) e dados."));
@@ -102,22 +102,21 @@ public class GerarDiagramasPimIV {
     // ------------------------------------------------------------------ casos de uso
 
     /**
-     * Os 15 casos de uso do PIM III, com os mesmos nomes, mais os 2 novos do PIM IV.
-     * Os dois que não foram implementados ficam com o estereótipo «planejado».
+     * Os 15 casos de uso do Nex_TI, ligados aos perfis (Usuário → Aluno → Tutor → Administrador).
      */
     private static void casosDeUso(IPackage pacote) throws Exception {
         UseCaseModelEditor uc = ModelEditorFactory.getUseCaseModelEditor();
         UseCaseDiagramEditor d = projeto.getDiagramEditorFactory().getUseCaseDiagramEditor();
-        d.createUseCaseDiagram(pacote, "1. Casos de Uso - PIM III melhorado").setDefinition("Os casos de uso do PIM III com os mesmos nomes, agora ligados ao código; «planejado» = ainda não feito, «novo no PIM IV» = não existia.");
+        d.createUseCaseDiagram(pacote, "1. Casos de Uso").setDefinition("Os casos de uso do Nex_TI por perfil, cada um ligado ao código atual.");
 
-        d.createRect(new Point2D.Double(250, 20), 640, 950);
+        d.createRect(new Point2D.Double(250, 20), 640, 870);
         d.createText("Sistema Nex_TI (site, app e API)", new Point2D.Double(270, 30));
 
         Map<String, IClass> atores = new HashMap<>();
         Map<String, INodePresentation> pAtores = new HashMap<>();
         // O Aluno fica à esquerda e na altura do meio dos seus casos de uso: assim nenhuma linha
         // dele passa por cima de outro caso de uso (conferido com a geometria das elipses).
-        double[][] posicao = {{0, 150}, {0, 461}, {0, 770}, {0, 880}};
+        double[][] posicao = {{0, 150}, {0, 430}, {0, 695}, {0, 805}};
         String[] nomesAtores = {"Usuário", "Aluno", "Tutor", "Administrador"};
         for (int i = 0; i < nomesAtores.length; i++) {
             atores.put(nomesAtores[i], uc.createActor(pacote, nomesAtores[i]));
@@ -133,21 +132,19 @@ public class GerarDiagramasPimIV {
             {"Cadastrar Novo Usuário", "Usuário", "300", "60", ""},
             {"Realizar Login", "Usuário", "300", "115", ""},
             {"Ajustar Acessibilidade", "Usuário", "300", "170", ""},
-            {"Gerenciar Minha Conta", "Usuário", "300", "225", "novo no PIM IV"},
+            {"Gerenciar Minha Conta", "Usuário", "300", "225", ""},
             {"Estudar Flashcards", "Aluno", "300", "300", ""},
             {"Realizar Simulado ENADE", "Aluno", "300", "375", ""},
             {"Realizar Teste de Nivelamento", "Aluno", "300", "450", ""},
             {"Visualizar Painel de Desempenho", "Aluno", "300", "525", ""},
             {"Criar Flashcards", "Aluno", "300", "600", ""},
-            {"Consultar Agente Especialista (IA)", "Aluno", "300", "675", "planejado"},
-            {"Acompanhar Desempenho dos Usuários", "Tutor", "300", "765", ""},
-            {"Gerenciar Conteúdo das Cartas", "Tutor", "300", "820", ""},
-            {"Gerenciar Perfis e Acessos", "Administrador", "300", "890", ""},
+            {"Acompanhar Desempenho dos Usuários", "Tutor", "300", "690", ""},
+            {"Gerenciar Conteúdo das Cartas", "Tutor", "300", "745", ""},
+            {"Gerenciar Perfis e Acessos", "Administrador", "300", "815", ""},
             // à direita, na altura do caso base: as setas de «extend» e «include» saem quase retas
-            {"Estudar sem Internet (app)", "", "620", "225", "novo no PIM IV"},
+            {"Estudar sem Internet (app)", "", "620", "225", ""},
             {"Desbloquear Fases e Módulos", "", "620", "295", ""},
             {"Atribuir XP e Moedas", "", "620", "360", ""},
-            {"Escalar Dúvida para Tutor", "", "620", "675", "planejado"},
         };
         Map<String, IUseCase> casos = new HashMap<>();
         Map<String, INodePresentation> pCasos = new HashMap<>();
@@ -170,20 +167,19 @@ public class GerarDiagramasPimIV {
         String[][] estende = {
             {"Estudar sem Internet (app)", "Estudar Flashcards"},
             {"Desbloquear Fases e Módulos", "Estudar Flashcards"},
-            {"Escalar Dúvida para Tutor", "Consultar Agente Especialista (IA)"},
         };
         for (String[] r : estende)
             d.createLinkPresentation(uc.createExtend(casos.get(r[1]), casos.get(r[0]), ""), pCasos.get(r[0]), pCasos.get(r[1]));
 
-        d.createNote("Mesmos casos de uso do PIM III, agora ligados ao código.\n«planejado»: ainda não implementado.\n«novo no PIM IV»: não existia no PIM III.\nCada perfil herda o anterior (Usuário → Aluno → Tutor → Administrador).",
-            ponto(600, 790));
+        d.createNote("Cada perfil herda o anterior:\nUsuário → Aluno → Tutor → Administrador.\nA API confere o perfil gravado no banco.",
+            ponto(600, 700));
     }
 
     // ------------------------------------------------------------------ classes: entidades
 
     private static void entidades(IPackage pacote) throws Exception {
         ClassDiagramEditor d = projeto.getDiagramEditorFactory().getClassDiagramEditor();
-        d.createClassDiagram(pacote, "2. Classes - entidades do domínio").setDefinition("Entidades da API (pasta Models) com atributos, herança e multiplicidades. Evolui o diagrama de classes do PIM III.");
+        d.createClassDiagram(pacote, "2. Classes - entidades do domínio").setDefinition("Entidades da API (pasta Models) com atributos, herança e multiplicidades.");
 
         Map<String, INodePresentation> p = new HashMap<>();
         p.put("Usuario", classe(d, pacote, "Usuario", 20, 200, new String[] {
@@ -465,8 +461,6 @@ public class GerarDiagramasPimIV {
             {"Usuário", "Qualquer pessoa com conta no Nex_TI. É a base dos outros perfis."},
             {"SQL Server", "Banco de dados do Nex_TI (LocalDB no desenvolvimento, Azure SQL em produção)."},
             {"API", "A API do Nex_TI em .NET 10, publicada no Azure App Service."},
-            {"AgenteEspecialista", "Planejado no PIM III e ainda não implementado: agente de IA que responde dúvidas do aluno e passa as difíceis para um Tutor."},
-            {"Duvida", "Planejado no PIM III e ainda não implementado: a dúvida enviada pelo aluno, com o texto e a situação (respondida pela IA ou com o Tutor)."},
             {"Administrador", "Perfil que, além de tudo o que o Tutor faz, define o perfil de cada usuário."},
         };
         for (String[] par : d) DEF.put(par[0], par[1]);
@@ -522,11 +516,6 @@ public class GerarDiagramasPimIV {
         elemento(front, "sincronizacao.js", "módulo JS", false, new String[] {"responder(carta : object, resultado : string) : Promise", "sincronizar() : Promise"});
         elemento(front, "armazenamento.js", "módulo JS", false, new String[] {"lerSessao() : Promise", "gravar(chave : string, valor : object) : Promise"});
 
-        IPackage planejado = modelo.createPackage(pimIV, "Planejado (do PIM III)");
-        planejado.setDefinition("Classes previstas no PIM III para os casos de uso ainda não implementados (Agente Especialista e Escalar Dúvida).");
-        elemento(planejado, "Duvida", "planejado", false, new String[0]);   // antes: os parâmetros de AgenteEspecialista usam este tipo
-        elemento(planejado, "AgenteEspecialista", "planejado", false, new String[] {
-            "responder(duvida : Duvida) : string", "detectarComplexidade(duvida : Duvida) : bool", "escalar(duvida : Duvida, tutorId : int) : void"});
     }
 
     /** Relação reaproveitada entre diagramas: a mesma dependência não é criada duas vezes no modelo. */
@@ -646,7 +635,7 @@ public class GerarDiagramasPimIV {
                 {"pol", "auth", "regras que faltam", "retorno"}, {"auth", "bd", "nickname ou e-mail já existem?"},
                 {"auth", "bd", "INSERT usuarios (hash BCrypt, perfil Aluno)"}, {"auth", "rota", "Usuario", "retorno"},
                 {"rota", "api", "200 OK", "retorno"}, {"api", "pg", "conta criada; o site já faz o login", "retorno"}},
-            "PIM III: Registrar(Dados) no ControladorAutenticacao. PIM IV: regras de senha nos dois lados e checagem de vazamento.");
+            "Regras de senha nos dois lados e checagem de vazamento.");
 
         detalhe(casos, "Realizar Login",
             "O usuário entra com nickname ou e-mail e senha e recebe um token JWT de 24 horas com o perfil.",
@@ -661,7 +650,7 @@ public class GerarDiagramasPimIV {
                 {"auth", "auth", "BCrypt.Verify(senha, hash)"}, {"auth", "auth", "GerarToken(): JWT com id, nome e perfil"},
                 {"auth", "rota", "Sessao(token, usuario)", "retorno"}, {"rota", "api", "200: token e perfil (senha errada: 401)", "retorno"},
                 {"api", "pg", "sessão", "retorno"}, {"pg", "pg", "salva a sessão no navegador"}},
-            "PIM III: Login(email, senha) e ValidarCredenciais(). PIM IV: token JWT, limite de tentativas e perfil no token.");
+            "Token JWT, limite de tentativas e perfil no token.");
 
         detalhe(casos, "Estudar Flashcards",
             "O aluno estuda as cartas de uma fase; cada resposta vai para a API, que aplica o SM-2 e agenda a próxima revisão.",
@@ -676,7 +665,7 @@ public class GerarDiagramasPimIV {
                 {"ctx", "rota", "POST /api/progresso/atualizar (nota 1, 3, 4 ou 5)"}, {"rota", "ps", "RegistrarRespostaAsync(usuarioId, flashcardId, qualidade)"},
                 {"ps", "sm2", "Calcular(progresso, qualidade)"}, {"ps", "bd", "SaveChangesAsync() (trigger grava o histórico)"},
                 {"ps", "rota", "ProgressoFlashcard", "retorno"}, {"rota", "ctx", "200 OK", "retorno"}},
-            "PIM III: Motor_SM2 aplicava o algoritmo. PIM IV: Sm2Engine na API, com 5 testes, e histórico gravado por trigger.");
+            "Sm2Engine na API, com 5 testes, e histórico gravado por trigger.");
 
         detalhe(casos, "Atribuir XP e Moedas",
             "Ao concluir uma fase, o aluno ganha XP e moedas; a API só aceita aumentos de até 200 por vez.",
@@ -690,7 +679,7 @@ public class GerarDiagramasPimIV {
                 {"ctx", "rota", "PUT /api/usuarios/stats (xp, moedas, nivel)"}, {"rota", "gs", "AtualizarAsync(usuarioId, xp, moedas, nivel)"},
                 {"gs", "gs", "ValidarAtualizacao(): só sobe, no máximo +200"}, {"gs", "bd", "UPDATE usuarios (trigger: XP e nível não diminuem)"},
                 {"gs", "rota", "Usuario (ou recusa)", "retorno"}, {"rota", "ctx", "200 OK (ou 400)", "retorno"}},
-            "PIM III: Gamificacao creditava XP(5) e COINS(10). PIM IV: valores por fase em gamificacao.js e proteção no servidor e no banco.");
+            "Valores por fase em gamificacao.js e proteção no servidor e no banco.");
 
         detalhe(casos, "Desbloquear Fases e Módulos",
             "Concluir uma fase (ou passar no teste do módulo) libera a próxima; moedas compram fases bônus.",
@@ -701,7 +690,7 @@ public class GerarDiagramasPimIV {
                 {"gam", "ctx", "aprovado pela nota de corte?", "retorno"}, {"ctx", "gam", "proximaFase(faseId)"},
                 {"gam", "ctx", "próxima fase da ORDEM_FASES", "retorno"}, {"ctx", "ctx", "libera a fase e salva no navegador"},
                 {"a", "ctx", "compra uma fase bônus"}, {"ctx", "gam", "podeComprarBonus(moedas, custo)"}, {"gam", "ctx", "sim ou não", "retorno"}},
-            "PIM III: o Tutor liberava as fases. PIM IV: a liberação é automática ao concluir a fase anterior.");
+            "A liberação é automática ao concluir a fase anterior.");
 
         detalhe(casos, "Realizar Teste de Nivelamento",
             "No primeiro acesso, 10 perguntas definem por qual fase o aluno começa.",
@@ -712,7 +701,7 @@ public class GerarDiagramasPimIV {
                 {"ctx", "diag", "resultadoDoDiagnostico(acertos)"}, {"diag", "ctx", "fases liberadas, rank e nível", "retorno"},
                 {"ctx", "ctx", "libera as fases e marca como nivelado"}, {"ctx", "rota", "PUT /api/usuarios/stats (nível)"},
                 {"ctx", "modal", "resultado", "retorno"}},
-            "PIM III: Simulado.definirFaseInicial(nota). PIM IV: diagnostico.js no pacote compartilhado.");
+            "Diagnostico.js no pacote compartilhado.");
 
         detalhe(casos, "Realizar Simulado ENADE",
             "O aluno faz o teste do módulo ou uma prova oficial do ENADE, com correção na hora e justificativa.",
@@ -724,7 +713,7 @@ public class GerarDiagramasPimIV {
                 {"ctx", "enade", "cartasDaProva(2017 ou 2021)"}, {"a", "ctx", "escolhe uma alternativa (responderEnade)"},
                 {"ctx", "ctx", "mostra a certa e a justificativa"}, {"a", "ctx", "conclui o simulado"},
                 {"ctx", "gam", "passouNoTeste() e liberaCertificado()"}, {"gam", "ctx", "aprovado? certificado liberado?", "retorno"}},
-            "PIM III: Simulado com Temporizador. PIM IV: sem limite de tempo, com as provas oficiais e o gabarito do INEP.");
+            "Sem limite de tempo, com as provas oficiais e o gabarito do INEP.");
 
         detalhe(casos, "Visualizar Painel de Desempenho",
             "O aluno vê os próprios números do SM-2: cartas estudadas, maduras e para revisar.",
@@ -737,7 +726,7 @@ public class GerarDiagramasPimIV {
                 {"api", "rota", "GET /api/usuarios/{username}/stats-detalhadas"}, {"rota", "rota", "EhOProprioUsuario(): só o dono (senão 403)"},
                 {"rota", "ps", "EstatisticasAsync(username)"}, {"ps", "bd", "progresso do aluno"}, {"ps", "rota", "EstatisticasDetalhadas", "retorno"},
                 {"rota", "api", "200 OK", "retorno"}, {"api", "modal", "números do SM-2", "retorno"}, {"modal", "modal", "mostra os gráficos"}},
-            "PIM III: Painel_Visual.renderizar(). PIM IV: dados reais da API, só para o próprio aluno.");
+            "Dados reais da API, só para o próprio aluno.");
 
         detalhe(casos, "Acompanhar Desempenho dos Usuários",
             "O Tutor vê cada aluno com XP e números do SM-2 no painel.",
@@ -749,7 +738,7 @@ public class GerarDiagramasPimIV {
             new String[][] {{"t", "modal", "abre o painel (aba Alunos)"}, {"modal", "rota", "GET /api/tutor/alunos"},
                 {"rota", "rota", "política tutor-ou-admin (Aluno: 403)"}, {"rota", "as", "PainelDosAlunosAsync()"},
                 {"as", "bd", "alunos e progresso de cada um"}, {"as", "rota", "lista por XP", "retorno"}, {"rota", "modal", "200 OK", "retorno"}},
-            "PIM III: Painel_Visual.obterMetricas(). PIM IV: rota protegida por perfil e dados do SM-2 de cada aluno.");
+            "Rota protegida por perfil e dados do SM-2 de cada aluno.");
 
         detalhe(casos, "Gerenciar Conteúdo das Cartas",
             "O Tutor edita ou exclui cartas; a carta moderada fica registrada para a carga inicial não a recriar.",
@@ -765,7 +754,7 @@ public class GerarDiagramasPimIV {
                 {"t", "modal", "exclui uma carta e confirma"}, {"modal", "rota", "DELETE /api/flashcards/{id}"},
                 {"rota", "cs", "ExcluirFlashcardAsync(id)"}, {"cs", "bd", "grava CartaModerada e apaga (progresso sai em cascata)"},
                 {"cs", "rota", "ok", "retorno"}},
-            "PIM III: o Tutor criava módulos novos. PIM IV: módulos fixos; o Tutor modera as cartas.");
+            "Módulos fixos; o Tutor modera as cartas.");
 
         detalhe(casos, "Criar Flashcards",
             "O aluno cria uma carta numa fase; ela entra no deck local e é gravada na API.",
@@ -779,7 +768,7 @@ public class GerarDiagramasPimIV {
                 {"ctx", "ctx", "valida e coloca no deck local"}, {"ctx", "rota", "POST /api/flashcards (JWT)"},
                 {"rota", "cs", "CriarFlashcardAsync(fase, frente, verso, dica)"}, {"cs", "bd", "a fase existe? INSERT flashcards"},
                 {"cs", "rota", "Flashcard", "retorno"}, {"rota", "ctx", "200 OK", "retorno"}},
-            "PIM III: Editor recebia (pergunta, resposta). PIM IV: a carta vale no site na hora e fica salva no banco.");
+            "A carta vale no site na hora e fica salva no banco.");
 
         detalhe(casos, "Gerenciar Perfis e Acessos",
             "O Administrador define o perfil de cada usuário; ninguém muda o próprio perfil.",
@@ -792,7 +781,7 @@ public class GerarDiagramasPimIV {
                 {"rota", "rota", "política admin (outros perfis: 403)"}, {"rota", "as", "DefinirPerfilAsync(quemPede, id, perfil)"},
                 {"as", "as", "não pode o próprio; perfil Aluno, Tutor ou Admin"}, {"as", "bd", "UPDATE usuarios.perfil (CHECK)"},
                 {"as", "rota", "UsuarioResumo", "retorno"}, {"rota", "modal", "200 OK", "retorno"}},
-            "PIM III: GerenciadorAcesso.alterarPapel(id, papel). PIM IV: perfil no banco com CHECK e conferido pela API.");
+            "Perfil no banco com CHECK e conferido pela API.");
 
         detalhe(casos, "Ajustar Acessibilidade",
             "O usuário aumenta a fonte, liga o alto contraste ou usa o VLibras; as escolhas ficam salvas no navegador.",
@@ -802,28 +791,10 @@ public class GerarDiagramasPimIV {
             new String[][] {{"u", "topo", "A+, A- ou alto contraste"}, {"topo", "acc", "mudarZoom(+1 ou -1)"},
                 {"acc", "acc", "muda o tamanho da fonte e salva quest_zoom"}, {"topo", "acc", "alternarAltoContraste()"},
                 {"acc", "acc", "liga high-contrast-mode e salva no navegador"}},
-            "PIM III: PainelConfiguracao.salvar(). PIM IV: zoom e alto contraste no site, mais o VLibras (gov.br) para Libras.");
-
-        detalhe(casos, "Consultar Agente Especialista (IA)",
-            "Planejado no PIM III e ainda não implementado: o aluno pergunta e um agente de IA responde.",
-            new String[] {"Aluno", "AgenteEspecialista", "Duvida"},
-            new String[][] {{"usa", "Aluno", "AgenteEspecialista", "pergunta"}, {"usa", "AgenteEspecialista", "Duvida", "registra"}},
-            new String[] {"a=:Aluno", "ia=:AgenteEspecialista", "d=:Duvida"},
-            new String[][] {{"a", "ia", "enviarDuvida(texto)"}, {"ia", "d", "registra a dúvida"}, {"ia", "ia", "processarLinguagem()"},
-                {"ia", "a", "resposta", "retorno"}},
-            "«planejado»: modelado no PIM III; no PIM IV ainda não há código. Seria um serviço novo na API, com sua interface.");
-
-        detalhe(casos, "Escalar Dúvida para Tutor",
-            "Planejado no PIM III e ainda não implementado: quando a dúvida é difícil, a IA a passa para um Tutor.",
-            new String[] {"AgenteEspecialista", "Duvida", "Tutor"},
-            new String[][] {{"usa", "AgenteEspecialista", "Duvida", "avalia"}, {"usa", "AgenteEspecialista", "Tutor", "notifica"}},
-            new String[] {"ia=:AgenteEspecialista", "t=:Tutor", "a=:Aluno"},
-            new String[][] {{"ia", "ia", "detectarComplexidade(duvida)"}, {"ia", "t", "escalar(duvida, tutorId)"},
-                {"t", "a", "responde a dúvida"}},
-            "«planejado»: modelado no PIM III; no PIM IV ainda não há código. Estende Consultar Agente Especialista (IA).");
+            "Zoom e alto contraste no site, mais o VLibras (gov.br) para Libras.");
 
         detalhe(casos, "Gerenciar Minha Conta",
-            "Novo no PIM IV (PB02): o usuário vê e exporta os próprios dados, troca e-mail e senha e exclui a conta.",
+            "O usuário vê e exporta os próprios dados, troca e-mail e senha e exclui a conta.",
             new String[] {"ModalConta", "ContaEndpoints", "IContaService", "ContaService", "IPoliticaDeSenha", "Usuario"},
             new String[][] {{"usa", "ModalConta", "ContaEndpoints"}, {"usa", "ContaEndpoints", "IContaService", "usa"},
                 {"implementa", "ContaService", "IContaService"}, {"usa", "ContaService", "IPoliticaDeSenha", "usa"},
@@ -835,10 +806,10 @@ public class GerarDiagramasPimIV {
                 {"u", "modal", "exclui a conta"}, {"modal", "rota", "POST /api/conta/excluir {senhaAtual}"},
                 {"rota", "cs", "ExcluirAsync(usuarioId, senhaAtual)"}, {"cs", "bd", "apaga a conta (progresso e histórico em cascata)"},
                 {"cs", "rota", "ok (o último Admin não pode)", "retorno"}, {"rota", "modal", "204", "retorno"}},
-            "Não existia no PIM III. Atende aos direitos de acesso, correção e eliminação da LGPD.");
+            "Atende aos direitos de acesso, correção e eliminação da LGPD.");
 
         detalhe(casos, "Estudar sem Internet (app)",
-            "Novo no PIM IV: no app, a resposta sem internet espera numa fila no aparelho e é enviada depois.",
+            "No app, a resposta sem internet espera numa fila no aparelho e é enviada depois.",
             new String[] {"EstudoScreen", "sincronizacao.js", "armazenamento.js", "ApiService", "EndpointExtensions", "IProgressoService"},
             new String[][] {{"usa", "EstudoScreen", "sincronizacao.js"}, {"usa", "sincronizacao.js", "armazenamento.js"},
                 {"usa", "sincronizacao.js", "ApiService"},
@@ -849,7 +820,7 @@ public class GerarDiagramasPimIV {
                 {"sinc", "arm", "guarda a resposta na fila (AsyncStorage)"}, {"a", "tela", "volta a ter internet"},
                 {"tela", "sinc", "sincronizar()"}, {"sinc", "api", "reenvia a fila"}, {"sinc", "api", "GET /api/progresso/usuario"},
                 {"api", "sinc", "SM-2 calculado no servidor", "retorno"}, {"sinc", "arm", "adota o SM-2 do servidor"}},
-            "Não existia no PIM III, que não tinha app. Erros de regra (400) não voltam para a fila.");
+            "Erros de regra (400) não voltam para a fila.");
     }
 
     /** Tipos que o Astah cria sozinho ao ler as assinaturas (List, Task, Promise...): também recebem definição. */
@@ -1294,10 +1265,8 @@ public class GerarDiagramasPimIV {
         Map.entry("Gerenciar Conteúdo das Cartas", "O Tutor edita ou exclui cartas."),
         Map.entry("Gerenciar Perfis e Acessos", "O Administrador define o perfil de cada usuário."),
         Map.entry("Estudar sem Internet (app)", "No app, respostas sem internet esperam numa fila e são enviadas depois."),
-        Map.entry("Atribuir XP e Moedas", "Ao concluir uma fase, somar XP e moedas; a API aceita no máximo +200 por vez."),
-        Map.entry("Desbloquear Fases e Módulos", "Concluir uma fase libera a próxima; moedas compram fases bônus."),
-        Map.entry("Consultar Agente Especialista (IA)", "Planejado no PIM III e ainda não implementado: tirar dúvidas com um agente de IA."),
-        Map.entry("Escalar Dúvida para Tutor", "Planejado no PIM III e ainda não implementado: a IA passaria a dúvida difícil para um Tutor."));
+        Map.entry("Atribuir XP e Moedas", "Ao concluir uma fase, a API calcula o XP e as moedas pela tabela de recompensas, a mesma do site."),
+        Map.entry("Desbloquear Fases e Módulos", "Concluir uma fase libera a próxima; moedas compram fases bônus."));
 
     // ------------------------------------------------------------------ ajudantes
 
