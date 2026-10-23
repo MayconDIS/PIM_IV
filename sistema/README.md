@@ -32,8 +32,8 @@ contraste e VLibras).
 | Cadastro e login | ✅ | API (JWT) e SQL Server |
 | Estudo com flashcards e SM-2 | ✅ | No navegador; respostas de cartas com ID são enviadas a `POST /api/progresso/atualizar` quando a API está disponível |
 | Simulados ENADE | ✅ | Cartas por fase vêm da API; os testes de módulo são montados com o conteúdo local |
-| XP, moedas e nível | ✅ | No navegador e na API (`PUT /api/usuarios/stats`), que limita incrementos por atualização |
-| Desbloqueio de fases e compra de bônus | ⚠️ | Acesso liberado no navegador; a compra não envia imediatamente o saldo à API |
+| XP, moedas e nível | ✅ | Calculados na API (`POST /api/progresso/concluir-fase`), com a mesma tabela do site; o site e o app mostram o prêmio na hora e ficam com os totais do servidor |
+| Desbloqueio de fases e compra de bônus | ✅ | Fases liberadas no navegador; a compra de bônus é conferida e descontada na API (`POST /api/usuarios/bonus/{id}/comprar`) |
 | Mapa Neural | ✅ | Só no navegador |
 | Certificado | ✅ | Gerado no navegador e impresso como PDF |
 | App de celular | ✅ | Login, fases e estudo pela API; sem internet, as respostas esperam numa fila no aparelho |

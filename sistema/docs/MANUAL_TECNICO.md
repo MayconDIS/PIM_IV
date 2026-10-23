@@ -39,7 +39,9 @@ interface, não da classe.
 | `POST /api/auth/register` · `POST /api/auth/login` | Cadastro e login (devolve o JWT) | Não |
 | `GET /api/usuarios/{username}` | Perfil: XP, moedas e nível | Sim, só o dono |
 | `GET /api/usuarios/{username}/stats-detalhadas` | Números do SM-2 do aluno | Sim, só o dono |
-| `PUT /api/usuarios/stats` | Grava XP, moedas e nível | Sim |
+| `POST /api/progresso/concluir-fase` | Conclui uma fase: a API calcula XP e moedas pela tabela de recompensas e devolve os totais | Sim |
+| `POST /api/usuarios/bonus/{id}/comprar` | Compra um bônus: a API confere o saldo e desconta as moedas | Sim |
+| `PUT /api/usuarios/stats` | Grava XP, moedas e nível (usado só quando a rota de concluir fase falha, e pelo diagnóstico) | Sim |
 | `GET /api/fases` · `GET /api/fases/{codigo}/flashcards` | Fases e cartas | Não |
 | `POST /api/flashcards` | Cria uma carta | Sim |
 | `PUT /api/flashcards/{id}` · `DELETE /api/flashcards/{id}` | Edita ou exclui uma carta | Tutor ou Admin |

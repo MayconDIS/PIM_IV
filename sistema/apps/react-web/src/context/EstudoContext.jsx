@@ -367,7 +367,13 @@ export function EstudoProvider({ children }) {
     }
 
     if (apiOnlineRef.current) {
-      ApiService.updateUserStats(novoXp, novasMoedas, nivelParaApi(novoRank, novoXp)).catch(() => {});
+      // O servidor calcula o prêmio e devolve os totais; o site mostra o mesmo valor na hora.
+      ApiService.concluirFase(faseId, acertos, total)
+        .then((r) => {
+          setXp(r.xp);
+          setMoedas(r.moedas);
+        })
+        .catch(() => ApiService.updateUserStats(novoXp, novasMoedas, nivelParaApi(novoRank, novoXp)).catch(() => {}));
     }
 
     const seguinte = proximaFase(faseId);
@@ -426,7 +432,19 @@ export function EstudoProvider({ children }) {
       return;
     }
 
-    setMoedas((m) => m - bonus.custoMoedas);
+    if (apiOnlineRef.current) {
+      // Online, quem confere o saldo e desconta é o servidor.
+      try {
+        const r = await ApiService.comprarBonus(bonus.id);
+        setMoedas(r.moedas);
+      } catch (erro) {
+        som('playError');
+        toast('error', 'Compra não concluída', erro.message);
+        return;
+      }
+    } else {
+      setMoedas((m) => m - bonus.custoMoedas);
+    }
     setBonusDesbloqueados((atual) => [...atual, bonus.id]);
     som('playUnlock');
     toast('success', 'Acesso Concedido', `Disciplina "${bonus.nome}" desbloqueada com sucesso!`);
