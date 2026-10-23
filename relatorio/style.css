@@ -296,3 +296,7 @@ td { padding: 10px; text-align: left; vertical-align: middle; }
 .ficha-compacta table { font-size: 10pt; margin-bottom: 0.6rem; }
 .ficha-compacta th, .ficha-compacta td { padding: 4px 8px; }
 .ficha-compacta p { margin-bottom: 0.3cm; }
+
+/* Tabelas longas (rotas da API): fonte e espaçamento menores para caber numa página */
+.tabela-compacta { font-size: 10pt; }
+.tabela-compacta th, .tabela-compacta td { padding: 5px 8px; }
