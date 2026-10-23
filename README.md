@@ -21,8 +21,8 @@ repositórios distintos, vivem aqui como pastas de primeiro nível:
 ```text
 📁 PIM_IV/
 ├── 📁 sistema/        # Implementação: frontend, API C# (.NET 10) e scripts SQL Server
-├── 📁 relatorio/      # Monografia ABNT interativa (HTML/CSS), protótipos, cronogramas e atas
-├── 📁 modelagem-uml/  # Modelagem UML (Astah + PlantUML), diagramas exportados e backlog do produto
+├── 📁 relatorio/      # Relatório ABNT (HTML/CSS) e os slides
+├── 📁 modelagem-uml/  # UML (Astah + PlantUML) e banco de dados (MER, DER, lógico e físico)
 ├── 📁 .agents/        # Skills e instruções de agentes de IA, compartilhadas pelas três frentes
 ├── 📁 .vscode/     # Configuração do editor para o workspace inteiro
 └── 📄 .gitattributes, .gitignore, LICENSE
@@ -33,8 +33,8 @@ repositórios distintos, vivem aqui como pastas de primeiro nível:
 | Pasta | Conteúdo |
 |---|---|
 | [`sistema/`](sistema) | Monorepo npm: `apps/react-web`, `apps/react-mobile`, `apps/api` (.NET), `packages/`, `database/`, `tests/` |
-| [`relatorio/`](relatorio) | Relatório ABNT em HTML/CSS, `examples/`, `assets/`, `design_DNA/` e documentação acadêmica |
-| [`modelagem-uml/`](modelagem-uml) | `01_Documentacao_Teorica/`, `02_Modelagem_UML/` (fonte `.asta`, `.puml` e PNGs), `03_Codigo_Gerado/` |
+| [`relatorio/`](relatorio) | Relatório ABNT em HTML/CSS, `assets/` e `design_DNA/` |
+| [`modelagem-uml/`](modelagem-uml) | `02_Modelagem_UML/` (`.asta`, `.puml` e PNGs) e `04_Banco_de_Dados/` (MER, DER, lógico e físico) |
 
 ## 🚀 Como executar o sistema
 
@@ -55,33 +55,31 @@ commits preservado via `git subtree`:
 - `PIM_IV-Parte_Pratica` → `sistema/` (antes `pratica/`)
 - `PIM_IV-Documentacao_UML` → `modelagem-uml/` (antes `uml/`)
 
-A pasta `modelagem-uml/` foi herdada do PIM III e serve de base para a modelagem do PIM IV. As atas de
-reunião em `modelagem-uml/.planning/meetings/` são registros datados das sprints do PIM III e foram
-mantidas na íntegra, sem reescrita, por serem documentos históricos.
+A documentação do PIM III (atas, backlog, PDFs e diagramas) fica no repositório dele,
+[MayconDIS/PIM_III](https://github.com/MayconDIS/PIM_III). Aqui fica só o PIM IV.
 
-## 🔁 Do PIM III ao PIM IV
+## 📈 Melhorias em relação ao PIM III
 
-O PIM IV é a continuação do [PIM III](https://github.com/MayconDIS/PIM_III). É o mesmo projeto,
-o Nex_TI: trouxemos tudo o que fizemos no PIM III e fomos melhorando com o que o PIM IV pede
-e com o que o nosso Scrum Master colocou no backlog.
+O Nex_TI começou no PIM III ([MayconDIS/PIM_III](https://github.com/MayconDIS/PIM_III)).
+No PIM IV ele virou um sistema completo, publicado na nuvem. O que mudou:
 
 | O quê | No PIM III | No PIM IV |
 |---|---|---|
-| **Site** | Feito em HTML, CSS e JavaScript | Refeito em React e publicado na internet (Vercel) |
-| **Celular** | Não tinha | Começamos o app, com a tela de estudo de flashcards |
-| **API em C#** | 7 rotas, com todo o código junto | 14 rotas, com o código separado em camadas (cada parte cuida de uma coisa) |
-| **Simulados** | Ficou para o futuro | Simulados no estilo ENADE, com questões de múltipla escolha |
-| **Moedas** | Ficou para o futuro | Dá para usar as moedas para liberar disciplinas bônus |
-| **Banco de dados** | Um script SQL | O banco é criado sozinho quando a API sobe, e roda na nuvem (Azure) |
-| **Segurança** | Senha criptografada e login | Senha forte obrigatória, aviso de senha vazada, limite de tentativas de login e cada aluno só vê os próprios dados |
+| **Site** | HTML, CSS e JavaScript | React, publicado na internet (Vercel) |
+| **Celular** | Não tinha | App (Expo) com login, estudo das fases e fila para estudar sem internet |
+| **API em C#** | 7 rotas, com todo o código junto | 26 rotas, separadas em camadas (rotas → serviços → banco), cada serviço com sua interface |
+| **Repetição espaçada (SM-2)** | Só no navegador | Uma regra só no site, no app e na API, conferida pelos mesmos casos de teste |
+| **XP e moedas** | Calculados no navegador | Calculados no servidor, com a mesma tabela do site; moedas compram disciplinas bônus |
+| **Simulados ENADE** | Ficou para o futuro | Provas oficiais do ENADE ADS 2017 e 2021, com o gabarito do INEP |
+| **Perfis** | Só o aluno | Aluno, Tutor e Administrador, com painel do Tutor e área do Administrador |
+| **Banco de dados** | Um script SQL | Criado pela API ao subir, na Azure, com triggers, views, funções e procedures |
+| **Segurança** | Senha criptografada e login | Senha forte, aviso de senha vazada, limite de tentativas, token JWT e cada aluno só vê os próprios dados |
+| **LGPD** | Não tinha | O usuário vê, exporta, corrige e exclui os próprios dados |
 | **Acessibilidade** | Modo de acessibilidade | Também o VLibras (tradução para Libras) |
-| **Testes** | Não tinha | Testes automatizados da API e das regras JavaScript |
-| **Nuvem** | Rodava só no computador | A API sobe sozinha para a Azure a cada atualização no GitHub |
-| **UML** | Caso de uso, classes e sequência | Também o diagrama de atividade e o diagrama de classes do código que fizemos |
+| **Testes** | Não tinha | Testes automatizados da API, das regras JavaScript e do app |
+| **Nuvem** | Rodava só no computador | API na Azure com publicação automática, monitoramento (Application Insights) e Docker |
+| **UML** | Casos de uso, classes e sequência | Para cada caso de uso, classes e sequência tirados do código; atividade, MER e DER |
 | **Organização** | Atas das reuniões | Scrum no Trello, com o backlog (PB01 a PB22) e as sprints |
-
-Também já entraram: os perfis de Aluno, Tutor e Administrador (PB01), o painel do Tutor (PB15) e o
-login e a sincronização no app de celular (PB11 e PB12).
 
 ## 📄 Licença
 

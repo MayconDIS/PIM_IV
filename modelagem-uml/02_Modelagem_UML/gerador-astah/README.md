@@ -1,26 +1,25 @@
 # Gerador do `Diagrams Nex_TI - PIM IV.asta`
 
-O `GerarDiagramasPimIV.java` monta, pela API do Astah, o arquivo com a modelagem do PIM IV:
-o PIM III melhorado. São 40 diagramas:
+O `GerarDiagramasPimIV.java` monta, pela API do Astah, o arquivo com a modelagem do Nex_TI.
+São 36 diagramas:
 
 | Diagrama | O que mostra |
 |---|---|
-| 1. Casos de Uso | Os 15 casos de uso do PIM III com os mesmos nomes, mais 2 novos; os não implementados ficam «planejado» |
+| 1. Casos de Uso | Os 15 casos de uso do Nex_TI, por perfil |
 | 2. Classes – entidades | As classes de `sistema/apps/api/Models`, com atributos, herança e multiplicidades |
 | 3. Classes – camadas da API | Endpoints → interfaces dos serviços → classes → `AppDbContext` |
 | 4. Atividade | A sessão de estudo, com raias para Aluno, site/app, API e banco |
 | 5. MER | Entidades e relacionamentos do negócio, com cardinalidade |
 | 6. DER | As tabelas do SQL Server com tipos, PK, FK e cardinalidade |
-| Casos de uso/… | Para **cada um dos 17 casos de uso**, um diagrama de classes e um de sequência. Os 15 implementados saem do código; os 2 «planejado» mostram o que o PIM III previa |
+| Casos de uso/… | Para **cada um dos 15 casos de uso**, um diagrama de classes e um de sequência, tirados do código |
 
 Todo elemento de todo diagrama tem a explicação no campo **Definition**: classes, atributos,
 operações, casos de uso, atores, linhas de vida, mensagens, ações, fluxos, relações e os próprios
-diagramas (925 elementos, conferidos um a um).
+diagramas (todos conferidos um a um).
 
 Nos diagramas de classes (incluindo MER e DER) as caixas não se sobrepõem e as linhas são em
 ângulo reto (retas ou em L), escolhidas para não passar por cima de outras caixas. Em cada caso
-de uso as classes ficam em camadas, de cima para baixo: tela → API → serviço → entidade. A comparação caso a caso com o PIM III está em
-[`../RASTREABILIDADE_PIM3_PIM4.md`](../RASTREABILIDADE_PIM3_PIM4.md).
+de uso as classes ficam em camadas, de cima para baixo: tela → API → serviço → entidade.
 
 As imagens da pasta de cima (`*.png`) saem dos `.puml` do PlantUML. O Astah UML não tem o
 diagrama entidade-relacionamento próprio (só o Astah Professional), então o MER e o DER aqui são

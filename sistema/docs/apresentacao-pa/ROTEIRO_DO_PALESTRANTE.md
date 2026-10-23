@@ -40,7 +40,7 @@
   1. O aluno estuda por flashcards e o algoritmo **SM-2** decide quando cada carta volta.
   2. São **26 fases e 620 cartas**, liberadas em ordem, com simulado no estilo ENADE.
   3. Cada fase dá **XP e moedas**; as moedas liberam disciplinas bônus.
-- **Passar a vez:** *"O PIM IV continua o PIM III. O Gabriel mostra quem usa o sistema."*
+- **Passar a vez:** *"O Gabriel mostra quem usa o sistema."*
 
 ---
 
@@ -85,7 +85,6 @@
   - `Usuario` é pai de `Aluno` e `Tutor` (a herança do slide anterior).
   - `ProgressoFlashcard` liga o aluno à carta e guarda os números do SM-2.
   - `Prova`, `Questao`, `Alternativa` e `AreaConhecimento` entraram no PIM IV para os simulados.
-- **Se perguntarem do diagrama do PIM III:** ele continua no projeto como a ideia inicial; este mostra o que foi implementado.
 - **Passar a vez:** *"O Miguel mostra como a API está organizada."*
 
 ---
@@ -142,4 +141,4 @@
 | Por que separar em camadas? | Miguel | Cada parte cuida de uma coisa: dá para testar a regra sem a rota e trocar o banco sem mexer nas regras. |
 | O que o diagrama de atividade mostra? | Gabriel | Uma sessão de estudo, da escolha da fase até ganhar XP. |
 | Como funciona o deploy? | Maycon | Merge na main → GitHub Actions roda os testes → publica na Azure. |
-| O que ainda falta? | Maciel | Dúvidas para o Tutor e o Agente de IA, que estavam no PIM III. Estão no backlog do Trello. |
+| O que mudou desde o PIM III? | Maciel | Site em React, app de celular, API em camadas na Azure, simulados oficiais do ENADE e três perfis. A lista completa está no README. |

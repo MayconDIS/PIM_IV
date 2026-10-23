@@ -1,7 +1,6 @@
 @startuml UseCase Diagram Nex_TI
-' Diagrama de Casos de Uso — o PIM III melhorado: os mesmos 15 casos de uso, com os mesmos
-' nomes, ligados ao código atual; «planejado» = ainda não implementado; «novo no PIM IV» = não
-' existia no PIM III. Perfis em sistema/apps/api/Models/Perfis.cs.
+' Diagrama de Casos de Uso do Nex_TI: os casos de uso de cada perfil, ligados ao código atual.
+' Perfis em sistema/apps/api/Models/Perfis.cs.
 ' Sem 'monochrome': no servidor do PlantUML ele apaga os textos dos casos de uso e dos atores.
 skinparam NoteBackgroundColor #F5F5F5
 skinparam UsecaseBackgroundColor #F5F5F5
@@ -14,7 +13,7 @@ skinparam nodesep 28
 skinparam ranksep 90
 left to right direction
 
-title Diagrama de Casos de Uso — Nex_TI (o PIM III melhorado)
+title Diagrama de Casos de Uso — Nex_TI
 
 actor "Usuário" as Usuario
 actor Aluno
@@ -28,7 +27,7 @@ rectangle "Sistema Nex_TI (site, app e API)" {
   usecase "Cadastrar Novo Usuário" as UC_Cadastro
   usecase "Realizar Login" as UC_Login
   usecase "Ajustar Acessibilidade" as UC_A11y
-  usecase "Gerenciar Minha Conta\n«novo no PIM IV»" as UC_Conta
+  usecase "Gerenciar Minha Conta" as UC_Conta
   usecase "Estudar Flashcards" as UC_Estudar
   usecase "Realizar Teste de Nivelamento" as UC_Nivel
   usecase "Realizar Simulado ENADE" as UC_Enade
@@ -36,12 +35,10 @@ rectangle "Sistema Nex_TI (site, app e API)" {
   usecase "Criar Flashcards" as UC_Criar
   usecase "Atribuir XP e Moedas" as UC_XP
   usecase "Desbloquear Fases e Módulos" as UC_Fases
-  usecase "Estudar sem Internet (app)\n«novo no PIM IV»" as UC_Offline
+  usecase "Estudar sem Internet (app)" as UC_Offline
   usecase "Acompanhar Desempenho\ndos Usuários" as UC_Acompanhar
   usecase "Gerenciar Conteúdo das Cartas" as UC_Conteudo
   usecase "Gerenciar Perfis e Acessos" as UC_Perfis
-  usecase "Consultar Agente Especialista (IA)\n«planejado»" as UC_IA
-  usecase "Escalar Dúvida para Tutor\n«planejado»" as UC_Escalar
 }
 
 Usuario --> UC_Cadastro
@@ -53,7 +50,6 @@ Aluno --> UC_Nivel
 Aluno --> UC_Enade
 Aluno --> UC_Painel
 Aluno --> UC_Criar
-Aluno --> UC_IA
 Tutor --> UC_Acompanhar
 Tutor --> UC_Conteudo
 Administrador --> UC_Perfis
@@ -65,10 +61,8 @@ UC_Enade ..> UC_XP : <<include>>
 ' do Aluno ficam numa coluna só e as linhas dele saem retas.
 UC_Estudar -[hidden]-> UC_Offline
 UC_Estudar -[hidden]-> UC_Fases
-UC_IA -[hidden]-> UC_Escalar
 UC_Offline .[norank].> UC_Estudar : <<extend>>
 UC_Fases .[norank].> UC_Estudar : <<extend>>
-UC_Escalar .[norank].> UC_IA : <<extend>>
 
-note "Cada perfil herda o anterior:\nUsuário → Aluno → Tutor → Administrador.\nA API confere o perfil gravado no banco.\n<<planejado>>: previsto no PIM III, ainda não feito." as N1
+note "Cada perfil herda o anterior:\nUsuário → Aluno → Tutor → Administrador.\nA API confere o perfil gravado no banco." as N1
 @enduml
