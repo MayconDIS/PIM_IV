@@ -113,8 +113,8 @@ namespace NexTI_API.Tests
             var registro = await progresso.RegistrarRespostaAsync(usuarioId: 1, flashcardId: 7, qualidade: 5);
 
             Assert.Equal(1, registro.Repeticoes);
-            Assert.Equal(1, registro.IntervaloDias);
-            Assert.Equal(DateTime.UtcNow.Date.AddDays(1), registro.DataProximaRevisao);
+            Assert.Equal(3, registro.IntervaloDias);   // Fácil numa carta nova: 3 dias, como no site
+            Assert.Equal(DateTime.UtcNow.Date.AddDays(3), registro.DataProximaRevisao);
             Assert.Equal(1, await db.Progresso_Flashcards.CountAsync());
         }
 
@@ -128,7 +128,7 @@ namespace NexTI_API.Tests
             var segunda = await progresso.RegistrarRespostaAsync(1, 7, 4);
 
             Assert.Equal(2, segunda.Repeticoes);
-            Assert.Equal(6, segunda.IntervaloDias);
+            Assert.Equal(8, segunda.IntervaloDias);   // Bom: 3 dias × fator 2,65 = 7,95 → 8
             Assert.Equal(1, await db.Progresso_Flashcards.CountAsync());
         }
 
