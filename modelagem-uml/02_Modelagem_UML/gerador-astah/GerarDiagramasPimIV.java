@@ -1265,7 +1265,7 @@ public class GerarDiagramasPimIV {
         Map.entry("Gerenciar Conteúdo das Cartas", "O Tutor edita ou exclui cartas."),
         Map.entry("Gerenciar Perfis e Acessos", "O Administrador define o perfil de cada usuário."),
         Map.entry("Estudar sem Internet (app)", "No app, respostas sem internet esperam numa fila e são enviadas depois."),
-        Map.entry("Atribuir XP e Moedas", "Ao concluir uma fase, somar XP e moedas; a API aceita no máximo +200 por vez."),
+        Map.entry("Atribuir XP e Moedas", "Ao concluir uma fase, a API calcula o XP e as moedas pela tabela de recompensas, a mesma do site."),
         Map.entry("Desbloquear Fases e Módulos", "Concluir uma fase libera a próxima; moedas compram fases bônus."));
 
     // ------------------------------------------------------------------ ajudantes

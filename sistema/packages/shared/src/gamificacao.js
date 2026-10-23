@@ -2,11 +2,9 @@
  * Regras de progressão do Nex_TI: ordem das fases, desbloqueio, XP, moedas,
  * ranks e aprovação nos testes de módulo.
  *
- * Veio do dashboard vanilla do PIM III (`ordemFases`, `atualizarBarraNivel`,
- * `finalizarTesteModulo` e `irParaProximaAula`). No PIM IV o prêmio de cada fase
- * sai do próprio conteúdo (content.js) e vira uma tabela única: o site e o app a
- * usam aqui, e a API recebe a mesma tabela em apps/api/Data/Seed/recompensas.json
- * para calcular o XP e as moedas no servidor.
+ * O prêmio de cada fase sai do próprio conteúdo (content.js) e vira uma tabela
+ * única: o site e o app a usam aqui, e a API recebe a mesma tabela em
+ * apps/api/Data/Seed/recompensas.json para calcular o XP e as moedas no servidor.
  */
 
 import { BONUS, FASES, TESTES } from './content.js';
