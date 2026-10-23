@@ -15,7 +15,7 @@ export const ORDEM_FASES = Object.freeze([
   'fase6', 'fase7', 'fase8', 'fase9', 'fase10', 'teste-mod2',
   'fase11', 'fase12', 'fase13', 'fase14', 'fase15', 'teste-mod3',
   'fase16', 'fase17', 'fase18', 'fase19', 'fase20', 'teste-mod4',
-  'fase21', 'fase22', 'teste-mod5',
+  'fase21', 'fase22', 'fase23', 'fase24', 'fase25', 'teste-mod5',
 ]);
 
 /** Fase liberada no primeiro acesso. */

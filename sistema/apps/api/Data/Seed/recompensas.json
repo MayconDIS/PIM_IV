@@ -87,6 +87,18 @@
     "fase22": {
       "xp": 30,
       "moedas": 70
+    },
+    "fase23": {
+      "xp": 30,
+      "moedas": 70
+    },
+    "fase24": {
+      "xp": 30,
+      "moedas": 70
+    },
+    "fase25": {
+      "xp": 30,
+      "moedas": 70
     }
   },
   "testes": {

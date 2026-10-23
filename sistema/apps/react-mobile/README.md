@@ -7,7 +7,7 @@ O app de celular do Nex_TI. Usa a mesma API e as mesmas regras do site.
 | Tela | O que tem |
 |---|---|
 | **Login** | Entrar com nickname ou e-mail, ou criar conta. O token fica no cofre do aparelho (`expo-secure-store`). |
-| **Fases** | As 22 fases por módulo. A próxima só abre quando a anterior é concluída. |
+| **Fases** | As 25 fases por módulo. A próxima só abre quando a anterior é concluída. |
 | **Estudo** | Cartas vindas da API, as vencidas primeiro. Errou, a carta volta no fim da sessão. No fim: XP e moedas. |
 | **Progresso** | Nível, cartas estudadas e para revisar hoje (da API), envios pendentes e o botão "Sincronizar agora". |
 
