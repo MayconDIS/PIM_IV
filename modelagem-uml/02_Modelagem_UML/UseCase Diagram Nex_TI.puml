@@ -57,9 +57,11 @@ Administrador --> UC_Perfis
 
 UC_Estudar ..> UC_XP : <<include>>
 UC_Enade ..> UC_XP : <<include>>
-UC_Offline ..> UC_Estudar : <<extend>>
-UC_Fases ..> UC_Estudar : <<extend>>
-UC_Escalar ..> UC_IA : <<extend>>
+' «extend» escrito com o caso base à esquerda: o significado é o mesmo, e o
+' PlantUML deixa os casos do Aluno numa coluna só, com as linhas retas.
+UC_Estudar <.. UC_Offline : <<extend>>
+UC_Estudar <.. UC_Fases : <<extend>>
+UC_IA <.. UC_Escalar : <<extend>>
 
 note "Cada perfil herda o anterior:\nUsuário → Aluno → Tutor → Administrador.\nA API confere o perfil gravado no banco.\n<<planejado>>: previsto no PIM III, ainda não feito." as N1
 @enduml
