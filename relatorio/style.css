@@ -60,6 +60,9 @@ td { padding: 10px; text-align: left; vertical-align: middle; }
 .sumario-link { text-decoration: none; color: inherit; display: block; width: 100%; }
 .sumario-link:hover .sumario-titulo { text-decoration: underline; cursor: pointer; }
 
+/* Links seguem o texto (padrão ABNT): mesma cor e sem sublinhado; continuam clicáveis. */
+.page a { color: inherit; text-decoration: none; }
+.page a:hover { text-decoration: underline; }
 .ref-link { color: inherit; transition: color 0.2s; }
 .ref-link:hover { color: #2f81f7; }
 
