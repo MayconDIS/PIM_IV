@@ -1,13 +1,12 @@
 /**
  * Motor de repetição espaçada (SM-2, no estilo Anki) do Nex_TI.
  *
- * Veio das funções `formatarIntervalo`, `gerarBotoesRepeticao` e `processarResposta`
- * do dashboard vanilla do PIM III, agora como funções puras. É a regra oficial do
- * Nex_TI: a API (Services/Sm2Engine.cs) calcula igual, e os dois lados são testados
- * com os mesmos casos (tests/sm2-casos.json).
+ * Funções puras, usadas pelo site e pelo app. É a regra oficial do Nex_TI: a API
+ * (Services/Sm2Engine.cs) calcula igual, e os dois lados são testados com os mesmos
+ * casos (tests/sm2-casos.json).
  *
- * Mudança do PIM IV: "Difícil" soma pelo menos 1 dia. Antes, uma carta com intervalo
- * de 1 dia ficava presa em 1 dia, porque arredondar 1 × 1,2 dá 1.
+ * "Difícil" soma pelo menos 1 dia: sem isso, uma carta com intervalo de 1 dia ficaria
+ * presa em 1 dia, porque arredondar 1 × 1,2 dá 1.
  */
 
 /** Estado inicial de uma carta nunca estudada. */
