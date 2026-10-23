@@ -21,9 +21,9 @@ A monografia está em [`../relatorio`](../relatorio) e os diagramas em
 ## O que é
 
 Um app para estudar TI com flashcards. O algoritmo **SM-2** decide quando cada
-carta volta (errou, volta amanhã; acertou, demora mais). São 26 fases e 620
-cartas, com simulados no estilo ENADE, XP, moedas e acessibilidade (alto
-contraste e VLibras).
+carta volta (errou, volta amanhã; acertou, demora mais). São 29 fases e 702
+cartas, com um guia de estudos para o ENADE, as provas oficiais de ADS de 2017 e
+2021 (com gabarito do INEP), XP, moedas e acessibilidade (alto contraste e VLibras).
 
 ## O que funciona hoje
 
@@ -31,7 +31,7 @@ contraste e VLibras).
 |---|---|---|
 | Cadastro e login | ✅ | API (JWT) e SQL Server |
 | Estudo com flashcards e SM-2 | ✅ | No navegador; respostas de cartas com ID são enviadas a `POST /api/progresso/atualizar` quando a API está disponível |
-| Simulados ENADE | ✅ | Cartas por fase vêm da API; os testes de módulo são montados com o conteúdo local |
+| Simulados ENADE | ✅ | Guia de estudos e provas oficiais de 2017 e 2021 (fases 23 a 25); cartas por fase vêm da API e as provas também ficam em `GET /api/simulados/questoes` |
 | XP, moedas e nível | ✅ | No navegador e na API (`PUT /api/usuarios/stats`), que limita incrementos por atualização |
 | Desbloqueio de fases e compra de bônus | ⚠️ | Acesso liberado no navegador; a compra não envia imediatamente o saldo à API |
 | Mapa Neural | ✅ | Só no navegador |

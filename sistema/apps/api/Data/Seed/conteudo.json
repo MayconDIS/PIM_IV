@@ -103,6 +103,18 @@
     {
       "codigo": "fase22",
       "descricao": "ENADE: Específicos de Análise e Desenvolvimento de Sistemas"
+    },
+    {
+      "codigo": "fase23",
+      "descricao": "ENADE: Guia de Estudos"
+    },
+    {
+      "codigo": "fase24",
+      "descricao": "ENADE 2017: Prova Oficial de ADS"
+    },
+    {
+      "codigo": "fase25",
+      "descricao": "ENADE 2021: Prova Oficial de ADS"
     }
   ],
   "flashcards": [
@@ -5565,6 +5577,938 @@
         "D) O código deve ser escrito por um único programador."
       ],
       "correta": 1
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "O que é o ENADE?",
+      "verso": "O Exame Nacional de Desempenho dos Estudantes, aplicado pelo INEP. Ele avalia os cursos de graduação e, para o estudante convocado, é obrigatório: quem não faz fica com pendência para receber o diploma.",
+      "dica": "Quem aplica é o INEP.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "Como a prova do ENADE é dividida?",
+      "verso": "40 questões em 4 horas:\n• Formação Geral: 2 discursivas + 8 objetivas.\n• Componente Específico (ADS): 3 discursivas + 27 objetivas.\nNo fim há ainda um questionário de percepção da prova, que não vale nota.",
+      "dica": "10 de Formação Geral + 30 específicas.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "Quanto vale cada parte do ENADE?",
+      "verso": "Formação Geral vale 25% da nota e Componente Específico, 75%.\nDentro da Formação Geral: discursivas 40% e objetivas 60%.\nDentro do Específico: discursivas 15% e objetivas 85%.",
+      "dica": "As objetivas específicas são a maior parte da nota.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "Como são as questões discursivas do ENADE?",
+      "verso": "Cada resposta tem no máximo 15 linhas. Na Formação Geral, pedem um texto argumentativo com proposta (2021: arte, cultura e censura; cidades inteligentes). No Específico de ADS caíram código em pseudocódigo (fila, lista encadeada, média de valores) e diagrama de classes.",
+      "dica": "15 linhas, sem passar do espaço.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "Como resolver uma questão do tipo \"avalie as afirmações\"?",
+      "verso": "Julgue cada afirmação sozinha (V ou F) e anote. Depois procure a alternativa com exatamente as verdadeiras. Achou uma falsa com certeza? Elimine todas as alternativas que a incluem.",
+      "dica": "Eliminar alternativas economiza tempo.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "Como resolver uma questão de asserção-razão (\"I PORQUE II\")?",
+      "verso": "1º veja se I é verdadeira. 2º veja se II é verdadeira. 3º só se as duas forem, pergunte se II explica I. Se uma for falsa, a relação nem importa.",
+      "dica": "Julgue as duas antes da relação.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "Qual a diferença entre requisito funcional e não funcional?",
+      "verso": "Funcional diz O QUE o sistema faz (\"emitir relatório de compras\"). Não funcional diz COMO ou com que restrição (\"responder em até 2 segundos\", \"rodar no Linux\", \"ficar pronto em 6 meses\").",
+      "dica": "Caiu em 2017 (Q12) e 2021 (Q09).",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "Quais são os tipos de requisito não funcional?",
+      "verso": "Desempenho (tempo de resposta), usabilidade (facilidade de aprender e usar, acessibilidade), portabilidade (trocar de sistema operacional), segurança (controle de acesso) e confiabilidade (funcionar sem falhas).",
+      "dica": "Confiabilidade não é tempo de resposta.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "Quais são os subprocessos da engenharia de requisitos?",
+      "verso": "Estudo de viabilidade, elicitação (ex.: entrevista com usuários), especificação (ex.: casos de uso dos requisitos funcionais) e validação (ex.: protótipo de telas).",
+      "dica": "Caso de uso modela requisito funcional.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "O que é o caminho crítico de um projeto?",
+      "verso": "A sequência de atividades com a maior duração total. Se qualquer atividade dele atrasar, o projeto inteiro atrasa. Para achar: some as durações de cada caminho e pegue o maior.",
+      "dica": "Some todos os caminhos.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "Quais são os tipos de manutenção de software?",
+      "verso": "Corretiva: conserta defeito.\nAdaptativa: ajusta a um ambiente novo (outro SO, nova lei).\nEvolutiva/perfectiva: acrescenta ou melhora funções (ex.: um relatório novo).\nPreventiva: evita problemas futuros.",
+      "dica": "Relatório novo = evolutiva.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "Quando usar cascata, incremental, espiral e RAD?",
+      "verso": "Cascata: requisitos estáveis, fases em sequência (lida mal com mudanças).\nIncremental: entrega o sistema em partes.\nEspiral: projetos grandes e arriscados, com análise de risco no planejamento.\nRAD: prazo muito curto.",
+      "dica": "Urgência pede incremental ou RAD.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "No Scrum, quem gerencia o Product Backlog?",
+      "verso": "O Product Owner. O Scrum Master cuida do processo e remove impedimentos; os desenvolvedores constroem o incremento.",
+      "dica": "Pegadinha clássica: não é o Scrum Master.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "O que caracteriza a XP (eXtreme Programming)?",
+      "verso": "Foco na qualidade do código: testes automatizados escritos antes do código (TDD), programação em par, integração contínua e entregas pequenas e frequentes.",
+      "dica": "Teste antes do código = TDD.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "Quais são as tarefas da gerência de configuração de software?",
+      "verso": "Identificação dos itens de configuração, controle de versão, controle de alterações, auditoria de configuração e relatório de status. Ela começa junto com o projeto, não depois da entrega.",
+      "dica": "São cinco tarefas.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "No controle de versão, para que servem checkout, branch, merge e tag?",
+      "verso": "Checkout: baixa os arquivos do repositório.\nBranch: ramo separado para uma mudança grande.\nMerge: junta versões e resolve conflitos.\nTag: marca uma versão (release); não resolve conflito.",
+      "dica": "Conflito se resolve com merge.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "Qual a diferença entre teste caixa-branca e caixa-preta?",
+      "verso": "Caixa-branca olha a estrutura interna do código (caminhos, condições). Caixa-preta olha só entradas e saídas, sem ver o código (ex.: testar em vários navegadores).",
+      "dica": "Branca = vê o código.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "O que são teste unitário, de carga, alfa e de aceitação?",
+      "verso": "Unitário: testa um método ou classe isolado.\nCarga: vê se aguenta o volume (ex.: 100 pedidos simultâneos).\nAlfa: o usuário testa no ambiente do desenvolvedor, supervisionado (o beta é no ambiente do usuário).\nAceitação: o cliente confirma que é o que pediu.",
+      "dica": "Alfa = com os desenvolvedores por perto.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "O que é o CMMI?",
+      "verso": "Um modelo de maturidade de processos: a empresa sobe de nível cumprindo metas de processo, até chegar à melhoria contínua. É pesado e voltado a organizações maiores; no Brasil, o MPS.BR foi pensado para pequenas e médias.",
+      "dica": "Maturidade = processo estável e institucionalizado.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "Em casos de uso, qual a diferença entre <<include>> e <<extend>>?",
+      "verso": "<<include>>: o comportamento incluído SEMPRE acontece (obrigatório).\n<<extend>>: acontece só em certa condição (opcional), como \"matrícula fora do prazo\".\nGeneralização: formas diferentes de fazer a mesma coisa (validar por retina ou por digital).",
+      "dica": "Include obrigatório, extend opcional.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "Como ler as multiplicidades 1, 0..1, 0..* e 1..* na UML?",
+      "verso": "1: exatamente um. 0..1: no máximo um, pode não ter. 0..*: zero ou muitos. 1..*: pelo menos um, sem limite. Um lado 1..* pede uma coleção (lista) no código, não um atributo simples.",
+      "dica": "1..* não tem limite superior.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "O que indica o losango cheio num diagrama de classes?",
+      "verso": "Composição: a parte depende do todo e não existe sem ele. O losango vazio é agregação, um vínculo mais fraco.",
+      "dica": "Cheio = composição.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "O que é o padrão de projeto Strategy?",
+      "verso": "Uma família de algoritmos com a mesma interface, que podem ser trocados em tempo de execução trocando o objeto usado (ex.: modo comum e modo probabilista de uma calculadora). Princípio: programar para uma interface.",
+      "dica": "Não confunda com Adapter, que converte interfaces.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "Pode criar um vetor de uma classe abstrata em Java?",
+      "verso": "Pode: Impressora imp[] = new Impressora[3] cria só o vetor. O que não pode é new Impressora(). Cada posição recebe um objeto concreto, e imp[i].imprimir() chama a versão de cada classe: polimorfismo.",
+      "dica": "Vetor do tipo abstrato compila.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "Como funcionam a pilha e a fila?",
+      "verso": "Pilha é LIFO: push empilha, pop tira o topo, top só lê.\nFila é FIFO: enqueue entra no fim, dequeue sai do início.\nNo push de uma pilha encadeada: novo.prox = topo; topo = novo.",
+      "dica": "top() não remove nada.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "Quais são os percursos de uma árvore binária?",
+      "verso": "Pré-ordem: raiz, esquerda, direita.\nEm-ordem: esquerda, raiz, direita (numa árvore de busca, sai ordenado).\nPós-ordem: esquerda, direita, raiz.",
+      "dica": "O nome diz quando a raiz é visitada.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "Como funciona a ordenação por inserção?",
+      "verso": "Pega cada elemento e o encaixa na parte já ordenada, empurrando os maiores uma casa para a direita (vetor[j + 1] <- vetor[j]) até achar a posição.",
+      "dica": "Como ordenar cartas na mão.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "Quando usar GROUP BY numa consulta SQL?",
+      "verso": "Sempre que usar função de agregação (SUM, AVG, COUNT, MAX, MIN) junto de outras colunas: agrupe por essas colunas. SUM soma valores, COUNT conta linhas, AVG tira média. Para mostrar do maior para o menor: ORDER BY ... DESC.",
+      "dica": "Total de votos é SUM, não COUNT.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "Como ler a cardinalidade (mínimo, máximo) no modelo entidade-relacionamento?",
+      "verso": "O par (mín, máx) junto de uma entidade diz quantas vezes ela participa. Ex.: pessoa (1,1) — possui — (0,1) cavalo: cada cavalo tem exatamente um dono, e cada pessoa tem no máximo um cavalo (pode não ter).",
+      "dica": "Mínimo 0 = participação opcional.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "Como converter números de outras bases para decimal?",
+      "verso": "Multiplique cada dígito pela potência da base. (1001)₂ = 8 + 1 = 9; (15)₈ = 1×8 + 5 = 13; (FF)₁₆ = 15×16 + 15 = 255.",
+      "dica": "Em hexadecimal, A = 10 ... F = 15.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "Para que serve a máscara de sub-rede?",
+      "verso": "Ela diz que parte do IP é a rede. Máquinas só se falam direto se estiverem na mesma rede: 175.16.10.200 com máscara 255.255.255.0 fica na rede 175.16.10.0 e não alcança 175.16.30.200 sem roteador. Com 255.255.0.0, as duas ficam na 175.16.0.0.",
+      "dica": "Mesma rede = comunicação direta.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "O que é multiprogramação, e quem protege a memória dos processos?",
+      "verso": "Multiprogramação: a CPU alterna rapidamente entre processos, dando a impressão de paralelismo. A gerência de memória do sistema operacional dá a cada processo o seu espaço e impede que um escreva na área do outro.",
+      "dica": "Proteção de memória = gerência de memória.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "Quais são os fundamentos da LGPD (art. 2º)?",
+      "verso": "Respeito à privacidade; autodeterminação informativa; liberdade de expressão, informação, comunicação e opinião; inviolabilidade da intimidade, da honra e da imagem; desenvolvimento econômico e tecnológico e inovação; livre iniciativa, livre concorrência e defesa do consumidor; direitos humanos, dignidade e cidadania.",
+      "dica": "Lei 13.709/2018.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "Qual recurso do HTML atende a acessibilidade em imagens?",
+      "verso": "O atributo alt: os leitores de tela leem esse texto para pessoas com deficiência visual. Outras boas práticas (WCAG): bom contraste, navegação pelo teclado e não depender só da cor.",
+      "dica": "Acessibilidade = igualdade de acesso.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "Quais são os 9 blocos do Business Model Canvas?",
+      "verso": "Segmentos de clientes, proposta de valor, canais, relacionamento com clientes, fontes de receita, recursos principais, atividades-chave, parcerias principais e estrutura de custo. Serve para modelar e validar a ideia de negócio.",
+      "dica": "Nenhum bloco pode ser ignorado.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase23",
+      "frente": "Como funciona um sistema especialista com regras de produção?",
+      "verso": "Usa regras \"se condição então conclusão\" sobre os fatos da memória de trabalho. Uma regra como \"se febre e dores, então dengue com 70% de chance\" dá uma probabilidade para cada caso, não uma contagem exata de pessoas.",
+      "dica": "Probabilidade não é garantia.",
+      "opcoes": null,
+      "correta": null
+    },
+    {
+      "codigoFase": "fase24",
+      "frente": "(ENADE 2017 · Questão 10 · Matemática e Lógica) A álgebra booleana possui o operador unário ~ (NÃO) e os operadores binários * (E) e + (OU). A tabela verdade da fórmula G, para as proposições p, q e r, é:\n\np q r | G\nV V V | V\nV V F | F\nV F V | F\nV F F | F\nF V V | V\nF V F | V\nF F V | V\nF F F | V\n\nConsiderando a ordem de precedência dos operadores booleanos, a fórmula G possui a mesma tabela verdade da proposição",
+      "verso": "Alternativa C.\n\nJustificativa: Quando p é falso, ~p já torna G verdadeira (as quatro últimas linhas). Quando p é verdadeiro, G só vale V se q e r forem verdadeiros, ou seja, q * r.\n\nFonte: INEP, ENADE 2017, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 10 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2017: Matemática e Lógica.",
+      "opcoes": [
+        "A) p + ~q * r.",
+        "B) p + q * ~r.",
+        "C) ~p + q * r.",
+        "D) ~p + ~q * r.",
+        "E) ~p + q * ~r."
+      ],
+      "correta": 2
+    },
+    {
+      "codigoFase": "fase24",
+      "frente": "(ENADE 2017 · Questão 11 · Banco de Dados) Num sistema para um clube recreativo, o diagrama de classes tem: Tipo_Associado (codigo, descricao, valorMensalidade) ligado a Associado com multiplicidade 1 para 0..*; e Associado (codigo, nome, endereco, telefone) ligado a Mensalidade (codigo, anomesreferencia, valormensalidade, datavencimento, valorpago, datapagamento) com multiplicidade 1 para 1..*.\n\nAvalie as afirmações:\nI. Haverá somente 12 mensalidades para cada associado, ou seja, elas não poderão ultrapassar os 12 meses do ano.\nII. Não existem associados sem mensalidades, nem mensalidades sem associado a elas relacionado.\nIII. Alterando-se o valor da mensalidade definido para cada tipo de associado, o sistema automaticamente altera os valores das mensalidades geradas anteriormente.\nIV. Poderão existir tipos de associados que não terão nenhum associado relacionado a eles.\n\nÉ correto apenas o que se afirma em",
+      "verso": "Alternativa C.\n\nJustificativa: II: 1..* obriga cada associado a ter ao menos uma mensalidade, e cada mensalidade tem exatamente um associado. IV: 0..* permite tipo sem associados. I é falsa (1..* não tem limite) e III também (cada mensalidade guarda o próprio valor).\n\nFonte: INEP, ENADE 2017, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 11 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2017: Banco de Dados.",
+      "opcoes": [
+        "A) I e II.",
+        "B) I e III.",
+        "C) II e IV.",
+        "D) I, III e IV.",
+        "E) II, III e IV."
+      ],
+      "correta": 2
+    },
+    {
+      "codigoFase": "fase24",
+      "frente": "(ENADE 2017 · Questão 12 · Engenharia de Software) Considere os requisitos de um sistema acadêmico de uma universidade:\nR1: o sistema deve permitir que cada professor realize o lançamento de notas das turmas nas quais lecionou;\nR2: o sistema deverá ser desenvolvido de forma a possibilitar seu transporte para outro sistema operacional em, no máximo, sessenta dias;\nR3: o sistema deve permitir que um estudante realize a sua matrícula nas disciplinas oferecidas em um semestre letivo;\nR4: o sistema atualiza a nota do estudante, permitindo sua visualização, em até dois segundos depois do momento que o professor a registra;\nR5: o sistema deve permitir que o auxiliar de serviços acadêmicos realize o cadastro de um estudante em não mais do que dez minutos de orientação.\n\nRepresentam requisitos não funcionais apenas os requisitos",
+      "verso": "Alternativa D.\n\nJustificativa: R2 é portabilidade, R4 é desempenho e R5 é usabilidade (facilidade de aprendizado). R1 e R3 descrevem funções do sistema.\n\nFonte: INEP, ENADE 2017, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 12 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2017: Engenharia de Software.",
+      "opcoes": [
+        "A) R1, R2 e R3.",
+        "B) R1, R2 e R5.",
+        "C) R1, R3 e R4.",
+        "D) R2, R4 e R5.",
+        "E) R3, R4 e R5."
+      ],
+      "correta": 3
+    },
+    {
+      "codigoFase": "fase24",
+      "frente": "(ENADE 2017 · Questão 13 · Engenharia de Software) Sobre o modelo CMMI, avalie as asserções e a relação proposta entre elas.\n\nI. O CMMI fornece diretrizes para a melhoria dos processos e habilidades organizacionais, incluindo o ciclo de vida de produtos e serviços, que abrange as fases de concepção, desenvolvimento, aquisição, entrega e manutenção.\n\nPORQUE\n\nII. As empresas brasileiras estão aderindo a programas de fomento à melhoria da qualidade de software, por meio da aplicação do modelo de maturidade CMMI, que é mais direcionado às pequenas e médias empresas, apesar de também ser aplicável em grandes organizações.",
+      "verso": "Alternativa C.\n\nJustificativa: I descreve o CMMI corretamente. II é falsa: o CMMI não é voltado principalmente a pequenas e médias empresas (no Brasil, quem tem esse foco é o MPS.BR).\n\nFonte: INEP, ENADE 2017, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 13 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2017: Engenharia de Software.",
+      "opcoes": [
+        "A) As asserções I e II são verdadeiras, e a II é uma justificativa correta da I.",
+        "B) As asserções I e II são verdadeiras, mas a II não é uma justificativa correta da I.",
+        "C) A asserção I é verdadeira, e a II é falsa.",
+        "D) A asserção I é falsa, e a II é verdadeira.",
+        "E) As asserções I e II são falsas."
+      ],
+      "correta": 2
+    },
+    {
+      "codigoFase": "fase24",
+      "frente": "(ENADE 2017 · Questão 14 · Gestão de Projetos) A tabela apresenta as atividades de um projeto (predecessora; duração em dias):\nA (--; 3), B (A; 5), C (--; 12), D (--; 4), E (D; 2), F (D; 5), G (F; 7), H (E e G; 8), I (B; 11), J (C, H e I; 3).\n\nAvalie as afirmações:\nI. O caminho crítico é composto pelas atividades A, B, I e J.\nII. O caminho crítico tem 27 dias.\nIII. A atividade H faz parte do caminho crítico.\nIV. O projeto em pauta possui dois caminhos críticos.\n\nÉ correto apenas o que se afirma em",
+      "verso": "Alternativa C.\n\nJustificativa: D-F-G-H-J soma 4+5+7+8+3 = 27 dias, o maior caminho. A-B-I-J soma 22 e C-J soma 15, então só há um caminho crítico, e ele passa por H.\n\nFonte: INEP, ENADE 2017, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 14 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2017: Gestão de Projetos.",
+      "opcoes": [
+        "A) I e II.",
+        "B) I e IV.",
+        "C) II e III.",
+        "D) I, III e IV.",
+        "E) II, III e IV."
+      ],
+      "correta": 2
+    },
+    {
+      "codigoFase": "fase24",
+      "frente": "(ENADE 2017 · Questão 16 · Programação Orientada a Objetos) Um diagrama de classes modela a transferência de materiais entre funcionários. RequisicaoTransferencia (dataRequisicao: date) tem duas associações navegáveis para Funcionario (nome: string), com os papéis \"origem\" e \"destino\" e multiplicidade 1. RequisicaoTransferencia também tem uma composição (losango cheio do seu lado) com Material (descricao: string, preco: double), navegável para Material, com papel \"material\" e multiplicidade 0..1 do lado da requisição e 1..* do lado de Material.\n\nAvalie as afirmações:\nI. A classe Funcionario é abstrata.\nII. Uma RequisicaoTransferencia só existe se estiver vinculada a um Material.\nIII. A classe Funcionario, em razão de sua associação, possui um atributo do tipo RequisicaoTransferencia.\nIV. Em uma implementação da classe RequisicaoTransferencia, é necessário adicionar um atributo simples do tipo Material.\n\nÉ correto o que se afirma em",
+      "verso": "Alternativa A.\n\nJustificativa: A multiplicidade 1..* obriga a requisição a ter ao menos um material. Funcionario não é abstrata, a navegação vai da requisição para o funcionário (não o contrário) e 1..* pede uma coleção de materiais, não um atributo simples.\n\nFonte: INEP, ENADE 2017, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 16 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2017: Programação Orientada a Objetos.",
+      "opcoes": [
+        "A) II, apenas.",
+        "B) I e II, apenas.",
+        "C) III e IV, apenas.",
+        "D) I, III e IV, apenas.",
+        "E) I, II, III e IV."
+      ],
+      "correta": 0
+    },
+    {
+      "codigoFase": "fase24",
+      "frente": "(ENADE 2017 · Questão 17 · Engenharia de Software) Considerando a etapa de manutenção no processo de desenvolvimento de software, avalie as afirmações:\nI. A fase de manutenção é uma parte explícita do modelo em cascata do processo de desenvolvimento de software.\nII. A atualização do sistema para inserir customizações é considerada um tipo de manutenção.\nIII. A depuração do programa é um processo específico da fase de desenvolvimento e um tipo de manutenção.\nIV. O acréscimo de novas funções a um sistema existente, sem perturbar sua operação, é considerado um tipo de manutenção.\nV. A manutenção do sistema está relacionada ao aumento do ciclo de vida do software.\n\nÉ correto apenas o que se afirma em",
+      "verso": "Alternativa D.\n\nJustificativa: A cascata termina em operação e manutenção, e customizar ou acrescentar funções são manutenções que prolongam a vida do software. A depuração faz parte do desenvolvimento, não é um tipo de manutenção.\n\nFonte: INEP, ENADE 2017, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 17 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2017: Engenharia de Software.",
+      "opcoes": [
+        "A) I e III.",
+        "B) IV e V.",
+        "C) I, II e III.",
+        "D) I, II, IV e V.",
+        "E) II, III, IV e V."
+      ],
+      "correta": 3
+    },
+    {
+      "codigoFase": "fase24",
+      "frente": "(ENADE 2017 · Questão 18 · Redes e Sistemas Distribuídos) As redes de computadores estão por toda parte e compartilham recursos por meio de sistemas distribuídos, que comunicam e coordenam vários dispositivos.\n\nAssinale a opção que apresenta exemplos atuais de sistemas distribuídos.",
+      "verso": "Alternativa A.\n\nJustificativa: Todos os itens da alternativa A rodam em várias máquinas que se comunicam pela rede. Pesquisa no Windows e jogos em mídia física rodam numa máquina só.\n\nFonte: INEP, ENADE 2017, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 18 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2017: Redes e Sistemas Distribuídos.",
+      "opcoes": [
+        "A) Pesquisa na web, jogos on-line, e-commerce e o banco de dados das agências bancárias.",
+        "B) Jogos on-line, e-commerce, pesquisa no Windows e e-mails.",
+        "C) E-commerce, jogos em mídia física, pesquisa no Windows e redes sociais.",
+        "D) Pesquisa na web, jogos em mídia física, e-commerce e e-mails.",
+        "E) Pesquisa no Windows, pesquisa na web, jogos on-line e o banco de dados das agências bancárias."
+      ],
+      "correta": 0
+    },
+    {
+      "codigoFase": "fase24",
+      "frente": "(ENADE 2017 · Questão 19 · Sistemas Operacionais) Conceitualmente, cada processo tem sua própria CPU virtual. Na realidade, a CPU troca a execução, a todo momento, de um processo para outro, mas é muito mais fácil pensar em um conjunto de processos sendo executados (pseudo) paralelamente do que tentar controlar o modo como a CPU faz esses chaveamentos. (Tanenbaum, adaptado)\n\nDe acordo com o exposto, o conceito descrito denomina-se",
+      "verso": "Alternativa C.\n\nJustificativa: Multiprogramação é a CPU alternando rapidamente entre vários processos, o que dá a impressão de execução paralela mesmo com um só processador.\n\nFonte: INEP, ENADE 2017, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 19 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2017: Sistemas Operacionais.",
+      "opcoes": [
+        "A) thread.",
+        "B) multiprocessador.",
+        "C) multiprogramação.",
+        "D) processo monothread.",
+        "E) máquina de estados finitos."
+      ],
+      "correta": 2
+    },
+    {
+      "codigoFase": "fase24",
+      "frente": "(ENADE 2017 · Questão 21 · Engenharia de Software) A respeito dos modelos de processo de software, avalie as afirmações:\nI. São atividades do modelo incremental: especificação, desenvolvimento e validação.\nII. No modelo espiral, a fase de modelagem é responsável, entre outras atividades, pela estimativa, cronograma e análise de risco.\nIII. O modelo cascata sugere uma abordagem sequencial e sistemática para o desenvolvimento de software, iniciando na especificação de requisitos e finalizando com a entrega do software concluído.\n\nÉ correto o que se afirma em",
+      "verso": "Alternativa D.\n\nJustificativa: No espiral, estimativa, cronograma e análise de risco ficam na fase de planejamento, não na de modelagem. I e III descrevem corretamente o incremental e o cascata.\n\nFonte: INEP, ENADE 2017, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 21 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2017: Engenharia de Software.",
+      "opcoes": [
+        "A) II, apenas.",
+        "B) III, apenas.",
+        "C) I e II, apenas.",
+        "D) I e III, apenas.",
+        "E) I, II e III."
+      ],
+      "correta": 3
+    },
+    {
+      "codigoFase": "fase24",
+      "frente": "(ENADE 2017 · Questão 22 · Engenharia de Software) Um desenvolvedor recém-formado recebeu explicações sobre como a gerência de configuração funcionava. Avalie as afirmações:\nI. Inicialmente, para ter acesso à base de desenvolvimento, o profissional deve realizar uma operação de checkout para baixar os arquivos do projeto que estão armazenados no servidor.\nII. Quando mais de um desenvolvedor estiver modificando um mesmo documento, ao se tentar realizar um commit, pode ser necessário realizar uma operação de tag (release) para resolução do conflito entre a versão local e a versão mais recente no repositório.\nIII. No desenvolvimento de um novo caso de uso, em que diversos arquivos sejam modificados, é recomendada a criação de uma ramificação (branch).\nIV. A versão estável é o ramo principal de desenvolvimento, que segue do começo do desenvolvimento até o momento presente.\n\nÉ correto apenas o que se afirma em",
+      "verso": "Alternativa B.\n\nJustificativa: Conflito se resolve com merge, não com tag (tag só marca uma versão). O ramo principal de desenvolvimento é o trunk/main, que não é necessariamente a versão estável.\n\nFonte: INEP, ENADE 2017, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 22 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2017: Engenharia de Software.",
+      "opcoes": [
+        "A) I e II.",
+        "B) I e III.",
+        "C) II e IV.",
+        "D) I, III e IV.",
+        "E) II, III e IV."
+      ],
+      "correta": 1
+    },
+    {
+      "codigoFase": "fase24",
+      "frente": "(ENADE 2017 · Questão 23 · Engenharia de Software) Verificações, validações e testes são fundamentais para certificar a qualidade do software. Avalie as afirmações:\nI. O teste funcional certifica se o software desempenha as funções especificadas nos requisitos.\nII. O teste de desempenho valida a conformidade da especificação do processo de desenvolvimento de software.\nIII. O teste de aceitação é realizado pelo cliente a fim de validar se aquilo que foi implementado é o que foi solicitado.\nIV. O teste de instalação, invariavelmente, é executado no local determinado pelo cliente para instalação do software.\nV. As técnicas de verificação e validação de software asseguram que o sistema que está sendo desenvolvido seja adequado ao seu propósito.\n\nÉ correto apenas o que se afirma em",
+      "verso": "Alternativa B.\n\nJustificativa: O teste de desempenho mede tempo de resposta e carga, não a conformidade do processo. E o teste de instalação nem sempre é feito no local do cliente.\n\nFonte: INEP, ENADE 2017, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 23 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2017: Engenharia de Software.",
+      "opcoes": [
+        "A) I e IV.",
+        "B) I, III e V.",
+        "C) II, III e IV.",
+        "D) II, IV e V.",
+        "E) I, II, III e V."
+      ],
+      "correta": 1
+    },
+    {
+      "codigoFase": "fase24",
+      "frente": "(ENADE 2017 · Questão 24 · Engenharia de Software) Muitos sistemas corporativos das décadas de 1970 e 1980 foram feitos em Cobol, com ADABAS e arquivos ISAM e VSAM, produtos que estão sendo descontinuados. A reengenharia desses sistemas com linguagens e bancos mais modernos é uma oportunidade de negócio. Avalie as afirmações:\nI. A dificuldade de reengenharia de sistemas antigos deve-se ao fato de que, na maioria das vezes, o desenvolvedor definia o sistema e esse já era o próprio processo da organização.\nII. O custo de alteração para modernização de uma linha de código em Cobol é alto; por isso, fazer a manutenção desses sistemas é menos dispendioso.\nIII. Uma estratégia de conversão dos referidos sistemas para uma linguagem orientada a objetos é definir uma estrutura de classes e métodos e realizar o refatoramento do código.\n\nÉ correto o que se afirma em",
+      "verso": "Alternativa E.\n\nJustificativa: As três descrevem a realidade dos sistemas legados: a regra de negócio ficou presa no código, reescrever é caro e a migração para OO passa por definir classes e refatorar.\n\nFonte: INEP, ENADE 2017, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 24 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2017: Engenharia de Software.",
+      "opcoes": [
+        "A) I, apenas.",
+        "B) III, apenas.",
+        "C) I e II, apenas.",
+        "D) II e III, apenas.",
+        "E) I, II e III."
+      ],
+      "correta": 4
+    },
+    {
+      "codigoFase": "fase24",
+      "frente": "(ENADE 2017 · Questão 25 · Algoritmos e Estruturas de Dados) O fragmento C++ a seguir insere um nó em uma árvore binária.\n\nstruct noArvore {\n    int dado;\n    noArvore *esquerda;\n    noArvore *direita;\n};\n\nnoArvore *insere(noArvore *arvore, int valor) {\n    if (arvore == NULL) {\n        arvore = new noArvore;\n        arvore->esquerda = NULL;\n        arvore->direita = NULL;\n        arvore->dado = valor;\n    } else if (valor < arvore->dado) {\n        arvore->esquerda = insere(arvore->esquerda, valor);\n    } else {\n        arvore->direita = insere(arvore->direita, valor);\n    }\n    return arvore;\n}\n\nAssinale a opção que imprime os valores dos nós percorrendo a árvore em pré-ordem.",
+      "verso": "Alternativa A.\n\nJustificativa: Pré-ordem visita primeiro a raiz, depois a subárvore esquerda e por fim a direita. A opção C é em-ordem e a D é pós-ordem.\n\nFonte: INEP, ENADE 2017, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 25 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2017: Algoritmos e Estruturas de Dados.",
+      "opcoes": [
+        "A) if (raiz != NULL) {\n    cout << raiz->dado << \" \";\n    preorder(raiz->esquerda);\n    preorder(raiz->direita);\n}",
+        "B) if (raiz != NULL) {\n    preorder(raiz->direita);\n    preorder(raiz->esquerda);\n    cout << raiz->dado << \" \";\n}",
+        "C) if (raiz != NULL) {\n    preorder(raiz->esquerda);\n    cout << raiz->dado << \" \";\n    preorder(raiz->direita);\n}",
+        "D) if (raiz != NULL) {\n    preorder(raiz->esquerda);\n    preorder(raiz->direita);\n    cout << raiz->dado << \" \";\n}",
+        "E) if (raiz != NULL) {\n    preorder(raiz->direita);\n    cout << raiz->dado << \" \";\n    preorder(raiz->esquerda);\n}"
+      ],
+      "correta": 0
+    },
+    {
+      "codigoFase": "fase24",
+      "frente": "(ENADE 2017 · Questão 26 · Programação Orientada a Objetos) Uma calculadora feita com MVC tem dois modos: comum e probabilista. A classe Calculadora guarda uma variável c do tipo CalculadoraController; o método multiplica(valores) apenas retorna c.multiplica(valores), e alteraModo() faz c = new ProbabilistaController() se modo == 1, senão c = new OrdinarioController(). ProbabilistaController e OrdinarioController herdam de CalculadoraController e implementam multiplica(valores: double[]): double, formando uma família de algoritmos intercambiáveis.\n\nAvalie as afirmações:\nI. A hierarquia exibida ilustra o uso do padrão de projetos Strategy.\nII. O padrão composto MVC define a existência de um único controller e, portanto, a solução proposta não caracteriza o uso desse padrão.\nIII. O método multiplica da classe Calculadora chama o método multiplica de CalculadoraController, o que caracteriza uma conversão de interfaces e, portanto, o uso do padrão de projetos Adapter.\n\nÉ correto o que se afirma em",
+      "verso": "Alternativa A.\n\nJustificativa: Trocar o algoritmo trocando o objeto referenciado é o Strategy. O MVC não exige um controller único, e repassar a chamada com a mesma assinatura é delegação, não Adapter.\n\nFonte: INEP, ENADE 2017, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 26 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2017: Programação Orientada a Objetos.",
+      "opcoes": [
+        "A) I, apenas.",
+        "B) II, apenas.",
+        "C) I e III, apenas.",
+        "D) II e III, apenas.",
+        "E) I, II e III."
+      ],
+      "correta": 0
+    },
+    {
+      "codigoFase": "fase24",
+      "frente": "(ENADE 2017 · Questão 28 · Engenharia de Software) O processo de descobrir, analisar, documentar e verificar os serviços e restrições de um sistema é denominado engenharia de requisitos (Sommerville). Avalie as atribuições listadas, no que se refere à etapa de especificação de requisitos:\nI. Identificar as expectativas e necessidades dos stakeholders com relação ao software a ser desenvolvido.\nII. Distribuir os requisitos em categorias, explorar as relações entre eles e classificar sua importância para os stakeholders.\nIII. Produzir um documento de especificação de requisitos, de forma que todos os stakeholders possam entendê-lo.\nIV. Examinar a especificação do software para assegurar que todos os requisitos foram definidos sem inconsistências.\n\nSão atribuições na etapa de especificação de requisitos os itens",
+      "verso": "Alternativa E.\n\nJustificativa: Segundo o gabarito oficial, as quatro atribuições fazem parte da especificação: entender os stakeholders, organizar e priorizar, documentar e checar a consistência.\n\nFonte: INEP, ENADE 2017, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 28 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2017: Engenharia de Software.",
+      "opcoes": [
+        "A) I e III, apenas.",
+        "B) I e IV, apenas.",
+        "C) II e III, apenas.",
+        "D) II e IV, apenas.",
+        "E) I, II, III e IV."
+      ],
+      "correta": 4
+    },
+    {
+      "codigoFase": "fase24",
+      "frente": "(ENADE 2017 · Questão 29 · Matemática e Lógica) Uma pesquisa usa os conjuntos A (\"possui ensino superior\"), B (\"possui pós-graduação\") e C (\"possui pelo menos 5 anos de experiência\"). As expressões são:\nExpressão 1: x ∈ A ∧ x ∉ (B ∪ C)\nExpressão 2: x ∈ A − (B ∪ C)\nExpressão 3: x ∈ A ∧ x ∈ B ∧ x ∈ C\n\nUm programa em C usa a função contem(conjunto, p):\n/* condição 1 */\nif (contem(A, p) && !contem(B, p) && !contem(C, p)) { ... }\n/* condição 2 */\nelse if (contem(A, p) || contem(B, p) || contem(C, p)) { ... }\n\nAssinale a opção correta.",
+      "verso": "Alternativa D.\n\nJustificativa: As três descrevem \"está em A e não está em B nem em C\". A condição 2 usa OU (é uma união), por isso não equivale à expressão 3, que usa E.\n\nFonte: INEP, ENADE 2017, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 29 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2017: Matemática e Lógica.",
+      "opcoes": [
+        "A) A condição 2 do programa é equivalente à expressão 3.",
+        "B) Pessoas com pós-graduação pertencem ao conjunto definido pela expressão 2.",
+        "C) A condição 1 do programa é verdadeira para todas as pessoas com ensino superior.",
+        "D) A condição 1 do programa e as expressões 1 e 2, que representam o mesmo subconjunto, são equivalentes.",
+        "E) A condição 2 do programa define o conjunto de pessoas que tem ensino superior, pós-graduação e pelo menos cinco anos de experiência em sua área de atuação."
+      ],
+      "correta": 3
+    },
+    {
+      "codigoFase": "fase24",
+      "frente": "(ENADE 2017 · Questão 30 · Programação Orientada a Objetos) Considere o código Java:\n\npublic abstract class Impressora {\n    String nome;\n    public void imprimir() {}\n}\npublic class Laser extends Impressora {\n    public void imprimir() { System.out.println(\"Imprimindo na Laser\"); }\n}\nclass Matricial extends Impressora {\n    public void imprimir() { System.out.println(\"Imprimindo na Matricial\"); }\n}\npublic class JatoDeTinta extends Impressora {\n    public void imprimir() { System.out.println(\"Imprimindo na Jato de tinta\"); }\n}\npublic class Main {\n    public static void main(String args[]) {\n        Impressora imp[] = new Impressora[3];\n        imp[0] = new Laser();\n        imp[1] = new JatoDeTinta();\n        imp[2] = new Matricial();\n        for (int i = imp.length - 1; i >= 0; i--) {\n            imp[i].imprimir();\n        }\n    }\n}\n\nAvalie as afirmações:\nI. A execução resulta em: Imprimindo na Laser / Imprimindo na Matricial / Imprimindo na Jato de tinta.\nII. O código faz uso da técnica denominada polimorfismo.\nIII. O código não será compilado, pois o vetor imp foi instanciado por meio da classe abstrata Impressora.\n\nÉ correto o que se afirma em",
+      "verso": "Alternativa A.\n\nJustificativa: O laço vai do fim para o começo: imprime Matricial, Jato de tinta e Laser. Criar um vetor do tipo abstrato é permitido (só não dá para instanciar a classe). Cada objeto executa o seu imprimir(): polimorfismo.\n\nFonte: INEP, ENADE 2017, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 30 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2017: Programação Orientada a Objetos.",
+      "opcoes": [
+        "A) II, apenas.",
+        "B) III, apenas.",
+        "C) I e II, apenas.",
+        "D) I e III, apenas.",
+        "E) I, II e III."
+      ],
+      "correta": 0
+    },
+    {
+      "codigoFase": "fase24",
+      "frente": "(ENADE 2017 · Questão 31 · UX/UI e Requisitos) À medida que o projeto de uma interface evolui, quatro questões quase sempre aparecem: tempo de resposta, recursos de ajuda, tratamento de erros e nomes de comandos (Pressman). Avalie as afirmações:\nI. A análise de interfaces tem por objetivo identificar o perfil dos usuários e auxiliar na especificação do requisito não funcional de segurança pertinente ao perfil de acesso dos usuários.\nII. O requisito não funcional de segurança descreve as características relacionadas a inteligibilidade, modo de usar ou operar o sistema.\nIII. O requisito não funcional de confiabilidade descreve as características relacionadas ao tempo de resposta para processamento de dados ou informações.\nIV. O requisito não funcional de usabilidade descreve diretrizes de acessibilidade para pessoas com deficiência.\n\nÉ correto apenas o que se afirma em",
+      "verso": "Alternativa B.\n\nJustificativa: II descreve usabilidade, não segurança. III descreve desempenho (eficiência), não confiabilidade.\n\nFonte: INEP, ENADE 2017, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 31 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2017: UX/UI e Requisitos.",
+      "opcoes": [
+        "A) I e III.",
+        "B) I e IV.",
+        "C) II e IV.",
+        "D) I, II e III.",
+        "E) II, III e IV."
+      ],
+      "correta": 1
+    },
+    {
+      "codigoFase": "fase24",
+      "frente": "(ENADE 2017 · Questão 32 · Banco de Dados) Um banco guarda o resultado de uma eleição nas tabelas Partido (numero, nome, sigla), Candidato (numero, nome), em que o número do candidato é o número do seu partido, e Votacao (partido, votos, estado), com os votos de cada partido em cada estado.\n\nQual comando SQL seleciona os nomes dos candidatos, seus partidos e o total de votos de cada partido?",
+      "verso": "Alternativa C.\n\nJustificativa: Total de votos é SUM (COUNT só contaria as linhas), e uma função de agregação junto de outras colunas exige GROUP BY por essas colunas.\n\nFonte: INEP, ENADE 2017, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 32 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2017: Banco de Dados.",
+      "opcoes": [
+        "A) SELECT c.nome, p.nome, SUM(v.votos) FROM Partido p, Candidato c, Votacao v WHERE c.numero = p.numero and v.partido = c.numero;",
+        "B) SELECT c.nome, p.nome, COUNT(v.votos) FROM Partido p, Candidato c, Votacao v WHERE c.numero = p.numero and v.partido = c.numero GROUP BY c.nome, p.nome;",
+        "C) SELECT c.nome, p.nome, SUM(v.votos) FROM Partido p, Candidato c, Votacao v WHERE c.numero = p.numero and v.partido = c.numero GROUP BY c.nome, p.nome;",
+        "D) SELECT c.nome, p.nome, v.votos FROM Partido p, Candidato c, Votacao v WHERE c.numero = p.numero and v.partido = c.numero GROUP BY c.nome, p.nome, SUM(v.votos);",
+        "E) SELECT c.nome, p.nome, COUNT(v.votos) FROM Partido p, Candidato c, Votacao v WHERE c.numero = p.numero and v.partido = c.numero GROUP BY c.nome, p.nome, v.votos;"
+      ],
+      "correta": 2
+    },
+    {
+      "codigoFase": "fase24",
+      "frente": "(ENADE 2017 · Questão 33 · Algoritmos e Estruturas de Dados) Um programador implementou a ordenação por inserção para vetor[1..9], mas o algoritmo não funciona:\n\n01 para i <- 2 até 9 faça\n02    valor <- vetor[i]\n03    j <- i - 1\n04    enquanto ((j >= 1) e (valor < vetor[j])) faça\n05       vetor[i] <- vetor[j]\n06       j <- j - 1\n07       se (j = 0) então\n08          interrompa\n09       fim se\n10    fim enquanto\n11    vetor[j + 1] <- valor\n12 fim para\n\nQual linha e comando devem ser substituídos para que o algoritmo ordene o vetor de forma crescente?",
+      "verso": "Alternativa D.\n\nJustificativa: Na inserção, cada elemento maior é empurrado uma posição para a direita: vetor[j + 1] <- vetor[j]. Escrever sempre em vetor[i] perde os valores.\n\nFonte: INEP, ENADE 2017, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 33 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2017: Algoritmos e Estruturas de Dados.",
+      "opcoes": [
+        "A) Linha 01; para i <- 1 até 9 faça",
+        "B) Linha 03; j <- i",
+        "C) Linha 04; enquanto ((j >= 1) ou (valor < vetor[j])) faça",
+        "D) Linha 05; vetor[j + 1] <- vetor[j]",
+        "E) Linha 11; vetor[j] <- valor"
+      ],
+      "correta": 3
+    },
+    {
+      "codigoFase": "fase24",
+      "frente": "(ENADE 2017 · Questão 34 · Banco de Dados) Inspirado no diálogo entre Chicó e João Grilo (Auto da Compadecida), um modelo de dados tem a entidade pessoa (codigo, que é o identificador; rg; cpf; nome) ligada pelo relacionamento possui à entidade cavalo (codigo, que é o identificador; raca; eBento?). A cardinalidade (1,1) aparece junto de pessoa e (0,1) junto de cavalo.\n\nAvalie as afirmações:\nI. O Chicó e a velha poderão ser cadastrados na entidade pessoa.\nII. O Chicó e a velha poderão ter mais que um cavalo cadastrados.\nIII. O atributo rg da entidade pessoa pode ter a função de chave primária nessa entidade.\nIV. O cavalo deverá ter no mínimo uma pessoa e uma pessoa poderá ser cadastrada sem a necessidade de ter um cavalo.\n\nÉ correto apenas o que se afirma em",
+      "verso": "Alternativa B.\n\nJustificativa: (1,1) do lado de pessoa: todo cavalo tem exatamente um dono. (0,1) do lado de cavalo: a pessoa tem no máximo um cavalo, e pode não ter nenhum. O identificador escolhido é codigo, não rg.\n\nFonte: INEP, ENADE 2017, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 34 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2017: Banco de Dados.",
+      "opcoes": [
+        "A) I e III.",
+        "B) I e IV.",
+        "C) II e III.",
+        "D) I, II e IV.",
+        "E) II, III e IV."
+      ],
+      "correta": 1
+    },
+    {
+      "codigoFase": "fase24",
+      "frente": "(ENADE 2017 · Questão 35 · UX/UI e Requisitos) Num site de venda de ingressos, os links para cada show são imagens. O web designer implementou cada link assim, para que usuários de leitores de tela recebam um texto informativo:\n\n<a href=\"link-area-venda-ingresso\">\n    <img src=\"imagem-show.jpg\" alt=\"identificação do show\" />\n</a>\n\nConsiderando o uso do atributo alt e a interação humano-computador, o web designer atendeu o requisito de",
+      "verso": "Alternativa C.\n\nJustificativa: O alt é lido pelos leitores de tela: é o recurso básico de acessibilidade para pessoas com deficiência visual.\n\nFonte: INEP, ENADE 2017, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 35 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2017: UX/UI e Requisitos.",
+      "opcoes": [
+        "A) segurança no uso, pois se uma imagem tiver baixa resolução, o texto associado possibilita identificar o conteúdo do link.",
+        "B) facilidade de aprendizado, pois imagens aliadas a textos informativos ajudam o usuário a aprender os caminhos de navegação.",
+        "C) acessibilidade, pois a possibilidade de acesso à página por pessoas com deficiência visual oferece condições de igualdade na interação com o sistema web.",
+        "D) ergonomia, pois imagens em links causam cansaço visual em smartphones e o atributo alt substitui a imagem por texto.",
+        "E) comunicabilidade, pois se uma imagem não comunica adequadamente a informação, o texto alternativo deve complementá-la."
+      ],
+      "correta": 2
+    },
+    {
+      "codigoFase": "fase25",
+      "frente": "(ENADE 2021 · Questão 9 · Engenharia de Software) A etapa de definição de requisitos estabelece quais funções são requeridas pelo sistema e as restrições sobre a operação e o desenvolvimento do software. Os requisitos podem ser funcionais ou não funcionais (Sommerville).\n\nAssinale a alternativa em que o item é um requisito funcional.",
+      "verso": "Alternativa C.\n\nJustificativa: Emitir relatórios é uma função do sistema. As demais são restrições: plataforma, prazo, desempenho e segurança.\n\nFonte: INEP, ENADE 2021, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 9 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2021: Engenharia de Software.",
+      "opcoes": [
+        "A) O software deve ser operacionalizado no sistema Linux.",
+        "B) O tempo de desenvolvimento não deve ultrapassar seis meses.",
+        "C) O software deve emitir relatórios de compras a cada quinze dias.",
+        "D) O tempo de resposta do sistema não deve ultrapassar 30 segundos.",
+        "E) A base de dados deve ser protegida para acesso apenas de usuários autorizados."
+      ],
+      "correta": 2
+    },
+    {
+      "codigoFase": "fase25",
+      "frente": "(ENADE 2021 · Questão 11 · Algoritmos e Estruturas de Dados) O código Java a seguir implementa uma Pilha encadeada.\n\npublic class No {\n    public int dado;\n    public No prox;\n    public No(int dado) { this.dado = dado; }\n}\npublic class PilhaEncadeada {\n    private No topo;\n    public int pop() {\n        if (topo == null) return -1;\n        No lixo = topo;\n        topo = topo.prox;\n        lixo.prox = null;\n        return lixo.dado;\n    }\n    public int top() {\n        if (topo == null) return -1;\n        return topo.dado;\n    }\n}\n\nAssinale a opção com a implementação correta do método push.",
+      "verso": "Alternativa E.\n\nJustificativa: O novo nó aponta para o topo atual e passa a ser o topo. Assim o pop(), que lê topo.prox, encontra o elemento de baixo.\n\nFonte: INEP, ENADE 2021, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 11 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2021: Algoritmos e Estruturas de Dados.",
+      "opcoes": [
+        "A) No novo = new No(elemento);\nif (topo == null) topo = novo;\nelse topo.prox = novo;",
+        "B) No novo = new No(elemento);\ntopo = novo;",
+        "C) topo.dado = elemento;",
+        "D) No novo = new No(elemento);\nwhile (topo != null) topo = topo.prox;\ntopo.prox = novo;",
+        "E) No novo = new No(elemento);\nnovo.prox = topo;\ntopo = novo;"
+      ],
+      "correta": 4
+    },
+    {
+      "codigoFase": "fase25",
+      "frente": "(ENADE 2021 · Questão 12 · Engenharia de Software) Uma fábrica de software usa Scrum, eXtreme Programming (XP) e quadro Kanban. Avalie as afirmações:\nI. Métodos ágeis são baseados em ciclos iterativos e incrementais que se concentram no desenvolvimento rápido e na flexibilidade às mudanças, com a participação do cliente no processo de software.\nII. Uma forte característica da XP é a garantia da qualidade do código produzido e, para isso, os desenvolvedores produzem testes automatizados antes mesmo de codificar uma funcionalidade.\nIII. O planejamento no Scrum é baseado na elaboração dos itens do product backlog, que é uma lista de funcionalidades desejadas pelo cliente, sendo o Scrum Master o responsável por gerenciá-lo.\nIV. O quadro Kanban permite monitorar a evolução das tarefas necessárias durante o processo ágil, possibilitando um acompanhamento visual das atividades em construção.\n\nÉ correto apenas o que se afirma em",
+      "verso": "Alternativa C.\n\nJustificativa: Quem gerencia o product backlog é o Product Owner, não o Scrum Master. As outras afirmações estão certas (o teste antes do código da II é o TDD).\n\nFonte: INEP, ENADE 2021, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 12 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2021: Engenharia de Software.",
+      "opcoes": [
+        "A) II.",
+        "B) I e III.",
+        "C) I, II e IV.",
+        "D) I, III e IV.",
+        "E) II, III e IV."
+      ],
+      "correta": 2
+    },
+    {
+      "codigoFase": "fase25",
+      "frente": "(ENADE 2021 · Questão 13 · Algoritmos e Estruturas de Dados) As variáveis pilha e fila são uma Pilha e uma Fila. Um programador executou:\n\npilha.push('A'); pilha.push('B'); pilha.push('C');\nfila.enqueue(pilha.top());\nfila.enqueue(pilha.top());\nfila.enqueue('D');\npilha.push(fila.dequeue());\nfila.enqueue(fila.dequeue());\nfila.enqueue(pilha.pop());\npilha.push('E');\nfila.enqueue('E');\npilha.pop();\n\nAo imprimir o conteúdo de pilha e fila, respectivamente, seria exibido:",
+      "verso": "Alternativa C.\n\nJustificativa: top() só lê, então a fila recebe C, C e D. O primeiro C volta para a pilha, o segundo vai para o fim da fila, e o pop() devolve esse C para a fila. O E entra e sai da pilha: pilha C, B, A e fila D, C, C, E.\n\nFonte: INEP, ENADE 2021, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 13 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2021: Algoritmos e Estruturas de Dados.",
+      "opcoes": [
+        "A) pilha: topo → C → A → E; fila: início → D → A → A → E",
+        "B) pilha: topo → A; fila: início → D → B → C → E",
+        "C) pilha: topo → C → B → A; fila: início → D → C → C → E",
+        "D) pilha: topo → B → A; fila: início → D → B → C → E",
+        "E) pilha: topo → C → B → A; fila: início → D → B → C → E"
+      ],
+      "correta": 2
+    },
+    {
+      "codigoFase": "fase25",
+      "frente": "(ENADE 2021 · Questão 14 · Gestão de Projetos) Um projeto de integração de um ERP com um CRM não implementou todos os serviços esperados e há falhas nos já implementados. Uma auditoria identificou desentendimentos entre os membros da equipe; os membros da qualidade não compreendem o que deve ser avaliado; demandas de novos solicitantes aparecem constantemente; e o patrocinador demora muito a responder às solicitações. Tudo isso atrasou o projeto e estourou o orçamento.\n\nO gerente de projeto deve priorizar o gerenciamento de",
+      "verso": "Alternativa E.\n\nJustificativa: Todos os problemas citados vêm das pessoas envolvidas: equipe, qualidade, solicitantes e patrocinador. Atraso e custo são consequências.\n\nFonte: INEP, ENADE 2021, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 14 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2021: Gestão de Projetos.",
+      "opcoes": [
+        "A) custo.",
+        "B) tempo.",
+        "C) escopo.",
+        "D) qualidade.",
+        "E) partes interessadas."
+      ],
+      "correta": 4
+    },
+    {
+      "codigoFase": "fase25",
+      "frente": "(ENADE 2021 · Questão 17 · Banco de Dados) Um banco de dados bancário tem, entre outras, as tabelas CLIENTE (COD_CLIENTE, NOM_CLIENTE, ...), CONTA (NUM_CONTA, COD_CLIENTE, ...) e HISTORICO_MOVIMENTACAO (COD_HISTORICO_MOVIMENTACAO, NUM_CONTA, VAL_MOVIMENTACAO, DTA_MOVIMENTACAO, ...).\n\nIndique a consulta SQL que recupera o nome dos clientes e o valor médio movimentado por eles em sua conta até o momento, exibindo primeiro os clientes com maior média.",
+      "verso": "Alternativa C.\n\nJustificativa: Média por cliente pede AVG com GROUP BY pelo cliente (o código evita juntar homônimos) e ORDER BY ... DESC. A opção D liga as chaves erradas e a E agrupa só pelo nome.\n\nFonte: INEP, ENADE 2021, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 17 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2021: Banco de Dados.",
+      "opcoes": [
+        "A) SELECT CL.NOME, HM.VAL_MOVIMENTADO FROM CLIENTE CL INNER JOIN CONTA CO ON CL.COD_CLIENTE = CO.COD_CLIENTE INNER JOIN HISTORICO_MOVIMENTACAO HM ON CO.NUM_CONTA = HM.NUM_CONTA ORDER BY HM.VAL_MOVIMENTADO",
+        "B) SELECT CL.NOME, AVG(HM.VAL_MOVIMENTADO) FROM CLIENTE CL INNER JOIN CONTA CO ON CL.COD_CLIENTE = CO.COD_CLIENTE INNER JOIN HISTORICO_MOVIMENTACAO HM ON CO.NUM_CONTA = HM.NUM_CONTA ORDER BY HM.VAL_MOVIMENTADO DESC",
+        "C) SELECT CL.NOME, AVG(HM.VAL_MOVIMENTADO) FROM CLIENTE CL INNER JOIN CONTA CO ON CL.COD_CLIENTE = CO.COD_CLIENTE INNER JOIN HISTORICO_MOVIMENTACAO HM ON CO.NUM_CONTA = HM.NUM_CONTA GROUP BY CL.COD_CLIENTE, CL.NOME ORDER BY AVG(HM.VAL_MOVIMENTADO) DESC",
+        "D) SELECT CL.NOME, AVG(HM.VAL_MOVIMENTADO) FROM CLIENTE CL LEFT OUTER JOIN CONTA CO ON CL.COD_CLIENTE = CO.NUM_CONTA LEFT OUTER JOIN HISTORICO_MOVIMENTACAO HM ON CO.NUM_CONTA = HM.COD_HISTORICO_MOVIMENTACAO GROUP BY CL.NOME ORDER BY AVG(HM.VAL_MOVIMENTADO) DESC",
+        "E) SELECT CL.NOME, AVG(HM.VAL_MOVIMENTADO) FROM CLIENTE CL LEFT OUTER JOIN CONTA CO ON CL.COD_CLIENTE = CO.COD_CLIENTE LEFT OUTER JOIN HISTORICO_MOVIMENTACAO HM ON CO.NUM_CONTA = HM.NUM_CONTA GROUP BY CL.NOME ORDER BY AVG(HM.VAL_MOVIMENTADO) DESC"
+      ],
+      "correta": 2
+    },
+    {
+      "codigoFase": "fase25",
+      "frente": "(ENADE 2021 · Questão 18 · Engenharia de Software) A engenharia de requisitos tem quatro subprocessos: estudo de viabilidade, elicitação, especificação e validação (Sommerville). Uma equipe vai desenvolver um software de Suporte Técnico; o estudo de viabilidade já foi aprovado e ela seguirá os outros três subprocessos.\n\nQuais artefatos podem ser usados nesses três subprocessos?",
+      "verso": "Alternativa A.\n\nJustificativa: Entrevista serve à elicitação, caso de uso à especificação dos requisitos funcionais e protótipo à validação. Viabilidade já foi feita, e caso de uso não modela requisito não funcional.\n\nFonte: INEP, ENADE 2021, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 18 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2021: Engenharia de Software.",
+      "opcoes": [
+        "A) Documento de entrevista com usuários; modelo de caso de uso para os requisitos funcionais; prototipação de telas.",
+        "B) Documento de estudo de viabilidade; modelo de caso de uso para os requisitos funcionais; prototipação de telas.",
+        "C) Matriz de rastreabilidade; modelo de caso de uso para os requisitos não-funcionais; prototipação de telas.",
+        "D) Documento de entrevista com usuários; modelo de caso de uso para os requisitos não-funcionais; matriz de rastreabilidade.",
+        "E) Documento de estudo de viabilidade; modelo de caso de uso para os requisitos funcionais; matriz de rastreabilidade."
+      ],
+      "correta": 0
+    },
+    {
+      "codigoFase": "fase25",
+      "frente": "(ENADE 2021 · Questão 19 · Engenharia de Software) A respeito dos estilos e padrões arquiteturais, avalie as afirmações:\nI. Em arquiteturas orientadas a objetos, a comunicação entre os componentes do software é realizada por intermédio da troca de mensagens.\nII. As arquiteturas monolíticas consistem de um sistema dividido em pequenas partes, possibilitando que estas tenham sua manutenção, execução e evolução individual.\nIII. No padrão MVC, a camada de Modelo armazena as interações realizadas no Controle, podendo ser apresentadas/manipuladas posteriormente na Visão.\nIV. Nas arquiteturas de microsserviços, o software possui componentes altamente acoplados, dificultando a manutenção.\n\nÉ correto apenas o que se afirma em",
+      "verso": "Alternativa A.\n\nJustificativa: II descreve microsserviços, não monólito. E microsserviços buscam baixo acoplamento, o contrário do que diz a IV.\n\nFonte: INEP, ENADE 2021, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 19 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2021: Engenharia de Software.",
+      "opcoes": [
+        "A) I e III.",
+        "B) II e III.",
+        "C) II e IV.",
+        "D) I, II e IV.",
+        "E) I, III e IV."
+      ],
+      "correta": 0
+    },
+    {
+      "codigoFase": "fase25",
+      "frente": "(ENADE 2021 · Questão 20 · UX/UI e Requisitos) Uma secretaria municipal vai criar um site para pessoas da terceira idade, com orientações de saúde, eventos esportivos e publicação de fotos que podem ser curtidas e comentadas. A maioria desse público acessa a internet pelo celular ou tablet, e uma parte prefere computadores.\n\nAvalie as afirmações:\nI. A segurança no uso é um fator crítico de usabilidade a ser considerado no projeto, tendo em vista que pessoas da terceira idade são temerosas quanto ao registro de dados pessoais e confidenciais em sites e aplicativos.\nII. A responsividade, que pressupõe o uso de valores relativos para definir as dimensões de elementos na estilização de páginas HTML, deve ser considerada, tendo em vista o acesso por dispositivos com diferentes tamanhos de tela.\nIII. A construção de protótipos pode antecipar problemas de design de interação e minimizar custos, e é viável para uma comunicação mais objetiva com o público-alvo, possibilitando validar a usabilidade e a experiência do usuário.\nIV. O design participativo é um processo de design de IHC viável para direcionar o projeto, pois o público-alvo tende a apresentar dificuldades no manuseio de tecnologias da informação e da comunicação.\n\nÉ correto apenas o que se afirma em",
+      "verso": "Alternativa E.\n\nJustificativa: Responsividade, protótipos e design participativo se encaixam no cenário. A I parte de uma generalização sobre o público que o texto não sustenta.\n\nFonte: INEP, ENADE 2021, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 20 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2021: UX/UI e Requisitos.",
+      "opcoes": [
+        "A) I e II.",
+        "B) I e III.",
+        "C) II e IV.",
+        "D) I, III e IV.",
+        "E) II, III e IV."
+      ],
+      "correta": 4
+    },
+    {
+      "codigoFase": "fase25",
+      "frente": "(ENADE 2021 · Questão 21 · Engenharia de Software) A Gestão de Configuração de Software estabelece um conjunto de atividades para gerenciar alterações durante todo o ciclo de vida de um software (Pressman).\n\nAssinale a opção correta acerca das atividades de gestão de configuração de software.",
+      "verso": "Alternativa B.\n\nJustificativa: São as cinco tarefas clássicas da gestão de configuração em Pressman: identificação, controle de versão, controle de alterações, auditoria e relatório de status.\n\nFonte: INEP, ENADE 2021, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 21 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2021: Engenharia de Software.",
+      "opcoes": [
+        "A) Identificação de itens na configuração de software, gerenciamento de alterações, validação de versões e controle de qualidade.",
+        "B) Identificação de objetos na configuração de software, controle de versão, controle de alterações, auditoria de configuração e relatório de status.",
+        "C) Gerência de projeto, gerência de configuração de software, ciclo de vida do projeto, processo de software e evolução das configurações.",
+        "D) Construção de modelo de requisitos, métricas para modelo de projeto, métricas de controle de versão e relatório de manutenção.",
+        "E) Identificação de alterações, controle de versão, mapeamento de alteração e notificação da alteração aos envolvidos."
+      ],
+      "correta": 1
+    },
+    {
+      "codigoFase": "fase25",
+      "frente": "(ENADE 2021 · Questão 22 · Engenharia de Software) Sobre o processo de Gerência de Configuração de Software (GCS), avalie as afirmações:\nI. O controle de versão possibilita o compartilhamento de dados e a edição colaborativa, permitindo a gestão de diferentes ramos de desenvolvimento e a existência de diferentes versões de forma simultânea.\nII. A auditoria de configuração é uma atividade de garantia de qualidade que tem por objetivo assegurar que a qualidade do software seja mantida quando feitas alterações requisitadas.\nIII. O relatório de status de configuração tem por objetivo manter o cliente informado sobre as alterações, e deve ser gerado ao final do processo.\nIV. A GCS proporciona atividades de acompanhamento e controle de mudanças que se iniciam logo depois que o software for fornecido ao cliente e colocado em operação.\n\nÉ correto apenas o que se afirma em",
+      "verso": "Alternativa A.\n\nJustificativa: O relatório de status informa a equipe ao longo de todo o processo, não só no final. E a GCS começa junto com o projeto, não depois da entrega.\n\nFonte: INEP, ENADE 2021, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 22 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2021: Engenharia de Software.",
+      "opcoes": [
+        "A) I e II.",
+        "B) II e III.",
+        "C) III e IV.",
+        "D) I, II e IV.",
+        "E) I, III e IV."
+      ],
+      "correta": 0
+    },
+    {
+      "codigoFase": "fase25",
+      "frente": "(ENADE 2021 · Questão 23 · Engenharia de Software) A evolução de sistemas legados se divide em manutenção, modernização e substituição. Um ERP já implantado integra todos os departamentos de uma empresa, e surgiu a necessidade de criar um relatório gerencial de comissão da equipe de vendas.\n\nNesse contexto, a manutenção a ser realizada é",
+      "verso": "Alternativa B.\n\nJustificativa: Acrescentar uma funcionalidade nova (o relatório) é manutenção evolutiva. Corretiva conserta defeito e adaptativa ajusta o sistema a um ambiente novo.\n\nFonte: INEP, ENADE 2021, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 23 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2021: Engenharia de Software.",
+      "opcoes": [
+        "A) corretiva.",
+        "B) evolutiva.",
+        "C) funcional.",
+        "D) preventiva.",
+        "E) adaptativa."
+      ],
+      "correta": 1
+    },
+    {
+      "codigoFase": "fase25",
+      "frente": "(ENADE 2021 · Questão 24 · Engenharia de Software) Num sistema web de delivery, o analista de teste descreveu:\n01 – Verificar se o método \"Finalizar Pedido\" da classe \"Pedido\" está funcionando corretamente.\n02 – Garantir que o sistema funcione corretamente em diferentes navegadores.\n03 – O sistema deve passar por testes rigorosos na estrutura lógica interna do software.\n04 – O sistema deve garantir, no mínimo, o registro de 100 pedidos simultâneos.\n05 – O usuário deve testar o sistema em um ambiente controlado sob a supervisão dos desenvolvedores.\n\nAvalie as afirmações:\nI. A descrição 01 deve ser verificada com teste unitário.\nII. A descrição 02 deve ser executada com a abordagem caixa-branca.\nIII. A descrição 03 deve ser executada com a abordagem caixa-preta.\nIV. A descrição 04 deve ser verificada com teste de carga.\nV. A descrição 05 deve ser classificada como teste alfa.\n\nÉ correto apenas o que se afirma em",
+      "verso": "Alternativa D.\n\nJustificativa: II e III estão trocadas: testar navegadores é caixa-preta (olha só o comportamento) e testar a lógica interna é caixa-branca.\n\nFonte: INEP, ENADE 2021, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 24 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2021: Engenharia de Software.",
+      "opcoes": [
+        "A) II e III.",
+        "B) I, II e IV.",
+        "C) I, III e V.",
+        "D) I, IV e V.",
+        "E) II, III, IV e V."
+      ],
+      "correta": 3
+    },
+    {
+      "codigoFase": "fase25",
+      "frente": "(ENADE 2021 · Questão 25 · Engenharia de Software) Uma empresa de piscicultura pediu com extrema urgência um sistema para gerenciar a criação dos peixes, das fases de alevino e engorda até a venda, registrando mortandade e rações.\n\nAvalie as afirmações sobre o processo de desenvolvimento a usar:\nI. Deve ser adotado um processo baseado no modelo cascata, pois ele se adapta melhor a cenários com muitas mudanças.\nII. Por se tratar de uma aplicação com escopo pequeno, o modelo espiral deverá ser utilizado, já que reduzirá riscos por meio da prototipação de cada fase dos peixes e diminuirá o tempo de entrega.\nIII. O modelo incremental deve ser utilizado, já que partes do sistema referentes à fase inicial dos peixes poderiam ser disponibilizadas, enquanto as demais estão nas etapas de concepção e desenvolvimento.\nIV. Em razão da extrema urgência, a empresa deve elaborar seu processo utilizando o modelo RAD (Rapid Application Development).\n\nÉ correto apenas o que se afirma em",
+      "verso": "Alternativa E.\n\nJustificativa: Entregar por partes (incremental) e com rapidez (RAD) atende a urgência. O cascata é o modelo que pior lida com mudanças, e o espiral é indicado para projetos grandes e arriscados.\n\nFonte: INEP, ENADE 2021, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 25 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2021: Engenharia de Software.",
+      "opcoes": [
+        "A) I.",
+        "B) IV.",
+        "C) I e II.",
+        "D) II e III.",
+        "E) III e IV."
+      ],
+      "correta": 4
+    },
+    {
+      "codigoFase": "fase25",
+      "frente": "(ENADE 2021 · Questão 26 · Cibersegurança e LGPD) Empreender em computação exige observar a legislação, como a Lei Geral de Proteção de Dados Pessoais (LGPD, Lei n. 13.709/2018).\n\nAssinale os fundamentos da disciplina da proteção de dados pessoais, previstos no art. 2º da LGPD.",
+      "verso": "Alternativa E.\n\nJustificativa: A alternativa E reproduz os sete incisos do art. 2º. As outras misturam fundamentos com direitos do titular, bases legais e obrigações.\n\nFonte: INEP, ENADE 2021, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 26 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2021: Cibersegurança e LGPD.",
+      "opcoes": [
+        "A) O direito ao usuário; as obrigações das organizações nacionais ou estrangeiras; obrigatoriedade do consentimento; a livre iniciativa, a livre concorrência e a defesa do consumidor; os direitos humanos e a cidadania; e a regulação da ANPD.",
+        "B) O direito à revogação de um consentimento; a transferência de dados para outro fornecedor; a solicitação de remoção de dados pessoais; a inviolabilidade da intimidade, da honra e da imagem; o desenvolvimento econômico e tecnológico e a inovação; a preservação da vida e da integridade física.",
+        "C) O respeito à privacidade; obrigatoriedade do consentimento; os deveres dos usuários finais; os deveres das organizações nacionais ou estrangeiras; o código de defesa do consumidor; e a obrigatoriedade do respeito à honra e à imagem.",
+        "D) O direito ao anonimato; a liberdade de expressão; a inviolabilidade da intimidade; medidas preventivas de segurança; o direito ao recurso e revisão; a administração de riscos e falhas; os agentes de tratamento; e a regulação da ANPD.",
+        "E) O respeito à privacidade; a autodeterminação informativa; a liberdade de expressão, de informação, de comunicação e de opinião; a inviolabilidade da intimidade, da honra e da imagem; o desenvolvimento econômico e tecnológico e a inovação; a livre iniciativa, a livre concorrência e a defesa do consumidor; e os direitos humanos, o livre desenvolvimento da personalidade, a dignidade e o exercício da cidadania."
+      ],
+      "correta": 4
+    },
+    {
+      "codigoFase": "fase25",
+      "frente": "(ENADE 2021 · Questão 27 · Matemática e Lógica) Os profissionais de TI precisam converter números entre as bases binária (2), octal (8), decimal (10) e hexadecimal (16).\n\nFazendo a conversão da soma (1001)₂ + (15)₈ + (FF)₁₆, qual é o número equivalente na base decimal?",
+      "verso": "Alternativa C.\n\nJustificativa: (1001)₂ = 9, (15)₈ = 1×8 + 5 = 13 e (FF)₁₆ = 15×16 + 15 = 255. Soma: 9 + 13 + 255 = 277.\n\nFonte: INEP, ENADE 2021, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 27 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2021: Matemática e Lógica.",
+      "opcoes": [
+        "A) (188)₁₀",
+        "B) (215)₁₀",
+        "C) (277)₁₀",
+        "D) (316)₁₀",
+        "E) (345)₁₀"
+      ],
+      "correta": 2
+    },
+    {
+      "codigoFase": "fase25",
+      "frente": "(ENADE 2021 · Questão 28 · Sistemas Operacionais) O sistema operacional é um gerenciador de recursos. É uma péssima ideia permitir que os programas tenham acesso sem restrição à memória uns dos outros: um programa com defeito ou malicioso pode travar outro, produzir resultados incorretos ou afetar todo o sistema (Stuart, adaptado).\n\nA atividade com que o sistema operacional garante essa proteção é",
+      "verso": "Alternativa B.\n\nJustificativa: É o gerenciamento de memória que dá a cada processo o seu espaço de endereços e impede que um escreva na área do outro.\n\nFonte: INEP, ENADE 2021, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 28 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2021: Sistemas Operacionais.",
+      "opcoes": [
+        "A) o programa antivírus.",
+        "B) o gerenciamento de memória.",
+        "C) o gerenciamento de arquivos.",
+        "D) o gerenciamento de processos.",
+        "E) o gerenciamento de entrada e saída."
+      ],
+      "correta": 1
+    },
+    {
+      "codigoFase": "fase25",
+      "frente": "(ENADE 2021 · Questão 29 · Algoritmos e Estruturas de Dados) Considere o algoritmo:\n\nmat[1..3][1..5] = {{1, 2, -1, 2, 3}, {1, -3, 4, 2, 0}, {-3, 5, 2, 3, 4}}\nsl[1..3] = {0, 0, 0}\nx <- 0\npara i <- 1 até 3 faça\n    para j <- 1 até 5 faça\n        sl[i] <- sl[i] + mat[i][j]\n    fimpara\n    x <- x + sl[i]\nfimpara\nimprima x\n\nNo fim da execução, será exibido o valor",
+      "verso": "Alternativa D.\n\nJustificativa: As somas das linhas são 7, 4 e 11. x acumula essas somas: 7 + 4 + 11 = 22.\n\nFonte: INEP, ENADE 2021, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 29 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2021: Algoritmos e Estruturas de Dados.",
+      "opcoes": [
+        "A) 4.",
+        "B) 7.",
+        "C) 11.",
+        "D) 22.",
+        "E) 30."
+      ],
+      "correta": 3
+    },
+    {
+      "codigoFase": "fase25",
+      "frente": "(ENADE 2021 · Questão 30 · Redes e Sistemas Distribuídos) Na sala dos professores há 3 máquinas na rede:\nPROFESSORES01: IP 175.16.10.200, máscara 255.255.255.0, gateway 175.16.1.1\nPROFESSORES02: IP 175.16.20.200, máscara 255.255.0.0, gateway 175.16.1.1\nPROFESSORES03: IP 175.16.30.200, máscara 255.255.0.0, gateway 175.16.1.1\n\nA estação PROFESSORES01 não consegue imprimir na impressora compartilhada pela PROFESSORES03. Que alteração resolve o problema?",
+      "verso": "Alternativa C.\n\nJustificativa: Com máscara 255.255.255.0, a PROFESSORES01 se vê na rede 175.16.10.0 e acha que a 03 está em outra rede. Com 255.255.0.0, todas ficam na 175.16.0.0.\n\nFonte: INEP, ENADE 2021, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 30 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2021: Redes e Sistemas Distribuídos.",
+      "opcoes": [
+        "A) Alterar o gateway da estação PROFESSORES03 para 175.16.10.200.",
+        "B) Alterar o endereço de IP da estação PROFESSORES01 para 175.16.30.200.",
+        "C) Alterar a máscara de sub-rede da estação PROFESSORES01 para 255.255.0.0.",
+        "D) Alterar a máscara de sub-rede da estação PROFESSORES03 para 255.255.255.0.",
+        "E) Alterar o gateway da estação PROFESSORES01 para o endereço de IP 175.16.30.200."
+      ],
+      "correta": 2
+    },
+    {
+      "codigoFase": "fase25",
+      "frente": "(ENADE 2021 · Questão 31 · Engenharia de Software) Um software de matrículas tem este diagrama de casos de uso: o ator Aluno se liga a \"Realizar Matrícula\"; \"Realizar Matrícula Fora do Prazo\" estende (<<extend>>) \"Realizar Matrícula\"; \"Realizar Matrícula Fora do Prazo\" inclui (<<include>>) \"Validar Aluno\"; e \"Validar via Retina\" e \"Validar via Digital\" são especializações de \"Validar Aluno\".\n\nAvalie as afirmações:\nI. O aluno poderá realizar a matrícula fora do prazo e as tratativas são as mesmas da matrícula feita dentro do prazo.\nII. O aluno poderá, opcionalmente, realizar a matrícula fora do prazo.\nIII. O sistema, obrigatoriamente, deverá validar o aluno que realizar a matrícula fora do prazo.\nIV. A validação do aluno deverá ser feita a partir da sua matrícula informada no sistema.\nV. A validação do aluno, a ser feita por retina, é diferente da validação feita pela digital.\n\nÉ correto apenas o que se afirma em",
+      "verso": "Alternativa D.\n\nJustificativa: <<extend>> é opcional (II), <<include>> é obrigatório (III) e as especializações são formas diferentes de validar (V). A validação é por retina ou digital, não pela matrícula.\n\nFonte: INEP, ENADE 2021, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 31 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2021: Engenharia de Software.",
+      "opcoes": [
+        "A) I e IV.",
+        "B) I, II e IV.",
+        "C) I, III e V.",
+        "D) II, III e V.",
+        "E) II, III, IV e V."
+      ],
+      "correta": 3
+    },
+    {
+      "codigoFase": "fase25",
+      "frente": "(ENADE 2021 · Questão 32 · Gestão e Empreendedorismo) O Canvas de Osterwalder divide o modelo de negócio em nove componentes: segmentos de clientes, proposta de valor, canais, relacionamento com cliente, fontes de receita, recursos principais, atividades-chave, parcerias principais e estrutura de custo. É muito usado por startups.\n\nDiante deste contexto, conclui-se que as startups",
+      "verso": "Alternativa B.\n\nJustificativa: O Canvas serve justamente para modelar e validar a ideia antes de investir, em qualquer segmento. Nenhum tipo de startup nasce validado ou pode ignorar um componente.\n\nFonte: INEP, ENADE 2021, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 32 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2021: Gestão e Empreendedorismo.",
+      "opcoes": [
+        "A) financeiras desenvolvem primeiro o plano de negócios, para em seguida partir para o Canvas.",
+        "B) de big data utilizam o Canvas para a modelagem da validação da ideia de negócio, ou seja, do problema a ser resolvido.",
+        "C) de educação dispensam a utilização do Canvas, ou seja, os modelos de negócios deste segmento já nascem validados.",
+        "D) de logística utilizam o plano de negócios ao invés do Canvas, ou seja, elas nascem a partir de um produto mínimo viável (MVP).",
+        "E) de impacto social podem desconsiderar o componente 1 (segmentos de clientes), pois possuem somente um segmento."
+      ],
+      "correta": 1
+    },
+    {
+      "codigoFase": "fase25",
+      "frente": "(ENADE 2021 · Questão 33 · Engenharia de Software) O CMMI descreve práticas, processos e atividades de gestão que guiam a melhoria do processo de software até o nível mais alto de maturidade. Avalie as afirmações:\nI. A maturidade implica no crescimento da capacidade e indica tanto a efetividade do processo de software quanto o grau de consistência com que este é aplicado nos diferentes projetos da organização.\nII. A maturidade do processo de software implica melhorias contínuas com base em etapas evolutivas que se caracterizam pela capacidade de inovação e absorção de novas tecnologias.\nIII. A maturidade do processo de software implica na sua institucionalização por meio de políticas e padrões organizacionais, levando a uma cultura corporativa de métodos, práticas e procedimentos com efetividade plenamente reconhecida.\nIV. Cada nível do CMMI implica na satisfação de um conjunto de metas de processo que estabilizam um componente importante do processo de software e representa o seu estágio de maturidade.\n\nÉ correto apenas o que se afirma em",
+      "verso": "Alternativa D.\n\nJustificativa: Pelo gabarito, a II é a falsa: as etapas evolutivas do CMMI são níveis de controle do processo, não de capacidade de inovação ou absorção de tecnologias.\n\nFonte: INEP, ENADE 2021, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 33 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2021: Engenharia de Software.",
+      "opcoes": [
+        "A) III.",
+        "B) I e II.",
+        "C) II e IV.",
+        "D) I, III e IV.",
+        "E) I, II, III e IV."
+      ],
+      "correta": 3
+    },
+    {
+      "codigoFase": "fase25",
+      "frente": "(ENADE 2021 · Questão 34 · Inteligência Artificial) Um sistema especialista para diagnóstico de dengue usa a regra de produção:\n\nSe ((temperatura > 38º) e (dores musculares intensas))\nentão (quadro de dengue, com 70% de chance);\nsenão (quadro de resfriado comum com 30% de chance);\n\nLevando em conta essa regra, é correto afirmar que",
+      "verso": "Alternativa A.\n\nJustificativa: A regra dá uma probabilidade para cada pessoa com os dois sintomas: 0,7. Ela não garante uma contagem exata (C) nem diz nada certo sobre quem tem só um sintoma.\n\nFonte: INEP, ENADE 2021, Tecnologia em Análise e Desenvolvimento de Sistemas, questão 34 (gabarito definitivo).",
+      "dica": "Questão oficial do ENADE 2021: Inteligência Artificial.",
+      "opcoes": [
+        "A) cada pessoa que procura atendimento apresentando ambos os sintomas possui a probabilidade 0,7 de estar contaminada pela dengue.",
+        "B) se 50 pessoas procurarem o atendimento apresentando um dos dois sintomas, provavelmente 15 pessoas estarão com resfriado comum.",
+        "C) se 100 pessoas procurarem o atendimento apresentando ambos os sintomas, a quantidade de pessoas com dengue será igual a 70.",
+        "D) cada pessoa que chega apresentando um dos dois sintomas estará com resfriado comum.",
+        "E) a cada 100 pessoas que procuram atendimento, no máximo 30 estarão doentes."
+      ],
+      "correta": 0
     }
   ]
 }

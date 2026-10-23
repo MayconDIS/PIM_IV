@@ -121,7 +121,7 @@ export function PainelEstudo({ ativo }) {
   } else if (cartaAtual && enade) {
     frente = (
       <>
-        <div style={{ fontSize: '1.1rem', lineHeight: 1.6, marginBottom: 20, whiteSpace: 'pre-line' }}>{cartaAtual.frente}</div>
+        <div style={{ fontSize: '1.1rem', lineHeight: 1.6, marginBottom: 20, whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' }}>{cartaAtual.frente}</div>
         <div className="opcoes-container">
           {cartaAtual.opcoes.map((opcao, i) => (
             <button
