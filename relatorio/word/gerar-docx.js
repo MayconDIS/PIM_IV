@@ -67,7 +67,10 @@ function imagem(img, larguraFixaCm) {
   const arquivo = path.join(PASTA, src);
   const { w, h, dados } = tamanhoPng(arquivo);
   const classe = img.getAttribute('class') || '';
-  const alturaMax = /img-height-7/.test(classe) ? 9 : /img-height-8/.test(classe) ? 10 : 17; // cm
+  const estilo = /max-height:\s*([\d.]+)cm/.exec(img.getAttribute('style') || '');
+  const porClasse = /img-height-(\d+)/.exec(classe);
+  // altura máxima: a do style (Apêndice B), a da classe img-height-N (+20%, a folha do Word é mais alta) ou 17 cm
+  const alturaMax = estilo ? Math.min(Number(estilo[1]), 17) : porClasse ? Math.min(Number(porClasse[1]) * 1.2, 17) : 17;
   const larguraMax = 16; // cm
   let largura = larguraFixaCm || larguraMax, altura = largura * h / w;
   if (altura > alturaMax) { altura = alturaMax; largura = alturaMax * w / h; }
