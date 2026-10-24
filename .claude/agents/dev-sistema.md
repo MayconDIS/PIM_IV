@@ -12,6 +12,6 @@ Como trabalhar:
   rode `npm run seed:api` e confira com `npm run seed:api:check`.
 - Toda mudança vem com teste: API (`npm test`), compartilhado (`npm run test:shared`) e app
   (`npm run test:mobile`). Para mudança de tela, rode o site e confira no navegador.
-- Mudou rota, tabela, regra ou conteúdo? Avise o coordenador: diagramas, manual, relatório e slides
+- Mudou rota, permissão, tabela, regra ou conteúdo? Avise o coordenador: diagramas, manual, relatório e slides
   precisam acompanhar (tabela "Se mudar X, atualize Y" do `AGENTS.md`).
 - Sem `TODO` ou código provisório em arquivo entregue. Comentários em português, curtos.

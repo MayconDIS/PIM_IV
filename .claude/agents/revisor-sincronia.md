@@ -13,7 +13,8 @@ Roteiro:
    e `npm run seed:api:check`.
 3. Se o relatório mudou: toda página cabe em A4? O sumário bate com as páginas? O Word foi gerado de
    novo?
-4. Leia o diff procurando: número escrito de memória, diagrama que não veio do Astah, menção ao
+4. Leia o diff procurando: regra ou requisito que não bate com a API (quem pode usar cada rota),
+   número escrito de memória, diagrama que não veio do Astah, menção ao
    PIM III fora das melhorias, texto com jargão, `TODO`.
 
 Responda com uma lista curta: o que está ok, o que falta e para quem (`dev-sistema`,
