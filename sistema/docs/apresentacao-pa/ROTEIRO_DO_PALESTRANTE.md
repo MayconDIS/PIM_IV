@@ -51,7 +51,7 @@
   - **Aluno:** estuda, faz simulado e vê o desempenho.
   - **Tutor:** cria conteúdo e acompanha os alunos.
   - **Admin:** controla o acesso.
-- **Se perguntarem:** hoje o Aluno está completo; os perfis de Tutor e Admin estão no backlog (PB01 e PB15).
+- **Se perguntarem:** os três perfis existem: o Tutor tem um painel com os alunos e modera as cartas; o Admin também define o perfil de cada usuário.
 
 ---
 
@@ -140,4 +140,4 @@
 | Por que separar em camadas? | Miguel | Cada parte cuida de uma coisa: dá para testar a regra sem a rota e trocar o banco sem mexer nas regras. |
 | O que o diagrama de atividade mostra? | Gabriel | Uma sessão de estudo, da escolha da fase até ganhar XP. |
 | Como funciona o deploy? | Maycon | Merge na main → GitHub Actions roda os testes → publica na Azure. |
-| O que ainda falta? | Maciel | Perfis de Tutor e Admin, painel do Tutor e login no app de celular. Estão no backlog do Trello. |
+| O que ainda falta? | Maciel | Dúvidas para o Tutor e o Agente de IA, que estavam no PIM III. Estão no backlog do Trello. |

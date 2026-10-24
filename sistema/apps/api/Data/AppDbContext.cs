@@ -15,6 +15,7 @@ namespace NexTI_API.Data
         public DbSet<Prova> Provas { get; set; }
         public DbSet<Questao> Questoes { get; set; }
         public DbSet<Alternativa> Alternativas { get; set; }
+        public DbSet<CartaModerada> CartasModeradas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,7 +30,16 @@ namespace NexTI_API.Data
             modelBuilder.Entity<ProgressoFlashcard>()
                 .ToTable(t => t.HasTrigger("tg_progresso_historico"));
             modelBuilder.Entity<Usuario>()
-                .ToTable(t => t.HasTrigger("tg_usuarios_protege_gamificacao"));
+                .ToTable(t =>
+                {
+                    t.HasTrigger("tg_usuarios_protege_gamificacao");
+                    t.HasCheckConstraint("ck_usuarios_perfil", "perfil IN ('Aluno', 'Tutor', 'Admin')");
+                });
+
+            // Quem já existia vira Aluno; só um Admin promove alguém a Tutor ou Admin.
+            modelBuilder.Entity<Usuario>()
+                .Property(u => u.Perfil)
+                .HasDefaultValue(Perfis.Aluno);
 
             // Unique Constraints for Usuario
             modelBuilder.Entity<Usuario>()

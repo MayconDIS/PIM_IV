@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using NexTI_API.Data;
+using NexTI_API.Models;
 using NexTI_API.Services;
 using NexTI_API.Services.Seed;
 using NexTI_API.Endpoints;
@@ -57,7 +58,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-builder.Services.AddAuthorization();
+// Perfis (claim de papel no JWT): Tutor e Admin moderam conteúdo; só Admin muda perfis.
+builder.Services.AddAuthorization(opcoes =>
+{
+    opcoes.AddPolicy(EndpointExtensions.PoliticaDeConteudo, p => p.RequireRole(Perfis.Tutor, Perfis.Admin));
+    opcoes.AddPolicy(EndpointExtensions.PoliticaDeAdmin, p => p.RequireRole(Perfis.Admin));
+});
 
 // Injeção de Dependências Customizadas (SOLID - SRP / DIP)
 builder.Services.AddSingleton<ISm2Engine, Sm2Engine>();
@@ -69,6 +75,7 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IProgressoService, ProgressoService>();
 builder.Services.AddScoped<IGamificacaoService, GamificacaoService>();
 builder.Services.AddScoped<IConteudoService, ConteudoService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
 
 // Login e cadastro: 30 tentativas por minuto por IP (força bruta / criação em massa).
 // Não é menor porque uma turma inteira sai pelo mesmo IP do Wi-Fi da faculdade.

@@ -241,8 +241,38 @@ const ApiService = {
             console.error("Erro ao buscar resumo de estatísticas:", error);
             return null;
         }
-    }
+    },
+
+    // 13. Estrutura administrativa (Tutor e Admin). Erros sobem com a mensagem da API.
+    getPainelAlunos: () => requisicaoAutenticada('GET', '/tutor/alunos'),
+    editarFlashcard: (id, frente, verso, dica) => requisicaoAutenticada('PUT', `/flashcards/${id}`, { frente, verso, dica }),
+    excluirFlashcard: (id) => requisicaoAutenticada('DELETE', `/flashcards/${id}`),
+    getUsuariosAdmin: () => requisicaoAutenticada('GET', '/admin/usuarios'),
+    definirPerfil: (id, perfil) => requisicaoAutenticada('PUT', `/admin/usuarios/${id}/perfil`, { perfil })
 };
+
+/** Chamada com o JWT do aluno; erro vira Error com a frase da API (ou uma padrão por status). */
+async function requisicaoAutenticada(metodo, rota, corpo) {
+    let response;
+    try {
+        response = await fetch(`${baseAtual()}${rota}`, {
+            method: metodo,
+            headers: { 'Content-Type': 'application/json', ...cabecalhoDeAutenticacao() },
+            body: corpo === undefined ? undefined : JSON.stringify(corpo)
+        });
+    } catch {
+        throw new Error('Servidor indisponível. Tente de novo em instantes.');
+    }
+    if (response.status === 204) return null;
+    const dados = await response.json().catch(() => null);
+    if (!response.ok) {
+        const padrao = response.status === 401 ? 'Sessão expirada. Entre de novo.'
+            : response.status === 403 ? 'Seu perfil não tem acesso a esta área.'
+            : `Erro ${response.status} no servidor.`;
+        throw new Error(dados?.message || padrao);
+    }
+    return dados;
+}
 
 if (typeof window !== 'undefined') window.ApiService = ApiService;
 

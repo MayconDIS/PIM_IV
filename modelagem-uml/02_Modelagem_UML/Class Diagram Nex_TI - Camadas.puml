@@ -27,13 +27,16 @@ package "Apresentação (Endpoints)" {
     POST /api/progresso/atualizar
     PUT  /api/usuarios/stats
     GET  /api/simulados/questoes
+    PUT|DELETE /api/flashcards/{id}  (Tutor, Admin)
+    GET  /api/tutor/alunos  (Tutor, Admin)
+    GET|PUT /api/admin/usuarios  (Admin)
   }
 }
 
 package "Serviços de aplicação (regras de negócio)" {
   interface IAuthService {
-    + CadastrarAsync(username : string, email : string, senha : string) : Task<Resultado<Usuario>>
-    + EntrarAsync(usernameOuEmail : string, senha : string) : Task<Resultado<Sessao>>
+    + CadastrarAsync(...) : Task<Resultado<Usuario>>
+    + EntrarAsync(...) : Task<Resultado<Sessao>>
   }
   class AuthService {
     + Emissor : string {readOnly}
@@ -45,7 +48,7 @@ package "Serviços de aplicação (regras de negócio)" {
 
   interface IProgressoService {
     + ListarAsync(usuarioId : int) : Task<List<ProgressoResumo>>
-    + RegistrarRespostaAsync(usuarioId : int, flashcardId : int, qualidade : int) : Task<ProgressoFlashcard>
+    + RegistrarRespostaAsync(...) : Task<ProgressoFlashcard>
     + EstatisticasAsync(username : string) : Task<Resultado<EstatisticasDetalhadas>>
   }
   class ProgressoService {
@@ -55,7 +58,7 @@ package "Serviços de aplicação (regras de negócio)" {
 
   interface IGamificacaoService {
     + PerfilAsync(username : string) : Task<PerfilUsuario>
-    + AtualizarAsync(usuarioId : int, xp : int, moedas : int, nivel : int) : Task<Resultado<Usuario>>
+    + AtualizarAsync(...) : Task<Resultado<Usuario>>
     + ResumoAsync(tamanhoDoRanking : int) : Task<ResumoGeral>
   }
   class GamificacaoService {
@@ -71,6 +74,13 @@ package "Serviços de aplicação (regras de negócio)" {
     + ListarQuestoesAsync() : Task<List<QuestaoDto>>
   }
   class ConteudoService
+
+  interface IAdminService {
+    + ListarUsuariosAsync() : Task<List<UsuarioResumo>>
+    + DefinirPerfilAsync(...) : Task<Resultado<UsuarioResumo>>
+    + PainelDosAlunosAsync() : Task<List<AlunoNoPainel>>
+  }
+  class AdminService
 
   class "Resultado<T>" as Resultado <<record>> {
     + Valor : T [0..1]
@@ -159,6 +169,7 @@ IAuthService <|.. AuthService
 IProgressoService <|.. ProgressoService
 IGamificacaoService <|.. GamificacaoService
 IConteudoService <|.. ConteudoService
+IAdminService <|.. AdminService
 Resultado --> TipoFalha
 ISm2Engine <|.. Sm2Engine
 IPoliticaDeSenha <|.. PoliticaDeSenha
@@ -171,6 +182,7 @@ EndpointExtensions ..> IAuthService : <<usa>>
 EndpointExtensions ..> IProgressoService : <<usa>>
 EndpointExtensions ..> IGamificacaoService : <<usa>>
 EndpointExtensions ..> IConteudoService : <<usa>>
+EndpointExtensions ..> IAdminService : <<usa>>
 EndpointExtensions ..> Resultado : traduz em HTTP
 AuthService ..> IPoliticaDeSenha : <<usa>>
 ProgressoService ..> ISm2Engine : <<usa>>
@@ -178,6 +190,7 @@ AuthService ..> AppDbContext
 ProgressoService ..> AppDbContext
 GamificacaoService ..> AppDbContext
 ConteudoService ..> AppDbContext
+AdminService ..> AppDbContext
 DatabaseSeeder o-- "1..*" IEtapaSeed : executa >
 ConexaoBanco ..> AppDbContext : fornece connection string
 

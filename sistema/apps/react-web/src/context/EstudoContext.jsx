@@ -502,7 +502,7 @@ export function EstudoProvider({ children }) {
   const deslogar = async () => {
     const ok = await confirmar('Encerrar Sessão', 'Deseja encerrar a sessão atual e retornar à tela de autenticação?');
     if (!ok) return;
-    ['quest_user_name', 'quest_jwt_token', 'quest_user_id'].forEach((chave) => localStorage.removeItem(chave));
+    ['quest_user_name', 'quest_jwt_token', 'quest_user_id', 'quest_user_perfil'].forEach((chave) => localStorage.removeItem(chave));
     window.location.reload();
   };
 

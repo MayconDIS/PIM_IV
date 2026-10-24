@@ -15,11 +15,20 @@ entity usuarios {
   --
   * username <<único>>
   * email <<único>>
+  * perfil
   * senha_hash
   * nivel
   * xp
   * moedas
   * data_criacao
+}
+
+entity cartas_moderadas {
+  * id <<PK>>
+  --
+  * codigo_fase
+  * frente
+  * data_moderacao
 }
 
 entity fases {
