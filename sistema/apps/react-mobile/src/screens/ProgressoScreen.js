@@ -7,7 +7,7 @@ import { tokens } from '../theme/tokens';
 export default function ProgressoScreen({ api, sinc, username, onSincronizar, onSair }) {
   const [numeros, setNumeros] = useState(null);
   const [mensagem, setMensagem] = useState('');
-  const nivel = progressoDeNivel(sinc.estado.xp);
+  const nivel = progressoDeNivel(sinc.estado.xp, sinc.estado.nivel);
   const pendentes = sinc.estado.fila.length;
 
   useEffect(() => {

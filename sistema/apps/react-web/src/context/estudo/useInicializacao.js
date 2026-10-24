@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { ApiService, ORDEM_FASES } from '@nexti/shared';
+import { ApiService, ORDEM_FASES, fasesLiberadasNoServidor } from '@nexti/shared';
 import { leJson, rotuloDoNivelDaApi } from './apoio.js';
 
 /**
@@ -22,20 +22,23 @@ export function useInicializacao({ nomeUsuario, userKey, progresso, ui, sessao }
       progresso.definirApiOnline(online);
 
       if (online && nomeUsuario !== 'Desenvolvedor' && nomeUsuario !== 'Admin') {
+        let nivelNoServidor = 1;
+        let remoto = [];
         try {
           const usuario = await ApiService.getUsuario(nomeUsuario);
           if (usuario) {
             progresso.setXp(usuario.xp);
             progresso.setMoedas(usuario.moedas);
             progresso.definirRank(rotuloDoNivelDaApi(usuario.nivel));
+            nivelNoServidor = usuario.nivel;
           }
         } catch {
           /* segue com o que está salvo localmente */
         }
 
         try {
-          const remoto = await ApiService.getProgressoUsuario();
-          if (remoto?.length) {
+          remoto = (await ApiService.getProgressoUsuario()) ?? [];
+          if (remoto.length) {
             progresso.setSrsData((atual) => {
               const mesclado = { ...atual };
               remoto.forEach((p) => {
@@ -53,6 +56,12 @@ export function useInicializacao({ nomeUsuario, userKey, progresso, ui, sessao }
         } catch {
           /* idem */
         }
+
+        // Continuar de outro aparelho: as fases liberadas também vêm do que está no servidor.
+        const doServidor = fasesLiberadasNoServidor({ nivel: nivelNoServidor, progresso: remoto });
+        progresso.setFasesDesbloqueadas((atual) => ORDEM_FASES.filter((f) => atual.includes(f) || doServidor.includes(f)));
+        // Quem já tem nível ou progresso no servidor já fez o nivelamento (talvez em outro aparelho).
+        if (nivelNoServidor > 1 || remoto.length) localStorage.setItem(`${userKey}nivelado`, 'true');
       }
 
       if (!localStorage.getItem(`${userKey}nivelado`)) {

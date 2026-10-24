@@ -6,7 +6,7 @@
  * Regras de SM-2, prêmio e nível vêm do @nexti/shared, as mesmas do site.
  */
 import { aplicarResposta, estadoDaCarta, qualidadeSm2 } from '@nexti/shared/sm2';
-import { FASES_INICIAIS, isTeste, nivelPorXp, proximaFase, recompensa } from '@nexti/shared/gamificacao';
+import { FASES_INICIAIS, fasesLiberadasNoServidor, isTeste, nivelPorXp, proximaFase, recompensa } from '@nexti/shared/gamificacao';
 import { ErroDaApi, ErroDeRede } from './api.js';
 
 // Função, não constante: cada usuário precisa de listas próprias (um objeto
@@ -64,7 +64,7 @@ export function criarSincronizador({ api, armazenamento, username, agora = () =>
 
     /**
      * Sincroniza nos dois sentidos: envia a fila pendente e depois traz da API
-     * XP, moedas, nível e o progresso SM-2 de cada carta.
+     * XP, moedas, nível, o progresso SM-2 de cada carta e as fases liberadas.
      */
     async sincronizar() {
       const pendentes = estado.fila;
@@ -86,7 +86,8 @@ export function criarSincronizador({ api, armazenamento, username, agora = () =>
       estado.moedas = perfil.moedas;
       estado.nivel = Math.max(estado.nivel, perfil.nivel);
 
-      for (const p of await api.progresso()) {
+      const progresso = await api.progresso();
+      for (const p of progresso) {
         estado.srs[p.flashcardId] = {
           rep: p.repeticoes,
           interval: p.intervaloDias,
@@ -94,6 +95,9 @@ export function criarSincronizador({ api, armazenamento, username, agora = () =>
           next: new Date(p.dataProximaRevisao).getTime(),
         };
       }
+      // Continuar de outro aparelho: as fases liberadas também vêm do servidor (o app não tem os testes).
+      const doServidor = fasesLiberadasNoServidor({ nivel: estado.nivel, progresso, pularTestes: true });
+      estado.liberadas = [...new Set([...estado.liberadas, ...doServidor])];
       await salvar();
       return estado;
     },

@@ -59,6 +59,7 @@ export {
   passouNoTeste,
   recompensa,
   proximaFase,
+  fasesLiberadasNoServidor,
   liberaCertificado,
   podeComprarBonus,
 } from './gamificacao.js';
