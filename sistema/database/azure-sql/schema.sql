@@ -496,3 +496,30 @@ END;
 COMMIT;
 GO
 
+BEGIN TRANSACTION;
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [migration_id] = N'20261024192728_FasesConcluidas'
+)
+BEGIN
+    CREATE TABLE [fases_concluidas] (
+        [usuario_id] int NOT NULL,
+        [codigo_fase] nvarchar(20) NOT NULL,
+        [data_conclusao] datetime2 NOT NULL,
+        CONSTRAINT [pk_fases_concluidas] PRIMARY KEY ([usuario_id], [codigo_fase]),
+        CONSTRAINT [fk_fases_concluidas_usuarios_usuario_id] FOREIGN KEY ([usuario_id]) REFERENCES [usuarios] ([id]) ON DELETE CASCADE
+    );
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [migration_id] = N'20261024192728_FasesConcluidas'
+)
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([migration_id], [product_version])
+    VALUES (N'20261024192728_FasesConcluidas', N'10.0.12');
+END;
+
+COMMIT;
+GO
+

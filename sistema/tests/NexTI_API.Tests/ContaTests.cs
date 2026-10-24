@@ -110,6 +110,7 @@ public class ContaTests
     {
         using var db = await Banco();
         db.Progresso_Flashcards.AddRange(new ProgressoFlashcard { UsuarioId = 1, FlashcardId = 7 }, new ProgressoFlashcard { UsuarioId = 2, FlashcardId = 8 });
+        db.FasesConcluidas.AddRange(new FaseConcluida { UsuarioId = 1, CodigoFase = "fase1" }, new FaseConcluida { UsuarioId = 2, CodigoFase = "fase2" });
         await db.SaveChangesAsync();
         var historico = new HistoricoFake();
         var resultado = await new ContaService(db, new PoliticaDeSenha(), historico).ExportarAsync(1);
@@ -117,6 +118,7 @@ public class ContaTests
         Assert.Equal(1, historico.UsuarioConsultado);
         Assert.Equal(7, Assert.Single(resultado.Valor!.Progresso).FlashcardId);
         Assert.Single(resultado.Valor.Historico);
+        Assert.Equal("fase1", Assert.Single(resultado.Valor.FasesConcluidas).CodigoFase);
         var json = JsonSerializer.Serialize(resultado.Valor);
         Assert.DoesNotContain("Senha", json);
         Assert.DoesNotContain(Hash, json);

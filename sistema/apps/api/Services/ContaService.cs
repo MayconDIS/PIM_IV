@@ -19,7 +19,9 @@ public class RevisaoExportada
     public DateTime DataProximaRevisao { get; set; }
     public DateTime DataRevisao { get; set; }
 }
-public record ExportacaoConta(DateTime ExportadoEm, ContaDados Conta, List<ProgressoExportado> Progresso, List<RevisaoExportada> Historico);
+public record FaseConcluidaExportada(string CodigoFase, DateTime DataConclusao);
+public record ExportacaoConta(DateTime ExportadoEm, ContaDados Conta, List<ProgressoExportado> Progresso, List<RevisaoExportada> Historico,
+    List<FaseConcluidaExportada> FasesConcluidas);
 
 public interface IHistoricoConta
 {
@@ -98,7 +100,11 @@ public class ContaService(AppDbContext db, IPoliticaDeSenha politica, IHistorico
             .OrderBy(p => p.FlashcardId)
             .Select(p => new ProgressoExportado(p.FlashcardId, p.Repeticoes, p.IntervaloDias, p.FatorFacilidade, p.DataProximaRevisao))
             .ToListAsync();
-        return Resultado<ExportacaoConta>.Ok(new(DateTime.UtcNow, conta.Valor!, progresso, await historico.LerAsync(usuarioId)));
+        var concluidas = await db.FasesConcluidas.AsNoTracking().Where(f => f.UsuarioId == usuarioId)
+            .OrderBy(f => f.DataConclusao)
+            .Select(f => new FaseConcluidaExportada(f.CodigoFase, f.DataConclusao))
+            .ToListAsync();
+        return Resultado<ExportacaoConta>.Ok(new(DateTime.UtcNow, conta.Valor!, progresso, await historico.LerAsync(usuarioId), concluidas));
     }
 
     public Task<Resultado<bool>> ExcluirAsync(int usuarioId, string? senhaAtual) =>
