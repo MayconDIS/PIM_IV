@@ -35,6 +35,7 @@
   <ItemGroup>
     <!-- Os mesmos casos do SM-2 que o teste em JavaScript confere (packages/shared). -->
     <None Include="../../packages/shared/tests/sm2-casos.json" Link="sm2-casos.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../packages/shared/tests/recompensa-casos.json" Link="recompensa-casos.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

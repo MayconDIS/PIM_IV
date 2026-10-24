@@ -65,5 +65,6 @@ export function criarApi({ baseUrl, obterToken = () => null, fetchFn = globalThi
     registrarResposta: (flashcardId, qualidade) =>
       requisicao('POST', '/progresso/atualizar', { usuarioId: 0, flashcardId, qualidade }),
     atualizarStats: (xp, moedas, nivel) => requisicao('PUT', '/usuarios/stats', { xp, moedas, nivel }),
+    concluirFase: (faseId, acertos = 0, total = 0) => requisicao('POST', '/progresso/concluir-fase', { faseId, acertos, total }),
   };
 }

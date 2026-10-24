@@ -19,8 +19,8 @@
     "test:estrutura": "node scripts/verificarEstrutura.js",
     "test:unit": "dotnet test tests/NexTI_API.Tests/NexTI_API.Tests.csproj",
     "test:shared": "npm test --prefix packages/shared",
-    "seed:api": "node scripts/gerar-semente-api.mjs",
-    "seed:api:check": "node scripts/gerar-semente-api.mjs --check",
+    "seed:api": "node scripts/gerar-semente-api.mjs && node scripts/gerar-recompensas-api.mjs",
+    "seed:api:check": "node scripts/gerar-semente-api.mjs --check && node scripts/gerar-recompensas-api.mjs --check",
     "test:mobile": "npm test --prefix apps/react-mobile"
   },
   "keywords": [

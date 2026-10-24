@@ -9,7 +9,7 @@ function memoria() {
 }
 
 /** API falsa: registra as chamadas; `falha` decide o erro de cada chamada. */
-function apiFalsa({ falha = () => null, perfil = { xp: 0, moedas: 0, nivel: 1 }, progresso = [] } = {}) {
+function apiFalsa({ falha = () => null, perfil = { xp: 0, moedas: 0, nivel: 1 }, progresso = [], totais = null } = {}) {
   const chamadas = [];
   const chamar = async (nome, args, resposta) => {
     chamadas.push([nome, ...args]);
@@ -21,6 +21,7 @@ function apiFalsa({ falha = () => null, perfil = { xp: 0, moedas: 0, nivel: 1 },
     chamadas,
     registrarResposta: (...a) => chamar('registrarResposta', a, {}),
     atualizarStats: (...a) => chamar('atualizarStats', a, {}),
+    concluirFase: (...a) => chamar('concluirFase', a, totais),
     perfil: (...a) => chamar('perfil', a, perfil),
     progresso: (...a) => chamar('progresso', a, progresso),
   };
@@ -68,24 +69,45 @@ test('sincronizar traz XP, moedas e o SM-2 da API', async () => {
   assert.deepEqual(s.estado.srs[9], { rep: 2, interval: 6, ease: 2.6, next: Date.parse('2026-11-01T00:00:00Z') });
 });
 
-test('concluir a fase 5 paga o prêmio do site e libera a fase 6 (pula o teste)', async () => {
-  const api = apiFalsa();
+test('concluir a fase 5 mostra o prêmio, libera a fase 6 (pula o teste) e avisa a API', async () => {
+  const api = apiFalsa({ totais: { premio: { xp: 5, moedas: 10 }, aprovado: true, xp: 5, moedas: 10, nivel: 1 } });
   const s = criarSincronizador({ api, armazenamento: memoria(), username: 'ana' });
   await s.carregar();
   const { premio, seguinte } = await s.concluirFase('fase5');
   assert.deepEqual(premio, { xp: 5, moedas: 10 });
   assert.equal(seguinte, 'fase6');
   assert.ok(s.estado.liberadas.includes('fase6'));
-  assert.deepEqual(api.chamadas, [['atualizarStats', 5, 10, 1]]);
+  assert.deepEqual(api.chamadas, [['concluirFase', 'fase5']]);
 });
 
-test('sem internet só o último envio de XP fica na fila', async () => {
+test('o app fica com os totais que o servidor calculou', async () => {
+  const api = apiFalsa({ totais: { premio: { xp: 5, moedas: 10 }, aprovado: true, xp: 130, moedas: 55, nivel: 3 } });
+  const s = criarSincronizador({ api, armazenamento: memoria(), username: 'ana' });
+  await s.carregar();
+  await s.concluirFase('fase1');
+  assert.equal(s.estado.xp, 130);
+  assert.equal(s.estado.moedas, 55);
+  assert.equal(s.estado.nivel, 3);
+});
+
+test('sem internet cada fase concluída fica na fila e o servidor paga quando chegar', async () => {
   const api = apiFalsa({ falha: () => new ErroDeRede('off') });
   const s = criarSincronizador({ api, armazenamento: memoria(), username: 'ana' });
   await s.carregar();
   await s.concluirFase('fase1');
   await s.concluirFase('fase2');
-  assert.deepEqual(s.estado.fila, [{ tipo: 'stats', xp: 10, moedas: 20, nivel: 1 }]);
+  assert.deepEqual(s.estado.fila, [{ tipo: 'fase', faseId: 'fase1' }, { tipo: 'fase', faseId: 'fase2' }]);
+  assert.equal(s.estado.xp, 10, 'o prêmio aparece na hora, mesmo offline');
+});
+
+test('item antigo de XP que já estava na fila ainda é enviado', async () => {
+  const api = apiFalsa();
+  const arm = memoria();
+  arm.dados.nexti_estado_ana = { fila: [{ tipo: 'stats', xp: 10, moedas: 20, nivel: 1 }] };
+  const s = criarSincronizador({ api, armazenamento: arm, username: 'ana' });
+  await s.carregar();
+  await s.sincronizar();
+  assert.deepEqual(api.chamadas[0], ['atualizarStats', 10, 20, 1]);
 });
 
 test('erro de regra da API (400) não fica na fila', async () => {

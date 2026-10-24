@@ -2,9 +2,12 @@
  * Regras de progressão do Nex_TI: ordem das fases, desbloqueio, XP, moedas,
  * ranks e aprovação nos testes de módulo.
  *
- * Porte fiel do dashboard vanilla original (`ordemFases`,
- * `atualizarBarraNivel`, `finalizarTesteModulo` e `irParaProximaAula`).
+ * O prêmio de cada fase sai do próprio conteúdo (content.js) e vira uma tabela
+ * única: o site e o app a usam aqui, e a API recebe a mesma tabela em
+ * apps/api/Data/Seed/recompensas.json para calcular o XP e as moedas no servidor.
  */
+
+import { BONUS, FASES, TESTES } from './content.js';
 
 /** Sequência oficial de desbloqueio: fases e testes, na ordem do menu. */
 export const ORDEM_FASES = Object.freeze([
@@ -51,10 +54,15 @@ export function progressoDeNivel(xp) {
 }
 
 /** Nível numérico enviado para a API (1, 3 ou 6). */
+/** Nível pelo XP total, do maior para o menor. */
+export const NIVEIS = Object.freeze([
+  { xpMinimo: 300, nivel: 6 },
+  { xpMinimo: 100, nivel: 3 },
+  { xpMinimo: 0, nivel: 1 },
+]);
+
 export function nivelPorXp(xp) {
-  if (xp >= 300) return 6;
-  if (xp >= 100) return 3;
-  return 1;
+  return (NIVEIS.find((n) => xp >= n.xpMinimo) ?? NIVEIS[NIVEIS.length - 1]).nivel;
 }
 
 /** Percentual mínimo de acertos para passar: 80% no ENADE, 70% nos demais. */
@@ -71,26 +79,34 @@ export function passouNoTeste(faseId, acertos, total) {
   return aproveitamento(acertos, total) >= corteDoTeste(faseId);
 }
 
+/** XP e moedas de uma disciplina bônus (o conteúdo só define o custo). */
+export const XP_BONUS = 25;
+export const MOEDAS_BONUS = 15;
+
+/**
+ * Prêmio de cada fase, teste e bônus, montado a partir do conteúdo. É a tabela que
+ * a API recebe (recompensas.json): os dois lados pagam o mesmo valor.
+ */
+export function tabelaDeRecompensas() {
+  return {
+    fases: Object.fromEntries(FASES.map((f) => [f.id, { xp: f.xp, moedas: f.moedas }])),
+    testes: Object.fromEntries(TESTES.map((t) => [t.id, { xp: t.xp, corte: corteDoTeste(t.id) }])),
+    bonus: Object.fromEntries(BONUS.map((b) => [b.id, { xp: XP_BONUS, moedas: MOEDAS_BONUS, custo: b.custoMoedas }])),
+    niveis: NIVEIS.map((n) => ({ ...n })),
+  };
+}
+
+const TABELA = tabelaDeRecompensas();
+
 /**
  * XP e moedas pagos ao concluir uma fase, teste ou bônus.
- * Teste reprovado não paga nada.
+ * Teste reprovado não paga nada; fase desconhecida também não.
  */
 export function recompensa(faseId, { acertos = 0, total = 0 } = {}) {
-  if (isTeste(faseId)) {
-    if (!passouNoTeste(faseId, acertos, total)) return { xp: 0, moedas: 0 };
-    return { xp: faseId === 'teste-mod5' ? 50 : 25, moedas: 0 };
-  }
-
-  if (isBonus(faseId)) return { xp: 25, moedas: 15 };
-
-  const numero = Number(String(faseId).replace('fase', ''));
-  if (!Number.isFinite(numero)) return { xp: 0, moedas: 0 };
-  if (numero <= 5) return { xp: 5, moedas: 10 };
-  if (numero <= 10) return { xp: 10, moedas: 10 };
-  if (numero <= 15) return { xp: 15, moedas: 10 };
-  if (numero <= 20) return { xp: 20, moedas: 10 };
-  if (numero <= 22) return { xp: 30, moedas: 70 };
-  return { xp: 0, moedas: 0 };
+  const teste = TABELA.testes[faseId];
+  if (teste) return passouNoTeste(faseId, acertos, total) ? { xp: teste.xp, moedas: 0 } : { xp: 0, moedas: 0 };
+  const premio = TABELA.fases[faseId] ?? TABELA.bonus[faseId];
+  return premio ? { xp: premio.xp, moedas: premio.moedas } : { xp: 0, moedas: 0 };
 }
 
 /** Próxima fase da trilha, ou null se for a última. */

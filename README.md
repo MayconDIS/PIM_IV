@@ -22,7 +22,7 @@ repositórios distintos, vivem aqui como pastas de primeiro nível:
 📁 PIM_IV/
 ├── 📁 sistema/        # Implementação: frontend, API C# (.NET 10) e scripts SQL Server
 ├── 📁 relatorio/      # Relatório ABNT (HTML/CSS) e os slides
-├── 📁 modelagem-uml/  # UML (Astah + PlantUML) e banco de dados (MER, DER, lógico e físico)
+├── 📁 modelagem-uml/  # UML no Astah e banco de dados (MER, DER e modelo físico)
 ├── 📁 .agents/        # Skills e instruções de agentes de IA, compartilhadas pelas três frentes
 ├── 📁 .vscode/     # Configuração do editor para o workspace inteiro
 └── 📄 .gitattributes, .gitignore, LICENSE
@@ -34,7 +34,7 @@ repositórios distintos, vivem aqui como pastas de primeiro nível:
 |---|---|
 | [`sistema/`](sistema) | Monorepo npm: `apps/react-web`, `apps/react-mobile`, `apps/api` (.NET), `packages/`, `database/`, `tests/` |
 | [`relatorio/`](relatorio) | Relatório ABNT em HTML/CSS, `assets/` e `design_DNA/` |
-| [`modelagem-uml/`](modelagem-uml) | `02_Modelagem_UML/` (`.asta`, `.puml` e PNGs) e `04_Banco_de_Dados/` (MER, DER, lógico e físico) |
+| [`modelagem-uml/`](modelagem-uml) | `02_Modelagem_UML/` (o `.asta` e as imagens exportadas do Astah) e `04_Banco_de_Dados/` (MER, DER e modelo físico) |
 
 ## 🚀 Como executar o sistema
 

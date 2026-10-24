@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,22 +14,38 @@ namespace NexTI_API.Services
 
     public record ResumoGeral(int TotalCards, int TotalUsuarios, List<RankingAluno> TopAlunos);
 
+    /// <summary>Resultado de concluir uma fase: o prêmio desta vez e o saldo novo do aluno.</summary>
+    public record Conclusao(Premio Premio, bool Aprovado, int XP, int Moedas, int Nivel);
+
     public interface IGamificacaoService
     {
         Task<PerfilUsuario?> PerfilAsync(string username);
         Task<Resultado<Usuario>> AtualizarAsync(int usuarioId, int xp, int moedas, int nivel);
         Task<ResumoGeral> ResumoAsync(int tamanhoDoRanking = 5);
+        Task<Resultado<Conclusao>> ConcluirFaseAsync(int usuarioId, string? faseId, int acertos, int total);
+        Task<Resultado<Usuario>> ComprarBonusAsync(int usuarioId, string? bonusId);
     }
 
-    /// <summary>XP, moedas, nível e ranking. O cliente calcula a recompensa; aqui ela é validada e gravada.</summary>
+    /// <summary>
+    /// XP, moedas, nível e ranking. O prêmio de cada fase é calculado aqui, com a mesma
+    /// tabela do site e do app (TabelaDeRecompensas); o cliente só informa o que concluiu.
+    /// </summary>
     public class GamificacaoService : IGamificacaoService
     {
         /// <summary>Maior ganho de XP ou moedas aceito numa única atualização.</summary>
         public const int IncrementoMaximo = 200;
 
-        private readonly AppDbContext _db;
+        /// <summary>Maior teste aceito (os testes de módulo têm 20 questões; as provas, 23).</summary>
+        public const int TotalMaximo = 100;
 
-        public GamificacaoService(AppDbContext db) => _db = db;
+        private readonly AppDbContext _db;
+        private readonly TabelaDeRecompensas _tabela;
+
+        public GamificacaoService(AppDbContext db, TabelaDeRecompensas? tabela = null)
+        {
+            _db = db;
+            _tabela = tabela ?? TabelaDeRecompensas.Padrao;
+        }
 
         /// <summary>Regra anti-trapaça: XP e nível só sobem, e nunca mais que <see cref="IncrementoMaximo"/> por vez.</summary>
         /// <returns>A mensagem de recusa, ou null se a atualização é válida.</returns>
@@ -59,6 +76,43 @@ namespace NexTI_API.Services
             usuario.Moedas = moedas;
             usuario.Nivel = nivel;
 
+            await _db.SaveChangesAsync();
+            return Resultado<Usuario>.Ok(usuario);
+        }
+
+        public async Task<Resultado<Conclusao>> ConcluirFaseAsync(int usuarioId, string? faseId, int acertos, int total)
+        {
+            faseId = (faseId ?? string.Empty).Trim().ToLowerInvariant();
+            if (!_tabela.Conhece(faseId))
+                return Resultado<Conclusao>.Erro(TipoFalha.Invalido, "Fase desconhecida.");
+            if (total < 0 || total > TotalMaximo || acertos < 0 || acertos > total)
+                return Resultado<Conclusao>.Erro(TipoFalha.Invalido, "Acertos e total inválidos.");
+
+            var usuario = await _db.Usuarios.FindAsync(usuarioId);
+            if (usuario == null) return Resultado<Conclusao>.Erro(TipoFalha.NaoEncontrado, "Usuário não encontrado");
+
+            var premio = _tabela.PremioDe(faseId, acertos, total);
+            usuario.XP += premio.Xp;
+            usuario.Moedas += premio.Moedas;
+            usuario.Nivel = Math.Max(usuario.Nivel, _tabela.NivelPorXp(usuario.XP));   // o diagnóstico pode ter dado um nível maior
+            await _db.SaveChangesAsync();
+
+            var aprovado = !_tabela.Testes.ContainsKey(faseId) || premio.Xp > 0;
+            return Resultado<Conclusao>.Ok(new Conclusao(premio, aprovado, usuario.XP, usuario.Moedas, usuario.Nivel));
+        }
+
+        public async Task<Resultado<Usuario>> ComprarBonusAsync(int usuarioId, string? bonusId)
+        {
+            bonusId = (bonusId ?? string.Empty).Trim().ToLowerInvariant();
+            if (!_tabela.Bonus.TryGetValue(bonusId, out var bonus))
+                return Resultado<Usuario>.Erro(TipoFalha.Invalido, "Bônus desconhecido.");
+
+            var usuario = await _db.Usuarios.FindAsync(usuarioId);
+            if (usuario == null) return Resultado<Usuario>.Erro(TipoFalha.NaoEncontrado, "Usuário não encontrado");
+            if (usuario.Moedas < bonus.Custo)
+                return Resultado<Usuario>.Erro(TipoFalha.Invalido, $"Saldo insuficiente: o bônus custa {bonus.Custo} moedas.");
+
+            usuario.Moedas -= bonus.Custo;
             await _db.SaveChangesAsync();
             return Resultado<Usuario>.Ok(usuario);
         }

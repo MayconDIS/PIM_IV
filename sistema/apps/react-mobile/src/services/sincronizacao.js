@@ -21,10 +21,14 @@ export function criarSincronizador({ api, armazenamento, username, agora = () =>
 
   const salvar = () => armazenamento.gravar(chave, estado);
 
-  /** Envia agora; se não houver internet, guarda na fila. Sessão expirada sobe como erro. */
+  /**
+   * Envia agora e devolve a resposta da API; se não houver internet, guarda na fila
+   * e devolve null. Sessão expirada sobe como erro.
+   */
   async function enviarOuEnfileirar(item) {
+    let resposta = null;
     try {
-      await enviar(item);
+      resposta = await enviar(item);
     } catch (erro) {
       if (erro instanceof ErroDeRede) {
         if (item.tipo === 'stats') estado.fila = estado.fila.filter((i) => i.tipo !== 'stats');
@@ -37,10 +41,13 @@ export function criarSincronizador({ api, armazenamento, username, agora = () =>
       // Outros erros da API (ex.: 400) não adiantam repetir: o item é descartado.
     }
     await salvar();
+    return resposta;
   }
 
   function enviar(item) {
     if (item.tipo === 'resposta') return api.registrarResposta(item.flashcardId, item.qualidade);
+    if (item.tipo === 'fase') return api.concluirFase(item.faseId);
+    // 'stats': itens antigos que ainda estejam na fila de algum aparelho.
     return api.atualizarStats(item.xp, item.moedas, item.nivel);
   }
 
@@ -105,7 +112,11 @@ export function criarSincronizador({ api, armazenamento, username, agora = () =>
       return estado.srs[carta.id];
     },
 
-    /** Fecha a fase: paga XP e moedas, libera a próxima e envia os números para a API. */
+    /**
+     * Fecha a fase: mostra o prêmio na hora (mesma tabela da API), libera a próxima e
+     * avisa a API, que calcula o prêmio e devolve os totais. Sem internet, o aviso vai
+     * para a fila e o servidor paga quando ele chegar.
+     */
     async concluirFase(faseId) {
       const premio = recompensa(faseId);
       estado.xp += premio.xp;
@@ -115,7 +126,13 @@ export function criarSincronizador({ api, armazenamento, username, agora = () =>
       let seguinte = proximaFase(faseId);
       if (seguinte && isTeste(seguinte)) seguinte = proximaFase(seguinte);
       if (seguinte && !estado.liberadas.includes(seguinte)) estado.liberadas.push(seguinte);
-      await enviarOuEnfileirar({ tipo: 'stats', xp: estado.xp, moedas: estado.moedas, nivel: estado.nivel });
+      const doServidor = await enviarOuEnfileirar({ tipo: 'fase', faseId });
+      if (doServidor) {
+        estado.xp = doServidor.xp;
+        estado.moedas = doServidor.moedas;
+        estado.nivel = Math.max(estado.nivel, doServidor.nivel);
+        await salvar();
+      }
       return { premio, seguinte };
     },
 
