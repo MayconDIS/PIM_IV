@@ -15,7 +15,8 @@ namespace NexTI_API.Services
     public record ResumoGeral(int TotalCards, int TotalUsuarios, List<RankingAluno> TopAlunos);
 
     /// <summary>Resultado de concluir uma fase: o prêmio desta vez e o saldo novo do aluno.</summary>
-    public record Conclusao(Premio Premio, bool Aprovado, int XP, int Moedas, int Nivel);
+    /// <summary>Resultado de concluir uma fase. PrimeiraVez = false quando é revisão (sem prêmio).</summary>
+    public record Conclusao(Premio Premio, bool Aprovado, int XP, int Moedas, int Nivel, bool PrimeiraVez);
 
     public interface IGamificacaoService
     {
@@ -91,14 +92,31 @@ namespace NexTI_API.Services
             var usuario = await _db.Usuarios.FindAsync(usuarioId);
             if (usuario == null) return Resultado<Conclusao>.Erro(TipoFalha.NaoEncontrado, "Usuário não encontrado");
 
-            var premio = _tabela.PremioDe(faseId, acertos, total);
-            usuario.XP += premio.Xp;
-            usuario.Moedas += premio.Moedas;
-            usuario.Nivel = Math.Max(usuario.Nivel, _tabela.NivelPorXp(usuario.XP));   // o diagnóstico pode ter dado um nível maior
-            await _db.SaveChangesAsync();
+            var premioDaTabela = _tabela.PremioDe(faseId, acertos, total);
+            var aprovado = !_tabela.Testes.ContainsKey(faseId) || premioDaTabela.Xp > 0;
 
-            var aprovado = !_tabela.Testes.ContainsKey(faseId) || premio.Xp > 0;
-            return Resultado<Conclusao>.Ok(new Conclusao(premio, aprovado, usuario.XP, usuario.Moedas, usuario.Nivel));
+            // O prêmio sai só na primeira conclusão; teste reprovado não conta como concluído.
+            var jaConcluida = await _db.FasesConcluidas.AnyAsync(f => f.UsuarioId == usuarioId && f.CodigoFase == faseId);
+            if (!aprovado || jaConcluida)
+                return Resultado<Conclusao>.Ok(new Conclusao(new Premio(0, 0), aprovado, usuario.XP, usuario.Moedas, usuario.Nivel, !jaConcluida));
+
+            usuario.XP += premioDaTabela.Xp;
+            usuario.Moedas += premioDaTabela.Moedas;
+            usuario.Nivel = Math.Max(usuario.Nivel, _tabela.NivelPorXp(usuario.XP));   // o diagnóstico pode ter dado um nível maior
+            _db.FasesConcluidas.Add(new FaseConcluida { UsuarioId = usuarioId, CodigoFase = faseId });
+            try
+            {
+                await _db.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                // Outra conclusão da mesma fase chegou junto e já gravou: a chave (aluno, fase) barrou
+                // esta, e nada foi pago em dobro. Devolve os totais que ficaram no banco.
+                _db.ChangeTracker.Clear();
+                var atual = await _db.Usuarios.AsNoTracking().FirstAsync(u => u.Id == usuarioId);
+                return Resultado<Conclusao>.Ok(new Conclusao(new Premio(0, 0), aprovado, atual.XP, atual.Moedas, atual.Nivel, false));
+            }
+            return Resultado<Conclusao>.Ok(new Conclusao(premioDaTabela, aprovado, usuario.XP, usuario.Moedas, usuario.Nivel, true));
         }
 
         public async Task<Resultado<Usuario>> ComprarBonusAsync(int usuarioId, string? bonusId)

@@ -68,7 +68,9 @@ export default function EstudoScreen({ fase, api, sinc, onSair, onErroDeSessao }
     return (
       <View style={styles.centro}>
         <Text style={styles.titulo}>Fase concluída! 🎉</Text>
-        <Text style={styles.premio}>+{fim.premio.xp} XP · +{fim.premio.moedas} moedas</Text>
+        {fim.premio.xp || fim.premio.moedas
+          ? <Text style={styles.premio}>+{fim.premio.xp} XP · +{fim.premio.moedas} moedas</Text>
+          : <Text style={styles.textoApoio}>Revisão concluída. O prêmio desta fase já foi recebido; a revisão conta para o SM-2.</Text>}
         {fim.seguinte && <Text style={styles.textoApoio}>Próxima fase liberada.</Text>}
         <TouchableOpacity style={styles.botaoPrincipal} onPress={onSair}><Text style={styles.botaoPrincipalTexto}>VOLTAR ÀS FASES</Text></TouchableOpacity>
       </View>

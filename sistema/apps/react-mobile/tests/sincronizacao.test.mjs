@@ -130,6 +130,29 @@ test('item antigo de XP que já estava na fila ainda é enviado', async () => {
   assert.deepEqual(api.chamadas[0], ['atualizarStats', 10, 20, 1]);
 });
 
+test('revisão: a API não paga de novo e o app mostra o prêmio zerado', async () => {
+  const api = apiFalsa({ totais: { premio: { xp: 0, moedas: 0 }, xp: 5, moedas: 10, nivel: 1, primeiraVez: false } });
+  const s = criarSincronizador({ api, armazenamento: memoria(), username: 'ana' });
+  await s.carregar();
+  const { premio } = await s.concluirFase('fase1');
+  assert.deepEqual(premio, { xp: 0, moedas: 0 });
+  assert.equal(s.estado.xp, 5);
+});
+
+test('revisão feita sem internet: depois de sincronizar, vale o XP do servidor', async () => {
+  let online = false;
+  const api = apiFalsa({ falha: (n) => (online || n !== 'concluirFase' ? null : new ErroDeRede('off')), perfil: { xp: 5, moedas: 10, nivel: 1 } });
+  const s = criarSincronizador({ api, armazenamento: memoria(), username: 'ana' });
+  await s.carregar();
+  s.estado.xp = 5; s.estado.moedas = 10;
+  await s.concluirFase('fase1');          // mostra +5 no aparelho
+  assert.equal(s.estado.xp, 10);
+  online = true;
+  await s.sincronizar();                  // a API não pagou de novo
+  assert.equal(s.estado.xp, 5);
+  assert.equal(s.estado.moedas, 10);
+});
+
 test('erro de regra da API (400) não fica na fila', async () => {
   const api = apiFalsa({ falha: () => new ErroDaApi(400, 'XP não pode diminuir') });
   const s = criarSincronizador({ api, armazenamento: memoria(), username: 'ana' });

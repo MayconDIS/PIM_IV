@@ -123,6 +123,27 @@ namespace NexTI_API.Data.Migrations
                     b.ToTable("fases", (string)null);
                 });
 
+            modelBuilder.Entity("NexTI_API.Models.FaseConcluida", b =>
+                {
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int")
+                        .HasColumnName("usuario_id");
+
+                    b.Property<string>("CodigoFase")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasColumnName("codigo_fase");
+
+                    b.Property<DateTime>("DataConclusao")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("data_conclusao");
+
+                    b.HasKey("UsuarioId", "CodigoFase")
+                        .HasName("pk_fases_concluidas");
+
+                    b.ToTable("fases_concluidas", (string)null);
+                });
+
             modelBuilder.Entity("NexTI_API.Models.Flashcard", b =>
                 {
                     b.Property<int>("Id")
@@ -368,6 +389,18 @@ namespace NexTI_API.Data.Migrations
                         .HasConstraintName("fk_tb_alternativas_tb_questoes_id_questao");
 
                     b.Navigation("Questao");
+                });
+
+            modelBuilder.Entity("NexTI_API.Models.FaseConcluida", b =>
+                {
+                    b.HasOne("NexTI_API.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_fases_concluidas_usuarios_usuario_id");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("NexTI_API.Models.Flashcard", b =>

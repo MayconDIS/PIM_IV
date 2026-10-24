@@ -69,6 +69,51 @@ namespace NexTI_API.Tests
         }
 
         [Fact]
+        public async Task MesmaFaseDeNovo_NaoPagaOutraVez()
+        {
+            using var db = BancoComAluno();
+            var servico = new GamificacaoService(db);
+
+            var primeira = await servico.ConcluirFaseAsync(1, "fase1", 0, 0);
+            var revisao = await servico.ConcluirFaseAsync(1, "fase1", 0, 0);
+
+            Assert.True(primeira.Valor!.PrimeiraVez);
+            Assert.False(revisao.Valor!.PrimeiraVez);
+            Assert.Equal(new Premio(0, 0), revisao.Valor.Premio);
+            Assert.Equal((5, 10), (revisao.Valor.XP, revisao.Valor.Moedas));
+            Assert.Single(db.FasesConcluidas);
+        }
+
+        [Fact]
+        public async Task TesteReprovado_PodeSerRefeito_EPagaQuandoPassa()
+        {
+            using var db = BancoComAluno();
+            var servico = new GamificacaoService(db);
+
+            await servico.ConcluirFaseAsync(1, "teste-mod1", 5, 20);    // reprovado: não conta como concluído
+            var aprovado = await servico.ConcluirFaseAsync(1, "teste-mod1", 18, 20);
+
+            Assert.True(aprovado.Valor!.Aprovado);
+            Assert.Equal(25, aprovado.Valor.XP);
+            Assert.Equal("teste-mod1", Assert.Single(db.FasesConcluidas).CodigoFase);
+        }
+
+        [Fact]
+        public async Task FaseConcluida_PorUmAluno_NaoAfetaOutro()
+        {
+            using var db = BancoComAluno();
+            db.Usuarios.Add(new Usuario { Id = 2, Username = "bia", Email = "bia@exemplo.test", SenhaHash = "x" });
+            await db.SaveChangesAsync();
+            var servico = new GamificacaoService(db);
+
+            await servico.ConcluirFaseAsync(1, "fase1", 0, 0);
+            var outra = await servico.ConcluirFaseAsync(2, "fase1", 0, 0);
+
+            Assert.True(outra.Valor!.PrimeiraVez);
+            Assert.Equal(5, outra.Valor.XP);
+        }
+
+        [Fact]
         public async Task TesteReprovado_NaoPaga()
         {
             using var db = BancoComAluno();

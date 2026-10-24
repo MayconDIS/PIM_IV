@@ -37,6 +37,7 @@ export function useSessaoDeEstudo({ userKey, progresso, ui }) {
   const [avisoRevisao, setAvisoRevisao] = useState(false);
   const deckRevisao = useRef([]);
   const acertosTeste = useRef(0);
+  const concluindo = useRef(false); // espera a API: um segundo clique não conclui a fase de novo
   const trocandoCarta = useRef(false);
 
   const { toast } = ui;
@@ -184,31 +185,48 @@ export function useSessaoDeEstudo({ userKey, progresso, ui }) {
     }, TEMPO_REVELA_ENADE);
   };
 
-  /** Paga o prêmio na hora e manda a conclusão para a API, que devolve os totais calculados lá. */
-  function pagarPremio(faseId, acertos, total) {
+  /**
+   * Manda a conclusão para a API, que paga o prêmio só na primeira vez e devolve o que pagou e os
+   * totais. Sem a API, paga na hora pela mesma tabela e envia os totais depois.
+   */
+  async function pagarPremio(faseId, acertos, total) {
+    if (progresso.apiOnlineRef.current) {
+      try {
+        const r = await ApiService.concluirFase(faseId, acertos, total);
+        progresso.setXp(r.xp);
+        progresso.setMoedas(r.moedas);
+        const novoRank = rankPorXp(progresso.rank, r.xp);
+        if (novoRank !== progresso.rank) progresso.definirRank(novoRank);
+        return r.premio ?? recompensa(faseId, { acertos, total });
+      } catch {
+        /* segue pelo cálculo local */
+      }
+    }
     const premio = recompensa(faseId, { acertos, total });
     const novoXp = progresso.xp + premio.xp;
     const novasMoedas = progresso.moedas + premio.moedas;
     progresso.setXp(novoXp);
     progresso.setMoedas(novasMoedas);
-
     const novoRank = rankPorXp(progresso.rank, novoXp);
     if (novoRank !== progresso.rank) progresso.definirRank(novoRank);
-
     if (progresso.apiOnlineRef.current) {
-      ApiService.concluirFase(faseId, acertos, total)
-        .then((r) => {
-          progresso.setXp(r.xp);
-          progresso.setMoedas(r.moedas);
-        })
-        .catch(() => ApiService.updateUserStats(novoXp, novasMoedas, nivelParaApi(novoRank, novoXp)).catch(() => {}));
+      ApiService.updateUserStats(novoXp, novasMoedas, nivelParaApi(novoRank, novoXp)).catch(() => {});
     }
     return premio;
   }
 
   /** CONCLUIR_ROTINA(): entrega XP/moedas, libera a próxima fase e fecha o painel. */
-  const concluirRotina = () => {
-    if (!faseAtiva || !fim) return;
+  const concluirRotina = async () => {
+    if (!faseAtiva || !fim || concluindo.current) return;
+    concluindo.current = true;
+    try {
+      await concluirAgora();
+    } finally {
+      concluindo.current = false;
+    }
+  };
+
+  const concluirAgora = async () => {
     const faseId = faseAtiva.id;
     const total = deck.length;
     const acertos = acertosTeste.current;
@@ -221,7 +239,7 @@ export function useSessaoDeEstudo({ userKey, progresso, ui }) {
       return;
     }
 
-    const premio = pagarPremio(faseId, acertos, total);
+    const premio = await pagarPremio(faseId, acertos, total);
     const seguinte = proximaFase(faseId);
     const jaLiberada = seguinte && progresso.fasesDesbloqueadas.includes(seguinte);
 
@@ -250,7 +268,9 @@ export function useSessaoDeEstudo({ userKey, progresso, ui }) {
         som('playLevelUp');
         toast('success', 'Missão Concluída! 🔓', `Novo nível liberado! (+${premio.xp} XP, +${premio.moedas} Coins)`);
       } else {
-        toast('info', 'Revisão Concluída', `Revisão finalizada (+${premio.xp} XP, +${premio.moedas} Coins)`);
+        toast('info', 'Revisão Concluída', premio.xp || premio.moedas
+          ? `Revisão finalizada (+${premio.xp} XP, +${premio.moedas} Coins)`
+          : 'Revisão finalizada. O prêmio desta fase já foi recebido; a revisão conta para o SM-2.');
       }
     } else {
       toast('success', 'ENADE Concluído', `Missão finalizada! (+${premio.xp} XP, +${premio.moedas} Coins)`);

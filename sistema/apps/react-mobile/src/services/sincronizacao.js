@@ -81,8 +81,10 @@ export function criarSincronizador({ api, armazenamento, username, agora = () =>
         }
       }
 
+      // A fila já foi enviada: o servidor tem a palavra final sobre XP e moedas (uma revisão feita
+      // sem internet mostra o prêmio no aparelho, mas a API não paga de novo).
       const perfil = await api.perfil(username);
-      estado.xp = Math.max(estado.xp, perfil.xp);
+      estado.xp = perfil.xp;
       estado.moedas = perfil.moedas;
       estado.nivel = Math.max(estado.nivel, perfil.nivel);
 
@@ -117,12 +119,12 @@ export function criarSincronizador({ api, armazenamento, username, agora = () =>
     },
 
     /**
-     * Fecha a fase: mostra o prêmio na hora (mesma tabela da API), libera a próxima e
-     * avisa a API, que calcula o prêmio e devolve os totais. Sem internet, o aviso vai
-     * para a fila e o servidor paga quando ele chegar.
+     * Fecha a fase: libera a próxima e avisa a API, que paga o prêmio só na primeira vez e
+     * devolve o que pagou e os totais. Sem internet, mostra o prêmio pela mesma tabela da API,
+     * o aviso vai para a fila e o servidor paga (ou não, se for revisão) quando ele chegar.
      */
     async concluirFase(faseId) {
-      const premio = recompensa(faseId);
+      let premio = recompensa(faseId);
       estado.xp += premio.xp;
       estado.moedas += premio.moedas;
       estado.nivel = Math.max(estado.nivel, nivelPorXp(estado.xp));
@@ -132,6 +134,8 @@ export function criarSincronizador({ api, armazenamento, username, agora = () =>
       if (seguinte && !estado.liberadas.includes(seguinte)) estado.liberadas.push(seguinte);
       const doServidor = await enviarOuEnfileirar({ tipo: 'fase', faseId });
       if (doServidor) {
+        // A API paga só na primeira conclusão: numa revisão o prêmio vem zerado.
+        if (doServidor.premio) premio = doServidor.premio;
         estado.xp = doServidor.xp;
         estado.moedas = doServidor.moedas;
         estado.nivel = Math.max(estado.nivel, doServidor.nivel);
