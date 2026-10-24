@@ -131,8 +131,8 @@ for (const [doc, base] of [['relatorio/index.html', 'relatorio'], ['sistema/docs
 // --- 5. só PIM IV: o PIM III aparece apenas na comparação de melhorias -----------------------
 const PERMITIDOS = ['README.md', 'modelagem-uml/README.md', 'relatorio/README.md', 'relatorio/index.html',
   'sistema/docs/apresentacao-pa/slides.html', 'sistema/docs/apresentacao-pa/ROTEIRO_DO_PALESTRANTE.md'];
-// Os arquivos de regras (AGENTS.md, CLAUDE.md, GEMINI.md e os agentes) citam o PIM III para proibi-lo.
-const REGRAS = (f) => /(^|\/)(AGENTS|CLAUDE|GEMINI)\.md$/.test(f) || f.startsWith('.claude/');
+// Os arquivos de regras (AGENTS.md, CLAUDE.md e os agentes) citam o PIM III para proibi-lo.
+const REGRAS = (f) => /(^|\/)(AGENTS|CLAUDE)\.md$/.test(f) || f.startsWith('.claude/');
 const comPim3 = arquivos('.', (c) => /\.(md|html|js|jsx|cs|java|json)$/.test(c))
   .filter((f) => !PERMITIDOS.includes(f) && !REGRAS(f) && !f.startsWith('relatorio/word/') && /PIM ?III/.test(ler(f)));
 checar('PIM III só nas seções de melhorias', comPim3.length === 0, comPim3.join(', '));
@@ -151,18 +151,16 @@ const procurar = (d) => {
 };
 procurar('.');
 checar('só a pasta .agents da raiz, sem .planning', extras.length === 0, extras.join(', '));
-for (const pasta of ['sistema', 'relatorio', 'modelagem-uml']) {
-  checar(`${pasta} tem AGENTS.md, CLAUDE.md e GEMINI.md`, ['AGENTS.md', 'CLAUDE.md', 'GEMINI.md'].every((f) => existe(`${pasta}/${f}`)));
-}
-// O Claude lê o que o Gemini lê: cada CLAUDE.md importa o GEMINI.md, que importa o AGENTS.md.
+// O Claude lê as mesmas regras do Codex: cada CLAUDE.md importa o AGENTS.md (o Codex lê o AGENTS.md sozinho).
 for (const pasta of ['.', 'sistema', 'relatorio', 'modelagem-uml']) {
   const claude = existe(`${pasta}/CLAUDE.md`) ? ler(`${pasta}/CLAUDE.md`) : '';
-  const gemini = existe(`${pasta}/GEMINI.md`) ? ler(`${pasta}/GEMINI.md`) : '';
-  checar(`${pasta}/CLAUDE.md importa o GEMINI.md`, /^@(\.\/)?GEMINI\.md$/m.test(claude));
-  checar(`${pasta}/GEMINI.md importa o AGENTS.md`, /^@(\.\/)?AGENTS\.md$/m.test(gemini));
+  checar(`${pasta} tem AGENTS.md`, existe(`${pasta}/AGENTS.md`));
+  checar(`${pasta}/CLAUDE.md importa o AGENTS.md`, /^@(\.\/)?AGENTS\.md$/m.test(claude));
 }
 const raiz = ler('CLAUDE.md');
-checar('CLAUDE.md da raiz importa o GEMINI.md de cada pasta', ['sistema', 'relatorio', 'modelagem-uml'].every((p) => raiz.includes(`@${p}/GEMINI.md`)));
+checar('CLAUDE.md da raiz importa o AGENTS.md de cada pasta', ['sistema', 'relatorio', 'modelagem-uml'].every((p) => raiz.includes(`@${p}/AGENTS.md`)));
+const geminis = arquivos('.', (c) => c.endsWith('GEMINI.md'));
+checar('nenhum GEMINI.md (a equipe usa Claude Code e Codex)', geminis.length === 0, geminis.join(', '));
 
 // --- resultado --------------------------------------------------------------------------
 console.log(`Sincronia do projeto: ${ok.length} ok, ${falhas.length} com problema.`);
