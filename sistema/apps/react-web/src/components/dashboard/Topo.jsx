@@ -119,6 +119,9 @@ export function Topo() {
             <a className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalMapaMental'))}>
               <span className="material-symbols-outlined">hub</span> Mapa Neural
             </a>
+            <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalConta'))}>
+              <span className="material-symbols-outlined">manage_accounts</span> Minha conta
+            </button>
             {podeAdministrar() && (
               <a className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalAdmin'))}>
                 <span className="material-symbols-outlined">admin_panel_settings</span> Painel do {perfilAtual() === 'Admin' ? 'Admin' : 'Tutor'}
