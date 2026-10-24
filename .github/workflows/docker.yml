@@ -1,0 +1,68 @@
+# Monta as imagens do Nex_TI e sobe o docker-compose (SQL Server + API + site)
+# para conferir que os contêineres funcionam juntos: a API cria o banco, carrega
+# o conteúdo e responde, e o site é servido pelo Nginx.
+
+name: Docker (contêineres)
+
+on:
+  pull_request:
+    paths:
+      - 'sistema/**'
+      - '.github/workflows/docker.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'sistema/**'
+      - '.github/workflows/docker.yml'
+  workflow_dispatch:
+
+jobs:
+  compose:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: sistema
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Montar as imagens
+        run: docker compose build
+
+      - name: Subir banco, API e site
+        run: docker compose up -d
+
+      - name: Esperar a API (migrations e carga do conteúdo)
+        run: |
+          for i in $(seq 1 60); do
+            if curl -fsS http://localhost:5000/api/status; then echo; exit 0; fi
+            sleep 5
+          done
+          docker compose logs api
+          exit 1
+
+      - name: Testar a API e o site
+        run: |
+          set -e
+          fases=$(curl -fsS http://localhost:5000/api/fases | jq length)
+          echo "fases: $fases"
+          test "$fases" -gt 20
+          questoes=$(curl -fsS http://localhost:5000/api/simulados/questoes | jq length)
+          echo "questões do simulado: $questoes"
+          test "$questoes" -gt 0
+          corpo='{"username":"teste_docker","email":"teste_docker@nexti.com","password":"Conteiner#Ok2026"}'
+          curl -fsS -X POST http://localhost:5000/api/auth/register -H 'Content-Type: application/json' -d "$corpo" > /dev/null
+          token=$(curl -fsS -X POST http://localhost:5000/api/auth/login -H 'Content-Type: application/json' \
+            -d '{"username":"teste_docker","password":"Conteiner#Ok2026"}' | jq -r .token)
+          test -n "$token" && test "$token" != "null"
+          echo "login com JWT: ok"
+          curl -fsS http://localhost:8080/ | grep -q '<div id="root">'
+          curl -fsS http://localhost:8080/dashboard | grep -q '<div id="root">'
+          echo "site: ok"
+
+      - name: Logs em caso de falha
+        if: failure()
+        run: docker compose logs
+
+      - name: Derrubar os contêineres
+        if: always()
+        run: docker compose down -v

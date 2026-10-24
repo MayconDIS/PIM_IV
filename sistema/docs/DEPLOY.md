@@ -120,6 +120,22 @@ npm run dev:react   # http://localhost:5501
 Para apontar para o Azure SQL, defina `AZURE_SQL_CONNECTIONSTRING` antes do `dev:api`.
 Lembre de liberar o seu IP no firewall do servidor SQL.
 
+## Contêineres (Docker)
+
+A API e o site também têm imagem Docker (`apps/api/Dockerfile` e
+`apps/react-web/Dockerfile`), e o `docker-compose.yml` sobe SQL Server + API + site
+com `docker compose up --build`; o passo a passo está no Manual de Execução. A
+imagem da API roda com um usuário sem privilégios na porta 8080, e só aceita a
+connection string e a `Jwt__Key` por variável de ambiente, como no App Service.
+
+| Pipeline | Quando roda | O que faz |
+|---|---|---|
+| `api-azure.yml` | push na `main` | testes da API e deploy no App Service |
+| `docker.yml` | PR e push na `main` | monta as imagens, sobe o compose e testa API e site |
+
+A produção continua no App Service com o código publicado; as imagens servem para
+rodar o sistema inteiro em qualquer máquina e para o teste do CI.
+
 ## Segurança
 
 - **Front (Vercel):** `apps/react-web/vercel.json` envia CSP, HSTS, `nosniff`,
