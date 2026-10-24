@@ -40,7 +40,7 @@
   1. O aluno estuda por flashcards e o algoritmo **SM-2** decide quando cada carta volta.
   2. São **29 fases e 702 cartas**, liberadas em ordem. No fim, um guia de estudos e as provas oficiais do ENADE de ADS (2017 e 2021).
   3. Cada fase dá **XP e moedas**; as moedas liberam disciplinas bônus.
-- **Passar a vez:** *"O PIM IV continua o PIM III. O Gabriel mostra quem usa o sistema."*
+- **Passar a vez:** *"O Gabriel mostra quem usa o sistema."*
 
 ---
 
@@ -49,8 +49,9 @@
 - **Objetivo:** mostrar os atores e o que cada um faz.
 - **Tópicos-chave:**
   - **Aluno:** estuda, faz simulado e vê o desempenho.
-  - **Tutor:** cria conteúdo e acompanha os alunos.
-  - **Admin:** controla o acesso.
+  - **Tutor:** tudo do Aluno, mais o painel dos alunos e editar ou excluir cartas.
+  - **Admin:** tudo do Tutor, mais definir o perfil de cada usuário.
+  - A seta de herança entre os atores mostra isso: o Admin herda do Tutor, que herda do Aluno.
 - **Se perguntarem:** os três perfis existem: o Tutor tem um painel com os alunos e modera as cartas; o Admin também define o perfil de cada usuário.
 
 ---
@@ -84,7 +85,6 @@
   - `Usuario` é pai de `Aluno` e `Tutor` (a herança do slide anterior).
   - `ProgressoFlashcard` liga o aluno à carta e guarda os números do SM-2.
   - `Prova`, `Questao`, `Alternativa` e `AreaConhecimento` entraram no PIM IV para os simulados.
-- **Se perguntarem do diagrama do PIM III:** ele continua no projeto como a ideia inicial; este mostra o que foi implementado.
 - **Passar a vez:** *"O Miguel mostra como a API está organizada."*
 
 ---
@@ -117,7 +117,8 @@
 
 - **Objetivo:** mostrar a ordem das mensagens quando o aluno revisa uma carta.
 - **Tópicos-chave:**
-  - A tela pede as cartas → o SM-2 filtra as vencidas → o aluno responde → o SM-2 calcula a nova data → o banco grava → a gamificação dá XP.
+  - O aluno avalia a carta → o site manda a nota para `POST /api/progresso/atualizar` → a rota confere o token → o `ProgressoService` busca o progresso → o `Sm2Engine` calcula a nova data → o banco grava, e uma trigger guarda o histórico.
+  - Sem login ou sem internet, o site segue só com o estado local (no app, a resposta espera numa fila).
   - Regra em `Services/Sm2Engine.cs`, com 5 testes. Nota 3 ou mais: 1 dia, 6 dias, depois multiplica pelo fator de facilidade. Menor que 3: volta para 1 dia e o fator cai (mínimo 1,3).
 
 ---
@@ -140,4 +141,4 @@
 | Por que separar em camadas? | Miguel | Cada parte cuida de uma coisa: dá para testar a regra sem a rota e trocar o banco sem mexer nas regras. |
 | O que o diagrama de atividade mostra? | Gabriel | Uma sessão de estudo, da escolha da fase até ganhar XP. |
 | Como funciona o deploy? | Maycon | Merge na main → GitHub Actions roda os testes → publica na Azure. |
-| O que ainda falta? | Maciel | Dúvidas para o Tutor e o Agente de IA, que estavam no PIM III. Estão no backlog do Trello. |
+| O que mudou desde o PIM III? | Maciel | Site em React, app de celular, API em camadas na Azure, simulados oficiais do ENADE e três perfis. A lista completa está no README. |

@@ -1,92 +1,81 @@
 @startuml Class Diagram Nex_TI - Camadas
-' Diagrama de Classes — reflete o código atual de sistema/apps/api (NexTI_API, .NET 10)
-' Organizado pelas camadas da API: Apresentação (Endpoints) → Serviços → Dados → Modelo
+' Diagrama de Classes — camadas da API (sistema/apps/api, NexTI_API, .NET 10)
+' Lido de cima para baixo: Rotas → Serviços de aplicação → Serviços de apoio → Dados.
+' As setas entre camadas resumem as dependências: cada rota usa a interface do serviço,
+' e cada serviço usa o AppDbContext (a lista completa de rotas está no Manual Técnico).
 skinparam monochrome true
 skinparam shadowing false
-skinparam linetype ortho
 skinparam defaultFontName Arial
 skinparam classAttributeIconSize 0
 skinparam packageStyle rectangle
+skinparam nodesep 25
+skinparam ranksep 45
 hide empty members
-
 
 title Diagrama de Classes 1/2 — NexTI_API: camadas e serviços
 
-package "Apresentação (Endpoints)" {
+package "1. Rotas (Endpoints)" as Rotas {
   class EndpointExtensions <<static>> {
-    + PoliticaDeAutenticacao : string {readOnly}
     + {static} MapNexTiEndpoints(app : IEndpointRouteBuilder) : void
-    + {static} EhOProprioUsuario(usuario : ClaimsPrincipal, username : string) : bool
     + {static} IdDoUsuario(usuario : ClaimsPrincipal) : int [0..1]
-    + {static} ParaHttp<T>(resultado : Resultado<T>, sucesso : Func<T, IResult>) : IResult
-    --
-    POST /api/auth/register
-    POST /api/auth/login
-    GET  /api/fases/{codigo}/flashcards
-    POST /api/flashcards
-    POST /api/progresso/atualizar
-    PUT  /api/usuarios/stats
-    GET  /api/simulados/questoes
-    PUT|DELETE /api/flashcards/{id}  (Tutor, Admin)
-    GET  /api/tutor/alunos  (Tutor, Admin)
-    GET|PUT /api/admin/usuarios  (Admin)
+    + {static} ParaHttp<T>(resultado : Resultado<T>, ...) : IResult
   }
+  class ContaEndpoints <<static>> {
+    + {static} MapContaEndpoints(app : IEndpointRouteBuilder) : void
+  }
+  note right of ContaEndpoints
+    24 rotas, por exemplo:
+    POST /api/auth/login · POST /api/progresso/atualizar
+    GET /api/tutor/alunos (Tutor, Admin)
+    PUT /api/admin/usuarios/{id}/perfil (Admin)
+    /api/conta (só o titular do token)
+  end note
 }
 
-package "Serviços de aplicação (regras de negócio)" {
-  interface IAuthService {
-    + CadastrarAsync(...) : Task<Resultado<Usuario>>
-    + EntrarAsync(...) : Task<Resultado<Sessao>>
+package "2. Serviços de aplicação (regras de negócio)" as Servicos {
+  together {
+    interface IAuthService {
+      + CadastrarAsync(...) : Task<Resultado<Usuario>>
+      + EntrarAsync(...) : Task<Resultado<Sessao>>
+    }
+    interface IProgressoService {
+      + RegistrarRespostaAsync(...) : Task<ProgressoFlashcard>
+      + EstatisticasAsync(username) : Task<Resultado<...>>
+    }
+    interface IGamificacaoService {
+      + AtualizarAsync(...) : Task<Resultado<Usuario>>
+      + ResumoAsync(tamanho) : Task<ResumoGeral>
+    }
   }
-  class AuthService {
-    + Emissor : string {readOnly}
-    + Publico : string {readOnly}
-    + CadastrarAsync(...) : Task<Resultado<Usuario>>
-    + EntrarAsync(...) : Task<Resultado<Sessao>>
-    - GerarToken(usuario : Usuario) : string
+  together {
+    interface IConteudoService {
+      + ListarFlashcardsAsync(codigoFase) : Task<List<Flashcard>>
+      + EditarFlashcardAsync(...) : Task<Resultado<Flashcard>>
+    }
+    interface IAdminService {
+      + PainelDosAlunosAsync() : Task<List<AlunoNoPainel>>
+      + DefinirPerfilAsync(...) : Task<Resultado<UsuarioResumo>>
+    }
+    interface IContaService {
+      + AlterarSenhaAsync(...) : Task<Resultado<bool>>
+      + ExcluirAsync(...) : Task<Resultado<bool>>
+    }
   }
-
-  interface IProgressoService {
-    + ListarAsync(usuarioId : int) : Task<List<ProgressoResumo>>
-    + RegistrarRespostaAsync(...) : Task<ProgressoFlashcard>
-    + EstatisticasAsync(username : string) : Task<Resultado<EstatisticasDetalhadas>>
-  }
+  class AuthService
   class ProgressoService {
-    + DiasParaCartaMadura : int = 21 {readOnly}
-    + RegistrarRespostaAsync(...) : Task<ProgressoFlashcard>
-  }
-
-  interface IGamificacaoService {
-    + PerfilAsync(username : string) : Task<PerfilUsuario>
-    + AtualizarAsync(...) : Task<Resultado<Usuario>>
-    + ResumoAsync(tamanhoDoRanking : int) : Task<ResumoGeral>
+    + DiasParaCartaMadura : int = 21
   }
   class GamificacaoService {
-    + IncrementoMaximo : int = 200 {readOnly}
-    + {static} ValidarAtualizacao(atual : Usuario, xp : int, moedas : int, nivel : int) : string
-    + AtualizarAsync(...) : Task<Resultado<Usuario>>
-  }
-
-  interface IConteudoService {
-    + ListarFasesAsync() : Task<List<Fase>>
-    + ListarFlashcardsAsync(codigoFase : string) : Task<List<Flashcard>>
-    + CriarFlashcardAsync(...) : Task<Resultado<Flashcard>>
-    + ListarQuestoesAsync() : Task<List<QuestaoDto>>
+    + IncrementoMaximo : int = 200
   }
   class ConteudoService
-
-  interface IAdminService {
-    + ListarUsuariosAsync() : Task<List<UsuarioResumo>>
-    + DefinirPerfilAsync(...) : Task<Resultado<UsuarioResumo>>
-    + PainelDosAlunosAsync() : Task<List<AlunoNoPainel>>
-  }
   class AdminService
+  class ContaService
 
   class "Resultado<T>" as Resultado <<record>> {
     + Valor : T [0..1]
     + Falha : TipoFalha [0..1]
     + Mensagem : string
-    + Sucesso : bool
   }
   enum TipoFalha {
     Invalido
@@ -95,118 +84,67 @@ package "Serviços de aplicação (regras de negócio)" {
   }
 }
 
-package "Serviços de apoio (algoritmo, segurança e carga inicial)" {
-  interface ISm2Engine {
-    + Calcular(progresso : ProgressoFlashcard, qualidade : int) : void
-  }
-  class Sm2Engine {
-    + Calcular(progresso : ProgressoFlashcard, qualidade : int) : void
-  }
-
+package "3. Serviços de apoio" as Apoio {
   interface IPoliticaDeSenha {
-    + Validar(senha : string, nickname : string, email : string) : IReadOnlyList<string>
+    + Validar(senha, nickname, email) : IReadOnlyList<string>
   }
   class PoliticaDeSenha {
-    + TamanhoMinimo : int = 8 {readOnly}
-    + TamanhoMaximo : int = 72 {readOnly}
-    + Validar(senha : string, nickname : string, email : string) : IReadOnlyList<string>
-    - UsaDadosPessoais(senha : string, nickname : string, email : string) : bool
-    + {static} Mensagem(faltando : IReadOnlyList<string>) : string
+    + TamanhoMinimo : int = 8
+    + TamanhoMaximo : int = 72
   }
-
-  class PoliticaDeCors {
-    - _origens : HashSet<string>
-    - _previews : List<Regex>
-    + PoliticaDeCors(origens : string, padroesDePreview : string)
-    + Permite(origem : string) : bool
+  interface ISm2Engine {
+    + Calcular(progresso, qualidade) : void
   }
-
-  interface IDatabaseSeeder {
-    + SeedAsync(db : AppDbContext) : Task
-  }
-  class DatabaseSeeder {
-    - _etapas : IEnumerable<IEtapaSeed>
-    + SeedAsync(db : AppDbContext) : Task
-  }
-
+  class Sm2Engine
   interface IEtapaSeed {
-    + Nome : string
-    + ExecutarAsync(db : AppDbContext) : Task<int>
+    + ExecutarAsync(db) : Task<int>
   }
-  class ConteudoSeeder {
-    + Nome : string
-    + ExecutarAsync(db : AppDbContext) : Task<int>
-  }
-  class SimuladoSeeder {
-    + Nome : string
-    + ExecutarAsync(db : AppDbContext) : Task<int>
-  }
+  class DatabaseSeeder
+  class ConteudoSeeder
+  class SimuladoSeeder
 }
 
-package "Dados (persistência)" {
+package "4. Dados (persistência)" as Dados {
   class AppDbContext {
     + Usuarios : DbSet<Usuario>
-    + Fases : DbSet<Fase>
     + Flashcards : DbSet<Flashcard>
     + Progresso_Flashcards : DbSet<ProgressoFlashcard>
-    + AreasConhecimento : DbSet<AreaConhecimento>
-    + Provas : DbSet<Prova>
     + Questoes : DbSet<Questao>
-    + Alternativas : DbSet<Alternativa>
-    # OnModelCreating(builder : ModelBuilder) : void
-  }
-  class ConexaoBanco <<static>> {
-    + LocalPadrao : string {readOnly}
-    + Resolver(config : IConfiguration) : string
-    + Normalizar(bruta : string) : string
+    + CartasModeradas : DbSet<CartaModerada>
   }
   class DbContext <<EF Core>>
+  class ConexaoBanco <<static>> {
+    + Resolver(config) : string
+  }
 }
 
-' --- Herança e realização (POO) ---
-DbContext <|-- AppDbContext
+' --- cada interface em cima da classe que a implementa ---
 IAuthService <|.. AuthService
 IProgressoService <|.. ProgressoService
 IGamificacaoService <|.. GamificacaoService
 IConteudoService <|.. ConteudoService
 IAdminService <|.. AdminService
+IContaService <|.. ContaService
 Resultado --> TipoFalha
-ISm2Engine <|.. Sm2Engine
+
 IPoliticaDeSenha <|.. PoliticaDeSenha
-IDatabaseSeeder <|.. DatabaseSeeder
+ISm2Engine <|.. Sm2Engine
 IEtapaSeed <|.. ConteudoSeeder
 IEtapaSeed <|.. SimuladoSeeder
-
-' --- Dependências entre camadas (injeção de dependência) ---
-EndpointExtensions ..> IAuthService : <<usa>>
-EndpointExtensions ..> IProgressoService : <<usa>>
-EndpointExtensions ..> IGamificacaoService : <<usa>>
-EndpointExtensions ..> IConteudoService : <<usa>>
-EndpointExtensions ..> IAdminService : <<usa>>
-EndpointExtensions ..> Resultado : traduz em HTTP
-AuthService ..> IPoliticaDeSenha : <<usa>>
-ProgressoService ..> ISm2Engine : <<usa>>
-AuthService ..> AppDbContext
-ProgressoService ..> AppDbContext
-GamificacaoService ..> AppDbContext
-ConteudoService ..> AppDbContext
-AdminService ..> AppDbContext
 DatabaseSeeder o-- "1..*" IEtapaSeed : executa >
-ConexaoBanco ..> AppDbContext : fornece connection string
 
-' --- Layout: camadas empilhadas de cima para baixo ---
-EndpointExtensions -[hidden]down- IGamificacaoService
-GamificacaoService -[hidden]down- ISm2Engine
+DbContext <|-- AppDbContext
+ConexaoBanco ..> AppDbContext : connection string
 
-note bottom of Sm2Engine
-  Algoritmo SM-2 (repetição espaçada):
-  qualidade >= 3 → intervalo 1, 6, depois × fator
-  qualidade < 3  → reinicia (intervalo = 1, fator - 0.2, mín. 1.3)
-end note
+' --- dependências entre camadas (resumidas) ---
+Rotas ..> Servicos : usa as interfaces\n(injeção de dependência)
+AuthService ..> IPoliticaDeSenha
+ContaService ..> IPoliticaDeSenha
+ProgressoService ..> ISm2Engine
+Servicos ..> Dados : usa o AppDbContext
 
-note bottom of IEtapaSeed
-  Polimorfismo: DatabaseSeeder percorre
-  as etapas sem conhecer a classe concreta
-  (Open/Closed — nova etapa = nova classe).
-end note
+' ordem vertical das camadas
+Rotas -[hidden]down- Servicos
+Servicos -[hidden]down- Apoio
+Apoio -[hidden]down- Dados
 @enduml
