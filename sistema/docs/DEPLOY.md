@@ -149,7 +149,7 @@ connection string e a `Jwt__Key` por variável de ambiente, como no App Service.
 
 | Pipeline | Quando roda | O que faz |
 |---|---|---|
-| `api-azure.yml` | push na `main` | testes da API e deploy no App Service |
+| `api-azure.yml` | push na `main` | testes da API, deploy no App Service e conferência da API publicada (`/api/status` e `/api/fases`) |
 | `docker.yml` | PR e push na `main` | monta as imagens, sobe o compose e testa API e site |
 
 A produção continua no App Service com o código publicado; as imagens servem para
