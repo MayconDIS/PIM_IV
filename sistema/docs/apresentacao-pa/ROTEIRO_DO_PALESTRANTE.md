@@ -38,7 +38,7 @@
 - **Objetivo:** explicar o produto.
 - **Tópicos-chave:**
   1. O aluno estuda por flashcards e o algoritmo **SM-2** decide quando cada carta volta.
-  2. São **26 fases e 620 cartas**, liberadas em ordem, com simulado no estilo ENADE.
+  2. São **29 fases e 702 cartas**, liberadas em ordem. No fim, um guia de estudos e as provas oficiais do ENADE de ADS (2017 e 2021).
   3. Cada fase dá **XP e moedas**; as moedas liberam disciplinas bônus.
 - **Passar a vez:** *"O PIM IV continua o PIM III. O Gabriel mostra quem usa o sistema."*
 
@@ -108,7 +108,7 @@
 ### Slide 9 — Modularização (07:30 – 08:00) · Miguel
 
 - **Objetivo:** mostrar que cada parte tem sua pasta e roda sozinha.
-- **Tópico-chave:** `packages/shared` guarda as 620 cartas e o código que fala com a API, e é usado pelo site e pelo app. Escrevemos uma vez e usamos nos dois.
+- **Tópico-chave:** `packages/shared` guarda as 702 cartas e o código que fala com a API, e é usado pelo site e pelo app. Escrevemos uma vez e usamos nos dois.
 - **Passar a vez:** *"O Maycon fecha com o SM-2 e o GitHub."*
 
 ---

@@ -37,7 +37,7 @@ Não precisa criar nada. Quando a API sobe, ela:
 
 1. cria o banco `NexTI_Local` no LocalDB (`(localdb)\mssqllocaldb`), se ainda não existir;
 2. aplica as migrations (as tabelas);
-3. carrega as 26 fases, as 620 cartas e os simulados ENADE.
+3. carrega as 29 fases, as 702 cartas e as provas oficiais do ENADE (2017 e 2021).
 
 Esse é o comportamento padrão, sem outra conexão configurada e com
 `Database:MigrarAoIniciar` habilitado. Para usar outro SQL Server, defina
