@@ -10,6 +10,7 @@ using System.Text;
 using System.Security.Claims;
 using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.HttpOverrides;
+using Azure.Monitor.OpenTelemetry.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -102,6 +103,12 @@ builder.Services.AddScoped<IHistoricoConta, HistoricoConta>();
 
 // Login e cadastro: 30 tentativas por minuto por IP (força bruta / criação em massa).
 // Não é menor porque uma turma inteira sai pelo mesmo IP do Wi-Fi da faculdade.
+// Monitoramento: com APPLICATIONINSIGHTS_CONNECTION_STRING (app setting do App Service),
+// requisições, erros, tempo de resposta e consultas ao SQL vão para o Application Insights.
+// Sem a variável (PC, Docker, testes), nada é enviado.
+if (!string.IsNullOrWhiteSpace(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]))
+    builder.Services.AddOpenTelemetry().UseAzureMonitor();
+
 builder.Services.AddRateLimiter(opcoes =>
 {
     opcoes.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
