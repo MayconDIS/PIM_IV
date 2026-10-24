@@ -1,0 +1,22 @@
+name: Sincronia do projeto
+
+# Confere se sistema, modelagem-uml, relatorio e slides contam a mesma história:
+# números iguais aos do código, diagramas iguais aos do Astah e o PIM III só nas melhorias.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  sincronia:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verificar sincronia
+        run: node scripts/verificar-sincronia.mjs --detalhes

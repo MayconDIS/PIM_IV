@@ -1,38 +1,20 @@
-# Configurações da IA (Gemini / Antigravity) — Nex_TI
+# relatorio/ — o relatório ABNT do Nex_TI
 
-Este arquivo contém as diretrizes e instruções de contexto específicas para os assistentes de IA (como Antigravity) que trabalham neste repositório.
+Leia primeiro o [`AGENTS.md`](../../AGENTS.md) da raiz: as regras do projeto inteiro estão lá.
+Aqui fica só o que é específico do relatório.
 
----
+## O que tem aqui
 
-## 🚀 Contexto do Projeto
-* **Nome**: Nex_TI – EdTech Learning Platform (PIM IV - UNIP).
-* **Objetivo**: Plataforma educacional gamificada de estudo ativo usando repetição espaçada (Algoritmo SM-2) e visualização gráfica via Mapa Neural (Obsidian View).
+- `index.html` e `style.css`: o relatório, uma folha A4 por `<section class="page">`.
+- `Relatorio_PIM_IV_Nex_TI.docx`: a versão em Word, gerada do HTML por `word/gerar-docx.js`.
+- `assets/diagrams/` e `assets/casos-de-uso/`: cópias exatas das imagens exportadas do Astah.
+- `assets/telas/`: fotos das telas reais do site (Apêndice A).
 
----
+## Regras do relatório
 
-## 🛠️ Pilha de Tecnologia (Tech Stack)
-* **Frontend**: HTML5 Semântico, CSS3 Puro (Design System Global), JavaScript Vanilla.
-  - **Porta Local**: Rodar na porta `5500` (configurada via Live Server no VS Code).
-  - **Conexão**: Se comunica com o backend consumindo a URL `https://localhost:5001/api/`.
-* **Backend**: C# (.NET 10) utilizando **Minimal APIs** e **Entity Framework Core**.
-  - **Porta Local**: `https://localhost:5001`.
-* **Banco de Dados**: **Microsoft SQL Server** (esquema inicial em `database/NexTI_DB.sql`).
-
----
-
-## 🎯 Diretrizes de Engenharia e Código
-1. **Padrão SOLID**:
-   - Manter as responsabilidades de rotas (HTTP) separadas da lógica de negócios e persistência.
-   - Usar `ISm2Engine` em `backend/Services/` para qualquer cálculo matemático do algoritmo SM-2 (SRP/DIP).
-   - Manter novos endpoints mapeados de forma extensível em classes separadas (ex: `EndpointExtensions.cs`), evitando inflar o `Program.cs`.
-2. **Sem Placeholders**:
-   - Nunca utilizar códigos ou comentários temporários (TBD, TODO, "implementar depois") em arquivos de produção.
-3. **Padrão de Commits**:
-   - Commitar alterações usando mensagens convencionais (*Conventional Commits*) em português (ex: `feat(backend):`, `refactor(backend):`, `docs(readme):`).
-
----
-
-## 💬 Preferências de Comunicação com o Usuário
-* **Idioma**: Sempre responder em **Português (PT-BR)**.
-* **Estilo**: Manter respostas concisas, focadas e estruturadas em Markdown.
-* **Rastreabilidade**: Sempre que mencionar um arquivo ou classe nas respostas, usar links markdown clicáveis usando o esquema `file://` (ex: `[Program.cs](file:///C:/.../backend/Program.cs)`).
+- Nenhuma página passa de 29,7 cm. Incluiu ou tirou página? Renumere as páginas e o sumário.
+- Números e imagens vêm do código e da modelagem, nunca de memória.
+- Cada etapa cita o livro-texto da sua disciplina (seção 1.5), com referência ABNT.
+- O PIM III aparece só na seção 1.4 (melhorias) e nas referências.
+- Mudou o HTML? Gere o Word de novo (`word/`: `npm run gerar`) e atualize o sumário no Word.
+- O Live Server do editor usa a porta 5500 para abrir o relatório.

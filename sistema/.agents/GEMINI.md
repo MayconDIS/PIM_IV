@@ -1,49 +1,26 @@
-# Configurações da IA (Gemini / Antigravity) — Nex_TI
+# sistema/ — o código do Nex_TI
 
-Este arquivo contém as diretrizes e instruções de contexto específicas para os assistentes de IA (como Antigravity) que trabalham neste repositório.
+Leia primeiro o [`AGENTS.md`](../../AGENTS.md) da raiz: as regras do projeto inteiro estão lá.
+Aqui fica só o que é específico do código.
 
----
+## O que tem aqui
 
-## 🚀 Contexto do Projeto
-* **Nome**: Nex_TI – EdTech Learning Platform (PIM IV - UNIP).
-* **Objetivo**: Plataforma educacional gamificada de estudo ativo usando repetição espaçada (Algoritmo SM-2) e visualização gráfica via Mapa Neural (Mapa Neural).
+| Pasta | O quê |
+|---|---|
+| `apps/api/` | API em .NET 10 (Minimal APIs, EF Core, SQL Server / Azure SQL), porta **5000** |
+| `apps/react-web/` | Site em React 18 + Vite, porta **5501**, publicado na Vercel |
+| `apps/react-mobile/` | App em React Native (Expo), com fila para estudar sem internet |
+| `packages/shared/` | Conteúdo (fases e cartas), regras de SM-2 e de XP/moedas e o cliente da API, usados pelo site e pelo app |
+| `database/` | `NexTI_DB.sql`, o script completo do banco |
+| `tests/` | Testes da API (xUnit) |
+| `docs/` | Manual técnico, slides e roteiro da apresentação |
 
----
+## Regras do código
 
-## 🛠️ Pilha de Tecnologia (Tech Stack)
-* **Frontend**: HTML5 Semântico, CSS3 Puro (Design System Global), JavaScript Vanilla.
-  - **Porta Local**: Rodar na porta `5500` (configurada via Live Server no VS Code).
-  - **Conexão**: Se comunica com o backend consumindo a URL `https://localhost:5001/api/`.
-* **Backend**: C# (.NET 10) utilizando **Minimal APIs** e **Entity Framework Core**.
-  - **Porta Local**: `https://localhost:5001`.
-* **Banco de Dados**: **Microsoft SQL Server** (esquema inicial em `database/NexTI_DB.sql`).
-
----
-
-* **Estrutura Monorepo**:
-  - `apps/react-web/`: Frontend Web (React 18 + Vite, Mapa Neural, SM-2) — deploy na Vercel.
-  - `apps/react-mobile/`: App mobile (React Native / Expo).
-  - `apps/api/`: Backend C# (.NET 10 Minimal APIs, EF Core, Azure SQL) — deploy no Azure App Service.
-  - `packages/shared/`: Conteúdo canônico (cards), regras (SM-2, gamificação), CSS, áudio, confete e cliente da API.
-  - `packages/design-dna/`: Design System e Tokens CSS/JSON.
-  - `database/`: Scripts SQL (`NexTI_DB.sql`).
-  - `docs/`: Documentação acadêmica e manuais do PIM IV.
-
----
-
-## 🎯 Diretrizes de Engenharia e Código
-1. **Padrão SOLID**:
-   - Manter as responsabilidades de rotas (HTTP) separadas da lógica de negócios e persistência.
-   - Usar `ISm2Engine` em `apps/api/Services/` para qualquer cálculo matemático do algoritmo SM-2 (SRP/DIP).
-   - Manter novos endpoints mapeados de forma extensível em classes separadas (ex: `apps/api/Endpoints/EndpointExtensions.cs`), evitando inflar o `Program.cs`.
-2. **Sem Placeholders**:
-   - Nunca utilizar códigos ou comentários temporários (TBD, TODO, "implementar depois") em arquivos de produção.
-3. **Padrão de Commits**:
-   - Commitar alterações usando mensagens convencionais (*Conventional Commits*) em português (ex: `feat(api):`, `refactor(web):`, `docs(readme):`).
-
----
-
-## 💬 Preferências de Comunicação com o Usuário
-* **Idioma**: Sempre responder em **Português (PT-BR)**.
-* **Estilo**: Manter respostas concisas, focadas e estruturadas em Markdown.
-* **Rastreabilidade**: Sempre que mencionar um arquivo ou classe nas respostas, usar links markdown clicáveis usando o esquema `file://` (ex: `[Program.cs](file:///C:/.../apps/api/Program.cs)`).
+- A API é em camadas: as rotas (`apps/api/Endpoints/`) só chamam interfaces de serviço; só os
+  serviços usam o `AppDbContext`. O SM-2 fica no `Sm2Engine` e o prêmio de cada fase na
+  `TabelaDeRecompensas`, as duas com a mesma regra do `packages/shared`.
+- Mudou regra ou conteúdo em `packages/shared`? Rode `npm run seed:api` e `npm run seed:api:check`.
+- Toda mudança vem com teste: `npm test` (API), `npm run test:shared` e `npm run test:mobile`.
+- Mudou rota, tabela ou regra? Os diagramas (Astah), o manual, o relatório e os slides também
+  mudam: veja a tabela "Se mudar X, atualize Y" no `AGENTS.md`.

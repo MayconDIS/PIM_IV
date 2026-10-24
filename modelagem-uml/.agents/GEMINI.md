@@ -1,38 +1,20 @@
-# Configurações da IA (Gemini / Antigravity) — Nex_TI
+# modelagem-uml/ — os diagramas do Nex_TI
 
-Este arquivo contém as diretrizes e instruções de contexto específicas para os assistentes de IA (como Antigravity) que trabalham neste repositório.
+Leia primeiro o [`AGENTS.md`](../../AGENTS.md) da raiz: as regras do projeto inteiro estão lá.
+Aqui fica só o que é específico da modelagem.
 
----
+## O que tem aqui
 
-## 🚀 Contexto do Projeto
-* **Nome**: Nex_TI – EdTech Learning Platform (PIM IV - UNIP).
-* **Objetivo**: Plataforma educacional gamificada de estudo ativo usando repetição espaçada (Algoritmo SM-2) e visualização gráfica via Mapa Neural (Obsidian View).
+- `02_Modelagem_UML/Diagrams Nex_TI - PIM IV.asta`: todos os diagramas, gerados pelo programa em
+  `02_Modelagem_UML/gerador-astah/` (API do Astah, rodando com o Java do próprio Astah).
+- `02_Modelagem_UML/imagens-astah/`: as imagens de todos os diagramas, exportadas pelo Astah.
+- As imagens principais ficam soltas em `02_Modelagem_UML/` (UML) e em `04_Banco_de_Dados/`
+  (MER, DER e modelo físico), copiadas das exportadas.
 
----
+## Regras da modelagem
 
-## 🛠️ Pilha de Tecnologia (Tech Stack)
-* **Frontend**: HTML5 Semântico, CSS3 Puro (Design System Global), JavaScript Vanilla.
-  - **Porta Local**: Rodar na porta `5500` (configurada via Live Server no VS Code).
-  - **Conexão**: Se comunica com o backend consumindo a URL `https://localhost:5001/api/`.
-* **Backend**: C# (.NET 10) utilizando **Minimal APIs** e **Entity Framework Core**.
-  - **Porta Local**: `https://localhost:5001`.
-* **Banco de Dados**: **Microsoft SQL Server** (esquema inicial em `database/NexTI_DB.sql`).
-
----
-
-## 🎯 Diretrizes de Engenharia e Código
-1. **Padrão SOLID**:
-   - Manter as responsabilidades de rotas (HTTP) separadas da lógica de negócios e persistência.
-   - Usar `ISm2Engine` em `backend/Services/` para qualquer cálculo matemático do algoritmo SM-2 (SRP/DIP).
-   - Manter novos endpoints mapeados de forma extensível em classes separadas (ex: `EndpointExtensions.cs`), evitando inflar o `Program.cs`.
-2. **Sem Placeholders**:
-   - Nunca utilizar códigos ou comentários temporários (TBD, TODO, "implementar depois") em arquivos de produção.
-3. **Padrão de Commits**:
-   - Commitar alterações usando mensagens convencionais (*Conventional Commits*) em português (ex: `feat(backend):`, `refactor(backend):`, `docs(readme):`).
-
----
-
-## 💬 Preferências de Comunicação com o Usuário
-* **Idioma**: Sempre responder em **Português (PT-BR)**.
-* **Estilo**: Manter respostas concisas, focadas e estruturadas em Markdown.
-* **Rastreabilidade**: Sempre que mencionar um arquivo ou classe nas respostas, usar links markdown clicáveis usando o esquema `file://` (ex: `[Program.cs](file:///C:/.../backend/Program.cs)`).
+- Diagramas só pelo gerador do Astah; não usamos PlantUML e não editamos o `.asta` à mão.
+- Todo elemento tem a explicação no campo *Definition*.
+- Caixas sem sobreposição e linhas que não passam por cima de outras caixas.
+- Depois de gerar: exportar as imagens, copiar as principais e avisar quem cuida do relatório e dos
+  slides (eles usam cópias dessas imagens).

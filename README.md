@@ -23,7 +23,10 @@ repositórios distintos, vivem aqui como pastas de primeiro nível:
 ├── 📁 sistema/        # Implementação: frontend, API C# (.NET 10) e scripts SQL Server
 ├── 📁 relatorio/      # Relatório ABNT (HTML/CSS) e os slides
 ├── 📁 modelagem-uml/  # UML no Astah e banco de dados (MER, DER e modelo físico)
-├── 📁 .agents/        # Skills e instruções de agentes de IA, compartilhadas pelas três frentes
+├── 📁 .agents/        # Skills de IA compartilhadas pelas três frentes
+├── 📁 .claude/agents/ # O time de agentes (coordenador, dev, modelagem, relatório, revisão)
+├── 📁 scripts/        # verificar-sincronia.mjs: confere se as três partes estão alinhadas
+├── 📄 AGENTS.md       # Regras do projeto inteiro (equipe e IAs)
 ├── 📁 .vscode/     # Configuração do editor para o workspace inteiro
 └── 📄 .gitattributes, .gitignore, LICENSE
 ```
@@ -45,6 +48,22 @@ npm run dev   # sobe a API (porta 5000) e o site (porta 5501)
 ```
 
 Detalhes de portas, banco de dados e API estão em [`sistema/README.md`](sistema/README.md).
+
+## 🤝 Como a equipe trabalha
+
+As regras do projeto inteiro estão em [`AGENTS.md`](AGENTS.md): de onde vem cada informação
+(código → modelagem no Astah → relatório, Word e slides), o que atualizar quando algo muda, os
+comandos e o time de agentes (`coordenador`, `dev-sistema`, `modelador-astah`, `redator-relatorio`
+e `revisor-sincronia`). Vale para as pessoas e para qualquer IA usada no projeto.
+
+Antes de abrir um pull request, rode:
+
+```bash
+node scripts/verificar-sincronia.mjs
+```
+
+Ele confere se os números dos documentos batem com o código, se os diagramas do relatório são os
+do Astah e se o PIM III só aparece nas melhorias. O GitHub roda a mesma checagem em todo pull request.
 
 ## 🧬 Histórico
 
