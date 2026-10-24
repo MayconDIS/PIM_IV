@@ -48,7 +48,7 @@
 
 - **Objetivo:** mostrar os atores e o que cada um faz.
 - **Tópicos-chave:**
-  - **Aluno:** estuda, faz simulado e vê o desempenho.
+  - **Aluno:** estuda, cria cartas, faz simulado e vê o desempenho.
   - **Tutor:** tudo do Aluno, mais o painel dos alunos e editar ou excluir cartas.
   - **Admin:** tudo do Tutor, mais definir o perfil de cada usuário.
   - A seta de herança entre os atores mostra isso: o Admin herda do Tutor, que herda do Aluno.
