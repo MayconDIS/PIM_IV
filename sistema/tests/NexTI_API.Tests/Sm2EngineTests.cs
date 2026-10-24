@@ -1,128 +1,99 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text.Json;
 using NexTI_API.Models;
 using NexTI_API.Services;
 using Xunit;
 
 namespace NexTI_API.Tests
 {
+    /// <summary>
+    /// O SM-2 da API tem de dar o mesmo resultado do site e do app. Os casos vêm de
+    /// packages/shared/tests/sm2-casos.json, o mesmo arquivo que o teste em JavaScript confere.
+    /// </summary>
     public class Sm2EngineTests
     {
-        private readonly ISm2Engine _sm2Engine;
+        private readonly Sm2Engine _sm2 = new();
 
-        public Sm2EngineTests()
+        private record Esperado(int Repeticoes, double IntervaloDias, double FatorFacilidade);
+        private record Caso(string Nome, string[] Respostas, Esperado Esperado);
+
+        private static readonly Dictionary<string, int> NotaDaResposta = new()
         {
-            _sm2Engine = new Sm2Engine();
+            ["again"] = 1, ["hard"] = 3, ["good"] = 4, ["easy"] = 5,
+        };
+
+        public static IEnumerable<object[]> CasosCompartilhados()
+        {
+            var arquivo = Path.Combine(AppContext.BaseDirectory, "sm2-casos.json");
+            var casos = JsonSerializer.Deserialize<List<Caso>>(File.ReadAllText(arquivo),
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
+            return casos.Select(c => new object[] { c.Nome, c.Respostas, c.Esperado.Repeticoes, c.Esperado.IntervaloDias, c.Esperado.FatorFacilidade });
+        }
+
+        [Theory]
+        [MemberData(nameof(CasosCompartilhados))]
+        public void MesmoResultadoQueOSiteEOApp(string nome, string[] respostas, int repeticoes, double intervalo, double fator)
+        {
+            var progresso = new ProgressoFlashcard();
+            foreach (var resposta in respostas) _sm2.Calcular(progresso, NotaDaResposta[resposta]);
+
+            Assert.True(repeticoes == progresso.Repeticoes, $"{nome}: repetições");
+            Assert.True(intervalo == progresso.IntervaloDias, $"{nome}: intervalo {progresso.IntervaloDias}, esperado {intervalo}");
+            Assert.True(fator == Math.Round(progresso.FatorFacilidade, 6), $"{nome}: fator {progresso.FatorFacilidade}, esperado {fator}");
+        }
+
+        [Theory]
+        [InlineData(0, Sm2Engine.Resposta.Errei)]
+        [InlineData(1, Sm2Engine.Resposta.Errei)]
+        [InlineData(2, Sm2Engine.Resposta.Errei)]
+        [InlineData(3, Sm2Engine.Resposta.Dificil)]
+        [InlineData(4, Sm2Engine.Resposta.Bom)]
+        [InlineData(5, Sm2Engine.Resposta.Facil)]
+        public void NotaDoSite_ViraUmaDasQuatroRespostas(int qualidade, Sm2Engine.Resposta esperada)
+        {
+            Assert.Equal(esperada, Sm2Engine.RespostaDaQualidade(qualidade));
         }
 
         [Fact]
-        public void Calcular_PrimeiraRepeticao_Qualidade5_DeveDefinirIntervalo1Dia_E_AumentarFacilidade()
+        public void ProximaRevisao_EHojeMaisOIntervalo()
         {
-            // Arrange
-            var progresso = new ProgressoFlashcard
-            {
-                UsuarioId = 1,
-                FlashcardId = 10,
-                Repeticoes = 0,
-                IntervaloDias = 0,
-                FatorFacilidade = 2.5
-            };
+            var progresso = new ProgressoFlashcard();
 
-            // Act: Qualidade 5 (Fácil)
-            _sm2Engine.Calcular(progresso, 5);
+            _sm2.Calcular(progresso, 5);   // Fácil numa carta nova: 3 dias
 
-            // Assert
-            Assert.Equal(1, progresso.Repeticoes);
-            Assert.Equal(1, progresso.IntervaloDias);
-            Assert.Equal(2.6, Math.Round(progresso.FatorFacilidade, 2));
-            Assert.Equal(DateTime.UtcNow.Date.AddDays(1), progresso.DataProximaRevisao);
+            Assert.Equal(DateTime.UtcNow.Date.AddDays(3), progresso.DataProximaRevisao);
         }
 
         [Fact]
-        public void Calcular_SegundaRepeticao_Qualidade4_DeveDefinirIntervalo6Dias()
+        public void Dificil_SomaPeloMenosUmDia()
         {
-            // Arrange
-            var progresso = new ProgressoFlashcard
-            {
-                UsuarioId = 1,
-                FlashcardId = 10,
-                Repeticoes = 1,
-                IntervaloDias = 1,
-                FatorFacilidade = 2.6
-            };
+            var progresso = new ProgressoFlashcard { Repeticoes = 1, IntervaloDias = 1, FatorFacilidade = 2.5 };
 
-            // Act: Qualidade 4 (Bom)
-            _sm2Engine.Calcular(progresso, 4);
+            _sm2.Calcular(progresso, 3);
 
-            // Assert
-            Assert.Equal(2, progresso.Repeticoes);
-            Assert.Equal(6, progresso.IntervaloDias);
-            Assert.Equal(2.6, Math.Round(progresso.FatorFacilidade, 2));
-            Assert.Equal(DateTime.UtcNow.Date.AddDays(6), progresso.DataProximaRevisao);
+            Assert.Equal(2, progresso.IntervaloDias);
         }
 
         [Fact]
-        public void Calcular_TerceiraRepeticao_Qualidade4_DeveMultiplicarPeloFatorFacilidade()
+        public void FatorNuncaFicaAbaixoDe1Ponto3()
         {
-            // Arrange
-            var progresso = new ProgressoFlashcard
-            {
-                UsuarioId = 1,
-                FlashcardId = 10,
-                Repeticoes = 2,
-                IntervaloDias = 6,
-                FatorFacilidade = 2.5
-            };
+            var progresso = new ProgressoFlashcard();
+            for (var i = 0; i < 40; i++) _sm2.Calcular(progresso, i % 2 == 0 ? 3 : 1);
 
-            // Act: Qualidade 4 (Bom)
-            _sm2Engine.Calcular(progresso, 4);
-
-            // Assert
-            Assert.Equal(3, progresso.Repeticoes);
-            Assert.Equal(15.0, progresso.IntervaloDias); // 6 * 2.5 = 15
-            Assert.Equal(DateTime.UtcNow.Date.AddDays(15), progresso.DataProximaRevisao);
+            Assert.Equal(Sm2Engine.FatorMinimo, progresso.FatorFacilidade);
         }
 
-        [Fact]
-        public void Calcular_ErroNaResposta_QualidadeMenorQue3_DeveZerarRepeticoes_E_ReduzirFacilidade()
+        [Theory]
+        [InlineData(2.5, 3)]
+        [InlineData(7.5, 8)]
+        [InlineData(7.95, 8)]
+        [InlineData(7.49, 7)]
+        public void Arredonda_ComoOMathRoundDoJavaScript(double valor, double esperado)
         {
-            // Arrange: Cartão maduro com 5 repetições e 30 dias de intervalo
-            var progresso = new ProgressoFlashcard
-            {
-                UsuarioId = 1,
-                FlashcardId = 10,
-                Repeticoes = 5,
-                IntervaloDias = 30,
-                FatorFacilidade = 2.5
-            };
-
-            // Act: Qualidade 1 (Errou)
-            _sm2Engine.Calcular(progresso, 1);
-
-            // Assert
-            Assert.Equal(0, progresso.Repeticoes);
-            Assert.Equal(1, progresso.IntervaloDias);
-            Assert.Equal(2.3, Math.Round(progresso.FatorFacilidade, 2));
-            Assert.Equal(DateTime.UtcNow.Date.AddDays(1), progresso.DataProximaRevisao);
-        }
-
-        [Fact]
-        public void Calcular_MultiplosErros_NaoDeveDeixarFatorFacilidadeMenorQue1Ponto3()
-        {
-            // Arrange: Cartão já com facilidade baixa
-            var progresso = new ProgressoFlashcard
-            {
-                UsuarioId = 1,
-                FlashcardId = 10,
-                Repeticoes = 1,
-                IntervaloDias = 1,
-                FatorFacilidade = 1.35
-            };
-
-            // Act: Erro consecutivo
-            _sm2Engine.Calcular(progresso, 0);
-
-            // Assert: Mínimo garantido é 1.3
-            Assert.Equal(1.3, progresso.FatorFacilidade);
+            Assert.Equal(esperado, Sm2Engine.ArredondarComoJs(valor));
         }
     }
 }

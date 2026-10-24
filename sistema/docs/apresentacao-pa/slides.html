@@ -423,8 +423,8 @@
             <figure><img src="../../../modelagem-uml/02_Modelagem_UML/Sequence%20Diagram%20Nex_TI%20-%20Responder%20Carta.png" alt="Diagrama de sequência: o aluno responde uma carta; o site chama a rota, que chama o ProgressoService, o Sm2Engine calcula e o banco grava, com a trigger guardando o histórico"></figure>
             <div class="lado">
                 <p>O aluno avalia a resposta: Errei (1), Difícil (3), Bom (4) ou Fácil (5).</p>
-                <div class="card"><h3>Nota 3 ou mais</h3><p>Volta em 1 dia, depois em 6, depois cada vez mais longe.</p></div>
-                <div class="card"><h3>Nota menor que 3</h3><p>Volta amanhã e recomeça a contagem.</p></div>
+                <div class="card"><h3>Bom ou Fácil</h3><p>O intervalo multiplica pelo fator (começa em 2,5). Fácil vai mais longe: carta nova volta em 3 dias.</p></div>
+                <div class="card"><h3>Errei ou Difícil</h3><p>Errei: volta amanhã e recomeça. Difícil: soma pelo menos 1 dia.</p></div>
                 <code>Sm2Engine.Calcular()</code>
             </div>
         </div>

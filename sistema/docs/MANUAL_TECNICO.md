@@ -72,28 +72,29 @@ Contratos, limites e execução dos testes: [PB02 — Gestão de conta](PB02_GES
 
 ## 4. O algoritmo SM-2
 
-Fica em `Services/Sm2Engine.cs` (e tem 5 testes). Para cada aluno e cada carta,
-a tabela `ProgressoFlashcard` guarda:
+É o SM-2 no estilo do Anki, com os quatro botões da tela. A mesma regra está em
+dois lugares: `packages/shared/src/sm2.js` (site e app) e `Services/Sm2Engine.cs`
+(API). Os dois são testados com os **mesmos casos**
+(`packages/shared/tests/sm2-casos.json`): se um dia as regras divergirem, os
+testes do JavaScript e do C# quebram juntos. Assim, a data que a API grava é a
+mesma que o aluno viu no botão.
 
-- **Repeticoes:** quantos acertos seguidos;
-- **IntervaloDias:** quantos dias até a carta voltar;
-- **FatorFacilidade:** começa em 2,5; o ramo de erro aplica mínimo de 1,3;
-- **DataProximaRevisao:** quando a carta volta.
+Para cada aluno e cada carta, a tabela `ProgressoFlashcard` guarda as repetições,
+o intervalo em dias, o fator de facilidade (começa em 2,5 e nunca fica abaixo de
+1,3) e a data da próxima revisão.
 
-Nota 3 ou mais: o intervalo vai para 1 dia, depois 6, depois é multiplicado pelo
-fator. Nota menor que 3: volta para 1 dia e o fator cai 0,2.
+| Botão (nota enviada) | Carta nova | Carta já estudada | Fator |
+|---|---|---|---|
+| Errei (1) | 1 dia | volta para 1 dia e recomeça | −0,2 |
+| Difícil (3) | 1 dia | intervalo × 1,2, somando pelo menos 1 dia | −0,15 |
+| Bom (4) | 1 dia | intervalo × fator | igual |
+| Fácil (5) | 3 dias | intervalo × fator × 1,3 | +0,15 |
 
-O navegador usa `packages/shared/src/sm2.js`, com regras diferentes: uma carta
-nova marcada como fácil recebe 3 dias, enquanto a API recebe qualidade 5 e
-agenda 1 dia. Na segunda resposta boa, o navegador multiplica o intervalo pelo
-fator, enquanto a API agenda 6 dias. O mobile usa o mesmo motor do navegador
-(`@nexti/shared/sm2`) e, ao sincronizar, adota o agendamento que a API devolve.
-Sem internet, o mobile guarda as respostas numa fila no aparelho e as envia na
-próxima sincronização (`apps/react-mobile/src/services/sincronizacao.js`).
-
-O painel calcula a revisão localmente e envia a resposta quando a carta tem ID
-da API. Ao carregar o painel, o progresso remoto pode substituir o estado local.
-Unificar esses cálculos e tratar falhas de sincronização continua pendente.
+O site calcula na hora para mostrar a previsão em cada botão e envia a nota para
+`POST /api/progresso/atualizar` quando a carta tem ID da API. O app usa a mesma
+regra e, ao sincronizar, adota o agendamento devolvido pela API. Sem internet, o
+app guarda as respostas numa fila no aparelho
+(`apps/react-mobile/src/services/sincronizacao.js`); o site ainda não tem essa fila.
 
 ## 5. Da UML para o código
 

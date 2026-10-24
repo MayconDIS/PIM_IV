@@ -76,6 +76,15 @@ test('a facilidade nunca cai abaixo de 1,3, mesmo errando sempre', () => {
   assert.ok(estado.interval >= 1);
 });
 
+test('"difícil" sempre soma pelo menos 1 dia (não fica preso em 1 dia)', () => {
+  let estado = aplicarResposta(ESTADO_INICIAL, 'hard', 0);
+  assert.equal(estado.interval, 1);
+  estado = aplicarResposta(estado, 'hard', 0);
+  assert.equal(estado.interval, 2);
+  estado = aplicarResposta(estado, 'hard', 0);
+  assert.equal(estado.interval, 3);
+});
+
 test('o intervalo nunca fica negativo em longas sequências de "difícil"', () => {
   let estado = { rep: 1, interval: 1, ease: 1.3 };
   for (let i = 0; i < 40; i += 1) {

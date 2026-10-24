@@ -42,7 +42,7 @@ cartas, com um guia de estudos para o ENADE, as provas oficiais de ADS de 2017 e
 Cadastro e login exigem a API. Com uma sessão já salva no navegador, o painel
 pode usar as cartas locais de `packages/shared` quando a API está indisponível.
 Não existe uma fila para reenviar automaticamente respostas que falharam.
-Os cálculos de revisão do navegador e da API ainda diferem; veja o manual técnico.
+O cálculo da revisão (SM-2) é o mesmo no site, no app e na API, testado com os mesmos casos.
 
 ## Como rodar
 
