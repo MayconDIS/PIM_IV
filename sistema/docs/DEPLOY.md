@@ -70,6 +70,25 @@ No primeiro start, a API aplica a migration `InicialAzureSql` e insere as 29 fas
 os 702 flashcards e as provas oficiais do ENADE (2017 e 2021). Para testar, abra
 `https://<app>.azurewebsites.net/api/status`.
 
+### Monitoramento
+
+| Recurso (grupo `rg-nexti-pim-iv`) | O que faz |
+|---|---|
+| `appi-nexti-pimivwjad` (Application Insights) | Recebe da API as requisições, os erros, o tempo de resposta e as consultas ao SQL |
+| `log-nexti-pimivwjad` (Log Analytics) | Guarda esses dados por 30 dias, com limite de 0,1 GB por dia (para não gastar crédito) |
+| `api-status-nexti` (teste de disponibilidade) | A cada 15 min, 3 locais da Europa acessam `/api/status` e conferem se a API respondeu |
+
+A API só envia telemetria quando a configuração `APPLICATIONINSIGHTS_CONNECTION_STRING`
+existe (no App Service ela já está definida); no PC, no Docker e nos testes, nada é enviado.
+A rota `/api/status` não acessa o banco, então o teste não acorda o SQL serverless.
+
+No portal: **Application Insights → `appi-nexti-pimivwjad`**:
+- **Disponibilidade**: resultado do teste a cada 15 min;
+- **Falhas** e **Desempenho**: erros e rotas mais lentas;
+- **Mapa do aplicativo**: API → SQL, com o tempo de cada consulta.
+
+O `infra/azure/provisionar.ps1` cria esses três recursos junto com o resto.
+
 ## 2. Vercel (front-end)
 
 1. Vercel → **Add New → Project** → este repositório.
