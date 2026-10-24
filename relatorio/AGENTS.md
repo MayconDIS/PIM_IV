@@ -13,11 +13,13 @@ Aqui fica só o que é específico do relatório.
 
 ## Regras do relatório
 
-- Nenhuma página passa de 29,7 cm. Incluiu ou tirou página? Renumere as páginas e o sumário.
+- Nenhuma página passa de 29,7 cm. Incluiu ou tirou página ou título? Rode `python atualizar-sumario.py`:
+  ele renumera as páginas e refaz o sumário, com link e página em cada linha.
 - Números e imagens vêm do código e da modelagem, nunca de memória.
 - Cada etapa cita o livro-texto da sua disciplina (seção 1.5), com referência ABNT.
 - O PIM III aparece só na seção 1.4 (melhorias) e nas referências.
 - Mudou o HTML? Gere o Word de novo (`word/`: `npm run gerar`) e atualize o sumário no Word.
+  Confira no PDF exportado do Word que não sobrou folha em branco.
 - Modelo de PIM da UNIP: resumo num parágrafo só, no passado, com 200 a 250 palavras (o abstract é a
   tradução dele); conclusão sem citação, ligando o problema às soluções; figuras numeradas
   ("Figura N – título") com a fonte embaixo; ficha de controle com orientador, e-mail e curso.

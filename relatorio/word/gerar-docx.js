@@ -48,9 +48,18 @@ const paragrafo = (no, opcoes = {}) => new Paragraph({
   keepNext: opcoes.keepNext,
 });
 
+// Parte nova (etapa, capítulo, ficha) começa em página nova pela quebra no próprio título: um parágrafo
+// só com a quebra pode cair sozinho numa página e deixá-la em branco.
+let quebraNoProximoTitulo = false;
+const usarQuebra = () => {
+  const quebrar = quebraNoProximoTitulo;
+  quebraNoProximoTitulo = false;
+  return quebrar || undefined;
+};
 const titulo = (texto, nivel, centro = false) => new Paragraph({
   children: [new TextRun({ text: limpar(texto).trim(), bold: true, font: FONTE, size: 24 })],
   heading: nivel,
+  pageBreakBefore: usarQuebra(),
   alignment: centro ? AlignmentType.CENTER : AlignmentType.LEFT,
   spacing: { ...ESPACO_15, before: 240, after: 240 },
   keepNext: true,
@@ -128,7 +137,8 @@ function tabela(no, { semBorda = false, larguraCm = 16, fonte = 20 } = {}) {
 }
 
 // ---------------------------------------------------------------- corpo de uma página
-function blocos(no, saida) {
+function blocos(no, saida, ultimoNaPagina = true) {
+  const elementos = no.childNodes.filter((f) => f.nodeType !== 3 && f.rawTagName);
   for (const filho of no.childNodes) {
     if (filho.nodeType === 3) continue;
     const tag = filho.rawTagName?.toLowerCase();
@@ -142,11 +152,16 @@ function blocos(no, saida) {
       else if (cls.includes('legenda-fonte')) saida.push(new Paragraph({ children: runs(filho, { size: 20 }), alignment: AlignmentType.CENTER, spacing: { after: 240 } }));
       else if (cls.includes('referencia')) saida.push(new Paragraph({ children: runs(filho), alignment: AlignmentType.LEFT, spacing: { line: 240, after: 240 } }));
       else saida.push(paragrafo(filho, { recuo: cls.includes('paragrafo') ? undefined : false }));
-    } else if (tag === 'table') saida.push(tabela(filho), new Paragraph({ spacing: { after: 120 } }));
+    } else if (tag === 'table') {
+      // Espaço depois da tabela só se ainda vem algo na página; no fim, ele poderia ir sozinho para uma folha nova.
+      const ultimo = ultimoNaPagina && elementos[elementos.length - 1] === filho;
+      saida.push(tabela(filho));
+      if (!ultimo) saida.push(new Paragraph({ spacing: { after: 120 } }));
+    }
     else if (tag === 'img') saida.push(imagem(filho));
     else if (tag === 'ul' || tag === 'ol') filho.querySelectorAll('li').forEach((li) => saida.push(paragrafo(li, { recuo: false })));
     else if (tag === 'br') continue;
-    else blocos(filho, saida); // div, header, nav, footer...
+    else blocos(filho, saida, ultimoNaPagina && elementos[elementos.length - 1] === filho); // div, header, nav, footer...
   }
 }
 
@@ -219,7 +234,7 @@ const comecaParte = (pg) => {
   return h.rawTagName.toLowerCase() === 'h2' || /^\d+\.\d+ Etapa/.test(h.text.trim());
 };
 paginas.slice(inicio).forEach((pg, k) => {
-  if (k > 0 && (comecaParte(pg) || pg.getAttribute('aria-label') === 'Ficha')) textuais.push(quebra());
+  if (k > 0 && (comecaParte(pg) || pg.getAttribute('aria-label') === 'Ficha')) quebraNoProximoTitulo = true;
   blocos(pg, textuais);
 });
 
