@@ -1,13 +1,12 @@
-@GEMINI.md
-@sistema/GEMINI.md
-@modelagem-uml/GEMINI.md
-@relatorio/GEMINI.md
+@AGENTS.md
+@sistema/AGENTS.md
+@modelagem-uml/AGENTS.md
+@relatorio/AGENTS.md
 
 ## Para o Claude Code
 
-O Claude lê os mesmos arquivos do Gemini: o `GEMINI.md` da raiz e o de cada pasta (importados
-acima), que por sua vez importam o `AGENTS.md` de cada lugar. Mudou uma regra? Mude o `AGENTS.md`;
-o Claude e o Gemini passam a ver a mesma coisa.
+As regras ficam nos `AGENTS.md` (o da raiz e o de cada pasta, importados acima). O Codex lê os
+mesmos arquivos, então regra nova vai no `AGENTS.md` e as duas IAs passam a ver a mesma coisa.
 
 - Os papéis do time estão em `.claude/agents/`. Use o `coordenador` quando um pedido mexer em mais
   de uma pasta (`sistema`, `modelagem-uml`, `relatorio`).
