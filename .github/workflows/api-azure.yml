@@ -43,3 +43,22 @@ jobs:
           app-name: ${{ vars.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: ${{ runner.temp }}/api
+
+      # Depois de publicar, confere a API de verdade: em 24/10 ela subiu respondendo /api/status, mas com
+      # erro 500 nas rotas que usam o banco (resolvido reiniciando o App Service). Se isso voltar, a
+      # publicação fica vermelha no GitHub em vez de passar despercebida.
+      - name: Conferir a API publicada
+        run: |
+          URL="https://${{ vars.AZURE_WEBAPP_NAME }}.azurewebsites.net/api"
+          for rota in status fases; do
+            for tentativa in $(seq 1 20); do
+              codigo=$(curl -s -o /dev/null -w "%{http_code}" --max-time 60 "$URL/$rota" || true)
+              [ "$codigo" = "200" ] && break
+              sleep 15
+            done
+            echo "/api/$rota -> HTTP $codigo"
+            if [ "$codigo" != "200" ]; then
+              echo "::error::A API publicada não respondeu 200 em /api/$rota. Reinicie o App Service no portal da Azure e confira os logs."
+              exit 1
+            fi
+          done
