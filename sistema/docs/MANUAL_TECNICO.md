@@ -98,19 +98,21 @@ Unificar esses cálculos e tratar falhas de sincronização continua pendente.
 ## 5. Da UML para o código
 
 Os diagramas estão em [`../../modelagem-uml/02_Modelagem_UML`](../../modelagem-uml/02_Modelagem_UML).
-O diagrama de classes do PIM III é a ideia inicial; os diagramas *Camadas* e
-*Entidades* mostram o que foi implementado.
+Todos saem do código atual. Em PlantUML: casos de uso, classes (*Camadas* e
+*Entidades*), atividade e sequência. No `Diagrams Nex_TI - PIM IV.asta`: os mesmos,
+mais um diagrama de classes e um de sequência para cada caso de uso, MER e DER
+(imagens em `imagens-astah/`).
 
 1. **Herança:** `Aluno` e `Tutor` herdam de `Usuario`. XP, moedas e nível ficam
    em `Usuario` para o login e as consultas usarem uma tabela só.
 2. **SM-2 entre Aluno e Flashcard:** virou a classe `ProgressoFlashcard`, com
    chave composta (aluno + carta).
-3. **`Motor_SM2` e `Gamificacao` do PIM III:** viraram `Sm2Engine` e
-   `GamificacaoService`.
+3. **SM-2 e gamificação:** ficam em `Sm2Engine` e `GamificacaoService`, com a
+   mesma regra do `sm2.js` e do `gamificacao.js` do site.
 4. **Perfis do caso de uso (Aluno, Tutor, Admin):** viraram o campo `Perfil` de `Usuario`,
    enviado no JWT; as rotas de Tutor e Admin conferem esse perfil.
-5. **Ainda não implementadas:** `Duvidas`, `Agente Especialista (IA)` e
-   `Acessibilidade` como classe (a acessibilidade existe no site).
+5. **Acessibilidade:** fica só no site (zoom, alto contraste e VLibras), sem
+   classe na API.
 
 ## 6. O que fica salvo onde
 
