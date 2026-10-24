@@ -31,3 +31,6 @@ Thumbs.db
 .vercel
 .env*
 !.env.example
+
+# Arquivos de trava do Word e do Excel (documento aberto)
+~$*
