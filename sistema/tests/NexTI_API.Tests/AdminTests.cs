@@ -135,7 +135,7 @@ namespace NexTI_API.Tests
             var inseridosNoReinicio = await seeder.ExecutarAsync(db);   // a API sobe de novo
 
             Assert.Equal(0, inseridosNoReinicio);
-            Assert.Equal(619, await db.Flashcards.CountAsync());
+            Assert.Equal(701, await db.Flashcards.CountAsync());
             Assert.False(await db.Flashcards.AnyAsync(f => f.Frente == frenteOriginal));
             Assert.False(await db.Flashcards.AnyAsync(f => f.Frente == excluida.Frente));
         }
