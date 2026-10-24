@@ -20,8 +20,9 @@ campos para o sumário ganhar os números de página.
 ├── 📁 word/          # Gerador do .docx a partir do index.html
 ├── 📁 assets/
 │   ├── 📁 branding/  # Logo da UNIP
-│   ├── 📁 diagrams/  # Casos de uso, classes, sequência, MER, DER, modelos lógico e físico
-│   └── 📁 telas/     # Telas reais do site (login, cadastro e nivelamento)
+│   ├── 📁 diagrams/  # Diagramas do Astah: casos de uso, classes, atividade, sequência, MER, DER e modelo físico
+│   ├── 📁 telas/     # Fotos das telas reais do site (Apêndice A)
+│   └── 📁 casos-de-uso/ # Classes e sequência de cada caso de uso, do Astah (Apêndice B)
 └── 📁 design_DNA/    # Padrões visuais do relatório
 ```
 
