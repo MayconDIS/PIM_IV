@@ -154,6 +154,15 @@ checar('só a pasta .agents da raiz, sem .planning', extras.length === 0, extras
 for (const pasta of ['sistema', 'relatorio', 'modelagem-uml']) {
   checar(`${pasta} tem AGENTS.md, CLAUDE.md e GEMINI.md`, ['AGENTS.md', 'CLAUDE.md', 'GEMINI.md'].every((f) => existe(`${pasta}/${f}`)));
 }
+// O Claude lê o que o Gemini lê: cada CLAUDE.md importa o GEMINI.md, que importa o AGENTS.md.
+for (const pasta of ['.', 'sistema', 'relatorio', 'modelagem-uml']) {
+  const claude = existe(`${pasta}/CLAUDE.md`) ? ler(`${pasta}/CLAUDE.md`) : '';
+  const gemini = existe(`${pasta}/GEMINI.md`) ? ler(`${pasta}/GEMINI.md`) : '';
+  checar(`${pasta}/CLAUDE.md importa o GEMINI.md`, /^@(\.\/)?GEMINI\.md$/m.test(claude));
+  checar(`${pasta}/GEMINI.md importa o AGENTS.md`, /^@(\.\/)?AGENTS\.md$/m.test(gemini));
+}
+const raiz = ler('CLAUDE.md');
+checar('CLAUDE.md da raiz importa o GEMINI.md de cada pasta', ['sistema', 'relatorio', 'modelagem-uml'].every((p) => raiz.includes(`@${p}/GEMINI.md`)));
 
 // --- resultado --------------------------------------------------------------------------
 console.log(`Sincronia do projeto: ${ok.length} ok, ${falhas.length} com problema.`);

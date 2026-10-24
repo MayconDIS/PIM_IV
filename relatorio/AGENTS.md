@@ -6,9 +6,10 @@ Aqui fica só o que é específico do relatório.
 ## O que tem aqui
 
 - `index.html` e `style.css`: o relatório, uma folha A4 por `<section class="page">`.
-- `Relatorio_PIM_IV_Nex_TI.docx`: a versão em Word, gerada do HTML por `word/gerar-docx.js`.
+- `word/Relatorio_PIM_IV_Nex_TI.docx`: a versão em Word, gerada do HTML por `word/gerar-docx.js`.
 - `assets/diagrams/` e `assets/casos-de-uso/`: cópias exatas das imagens exportadas do Astah.
 - `assets/telas/`: fotos das telas reais do site (Apêndice A).
+- `assets/trello/`: prints do quadro do Trello (Etapa 9).
 
 ## Regras do relatório
 

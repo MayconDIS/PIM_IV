@@ -2,8 +2,8 @@
 
 Regras do projeto inteiro, para a equipe e para qualquer IA (Claude, Gemini/Antigravity, Copilot).
 Os `AGENTS.md` de cada pasta (`sistema/`, `relatorio/` e `modelagem-uml/`) só complementam este; se algo
-divergir, vale este arquivo. Cada pasta tem também um `CLAUDE.md` e um `GEMINI.md` que só importam o
-`AGENTS.md` dela. As skills de IA ficam numa pasta só: `.agents/`, na raiz.
+divergir, vale este arquivo. Cada pasta tem também um `GEMINI.md`, que importa o
+`AGENTS.md` dela, e um `CLAUDE.md`, que importa o `GEMINI.md`: as duas IAs leem as mesmas regras. As skills de IA ficam numa pasta só: `.agents/`, na raiz.
 
 ## O projeto
 

@@ -13,23 +13,11 @@
       "skillPath": "skills/.curated/security-best-practices/SKILL.md",
       "computedHash": "0c42fff660b6f7e85add36437edc36976466bb254b7cd9eb38ec67b2ad64a9bf"
     },
-    "security-review": {
-      "source": "getsentry/skills",
-      "sourceType": "github",
-      "skillPath": "skills/security-review/SKILL.md",
-      "computedHash": "1eee1e41aa0a0e75dbbe0cac387e3d61bedf51af1888f184301a173731e6973e"
-    },
     "dotnet-best-practices": {
       "source": "local",
       "sourceType": "local",
       "skillPath": ".agents/dotnet-best-practices/SKILL.md",
       "computedHash": "local"
-    },
-    "find-skills": {
-      "source": "vercel-labs/skills",
-      "sourceType": "github",
-      "skillPath": "skills/find-skills/SKILL.md",
-      "computedHash": "9e1c8b3103f92fa8092568a44fe64858de7c5c9dc65ce4bea8f168080e889cfd"
     },
     "design-dna": {
       "source": "local",
