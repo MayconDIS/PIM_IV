@@ -94,7 +94,7 @@
 - **Objetivo:** explicar a arquitetura em camadas com o exemplo do login.
 - **Fala sugerida:**
   > *"Quando o aluno faz login, a rota recebe o pedido e chama o AuthService. O serviço confere a senha e usa o AppDbContext para buscar o usuário no banco. Cada parte só conversa com a do lado."*
-- **Tópicos-chave:** antes tudo ficava no `EndpointExtensions.cs` (338 linhas); separamos em `AuthService`, `ProgressoService`, `GamificacaoService` e `ConteudoService`. Para o aluno nada mudou, e os testes conferem isso.
+- **Tópicos-chave:** antes tudo ficava no `EndpointExtensions.cs` (338 linhas); separamos em `AuthService`, `ProgressoService`, `GamificacaoService` e `ConteudoService`; depois vieram `AdminService` (painel) e `ContaService` (Minha conta). Para o aluno nada mudou, e os testes conferem isso.
 
 ---
 
@@ -128,7 +128,7 @@
 - **Objetivo:** mostrar o repositório ao vivo.
 - **No GitHub:** abrir o **Pull Request #1** (o trabalho desta entrega separado em commits) e a pasta `sistema/tests`.
 - **Fala sugerida:**
-  > *"Abrimos um Pull Request, damos merge na main, o GitHub Actions roda os 62 testes e, se passarem, publica a API na Azure sozinho. O site vai para a Vercel."*
+  > *"Abrimos um Pull Request, damos merge na main, o GitHub Actions roda os 179 testes da API e, se passarem, publica a API na Azure sozinho. O site vai para a Vercel."*
 
 ---
 
