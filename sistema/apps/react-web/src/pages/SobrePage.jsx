@@ -87,9 +87,9 @@ const GRUPOS = [
         id: 'loja',
         icone: 'store',
         menu: 'Loja de Bônus',
-        titulo: 'Loja de Bônus (Coins)',
+        titulo: 'Loja de bônus (moedas)',
         corpo: [
-          'As Moedas Virtuais (Coins) que você minera estudando diariamente servem para desbloquear Flashcards ocultos de disciplinas avançadas ou "Easter Eggs" sobre cultura hacker e curiosidades de TI. Quanto mais você estuda, mais acesso você tem ao conteúdo premium gratuito.',
+          'As moedas que você ganha estudando todos os dias servem para desbloquear Flashcards ocultos de disciplinas avançadas ou "Easter Eggs" sobre cultura hacker e curiosidades de TI. Quanto mais você estuda, mais acesso você tem ao conteúdo premium gratuito.',
         ],
       },
     ],

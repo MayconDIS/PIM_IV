@@ -16,7 +16,7 @@ export function ModalNivelamento() {
       classeCabecalho="modal-header-cyan"
       classeTitulo="text-cyan"
       icone="radar"
-      titulo="Executar Diagnóstico"
+      titulo="Teste de nivelamento"
     >
       {aberto && <Quiz concluirDiagnostico={concluirDiagnostico} fecharModal={fecharModal} som={som} />}
     </Modal>
@@ -44,10 +44,10 @@ function Quiz({ concluirDiagnostico, fecharModal, som }) {
           Você pontuou {resultado.acertos}/10.
           <br />
           <br />
-          <b>Status: {resultado.status}.</b> {resultado.mensagem}
+          <b>Seu nível: {resultado.status}.</b> {resultado.mensagem}
         </p>
         <button className="btn-action btn-right tech-font flex-align-center" style={{ width: '100%', justifyContent: 'center' }} onClick={fecharModal}>
-          Entrar no Terminal
+          Ir para o painel
         </button>
       </div>
     );
@@ -57,10 +57,10 @@ function Quiz({ concluirDiagnostico, fecharModal, som }) {
     return (
       <div className="modal-body">
         <p className="modal-desc-text">
-          Iniciando protocolo de avaliação. Para calibrarmos sua árvore de habilidades, responda às 10 questões técnicas abaixo.
+          Antes de começar, responda a 10 perguntas rápidas. Assim descobrimos por qual fase você deve começar.
         </p>
         <button className="btn-action btn-right tech-font flex-align-center btn-full-width" onClick={() => setEtapa(0)}>
-          <span className="material-symbols-outlined control-icon-spacing">play_arrow</span> START_SCAN()
+          <span className="material-symbols-outlined control-icon-spacing">play_arrow</span> Começar teste
         </button>
       </div>
     );
