@@ -70,7 +70,28 @@ recarregado do banco, portanto rebaixamentos não aguardam o JWT expirar.
 **Após implantar esta versão, sessões emitidas antes do PB02 precisam de novo
 login.** Não há nova migration: são usados o hash e as tabelas existentes.
 
-Contratos, limites e execução dos testes: [PB02 — Gestão de conta](PB02_GESTAO_CONTA.md).
+| Operação | Rota |
+|---|---|
+| Consultar | `GET /api/conta/` |
+| Alterar e-mail | `PUT /api/conta/email` com `{ email, senhaAtual }` |
+| Alterar senha | `PUT /api/conta/senha` com `{ senhaAtual, novaSenha }` |
+| Exportar | `GET /api/conta/dados` |
+| Excluir | `POST /api/conta/excluir` com `{ senhaAtual }` |
+
+Senha errada, e-mail inválido ou repetido e excluir o último Admin retornam 400; sessão
+inválida, 401; troca de senha e exclusão, 204. As escritas usam o mesmo limite de
+tentativas do login. Não há confirmação do novo e-mail nem recuperação de senha, e o
+app de celular ainda não tem a tela de conta.
+
+Os testes com SQL Server LocalDB (só no Windows) são opcionais: criam bancos
+descartáveis `NexTI_ContaTest_<guid>`, cobrem exportação, exclusão em cascata,
+exclusões de Admins ao mesmo tempo e chamadas HTTP de verdade, e apagam os bancos no fim.
+
+```powershell
+$env:NEXTI_TEST_LOCALDB = '1'
+dotnet test tests/NexTI_API.Tests/NexTI_API.Tests.csproj
+Remove-Item Env:NEXTI_TEST_LOCALDB
+```
 
 ## 4. O algoritmo SM-2
 
