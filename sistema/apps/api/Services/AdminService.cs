@@ -1,4 +1,5 @@
 using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -32,8 +33,14 @@ namespace NexTI_API.Services
                 .Select(u => new UsuarioResumo(u.Id, u.Username, u.Email, u.Perfil, u.XP, u.Nivel, u.DataCriacao))
                 .ToListAsync();
 
-        public async Task<Resultado<UsuarioResumo>> DefinirPerfilAsync(int quemPede, int usuarioId, string? perfil)
+        public Task<Resultado<UsuarioResumo>> DefinirPerfilAsync(int quemPede, int usuarioId, string? perfil) =>
+            _db.Database.CreateExecutionStrategy().ExecuteAsync(async () =>
         {
+            _db.ChangeTracker.Clear();
+            await using var tx = _db.Database.IsRelational()
+                ? await _db.Database.BeginTransactionAsync(IsolationLevel.Serializable) : null;
+            if (!await _db.Usuarios.AnyAsync(u => u.Id == quemPede && u.Perfil == Perfis.Admin))
+                return Resultado<UsuarioResumo>.Erro(TipoFalha.NaoAutorizado);
             var novo = Perfis.Todos.FirstOrDefault(p => string.Equals(p, perfil?.Trim(), StringComparison.OrdinalIgnoreCase));
             if (novo is null)
                 return Resultado<UsuarioResumo>.Erro(TipoFalha.Invalido, "Perfil inválido. Use Aluno, Tutor ou Admin.");
@@ -46,10 +53,14 @@ namespace NexTI_API.Services
             if (usuario is null)
                 return Resultado<UsuarioResumo>.Erro(TipoFalha.NaoEncontrado, "Usuário não encontrado.");
 
+            if (usuario.Perfil == Perfis.Admin && novo != Perfis.Admin &&
+                await _db.Usuarios.CountAsync(u => u.Perfil == Perfis.Admin) <= 1)
+                return Resultado<UsuarioResumo>.Erro(TipoFalha.Invalido, "O sistema precisa de pelo menos um administrador.");
             usuario.Perfil = novo;
             await _db.SaveChangesAsync();
+            if (tx is not null) await tx.CommitAsync();
             return Resultado<UsuarioResumo>.Ok(new UsuarioResumo(usuario.Id, usuario.Username, usuario.Email, usuario.Perfil, usuario.XP, usuario.Nivel, usuario.DataCriacao));
-        }
+        });
 
         public async Task<List<AlunoNoPainel>> PainelDosAlunosAsync()
         {

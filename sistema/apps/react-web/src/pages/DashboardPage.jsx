@@ -10,6 +10,7 @@ import { Rodape } from '../components/dashboard/Rodape';
 import { BotaoTopo, WidgetAcessibilidade } from '../components/dashboard/Flutuantes';
 import { ModalCriacao } from '../components/modais/ModalCriacao';
 import { ModalAdmin } from '../components/modais/ModalAdmin';
+import { ModalConta } from '../components/modais/ModalConta';
 import { ModalProgresso } from '../components/modais/ModalProgresso';
 import { ModalNivelamento } from '../components/modais/ModalNivelamento';
 import { ModalMapaNeural } from '../components/modais/ModalMapaNeural';
@@ -78,6 +79,7 @@ function Dashboard() {
       <ModalMapaNeural />
       <ModalCertificado />
       <ModalAdmin />
+      <ModalConta />
 
       <Rodape />
       <BotaoTopo />

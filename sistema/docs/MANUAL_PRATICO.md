@@ -44,5 +44,22 @@ No Dashboard, o menu esquerdo ("Missões de Aprendizagem") exibe todas as discip
 Fases liberadas, compras de bônus e posições do Mapa Neural ficam neste
 navegador. Limpar os dados do site ou trocar de dispositivo pode perder essas
 informações. O progresso das cartas pode ser enviado à API, mas respostas cujo
-envio falhou não são reenviadas automaticamente. O aplicativo móvel ainda é
-demonstrativo e não compartilha a sessão ou o progresso do site.
+envio falhou não são reenviadas automaticamente no Web. O aplicativo móvel usa
+login próprio e sincroniza o progresso com a API; preferências locais do site
+não são compartilhadas automaticamente com o aparelho.
+
+## 6. Minha conta
+
+Abra o menu do usuário e escolha **Minha conta**. É necessário estar conectado
+à API para consultar ou alterar o cadastro.
+
+- **E-mail:** informe o novo endereço e a senha atual; o endereço não pode estar
+  em uso por outra conta. Não há envio de confirmação por e-mail nesta versão.
+- **Senha:** informe a senha atual, a nova senha e sua confirmação. Após salvar,
+  entre novamente; as sessões anteriores deixam de acessar a API.
+- **Baixar meus dados (JSON):** exporta cadastro, progresso e histórico do servidor
+  junto dos dados locais desta conta no navegador, sem senhas ou tokens.
+- **Excluir minha conta:** informe a senha atual e marque a confirmação. A ação
+  remove cadastro, progresso e histórico do servidor e os dados desta conta neste
+  navegador. Cartas compartilhadas permanecem. Cópias em outros aparelhos não
+  são apagadas remotamente. Se você for o único Admin, defina outro antes.

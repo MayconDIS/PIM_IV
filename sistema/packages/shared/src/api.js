@@ -248,7 +248,14 @@ const ApiService = {
     editarFlashcard: (id, frente, verso, dica) => requisicaoAutenticada('PUT', `/flashcards/${id}`, { frente, verso, dica }),
     excluirFlashcard: (id) => requisicaoAutenticada('DELETE', `/flashcards/${id}`),
     getUsuariosAdmin: () => requisicaoAutenticada('GET', '/admin/usuarios'),
-    definirPerfil: (id, perfil) => requisicaoAutenticada('PUT', `/admin/usuarios/${id}/perfil`, { perfil })
+    definirPerfil: (id, perfil) => requisicaoAutenticada('PUT', `/admin/usuarios/${id}/perfil`, { perfil }),
+
+    // Conta própria: a API obtém o ID exclusivamente do JWT.
+    getMinhaConta: () => requisicaoAutenticada('GET', '/conta/'),
+    alterarMeuEmail: (email, senhaAtual) => requisicaoAutenticada('PUT', '/conta/email', { email, senhaAtual }),
+    alterarMinhaSenha: (senhaAtual, novaSenha) => requisicaoAutenticada('PUT', '/conta/senha', { senhaAtual, novaSenha }),
+    exportarMinhaConta: () => requisicaoAutenticada('GET', '/conta/dados'),
+    excluirMinhaConta: (senhaAtual) => requisicaoAutenticada('POST', '/conta/excluir', { senhaAtual })
 };
 
 /** Chamada com o JWT do aluno; erro vira Error com a frase da API (ou uma padrão por status). */
@@ -266,7 +273,8 @@ async function requisicaoAutenticada(metodo, rota, corpo) {
     if (response.status === 204) return null;
     const dados = await response.json().catch(() => null);
     if (!response.ok) {
-        const padrao = response.status === 401 ? 'Sessão expirada. Entre de novo.'
+        const padrao = response.status === 429 ? 'Muitas tentativas. Aguarde um minuto e tente novamente.'
+            : response.status === 401 ? 'Sessão expirada. Entre de novo.'
             : response.status === 403 ? 'Seu perfil não tem acesso a esta área.'
             : `Erro ${response.status} no servidor.`;
         throw new Error(dados?.message || padrao);
