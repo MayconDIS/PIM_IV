@@ -1,0 +1,162 @@
+{
+  "fases": {
+    "fase1": {
+      "xp": 5,
+      "moedas": 10
+    },
+    "fase2": {
+      "xp": 5,
+      "moedas": 10
+    },
+    "fase3": {
+      "xp": 5,
+      "moedas": 10
+    },
+    "fase4": {
+      "xp": 5,
+      "moedas": 10
+    },
+    "fase5": {
+      "xp": 5,
+      "moedas": 10
+    },
+    "fase6": {
+      "xp": 10,
+      "moedas": 10
+    },
+    "fase7": {
+      "xp": 10,
+      "moedas": 10
+    },
+    "fase8": {
+      "xp": 10,
+      "moedas": 10
+    },
+    "fase9": {
+      "xp": 10,
+      "moedas": 10
+    },
+    "fase10": {
+      "xp": 10,
+      "moedas": 10
+    },
+    "fase11": {
+      "xp": 15,
+      "moedas": 10
+    },
+    "fase12": {
+      "xp": 15,
+      "moedas": 10
+    },
+    "fase13": {
+      "xp": 15,
+      "moedas": 10
+    },
+    "fase14": {
+      "xp": 15,
+      "moedas": 10
+    },
+    "fase15": {
+      "xp": 15,
+      "moedas": 10
+    },
+    "fase16": {
+      "xp": 20,
+      "moedas": 10
+    },
+    "fase17": {
+      "xp": 20,
+      "moedas": 10
+    },
+    "fase18": {
+      "xp": 20,
+      "moedas": 10
+    },
+    "fase19": {
+      "xp": 20,
+      "moedas": 10
+    },
+    "fase20": {
+      "xp": 20,
+      "moedas": 10
+    },
+    "fase21": {
+      "xp": 30,
+      "moedas": 70
+    },
+    "fase22": {
+      "xp": 30,
+      "moedas": 70
+    },
+    "fase23": {
+      "xp": 30,
+      "moedas": 70
+    },
+    "fase24": {
+      "xp": 30,
+      "moedas": 70
+    },
+    "fase25": {
+      "xp": 30,
+      "moedas": 70
+    }
+  },
+  "testes": {
+    "teste-mod1": {
+      "xp": 25,
+      "corte": 70
+    },
+    "teste-mod2": {
+      "xp": 25,
+      "corte": 70
+    },
+    "teste-mod3": {
+      "xp": 25,
+      "corte": 70
+    },
+    "teste-mod4": {
+      "xp": 25,
+      "corte": 70
+    },
+    "teste-mod5": {
+      "xp": 50,
+      "corte": 80
+    }
+  },
+  "bonus": {
+    "bonus1": {
+      "xp": 25,
+      "moedas": 15,
+      "custo": 50
+    },
+    "bonus2": {
+      "xp": 25,
+      "moedas": 15,
+      "custo": 50
+    },
+    "bonus3": {
+      "xp": 25,
+      "moedas": 15,
+      "custo": 50
+    },
+    "bonus4": {
+      "xp": 25,
+      "moedas": 15,
+      "custo": 50
+    }
+  },
+  "niveis": [
+    {
+      "xpMinimo": 300,
+      "nivel": 6
+    },
+    {
+      "xpMinimo": 100,
+      "nivel": 3
+    },
+    {
+      "xpMinimo": 0,
+      "nivel": 1
+    }
+  ]
+}

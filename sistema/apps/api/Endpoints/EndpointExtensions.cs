@@ -152,6 +152,21 @@ namespace NexTI_API.Endpoints
                     usuario => Results.Ok(new { message = "Estatísticas atualizadas!", xp = usuario.XP, moedas = usuario.Moedas, nivel = usuario.Nivel }));
             }).RequireAuthorization();
 
+            // --- PRÊMIO CALCULADO NO SERVIDOR ---
+            // O cliente diz o que concluiu; a API calcula XP, moedas e nível com a tabela compartilhada.
+            app.MapPost("/api/progresso/concluir-fase", async (ConclusaoRequest request, IGamificacaoService gamificacao, ClaimsPrincipal userClaims) =>
+            {
+                if (IdDoUsuario(userClaims) is not int usuarioId) return Results.Unauthorized();
+                return ParaHttp(await gamificacao.ConcluirFaseAsync(usuarioId, request.FaseId, request.Acertos, request.Total), Results.Ok);
+            }).RequireAuthorization();
+
+            app.MapPost("/api/usuarios/bonus/{bonusId}/comprar", async (string bonusId, IGamificacaoService gamificacao, ClaimsPrincipal userClaims) =>
+            {
+                if (IdDoUsuario(userClaims) is not int usuarioId) return Results.Unauthorized();
+                return ParaHttp(await gamificacao.ComprarBonusAsync(usuarioId, bonusId),
+                    usuario => Results.Ok(new { moedas = usuario.Moedas }));
+            }).RequireAuthorization();
+
             // --- SIMULADOS (UML PIM IV) ---
             app.MapGet("/api/simulados/areas", async (IConteudoService conteudo) => Results.Ok(await conteudo.ListarAreasAsync()));
 
@@ -170,4 +185,5 @@ namespace NexTI_API.Endpoints
     public record NovoFlashcardRequest(string CodigoFase, string Frente, string Verso, string? Dica);
     public record EditarFlashcardRequest(string Frente, string Verso, string? Dica);
     public record PerfilRequest(string Perfil);
+    public record ConclusaoRequest(string? FaseId, int Acertos, int Total);
 }

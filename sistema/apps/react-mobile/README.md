@@ -15,7 +15,7 @@ Fluxo: Login → Fases ⇄ Progresso → Estudo → Fases.
 
 ## Sincronização
 
-- Cada resposta vai para `POST /api/progresso/atualizar`; o XP de cada fase, para `PUT /api/usuarios/stats`.
+- Cada resposta vai para `POST /api/progresso/atualizar`; cada fase concluída, para `POST /api/progresso/concluir-fase`, e o app fica com o XP e as moedas que o servidor calcular.
 - **Sem internet**, a resposta entra numa fila salva no aparelho e é enviada na próxima sincronização (ao abrir o app, ao sair de uma fase ou no botão).
 - Ao sincronizar, o app traz da API o XP, as moedas e o agendamento de cada carta. Assim o que foi estudado no site aparece no celular.
 - Sessão expirada (24 h): o app volta ao login sem perder a fila.

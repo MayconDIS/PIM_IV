@@ -32,8 +32,8 @@ cartas, com um guia de estudos para o ENADE, as provas oficiais de ADS de 2017 e
 | Cadastro e login | ✅ | API (JWT) e SQL Server |
 | Estudo com flashcards e SM-2 | ✅ | No navegador; respostas de cartas com ID são enviadas a `POST /api/progresso/atualizar` quando a API está disponível |
 | Simulados ENADE | ✅ | Guia de estudos e provas oficiais de 2017 e 2021 (fases 23 a 25); cartas por fase vêm da API e as provas também ficam em `GET /api/simulados/questoes` |
-| XP, moedas e nível | ✅ | No navegador e na API (`PUT /api/usuarios/stats`), que limita incrementos por atualização |
-| Desbloqueio de fases e compra de bônus | ⚠️ | Acesso liberado no navegador; a compra não envia imediatamente o saldo à API |
+| XP, moedas e nível | ✅ | Calculados na API (`POST /api/progresso/concluir-fase`), com a mesma tabela do site; o site e o app mostram o prêmio na hora e ficam com os totais do servidor |
+| Desbloqueio de fases e compra de bônus | ✅ | Fases liberadas no navegador; a compra de bônus é conferida e descontada na API (`POST /api/usuarios/bonus/{id}/comprar`) |
 | Mapa Neural | ✅ | Só no navegador |
 | Certificado | ✅ | Gerado no navegador e impresso como PDF |
 | App de celular | ✅ | Login, fases e estudo pela API; sem internet, as respostas esperam numa fila no aparelho |
