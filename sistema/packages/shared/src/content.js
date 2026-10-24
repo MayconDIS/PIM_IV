@@ -4184,18 +4184,18 @@ export const MODULOS = [
 ];
 
 export const FRASES_MOTIVACIONAIS = [
-  "Bora programar, {name}! O próximo commit será de sucesso!",
+  "Bora estudar, {name}! Um pouco por dia faz diferença.",
   "Foco total nos estudos, {name}! Você evolui a cada fase.",
   "A persistência é o segredo do código perfeito, {name}!",
   "{name}, cada flashcard resolvido é um passo rumo ao topo!",
-  "Compilando conhecimento... continue assim, {name}!",
-  "Não pare até orgulhar o seu console, {name}!",
+  "Você está aprendendo, continue assim, {name}!",
+  "Mais uma fase e você chega mais perto do seu objetivo, {name}!",
   "Café na caneca e foco nos estudos, {name}!",
-  "{name}, os bugs de hoje são os aprendizados de amanhã!",
-  "O algoritmo SM-2 está calibrando suas conexões neurais, {name}!",
-  "Sua árvore de habilidades está crescendo, {name}!",
-  "Executando processo de aprendizagem... Vai com tudo, {name}!",
-  "Estudo ativo gera resultados exponenciais. Força, {name}!"
+  "{name}, errar uma carta também é aprender!",
+  "As revisões voltam no dia certo para você não esquecer, {name}!",
+  "Seu conhecimento está crescendo, {name}!",
+  "Vai com tudo nos estudos, {name}!",
+  "Estudar todo dia dá resultado. Força, {name}!"
 ];
 
 export const FASES = MODULOS.flatMap((m) => m.fases);

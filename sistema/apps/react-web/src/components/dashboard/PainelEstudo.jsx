@@ -36,7 +36,7 @@ function BotoesAnki({ previsto, responder }) {
 /** Mensagem final do deck ou do teste (porte de `finalizarDeck` / `finalizarTesteModulo`). */
 function textoDoFim(fim, faseId) {
   if (fim.tipo === 'fase') {
-    return { titulo: 'Rotina Concluída 🎉', texto: 'Código executado com sucesso!', dica: 'Recolha seu XP e Coins abaixo.', contador: 'Status: Finalizado' };
+    return { titulo: 'Fase concluída! 🎉', texto: 'Você estudou todas as cartas desta fase.', dica: 'Clique abaixo para receber seu XP e suas moedas.', contador: 'Fase finalizada' };
   }
   const resumo = `Aproveitamento: ${fim.percentual}% (${fim.acertos}/${fim.total} acertos).`;
   const contador = `Resultado: ${fim.percentual}%`;
@@ -52,11 +52,11 @@ function textoDoFim(fim, faseId) {
     return {
       titulo: 'Curso Concluído! 📜🎉',
       texto: `${resumo}\n\nVocê desbloqueou o Certificado de Conclusão Oficial!`,
-      dica: 'Parabéns! Recolha seu XP e verifique seu Certificado no menu lateral.',
+      dica: 'Parabéns! Clique abaixo para receber seu XP e veja o certificado no menu lateral.',
       contador,
     };
   }
-  return { titulo: 'Teste Aprovado! 🎉', texto: `${resumo}\n\nCódigo executado com sucesso!`, dica: 'Recolha seu XP abaixo.', contador };
+  return { titulo: 'Teste Aprovado! 🎉', texto: `${resumo}\n\nVocê passou no teste do módulo!`, dica: 'Clique abaixo para receber seu XP.', contador };
 }
 
 /** `<article id="right-panel">`: a carta 3D, as alternativas ENADE e os controles SM-2. */
@@ -165,7 +165,7 @@ export function PainelEstudo({ ativo }) {
         <div style={{ fontSize: '1.3rem', textAlign: 'center', color: '#fff', fontWeight: 500, whiteSpace: 'pre-line' }}>{cartaAtual.verso}</div>
       </>
     );
-    dicaFrente = 'Aperte [ESPAÇO] para debugar';
+    dicaFrente = 'Aperte espaço para ver a resposta';
   }
   if (avisoRevisao && !final) dicaFrente = '🔄 Reprocessando os erros de hoje...';
 
@@ -175,7 +175,7 @@ export function PainelEstudo({ ativo }) {
     <article id="right-panel" className={ativo ? 'active' : ''} style={{ display: 'block' }} aria-live="polite" aria-atomic="true">
       <div className="painel-header">
         <div id="titulo-aula">
-          Processando: <span style={{ color: 'var(--nexti-cyan)' }}>{faseAtiva.nome}</span>
+          Estudando: <span style={{ color: 'var(--nexti-cyan)' }}>{faseAtiva.nome}</span>
         </div>
         <div id="contador-cartas" className="tech-font">
           {final ? final.contador : `Item ${Math.min(indice + 1, deck.length)}/${deck.length}`}
@@ -199,7 +199,7 @@ export function PainelEstudo({ ativo }) {
 
       {final && (
         <button className="btn-action btn-proxima tech-font flex-align-center" style={{ display: 'flex' }} onClick={concluirRotina}>
-          <span className="material-symbols-outlined control-icon-spacing">keyboard_double_arrow_right</span> CONCLUIR_ROTINA()
+          <span className="material-symbols-outlined control-icon-spacing">keyboard_double_arrow_right</span> Concluir fase
         </button>
       )}
     </article>

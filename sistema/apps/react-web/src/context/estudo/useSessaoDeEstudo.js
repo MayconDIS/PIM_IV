@@ -74,7 +74,7 @@ export function useSessaoDeEstudo({ userKey, progresso, ui }) {
   const carregarAula = async (faseId, nomeAula, { ignorarBloqueio = false } = {}) => {
     if (!ignorarBloqueio && !progresso.faseLiberada(faseId)) {
       som('playError');
-      toast('warning', 'Acesso Bloqueado', 'Conclua as disciplinas e testes anteriores para desbloquear!');
+      toast('warning', 'Fase trancada', 'Conclua as fases e os testes anteriores para liberar esta.');
       return;
     }
 
@@ -215,7 +215,7 @@ export function useSessaoDeEstudo({ userKey, progresso, ui }) {
     return premio;
   }
 
-  /** CONCLUIR_ROTINA(): entrega XP/moedas, libera a próxima fase e fecha o painel. */
+  /** Concluir fase: entrega XP/moedas, libera a próxima fase e fecha o painel. */
   const concluirRotina = async () => {
     if (!faseAtiva || !fim || concluindo.current) return;
     concluindo.current = true;
@@ -234,7 +234,7 @@ export function useSessaoDeEstudo({ userKey, progresso, ui }) {
 
     if (isTeste(faseId) && !passouNoTeste(faseId, acertos, total)) {
       som('playError');
-      toast('error', 'Acesso Negado', `Aproveitamento de ${percentual}% (mínimo: ${corteDoTeste(faseId)}%). Estude o módulo e tente novamente!`);
+      toast('error', 'Ainda não foi desta vez', `Você acertou ${percentual}% (o mínimo é ${corteDoTeste(faseId)}%). Revise o módulo e tente de novo.`);
       fecharPainel();
       return;
     }
@@ -249,9 +249,9 @@ export function useSessaoDeEstudo({ userKey, progresso, ui }) {
           progresso.liberarFase(seguinte);
           som('playLevelUp');
           confete('burst', 50);
-          toast('success', 'Novo Acesso Concedido', `Teste concluído com ${percentual}%! (+${premio.xp} XP)`);
+          toast('success', 'Teste aprovado!', `Você acertou ${percentual}% e liberou o próximo módulo (+${premio.xp} XP).`);
         } else {
-          toast('success', 'Teste Revisitado', `Aproveitamento: ${percentual}% (+${premio.xp} XP)`);
+          toast('success', 'Teste refeito', `Você acertou ${percentual}% (+${premio.xp} XP).`);
         }
       } else if (liberaCertificado(faseId)) {
         localStorage.setItem(`${userKey}certificado_unlocked`, 'true');
@@ -261,19 +261,19 @@ export function useSessaoDeEstudo({ userKey, progresso, ui }) {
         toast('success', 'Certificado Desbloqueado! 📜', `Parabéns! Aproveitamento de ${percentual}% no ENADE! (+${premio.xp} XP)`);
       }
     } else if (isBonus(faseId)) {
-      toast('success', 'Bônus Concluído', `Conhecimento extra rendeu +${premio.xp} XP e +${premio.moedas} Coins!`);
+      toast('success', 'Bônus Concluído', `O bônus rendeu +${premio.xp} XP e +${premio.moedas} moedas.`);
     } else if (seguinte) {
       if (!jaLiberada) {
         progresso.liberarFase(seguinte);
         som('playLevelUp');
-        toast('success', 'Missão Concluída! 🔓', `Novo nível liberado! (+${premio.xp} XP, +${premio.moedas} Coins)`);
+        toast('success', 'Fase concluída! 🔓', `Próxima fase liberada (+${premio.xp} XP, +${premio.moedas} moedas).`);
       } else {
         toast('info', 'Revisão Concluída', premio.xp || premio.moedas
-          ? `Revisão finalizada (+${premio.xp} XP, +${premio.moedas} Coins)`
+          ? `Revisão finalizada (+${premio.xp} XP, +${premio.moedas} moedas).`
           : 'Revisão finalizada. O prêmio desta fase já foi recebido; a revisão conta para o SM-2.');
       }
     } else {
-      toast('success', 'ENADE Concluído', `Missão finalizada! (+${premio.xp} XP, +${premio.moedas} Coins)`);
+      toast('success', 'Prova concluída', `Você terminou a prova do ENADE (+${premio.xp} XP, +${premio.moedas} moedas).`);
     }
 
     fecharPainel();

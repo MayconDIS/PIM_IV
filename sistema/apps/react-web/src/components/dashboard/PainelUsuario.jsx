@@ -13,10 +13,10 @@ export function PainelUsuario() {
       <div className="dashboard-header-main">
         <div className="welcome-text">
           <h1>
-            Terminal | Usuário: <span className="tech-text" id="header-user-name">{nomeUsuario}</span>
+            Olá, <span className="tech-text" id="header-user-name">{nomeUsuario}</span>
           </h1>
           <p>
-            Status da missão ENADE: <span className="status-online">Online</span>
+            Servidor: <span className="status-online">conectado</span>
           </p>
         </div>
         <div className="xp-wrapper xp-wrapper-flex">

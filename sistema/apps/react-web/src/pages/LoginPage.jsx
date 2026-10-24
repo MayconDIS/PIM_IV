@@ -208,7 +208,7 @@ export default function LoginPage() {
 
   const textoBotao = concluido ?? (enviando
     ? (modoLogin ? 'Autenticando...' : 'Criando Conta...')
-    : (modoLogin ? '> INITIALIZE_LOGIN()' : '> CREATE_ACCOUNT()'));
+    : (modoLogin ? 'Entrar' : 'Criar conta'));
   const corBotao = concluido ? 'var(--nexti-green)' : undefined;
   const descricaoSenha = [!modoLogin && senha ? idRegras : null, capsLigado ? idCaps : null].filter(Boolean).join(' ') || undefined;
 
@@ -216,10 +216,10 @@ export default function LoginPage() {
     <main className="login-container" aria-labelledby="form-title">
       <header className="login-header">
         <h1 id="form-title" className="logo-title">
-          {modoLogin ? 'Nex_' : 'New_'}
-          <span className="tech-text">{modoLogin ? 'TI' : 'Access'}</span>
+          Nex_
+          <span className="tech-text">TI</span>
         </h1>
-        <p className="subtitle">{modoLogin ? 'Welcome back, developer.' : 'Join the Quest.'}</p>
+        <p className="subtitle">{modoLogin ? 'Que bom ver você de novo!' : 'Crie sua conta para começar a estudar.'}</p>
       </header>
 
       <form className="login-form" onSubmit={autenticar} aria-label={modoLogin ? 'Entrar no Nex_TI' : 'Criar conta no Nex_TI'} noValidate>
@@ -257,7 +257,7 @@ export default function LoginPage() {
               ref={modoLogin ? primeiroCampo : undefined}
               type={modoLogin ? 'text' : 'email'}
               id="email"
-              placeholder={modoLogin ? 'dev@quest.com ou Nickname' : 'dev@quest.com'}
+              placeholder={modoLogin ? 'seu@email.com ou nickname' : 'seu@email.com'}
               required
               aria-required="true"
               autoComplete={modoLogin ? 'username' : 'email'}
@@ -271,7 +271,7 @@ export default function LoginPage() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="password" className="tech-font">Password</label>
+          <label htmlFor="password" className="tech-font">Senha</label>
           <CampoSenha
             id="password"
             rotulo="Senha"
@@ -291,7 +291,7 @@ export default function LoginPage() {
 
         {!modoLogin && (
           <div className="form-group">
-            <label htmlFor="confirmacao" className="tech-font">Confirm Password</label>
+            <label htmlFor="confirmacao" className="tech-font">Confirme a senha</label>
             <CampoSenha
               id="confirmacao"
               rotulo="Confirmação da senha"

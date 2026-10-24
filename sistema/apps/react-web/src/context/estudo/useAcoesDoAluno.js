@@ -12,14 +12,14 @@ export function useAcoesDoAluno({ nomeUsuario, userKey, progresso, ui, sessao })
     }
 
     const ok = await confirmar(
-      'Transação de Loja',
-      `Deseja desbloquear a disciplina bônus "${bonus.nome}" por ${bonus.custoMoedas} Coins?\n\nSaldo atual: ${progresso.moedas} Coins.`,
+      'Comprar bônus',
+      `Deseja desbloquear a disciplina bônus "${bonus.nome}" por ${bonus.custoMoedas} moedas?\n\nSaldo atual: ${progresso.moedas} moedas.`,
     );
     if (!ok) return;
 
     if (progresso.moedas < bonus.custoMoedas) {
       som('playError');
-      toast('error', 'Saldo Insuficiente', `Você possui ${progresso.moedas} Coins, mas são necessários ${bonus.custoMoedas} Coins.`);
+      toast('error', 'Saldo Insuficiente', `Você tem ${progresso.moedas} moedas, mas o bônus custa ${bonus.custoMoedas}.`);
       return;
     }
 

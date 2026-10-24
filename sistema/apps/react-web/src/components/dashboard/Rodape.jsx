@@ -10,7 +10,7 @@ const COLUNAS = [
   },
   {
     titulo: 'Ecossistema',
-    links: [['Trilhas e Disciplinas', 'trilhas'], ['Simulado ENADE', 'enade'], ['Comunidade Devs', 'comunidade'], ['Loja de Bônus (Coins)', 'loja']],
+    links: [['Trilhas e Disciplinas', 'trilhas'], ['Simulado ENADE', 'enade'], ['Comunidade Devs', 'comunidade'], ['Loja de bônus', 'loja']],
   },
   {
     titulo: 'Suporte & Legal',

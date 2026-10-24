@@ -82,7 +82,7 @@ export function ModalProgresso() {
 
       const ok = await confirmar(
         'Restaurar Backup',
-        `Deseja restaurar os dados de "${dados.usuario || 'Usuário'}" (${dados.xp || 0} XP, ${dados.coins || 0} Coins)?\n\nIsso sincronizará o estado local com o backup.`,
+        `Deseja restaurar os dados de "${dados.usuario || 'Usuário'}" (${dados.xp || 0} XP, ${dados.coins || 0} moedas)?\n\nO progresso deste navegador será trocado pelo do arquivo de backup.`,
       );
       if (!ok) return;
 
