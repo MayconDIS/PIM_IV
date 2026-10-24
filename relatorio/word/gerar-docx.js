@@ -5,7 +5,7 @@ const path = require('path');
 const { parse } = require('node-html-parser');
 const {
   AlignmentType, BorderStyle, Document, Footer, Header, HeadingLevel, ImageRun, LineRuleType, Packer, PageBreak,
-  PageNumber, Paragraph, ShadingType, Table, TableCell, TableOfContents, TableRow, TextRun, VerticalAlign, WidthType,
+  HeightRule, PageNumber, Paragraph, ShadingType, Table, TableCell, TableOfContents, TableRow, TextRun, VerticalAlign, WidthType,
 } = require('docx');
 
 const [PASTA, SAIDA] = process.argv.slice(2);
@@ -99,6 +99,7 @@ const bordas = { top: borda, bottom: borda, left: borda, right: borda };
 
 function tabela(no, { semBorda = false, larguraCm = 16, fonte = 20 } = {}) {
   const linhas = no.querySelectorAll('tr');
+  const preencher = (no.getAttribute('class') || '').includes('tabela-preencher');
   const nCol = Math.max(...linhas.map((l) => l.childNodes.filter((c) => ['td', 'th'].includes(c.rawTagName?.toLowerCase())).length));
   const largura = Math.round(larguraCm * CM);
   // larguras pelo tamanho médio do texto de cada coluna, com mínimo
@@ -108,6 +109,10 @@ function tabela(no, { semBorda = false, larguraCm = 16, fonte = 20 } = {}) {
   }
   const soma = tam.reduce((a, b) => a + b, 0);
   let cols = tam.map((t) => Math.max(Math.round(largura * t / soma), Math.round(2.2 * CM)));
+  // Largura fixa quando o HTML pede (col-width-N no cabeçalho): coluna vazia, como a do e-mail, não fica estreita.
+  const fixas = linhas[0].childNodes.filter((c) => ['td', 'th'].includes(c.rawTagName?.toLowerCase()))
+    .map((c) => Number((c.getAttribute('class') || '').match(/col-width-(\d+)/)?.[1]) || 0);
+  if (fixas.length === nCol && fixas.every(Boolean)) cols = fixas.map((p) => Math.round(largura * p / 100));
   const ajuste = largura - cols.reduce((a, b) => a + b, 0);
   cols[cols.indexOf(Math.max(...cols))] += ajuste;
   return new Table({
@@ -116,6 +121,9 @@ function tabela(no, { semBorda = false, larguraCm = 16, fonte = 20 } = {}) {
     alignment: AlignmentType.CENTER,
     rows: linhas.map((l) => new TableRow({
       cantSplit: true,
+      // Tabela preenchida à mão (ficha): linhas de dados com 0,9 cm para escrever.
+      height: preencher && l.parentNode?.rawTagName?.toLowerCase() !== 'thead' && !l.querySelector('th')
+        ? { value: Math.round(0.9 * CM), rule: HeightRule.ATLEAST } : undefined,
       tableHeader: l.parentNode?.rawTagName?.toLowerCase() === 'thead',
       children: l.childNodes.filter((c) => ['td', 'th'].includes(c.rawTagName?.toLowerCase())).map((c, k) => {
         const cab = c.rawTagName.toLowerCase() === 'th';
