@@ -31,6 +31,31 @@ npm run dev:react    # site em http://localhost:5501
 npm run dev:mobile   # app de celular (Expo)
 ```
 
+### Com Docker (sem instalar .NET, Node nem SQL Server)
+
+Com o [Docker Desktop](https://www.docker.com/products/docker-desktop/) instalado:
+
+```bash
+cd sistema
+docker compose up --build
+```
+
+Sobem três contêineres: o **SQL Server**, a **API** (que cria o banco e carrega o
+conteúdo sozinha) e o **site** servido pelo Nginx.
+
+| O quê | Endereço |
+|---|---|
+| Site | http://localhost:8080 |
+| API | http://localhost:5000/api/status |
+| Banco | `localhost,1433`, usuário `sa` |
+
+As senhas do `docker-compose.yml` servem só para rodar no próprio computador. Para
+trocar, crie um `.env` na pasta `sistema` com `MSSQL_SA_PASSWORD` e `JWT_KEY`.
+`docker compose down` para tudo; `docker compose down -v` também apaga o banco.
+
+A cada PR, o GitHub Actions (`.github/workflows/docker.yml`) monta as imagens, sobe
+os três contêineres e testa a API e o site.
+
 ## 4. Banco de dados
 
 Não precisa criar nada. Quando a API sobe, ela:

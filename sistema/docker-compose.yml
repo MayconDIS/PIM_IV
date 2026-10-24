@@ -1,0 +1,53 @@
+# Sobe o Nex_TI inteiro em contêineres: SQL Server, API (.NET 10) e site (React + Nginx).
+#
+#   docker compose up --build      (na pasta sistema/)
+#
+#   Site: http://localhost:8080    API: http://localhost:5000/api/status
+#
+# As senhas abaixo são só para rodar no próprio computador. Para trocar, crie um
+# arquivo .env nesta pasta com MSSQL_SA_PASSWORD e JWT_KEY (o .env não vai para o git).
+
+services:
+  banco:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:-Nexti#Docker2026}
+    ports:
+      - "1433:1433"
+    volumes:
+      - dados-sql:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -Q 'SELECT 1' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    depends_on:
+      banco:
+        condition: service_healthy
+    environment:
+      ConnectionStrings__DefaultConnection: Server=banco,1433;Database=NexTI_DB;User ID=sa;Password=${MSSQL_SA_PASSWORD:-Nexti#Docker2026};TrustServerCertificate=True;
+      Jwt__Key: ${JWT_KEY:-chave-local-do-docker-com-mais-de-32-caracteres}
+      Database__MigrarAoIniciar: "true"
+    ports:
+      - "5000:8080"
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/react-web/Dockerfile
+      args:
+        VITE_API_URL: http://localhost:5000/api
+    depends_on:
+      - api
+    ports:
+      - "8080:80"
+
+volumes:
+  dados-sql:

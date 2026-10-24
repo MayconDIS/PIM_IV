@@ -1,0 +1,12 @@
+# O contexto do build é a pasta sistema/: fica de fora o que é gerado ou pesado.
+**/node_modules
+**/bin
+**/obj
+**/dist
+**/__pycache__
+**/.expo
+.env
+database
+docs
+infra
+tests
