@@ -37,7 +37,7 @@ contraste e VLibras).
 | Mapa Neural | ✅ | Só no navegador |
 | Certificado | ✅ | Gerado no navegador e impresso como PDF |
 | App de celular | ✅ | Login, fases e estudo pela API; sem internet, as respostas esperam numa fila no aparelho |
-| Perfis de Tutor e Admin | ❌ | No backlog (PB01 e PB15) |
+| Perfis e painel do Tutor/Admin | ✅ | Perfil no banco e no JWT; Tutor vê os alunos e edita/exclui cartas; Admin também define perfis |
 
 Cadastro e login exigem a API. Com uma sessão já salva no navegador, o painel
 pode usar as cartas locais de `packages/shared` quando a API está indisponível.

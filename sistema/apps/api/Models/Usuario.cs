@@ -21,6 +21,11 @@ namespace NexTI_API.Models
         [MaxLength(255)]
         public string SenhaHash { get; set; } = string.Empty;
 
+        /// <summary>Aluno, Tutor ou Admin (ver <see cref="Perfis"/>). Todo cadastro começa como Aluno.</summary>
+        [Required]
+        [MaxLength(20)]
+        public string Perfil { get; set; } = Perfis.Aluno;
+
         public int Nivel { get; set; } = 1;
         public int XP { get; set; } = 0;
         public int Moedas { get; set; } = 0;

@@ -1930,3 +1930,18 @@ body.high-contrast-mode .xp-badge {
 @supports not selector(::-webkit-scrollbar) {
     * { scrollbar-width: thin; scrollbar-color: var(--nexti-cyan) rgba(13, 17, 23, 0.6); }
 }
+
+/* =========================================
+   PAINEL DO TUTOR / ADMIN (ModalAdmin)
+   ========================================= */
+.admin-abas { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+.admin-aba-ativa { border-color: var(--nexti-cyan); color: var(--nexti-cyan); box-shadow: 0 0 10px rgba(0, 230, 230, 0.2); }
+.admin-tabela { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.admin-tabela caption { caption-side: top; text-align: left; color: var(--nexti-cyan); font-weight: 700; padding-bottom: 10px; }
+.admin-tabela th { text-align: left; color: #8b92a5; font-weight: 600; padding: 8px 10px; border-bottom: 1px solid var(--nexti-cyan); }
+.admin-tabela td { color: #c5c6c7; padding: 8px 10px; border-bottom: 1px solid #30363d; vertical-align: top; }
+.admin-tabela select { background: #0d1117; color: #c5c6c7; border: 1px solid #30363d; border-radius: 6px; padding: 4px 8px; }
+.admin-acoes { display: flex; gap: 8px; white-space: nowrap; }
+.admin-perigo:hover { border-color: #ff5555; color: #ff5555; }
+.admin-edicao { border: 1px solid var(--nexti-cyan); border-radius: 10px; padding: 16px; margin-bottom: 20px; }
+.admin-vazio { color: #8b92a5; }

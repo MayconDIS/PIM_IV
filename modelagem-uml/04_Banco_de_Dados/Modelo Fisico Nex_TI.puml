@@ -15,6 +15,7 @@ entity usuarios {
   --
   * username : NVARCHAR(50) <<UNIQUE>>
   * email : NVARCHAR(100) <<UNIQUE>>
+  * perfil : NVARCHAR(20) = 'Aluno' <<CHECK>>
   * senha_hash : NVARCHAR(255)
   * nivel : INT
   * xp : INT
@@ -22,6 +23,16 @@ entity usuarios {
   * data_criacao : DATETIME2
   ..
   trigger: tg_usuarios_protege_gamificacao
+}
+
+entity cartas_moderadas {
+  * id : INT IDENTITY <<PK>>
+  --
+  * codigo_fase : NVARCHAR(20)
+  * frente : NVARCHAR(MAX)
+  * data_moderacao : DATETIME2
+  ..
+  o seed não recria estas cartas
 }
 
 entity fases {

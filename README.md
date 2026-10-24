@@ -80,8 +80,8 @@ e com o que o nosso Scrum Master colocou no backlog.
 | **UML** | Caso de uso, classes e sequência | Também o diagrama de atividade e o diagrama de classes do código que fizemos |
 | **Organização** | Atas das reuniões | Scrum no Trello, com o backlog (PB01 a PB22) e as sprints |
 
-Ainda falta: o painel do Tutor (PB15), o login no app de celular (PB11) e os perfis de
-Aluno, Tutor e Administrador (PB01).
+Também já entraram: os perfis de Aluno, Tutor e Administrador (PB01), o painel do Tutor (PB15) e o
+login e a sincronização no app de celular (PB11 e PB12).
 
 ## 📄 Licença
 
