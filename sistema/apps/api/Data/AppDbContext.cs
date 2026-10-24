@@ -16,6 +16,7 @@ namespace NexTI_API.Data
         public DbSet<Questao> Questoes { get; set; }
         public DbSet<Alternativa> Alternativas { get; set; }
         public DbSet<CartaModerada> CartasModeradas { get; set; }
+        public DbSet<FaseConcluida> FasesConcluidas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -24,6 +25,10 @@ namespace NexTI_API.Data
             // Composite Key for ProgressoFlashcard
             modelBuilder.Entity<ProgressoFlashcard>()
                 .HasKey(p => new { p.UsuarioId, p.FlashcardId });
+
+            // Uma linha por fase concluída por aluno: é o que garante o prêmio só uma vez.
+            modelBuilder.Entity<FaseConcluida>()
+                .HasKey(f => new { f.UsuarioId, f.CodigoFase });
 
             // Tabelas com trigger (migration ObjetosDoBanco). O EF Core precisa saber,
             // senão grava com OUTPUT, que o SQL Server recusa em tabela com trigger.

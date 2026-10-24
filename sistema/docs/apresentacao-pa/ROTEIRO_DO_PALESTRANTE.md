@@ -128,7 +128,7 @@
 - **Objetivo:** mostrar o repositório ao vivo.
 - **No GitHub:** abrir o **Pull Request #1** (o trabalho desta entrega separado em commits) e a pasta `sistema/tests`.
 - **Fala sugerida:**
-  > *"Abrimos um Pull Request, damos merge na main, o GitHub Actions roda os 179 testes da API e, se passarem, publica a API na Azure sozinho. O site vai para a Vercel."*
+  > *"Abrimos um Pull Request, damos merge na main, o GitHub Actions roda os 182 testes da API e, se passarem, publica a API na Azure sozinho. O site vai para a Vercel."*
 
 ---
 

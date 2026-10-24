@@ -196,6 +196,8 @@ public class GerarDiagramasPimIV {
             "FatorFacilidade : double = 2.5", "DataProximaRevisao : DateTime"}, new String[0]));
         p.put("CartaModerada", classe(d, pacote, "CartaModerada", 740, 220, new String[] {
             "Id : int", "CodigoFase : string", "Frente : string", "DataModeracao : DateTime"}, new String[0]));
+        p.put("FaseConcluida", classe(d, pacote, "FaseConcluida", 20, 40, new String[] {
+            "UsuarioId : int", "CodigoFase : string", "DataConclusao : DateTime"}, new String[0]));
         p.put("AreaConhecimento", classe(d, pacote, "AreaConhecimento", 1000, 40, new String[] {"Id : int", "NomeArea : string"}, new String[0]));
         p.put("Questao", classe(d, pacote, "Questao", 1000, 220, new String[] {
             "Id : int", "IdArea : int", "Enunciado : string", "Origem : string [0..1]"}, new String[0]));
@@ -208,6 +210,8 @@ public class GerarDiagramasPimIV {
         associacao(d, p, "Fase", "1", "Flashcard", "0..*", "contém", true);
         associacao(d, p, "Fase", "1", "CartaModerada", "0..*", "lembra", false);
         associacao(d, p, "Usuario", "1", "ProgressoFlashcard", "0..*", "possui", false);
+        associacao(d, p, "Usuario", "1", "FaseConcluida", "0..*", "conclui", false);
+        associacao(d, p, "Fase", "1", "FaseConcluida", "0..*", "concluída em", false);
         associacao(d, p, "Flashcard", "1", "ProgressoFlashcard", "0..*", "revisado em", false);
         associacao(d, p, "AreaConhecimento", "1", "Questao", "0..*", "classifica", false);
         associacao(d, p, "Questao", "1", "Alternativa", "0..*", "tem", true);
@@ -271,7 +275,7 @@ public class GerarDiagramasPimIV {
         d.createText("Dados (persistência)", new Point2D.Double(20, 500));
         p.put("AppDbContext", classe(d, dados, "AppDbContext", 20, 520, new String[] {
             "Usuarios : DbSet<Usuario>", "Flashcards : DbSet<Flashcard>", "Progresso_Flashcards : DbSet<ProgressoFlashcard>",
-            "Questoes : DbSet<Questao>", "CartasModeradas : DbSet<CartaModerada>"}, new String[0]));
+            "Questoes : DbSet<Questao>", "CartasModeradas : DbSet<CartaModerada>", "FasesConcluidas : DbSet<FaseConcluida>"}, new String[0]));
         p.get("AppDbContext").setWidth(larguraTotal);
         INodePresentation app = p.get("AppDbContext");
         p.put("DbContext", classe(d, dados, "DbContext", 20, app.getLocation().getY() + app.getHeight() + 70, new String[0], new String[0]));
@@ -356,7 +360,7 @@ public class GerarDiagramasPimIV {
         naRaia.put(resta, FRONT);
         INodePresentation premio = acao(a, "Mostra o prêmio e libera a próxima fase", centro[FRONT], 1300);
         naRaia.put(premio, FRONT);
-        INodePresentation stats = acao(a, "POST /api/progresso/concluir-fase: calcula XP e moedas", centro[API], 1360);
+        INodePresentation stats = acao(a, "POST /api/progresso/concluir-fase: paga XP e moedas na 1ª vez", centro[API], 1360);
         naRaia.put(stats, API);
         INodePresentation salva = acao(a, "Atualiza XP, moedas e nível (trigger: nunca diminuem)", centro[BANCO], 1420);
         naRaia.put(salva, BANCO);
@@ -415,6 +419,7 @@ public class GerarDiagramasPimIV {
             {"Flashcard", "Carta de estudo de uma fase (tabela flashcards). Com Opcoes e Correta, vira questão de múltipla escolha no estilo ENADE."},
             {"ProgressoFlashcard", "Estado do SM-2 de um aluno numa carta: repetições, intervalo em dias, fator de facilidade e data da próxima revisão. Chave composta UsuarioId + FlashcardId."},
             {"CartaModerada", "Carta editada ou excluída por um Tutor. A carga inicial consulta esta tabela para não recriar a carta."},
+            {"FaseConcluida", "Fase, teste ou bônus que o aluno já concluiu (tabela fases_concluidas, chave UsuarioId + CodigoFase). O prêmio de XP e moedas sai só na primeira conclusão."},
             {"AreaConhecimento", "Área das questões do ENADE, por exemplo Engenharia de Software ou Banco de Dados."},
             {"Questao", "Questão de prova do ENADE. Origem guarda de onde veio, por exemplo ENADE 2017 - questão 12."},
             {"Alternativa", "Uma das cinco alternativas de uma questão; IsCorreta marca a resposta certa."},
@@ -672,20 +677,21 @@ public class GerarDiagramasPimIV {
             "Sm2Engine na API, com 5 testes, e histórico gravado por trigger.");
 
         detalhe(casos, "Atribuir XP e Moedas",
-            "Ao concluir uma fase, a API calcula o XP e as moedas pela tabela de recompensas, a mesma do site, e devolve os totais.",
-            new String[] {"EstudoContext", "gamificacao.js", "ApiService", "EndpointExtensions", "IGamificacaoService", "GamificacaoService", "TabelaDeRecompensas", "Usuario"},
+            "Ao concluir uma fase, a API paga o XP e as moedas da tabela de recompensas só na primeira vez e devolve o prêmio pago e os totais.",
+            new String[] {"EstudoContext", "gamificacao.js", "ApiService", "EndpointExtensions", "IGamificacaoService", "GamificacaoService", "TabelaDeRecompensas", "Usuario", "FaseConcluida"},
             new String[][] {{"usa", "EstudoContext", "gamificacao.js"}, {"usa", "EstudoContext", "ApiService"},
                 {"implementa", "GamificacaoService", "IGamificacaoService"}, {"usa", "GamificacaoService", "TabelaDeRecompensas", "consulta"},
-                {"usa", "GamificacaoService", "Usuario", "atualiza"},
+                {"usa", "GamificacaoService", "Usuario", "atualiza"}, {"usa", "GamificacaoService", "FaseConcluida", "registra"},
                 {"usa", "ApiService", "EndpointExtensions", "HTTP"}, {"usa", "EndpointExtensions", "IGamificacaoService"}},
             new String[] {"a=:Aluno", "ctx=:EstudoContext", "gam=:gamificacao.js", "rota=:EndpointExtensions", "gs=:GamificacaoService", "tab=:TabelaDeRecompensas", "bd=:SQL Server"},
             new String[][] {{"a", "ctx", "conclui a fase (concluirRotina)"}, {"ctx", "gam", "recompensa(faseId, acertos, total)"},
                 {"gam", "ctx", "prêmio para mostrar na hora", "retorno"},
                 {"ctx", "rota", "POST /api/progresso/concluir-fase (faseId, acertos, total)"},
                 {"rota", "gs", "ConcluirFaseAsync(usuarioId, faseId, acertos, total)"}, {"gs", "tab", "PremioDe(faseId, acertos, total)"},
-                {"tab", "gs", "XP e moedas", "retorno"}, {"gs", "bd", "UPDATE usuarios (trigger: XP e nível não diminuem)"},
-                {"gs", "rota", "Conclusao(prêmio, XP, moedas, nível)", "retorno"}, {"rota", "ctx", "200: totais do servidor", "retorno"},
-                {"ctx", "ctx", "fica com o XP e as moedas do servidor"}},
+                {"tab", "gs", "XP e moedas", "retorno"}, {"gs", "bd", "SELECT fases_concluidas: já concluiu esta fase?"},
+                {"gs", "bd", "na 1ª vez: UPDATE usuarios e INSERT fases_concluidas"},
+                {"gs", "rota", "Conclusao(prêmio pago, XP, moedas, nível, primeiraVez)", "retorno"}, {"rota", "ctx", "200: prêmio pago e totais", "retorno"},
+                {"ctx", "ctx", "mostra o prêmio pago (0 numa revisão)"}},
             "A tabela vem do gamificacao.js (npm run seed:api): site, app e API pagam o mesmo valor; o cliente não manda o XP.");
 
         detalhe(casos, "Desbloquear Fases e Módulos",
@@ -870,6 +876,7 @@ public class GerarDiagramasPimIV {
             {"Usuário", "Pessoa com conta no sistema, com perfil Aluno, Tutor ou Admin.", "800", "240", "nome de usuário : texto", "e-mail : texto", "perfil : texto", "senha (hash) : texto", "XP : número", "moedas : número", "nível : número"},
             {"Progresso de estudo", "Como um aluno está numa carta (SM-2).", "400", "240", "repetições : número", "intervalo : número", "fator de facilidade : número", "próxima revisão : data"},
             {"Revisão registrada", "Cada resposta do aluno, guardada pela trigger.", "400", "500", "intervalo : número", "data da revisão : data"},
+            {"Fase concluída", "Fase que o aluno já concluiu; o prêmio sai só na primeira vez.", "800", "30", "data da conclusão : data"},
             {"Área de conhecimento", "Área das questões do ENADE.", "1200", "30", "nome : texto"},
             {"Questão", "Questão de prova do ENADE.", "1200", "240", "enunciado : texto", "origem : texto"},
             {"Alternativa", "Uma das alternativas de uma questão.", "1200", "480", "texto : texto", "correta : lógico"},
@@ -888,6 +895,7 @@ public class GerarDiagramasPimIV {
             {"Fase", "1", "Flashcard", "0..*", "contém"},
             {"Fase", "1", "Carta moderada", "0..*", "lembra"},
             {"Usuário", "1", "Progresso de estudo", "0..*", "estuda"},
+            {"Usuário", "1", "Fase concluída", "0..*", "conclui"},
             {"Flashcard", "1", "Progresso de estudo", "0..*", "é estudada em"},
             {"Usuário", "1", "Revisão registrada", "0..*", "gera"},
             {"Flashcard", "1", "Revisão registrada", "0..*", "aparece em"},
@@ -905,6 +913,7 @@ public class GerarDiagramasPimIV {
             {"usuarios", "Contas; o CHECK limita o perfil a Aluno, Tutor ou Admin.", "820", "240", "id : INT {PK}", "username : NVARCHAR(50)", "email : NVARCHAR(100)", "perfil : NVARCHAR(20)", "senha_hash : NVARCHAR(255)", "nivel : INT", "xp : INT", "moedas : INT", "data_criacao : DATETIME2"},
             {"progresso_flashcards", "Estado do SM-2 por aluno e carta (chave composta).", "420", "240", "usuario_id : INT {PK, FK}", "flashcard_id : INT {PK, FK}", "repeticoes : INT", "intervalo_dias : FLOAT", "fator_facilidade : FLOAT", "data_proxima_revisao : DATETIME2"},
             {"tb_historico_revisoes", "Uma linha por revisão, gravada pela trigger tg_progresso_historico.", "420", "520", "id_historico : INT {PK}", "usuario_id : INT {FK}", "flashcard_id : INT {FK}", "intervalo_dias : FLOAT", "data_revisao : DATETIME2"},
+            {"fases_concluidas", "Fases que cada aluno concluiu; a chave composta garante o prêmio uma vez só.", "820", "30", "usuario_id : INT {PK, FK}", "codigo_fase : NVARCHAR(20) {PK}", "data_conclusao : DATETIME2"},
             {"tb_areas_conhecimento", "Áreas das questões do ENADE.", "1250", "30", "id_area : INT {PK}", "nome_area : NVARCHAR(100)"},
             {"tb_questoes", "Questões das provas.", "1250", "240", "id_questao : INT {PK}", "id_area : INT {FK}", "enunciado : NVARCHAR(MAX)", "origem : NVARCHAR(50)"},
             {"tb_alternativas", "Alternativas de cada questão.", "1250", "480", "id_alternativa : INT {PK}", "id_questao : INT {FK}", "texto : NVARCHAR(MAX)", "is_correta : BIT"},
@@ -946,6 +955,7 @@ public class GerarDiagramasPimIV {
         String[][] relacoesDer = {
             {"fases", "1", "flashcards", "0..*", "contém"},
             {"usuarios", "1", "progresso_flashcards", "0..*", "estuda"},
+            {"usuarios", "1", "fases_concluidas", "0..*", "conclui"},
             {"flashcards", "1", "progresso_flashcards", "0..*", "é estudada em"},
             {"usuarios", "1", "tb_historico_revisoes", "0..*", "gera"},
             {"flashcards", "1", "tb_historico_revisoes", "0..*", "aparece em"},
@@ -955,7 +965,7 @@ public class GerarDiagramasPimIV {
             {"tb_provas", "1", "tb_prova_questao", "0..*", "reúne"},
         };
         for (String[] r : relacoesDer) ligar(d, e.get(r[0]), p.get(r[0]), r[1], e.get(r[2]), p.get(r[2]), r[3], r[4]);
-        d.createNote("PK = chave primária · FK = chave estrangeira.\ncartas_moderadas se liga a fases só pelo código (sem FK)."
+        d.createNote("PK = chave primária · FK = chave estrangeira.\ncartas_moderadas e fases_concluidas se ligam a fases só pelo código (sem FK)."
             + (comTipos ? "\nTipos do SQL Server; o script completo está em sistema/database/NexTI_DB.sql." : ""),
             ponto(30, 760));
         }
@@ -1290,7 +1300,7 @@ public class GerarDiagramasPimIV {
         Map.entry("Gerenciar Conteúdo das Cartas", "O Tutor edita ou exclui cartas."),
         Map.entry("Gerenciar Perfis e Acessos", "O Administrador define o perfil de cada usuário."),
         Map.entry("Estudar sem Internet (app)", "No app, respostas sem internet esperam numa fila e são enviadas depois."),
-        Map.entry("Atribuir XP e Moedas", "Ao concluir uma fase, a API calcula o XP e as moedas pela tabela de recompensas, a mesma do site."),
+        Map.entry("Atribuir XP e Moedas", "Ao concluir uma fase, a API paga o XP e as moedas da tabela de recompensas, a mesma do site, só na primeira conclusão."),
         Map.entry("Desbloquear Fases e Módulos", "Concluir uma fase libera a próxima; moedas compram fases bônus."));
 
     // ------------------------------------------------------------------ ajudantes

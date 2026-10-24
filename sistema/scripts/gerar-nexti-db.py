@@ -72,14 +72,15 @@ def bloco_insert(tabela, colunas, identidade, linhas):
 def main():
     banco = sys.argv[1] if len(sys.argv) > 1 else "NexTI_Export"
     esquema = (RAIZ / "database" / "azure-sql" / "schema.sql").read_text(encoding="utf-8-sig")
-    cabecalho = """-- =====================================================================
+    contagem = {tabela: len(ler(banco, tabela, colunas)) for tabela, colunas, _ in TABELAS[:2]}
+    cabecalho = f"""-- =====================================================================
 -- Nex_TI — script completo do banco de dados (SQL Server / Azure SQL)
 -- PIM IV · Etapa 7 · Programação de Banco de Dados
 --
 -- 1. Cria o banco NexTI_DB (se não existir).
 -- 2. Cria as tabelas, a tabela de histórico, os 2 triggers, as 2 funções,
 --    as 2 views e as 4 procedures (mesmas migrations que a API aplica).
--- 3. Insere as 26 fases, as 620 cartas e os simulados ENADE.
+-- 3. Insere as {contagem['fases']} fases, as {contagem['flashcards']} cartas e os simulados ENADE.
 --
 -- Pode ser executado mais de uma vez: cada parte confere se já existe.
 -- Gerado por sistema/scripts/gerar-nexti-db.py — não editar à mão.
