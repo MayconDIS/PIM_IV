@@ -1,8 +1,9 @@
 # Como trabalhar no Nex_TI (PIM IV)
 
 Regras do projeto inteiro, para a equipe e para qualquer IA (Claude, Gemini/Antigravity, Copilot).
-Os arquivos de cada pasta (`sistema/.agents/GEMINI.md`, `relatorio/.agents/GEMINI.md`,
-`modelagem-uml/.agents/GEMINI.md`) só complementam este; se algo divergir, vale este arquivo.
+Os `AGENTS.md` de cada pasta (`sistema/`, `relatorio/` e `modelagem-uml/`) só complementam este; se algo
+divergir, vale este arquivo. Cada pasta tem também um `CLAUDE.md` e um `GEMINI.md` que só importam o
+`AGENTS.md` dela. As skills de IA ficam numa pasta só: `.agents/`, na raiz.
 
 ## O projeto
 

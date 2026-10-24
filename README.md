@@ -23,7 +23,7 @@ repositórios distintos, vivem aqui como pastas de primeiro nível:
 ├── 📁 sistema/        # Implementação: frontend, API C# (.NET 10) e scripts SQL Server
 ├── 📁 relatorio/      # Relatório ABNT (HTML/CSS) e os slides
 ├── 📁 modelagem-uml/  # UML no Astah e banco de dados (MER, DER e modelo físico)
-├── 📁 .agents/        # Skills de IA compartilhadas pelas três frentes
+├── 📁 .agents/        # Skills de IA (uma pasta só, usada pelas três frentes)
 ├── 📁 .claude/agents/ # O time de agentes (coordenador, dev, modelagem, relatório, revisão)
 ├── 📁 scripts/        # verificar-sincronia.mjs: confere se as três partes estão alinhadas
 ├── 📄 AGENTS.md       # Regras do projeto inteiro (equipe e IAs)

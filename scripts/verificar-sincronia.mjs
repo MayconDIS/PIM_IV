@@ -18,7 +18,7 @@ function arquivos(dir, filtro = () => true) {
   const saida = [];
   const andar = (d) => {
     for (const nome of readdirSync(d)) {
-      if (['node_modules', '.git', 'bin', 'obj', 'dist', '.planning', '.agents'].includes(nome)) continue;
+      if (['node_modules', '.git', 'bin', 'obj', 'dist', '.agents'].includes(nome)) continue;
       const caminho = join(d, nome);
       if (statSync(caminho).isDirectory()) andar(caminho);
       else if (filtro(caminho)) saida.push(relative(RAIZ, caminho).replaceAll('\\', '/'));
@@ -136,6 +136,24 @@ const REGRAS = (f) => /(^|\/)(AGENTS|CLAUDE|GEMINI)\.md$/.test(f) || f.startsWit
 const comPim3 = arquivos('.', (c) => /\.(md|html|js|jsx|cs|java|json)$/.test(c))
   .filter((f) => !PERMITIDOS.includes(f) && !REGRAS(f) && !f.startsWith('relatorio/word/') && /PIM ?III/.test(ler(f)));
 checar('PIM III só nas seções de melhorias', comPim3.length === 0, comPim3.join(', '));
+
+// --- 6. uma pasta de skills só ---------------------------------------------------------------
+// As skills ficam em .agents/ na raiz; as regras de cada pasta, no AGENTS.md dela.
+const extras = [];
+const procurar = (d) => {
+  for (const nome of readdirSync(join(RAIZ, d))) {
+    if (['node_modules', '.git', 'bin', 'obj', 'dist'].includes(nome)) continue;
+    const rel = d === '.' ? nome : `${d}/${nome}`;
+    if (!statSync(join(RAIZ, rel)).isDirectory()) continue;
+    if ((nome === '.agents' && rel !== '.agents') || nome === '.planning') extras.push(rel);
+    else procurar(rel);
+  }
+};
+procurar('.');
+checar('só a pasta .agents da raiz, sem .planning', extras.length === 0, extras.join(', '));
+for (const pasta of ['sistema', 'relatorio', 'modelagem-uml']) {
+  checar(`${pasta} tem AGENTS.md, CLAUDE.md e GEMINI.md`, ['AGENTS.md', 'CLAUDE.md', 'GEMINI.md'].every((f) => existe(`${pasta}/${f}`)));
+}
 
 // --- resultado --------------------------------------------------------------------------
 console.log(`Sincronia do projeto: ${ok.length} ok, ${falhas.length} com problema.`);

@@ -1,6 +1,6 @@
 # sistema/ — o código do Nex_TI
 
-Leia primeiro o [`AGENTS.md`](../../AGENTS.md) da raiz: as regras do projeto inteiro estão lá.
+Leia primeiro o [`AGENTS.md`](../AGENTS.md) da raiz: as regras do projeto inteiro estão lá.
 Aqui fica só o que é específico do código.
 
 ## O que tem aqui

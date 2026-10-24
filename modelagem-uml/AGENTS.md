@@ -1,6 +1,6 @@
 # modelagem-uml/ — os diagramas do Nex_TI
 
-Leia primeiro o [`AGENTS.md`](../../AGENTS.md) da raiz: as regras do projeto inteiro estão lá.
+Leia primeiro o [`AGENTS.md`](../AGENTS.md) da raiz: as regras do projeto inteiro estão lá.
 Aqui fica só o que é específico da modelagem.
 
 ## O que tem aqui
