@@ -13,7 +13,7 @@ Aqui fica só o que é específico do código.
 | `packages/shared/` | Conteúdo (fases e cartas), regras de SM-2 e de XP/moedas e o cliente da API, usados pelo site e pelo app |
 | `database/` | `NexTI_DB.sql`, o script completo do banco |
 | `tests/` | Testes da API (xUnit) |
-| `docs/` | Manual técnico, slides e roteiro da apresentação |
+| `docs/` | Manuais (técnico com as rotas, de execução, prático do usuário e de deploy), slides e roteiro da apresentação |
 
 ## Regras do código
 

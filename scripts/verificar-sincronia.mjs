@@ -162,6 +162,43 @@ checar('CLAUDE.md da raiz importa o AGENTS.md de cada pasta', ['sistema', 'relat
 const geminis = arquivos('.', (c) => c.endsWith('GEMINI.md'));
 checar('nenhum GEMINI.md (a equipe usa Claude Code e Codex)', geminis.length === 0, geminis.join(', '));
 
+// --- 7. manual, dicionário de dados e modelo do PIM ------------------------------------------
+// Rotas do manual técnico = rotas da API (parâmetros {x} comparados sem o nome).
+const normalizar = (r) => r.replace(/\{[^}]*\}/g, '{}').replace(/\/$/, '');
+const rotasDoCodigo = new Set();
+for (const f of arquivos('sistema/apps/api', (c) => c.endsWith('.cs'))) {
+  const t = ler(f);
+  const grupo = t.match(/MapGroup\("([^"]+)"\)/)?.[1] ?? '';
+  for (const m of t.matchAll(/\.Map(Get|Post|Put|Delete)\("([^"]*)"/g)) {
+    const caminho = m[2].startsWith('/api') ? m[2] : grupo + m[2];
+    rotasDoCodigo.add(`${m[1].toUpperCase()} ${normalizar(caminho)}`);
+  }
+}
+const manual = ler('sistema/docs/MANUAL_TECNICO.md');
+const rotasDoManual = new Set([...manual.matchAll(/`(GET|POST|PUT|DELETE) (\/api[^`]*)`/g)].map((m) => `${m[1]} ${normalizar(m[2])}`));
+const faltamNoManual = [...rotasDoCodigo].filter((r) => !rotasDoManual.has(r));
+const sobramNoManual = [...rotasDoManual].filter((r) => !rotasDoCodigo.has(r));
+checar('rotas do manual técnico iguais às da API', !faltamNoManual.length && !sobramNoManual.length,
+  [faltamNoManual.length && `faltam: ${faltamNoManual.join(', ')}`, sobramNoManual.length && `sobram: ${sobramNoManual.join(', ')}`].filter(Boolean).join('; '));
+
+const relatorio = ler('relatorio/index.html');
+// Dicionário de dados (2.7.6) = tabelas do script do banco.
+const tabelasDoBanco = new Set([...ler('sistema/database/NexTI_DB.sql').matchAll(/CREATE TABLE \[?(\w+)\]?/g)]
+  .map((m) => m[1]).filter((t) => !t.startsWith('__')));
+const secaoDicionario = relatorio.match(/aria-label="2\.7\.6 Dicionário de dados".*?<\/section>/s)?.[0] ?? '';
+const tabelasDoDicionario = new Set([...secaoDicionario.matchAll(/<tr><td>(\w+)<\/td>/g)].map((m) => m[1]));
+const difDicionario = [...tabelasDoBanco].filter((t) => !tabelasDoDicionario.has(t))
+  .concat([...tabelasDoDicionario].filter((t) => !tabelasDoBanco.has(t)));
+checar('dicionário de dados (2.7.6) com as tabelas do banco', Boolean(secaoDicionario) && !difDicionario.length, difDicionario.join(', '));
+
+// Modelo do PIM: resumo de 200 a 250 palavras e figuras numeradas em sequência.
+const resumo = relatorio.match(/<h2 class="center">RESUMO<\/h2><p class="paragrafo">(.*?)<\/p>/s)?.[1] ?? '';
+const palavras = resumo.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
+checar('resumo com 200 a 250 palavras', palavras >= 200 && palavras <= 250, `tem ${palavras}`);
+const figuras = [...relatorio.matchAll(/<p class="legenda-topo">([^<]*)<\/p>/g)].map((m) => m[1]);
+const foraDeOrdem = figuras.filter((f, i) => !f.startsWith(`Figura ${i + 1} – `));
+checar('figuras numeradas em sequência (Figura N – título)', figuras.length > 0 && !foraDeOrdem.length, foraDeOrdem.slice(0, 3).join(' | '));
+
 // --- resultado --------------------------------------------------------------------------
 console.log(`Sincronia do projeto: ${ok.length} ok, ${falhas.length} com problema.`);
 for (const f of falhas) console.log(`  ✗ ${f}`);

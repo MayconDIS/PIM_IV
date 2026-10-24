@@ -13,5 +13,9 @@ Como trabalhar:
 - Cada etapa cita o livro-texto da sua disciplina (seção 1.5) com referência ABNT.
 - Só PIM IV: o PIM III aparece apenas na seção 1.4 (melhorias) e nas referências.
 - Linguagem simples, como alunos explicando o que fizeram.
+- Siga o modelo de PIM da UNIP: resumo de 200 a 250 palavras, no passado, e abstract igual;
+  conclusão sem citação; figuras numeradas ("Figura N – título") com a fonte.
+- Regras de negócio e requisitos (2.2.2 a 2.2.4) descrevem o que o código faz hoje: confira na API
+  quem pode usar cada rota antes de escrever. Atualize também os cartões RN, RF e RNF do Trello.
 - Depois de mudar o relatório, gere o Word (`relatorio/word`, `npm run gerar`), abra no Word para
   atualizar o sumário e confira. Mudou slide? Gere o PDF dos slides de novo.

@@ -34,17 +34,19 @@ A ordem é sempre a mesma: **código → modelagem → relatório, Word e slides
 
 | Mudou | Atualize também |
 |---|---|
-| Rota da API | `sistema/docs/MANUAL_TECNICO.md` (tabela de rotas), relatório 2.4.3, número de rotas no README, no relatório e nos slides, diagramas do caso de uso no gerador do Astah |
+| Rota da API ou quem pode usá-la | `sistema/docs/MANUAL_TECNICO.md` (tabela de rotas), relatório 2.4.3 e regras/requisitos (2.2.2 e 2.2.3), número de rotas no README, no relatório e nos slides, diagramas do caso de uso no gerador do Astah |
 | Regra de SM-2 ou de XP e moedas (`packages/shared`) | `npm run seed:api` (gera a tabela da API), testes compartilhados e da API, manual, relatório |
 | Fases ou cartas (`content.js`) | `npm run seed:api`, número de fases e cartas no README, relatório e slides |
-| Tabela ou entidade do banco | migration, `sistema/database/NexTI_DB.sql`, gerador do Astah (entidades, MER, DER, modelo físico), relatório Etapa 7 |
+| Tabela ou entidade do banco | migration, `sistema/database/NexTI_DB.sql`, gerador do Astah (entidades, MER, DER, modelo físico), relatório Etapa 7 e dicionário de dados (2.7.6) |
+| Regra de negócio ou funcionalidade | relatório 2.2.2 (regras), 2.2.3 e 2.2.4 (requisitos), cartões RN, RF e RNF do Trello, caso de uso no gerador do Astah |
 | Qualquer diagrama | gerador do Astah → gerar o `.asta` → exportar imagens → copiar as principais para `02_Modelagem_UML` e `04_Banco_de_Dados` → copiar para `relatorio/assets` → Word → PDF dos slides |
-| Texto ou página do relatório | conferir que toda página cabe em A4 e gerar o Word de novo |
+| Texto ou página do relatório | conferir que toda página cabe em A4 e gerar o Word de novo; resumo e abstract andam juntos |
 | Tela do site | tirar nova foto para o Apêndice A do relatório |
 
 Antes de abrir um pull request, rode **`node scripts/verificar-sincronia.mjs`**. Ele confere se os
-números dos documentos batem com o código, se os diagramas do relatório são os mesmos do Astah e
-se o PIM III só aparece nas melhorias. O GitHub roda a mesma checagem em todo pull request.
+números dos documentos batem com o código, se as rotas do manual e o dicionário de dados batem com a
+API e o banco, se os diagramas do relatório são os mesmos do Astah, se o relatório segue o modelo do
+PIM (resumo e figuras) e se o PIM III só aparece nas melhorias. O GitHub roda a mesma checagem em todo pull request.
 
 ## Regras
 
