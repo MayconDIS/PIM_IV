@@ -82,7 +82,7 @@ export default function EstudoScreen({ fase, api, sinc, onSair, onErroDeSessao }
   return (
     <ScrollView contentContainerStyle={styles.conteudo}>
       <View style={styles.topo}>
-        <TouchableOpacity onPress={onSair} accessibilityRole="button"><Text style={styles.link}>‹ Fases</Text></TouchableOpacity>
+        <TouchableOpacity onPress={onSair} accessibilityRole="button" accessibilityLabel="Voltar às fases" hitSlop={{ top: 14, bottom: 14, left: 12, right: 12 }}><Text style={styles.link}>‹ Fases</Text></TouchableOpacity>
         <Text style={styles.contador}>{fase.titulo} · faltam {fila.length}</Text>
       </View>
 

@@ -55,7 +55,8 @@ export function useAcoesDoAluno({ nomeUsuario, userKey, progresso, ui, sessao })
   const concluirDiagnostico = (acertos) => {
     const resultado = resultadoDoDiagnostico(acertos);
     localStorage.setItem(`${userKey}nivelado`, 'true');
-    progresso.setFasesDesbloqueadas(resultado.fases);
+    // Soma ao que já estava liberado: refazer o nivelamento não tranca fases já abertas.
+    progresso.setFasesDesbloqueadas((atual) => [...new Set([...atual, ...resultado.fases])]);
     progresso.definirRank(resultado.rotuloRank);
 
     if (progresso.apiOnlineRef.current) {

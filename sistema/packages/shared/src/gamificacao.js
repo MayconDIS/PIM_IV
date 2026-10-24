@@ -33,12 +33,18 @@ export const isTeste = (faseId) => String(faseId).startsWith('teste-mod');
 export const isBonus = (faseId) => String(faseId).startsWith('bonus');
 
 /** Progresso para a barra de nível: rank atual, próximo e percentual. */
-export function progressoDeNivel(xp) {
-  const rank = RANKS.find((r) => xp >= r.xpMinimo) ?? RANKS[RANKS.length - 1];
+export function progressoDeNivel(xp, nivel = 1) {
+  const pelaXp = RANKS.find((r) => xp >= r.xpMinimo) ?? RANKS[RANKS.length - 1];
+  // O nivelamento grava o nível na API: quem começou como Intermediário não volta a Ingressante
+  // só porque ainda tem pouco XP. Vale o maior dos dois ranks.
+  // RANKS vai do maior para o menor; o Mestre só se alcança por XP.
+  const peloNivel = RANKS.find((r) => r.xpMinimo < 600 && nivel >= r.nivel) ?? pelaXp;
+  const rank = peloNivel.xpMinimo > pelaXp.xpMinimo ? peloNivel : pelaXp;
   const noTopo = rank.alvo === rank.xpMinimo;
+  const base = xp >= rank.xpMinimo ? rank.xpMinimo : 0;
   const percentual = noTopo
     ? 100
-    : Math.min(100, Math.max(0, Math.round(((xp - rank.xpMinimo) / (rank.alvo - rank.xpMinimo)) * 100)));
+    : Math.min(100, Math.max(0, Math.round(((xp - base) / (rank.alvo - base)) * 100)));
 
   return {
     rank: rank.nome,
@@ -114,6 +120,33 @@ export function proximaFase(faseId) {
   const indice = ORDEM_FASES.indexOf(faseId);
   if (indice < 0 || indice >= ORDEM_FASES.length - 1) return null;
   return ORDEM_FASES[indice + 1];
+}
+
+/**
+ * Fases liberadas pelo que está no servidor, para o aluno continuar em outro aparelho:
+ * - o nível gravado na API (vem do nivelamento) dá o ponto de partida, como no diagnóstico;
+ * - fase com todas as cartas respondidas conta como concluída e libera a trilha até a seguinte.
+ * Com `pularTestes` (app, que não tem os testes de módulo), a fase depois do teste também é liberada.
+ */
+export function fasesLiberadasNoServidor({ nivel = 1, progresso = [], pularTestes = false } = {}) {
+  const liberadas = new Set(FASES_INICIAIS);
+  if (nivel >= 6) ORDEM_FASES.forEach((f) => liberadas.add(f));
+  else if (nivel >= 3) ORDEM_FASES.slice(0, ORDEM_FASES.indexOf('teste-mod2') + 1).forEach((f) => liberadas.add(f));
+
+  const respondidas = {};
+  for (const p of progresso) (respondidas[p.codigoFase] ??= new Set()).add(p.flashcardId);
+  let ultimaConcluida = -1;
+  for (const fase of FASES) {
+    if (fase.totalCards > 0 && (respondidas[fase.id]?.size ?? 0) >= fase.totalCards) {
+      ultimaConcluida = Math.max(ultimaConcluida, ORDEM_FASES.indexOf(fase.id));
+    }
+  }
+  if (ultimaConcluida >= 0) {
+    let ate = ultimaConcluida + 1;
+    if (pularTestes && isTeste(ORDEM_FASES[ate] ?? '')) ate += 1;
+    ORDEM_FASES.slice(0, ate + 1).forEach((f) => liberadas.add(f));
+  }
+  return ORDEM_FASES.filter((f) => liberadas.has(f));
 }
 
 /** true quando concluir esta fase libera o certificado. */

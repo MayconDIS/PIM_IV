@@ -1946,3 +1946,14 @@ body.high-contrast-mode .xp-badge {
 .admin-perigo:hover { border-color: #ff5555; color: #ff5555; }
 .admin-edicao { border: 1px solid var(--nexti-cyan); border-radius: 10px; padding: 16px; margin-bottom: 20px; }
 .admin-vazio { color: #8b92a5; }
+
+/* Barra de rank no celular: rank, XP e próximo rank quebram em linhas em vez de se sobrepor. */
+@media (max-width: 640px) {
+    .xp-level-progress-labels {
+        flex-wrap: wrap;
+        gap: 4px 12px;
+    }
+    .xp-level-progress-labels > span {
+        white-space: nowrap;
+    }
+}

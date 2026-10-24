@@ -6,7 +6,7 @@
  * define o rank inicial e quais fases já começam liberadas.
  */
 
-import { ORDEM_FASES } from './gamificacao.js';
+import { ORDEM_FASES, isTeste } from './gamificacao.js';
 
 export const PERGUNTAS_DIAGNOSTICO = Object.freeze([
   { p: '1. Python: O que é um Dicionário?', r: ['Uma lista de palavras.', "Estrutura baseada em 'Chave: Valor'.", 'Um laço de repetição.'], certa: 1 },
@@ -49,6 +49,6 @@ export function resultadoDoDiagnostico(acertos) {
     rotuloRank: 'Rank: Expert',
     nivel: 6,
     fases: [...ORDEM_FASES],
-    mensagem: 'Todas as 22 disciplinas regulares estão abertas!',
+    mensagem: `Todas as ${ORDEM_FASES.filter((f) => !isTeste(f)).length} fases regulares estão abertas!`,
   };
 }

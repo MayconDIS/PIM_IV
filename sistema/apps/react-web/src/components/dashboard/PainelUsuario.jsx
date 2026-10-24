@@ -1,11 +1,12 @@
 import React from 'react';
 import { progressoDeNivel } from '@nexti/shared';
 import { useEstudo } from '../../context/EstudoContext';
+import { nivelParaApi } from '../../context/estudo/apoio.js';
 
 /** Seção `.dashboard-header`: usuário, XP, moedas e barra de rank (porte de `atualizarBarraNivel`). */
 export function PainelUsuario() {
-  const { nomeUsuario, xp, moedas } = useEstudo();
-  const nivel = progressoDeNivel(xp);
+  const { nomeUsuario, xp, moedas, rank } = useEstudo();
+  const nivel = progressoDeNivel(xp, nivelParaApi(rank, xp));
 
   return (
     <section className="dashboard-header" aria-labelledby="header-user-name">
@@ -23,13 +24,13 @@ export function PainelUsuario() {
             <span className="xp-badge tech-font flex-align xp-display-badge">
               <span className="material-symbols-outlined" style={{ fontSize: '1.2rem' }}>military_tech</span> {xp} XP
             </span>
-            <span className="badge-title-sub">Nível</span>
+            <span className="badge-title-sub">XP</span>
           </div>
           <div className="xp-badge-col">
             <span className="xp-badge tech-font flex-align coin-display-badge">
               <span className="material-symbols-outlined" style={{ fontSize: '1.2rem' }}>toll</span> {moedas}
             </span>
-            <span className="badge-title-sub">Coins</span>
+            <span className="badge-title-sub">Moedas</span>
           </div>
         </div>
       </div>
