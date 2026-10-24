@@ -438,7 +438,7 @@ public class GerarDiagramasPimIV {
             {"IPoliticaDeSenha", "Contrato das regras de senha forte."},
             {"PoliticaDeSenha", "Regras de senha no servidor: de 8 a 72 caracteres, letras, números e símbolo, sem usar o nickname nem o e-mail."},
             {"ISm2Engine", "Contrato do algoritmo de repetição espaçada."},
-            {"Sm2Engine", "Algoritmo SM-2: nota 3 ou mais volta em 1 dia, depois 6, depois multiplica pelo fator; nota menor recomeça em 1 dia."},
+            {"Sm2Engine", "Algoritmo SM-2 no estilo do Anki, igual ao do site (sm2.js): Bom multiplica o intervalo pelo fator, Fácil vai mais longe, Difícil soma pelo menos 1 dia e Errei volta para 1 dia. Os dois lados são testados com os mesmos casos."},
             {"LoginPage", "Tela de login e cadastro do site (React)."},
             {"EstudoContext", "Estado do estudo no site (React): deck, respostas, XP, moedas e fases liberadas. Fala com a API pelo ApiService."},
             {"ApiService", "Cliente da API usado pelo site e pelo app (packages/shared/src/api.js). Envia o token JWT no cabeçalho."},

@@ -1,0 +1,155 @@
+[
+  {
+    "nome": "carta nova: Errei",
+    "respostas": [
+      "again"
+    ],
+    "esperado": {
+      "repeticoes": 0,
+      "intervaloDias": 1,
+      "fatorFacilidade": 2.3
+    }
+  },
+  {
+    "nome": "carta nova: Difícil",
+    "respostas": [
+      "hard"
+    ],
+    "esperado": {
+      "repeticoes": 1,
+      "intervaloDias": 1,
+      "fatorFacilidade": 2.35
+    }
+  },
+  {
+    "nome": "carta nova: Bom",
+    "respostas": [
+      "good"
+    ],
+    "esperado": {
+      "repeticoes": 1,
+      "intervaloDias": 1,
+      "fatorFacilidade": 2.5
+    }
+  },
+  {
+    "nome": "carta nova: Fácil",
+    "respostas": [
+      "easy"
+    ],
+    "esperado": {
+      "repeticoes": 1,
+      "intervaloDias": 3,
+      "fatorFacilidade": 2.65
+    }
+  },
+  {
+    "nome": "Bom, Bom, Bom",
+    "respostas": [
+      "good",
+      "good",
+      "good"
+    ],
+    "esperado": {
+      "repeticoes": 3,
+      "intervaloDias": 8,
+      "fatorFacilidade": 2.5
+    }
+  },
+  {
+    "nome": "Fácil, Fácil, Fácil",
+    "respostas": [
+      "easy",
+      "easy",
+      "easy"
+    ],
+    "esperado": {
+      "repeticoes": 3,
+      "intervaloDias": 36,
+      "fatorFacilidade": 2.95
+    }
+  },
+  {
+    "nome": "Bom, Difícil, Bom",
+    "respostas": [
+      "good",
+      "hard",
+      "good"
+    ],
+    "esperado": {
+      "repeticoes": 3,
+      "intervaloDias": 5,
+      "fatorFacilidade": 2.35
+    }
+  },
+  {
+    "nome": "Bom, Bom, Errei, Bom",
+    "respostas": [
+      "good",
+      "good",
+      "again",
+      "good"
+    ],
+    "esperado": {
+      "repeticoes": 1,
+      "intervaloDias": 1,
+      "fatorFacilidade": 2.3
+    }
+  },
+  {
+    "nome": "Difícil 12 vezes (soma pelo menos 1 dia; o fator para em 1,3)",
+    "respostas": [
+      "hard",
+      "hard",
+      "hard",
+      "hard",
+      "hard",
+      "hard",
+      "hard",
+      "hard",
+      "hard",
+      "hard",
+      "hard",
+      "hard"
+    ],
+    "esperado": {
+      "repeticoes": 12,
+      "intervaloDias": 17,
+      "fatorFacilidade": 1.3
+    }
+  },
+  {
+    "nome": "Errei 8 vezes (o fator para em 1,3)",
+    "respostas": [
+      "again",
+      "again",
+      "again",
+      "again",
+      "again",
+      "again",
+      "again",
+      "again"
+    ],
+    "esperado": {
+      "repeticoes": 0,
+      "intervaloDias": 1,
+      "fatorFacilidade": 1.3
+    }
+  },
+  {
+    "nome": "Fácil, Bom, Difícil, Errei, Bom, Fácil",
+    "respostas": [
+      "easy",
+      "good",
+      "hard",
+      "again",
+      "good",
+      "easy"
+    ],
+    "esperado": {
+      "repeticoes": 2,
+      "intervaloDias": 3,
+      "fatorFacilidade": 2.45
+    }
+  }
+]

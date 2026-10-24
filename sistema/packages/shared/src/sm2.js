@@ -1,10 +1,12 @@
 /**
  * Motor de repetição espaçada (SM-2, no estilo Anki) do Nex_TI.
  *
- * Porte fiel das funções `formatarIntervalo`, `gerarBotoesRepeticao` e
- * `processarResposta` do dashboard vanilla original. As fórmulas e os limites
- * são os mesmos; aqui elas viram funções puras para que o react-web e o
- * react-mobile cheguem sempre ao mesmo resultado.
+ * Funções puras, usadas pelo site e pelo app. É a regra oficial do Nex_TI: a API
+ * (Services/Sm2Engine.cs) calcula igual, e os dois lados são testados com os mesmos
+ * casos (tests/sm2-casos.json).
+ *
+ * "Difícil" soma pelo menos 1 dia: sem isso, uma carta com intervalo de 1 dia ficaria
+ * presa em 1 dia, porque arredondar 1 × 1,2 dá 1.
  */
 
 /** Estado inicial de uma carta nunca estudada. */
@@ -38,7 +40,7 @@ export function previsoes(estado = ESTADO_INICIAL) {
   if (!estado.rep) return { again: '<1m', hard: '<6m', good: '<10m', easy: '3d' };
   return {
     again: '<1m',
-    hard: formatarIntervalo(Math.max(1, estado.interval * 1.2)),
+    hard: formatarIntervalo(Math.max(estado.interval + 1, estado.interval * 1.2)),
     good: formatarIntervalo(Math.max(1, estado.interval * estado.ease)),
     easy: formatarIntervalo(Math.max(1, estado.interval * estado.ease * 1.3)),
   };
@@ -59,7 +61,7 @@ export function aplicarResposta(estado = ESTADO_INICIAL, resultado, agora = Date
       novo.ease = Math.max(1.3, novo.ease - 0.2);
       break;
     case 'hard':
-      novo.interval = Math.max(1, Math.round(novo.interval * 1.2));
+      novo.interval = novo.rep === 0 ? 1 : Math.max(novo.interval + 1, Math.round(novo.interval * 1.2));
       novo.ease = Math.max(1.3, novo.ease - 0.15);
       novo.rep += 1;
       break;

@@ -119,7 +119,7 @@
 - **Tópicos-chave:**
   - O aluno avalia a carta → o site manda a nota para `POST /api/progresso/atualizar` → a rota confere o token → o `ProgressoService` busca o progresso → o `Sm2Engine` calcula a nova data → o banco grava, e uma trigger guarda o histórico.
   - Sem login ou sem internet, o site segue só com o estado local (no app, a resposta espera numa fila).
-  - Regra em `Services/Sm2Engine.cs`, com 5 testes. Nota 3 ou mais: 1 dia, 6 dias, depois multiplica pelo fator de facilidade. Menor que 3: volta para 1 dia e o fator cai (mínimo 1,3).
+  - Regra em `Services/Sm2Engine.cs`, igual à do site e do app (`sm2.js`): os dois lados rodam os mesmos 11 casos de teste. Bom multiplica o intervalo pelo fator (2,5); Fácil vai mais longe (carta nova: 3 dias); Difícil soma pelo menos 1 dia; Errei volta para amanhã. O fator nunca fica abaixo de 1,3.
 
 ---
 
