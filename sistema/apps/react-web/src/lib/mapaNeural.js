@@ -12,9 +12,14 @@ export function montarMapaNeural(container, canvas, { nomeUsuario, chaveSave, or
   canvas.textContent = '';
 
   const salvo = lerSave(chaveSave);
-  let escala = 1;
-  let panX = container.clientWidth / 2 - CENTRO;
-  let panY = container.clientHeight / 2 - CENTRO;
+  // Tela de toque (celular): não há "passar o mouse", então os nomes ficam à mostra (CSS) e a
+  // carta tocada abre num painel fixo embaixo do mapa, fora do zoom, para dar para ler.
+  const toque = window.matchMedia('(hover: none)').matches;
+  // Zoom que cabe o mapa inteiro (as fases ficam até ~650px do centro): 1 no computador, menos no celular.
+  const escalaInicial = () => Math.min(1, Math.max(0.3, Math.min(container.clientWidth, container.clientHeight) / 1300));
+  let escala = escalaInicial();
+  let panX = container.clientWidth / 2 - CENTRO * escala;
+  let panY = container.clientHeight / 2 - CENTRO * escala;
   if (salvo.camera) ({ scale: escala, panX, panY } = salvo.camera);
 
   let noArrastado = null;
@@ -22,6 +27,7 @@ export function montarMapaNeural(container, canvas, { nomeUsuario, chaveSave, or
   let ultimoToqueX = 0;
   let ultimoToqueY = 0;
   let quadro = 0;
+  let pinca = null; // { distancia, x, y } enquanto há dois dedos na tela
 
   const nos = {};
   const arestas = [];
@@ -31,7 +37,7 @@ export function montarMapaNeural(container, canvas, { nomeUsuario, chaveSave, or
   };
   atualizarCamera();
 
-  const removerMiniCards = () => canvas.querySelectorAll('.mini-flashcard').forEach((el) => el.remove());
+  const removerMiniCards = () => container.querySelectorAll('.mini-flashcard').forEach((el) => el.remove());
 
   function criarNo(dados) {
     const el = document.createElement('div');
@@ -88,7 +94,8 @@ export function montarMapaNeural(container, canvas, { nomeUsuario, chaveSave, or
       el.addEventListener('click', (e) => {
         e.stopPropagation();
         removerMiniCards();
-        canvas.appendChild(miniFlashcard(dados));
+        if (toque) container.appendChild(miniFlashcard(dados, { fixo: true }));
+        else canvas.appendChild(miniFlashcard(dados));
       });
     }
 
@@ -245,7 +252,27 @@ export function montarMapaNeural(container, canvas, { nomeUsuario, chaveSave, or
   };
 
   const onTouchMove = (e) => {
-    if (e.touches.length !== 1) return;
+    if (e.touches.length === 2 && container.contains(e.target)) {
+      // Pinça: a distância entre os dedos dá o zoom e o meio deles move a câmera.
+      e.preventDefault();
+      const [a, b] = e.touches;
+      const r = container.getBoundingClientRect();
+      const distancia = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+      const x = (a.clientX + b.clientX) / 2 - r.left;
+      const y = (a.clientY + b.clientY) / 2 - r.top;
+      if (pinca) {
+        panX += x - pinca.x;
+        panY += y - pinca.y;
+        zoomPara(escala * (distancia / pinca.distancia), x, y);
+      } else {
+        noArrastado = null;
+        panorama = false;
+        removerMiniCards();
+      }
+      pinca = { distancia, x, y };
+      return;
+    }
+    if (e.touches.length !== 1 || pinca) return;
     const { clientX, clientY } = e.touches[0];
     const dx = clientX - ultimoToqueX;
     const dy = clientY - ultimoToqueY;
@@ -265,6 +292,10 @@ export function montarMapaNeural(container, canvas, { nomeUsuario, chaveSave, or
   };
 
   const onSoltar = () => {
+    if (pinca) {
+      pinca = null;
+      salvarEstado();
+    }
     if (noArrastado) {
       const pai = nos[noArrastado.parentId];
       if (pai) {
@@ -282,13 +313,18 @@ export function montarMapaNeural(container, canvas, { nomeUsuario, chaveSave, or
     container.style.cursor = 'grab';
   };
 
-  function aplicarZoom(delta, origemX, origemY) {
+  /** Muda o zoom mantendo parado o ponto (origemX, origemY) da tela. */
+  function zoomPara(novaEscala, origemX, origemY) {
     const alvoX = (origemX - panX) / escala;
     const alvoY = (origemY - panY) / escala;
-    escala = Math.min(3, Math.max(0.2, escala + delta));
+    escala = Math.min(3, Math.max(0.2, novaEscala));
     panX = origemX - alvoX * escala;
     panY = origemY - alvoY * escala;
     atualizarCamera();
+  }
+
+  function aplicarZoom(delta, origemX, origemY) {
+    zoomPara(escala + delta, origemX, origemY);
     salvarEstado();
   }
 
@@ -316,9 +352,9 @@ export function montarMapaNeural(container, canvas, { nomeUsuario, chaveSave, or
     aproximar: () => zoomCentral(0.3),
     afastar: () => zoomCentral(-0.3),
     centralizar: () => {
-      escala = 1;
-      panX = container.clientWidth / 2 - cx;
-      panY = container.clientHeight / 2 - cy;
+      escala = escalaInicial();
+      panX = container.clientWidth / 2 - cx * escala;
+      panY = container.clientHeight / 2 - cy * escala;
       atualizarCamera();
       salvarEstado();
     },
@@ -347,11 +383,13 @@ function lerSave(chave) {
 }
 
 /** Card flutuante com pergunta/resposta — montado com textContent (o original usava innerHTML). */
-function miniFlashcard(no) {
+function miniFlashcard(no, { fixo = false } = {}) {
   const artigo = document.createElement('article');
-  artigo.className = 'mini-flashcard';
-  artigo.style.left = `${no.x + no.size / 2 + 10}px`;
-  artigo.style.top = `${no.y - 40}px`;
+  artigo.className = fixo ? 'mini-flashcard mini-flashcard-fixo' : 'mini-flashcard';
+  if (!fixo) {
+    artigo.style.left = `${no.x + no.size / 2 + 10}px`;
+    artigo.style.top = `${no.y - 40}px`;
+  }
 
   const titulo = document.createElement('h4');
   titulo.textContent = no.id.split('_')[0].toUpperCase();
