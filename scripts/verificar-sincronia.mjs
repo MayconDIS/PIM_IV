@@ -75,7 +75,9 @@ checar('testes da API iguais em todos os documentos', valores.length <= 1,
 
 // --- 4. diagramas: só do Astah ----------------------------------------------------------
 const ASTAH = 'modelagem-uml/02_Modelagem_UML/imagens-astah';
-const pngsAstah = arquivos(ASTAH, (c) => c.endsWith('.png'));
+// O Nex_TI Desktop (apresentação de P.A. em .NET) tem um .asta à parte; a contagem é a do PIM IV.
+const DESKTOP = `${ASTAH}/Nex_TI Desktop`;
+const pngsAstah = arquivos(ASTAH, (c) => c.endsWith('.png')).filter((f) => !f.startsWith(`${DESKTOP}/`));
 const pastasCasos = readdirSync(join(RAIZ, ASTAH, 'Casos de uso')).filter((n) => statSync(join(RAIZ, ASTAH, 'Casos de uso', n)).isDirectory());
 for (const { doc, m } of citacoes(/\b(\d+) diagramas\b/g)) {
   if (doc.includes('ROTEIRO')) continue; // o roteiro conta os diagramas mostrados nos slides
@@ -101,6 +103,19 @@ const PRINCIPAIS = {
 for (const [principal, exportada] of Object.entries(PRINCIPAIS)) {
   const origem = `${ASTAH}/${exportada}`;
   checar(`${principal} igual à exportada do Astah`, existe(principal) && existe(origem) && hash(principal) === hash(origem));
+}
+
+// O README do Nex_TI Desktop usa cópias exatas dos diagramas exportados do Astah.
+const DO_DESKTOP = {
+  '1-casos-de-uso.png': 'Casos de uso/1. Casos de Uso - Nex_TI Desktop.png',
+  '2-classes-camadas.png': 'Classes/2. Classes - camadas.png',
+  '3-classes-dominio.png': 'Classes/3. Classes - domínio.png',
+  '4-sequencia.png': 'Sequência/4. Sequência - responder carta e concluir fase.png',
+  '5-atividade.png': 'Atividade/5. Atividade - sessão de estudo no desktop.png',
+};
+for (const [copia, exportada] of Object.entries(DO_DESKTOP)) {
+  const destino = `sistema/apps/desktop/docs/diagramas/${copia}`, origem = `${DESKTOP}/${exportada}`;
+  checar(`${destino} igual à exportada do Astah`, existe(destino) && existe(origem) && hash(destino) === hash(origem));
 }
 
 // O relatório usa cópias exatas das imagens da modelagem.

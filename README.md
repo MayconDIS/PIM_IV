@@ -35,7 +35,7 @@ repositórios distintos, vivem aqui como pastas de primeiro nível:
 
 | Pasta | Conteúdo |
 |---|---|
-| [`sistema/`](sistema) | Monorepo npm: `apps/react-web`, `apps/react-mobile`, `apps/api` (.NET), `packages/`, `database/`, `tests/` |
+| [`sistema/`](sistema) | Monorepo npm: `apps/react-web`, `apps/react-mobile`, `apps/api` (.NET), `apps/desktop` (.NET, Windows Forms), `packages/`, `database/`, `tests/` |
 | [`relatorio/`](relatorio) | Relatório ABNT em HTML/CSS, `assets/` e `design_DNA/` |
 | [`modelagem-uml/`](modelagem-uml) | `02_Modelagem_UML/` (o `.asta` e as imagens exportadas do Astah) e `04_Banco_de_Dados/` (MER, DER e modelo físico) |
 

@@ -66,7 +66,7 @@ PIM (resumo e figuras) e se o PIM III só aparece nas melhorias. O GitHub roda a
 | O quê | Comando (na pasta indicada) |
 |---|---|
 | Subir API (porta 5000) e site (porta 5501) | `sistema/`: `npm install` e `npm run dev` |
-| Testes da API / compartilhados / app | `sistema/`: `npm test`, `npm run test:shared`, `npm run test:mobile` |
+| Testes da API / compartilhados / app / desktop | `sistema/`: `npm test`, `npm run test:shared`, `npm run test:mobile`, `npm run test:desktop` |
 | Tabelas da API a partir do conteúdo | `sistema/`: `npm run seed:api` (e `npm run seed:api:check` para conferir) |
 | Gerar o `.asta` | ver `modelagem-uml/02_Modelagem_UML/gerador-astah/README.md` |
 | Exportar as imagens do Astah | idem (`ExportarImagens.java`) |

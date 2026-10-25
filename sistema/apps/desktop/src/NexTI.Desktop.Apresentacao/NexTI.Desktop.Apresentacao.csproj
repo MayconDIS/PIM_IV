@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>NexTI.Desktop</AssemblyName>
+    <RootNamespace>NexTI.Desktop.Apresentacao</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NexTI.Desktop.Aplicacao\NexTI.Desktop.Aplicacao.csproj" />
+    <ProjectReference Include="..\NexTI.Desktop.Infraestrutura\NexTI.Desktop.Infraestrutura.csproj" />
+  </ItemGroup>
+
+  <!-- O conteúdo e a tabela de prêmios são os mesmos da API (gerados de packages/shared por npm run seed:api). -->
+  <ItemGroup>
+    <None Include="..\..\..\api\Data\Seed\conteudo.json" Link="Dados\conteudo.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\..\api\Data\Seed\recompensas.json" Link="Dados\recompensas.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

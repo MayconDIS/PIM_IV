@@ -58,3 +58,28 @@ cd $A
 A exportação da API só funciona com o Astah aberto, então o `ExportarImagens.java` abre a
 janela do Astah, espera o projeto carregar, exporta e fecha sozinho. A linha de comando do
 Astah (`astah-command -image`) não serve: ela para na verificação da licença acadêmica.
+
+## Nex_TI Desktop (apresentação de P.A. em .NET)
+
+O `GerarDiagramasDesktop.java` monta o `Diagrams Nex_TI Desktop - PA DotNet.asta`, com os quatro
+diagramas pedidos na apresentação de P.A. em .NET, tirados do programa em
+[`sistema/apps/desktop`](../../../sistema/apps/desktop):
+
+| Diagrama | O que mostra |
+|---|---|
+| 1. Casos de Uso | Entrar com nickname, ver painel e trilha, estudar fase («include» responder carta, «extend» concluir fase) |
+| 2. Classes – camadas | Telas → serviços → interfaces do domínio ← implementações com EF Core e SQLite |
+| 3. Classes – domínio | Herança (Aluno é um Usuario), composição, associações com multiplicidade e a interface do SM-2 |
+| 4. Sequência | O aluno responde a última carta e conclui a fase |
+| 5. Atividade | A sessão de estudo inteira, com uma raia para o aluno e uma para cada camada |
+
+Gera e exporta do mesmo jeito (na primeira vez, passe um `.asta` qualquer como base):
+
+```powershell
+$A = "C:\Program Files\astah-uml"
+& "$A\jre\bin\java.exe" -cp "$A\astah-uml.jar;$A\astah-api.jar;$A\lib\*" `
+  GerarDiagramasDesktop.java "..\Diagrams Nex_TI Desktop - PA DotNet.asta"
+```
+
+As imagens ficam em [`../imagens-astah/Nex_TI Desktop`](../imagens-astah/Nex_TI%20Desktop), e as
+cópias usadas no README do programa, em `sistema/apps/desktop/docs/diagramas`.

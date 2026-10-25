@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/NexTI.Desktop.Aplicacao/NexTI.Desktop.Aplicacao.csproj" />
+    <Project Path="src/NexTI.Desktop.Apresentacao/NexTI.Desktop.Apresentacao.csproj" />
+    <Project Path="src/NexTI.Desktop.Dominio/NexTI.Desktop.Dominio.csproj" />
+    <Project Path="src/NexTI.Desktop.Infraestrutura/NexTI.Desktop.Infraestrutura.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/NexTI.Desktop.Testes/NexTI.Desktop.Testes.csproj" />
+  </Folder>
+</Solution>
