@@ -37,19 +37,28 @@ function montarMarcacao() {
 }
 
 // O botão do plugin fica dentro de um shadow DOM (#vlibras-access-wrapper), fora do alcance do CSS
-// da página. No celular ele ficava no meio da borda direita, por cima de campos e da busca: a regra
-// abaixo, colocada dentro do shadow DOM, desce o botão para o canto inferior, acima do "voltar ao topo".
-const POSICAO_NO_CELULAR = '@media (max-width: 640px) { #vlibras-access { top: auto !important; bottom: 96px !important; } }';
+// da página. No celular ele flutuava por cima da lista e dos botões do estudo (cobria o "Fácil").
+// Como no CasalFlow, abaixo de 800px o botão flutuante some; aqui, em vez de perder o tradutor, ele
+// abre pelo botão "Libras" do painel de acessibilidade do menu (abrirVLibras).
+const SEM_BOTAO_NO_CELULAR = '@media (max-width: 800px) { #vlibras-access { display: none !important; } }';
 
-function ajustarPosicaoNoCelular(tentativas = 40) {
+function esconderBotaoNoCelular(tentativas = 40) {
   const sombra = document.getElementById('vlibras-access-wrapper')?.shadowRoot;
   if (sombra) {
     const estilo = document.createElement('style');
-    estilo.textContent = POSICAO_NO_CELULAR;
+    estilo.textContent = SEM_BOTAO_NO_CELULAR;
     sombra.appendChild(estilo);
   } else if (tentativas > 0) {
-    setTimeout(() => ajustarPosicaoNoCelular(tentativas - 1), 250);
+    setTimeout(() => esconderBotaoNoCelular(tentativas - 1), 250);
   }
+}
+
+/** Abre o tradutor de Libras (o mesmo que tocar no botão azul do plugin). */
+export function abrirVLibras() {
+  const botao = document.getElementById('vlibras-access-wrapper')?.shadowRoot?.getElementById('vlibras-access')
+    ?? document.querySelector('[vw-access-button]');
+  if (botao) botao.click();
+  else console.warn('[VLibras] o tradutor ainda não carregou ou está fora do ar.');
 }
 
 export function instalarVLibras() {
@@ -63,7 +72,7 @@ export function instalarVLibras() {
   script.onload = () => {
     try {
       new window.VLibras.Widget(ENDERECO);
-      ajustarPosicaoNoCelular();
+      esconderBotaoNoCelular();
     } catch (erro) {
       console.warn('[VLibras] o plugin carregou mas não inicializou', { motivo: erro?.message });
     }
