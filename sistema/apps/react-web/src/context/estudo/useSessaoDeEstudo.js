@@ -263,14 +263,19 @@ export function useSessaoDeEstudo({ userKey, progresso, ui }) {
     } else if (isBonus(faseId)) {
       toast('success', 'Bônus Concluído', `O bônus rendeu +${premio.xp} XP e +${premio.moedas} moedas.`);
     } else if (seguinte) {
+      // Prêmio zerado = a API já tinha pagado esta fase antes: é revisão, mesmo que a próxima
+      // ainda não estivesse liberada neste aparelho.
+      const revisao = !premio.xp && !premio.moedas;
       if (!jaLiberada) {
         progresso.liberarFase(seguinte);
-        som('playLevelUp');
+        if (!revisao) som('playLevelUp');
+      }
+      if (!revisao && !jaLiberada) {
         toast('success', 'Fase concluída! 🔓', `Próxima fase liberada (+${premio.xp} XP, +${premio.moedas} moedas).`);
+      } else if (!revisao) {
+        toast('info', 'Revisão concluída', `Revisão finalizada (+${premio.xp} XP, +${premio.moedas} moedas).`);
       } else {
-        toast('info', 'Revisão Concluída', premio.xp || premio.moedas
-          ? `Revisão finalizada (+${premio.xp} XP, +${premio.moedas} moedas).`
-          : 'Revisão finalizada. O prêmio desta fase já foi recebido; a revisão conta para o SM-2.');
+        toast('info', 'Revisão concluída', 'O prêmio desta fase já foi recebido; a revisão conta para o SM-2.');
       }
     } else {
       toast('success', 'Prova concluída', `Você terminou a prova do ENADE (+${premio.xp} XP, +${premio.moedas} moedas).`);
