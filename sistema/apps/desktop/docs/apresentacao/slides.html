@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nex_TI — Apresentação P.A. em .NET</title>
+    <title>Nex_TI Desktop — Apresentação P.A. em .NET</title>
     <!--
       Slides da apresentação de P.A. em .NET (27/10/2026), 12 folhas em A4 PAISAGEM.
       Para projetar: abrir no Chrome, Ctrl+P, papel A4, orientação paisagem,
@@ -206,77 +206,71 @@
 </head>
 <body>
 
-<!-- ═══════════════════════════ SLIDE 1: CAPA (Maciel) ═══════════════════════════ -->
+<!-- ═══════════════════════════ SLIDE 1 (Maciel) ═══════════════════════════ -->
 <section class="slide capa" id="slide-1">
     <div class="slide-header">
         <span class="slide-tag">PIM IV · P.A. em .NET</span>
         <span class="slide-meta">UNIP · CST em ADS · 27/10/2026</span>
     </div>
     <div class="slide-body">
-        <span class="selo">Plataforma de estudo com flashcards</span>
-        <h1>Nex<span>_TI</span></h1>
+        <span class="selo">Aplicação desktop em .NET</span>
+        <h1>Nex<span>_TI</span> Desktop</h1>
         <div class="regua"></div>
-        <p class="slide-subtitle">Estudar TI com cartas que voltam na hora certa.</p>
+        <p class="slide-subtitle">Uma aplicação desktop pequena e organizada: flashcards com revisão espaçada.</p>
         <p class="equipe"><strong>DevTime</strong><br>
             Gabriel Alves Moreira <span>(H67HJI4)</span> · Maciel Costa da Silva <span>(R280985)</span> · Maycon Douglas Inácio Silva <span>(H719CD3)</span><br>
             Miguel Angel Fernandez Ortiz <span>(H7858F9)</span> · Rafael Mesquita <span>(H6722I0)</span><br>
-            <span>github.com/MayconDIS/PIM_IV</span></p>
+            <span>github.com/MayconDIS/PIM_IV · sistema/apps/desktop</span></p>
     </div>
-    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Maciel</strong> · Slide 1 / 14</span></div>
-    <div class="progresso"><i style="width:7%"></i></div>
+    <div class="slide-footer"><span>Nex_TI Desktop · P.A. em .NET</span><span><strong>Maciel</strong> · Slide 1 / 13</span></div>
+    <div class="progresso"><i style="width:8%"></i></div>
 </section>
 
-<!-- ═══════════════════════════ SLIDE 2: O PROJETO (Maciel) ═══════════════════════════ -->
+<!-- ═══════════════════════════ SLIDE 2 (Maciel) ═══════════════════════════ -->
 <section class="slide" id="slide-2">
     <div class="slide-header">
-        <span class="slide-tag">01 · O projeto</span>
-        <span class="slide-meta">O que é o Nex_TI</span>
+        <span class="slide-tag">01 · O programa</span>
+        <span class="slide-meta">O que o Nex_TI Desktop faz</span>
     </div>
     <div class="slide-body">
-        <h2 class="slide-title">Um app para estudar TI um pouco por dia</h2>
-        <p class="slide-subtitle">O aluno estuda por flashcards, e o sistema decide quando cada carta volta.</p>
-        <div class="grid-3">
-            <div class="card">
-                <h3>Flashcards com SM-2</h3>
-                <p>Errou, a carta volta amanhã. Acertou, ela demora mais para voltar.</p>
-            </div>
-            <div class="card">
-                <h3>Trilha de estudo</h3>
-                <p>29 fases e 702 cartas sobre TI, liberadas em ordem. No fim, guia de estudos e as provas oficiais do ENADE.</p>
-            </div>
-            <div class="card">
-                <h3>XP e moedas</h3>
-                <p>Cada fase dá XP e moedas. As moedas liberam disciplinas bônus.</p>
+        <h2 class="slide-title">Estudar TI no computador, sem internet</h2>
+        <div class="diagrama">
+            <figure><img src="../telas/2-principal.png" alt="Tela principal do Nex_TI Desktop: XP, moedas, nível e a trilha de fases com a situação de cada uma" style="height:105mm;max-width:150mm"></figure>
+            <div class="lado">
+                <div class="card"><h3>Entrar</h3><p>O aluno digita só o nickname. Os dados ficam no computador dele.</p></div>
+                <div class="card"><h3>Trilha</h3><p>25 fases e 582 cartas sobre TI. Concluir uma fase libera a próxima.</p></div>
+                <div class="card"><h3>SM-2, XP e moedas</h3><p>O SM-2 decide quando cada carta volta. A fase dá XP e moedas só na primeira vez.</p></div>
+                <p><b>Windows Forms</b> + <b>.NET 10</b> + <b>SQLite</b>.</p>
             </div>
         </div>
-        <p class="destaque"><strong>Melhorias em relação ao PIM III:</strong> API em camadas, app de celular e nuvem.</p>
     </div>
-    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Maciel</strong> · Slide 2 / 14</span></div>
-    <div class="progresso"><i style="width:14%"></i></div>
+    <div class="slide-footer"><span>Nex_TI Desktop · P.A. em .NET</span><span><strong>Maciel</strong> · Slide 2 / 13</span></div>
+    <div class="progresso"><i style="width:15%"></i></div>
 </section>
 
-<!-- ═══════════════════════════ SLIDE 3: CASO DE USO (Gabriel) ═══════════════════════════ -->
+<!-- ═══════════════════════════ SLIDE 3 (Gabriel) ═══════════════════════════ -->
 <section class="slide" id="slide-3">
     <div class="slide-header">
         <span class="slide-tag">02 · UML 1 de 4</span>
         <span class="slide-meta">Diagrama de caso de uso</span>
     </div>
     <div class="slide-body">
-        <h2 class="slide-title">Quem usa o sistema e para quê</h2>
+        <h2 class="slide-title">O que o aluno faz no programa</h2>
         <div class="diagrama">
-            <figure><img src="../../../../../modelagem-uml/02_Modelagem_UML/UseCase%20Diagram%20Nex_TI.png" alt="Diagrama de casos de uso do Nex_TI: o Administrador herda do Tutor, que herda do Aluno, e o que cada perfil faz" style="height:132mm;max-width:190mm"></figure>
+            <figure><img src="../diagramas/1-casos-de-uso.png" alt="Casos de uso do Nex_TI Desktop: o Aluno entra com nickname, vê o painel e a trilha e estuda uma fase, que inclui responder carta e é estendida por concluir fase" style="height:112mm;max-width:165mm"></figure>
             <div class="lado">
-                <p><b>Aluno:</b> estuda os flashcards, cria cartas, faz simulados e vê o próprio desempenho.</p>
-                <p><b>Tutor:</b> tudo do Aluno, mais o painel dos alunos e editar ou excluir cartas.</p>
-                <p><b>Admin:</b> tudo do Tutor, mais definir o perfil de cada usuário.</p>
+                <p><b>Ator:</b> o Aluno.</p>
+                <p><b>Entrar com nickname</b>, <b>ver painel e trilha</b> e <b>estudar fase</b>.</p>
+                <p><b>«include»:</b> estudar uma fase sempre inclui responder cartas.</p>
+                <p><b>«extend»:</b> concluir a fase só acontece quando a última carta é acertada.</p>
             </div>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Gabriel</strong> · Slide 3 / 14</span></div>
-    <div class="progresso"><i style="width:21%"></i></div>
+    <div class="slide-footer"><span>Nex_TI Desktop · P.A. em .NET</span><span><strong>Gabriel</strong> · Slide 3 / 13</span></div>
+    <div class="progresso"><i style="width:23%"></i></div>
 </section>
 
-<!-- ═══════════════════════════ SLIDE 4: ATIVIDADE (Gabriel) ═══════════════════════════ -->
+<!-- ═══════════════════════════ SLIDE 4 (Gabriel) ═══════════════════════════ -->
 <section class="slide" id="slide-4">
     <div class="slide-header">
         <span class="slide-tag">03 · UML 2 de 4</span>
@@ -285,99 +279,101 @@
     <div class="slide-body">
         <h2 class="slide-title">Uma sessão de estudo, passo a passo</h2>
         <div class="diagrama">
-            <figure><img src="../../../../../modelagem-uml/02_Modelagem_UML/Activity%20Diagram%20Nex_TI.png" alt="Diagrama de atividade da sessão de estudo em quatro raias: Aluno, Front-end, API e Banco de Dados"></figure>
+            <figure><img src="../diagramas/5-atividade.png" alt="Atividade da sessão de estudo no desktop, com raias para o Aluno, a Apresentação, a Aplicação, o Domínio e a Infraestrutura" style="height:118mm;max-width:175mm"></figure>
             <div class="lado">
                 <ol>
-                    <li>O aluno escolhe uma fase. Se estiver bloqueada, aparece um aviso.</li>
-                    <li>O site busca as cartas na API. Sem internet, usa as cartas guardadas.</li>
-                    <li>O aluno responde e o SM-2 calcula quando a carta volta.</li>
-                    <li>Errou? A carta volta no fim da sessão.</li>
-                    <li>Acabou: ganha XP e moedas e libera a próxima fase.</li>
+                    <li>O aluno entra; o programa busca ou cria o aluno no banco.</li>
+                    <li>Fase trancada? Aparece um aviso.</li>
+                    <li>Liberada: a fila começa pelas cartas vencidas.</li>
+                    <li>Cada resposta passa pelo SM-2 e é gravada.</li>
+                    <li>Fila vazia: paga XP e moedas (só na primeira vez).</li>
                 </ol>
+                <p>Uma raia para o aluno e uma para cada camada.</p>
             </div>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Gabriel</strong> · Slide 4 / 14</span></div>
-    <div class="progresso"><i style="width:29%"></i></div>
+    <div class="slide-footer"><span>Nex_TI Desktop · P.A. em .NET</span><span><strong>Gabriel</strong> · Slide 4 / 13</span></div>
+    <div class="progresso"><i style="width:31%"></i></div>
 </section>
 
-<!-- ═══════════════════════════ SLIDE 5: POO (Rafael) ═══════════════════════════ -->
+<!-- ═══════════════════════════ SLIDE 5 (Rafael) ═══════════════════════════ -->
 <section class="slide" id="slide-5">
     <div class="slide-header">
         <span class="slide-tag">04 · Orientação a objetos</span>
-        <span class="slide-meta">Os quatro pilares no nosso código</span>
+        <span class="slide-meta">Os pilares no código do desktop</span>
     </div>
     <div class="slide-body">
-        <h2 class="slide-title">Onde a POO aparece no Nex_TI</h2>
+        <h2 class="slide-title">Onde a POO aparece no Nex_TI Desktop</h2>
         <div class="grid-2">
             <div class="card">
                 <h3>Herança</h3>
-                <p>Aluno e Tutor herdam login, XP e moedas de Usuario.</p>
+                <p>O Aluno é um Usuario: herda o Id, o nickname e a data de criação.</p>
                 <code>class Aluno : Usuario</code>
             </div>
             <div class="card">
-                <h3>Interface</h3>
-                <p>ISm2Engine diz o que o SM-2 faz; Sm2Engine é quem faz.</p>
-                <code>class Sm2Engine : ISm2Engine</code>
-            </div>
-            <div class="card">
-                <h3>Polimorfismo</h3>
-                <p>A carga inicial do banco roda o conteúdo e os simulados pelo mesmo método, sem saber qual é qual.</p>
-                <code>etapa.ExecutarAsync(db)</code>
+                <h3>Abstração e polimorfismo</h3>
+                <p>Usuario é abstrata; cada tipo diz o próprio perfil.</p>
+                <code>public abstract string Perfil { get; }</code>
             </div>
             <div class="card">
                 <h3>Encapsulamento</h3>
-                <p>A regra do XP fica dentro do serviço: só sobe, e no máximo 200 por vez.</p>
-                <code>GamificacaoService.ValidarAtualizacao()</code>
+                <p>XP e moedas só mudam por ReceberPremio, que paga uma vez por fase.</p>
+                <code>public int Xp { get; private set; }</code>
+            </div>
+            <div class="card">
+                <h3>Interface</h3>
+                <p>A revisão usa o contrato; o SM-2 é quem faz. Dá para trocar o algoritmo.</p>
+                <code>class AgendadorSm2 : IAgendadorDeRevisao</code>
             </div>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Rafael</strong> · Slide 5 / 14</span></div>
-    <div class="progresso"><i style="width:36%"></i></div>
+    <div class="slide-footer"><span>Nex_TI Desktop · P.A. em .NET</span><span><strong>Rafael</strong> · Slide 5 / 13</span></div>
+    <div class="progresso"><i style="width:38%"></i></div>
 </section>
 
-<!-- ═══════════════════════════ SLIDE 6: CLASSES — ENTIDADES (Rafael) ═══════════════════════════ -->
+<!-- ═══════════════════════════ SLIDE 6 (Rafael) ═══════════════════════════ -->
 <section class="slide" id="slide-6">
     <div class="slide-header">
         <span class="slide-tag">05 · UML 3 de 4</span>
-        <span class="slide-meta">Diagrama de classes · entidades</span>
+        <span class="slide-meta">Diagrama de classes · domínio</span>
     </div>
     <div class="slide-body">
-        <h2 class="slide-title">As classes que estão no código</h2>
+        <h2 class="slide-title">As classes do domínio</h2>
         <div class="diagrama">
-            <figure><img src="../../../../../modelagem-uml/02_Modelagem_UML/Class%20Diagram%20Nex_TI%20-%20Entidades.png" alt="Diagrama de classes das entidades: Usuario com Aluno e Tutor, Fase, Flashcard, ProgressoFlashcard, AreaConhecimento, Questao, Alternativa e Prova"></figure>
+            <figure><img src="../diagramas/3-classes-dominio.png" alt="Classes do domínio do desktop: Usuario abstrata, Aluno, FaseConcluida, Fase, Flashcard, Revisao, IAgendadorDeRevisao e AgendadorSm2" style="height:112mm;max-width:170mm"></figure>
             <div class="lado">
-                <p><b>Usuario</b> é a classe pai de Aluno e Tutor.</p>
-                <p><b>ProgressoFlashcard</b> guarda o SM-2 de cada aluno em cada carta.</p>
-                <p><b>Novas no PIM IV:</b> Prova, Questao, Alternativa e AreaConhecimento, para os simulados.</p>
+                <p><b>Herança:</b> Aluno herda de Usuario.</p>
+                <p><b>Composição:</b> o Aluno é dono das fases concluídas; a Fase, das cartas.</p>
+                <p><b>Revisao</b> guarda o SM-2 de cada carta para cada aluno.</p>
+                <p><b>Interface:</b> IAgendadorDeRevisao, implementada pelo AgendadorSm2.</p>
             </div>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Rafael</strong> · Slide 6 / 14</span></div>
-    <div class="progresso"><i style="width:43%"></i></div>
+    <div class="slide-footer"><span>Nex_TI Desktop · P.A. em .NET</span><span><strong>Rafael</strong> · Slide 6 / 13</span></div>
+    <div class="progresso"><i style="width:46%"></i></div>
 </section>
 
-<!-- ═══════════════════════════ SLIDE 7: CAMADAS (Miguel) ═══════════════════════════ -->
+<!-- ═══════════════════════════ SLIDE 7 (Miguel) ═══════════════════════════ -->
 <section class="slide" id="slide-7">
     <div class="slide-header">
         <span class="slide-tag">06 · Arquitetura</span>
-        <span class="slide-meta">A API em camadas</span>
+        <span class="slide-meta">Quatro camadas</span>
     </div>
     <div class="slide-body">
-        <h2 class="slide-title">Cada parte da API cuida de uma coisa</h2>
+        <h2 class="slide-title">Cada camada cuida de uma coisa</h2>
         <div class="grid-4">
-            <div class="card"><h3>Rotas</h3><p>Recebem o pedido e devolvem a resposta.</p><code>Endpoints/</code></div>
-            <div class="card"><h3>Serviços</h3><p>As regras: login, SM-2, XP, conteúdo, painel e conta.</p><code>Services/</code></div>
-            <div class="card"><h3>Dados</h3><p>Conversam com o banco SQL Server.</p><code>Data/</code></div>
-            <div class="card"><h3>Modelos</h3><p>As classes: Usuario, Flashcard, Fase…</p><code>Models/</code></div>
+            <div class="card"><h3>Apresentação</h3><p>As telas em Windows Forms: entrada, painel e estudo.</p><code>Telas/</code></div>
+            <div class="card"><h3>Aplicação</h3><p>Os casos de uso: entrar, listar fases, estudar e concluir.</p><code>ServicoDeEstudo</code></div>
+            <div class="card"><h3>Domínio</h3><p>Entidades, a regra do SM-2 e as interfaces dos repositórios.</p><code>Entidades/ e Regras/</code></div>
+            <div class="card"><h3>Infraestrutura</h3><p>O banco SQLite pelo EF Core: contexto, repositórios e migration.</p><code>ContextoNexTI</code></div>
         </div>
-        <p class="destaque"><strong>Antes:</strong> as rotas faziam tudo, num arquivo de 338 linhas. <strong>Agora:</strong> 226 linhas para 26 rotas, em dois arquivos, e só os serviços mexem no banco.</p>
+        <p class="destaque"><strong>Regra:</strong> cada camada só usa a de baixo. O <strong>Domínio não depende de ninguém</strong>, e a Aplicação conhece só as interfaces, sem saber que existe SQLite.</p>
     </div>
-    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Miguel</strong> · Slide 7 / 14</span></div>
-    <div class="progresso"><i style="width:50%"></i></div>
+    <div class="slide-footer"><span>Nex_TI Desktop · P.A. em .NET</span><span><strong>Miguel</strong> · Slide 7 / 13</span></div>
+    <div class="progresso"><i style="width:54%"></i></div>
 </section>
 
-<!-- ═══════════════════════════ SLIDE 8: CLASSES — CAMADAS (Miguel) ═══════════════════════════ -->
+<!-- ═══════════════════════════ SLIDE 8 (Miguel) ═══════════════════════════ -->
 <section class="slide" id="slide-8">
     <div class="slide-header">
         <span class="slide-tag">06 · UML 3 de 4 (continuação)</span>
@@ -386,125 +382,104 @@
     <div class="slide-body">
         <h2 class="slide-title">As camadas no diagrama de classes</h2>
         <div class="diagrama" style="justify-content:center">
-            <figure><img src="../../../../../modelagem-uml/02_Modelagem_UML/Class%20Diagram%20Nex_TI%20-%20Camadas.png" alt="Diagrama de classes da API em pacotes: Apresentação (Endpoints), Serviços de aplicação, Serviços de apoio e Dados" style="height:118mm;max-width:255mm"></figure>
+            <figure><img src="../diagramas/2-classes-camadas.png" alt="Classes das camadas do desktop: telas, serviços, interfaces do domínio e as implementações com EF Core" style="height:125mm;max-width:262mm"></figure>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Miguel</strong> · Slide 8 / 14</span></div>
-    <div class="progresso"><i style="width:57%"></i></div>
+    <div class="slide-footer"><span>Nex_TI Desktop · P.A. em .NET</span><span><strong>Miguel</strong> · Slide 8 / 13</span></div>
+    <div class="progresso"><i style="width:62%"></i></div>
 </section>
 
-<!-- ═══════════════════════════ SLIDE 9: PASTAS (Miguel) ═══════════════════════════ -->
+<!-- ═══════════════════════════ SLIDE 9 (Miguel) ═══════════════════════════ -->
 <section class="slide" id="slide-9">
     <div class="slide-header">
         <span class="slide-tag">07 · Modularização</span>
-        <span class="slide-meta">O projeto em pastas</span>
+        <span class="slide-meta">Um projeto .csproj por camada</span>
     </div>
     <div class="slide-body">
-        <h2 class="slide-title">Um repositório, cada parte na sua pasta</h2>
+        <h2 class="slide-title">Cada camada é um projeto separado</h2>
         <table>
-            <tr><th>Pasta</th><th>O que tem</th></tr>
-            <tr><td><code>sistema/apps/api</code></td><td>API em C# (.NET 10)</td></tr>
-            <tr><td><code>sistema/apps/react-web</code></td><td>O site, em React</td></tr>
-            <tr><td><code>sistema/apps/react-mobile</code></td><td>O app de celular</td></tr>
-            <tr><td><code>sistema/apps/desktop</code></td><td>O programa desktop (Windows Forms), em 4 projetos</td></tr>
-            <tr><td><code>sistema/packages/shared</code></td><td>Cartas e código usados pelo site e pelo app</td></tr>
-            <tr><td><code>sistema/tests</code></td><td>182 testes automáticos da API</td></tr>
-            <tr><td><code>relatorio/</code></td><td>A monografia (ABNT)</td></tr>
-            <tr><td><code>modelagem-uml/</code></td><td>Os diagramas (Astah)</td></tr>
+            <tr><th>Projeto</th><th>O que tem</th><th>Usa</th></tr>
+            <tr><td><code>NexTI.Desktop.Apresentacao</code></td><td>As telas e o Program.cs, que liga as camadas</td><td>Aplicação e Infraestrutura</td></tr>
+            <tr><td><code>NexTI.Desktop.Aplicacao</code></td><td>ServicoDeAlunos, ServicoDeEstudo e SessaoDeEstudo</td><td>Domínio</td></tr>
+            <tr><td><code>NexTI.Desktop.Dominio</code></td><td>Entidades, SM-2 e interfaces</td><td>nenhum</td></tr>
+            <tr><td><code>NexTI.Desktop.Infraestrutura</code></td><td>EF Core + SQLite: contexto, repositórios, migration e semente</td><td>Domínio</td></tr>
+            <tr><td><code>NexTI.Desktop.Testes</code></td><td>27 testes automáticos (xUnit)</td><td>Domínio, Aplicação e Infraestrutura</td></tr>
         </table>
+        <p class="destaque"><strong>Por quê:</strong> o compilador não deixa o Domínio usar a tela ou o banco. Os testes trocam o banco por um em memória sem mudar as regras.</p>
     </div>
-    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Miguel</strong> · Slide 9 / 14</span></div>
-    <div class="progresso"><i style="width:64%"></i></div>
+    <div class="slide-footer"><span>Nex_TI Desktop · P.A. em .NET</span><span><strong>Miguel</strong> · Slide 9 / 13</span></div>
+    <div class="progresso"><i style="width:69%"></i></div>
 </section>
 
-<!-- ═══════════════════════════ SLIDE 10: SEQUÊNCIA (Maycon) ═══════════════════════════ -->
+<!-- ═══════════════════════════ SLIDE 10 (Maycon) ═══════════════════════════ -->
 <section class="slide" id="slide-10">
     <div class="slide-header">
         <span class="slide-tag">08 · UML 4 de 4</span>
         <span class="slide-meta">Diagrama de sequência</span>
     </div>
     <div class="slide-body">
-        <h2 class="slide-title">O SM-2 em ação</h2>
+        <h2 class="slide-title">Responder a última carta e concluir a fase</h2>
         <div class="diagrama">
-            <figure><img src="../../../../../modelagem-uml/02_Modelagem_UML/Sequence%20Diagram%20Nex_TI%20-%20Estudar%20Flashcards.png" alt="Diagrama de sequência do Astah: o aluno estuda uma fase; cada resposta vai para a rota, que chama o ProgressoService, o Sm2Engine calcula e o banco grava"></figure>
+            <figure><img src="../diagramas/4-sequencia.png" alt="Sequência do desktop: a TelaEstudo chama o ServicoDeEstudo, que avança a sessão, registra a revisão com o AgendadorSm2, grava pela UnidadeDeTrabalho e conclui a fase com o prêmio do Aluno" style="height:118mm;max-width:165mm"></figure>
             <div class="lado">
-                <p>O aluno avalia a resposta: Errei (1), Difícil (3), Bom (4) ou Fácil (5).</p>
-                <div class="card"><h3>Bom ou Fácil</h3><p>O intervalo multiplica pelo fator (começa em 2,5). Fácil vai mais longe: carta nova volta em 3 dias.</p></div>
-                <div class="card"><h3>Errei ou Difícil</h3><p>Errei: volta amanhã e recomeça. Difícil: soma pelo menos 1 dia.</p></div>
-                <code>Sm2Engine.Calcular()</code>
+                <p>A tela chama <b>Responder</b> no serviço.</p>
+                <p>O serviço tira a carta da fila, o <b>AgendadorSm2</b> calcula a próxima revisão e a <b>UnidadeDeTrabalho</b> grava.</p>
+                <p>Era a última carta? <b>ConcluirFase</b>: o Aluno recebe XP e moedas se for a primeira vez.</p>
+                <code>ServicoDeEstudo.Responder()</code>
             </div>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Maycon</strong> · Slide 10 / 14</span></div>
-    <div class="progresso"><i style="width:71%"></i></div>
+    <div class="slide-footer"><span>Nex_TI Desktop · P.A. em .NET</span><span><strong>Maycon</strong> · Slide 10 / 13</span></div>
+    <div class="progresso"><i style="width:77%"></i></div>
 </section>
 
-<!-- ═══════════════════════════ SLIDE 11: NEX_TI DESKTOP (Maycon) ═══════════════════════════ -->
+<!-- ═══════════════════════════ SLIDE 11 (Maycon) ═══════════════════════════ -->
 <section class="slide" id="slide-11">
     <div class="slide-header">
-        <span class="slide-tag">09 · Aplicação desktop</span>
-        <span class="slide-meta">sistema/apps/desktop</span>
+        <span class="slide-tag">09 · O programa funcionando</span>
+        <span class="slide-meta">Telas e banco de dados</span>
     </div>
     <div class="slide-body">
-        <h2 class="slide-title">O Nex_TI Desktop: pequeno e organizado</h2>
-        <div class="diagrama">
-            <figure><img src="../telas/4-estudo-resposta.png" alt="Tela de estudo do Nex_TI Desktop: a pergunta, a resposta e os botões Errei, Difícil, Bom e Fácil" style="height:100mm;max-width:140mm"></figure>
-            <div class="lado">
-                <p><b>Windows Forms (.NET 10):</b> entra com o nickname, estuda as 25 fases com o SM-2 e ganha XP e moedas.</p>
-                <p><b>Um projeto por camada:</b></p>
-                <code>Apresentação → Aplicação → Domínio ← Infraestrutura</code>
-                <p><b>POO:</b> Usuario é abstrata, Aluno herda de Usuario, XP e moedas só mudam por ReceberPremio, e o SM-2 fica atrás da interface IAgendadorDeRevisao.</p>
-                <p><b>Banco:</b> EF Core com SQLite, migration e semente, como no livro da disciplina. <b>27 testes</b>.</p>
-            </div>
+        <h2 class="slide-title">As telas e o banco</h2>
+        <div class="grid-2" style="align-items:start">
+            <figure style="background:#fff;border:1.5px solid var(--nx-border);border-radius:6px;padding:1.5mm"><img src="../telas/3-estudo-pergunta.png" alt="Tela de estudo do desktop mostrando a pergunta e o botão Mostrar resposta" style="width:100%;height:62mm;object-fit:contain"></figure>
+            <figure style="background:#fff;border:1.5px solid var(--nx-border);border-radius:6px;padding:1.5mm"><img src="../telas/4-estudo-resposta.png" alt="Tela de estudo do desktop mostrando a resposta e os botões Errei, Difícil, Bom e Fácil" style="width:100%;height:62mm;object-fit:contain"></figure>
+        </div>
+        <div class="grid-3">
+            <div class="card"><h3>EF Core + SQLite</h3><p>Um arquivo de banco no computador do aluno, sem servidor.</p></div>
+            <div class="card"><h3>Migration e semente</h3><p>A migration Inicial cria as 5 tabelas; a semente coloca as fases e as cartas.</p></div>
+            <div class="card"><h3>Atalhos</h3><p>Espaço mostra a resposta; 1 a 4 respondem Errei, Difícil, Bom e Fácil.</p></div>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Maycon</strong> · Slide 11 / 14</span></div>
-    <div class="progresso"><i style="width:79%"></i></div>
+    <div class="slide-footer"><span>Nex_TI Desktop · P.A. em .NET</span><span><strong>Maycon</strong> · Slide 11 / 13</span></div>
+    <div class="progresso"><i style="width:85%"></i></div>
 </section>
 
-<!-- ═══════════════════════════ SLIDE 12: DIAGRAMAS DO DESKTOP (Maycon) ═══════════════════════════ -->
+<!-- ═══════════════════════════ SLIDE 12 (Maycon) ═══════════════════════════ -->
 <section class="slide" id="slide-12">
     <div class="slide-header">
-        <span class="slide-tag">10 · UML do desktop</span>
-        <span class="slide-meta">Os quatro diagramas, no Astah</span>
-    </div>
-    <div class="slide-body">
-        <h2 class="slide-title">Os quatro diagramas do programa desktop</h2>
-        <div class="galeria">
-            <figure><img src="../diagramas/1-casos-de-uso.png" alt="Casos de uso do desktop: entrar, ver a trilha, estudar fase, responder carta e concluir fase"><figcaption>Caso de uso</figcaption></figure>
-            <figure><img src="../diagramas/3-classes-dominio.png" alt="Classes do domínio do desktop: Usuario, Aluno, FaseConcluida, Fase, Flashcard, Revisao e o SM-2"><figcaption>Classes (domínio)</figcaption></figure>
-            <figure><img src="../diagramas/4-sequencia.png" alt="Sequência do desktop: o aluno responde a última carta e conclui a fase"><figcaption>Sequência</figcaption></figure>
-            <figure><img src="../diagramas/5-atividade.png" alt="Atividade do desktop: a sessão de estudo com uma raia para o aluno e uma para cada camada"><figcaption>Atividade</figcaption></figure>
-        </div>
-    </div>
-    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Maycon</strong> · Slide 12 / 14</span></div>
-    <div class="progresso"><i style="width:86%"></i></div>
-</section>
-
-<!-- ═══════════════════════════ SLIDE 13: GITHUB (Maycon) ═══════════════════════════ -->
-<section class="slide" id="slide-13">
-    <div class="slide-header">
-        <span class="slide-tag">11 · GitHub</span>
+        <span class="slide-tag">10 · GitHub</span>
         <span class="slide-meta">github.com/MayconDIS/PIM_IV</span>
     </div>
     <div class="slide-body">
-        <h2 class="slide-title">Como o código chega na nuvem</h2>
+        <h2 class="slide-title">Testes e GitHub</h2>
         <div class="grid-4">
-            <div><p class="numero">182</p><p>testes da API</p></div>
-            <div><p class="numero">26</p><p>rotas na API</p></div>
-            <div><p class="numero">22</p><p>itens no backlog</p></div>
-            <div><p class="numero">5</p><p>sprints no Trello</p></div>
+            <div><p class="numero">27</p><p>testes automáticos</p></div>
+            <div><p class="numero">4</p><p>camadas, uma por projeto</p></div>
+            <div><p class="numero">5</p><p>tabelas no SQLite</p></div>
+            <div><p class="numero">4</p><p>tipos de diagrama UML</p></div>
         </div>
         <div class="fluxo">
-            <span>Pull Request</span><i>→</i><span>Merge na main</span><i>→</i><span>Testes rodam</span><i>→</i><span>API na Azure, site na Vercel</span>
+            <span>Pull Request</span><i>→</i><span>GitHub Actions roda os testes</span><i>→</i><span>Merge na main</span>
         </div>
+        <p class="destaque"><strong>Os testes</strong> conferem o SM-2, o prêmio uma vez só e o programa de ponta a ponta, com um banco SQLite em memória.</p>
     </div>
-    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Maycon</strong> · Slide 13 / 14</span></div>
-    <div class="progresso"><i style="width:93%"></i></div>
+    <div class="slide-footer"><span>Nex_TI Desktop · P.A. em .NET</span><span><strong>Maycon</strong> · Slide 12 / 13</span></div>
+    <div class="progresso"><i style="width:92%"></i></div>
 </section>
 
-<!-- ═══════════════════════════ SLIDE 14: ENCERRAMENTO (Todos) ═══════════════════════════ -->
-<section class="slide capa" id="slide-14">
+<!-- ═══════════════════════════ SLIDE 13 (Todos) ═══════════════════════════ -->
+<section class="slide capa" id="slide-13">
     <div class="slide-header">
         <span class="slide-tag">Encerramento</span>
         <span class="slide-meta">DevTime · Gabriel · Maciel · Maycon · Miguel · Rafael</span>
@@ -513,9 +488,9 @@
         <h1>Obrigado!</h1>
         <div class="regua"></div>
         <p class="slide-subtitle">Perguntas?</p>
-        <p class="equipe"><code>github.com/MayconDIS/PIM_IV</code></p>
+        <p class="equipe"><code>github.com/MayconDIS/PIM_IV</code> · <code>sistema/apps/desktop</code></p>
     </div>
-    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Todos</strong> · Slide 14 / 14</span></div>
+    <div class="slide-footer"><span>Nex_TI Desktop · P.A. em .NET</span><span><strong>Todos</strong> · Slide 13 / 13</span></div>
     <div class="progresso"><i style="width:100%"></i></div>
 </section>
 

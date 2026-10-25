@@ -18,30 +18,31 @@ juntou três que eram separados; hoje são três pastas **do mesmo projeto**:
 | `modelagem-uml/` | Os diagramas (Astah) e o banco (MER, DER, modelo físico) | `.asta` + imagens exportadas |
 | `relatorio/` | O relatório ABNT, a versão em Word e as imagens que ele usa | HTML/CSS + `.docx` |
 
-Os slides e o roteiro da apresentação de P.A. em .NET ficam junto do programa desktop, em `sistema/apps/desktop/docs/apresentacao/`.
+A apresentação de P.A. em .NET é uma **atividade à parte**: fala só do Nex_TI Desktop (`sistema/apps/desktop`). Os slides e o roteiro ficam em `sistema/apps/desktop/docs/apresentacao/` e usam só os diagramas de `docs/diagramas`, as telas de `docs/telas` e os números do próprio programa (fases da trilha, cartas e testes do desktop).
 
 ## De onde vem cada informação
 
-A ordem é sempre a mesma: **código → modelagem → relatório, Word e slides**.
+A ordem é sempre a mesma: **código → modelagem → relatório e Word** (e, no desktop, **código → Astah → README e slides**).
 
 1. O **código** (`sistema/`) é a verdade. Números (rotas, fases, cartas, testes) saem dele.
 2. Os **diagramas** saem só do Astah, pelo gerador `modelagem-uml/02_Modelagem_UML/gerador-astah/`.
    Não usamos PlantUML. As imagens são exportadas pelo próprio Astah (`ExportarImagens.java`).
-3. O **relatório** e os **slides** copiam as imagens da modelagem e os números do código; o **Word**
-   é gerado do relatório (`relatorio/word`).
+3. O **relatório** copia as imagens da modelagem e os números do código; o **Word** é gerado do
+   relatório (`relatorio/word`). Os **slides** do desktop copiam os diagramas e as telas do desktop.
 
 ## Se mudar X, atualize Y
 
 | Mudou | Atualize também |
 |---|---|
-| Rota da API ou quem pode usá-la | `sistema/docs/MANUAL_TECNICO.md` (tabela de rotas), relatório 2.4.3 e regras/requisitos (2.2.2 e 2.2.3), número de rotas no README, no relatório e nos slides, diagramas do caso de uso no gerador do Astah |
+| Rota da API ou quem pode usá-la | `sistema/docs/MANUAL_TECNICO.md` (tabela de rotas), relatório 2.4.3 e regras/requisitos (2.2.2 e 2.2.3), número de rotas no README e no relatório, diagramas do caso de uso no gerador do Astah |
 | Regra de SM-2 ou de XP e moedas (`packages/shared`) | `npm run seed:api` (gera a tabela da API), testes compartilhados e da API, manual, relatório |
-| Fases ou cartas (`content.js`) | `npm run seed:api`, número de fases e cartas no README, relatório e slides |
+| Fases ou cartas (`content.js`) | `npm run seed:api`, número de fases e cartas no README e no relatório; no desktop, o número de fases e cartas do README e dos slides dele |
 | Tabela ou entidade do banco | migration, `sistema/database/NexTI_DB.sql`, gerador do Astah (entidades, MER, DER, modelo físico), relatório Etapa 7 e dicionário de dados (2.7.6) |
 | Regra de negócio ou funcionalidade | relatório 2.2.2 (regras), 2.2.3 e 2.2.4 (requisitos), cartões RN, RF e RNF do Trello, caso de uso no gerador do Astah |
-| Qualquer diagrama | gerador do Astah → gerar o `.asta` → exportar imagens → copiar as principais para `02_Modelagem_UML` e `04_Banco_de_Dados` → copiar para `relatorio/assets` → Word → PDF dos slides |
+| Qualquer diagrama | gerador do Astah → gerar o `.asta` → exportar imagens → copiar as principais para `02_Modelagem_UML` e `04_Banco_de_Dados` → copiar para `relatorio/assets` → Word |
 | Texto ou página do relatório | conferir que toda página cabe em A4 e gerar o Word de novo; resumo e abstract andam juntos |
 | Tela do site | tirar nova foto para o Apêndice A do relatório |
+| Programa desktop (`sistema/apps/desktop`) | testes do desktop, `GerarDiagramasDesktop.java` → exportar → copiar para `docs/diagramas`, fotos em `docs/telas`, README do desktop, slides e roteiro em `docs/apresentacao` → PDF dos slides |
 
 Antes de abrir um pull request, rode **`node scripts/verificar-sincronia.mjs`**. Ele confere se os
 números dos documentos batem com o código, se as rotas do manual e o dicionário de dados batem com a
