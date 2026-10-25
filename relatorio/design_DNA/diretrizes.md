@@ -42,4 +42,4 @@ suave à esquerda e um ciano à direita.
 - Cor nunca sozinha: o acerto também diz "Acertou", o erro diz o que deu errado.
 - Moedas sempre em dourado, com o ícone de moeda.
 - Material visual da equipe (slides, relatório) usa estas mesmas cores e fontes,
-  como em `sistema/docs/apresentacao-pa/slides.html`.
+  como em `sistema/apps/desktop/docs/apresentacao/slides.html`.

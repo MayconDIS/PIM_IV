@@ -68,7 +68,7 @@ sistema/
 │   ├── api/            API em C# (.NET 10): Endpoints → Services → Data → Models
 │   ├── react-web/      O site (React + Vite)
 │   ├── react-mobile/   O app de celular (Expo)
-│   └── desktop/        Nex_TI Desktop (Windows Forms), para a apresentação de P.A. em .NET
+│   └── desktop/        Nex_TI Desktop (Windows Forms) e a apresentação de P.A. em .NET
 ├── packages/
 │   ├── shared/         Cartas, SM-2 do navegador, cliente da API e CSS do site
 │   └── design-dna/     Cores e fontes do Nex_TI
@@ -76,7 +76,7 @@ sistema/
 ├── tests/              Testes da API (xUnit)
 ├── infra/azure/        Script que cria a infraestrutura na Azure
 ├── scripts/            Gera a semente da API e confere a estrutura
-├── docs/               Manuais, deploy e a apresentação de P.A. em .NET
+├── docs/               Manuais e deploy
 └── start.py            Sobe a API e o site juntos
 ```
 

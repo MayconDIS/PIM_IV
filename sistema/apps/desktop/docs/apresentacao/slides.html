@@ -156,6 +156,11 @@
         .diagrama .lado b { color: var(--nx-ink); }
         .diagrama ol { padding-left: 5mm; display: flex; flex-direction: column; gap: 2mm; }
 
+        /* Os quatro diagramas do desktop, dois por linha */
+        .galeria { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm 5mm; flex: 1; min-height: 0; }
+        .galeria figure { background: #ffffff; border: 1.5px solid var(--nx-border); border-radius: 6px; padding: 1.5mm; display: flex; flex-direction: column; min-height: 0; }
+        .galeria img { width: 100%; height: 58mm; object-fit: contain; }
+        .galeria figcaption { font-size: 9pt; color: #1b1f27; text-align: center; margin-top: 1mm; font-weight: 600; }
         .numero { font-family: var(--nx-brand); font-size: 32pt; font-weight: 900; color: var(--nx-primary); line-height: 1; text-shadow: 0 0 12px rgba(0, 230, 230, 0.4); }
         .numero + p { font-size: 10.5pt; color: var(--nx-txt-2); margin-top: 1mm; }
 
@@ -217,8 +222,8 @@
             Miguel Angel Fernandez Ortiz <span>(H7858F9)</span> · Rafael Mesquita <span>(H6722I0)</span><br>
             <span>github.com/MayconDIS/PIM_IV</span></p>
     </div>
-    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Maciel</strong> · Slide 1 / 12</span></div>
-    <div class="progresso"><i style="width:8%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Maciel</strong> · Slide 1 / 14</span></div>
+    <div class="progresso"><i style="width:7%"></i></div>
 </section>
 
 <!-- ═══════════════════════════ SLIDE 2: O PROJETO (Maciel) ═══════════════════════════ -->
@@ -246,8 +251,8 @@
         </div>
         <p class="destaque"><strong>Melhorias em relação ao PIM III:</strong> API em camadas, app de celular e nuvem.</p>
     </div>
-    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Maciel</strong> · Slide 2 / 12</span></div>
-    <div class="progresso"><i style="width:17%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Maciel</strong> · Slide 2 / 14</span></div>
+    <div class="progresso"><i style="width:14%"></i></div>
 </section>
 
 <!-- ═══════════════════════════ SLIDE 3: CASO DE USO (Gabriel) ═══════════════════════════ -->
@@ -259,7 +264,7 @@
     <div class="slide-body">
         <h2 class="slide-title">Quem usa o sistema e para quê</h2>
         <div class="diagrama">
-            <figure><img src="../../../modelagem-uml/02_Modelagem_UML/UseCase%20Diagram%20Nex_TI.png" alt="Diagrama de casos de uso do Nex_TI: o Administrador herda do Tutor, que herda do Aluno, e o que cada perfil faz" style="height:132mm;max-width:190mm"></figure>
+            <figure><img src="../../../../../modelagem-uml/02_Modelagem_UML/UseCase%20Diagram%20Nex_TI.png" alt="Diagrama de casos de uso do Nex_TI: o Administrador herda do Tutor, que herda do Aluno, e o que cada perfil faz" style="height:132mm;max-width:190mm"></figure>
             <div class="lado">
                 <p><b>Aluno:</b> estuda os flashcards, cria cartas, faz simulados e vê o próprio desempenho.</p>
                 <p><b>Tutor:</b> tudo do Aluno, mais o painel dos alunos e editar ou excluir cartas.</p>
@@ -267,8 +272,8 @@
             </div>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Gabriel</strong> · Slide 3 / 12</span></div>
-    <div class="progresso"><i style="width:25%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Gabriel</strong> · Slide 3 / 14</span></div>
+    <div class="progresso"><i style="width:21%"></i></div>
 </section>
 
 <!-- ═══════════════════════════ SLIDE 4: ATIVIDADE (Gabriel) ═══════════════════════════ -->
@@ -280,7 +285,7 @@
     <div class="slide-body">
         <h2 class="slide-title">Uma sessão de estudo, passo a passo</h2>
         <div class="diagrama">
-            <figure><img src="../../../modelagem-uml/02_Modelagem_UML/Activity%20Diagram%20Nex_TI.png" alt="Diagrama de atividade da sessão de estudo em quatro raias: Aluno, Front-end, API e Banco de Dados"></figure>
+            <figure><img src="../../../../../modelagem-uml/02_Modelagem_UML/Activity%20Diagram%20Nex_TI.png" alt="Diagrama de atividade da sessão de estudo em quatro raias: Aluno, Front-end, API e Banco de Dados"></figure>
             <div class="lado">
                 <ol>
                     <li>O aluno escolhe uma fase. Se estiver bloqueada, aparece um aviso.</li>
@@ -292,8 +297,8 @@
             </div>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Gabriel</strong> · Slide 4 / 12</span></div>
-    <div class="progresso"><i style="width:33%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Gabriel</strong> · Slide 4 / 14</span></div>
+    <div class="progresso"><i style="width:29%"></i></div>
 </section>
 
 <!-- ═══════════════════════════ SLIDE 5: POO (Rafael) ═══════════════════════════ -->
@@ -327,8 +332,8 @@
             </div>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Rafael</strong> · Slide 5 / 12</span></div>
-    <div class="progresso"><i style="width:42%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Rafael</strong> · Slide 5 / 14</span></div>
+    <div class="progresso"><i style="width:36%"></i></div>
 </section>
 
 <!-- ═══════════════════════════ SLIDE 6: CLASSES — ENTIDADES (Rafael) ═══════════════════════════ -->
@@ -340,7 +345,7 @@
     <div class="slide-body">
         <h2 class="slide-title">As classes que estão no código</h2>
         <div class="diagrama">
-            <figure><img src="../../../modelagem-uml/02_Modelagem_UML/Class%20Diagram%20Nex_TI%20-%20Entidades.png" alt="Diagrama de classes das entidades: Usuario com Aluno e Tutor, Fase, Flashcard, ProgressoFlashcard, AreaConhecimento, Questao, Alternativa e Prova"></figure>
+            <figure><img src="../../../../../modelagem-uml/02_Modelagem_UML/Class%20Diagram%20Nex_TI%20-%20Entidades.png" alt="Diagrama de classes das entidades: Usuario com Aluno e Tutor, Fase, Flashcard, ProgressoFlashcard, AreaConhecimento, Questao, Alternativa e Prova"></figure>
             <div class="lado">
                 <p><b>Usuario</b> é a classe pai de Aluno e Tutor.</p>
                 <p><b>ProgressoFlashcard</b> guarda o SM-2 de cada aluno em cada carta.</p>
@@ -348,8 +353,8 @@
             </div>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Rafael</strong> · Slide 6 / 12</span></div>
-    <div class="progresso"><i style="width:50%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Rafael</strong> · Slide 6 / 14</span></div>
+    <div class="progresso"><i style="width:43%"></i></div>
 </section>
 
 <!-- ═══════════════════════════ SLIDE 7: CAMADAS (Miguel) ═══════════════════════════ -->
@@ -368,8 +373,8 @@
         </div>
         <p class="destaque"><strong>Antes:</strong> as rotas faziam tudo, num arquivo de 338 linhas. <strong>Agora:</strong> 226 linhas para 26 rotas, em dois arquivos, e só os serviços mexem no banco.</p>
     </div>
-    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Miguel</strong> · Slide 7 / 12</span></div>
-    <div class="progresso"><i style="width:58%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Miguel</strong> · Slide 7 / 14</span></div>
+    <div class="progresso"><i style="width:50%"></i></div>
 </section>
 
 <!-- ═══════════════════════════ SLIDE 8: CLASSES — CAMADAS (Miguel) ═══════════════════════════ -->
@@ -381,11 +386,11 @@
     <div class="slide-body">
         <h2 class="slide-title">As camadas no diagrama de classes</h2>
         <div class="diagrama" style="justify-content:center">
-            <figure><img src="../../../modelagem-uml/02_Modelagem_UML/Class%20Diagram%20Nex_TI%20-%20Camadas.png" alt="Diagrama de classes da API em pacotes: Apresentação (Endpoints), Serviços de aplicação, Serviços de apoio e Dados" style="height:118mm;max-width:255mm"></figure>
+            <figure><img src="../../../../../modelagem-uml/02_Modelagem_UML/Class%20Diagram%20Nex_TI%20-%20Camadas.png" alt="Diagrama de classes da API em pacotes: Apresentação (Endpoints), Serviços de aplicação, Serviços de apoio e Dados" style="height:118mm;max-width:255mm"></figure>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Miguel</strong> · Slide 8 / 12</span></div>
-    <div class="progresso"><i style="width:67%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Miguel</strong> · Slide 8 / 14</span></div>
+    <div class="progresso"><i style="width:57%"></i></div>
 </section>
 
 <!-- ═══════════════════════════ SLIDE 9: PASTAS (Miguel) ═══════════════════════════ -->
@@ -401,14 +406,15 @@
             <tr><td><code>sistema/apps/api</code></td><td>API em C# (.NET 10)</td></tr>
             <tr><td><code>sistema/apps/react-web</code></td><td>O site, em React</td></tr>
             <tr><td><code>sistema/apps/react-mobile</code></td><td>O app de celular</td></tr>
+            <tr><td><code>sistema/apps/desktop</code></td><td>O programa desktop (Windows Forms), em 4 projetos</td></tr>
             <tr><td><code>sistema/packages/shared</code></td><td>Cartas e código usados pelo site e pelo app</td></tr>
             <tr><td><code>sistema/tests</code></td><td>182 testes automáticos da API</td></tr>
             <tr><td><code>relatorio/</code></td><td>A monografia (ABNT)</td></tr>
             <tr><td><code>modelagem-uml/</code></td><td>Os diagramas (Astah)</td></tr>
         </table>
     </div>
-    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Miguel</strong> · Slide 9 / 12</span></div>
-    <div class="progresso"><i style="width:75%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Miguel</strong> · Slide 9 / 14</span></div>
+    <div class="progresso"><i style="width:64%"></i></div>
 </section>
 
 <!-- ═══════════════════════════ SLIDE 10: SEQUÊNCIA (Maycon) ═══════════════════════════ -->
@@ -420,7 +426,7 @@
     <div class="slide-body">
         <h2 class="slide-title">O SM-2 em ação</h2>
         <div class="diagrama">
-            <figure><img src="../../../modelagem-uml/02_Modelagem_UML/Sequence%20Diagram%20Nex_TI%20-%20Estudar%20Flashcards.png" alt="Diagrama de sequência do Astah: o aluno estuda uma fase; cada resposta vai para a rota, que chama o ProgressoService, o Sm2Engine calcula e o banco grava"></figure>
+            <figure><img src="../../../../../modelagem-uml/02_Modelagem_UML/Sequence%20Diagram%20Nex_TI%20-%20Estudar%20Flashcards.png" alt="Diagrama de sequência do Astah: o aluno estuda uma fase; cada resposta vai para a rota, que chama o ProgressoService, o Sm2Engine calcula e o banco grava"></figure>
             <div class="lado">
                 <p>O aluno avalia a resposta: Errei (1), Difícil (3), Bom (4) ou Fácil (5).</p>
                 <div class="card"><h3>Bom ou Fácil</h3><p>O intervalo multiplica pelo fator (começa em 2,5). Fácil vai mais longe: carta nova volta em 3 dias.</p></div>
@@ -429,21 +435,63 @@
             </div>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Maycon</strong> · Slide 10 / 12</span></div>
-    <div class="progresso"><i style="width:83%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Maycon</strong> · Slide 10 / 14</span></div>
+    <div class="progresso"><i style="width:71%"></i></div>
 </section>
 
-<!-- ═══════════════════════════ SLIDE 11: GITHUB (Maycon) ═══════════════════════════ -->
+<!-- ═══════════════════════════ SLIDE 11: NEX_TI DESKTOP (Maycon) ═══════════════════════════ -->
 <section class="slide" id="slide-11">
     <div class="slide-header">
-        <span class="slide-tag">09 · GitHub</span>
+        <span class="slide-tag">09 · Aplicação desktop</span>
+        <span class="slide-meta">sistema/apps/desktop</span>
+    </div>
+    <div class="slide-body">
+        <h2 class="slide-title">O Nex_TI Desktop: pequeno e organizado</h2>
+        <div class="diagrama">
+            <figure><img src="../telas/4-estudo-resposta.png" alt="Tela de estudo do Nex_TI Desktop: a pergunta, a resposta e os botões Errei, Difícil, Bom e Fácil" style="height:100mm;max-width:140mm"></figure>
+            <div class="lado">
+                <p><b>Windows Forms (.NET 10):</b> entra com o nickname, estuda as 25 fases com o SM-2 e ganha XP e moedas.</p>
+                <p><b>Um projeto por camada:</b></p>
+                <code>Apresentação → Aplicação → Domínio ← Infraestrutura</code>
+                <p><b>POO:</b> Usuario é abstrata, Aluno herda de Usuario, XP e moedas só mudam por ReceberPremio, e o SM-2 fica atrás da interface IAgendadorDeRevisao.</p>
+                <p><b>Banco:</b> EF Core com SQLite, migration e semente, como no livro da disciplina. <b>27 testes</b>.</p>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Maycon</strong> · Slide 11 / 14</span></div>
+    <div class="progresso"><i style="width:79%"></i></div>
+</section>
+
+<!-- ═══════════════════════════ SLIDE 12: DIAGRAMAS DO DESKTOP (Maycon) ═══════════════════════════ -->
+<section class="slide" id="slide-12">
+    <div class="slide-header">
+        <span class="slide-tag">10 · UML do desktop</span>
+        <span class="slide-meta">Os quatro diagramas, no Astah</span>
+    </div>
+    <div class="slide-body">
+        <h2 class="slide-title">Os quatro diagramas do programa desktop</h2>
+        <div class="galeria">
+            <figure><img src="../diagramas/1-casos-de-uso.png" alt="Casos de uso do desktop: entrar, ver a trilha, estudar fase, responder carta e concluir fase"><figcaption>Caso de uso</figcaption></figure>
+            <figure><img src="../diagramas/3-classes-dominio.png" alt="Classes do domínio do desktop: Usuario, Aluno, FaseConcluida, Fase, Flashcard, Revisao e o SM-2"><figcaption>Classes (domínio)</figcaption></figure>
+            <figure><img src="../diagramas/4-sequencia.png" alt="Sequência do desktop: o aluno responde a última carta e conclui a fase"><figcaption>Sequência</figcaption></figure>
+            <figure><img src="../diagramas/5-atividade.png" alt="Atividade do desktop: a sessão de estudo com uma raia para o aluno e uma para cada camada"><figcaption>Atividade</figcaption></figure>
+        </div>
+    </div>
+    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Maycon</strong> · Slide 12 / 14</span></div>
+    <div class="progresso"><i style="width:86%"></i></div>
+</section>
+
+<!-- ═══════════════════════════ SLIDE 13: GITHUB (Maycon) ═══════════════════════════ -->
+<section class="slide" id="slide-13">
+    <div class="slide-header">
+        <span class="slide-tag">11 · GitHub</span>
         <span class="slide-meta">github.com/MayconDIS/PIM_IV</span>
     </div>
     <div class="slide-body">
         <h2 class="slide-title">Como o código chega na nuvem</h2>
         <div class="grid-4">
-            <div><p class="numero">90</p><p>testes da API</p></div>
-            <div><p class="numero">24</p><p>rotas na API</p></div>
+            <div><p class="numero">182</p><p>testes da API</p></div>
+            <div><p class="numero">26</p><p>rotas na API</p></div>
             <div><p class="numero">22</p><p>itens no backlog</p></div>
             <div><p class="numero">5</p><p>sprints no Trello</p></div>
         </div>
@@ -451,12 +499,12 @@
             <span>Pull Request</span><i>→</i><span>Merge na main</span><i>→</i><span>Testes rodam</span><i>→</i><span>API na Azure, site na Vercel</span>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Maycon</strong> · Slide 11 / 12</span></div>
-    <div class="progresso"><i style="width:92%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Maycon</strong> · Slide 13 / 14</span></div>
+    <div class="progresso"><i style="width:93%"></i></div>
 </section>
 
-<!-- ═══════════════════════════ SLIDE 12: ENCERRAMENTO (Todos) ═══════════════════════════ -->
-<section class="slide capa" id="slide-12">
+<!-- ═══════════════════════════ SLIDE 14: ENCERRAMENTO (Todos) ═══════════════════════════ -->
+<section class="slide capa" id="slide-14">
     <div class="slide-header">
         <span class="slide-tag">Encerramento</span>
         <span class="slide-meta">DevTime · Gabriel · Maciel · Maycon · Miguel · Rafael</span>
@@ -467,7 +515,7 @@
         <p class="slide-subtitle">Perguntas?</p>
         <p class="equipe"><code>github.com/MayconDIS/PIM_IV</code></p>
     </div>
-    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Todos</strong> · Slide 12 / 12</span></div>
+    <div class="slide-footer"><span>Nex_TI · P.A. em .NET</span><span><strong>Todos</strong> · Slide 14 / 14</span></div>
     <div class="progresso"><i style="width:100%"></i></div>
 </section>
 

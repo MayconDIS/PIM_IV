@@ -9,17 +9,17 @@
 | **Duração** | 10 minutos + perguntas, cerca de 2 minutos por pessoa |
 | **O que avaliam** | Orientação a objetos, arquitetura em camadas, modularização e os 4 diagramas UML (caso de uso, classe, sequência e atividade). O GitHub faz parte. |
 | **Slides** | `Nex_TI - Apresentacao PA DotNet.pdf`, nesta pasta, em tela cheia. Se mudar algo no `slides.html`: abrir no Chrome, `Ctrl+P`, papel A4, paisagem, margens "Nenhuma", "Gráficos de segundo plano" marcado, salvar como PDF. |
-| **Ter aberto** | O PDF dos slides e uma aba com o repositório: https://github.com/MayconDIS/PIM_IV |
+| **Ter aberto** | O PDF dos slides, o projeto no **Antigravity** (com o terminal em `sistema/apps/desktop`) e uma aba com o repositório: https://github.com/MayconDIS/PIM_IV. Como abrir cada coisa: [README do desktop, "Como abrir cada parte no Antigravity"](../../README.md#como-abrir-cada-parte-no-antigravity) |
 
 ### Equipe DevTime
 
 | Integrante | RA | Slides | Tempo |
 |---|---|---|---|
-| Maciel Costa da Silva | R280985 | 1–2 · Capa e o projeto | 00:00 – 02:00 |
-| Gabriel Alves Moreira | H67HJI4 | 3–4 · Caso de uso e atividade | 02:00 – 04:00 |
-| Rafael Mesquita | H6722I0 | 5–6 · Orientação a objetos e classes | 04:00 – 06:00 |
-| Miguel Angel Fernandez Ortiz | H7858F9 | 7–9 · Camadas e modularização | 06:00 – 08:00 |
-| Maycon Douglas Inácio Silva | H719CD3 | 10–11 · Sequência e GitHub | 08:00 – 10:00 |
+| Maciel Costa da Silva | R280985 | 1–2 · Capa e o projeto | 00:00 – 01:40 |
+| Gabriel Alves Moreira | H67HJI4 | 3–4 · Caso de uso e atividade | 01:40 – 03:20 |
+| Rafael Mesquita | H6722I0 | 5–6 · Orientação a objetos e classes | 03:20 – 05:00 |
+| Miguel Angel Fernandez Ortiz | H7858F9 | 7–9 · Camadas e modularização | 05:00 – 06:50 |
+| Maycon Douglas Inácio Silva | H719CD3 | 10–13 · Sequência, programa desktop e GitHub | 06:50 – 10:00 |
 
 ---
 
@@ -33,7 +33,7 @@
 
 ---
 
-### Slide 2 — O que é o Nex_TI (00:20 – 02:00) · Maciel
+### Slide 2 — O que é o Nex_TI (00:20 – 01:40) · Maciel
 
 - **Objetivo:** explicar o produto.
 - **Tópicos-chave:**
@@ -44,7 +44,7 @@
 
 ---
 
-### Slide 3 — Caso de uso (02:00 – 03:00) · Gabriel
+### Slide 3 — Caso de uso (01:40 – 02:30) · Gabriel
 
 - **Objetivo:** mostrar os atores e o que cada um faz.
 - **Tópicos-chave:**
@@ -56,7 +56,7 @@
 
 ---
 
-### Slide 4 — Atividade (03:00 – 04:00) · Gabriel
+### Slide 4 — Atividade (02:30 – 03:20) · Gabriel
 
 - **Objetivo:** contar uma sessão de estudo do começo ao fim.
 - **Tópicos-chave:**
@@ -67,7 +67,7 @@
 
 ---
 
-### Slide 5 — Orientação a objetos (04:00 – 05:10) · Rafael
+### Slide 5 — Orientação a objetos (03:20 – 04:20) · Rafael
 
 - **Objetivo:** mostrar os quatro pilares com exemplos do projeto.
 - **Tópicos-chave:**
@@ -78,7 +78,7 @@
 
 ---
 
-### Slide 6 — Classes: entidades (05:10 – 06:00) · Rafael
+### Slide 6 — Classes: entidades (04:20 – 05:00) · Rafael
 
 - **Objetivo:** ligar o diagrama ao código de `sistema/apps/api/Models`.
 - **Tópicos-chave:**
@@ -89,7 +89,7 @@
 
 ---
 
-### Slide 7 — Camadas (06:00 – 07:00) · Miguel
+### Slide 7 — Camadas (05:00 – 05:50) · Miguel
 
 - **Objetivo:** explicar a arquitetura em camadas com o exemplo do login.
 - **Fala sugerida:**
@@ -98,22 +98,22 @@
 
 ---
 
-### Slide 8 — Classes: camadas (07:00 – 07:30) · Miguel
+### Slide 8 — Classes: camadas (05:50 – 06:20) · Miguel
 
 - **Objetivo:** mostrar o slide anterior em UML, sem ler o diagrama inteiro.
 - **Tópicos-chave:** de cima para baixo: as rotas usam as interfaces dos serviços, cada interface tem sua classe (a seta tracejada com triângulo quer dizer "implementa"), e os serviços usam o `AppDbContext`.
 
 ---
 
-### Slide 9 — Modularização (07:30 – 08:00) · Miguel
+### Slide 9 — Modularização (06:20 – 06:50) · Miguel
 
 - **Objetivo:** mostrar que cada parte tem sua pasta e roda sozinha.
-- **Tópico-chave:** `packages/shared` guarda as 702 cartas e o código que fala com a API, e é usado pelo site e pelo app. Escrevemos uma vez e usamos nos dois.
-- **Passar a vez:** *"O Maycon fecha com o SM-2 e o GitHub."*
+- **Tópico-chave:** a pasta nova `apps/desktop` é o programa desktop, que o Maycon mostra daqui a pouco. `packages/shared` guarda as 702 cartas e o código que fala com a API, e é usado pelo site e pelo app. Escrevemos uma vez e usamos nos dois.
+- **Passar a vez:** *"O Maycon fecha com o SM-2, o programa desktop e o GitHub."*
 
 ---
 
-### Slide 10 — Sequência (08:00 – 09:00) · Maycon
+### Slide 10 — Sequência (06:50 – 07:40) · Maycon
 
 - **Objetivo:** mostrar a ordem das mensagens quando o aluno revisa uma carta.
 - **Tópicos-chave:**
@@ -123,16 +123,36 @@
 
 ---
 
-### Slide 11 — GitHub (09:00 – 10:00) · Maycon
+### Slide 11 — Nex_TI Desktop (07:40 – 08:40) · Maycon
+
+- **Objetivo:** mostrar a aplicação desktop pedida na atividade, pequena e organizada.
+- **Ao vivo no Antigravity (30 s):** no terminal, em `sistema/apps/desktop`, rodar `dotnet run --project src/NexTI.Desktop.Apresentacao`, entrar com um nickname, abrir a fase 1 e responder duas cartas. Se algo travar, seguir com a foto do slide.
+- **Tópicos-chave:**
+  - Quatro projetos, um por camada: **Apresentação** (telas) → **Aplicação** (casos de uso) → **Domínio** (regras) ← **Infraestrutura** (banco). O Domínio não depende de ninguém.
+  - **POO:** `Usuario` é abstrata e `Aluno` herda dela; `Xp` e `Moedas` têm `private set` e só mudam por `ReceberPremio`, que paga uma vez por fase; o SM-2 fica atrás da interface `IAgendadorDeRevisao`.
+  - **Banco:** EF Core com SQLite, com migration e semente, como no PetMatch do livro da disciplina.
+  - As cartas e o SM-2 são os mesmos do site: os **27 testes** usam os mesmos casos.
+
+---
+
+### Slide 12 — Diagramas do desktop (08:40 – 09:20) · Maycon
+
+- **Objetivo:** mostrar que os quatro diagramas também existem para o programa desktop, feitos no Astah.
+- **Tópicos-chave:** caso de uso (o aluno entra, vê a trilha e estuda; responder carta é «include» e concluir fase é «extend»), classes do domínio (herança e composição), sequência (responder a última carta e concluir) e atividade (uma raia para o aluno e uma para cada camada).
+- **No Antigravity, se pedirem:** abrir `docs/diagramas` dentro de `sistema/apps/desktop`.
+
+---
+
+### Slide 13 — GitHub (09:20 – 10:00) · Maycon
 
 - **Objetivo:** mostrar o repositório ao vivo.
-- **No GitHub:** abrir o **Pull Request #1** (o trabalho desta entrega separado em commits) e a pasta `sistema/tests`.
+- **No GitHub:** abrir o **Pull Request #33** (o programa desktop e os diagramas) e a aba **Actions**, com os testes passando.
 - **Fala sugerida:**
   > *"Abrimos um Pull Request, damos merge na main, o GitHub Actions roda os 182 testes da API e, se passarem, publica a API na Azure sozinho. O site vai para a Vercel."*
 
 ---
 
-### Slide 12 — Perguntas · Todos
+### Slide 14 — Perguntas · Todos
 
 | Pergunta provável | Quem responde | Resposta curta |
 |---|---|---|
@@ -141,4 +161,6 @@
 | Por que separar em camadas? | Miguel | Cada parte cuida de uma coisa: dá para testar a regra sem a rota e trocar o banco sem mexer nas regras. |
 | O que o diagrama de atividade mostra? | Gabriel | Uma sessão de estudo, da escolha da fase até ganhar XP. |
 | Como funciona o deploy? | Maycon | Merge na main → GitHub Actions roda os testes → publica na Azure. |
+| Por que fazer um programa desktop? | Maycon | A atividade pede uma aplicação desktop organizada em escala pequena. Ele usa as mesmas cartas e regras do Nex_TI, em quatro projetos separados por camada. |
+| Onde está a herança no desktop? | Rafael | `Aluno : Usuario`, em `src/NexTI.Desktop.Dominio/Entidades`. |
 | O que mudou desde o PIM III? | Maciel | Site em React, app de celular, API em camadas na Azure, simulados oficiais do ENADE e três perfis. A lista completa está no README. |

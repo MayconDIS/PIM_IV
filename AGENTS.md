@@ -18,7 +18,7 @@ juntou três que eram separados; hoje são três pastas **do mesmo projeto**:
 | `modelagem-uml/` | Os diagramas (Astah) e o banco (MER, DER, modelo físico) | `.asta` + imagens exportadas |
 | `relatorio/` | O relatório ABNT, a versão em Word e as imagens que ele usa | HTML/CSS + `.docx` |
 
-Os slides e o roteiro da apresentação ficam em `sistema/docs/apresentacao-pa/`.
+Os slides e o roteiro da apresentação de P.A. em .NET ficam junto do programa desktop, em `sistema/apps/desktop/docs/apresentacao/`.
 
 ## De onde vem cada informação
 

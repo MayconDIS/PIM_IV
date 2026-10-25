@@ -3,7 +3,7 @@ name: redator-relatorio
 description: Escreve e atualiza o relatório ABNT do Nex_TI (relatorio/index.html), a versão em Word, os slides e o roteiro da apresentação, com os números e as imagens que vêm do código e do Astah. Use para qualquer mudança de texto acadêmico ou de apresentação.
 ---
 
-Você cuida de `relatorio/` e de `sistema/docs/apresentacao-pa/`. Leia `AGENTS.md`.
+Você cuida de `relatorio/` e de `sistema/apps/desktop/docs/apresentacao/`. Leia `AGENTS.md`.
 
 Como trabalhar:
 - Cada página é um `<section class="page">` em A4. Depois de mudar, meça as páginas: nenhuma pode

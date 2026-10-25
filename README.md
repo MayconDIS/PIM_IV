@@ -21,7 +21,7 @@ repositórios distintos, vivem aqui como pastas de primeiro nível:
 ```text
 📁 PIM_IV/
 ├── 📁 sistema/        # Implementação: frontend, API C# (.NET 10) e scripts SQL Server
-├── 📁 relatorio/      # Relatório ABNT (HTML/CSS) e os slides
+├── 📁 relatorio/      # Relatório ABNT (HTML/CSS) e a versão em Word
 ├── 📁 modelagem-uml/  # UML no Astah e banco de dados (MER, DER e modelo físico)
 ├── 📁 .agents/        # Skills de IA (uma pasta só, usada pelas três frentes)
 ├── 📁 .claude/agents/ # O time de agentes (coordenador, dev, modelagem, relatório, revisão)
@@ -48,6 +48,13 @@ npm run dev   # sobe a API (porta 5000) e o site (porta 5501)
 ```
 
 Detalhes de portas, banco de dados e API estão em [`sistema/README.md`](sistema/README.md).
+
+## 🎤 Apresentação de P.A. em .NET (27/10)
+
+O programa desktop da atividade, os slides, o roteiro e o guia de como abrir cada parte no
+Antigravity estão em [`sistema/apps/desktop`](sistema/apps/desktop#como-abrir-cada-parte-no-antigravity).
+No editor, `Ctrl+Shift+P` → **Tasks: Run Task** traz os atalhos prontos (abrir o programa, os
+testes, os slides, o Astah e o GitHub).
 
 ## 🤝 Como a equipe trabalha
 

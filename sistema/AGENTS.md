@@ -10,11 +10,11 @@ Aqui fica só o que é específico do código.
 | `apps/api/` | API em .NET 10 (Minimal APIs, EF Core, SQL Server / Azure SQL), porta **5000** |
 | `apps/react-web/` | Site em React 18 + Vite, porta **5501**, publicado na Vercel |
 | `apps/react-mobile/` | App em React Native (Expo), com fila para estudar sem internet |
-| `apps/desktop/` | Nex_TI Desktop (Windows Forms + EF Core/SQLite), feito para a apresentação de P.A. em .NET: 4 projetos em camadas e testes |
+| `apps/desktop/` | Nex_TI Desktop (Windows Forms + EF Core/SQLite), feito para a apresentação de P.A. em .NET: 4 projetos em camadas, testes e, em `docs/apresentacao`, os slides e o roteiro |
 | `packages/shared/` | Conteúdo (fases e cartas), regras de SM-2 e de XP/moedas e o cliente da API, usados pelo site e pelo app |
 | `database/` | `NexTI_DB.sql`, o script completo do banco |
 | `tests/` | Testes da API (xUnit) |
-| `docs/` | Manuais (técnico com as rotas, de execução, prático do usuário e de deploy), slides e roteiro da apresentação |
+| `docs/` | Manuais (técnico com as rotas, de execução, prático do usuário e de deploy) |
 
 ## Regras do código
 
