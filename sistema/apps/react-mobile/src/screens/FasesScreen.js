@@ -20,6 +20,7 @@ export default function FasesScreen({ liberadas, onAbrir }) {
                 onPress={() => onAbrir(fase)}
                 accessibilityRole="button"
                 accessibilityLabel={`${fase.titulo}${liberada ? '' : ', bloqueada'}`}
+                accessibilityState={{ disabled: !liberada }}
               >
                 <Text style={[styles.faseTitulo, !liberada && styles.textoApagado]}>{fase.titulo}</Text>
                 <Text style={styles.faseInfo}>{liberada ? `${fase.totalCards} cartas · +${fase.xp} XP` : '🔒 Conclua a fase anterior'}</Text>

@@ -25,6 +25,18 @@ const gravar = (chave, valor) => {
 let zoomAtual = Number.parseInt(ler('quest_zoom'), 10) || 100;
 let altoContraste = ler('quest_high_contrast') === 'true';
 
+/**
+ * onKeyDown para um elemento que não é <button> mas age como um (role="button"): Enter e Espaço
+ * fazem o mesmo que o clique, como num botão de verdade (WAI-ARIA, padrão "button").
+ */
+export function ativarComTeclado(acao, teclas = ['Enter', ' ']) {
+  return (e) => {
+    if (!teclas.includes(e.key)) return;
+    e.preventDefault();
+    acao(e);
+  };
+}
+
 export function aplicarPreferencias() {
   document.documentElement.style.fontSize = `${zoomAtual}%`;
   document.body.classList.toggle('high-contrast-mode', altoContraste);

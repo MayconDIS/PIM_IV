@@ -20,3 +20,5 @@ jobs:
           node-version: 22
       - name: Verificar sincronia
         run: node scripts/verificar-sincronia.mjs --detalhes
+      - name: Auditoria do código (código morto, depuração e acessibilidade)
+        run: node sistema/scripts/auditoria-codigo.mjs

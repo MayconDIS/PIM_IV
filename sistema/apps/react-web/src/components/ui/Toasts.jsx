@@ -8,21 +8,22 @@ export function Toasts() {
   const { toasts, removerToast } = useEstudo();
 
   return (
-    <div id="toast-container" aria-live="polite" aria-atomic="true">
+    <section id="toast-container" aria-label="Avisos" aria-live="polite">
+      {/* Erro é anunciado na hora (alert); os outros esperam o leitor terminar a frase (status). */}
       {toasts.map((t) => (
-        <div key={t.id} className={`toast-item toast-${t.tipo}${t.saindo ? ' toast-leaving' : ''}`}>
-          <span className="material-symbols-outlined toast-icon" style={{ fontSize: '1.3rem' }}>
+        <article key={t.id} role={t.tipo === 'error' ? 'alert' : 'status'} className={`toast-item toast-${t.tipo}${t.saindo ? ' toast-leaving' : ''}`}>
+          <span className="material-symbols-outlined toast-icon" style={{ fontSize: '1.3rem' }} aria-hidden="true">
             {ICONES[t.tipo] ?? 'info'}
           </span>
           <div className="toast-content">
-            <div className="toast-title">{t.titulo}</div>
-            <div className="toast-message">{t.mensagem}</div>
+            <strong className="toast-title">{t.titulo}</strong>
+            <p className="toast-message">{t.mensagem}</p>
           </div>
-          <button className="toast-close" title="Fechar" onClick={() => removerToast(t.id)}>
-            <span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }}>close</span>
+          <button type="button" className="toast-close" aria-label={`Fechar o aviso: ${t.titulo}`} title="Fechar" onClick={() => removerToast(t.id)}>
+            <span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }} aria-hidden="true">close</span>
           </button>
-        </div>
+        </article>
       ))}
-    </div>
+    </section>
   );
 }

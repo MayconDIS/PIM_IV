@@ -28,7 +28,7 @@ export function PainelUsuario() {
           </div>
           <div className="xp-badge-col">
             <span className="xp-badge tech-font flex-align coin-display-badge">
-              <span className="material-symbols-outlined" style={{ fontSize: '1.2rem' }}>toll</span> {moedas}
+              <span className="material-symbols-outlined" style={{ fontSize: '1.2rem' }} aria-hidden="true">toll</span> {moedas}
             </span>
             <span className="badge-title-sub">Moedas</span>
           </div>
@@ -40,7 +40,15 @@ export function PainelUsuario() {
           <span className="tech-font text-cyan">{nivel.rotuloProgresso}</span>
           <span className="tech-font">{nivel.rotuloProximo}</span>
         </div>
-        <div className="xp-level-progress-bar-bg">
+        <div
+          className="xp-level-progress-bar-bg"
+          role="progressbar"
+          aria-label="Progresso até o próximo rank"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={Math.round(nivel.percentual)}
+          aria-valuetext={nivel.rotuloProgresso}
+        >
           <div className="xp-level-progress-bar-fill" style={{ width: `${nivel.percentual}%` }} />
         </div>
       </div>

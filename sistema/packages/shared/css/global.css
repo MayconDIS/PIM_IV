@@ -315,3 +315,17 @@
 @media (max-width: 800px) {
     input, select, textarea { font-size: 16px !important; }
 }
+
+/* Foco visível para quem navega pelo teclado (WCAG 2.4.7): o anel padrão do navegador quase some
+   no fundo escuro. Os campos de texto continuam com a borda ciano que já tinham. */
+:focus-visible {
+    outline: 2px solid var(--nexti-cyan, #00e6e6);
+    outline-offset: 2px;
+}
+
+/* Os avisos usam <strong> e <p> (HTML semântico): os dois em bloco e sem a margem padrão do <p>. */
+.toast-title { display: block; }
+.toast-message { margin: 0; }
+
+/* A janela recebe o foco ao abrir (role="dialog"); o contorno fica só nos controles dentro dela. */
+.modal-content:focus, .modal-content:focus-visible { outline: none; }
