@@ -126,7 +126,7 @@ ensaiar, leia o [`ESTUDOS.md`](../../ESTUDOS.md).
 - **Tópicos-chave:**
   - A `TelaEstudo` chama `Responder` → a `SessaoDeEstudo` tira a carta da fila → a `Revisao` pede ao `AgendadorSm2` a próxima data → a `UnidadeDeTrabalho` grava.
   - Era a última carta: a tela chama `ConcluirFase` → o `Aluno` recebe o prêmio se for a primeira vez → grava → a tela mostra o resultado.
-  - Regra do SM-2: Bom multiplica o intervalo pelo fator (começa em 2,5); Fácil vai mais longe (carta nova volta em 3 dias); Difícil soma pelo menos 1 dia; Errei volta amanhã. O fator nunca fica abaixo de 1,3.
+  - Regra do SM-2: Bom multiplica o intervalo pelo fator (começa em 2,5); Fácil vai mais longe (carta nova volta em 3 dias); Difícil soma pelo menos 1 dia; Errei volta amanhã. O fator nunca fica abaixo de 1,3 e o intervalo nunca passa de 100 anos (36.500 dias, o mesmo teto do Anki): sem esse teto, uma carta respondida "Fácil" umas 12 vezes passava do ano 9999 e o programa travava — foi o teste de carga que achou.
 
 ---
 
@@ -158,4 +158,5 @@ ensaiar, leia o [`ESTUDOS.md`](../../ESTUDOS.md).
 | Como as camadas se ligam? | Miguel | No `Program.cs` da Apresentação, que cria os repositórios e entrega aos serviços pelo construtor. |
 | O que o diagrama de atividade mostra? | Gabriel | Uma sessão de estudo, do nickname até ganhar XP, com uma raia por camada. |
 | Onde fica o banco? | Maycon | Um arquivo SQLite em `%LOCALAPPDATA%\NexTI.Desktop`, criado pela migration na primeira vez. |
+| Por que o intervalo tem limite? | Maycon | Sem limite, a data da próxima revisão passava do ano 9999 e travava. O teste de carga achou; agora o intervalo para em 100 anos, como no Anki, no site, na API e no desktop. |
 | Como sabem que funciona? | Maycon | 28 testes automáticos, rodados no GitHub a cada Pull Request. |
