@@ -20,7 +20,10 @@ export function montarMapaNeural(container, canvas, { nomeUsuario, chaveSave, or
   let escala = escalaInicial();
   let panX = container.clientWidth / 2 - CENTRO * escala;
   let panY = container.clientHeight / 2 - CENTRO * escala;
-  if (salvo.camera) ({ scale: escala, panX, panY } = salvo.camera);
+  // A câmera salva só vale na mesma largura de tela: aberta no celular depois do computador (ou o
+  // contrário), ela deixaria o mapa fora da tela.
+  const mesmaTela = salvo.camera && Math.abs((salvo.camera.largura ?? 0) - container.clientWidth) < 100;
+  if (mesmaTela) ({ scale: escala, panX, panY } = salvo.camera);
 
   let noArrastado = null;
   let panorama = false;
@@ -184,7 +187,7 @@ export function montarMapaNeural(container, canvas, { nomeUsuario, chaveSave, or
   recalcularTeia();
 
   function salvarEstado() {
-    const estado = { camera: { scale: escala, panX, panY }, nodes: {} };
+    const estado = { camera: { scale: escala, panX, panY, largura: container.clientWidth }, nodes: {} };
     Object.values(nos).forEach((n) => {
       estado.nodes[n.id] = { x: n.x, y: n.y, offsetX: n.offsetX || 0, offsetY: n.offsetY || 0 };
     });
