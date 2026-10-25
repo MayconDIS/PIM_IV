@@ -103,8 +103,9 @@ checar('testes da API iguais em todos os documentos', valores.length <= 1,
 
 // --- 4. diagramas: só do Astah ----------------------------------------------------------
 const ASTAH = 'modelagem-uml/02_Modelagem_UML/imagens-astah';
-// O Nex_TI Desktop (apresentação de P.A. em .NET) tem um .asta à parte; a contagem é a do PIM IV.
-const DESKTOP = `${ASTAH}/Nex_TI Desktop`;
+// O Nex_TI Desktop (apresentação de P.A. em .NET) tem um .asta à parte, guardado com o programa em
+// sistema/apps/desktop/docs/diagramas, com as imagens exportadas pelo Astah em exportadas-astah.
+const DESKTOP = 'sistema/apps/desktop/docs/diagramas/exportadas-astah';
 const pngsAstah = arquivos(ASTAH, (c) => c.endsWith('.png')).filter((f) => !f.startsWith(`${DESKTOP}/`));
 const pastasCasos = readdirSync(join(RAIZ, ASTAH, 'Casos de uso')).filter((n) => statSync(join(RAIZ, ASTAH, 'Casos de uso', n)).isDirectory());
 for (const { doc, m } of citacoes(/\b(\d+) diagramas\b/g)) {

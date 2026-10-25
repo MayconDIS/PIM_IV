@@ -61,7 +61,8 @@ Astah (`astah-command -image`) não serve: ela para na verificação da licença
 
 ## Nex_TI Desktop (apresentação de P.A. em .NET)
 
-O `GerarDiagramasDesktop.java` monta o `Diagrams Nex_TI Desktop - PA DotNet.asta`, com os quatro
+O `GerarDiagramasDesktop.java` monta o `Diagrams Nex_TI Desktop - PA DotNet.asta`, que fica com o
+programa, em [`sistema/apps/desktop/docs/diagramas`](../../../sistema/apps/desktop/docs/diagramas), com os quatro
 diagramas pedidos na apresentação de P.A. em .NET, tirados do programa em
 [`sistema/apps/desktop`](../../../sistema/apps/desktop):
 
@@ -78,8 +79,8 @@ Gera e exporta do mesmo jeito (na primeira vez, passe um `.asta` qualquer como b
 ```powershell
 $A = "C:\Program Files\astah-uml"
 & "$A\jre\bin\java.exe" -cp "$A\astah-uml.jar;$A\astah-api.jar;$A\lib\*" `
-  GerarDiagramasDesktop.java "..\Diagrams Nex_TI Desktop - PA DotNet.asta"
+  GerarDiagramasDesktop.java "..\..\..\sistema\apps\desktop\docs\diagramas\Diagrams Nex_TI Desktop - PA DotNet.asta"
 ```
 
-As imagens ficam em [`../imagens-astah/Nex_TI Desktop`](../imagens-astah/Nex_TI%20Desktop), e as
-cópias usadas no README do programa, em `sistema/apps/desktop/docs/diagramas`.
+Exporte com o `ExportarImagens.java` para `sistema/apps/desktop/docs/diagramas/exportadas-astah`; as
+cópias com nomes curtos, usadas no README e nos slides, ficam na própria `docs/diagramas`.

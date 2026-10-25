@@ -66,7 +66,7 @@ Start-Process "docs/apresentacao/Nex_TI - Apresentacao PA DotNet.pdf"   # abre o
 | Slides e roteiro | `docs/apresentacao/` | O PDF pela tarefa acima. O roteiro (`ROTEIRO_DO_PALESTRANTE.md`) fica mais legível com `Ctrl+Shift+V` |
 | Este guia, com fotos e diagramas | `README.md` (este arquivo) | `Ctrl+Shift+V` abre a visualização com as imagens |
 | Os quatro diagramas | `docs/diagramas/` | Clique no `.png`: abre como imagem no editor |
-| Arquivo do Astah | `modelagem-uml/02_Modelagem_UML/Diagrams Nex_TI Desktop - PA DotNet.asta` | Pela tarefa, ou com dois cliques no Explorer do Windows |
+| Arquivo do Astah | `docs/diagramas/Diagrams Nex_TI Desktop - PA DotNet.asta` | Pela tarefa, ou com dois cliques no Explorer do Windows |
 | Herança e classe abstrata | `Usuario.cs` e `Aluno.cs` | `Ctrl+P` → `Aluno.cs` |
 | Encapsulamento (prêmio uma vez só) | `Aluno.cs`, método `ReceberPremio` | `Ctrl+P` → `Aluno.cs` |
 | Interface e SM-2 | `Regras.cs` (`IAgendadorDeRevisao`) e `AgendadorSm2.cs` | `Ctrl+P` → `AgendadorSm2.cs` |
@@ -92,7 +92,7 @@ desktop/
 ├── tests/NexTI.Desktop.Testes/        xUnit: regras, domínio e casos de uso de ponta a ponta
 └── docs/
     ├── apresentacao/                  Slides (HTML e PDF) e roteiro da apresentação de 27/10
-    ├── diagramas/                     Cópias dos diagramas exportados do Astah
+    ├── diagramas/                     O .asta do Astah, as imagens exportadas e as cópias usadas aqui
     └── telas/                         Fotos das telas do programa
 ```
 
@@ -137,7 +137,7 @@ usa EF Core com SQLite:
 ## Os quatro diagramas UML
 
 Feitos no Astah, pelo gerador `modelagem-uml/02_Modelagem_UML/gerador-astah/GerarDiagramasDesktop.java`
-(arquivo `Diagrams Nex_TI Desktop - PA DotNet.asta`), com a explicação de cada elemento no campo
+(arquivo `docs/diagramas/Diagrams Nex_TI Desktop - PA DotNet.asta`), com a explicação de cada elemento no campo
 *Definition*. As imagens abaixo são cópias das exportadas pelo Astah.
 
 **1. Casos de uso:** o que o aluno faz no programa.

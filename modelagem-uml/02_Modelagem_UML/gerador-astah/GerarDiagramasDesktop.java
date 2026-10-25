@@ -30,14 +30,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Gera "Diagrams Nex_TI Desktop - PA DotNet.asta": os quatro diagramas UML pedidos na
+ * Gera "Diagrams Nex_TI Desktop - PA DotNet.asta" (guardado em sistema/apps/desktop/docs/diagramas): os quatro diagramas UML pedidos na
  * apresentação de P.A. em .NET (caso de uso, classes, sequência e atividade), todos tirados do
  * código de sistema/apps/desktop. Todo elemento recebe uma Definition.
  *
  * Uso (PowerShell, nesta pasta; a API do Astah precisa do Java 21 que vem com ele):
  *   $A = "C:\Program Files\astah-uml"
  *   & "$A\jre\bin\java.exe" -cp "$A\astah-uml.jar;$A\astah-api.jar;$A\lib\*" `
- *     GerarDiagramasDesktop.java "..\Diagrams Nex_TI Desktop - PA DotNet.asta" ["<base.asta>"]
+ *     GerarDiagramasDesktop.java "..\..\..\sistema\apps\desktop\docs\diagramas\Diagrams Nex_TI Desktop - PA DotNet.asta" ["<base.asta>"]
  * Como no outro gerador, a licença acadêmica só deixa salvar um arquivo aberto: na primeira vez,
  * passe um .asta qualquer como base (ele é copiado, não alterado).
  */
