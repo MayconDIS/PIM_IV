@@ -8,6 +8,7 @@ import { PainelUsuario } from '../components/dashboard/PainelUsuario';
 import { Trilhas } from '../components/dashboard/Trilhas';
 import { Rodape } from '../components/dashboard/Rodape';
 import { BotaoTopo, WidgetAcessibilidade } from '../components/dashboard/Flutuantes';
+import { NavegacaoCelular } from '../components/dashboard/NavegacaoCelular';
 import { ModalCriacao } from '../components/modais/ModalCriacao';
 import { ModalAdmin } from '../components/modais/ModalAdmin';
 import { ModalConta } from '../components/modais/ModalConta';
@@ -84,6 +85,7 @@ function Dashboard() {
       <Rodape />
       <BotaoTopo />
       <WidgetAcessibilidade />
+      <NavegacaoCelular />
       <Toasts />
       <CyberDialog />
     </>

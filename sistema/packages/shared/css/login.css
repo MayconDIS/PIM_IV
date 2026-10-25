@@ -288,3 +288,13 @@ body {
 @media (max-width: 480px) {
     .login-container { padding: 32px 22px; }
 }
+
+/* Celular: os links do rodapé do login (Cadastre-se, Privacidade, Termos) tinham 17px de
+   altura para tocar; o padding vertical leva a área de toque a ~40px sem mudar o desenho. */
+@media (max-width: 800px) {
+    .extra-links a {
+        display: inline-block;
+        padding: 11px 4px;
+    }
+    .extra-links p { margin: 0; }
+}

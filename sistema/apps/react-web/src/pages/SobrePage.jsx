@@ -167,7 +167,11 @@ export default function SobrePage() {
 
   useEffect(() => {
     document.title = 'Sobre - Nex_TI';
-    const aoMudarHash = () => setAtiva(secaoDoHash());
+    const aoMudarHash = () => {
+      setAtiva(secaoDoHash());
+      // No celular o texto fica embaixo do menu: depois do toque, rola até ele.
+      if (window.innerWidth <= 800) document.querySelector('.right-panel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
     window.addEventListener('hashchange', aoMudarHash);
     return () => window.removeEventListener('hashchange', aoMudarHash);
   }, []);

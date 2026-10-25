@@ -4,6 +4,7 @@ import logo from '@nexti/shared/img/logo.png';
 import iconeTerminal from '@nexti/shared/img/terminal-icon.png';
 import { useEstudo } from '../../context/EstudoContext';
 import { alternarAltoContraste, mudarZoom } from '../../lib/acessibilidade';
+import { abrirVLibras } from '../../lib/vlibras';
 import { perfilAtual, podeAdministrar } from '../modais/ModalAdmin';
 
 /** <header> do dashboard: frase motivacional, áudio, criação de carta e menu do usuário. */
@@ -86,12 +87,12 @@ export function Topo() {
         >
           <span className="material-symbols-outlined">{audioMudo ? 'volume_off' : 'volume_up'}</span>
         </button>
-        <button className="btn-action tech-font flex-align" onClick={() => abrirModal('modalCriacao')}>
+        <button className="btn-action tech-font flex-align btn-criar-carta" onClick={() => abrirModal('modalCriacao')}>
           <span className="material-symbols-outlined">add_box</span> Criar Carta
         </button>
 
         <div className="hamburger-menu" ref={menuRef}>
-          <button className="hamburger-btn flex-align" onClick={() => setMenuAberto((v) => !v)}>
+          <button className="hamburger-btn flex-align" aria-label="Abrir menu" aria-expanded={menuAberto} onClick={() => setMenuAberto((v) => !v)}>
             <span className="material-symbols-outlined hamburger-icon">menu</span>
           </button>
           <div className={`dropdown-content${menuAberto ? ' show' : ''}`}>
@@ -110,26 +111,26 @@ export function Topo() {
                 <div className="tech-font menu-user-level">{rank}</div>
               </div>
             </div>
-            <a className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalNivelamento'))}>
+            <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalNivelamento'))}>
               <span className="material-symbols-outlined target-icon">radar</span> Refazer Diagnóstico
-            </a>
-            <a className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalProgresso'))}>
+            </button>
+            <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalProgresso'))}>
               <span className="material-symbols-outlined stats-icon">monitoring</span> Minhas Estatísticas
-            </a>
-            <a className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalMapaMental'))}>
+            </button>
+            <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalMapaMental'))}>
               <span className="material-symbols-outlined">hub</span> Mapa Neural
-            </a>
+            </button>
             <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalConta'))}>
               <span className="material-symbols-outlined">manage_accounts</span> Minha conta
             </button>
             {podeAdministrar() && (
-              <a className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalAdmin'))}>
+              <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalAdmin'))}>
                 <span className="material-symbols-outlined">admin_panel_settings</span> Painel do {perfilAtual() === 'Admin' ? 'Admin' : 'Tutor'}
-              </a>
+              </button>
             )}
-            <a className="dropdown-item danger flex-align" onClick={acao(resetarProgresso)}>
+            <button type="button" className="dropdown-item danger flex-align" onClick={acao(resetarProgresso)}>
               <span className="material-symbols-outlined">warning</span> Formatar Sistema
-            </a>
+            </button>
             <div className="dropdown-item mobile-a11y mobile-a11y-container">
               <span className="flex-align a11y-title-text">
                 <span className="material-symbols-outlined">accessibility_new</span> Acessibilidade
@@ -140,11 +141,14 @@ export function Topo() {
                 <button className="btn-action tech-font flex-align-center a11y-btn" onClick={alternarAltoContraste} title="Alto Contraste">
                   <span className="material-symbols-outlined contrast-icon">contrast</span>
                 </button>
+                <button className="btn-action tech-font flex-align-center a11y-btn" onClick={acao(abrirVLibras)} title="Tradutor de Libras (VLibras)">
+                  Libras
+                </button>
               </div>
             </div>
-            <a className="dropdown-item flex-align" onClick={acao(deslogar)}>
+            <button type="button" className="dropdown-item flex-align" onClick={acao(deslogar)}>
               <span className="material-symbols-outlined">logout</span> Logout
-            </a>
+            </button>
           </div>
         </div>
       </div>

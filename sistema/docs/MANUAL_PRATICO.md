@@ -12,18 +12,22 @@ respostas; ele não prevê exatamente quando uma pessoa esquecerá um conteúdo.
 ---
 
 ## 🚀 2. Acesso à Plataforma
-A entrada do sistema simula um terminal de comandos.
-1. Na tela de **Splash Screen**, você verá o carregamento simulado de módulos (apenas por imersão).
-2. Na tela de **Acesso**, cadastre uma conta ou entre com seu nickname ou e-mail e senha. Cadastro e login precisam da API disponível.
-3. Após a autenticação, você será redirecionado para o seu **Dashboard Principal**.
+1. Na primeira visita aparece uma tela de abertura com o carregamento dos módulos.
+2. Na tela de entrada, crie uma conta (**Criar conta**) ou entre com seu nickname ou e-mail e senha (**Entrar**). Cadastro e login precisam da API disponível.
+3. No primeiro acesso, o **teste de nivelamento** (10 perguntas) define por qual fase você começa. Depois disso você vai para o painel.
+
+### No celular
+O site se adapta à tela do celular (abaixo de 800px de largura):
+- uma **barra no rodapé da tela** leva a Fases, Estatísticas, Criar carta, Mapa e Conta;
+- o **menu** (☰, no canto de cima) tem o refazer nivelamento, o painel do Tutor/Admin, a saída e a **Acessibilidade**: A-, A+, alto contraste e **Libras**, que abre o tradutor VLibras (no computador ele fica no botão azul flutuante).
 
 ---
 
 ## 🎮 3. Sistema de Gamificação
 Para manter os alunos motivados e engajados a longo prazo (especialmente em projetos de extensão), o Nex_TI usa um HUD interativo:
-- **XP (Pontos de Experiência):** Ganhos ao acertar perguntas ou concluir módulos de estudo de disciplinas específicas.
+- **XP (Pontos de Experiência):** Ganhos ao concluir uma fase ou passar num teste de módulo, **só na primeira vez**. Revisar a fase depois conta para o SM-2, sem prêmio.
 - **Níveis (Level Up):** Acumular XP aumenta o seu nível de aluno na plataforma, destravando status entre a comunidade de estudantes.
-- **Moedas Tech:** Ganhas através do desempenho diário, permitindo a liberação imediata de módulos bônus e de extensão na própria plataforma.
+- **Moedas:** Ganhas ao concluir cada fase pela primeira vez; servem para comprar as fases bônus na loja.
 
 ---
 

@@ -1957,3 +1957,108 @@ body.high-contrast-mode .xp-badge {
         white-space: nowrap;
     }
 }
+
+/* =========================================================================
+   ITENS DO MENU COMO BOTÕES
+   Os itens viraram <button> (um <a> sem href não recebe foco do teclado). Sem
+   isto, o botão vinha com o fundo cinza e o texto apagado do navegador — era o
+   "Minha conta" ilegível no menu.
+   ========================================================================= */
+button.dropdown-item {
+    width: 100%;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #30363d;
+    font: inherit;
+    text-align: left;
+}
+
+/* =========================================================================
+   CELULAR (até 800px) — mesmo padrão do CasalFlow
+   Barra de navegação no rodapé da tela, cabeçalho só com marca, som e menu,
+   e espaço reservado embaixo para a barra não cobrir conteúdo.
+   A barra tem 62px mais a área segura do aparelho (o entalhe do iPhone).
+   ========================================================================= */
+.nav-celular { display: none; }
+
+@media (max-width: 800px) {
+    .nav-celular {
+        display: flex;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100vw;
+        height: calc(62px + env(safe-area-inset-bottom, 0px));
+        padding: 0 4px env(safe-area-inset-bottom, 0px);
+        justify-content: space-around;
+        align-items: center;
+        background: rgba(11, 12, 16, 0.96);
+        -webkit-backdrop-filter: blur(16px);
+        backdrop-filter: blur(16px);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 9000;
+    }
+    .nav-celular-item {
+        flex: 1;
+        min-width: 48px;
+        min-height: 48px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        padding: 4px 2px;
+        background: none;
+        border: none;
+        border-radius: 10px;
+        color: #8b92a5;
+        font: 600 0.72rem 'Inter', sans-serif;
+        cursor: pointer;
+    }
+    .nav-celular-item .material-symbols-outlined { font-size: 1.35rem; }
+    .nav-celular-item.ativo {
+        color: var(--nexti-cyan);
+        background: rgba(0, 230, 230, 0.1);
+    }
+
+    /* Conteúdo e botões flutuantes acima da barra */
+    body { padding-bottom: calc(62px + env(safe-area-inset-bottom, 0px)); }
+    .main-footer { padding-bottom: calc(62px + 30px + env(safe-area-inset-bottom, 0px)); }
+    #btn-voltar-topo { bottom: calc(62px + 16px + env(safe-area-inset-bottom, 0px)) !important; }
+    .app-footer { bottom: calc(62px + 76px + env(safe-area-inset-bottom, 0px)) !important; }
+
+    /* "Criar carta" foi para a barra: o cabeçalho fica com marca, som e menu */
+    .header-right .btn-criar-carta { display: none; }
+
+    /* Cartão do usuário: o nome em cima, XP e moedas embaixo (antes o nome ficava atrás do XP) */
+    .dashboard-header-main { flex-direction: column; align-items: flex-start; gap: 4px; }
+    .welcome-text h1 { overflow-wrap: anywhere; }
+
+    /* Fechar dos modais e botões de acessibilidade do menu com área de toque de 44px */
+    .btn-close { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+    .a11y-btn { min-height: 44px; }
+
+    /* Links do rodapé com altura de toque */
+    .footer-links a { display: inline-block; padding: 8px 0; }
+
+    /* Modais: a barra continua por cima (troca de tela sem fechar nada), então o modal
+       reserva o espaço dela embaixo em vez de ter o fim coberto. */
+    .modal-overlay { padding: 12px 10px calc(62px + 12px + env(safe-area-inset-bottom, 0px)); }
+    .modal-content {
+        max-height: calc(100vh - 86px - env(safe-area-inset-bottom, 0px));
+        max-height: calc(100dvh - 86px - env(safe-area-inset-bottom, 0px));
+    }
+    .modal-mapa { max-width: 100%; height: calc(100dvh - 86px - env(safe-area-inset-bottom, 0px)); }
+    .modal-body { padding: 20px 16px; }
+}
+
+@media (max-width: 800px) {
+    /* Rodapé em grade: as listas são curtas, e empilhadas viravam uma rolagem longa.
+       Duas colunas no celular, três ou mais no tablet. */
+    .footer-content {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 24px 18px;
+    }
+    .footer-brand { grid-column: 1 / -1; }
+}
