@@ -24,7 +24,7 @@ Precisa do **.NET 10 SDK** no Windows (o programa usa Windows Forms).
 ```powershell
 cd sistema/apps/desktop
 dotnet run --project src/NexTI.Desktop.Apresentacao     # abre o programa
-dotnet test                                            # roda os 27 testes
+dotnet test                                            # roda os 28 testes
 ```
 
 Na primeira vez, o programa cria o banco SQLite em `%LOCALAPPDATA%\NexTI.Desktop\nexti-desktop.db`,
@@ -45,7 +45,7 @@ repositório, não só esta pasta). Assim os atalhos abaixo funcionam.
 | Tarefa | O que faz |
 |---|---|
 | Desktop: abrir o programa | Compila e abre o Nex_TI Desktop (a primeira vez leva uns 20 segundos) |
-| Desktop: rodar os testes | Roda os 27 testes no terminal |
+| Desktop: rodar os testes | Roda os 28 testes no terminal |
 | Apresentação: abrir os slides (PDF) | Abre o PDF dos slides no leitor de PDF do Windows |
 | Apresentação: abrir os diagramas do desktop no Astah | Abre o `.asta` no Astah |
 | Apresentação: abrir o GitHub | Abre o repositório no navegador |
@@ -164,7 +164,7 @@ Feitos no Astah, pelo gerador `modelagem-uml/02_Modelagem_UML/gerador-astah/Gera
 
 ## Testes
 
-`dotnet test` roda **27 testes** (xUnit):
+`dotnet test` roda **28 testes** (xUnit):
 
 - **Mesmas regras do resto do Nex_TI:** o SM-2 e os prêmios passam pelos mesmos casos que o site,
   o app e a API conferem (`packages/shared/tests/sm2-casos.json` e `recompensa-casos.json`).

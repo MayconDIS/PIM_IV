@@ -143,7 +143,7 @@ ensaiar, leia o [`ESTUDOS.md`](../../ESTUDOS.md).
 - **Objetivo:** mostrar o repositório e os testes.
 - **No GitHub:** abrir o **Pull Request #33** (o programa desktop e os diagramas) e a aba **Actions**, com a checagem "Nex_TI Desktop" passando.
 - **Fala sugerida:**
-  > *"Cada mudança entra por um Pull Request. O GitHub Actions roda os 27 testes do programa: o SM-2, o prêmio uma vez só e o programa de ponta a ponta, com um banco em memória. Se passarem, damos merge na main."*
+  > *"Cada mudança entra por um Pull Request. O GitHub Actions roda os 28 testes do programa: o SM-2, o prêmio uma vez só e o programa de ponta a ponta, com um banco em memória. Se passarem, damos merge na main."*
 
 ---
 
@@ -158,4 +158,4 @@ ensaiar, leia o [`ESTUDOS.md`](../../ESTUDOS.md).
 | Como as camadas se ligam? | Miguel | No `Program.cs` da Apresentação, que cria os repositórios e entrega aos serviços pelo construtor. |
 | O que o diagrama de atividade mostra? | Gabriel | Uma sessão de estudo, do nickname até ganhar XP, com uma raia por camada. |
 | Onde fica o banco? | Maycon | Um arquivo SQLite em `%LOCALAPPDATA%\NexTI.Desktop`, criado pela migration na primeira vez. |
-| Como sabem que funciona? | Maycon | 27 testes automáticos, rodados no GitHub a cada Pull Request. |
+| Como sabem que funciona? | Maycon | 28 testes automáticos, rodados no GitHub a cada Pull Request. |

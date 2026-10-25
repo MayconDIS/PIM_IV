@@ -17,7 +17,7 @@ namespace NexTI_API.Services
     public interface IProgressoService
     {
         Task<List<ProgressoResumo>> ListarAsync(int usuarioId);
-        Task<ProgressoFlashcard> RegistrarRespostaAsync(int usuarioId, int flashcardId, int qualidade);
+        Task<Resultado<ProgressoFlashcard>> RegistrarRespostaAsync(int usuarioId, int flashcardId, int qualidade);
         Task<Resultado<EstatisticasDetalhadas>> EstatisticasAsync(string username);
     }
 
@@ -46,9 +46,17 @@ namespace NexTI_API.Services
                           p.IntervaloDias, p.FatorFacilidade, p.DataProximaRevisao))
                 .ToListAsync();
 
-        public async Task<ProgressoFlashcard> RegistrarRespostaAsync(int usuarioId, int flashcardId, int qualidade)
+        public async Task<Resultado<ProgressoFlashcard>> RegistrarRespostaAsync(int usuarioId, int flashcardId, int qualidade)
         {
+            // A nota vem do cliente: fora de 0 a 5 não é uma resposta do SM-2 (antes 99 virava "Fácil").
+            if (qualidade is < 0 or > 5)
+                return Resultado<ProgressoFlashcard>.Erro(TipoFalha.Invalido, "A nota da resposta vai de 0 a 5.");
+            // Sem esta conferência, uma carta inexistente estourava a chave estrangeira no SQL Server (erro 500).
+            if (!await _db.Flashcards.AnyAsync(f => f.Id == flashcardId))
+                return Resultado<ProgressoFlashcard>.Erro(TipoFalha.NaoEncontrado, "Carta não encontrada.");
+
             var progresso = await _db.Progresso_Flashcards.FindAsync(usuarioId, flashcardId);
+            var novo = progresso == null;
             if (progresso == null)
             {
                 progresso = new ProgressoFlashcard
@@ -63,8 +71,22 @@ namespace NexTI_API.Services
             // Inversão de dependência para aplicar cálculo do SM-2 (DIP)
             _sm2.Calcular(progresso, qualidade);
 
-            await _db.SaveChangesAsync();
-            return progresso;
+            try
+            {
+                await _db.SaveChangesAsync();
+            }
+            catch (DbUpdateException) when (novo)
+            {
+                // Duas primeiras respostas da mesma carta ao mesmo tempo (clique duplo, fila do app
+                // reenviando): a outra requisição criou o registro primeiro e este INSERT bateu na
+                // chave. Aplica a resposta sobre o registro que já existe. Achado pelo teste de carga.
+                _db.ChangeTracker.Clear();
+                progresso = await _db.Progresso_Flashcards.FindAsync(usuarioId, flashcardId);
+                if (progresso == null) throw;
+                _sm2.Calcular(progresso, qualidade);
+                await _db.SaveChangesAsync();
+            }
+            return Resultado<ProgressoFlashcard>.Ok(progresso);
         }
 
         public async Task<Resultado<EstatisticasDetalhadas>> EstatisticasAsync(string username)

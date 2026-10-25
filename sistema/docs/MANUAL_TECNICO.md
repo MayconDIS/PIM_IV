@@ -113,6 +113,12 @@ o intervalo em dias, o fator de facilidade (começa em 2,5 e nunca fica abaixo d
 | Bom (4) | 1 dia | intervalo × fator | igual |
 | Fácil (5) | 3 dias | intervalo × fator × 1,3 | +0,15 |
 
+O intervalo para em **36.500 dias** (100 anos, o mesmo teto do Anki): sem ele, uma carta
+respondida "Fácil" umas 12 vezes passava do ano 9999 e a API não conseguia gravar a data.
+A rota recusa nota fora de 0 a 5 (400) e carta que não existe (404); duas primeiras respostas
+da mesma carta ao mesmo tempo gravam um registro só. Os três casos foram achados pelos testes
+de caixa branca e de carga (ver [`TESTES.md`](TESTES.md)).
+
 O site calcula na hora para mostrar a previsão em cada botão e envia a nota para
 `POST /api/progresso/atualizar` quando a carta tem ID da API. O app usa a mesma
 regra e, ao sincronizar, adota o agendamento devolvido pela API. Sem internet, o

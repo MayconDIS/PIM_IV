@@ -101,14 +101,15 @@ builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<IContaService, ContaService>();
 builder.Services.AddScoped<IHistoricoConta, HistoricoConta>();
 
-// Login e cadastro: 30 tentativas por minuto por IP (força bruta / criação em massa).
-// Não é menor porque uma turma inteira sai pelo mesmo IP do Wi-Fi da faculdade.
 // Monitoramento: com APPLICATIONINSIGHTS_CONNECTION_STRING (app setting do App Service),
 // requisições, erros, tempo de resposta e consultas ao SQL vão para o Application Insights.
 // Sem a variável (PC, Docker, testes), nada é enviado.
 if (!string.IsNullOrWhiteSpace(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]))
     builder.Services.AddOpenTelemetry().UseAzureMonitor();
 
+// Login e cadastro: 30 tentativas por minuto por IP (força bruta / criação em massa).
+// Não é menor porque uma turma inteira sai pelo mesmo IP do Wi-Fi da faculdade.
+// O teste de carga (tests/carga/carga-api.mjs) confere que uma rajada recebe 429.
 builder.Services.AddRateLimiter(opcoes =>
 {
     opcoes.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
@@ -181,3 +182,6 @@ if (app.Configuration.GetValue("Database:MigrarAoIniciar", true))
 }
 
 app.Run();
+
+// Deixa a classe Program visível aos testes de caixa preta (WebApplicationFactory<Program>).
+public partial class Program;

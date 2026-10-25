@@ -151,5 +151,35 @@
       "intervaloDias": 3,
       "fatorFacilidade": 2.45
     }
+  },
+  {
+    "nome": "Fácil 20 vezes (o intervalo para em 36.500 dias)",
+    "respostas": [
+      "easy",
+      "easy",
+      "easy",
+      "easy",
+      "easy",
+      "easy",
+      "easy",
+      "easy",
+      "easy",
+      "easy",
+      "easy",
+      "easy",
+      "easy",
+      "easy",
+      "easy",
+      "easy",
+      "easy",
+      "easy",
+      "easy",
+      "easy"
+    ],
+    "esperado": {
+      "repeticoes": 20,
+      "intervaloDias": 36500,
+      "fatorFacilidade": 5.5
+    }
   }
 ]

@@ -39,7 +39,7 @@ decide quando cada carta volta. Ao acertar todas as cartas da fase, ganha **XP e
 primeira vez) e libera a próxima fase. Tudo fica num banco **SQLite** no computador, sem internet.
 
 - **Tecnologia:** C#, .NET 10, Windows Forms (telas), EF Core (acesso ao banco) e SQLite (banco num arquivo).
-- **Testes:** 27 testes automáticos com xUnit.
+- **Testes:** 28 testes automáticos com xUnit.
 
 ---
 
@@ -138,7 +138,7 @@ construtor. Isso se chama **injeção de dependência**, outro assunto da Unidad
 
 **Por que vale a pena?**
 
-- Dá para **testar** as regras sem abrir tela nenhuma (os 27 testes fazem isso).
+- Dá para **testar** as regras sem abrir tela nenhuma (os 28 testes fazem isso).
 - Dá para **trocar o banco** sem mexer nas regras (nos testes, o banco é um SQLite em memória).
 - Fica fácil **achar** onde está cada coisa.
 
@@ -266,7 +266,7 @@ O livro da disciplina (PERES, 2026) ensina desenvolvimento web com .NET usando u
 | Quem liga as camadas? | O `Program.cs`, que cria os repositórios e entrega aos serviços pelo construtor (injeção de dependência). |
 | O que é «include» e «extend»? | Include acontece sempre (estudar inclui responder); extend só às vezes (concluir, quando acaba). |
 | O que é uma migration? | O histórico das mudanças no banco; a `Inicial` cria as tabelas. |
-| Como sabem que funciona? | 27 testes automáticos, rodados no GitHub a cada Pull Request. |
+| Como sabem que funciona? | 28 testes automáticos, rodados no GitHub a cada Pull Request. |
 | Por que SQLite? | O banco é um arquivo no computador, sem servidor; é o que o livro usa no PetMatch. |
 
 ---

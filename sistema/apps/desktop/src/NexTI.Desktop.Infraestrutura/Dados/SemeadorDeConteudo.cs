@@ -14,12 +14,14 @@ public static class SemeadorDeConteudo
     private record CartaJson(string CodigoFase, string Frente, string Verso, string? Dica);
     private record ConteudoJson(List<FaseJson> Fases, List<CartaJson> Flashcards);
 
+    private static readonly JsonSerializerOptions Json = new() { PropertyNameCaseInsensitive = true };
+
     public static int Semear(ContextoNexTI contexto, string caminhoDoConteudo)
     {
         if (contexto.Fases.Any()) return 0;
 
         var conteudo = JsonSerializer.Deserialize<ConteudoJson>(File.ReadAllText(caminhoDoConteudo),
-                           new JsonSerializerOptions { PropertyNameCaseInsensitive = true })
+                           Json)
                        ?? throw new InvalidDataException($"Conteúdo vazio: {caminhoDoConteudo}");
 
         var ordem = 0;

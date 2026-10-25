@@ -16,12 +16,14 @@ public class TabelaDeRecompensas
     public Dictionary<string, PremioFase> Fases { get; init; } = new();
     public List<FaixaDeNivel> Niveis { get; init; } = new();
 
+    private static readonly JsonSerializerOptions Json = new() { PropertyNameCaseInsensitive = true };
+
     public static TabelaDeRecompensas Carregar(string caminho)
     {
         if (!File.Exists(caminho))
             throw new FileNotFoundException("Tabela de recompensas não encontrada.", caminho);
         return JsonSerializer.Deserialize<TabelaDeRecompensas>(File.ReadAllText(caminho),
-                   new JsonSerializerOptions { PropertyNameCaseInsensitive = true })
+                   Json)
                ?? throw new InvalidDataException($"Tabela de recompensas vazia: {caminho}");
     }
 

@@ -40,7 +40,7 @@ namespace NexTI_API.Services
                 return Resultado<Flashcard>.Erro(TipoFalha.Invalido, "Fase, Frente e Verso são campos obrigatórios.");
 
             // Confere a fase já normalizada — o mesmo código que será gravado.
-            codigoFase = codigoFase.Trim().ToLower();
+            codigoFase = codigoFase.Trim().ToLowerInvariant();
             if (!await _db.Fases.AnyAsync(f => f.CodigoFase == codigoFase))
                 return Resultado<Flashcard>.Erro(TipoFalha.Invalido, $"A disciplina '{codigoFase}' não foi encontrada.");
 
