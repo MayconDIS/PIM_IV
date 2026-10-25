@@ -31,6 +31,54 @@ aplica a migration e coloca as fases e as cartas. Não precisa de internet nem d
 **Atalhos no estudo:** Espaço mostra a resposta; 1, 2, 3 e 4 respondem Errei, Difícil, Bom e Fácil;
 Esc fecha a fase.
 
+## Como abrir cada parte no Antigravity
+
+Para a apresentação de 27/10, tudo abre de dentro do Antigravity (vale igual para o VS Code).
+
+**1. Abrir o projeto:** *File → Open Folder* e escolha a pasta `PIM_IV` inteira (a raiz do
+repositório, não só esta pasta). Assim os atalhos abaixo funcionam.
+
+**2. Atalhos prontos:** `Ctrl+Shift+P` → digite **Tasks: Run Task** → escolha:
+
+| Tarefa | O que faz |
+|---|---|
+| Desktop: abrir o programa | Compila e abre o Nex_TI Desktop (a primeira vez leva uns 20 segundos) |
+| Desktop: rodar os testes | Roda os 27 testes no terminal |
+| Apresentação: abrir os slides (PDF) | Abre o PDF dos slides no leitor de PDF do Windows |
+| Apresentação: abrir os diagramas do desktop no Astah | Abre o `.asta` no Astah |
+| Apresentação: abrir o GitHub | Abre o repositório no navegador |
+| Desktop: começar do zero | Apaga o banco local do programa, para mostrar como se fosse a primeira vez |
+| Sistema: subir a API e o site | O Nex_TI web: API na porta 5000 e site na 5501 |
+
+**3. Sem os atalhos, pelo terminal** (*Terminal → New Terminal*, ou `` Ctrl+` ``):
+
+```powershell
+cd sistema/apps/desktop
+dotnet run --project src/NexTI.Desktop.Apresentacao   # abre o programa
+dotnet test                                          # roda os testes
+Start-Process "docs/apresentacao/Nex_TI - Apresentacao PA DotNet.pdf"   # abre os slides
+```
+
+**4. Onde está cada coisa** (`Ctrl+P` e digite o nome do arquivo para abrir direto):
+
+| O quê | Arquivo ou pasta | Como mostrar |
+|---|---|---|
+| Slides e roteiro | `docs/apresentacao/` | O PDF pela tarefa acima. O roteiro (`ROTEIRO_DO_PALESTRANTE.md`) fica mais legível com `Ctrl+Shift+V` |
+| Este guia, com fotos e diagramas | `README.md` (este arquivo) | `Ctrl+Shift+V` abre a visualização com as imagens |
+| Os quatro diagramas | `docs/diagramas/` | Clique no `.png`: abre como imagem no editor |
+| Arquivo do Astah | `modelagem-uml/02_Modelagem_UML/Diagrams Nex_TI Desktop - PA DotNet.asta` | Pela tarefa, ou com dois cliques no Explorer do Windows |
+| Herança e classe abstrata | `Usuario.cs` e `Aluno.cs` | `Ctrl+P` → `Aluno.cs` |
+| Encapsulamento (prêmio uma vez só) | `Aluno.cs`, método `ReceberPremio` | `Ctrl+P` → `Aluno.cs` |
+| Interface e SM-2 | `Regras.cs` (`IAgendadorDeRevisao`) e `AgendadorSm2.cs` | `Ctrl+P` → `AgendadorSm2.cs` |
+| Casos de uso (camada de Aplicação) | `ServicoDeEstudo.cs` | `Ctrl+P` → `ServicoDeEstudo.cs` |
+| Banco (EF Core + SQLite) | `ContextoNexTI.cs` e a pasta `Dados/Migrations` | `Ctrl+P` → `ContextoNexTI.cs` |
+| Onde as camadas se ligam | `src/NexTI.Desktop.Apresentacao/Program.cs` | `Ctrl+P` → `Program.cs` (escolha o do desktop) |
+| As telas | `src/NexTI.Desktop.Apresentacao/Telas/` | `TelaEstudo.cs` mostra os quatro botões do SM-2 |
+| Testes | `tests/NexTI.Desktop.Testes/` | `CasosDeUsoTestes.cs` testa o programa de ponta a ponta |
+
+O Antigravity pode sugerir instalar extensões de C#; não precisa, porque o programa e os testes
+rodam pelo terminal.
+
 ## Módulos: um projeto por camada
 
 ```text
@@ -42,7 +90,10 @@ desktop/
 │   ├── NexTI.Desktop.Dominio/         Entidades, regra do SM-2 e interfaces dos repositórios
 │   └── NexTI.Desktop.Infraestrutura/  EF Core + SQLite: DbContext, migration, repositórios e semente
 ├── tests/NexTI.Desktop.Testes/        xUnit: regras, domínio e casos de uso de ponta a ponta
-└── docs/                              Fotos das telas e cópias dos diagramas
+└── docs/
+    ├── apresentacao/                  Slides (HTML e PDF) e roteiro da apresentação de 27/10
+    ├── diagramas/                     Cópias dos diagramas exportados do Astah
+    └── telas/                         Fotos das telas do programa
 ```
 
 Cada camada é um projeto `.csproj` separado, e as referências só apontam para baixo:

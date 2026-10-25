@@ -37,9 +37,10 @@ const DOCUMENTOS = [
   'README.md', 'sistema/README.md', 'sistema/docs/MANUAL_TECNICO.md', 'modelagem-uml/README.md',
   'modelagem-uml/02_Modelagem_UML/gerador-astah/README.md', 'modelagem-uml/04_Banco_de_Dados/README.md',
   'relatorio/README.md', 'relatorio/index.html',
-  'sistema/docs/apresentacao-pa/slides.html', 'sistema/docs/apresentacao-pa/ROTEIRO_DO_PALESTRANTE.md',
+  'sistema/apps/desktop/docs/apresentacao/slides.html', 'sistema/apps/desktop/docs/apresentacao/ROTEIRO_DO_PALESTRANTE.md',
 ].filter(existe);
-const textos = Object.fromEntries(DOCUMENTOS.map((d) => [d, ler(d).replace(/<[^>]+>/g, ' ')]));
+// Sem as tags e com um espaço só entre as palavras: assim "<p>90</p><p>testes da API</p>" também é lido como "90 testes da API".
+const textos = Object.fromEntries(DOCUMENTOS.map((d) => [d, ler(d).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ')]));
 
 function citacoes(regex) {
   const achados = [];
@@ -134,7 +135,7 @@ for (const caso of pastasCasos) {
 }
 
 // Toda imagem citada no relatório e nos slides existe.
-for (const [doc, base] of [['relatorio/index.html', 'relatorio'], ['sistema/docs/apresentacao-pa/slides.html', 'sistema/docs/apresentacao-pa']]) {
+for (const [doc, base] of [['relatorio/index.html', 'relatorio'], ['sistema/apps/desktop/docs/apresentacao/slides.html', 'sistema/apps/desktop/docs/apresentacao']]) {
   if (!existe(doc)) continue;
   for (const m of ler(doc).matchAll(/<img[^>]+src="([^"]+)"/g)) {
     if (/^https?:/.test(m[1])) continue;
@@ -145,7 +146,7 @@ for (const [doc, base] of [['relatorio/index.html', 'relatorio'], ['sistema/docs
 
 // --- 5. só PIM IV: o PIM III aparece apenas na comparação de melhorias -----------------------
 const PERMITIDOS = ['README.md', 'modelagem-uml/README.md', 'relatorio/README.md', 'relatorio/index.html',
-  'sistema/docs/apresentacao-pa/slides.html', 'sistema/docs/apresentacao-pa/ROTEIRO_DO_PALESTRANTE.md'];
+  'sistema/apps/desktop/docs/apresentacao/slides.html', 'sistema/apps/desktop/docs/apresentacao/ROTEIRO_DO_PALESTRANTE.md'];
 // Os arquivos de regras (AGENTS.md, CLAUDE.md e os agentes) citam o PIM III para proibi-lo.
 const REGRAS = (f) => /(^|\/)(AGENTS|CLAUDE)\.md$/.test(f) || f.startsWith('.claude/');
 const comPim3 = arquivos('.', (c) => /\.(md|html|js|jsx|cs|java|json)$/.test(c))

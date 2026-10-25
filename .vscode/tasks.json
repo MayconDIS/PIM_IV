@@ -1,0 +1,59 @@
+{
+    // Atalhos para apresentar o projeto no editor (Antigravity ou VS Code):
+    // Ctrl+Shift+P → "Tasks: Run Task" → escolha a tarefa.
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Desktop: abrir o programa",
+            "type": "shell",
+            "command": "dotnet run --project src/NexTI.Desktop.Apresentacao",
+            "options": { "cwd": "${workspaceFolder}/sistema/apps/desktop" },
+            "problemMatcher": []
+        },
+        {
+            "label": "Desktop: rodar os testes",
+            "type": "shell",
+            "command": "dotnet test",
+            "options": { "cwd": "${workspaceFolder}/sistema/apps/desktop" },
+            "group": "test",
+            "problemMatcher": []
+        },
+        {
+            "label": "Apresentação: abrir os slides (PDF)",
+            "type": "process",
+            "command": "powershell",
+            "args": ["-NoProfile", "-Command", "Start-Process 'sistema/apps/desktop/docs/apresentacao/Nex_TI - Apresentacao PA DotNet.pdf'"],
+            "options": { "cwd": "${workspaceFolder}" },
+            "problemMatcher": []
+        },
+        {
+            "label": "Apresentação: abrir os diagramas do desktop no Astah",
+            "type": "process",
+            "command": "powershell",
+            "args": ["-NoProfile", "-Command", "Start-Process 'modelagem-uml/02_Modelagem_UML/Diagrams Nex_TI Desktop - PA DotNet.asta'"],
+            "options": { "cwd": "${workspaceFolder}" },
+            "problemMatcher": []
+        },
+        {
+            "label": "Apresentação: abrir o GitHub",
+            "type": "process",
+            "command": "powershell",
+            "args": ["-NoProfile", "-Command", "Start-Process 'https://github.com/MayconDIS/PIM_IV'"],
+            "problemMatcher": []
+        },
+        {
+            "label": "Desktop: começar do zero (apaga o banco local do programa)",
+            "type": "process",
+            "command": "powershell",
+            "args": ["-NoProfile", "-Command", "Remove-Item -Recurse -Force \"$env:LOCALAPPDATA\\NexTI.Desktop\" -ErrorAction SilentlyContinue; 'Banco do Nex_TI Desktop apagado: o programa cria de novo ao abrir.'"],
+            "problemMatcher": []
+        },
+        {
+            "label": "Sistema: subir a API e o site",
+            "type": "shell",
+            "command": "npm run dev",
+            "options": { "cwd": "${workspaceFolder}/sistema" },
+            "problemMatcher": []
+        }
+    ]
+}
