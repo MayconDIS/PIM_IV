@@ -23,10 +23,9 @@ function ConteudoConta({ nomeUsuario, fecharModal }) {
   const corpo = useRef(null);
   const [tentativa, setTentativa] = useState(0);
 
+  // O foco entra no corpo da janela; devolvê-lo ao fechar é com o Modal.
   useEffect(() => {
-    const anterior = document.activeElement;
     corpo.current?.focus();
-    return () => { anterior?.focus(); };
   }, []);
 
   useEffect(() => {
@@ -80,7 +79,7 @@ function ConteudoConta({ nomeUsuario, fecharModal }) {
 
   return (
     <Modal aberto icone="manage_accounts" titulo="Minha conta" onFechar={ocupado ? undefined : finalizado ? () => window.location.reload() : fecharModal}>
-      <div ref={corpo} tabIndex={-1} className="modal-body conta-body" role="dialog" aria-modal="true" aria-label="Minha conta" aria-busy={ocupado}>
+      <div ref={corpo} tabIndex={-1} className="modal-body conta-body" aria-busy={ocupado}>
         {erro && <p role="alert" className="conta-erro">{erro}</p>}
         {mensagem && <p role="status">{mensagem}</p>}
         {finalizado ? <button className="btn-action" onClick={() => window.location.reload()}>Ir para o login</button>

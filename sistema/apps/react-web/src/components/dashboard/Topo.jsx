@@ -3,7 +3,7 @@ import { FRASES_MOTIVACIONAIS } from '@nexti/shared';
 import logo from '@nexti/shared/img/logo.png';
 import iconeTerminal from '@nexti/shared/img/terminal-icon.png';
 import { useEstudo } from '../../context/EstudoContext';
-import { alternarAltoContraste, mudarZoom } from '../../lib/acessibilidade';
+import { alternarAltoContraste, ativarComTeclado, mudarZoom } from '../../lib/acessibilidade';
 import { abrirVLibras } from '../../lib/vlibras';
 import { perfilAtual, podeAdministrar } from '../modais/ModalAdmin';
 
@@ -16,6 +16,7 @@ export function Topo() {
   const [menuAberto, setMenuAberto] = useState(false);
   const [avatar, setAvatar] = useState(() => localStorage.getItem(`${userKey}avatar_custom`));
   const menuRef = useRef(null);
+  const botaoMenu = useRef(null);
   const inputAvatar = useRef(null);
 
   const [frase] = useState(() => {
@@ -33,8 +34,13 @@ export function Topo() {
     return () => document.removeEventListener('click', fecharFora);
   }, []);
 
+  const voltarAoTopo = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  const escolherFoto = () => inputAvatar.current?.click();
+
   const acao = (fn) => () => {
     setMenuAberto(false);
+    // O item some com o menu: o foco volta ao botão do menu, e é para ele que a janela aberta devolve o foco.
+    botaoMenu.current?.focus();
     fn();
   };
 
@@ -66,7 +72,8 @@ export function Topo() {
 
   return (
     <header role="banner">
-      <div className="logo logo-header-box cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+      <div className="logo logo-header-box cursor-pointer" role="button" tabIndex={0} aria-label="Nex_TI: voltar ao topo"
+        onClick={voltarAoTopo} onKeyDown={ativarComTeclado(voltarAoTopo)}>
         <img src={logo} alt="Nex_TI" className="logo-image-header" />
       </div>
 
@@ -92,7 +99,7 @@ export function Topo() {
         </button>
 
         <div className="hamburger-menu" ref={menuRef}>
-          <button className="hamburger-btn flex-align" aria-label="Abrir menu" aria-expanded={menuAberto} onClick={() => setMenuAberto((v) => !v)}>
+          <button ref={botaoMenu} type="button" className="hamburger-btn flex-align" aria-label="Abrir menu" aria-haspopup="menu" aria-expanded={menuAberto} onClick={() => setMenuAberto((v) => !v)}>
             <span className="material-symbols-outlined hamburger-icon">menu</span>
           </button>
           <div className={`dropdown-content${menuAberto ? ' show' : ''}`}>
@@ -101,7 +108,11 @@ export function Topo() {
                 className="avatar tech-font flex-align"
                 style={estiloAvatar}
                 title="Clique para alterar a foto do seu avatar"
-                onClick={() => inputAvatar.current?.click()}
+                role="button"
+                tabIndex={0}
+                aria-label="Alterar a foto do avatar"
+                onClick={escolherFoto}
+                onKeyDown={ativarComTeclado(escolherFoto)}
               >
                 {!avatar && <span className="material-symbols-outlined">terminal</span>}
               </div>
@@ -129,7 +140,7 @@ export function Topo() {
               </button>
             )}
             <button type="button" className="dropdown-item danger flex-align" onClick={acao(resetarProgresso)}>
-              <span className="material-symbols-outlined">warning</span> Formatar Sistema
+              <span className="material-symbols-outlined" aria-hidden="true">warning</span> Limpar dados do navegador
             </button>
             <div className="dropdown-item mobile-a11y mobile-a11y-container">
               <span className="flex-align a11y-title-text">
@@ -147,7 +158,7 @@ export function Topo() {
               </div>
             </div>
             <button type="button" className="dropdown-item flex-align" onClick={acao(deslogar)}>
-              <span className="material-symbols-outlined">logout</span> Logout
+              <span className="material-symbols-outlined" aria-hidden="true">logout</span> Sair
             </button>
           </div>
         </div>

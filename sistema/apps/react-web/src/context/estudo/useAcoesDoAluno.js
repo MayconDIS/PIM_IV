@@ -88,14 +88,15 @@ export function useAcoesDoAluno({ nomeUsuario, userKey, progresso, ui, sessao })
     }
 
     som('playUnlock');
-    toast('success', 'Flashcard Salvo', 'Novo dado registrado com sucesso na disciplina!');
+    toast('success', 'Carta salva', 'A carta nova já está na fase que você escolheu.');
     return true;
   };
 
   const resetarProgresso = async () => {
     const ok = await confirmar(
-      'Formatação de Save Data',
-      `Usuário logado: ${nomeUsuario}\n\nIsso apagará permanentemente TODO o seu histórico de XP, Moedas, Árvore de Permissões e progresso SM-2.\n\nTem certeza que deseja formatar os dados?`,
+      'Limpar dados do navegador',
+      // Só o localStorage é limpo: o que está na conta (servidor) volta ao recarregar.
+      `Conta: ${nomeUsuario}\n\nIsso limpa o que está guardado neste navegador: XP, moedas, fases liberadas, revisões, avatar e o desenho do mapa. O que está salvo na sua conta volta quando a página recarregar.\n\nPara apagar a conta de verdade, use Minha conta → Excluir conta.\n\nLimpar agora?`,
     );
     if (!ok) return;
     ['xp', 'coins', 'nivelado', 'desbloqueadas', 'bonus_unlocked', 'decks', 'rank', 'srs', 'map_state',

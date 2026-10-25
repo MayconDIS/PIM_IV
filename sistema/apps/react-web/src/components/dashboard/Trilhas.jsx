@@ -8,7 +8,7 @@ const normalizar = (texto) => texto.toLowerCase().trim();
 function Moeda({ valor, estilo }) {
   return (
     <span className="xp-badge tech-font flex-align coin-badge" style={estilo}>
-      <span className="material-symbols-outlined toll-icon-small">toll</span> {valor}
+      <span className="material-symbols-outlined toll-icon-small" aria-hidden="true">toll</span> {valor}
     </span>
   );
 }
@@ -63,19 +63,23 @@ export function Trilhas({ refBusca }) {
     if (!visivel(textoBusca ?? titulo)) return null;
     const ativo = id === idAtivo;
     return (
-      <React.Fragment key={id}>
-        <div
+      <li key={id}>
+        {/* Um <button> de verdade: foco pelo Tab, Enter e Espaço sem código extra. */}
+        <button
+          type="button"
           ref={(el) => { itensRef.current[id] = el; }}
           className={`aula-item${bloqueado ? ' aula-locked-item' : ''}${ativo ? ' active-lesson' : ''}`}
           id={`menu-${id}`}
+          aria-label={`${titulo}${bloqueado ? ' (trancada)' : ''}`}
+          aria-expanded={ativo}
           onClick={onClick}
         >
-          <span className="icon-status material-symbols-outlined">{icone}</span>
+          <span className="icon-status material-symbols-outlined" aria-hidden="true">{icone}</span>
           <span className={classeTitulo}>{titulo}</span>
           {badges}
-        </div>
+        </button>
         {ativo && <PainelEstudo ativo={painelAtivo} />}
-      </React.Fragment>
+      </li>
     );
   };
 
@@ -86,25 +90,27 @@ export function Trilhas({ refBusca }) {
 
   return (
     <nav className={`left-panel${idAtivo ? ' fade-out-others' : ''}${foco ? ' focus-mode' : ''}`} aria-label="Trilhas de Aprendizagem">
-      <div className="search-panel-container">
-        <span className="material-symbols-outlined search-icon">search</span>
+      <form className="search-panel-container" role="search" onSubmit={(e) => e.preventDefault()}>
+        <span className="material-symbols-outlined search-icon" aria-hidden="true">search</span>
         <input
           ref={refBusca}
           type="text"
           id="filtro-aulas"
+          aria-label="Buscar disciplina (atalho: /)"
           placeholder="Buscar disciplina..."
           autoComplete="off"
           value={filtro}
           onChange={(e) => setFiltro(e.target.value)}
         />
-      </div>
+      </form>
 
       {MODULOS.map((modulo) => (
-        <React.Fragment key={modulo.id}>
-          <div className={`dia-header mod-0${modulo.numero}${moduloAtivo === modulo.id ? ' active-header' : ''}`}>
+        <section key={modulo.id} className="trilha-modulo" aria-labelledby={`titulo-${modulo.id}`}>
+          <h2 id={`titulo-${modulo.id}`} className={`dia-header mod-0${modulo.numero}${moduloAtivo === modulo.id ? ' active-header' : ''}`}>
             <span className="tech-font">[ {modulo.codigo} ]</span> {modulo.titulo}
-            <div className="dia-line" />
-          </div>
+            <span className="dia-line" aria-hidden="true" />
+          </h2>
+          <ul className="trilha-lista">
 
           {modulo.fases.map((fase) =>
             item({
@@ -114,10 +120,10 @@ export function Trilhas({ refBusca }) {
               bloqueado: !fasesDesbloqueadas.includes(fase.id),
               onClick: () => carregarAula(fase.id, fase.nome),
               badges: (
-                <div className="menu-badges-wrapper">
+                <span className="menu-badges-wrapper">
                   <span className={`xp-badge tech-font${modulo.numero === 5 ? ' enade-xp-badge' : ''}`}>{fase.xp} XP</span>
                   <Moeda valor={fase.moedas} />
-                </div>
+                </span>
               ),
             }),
           )}
@@ -131,9 +137,9 @@ export function Trilhas({ refBusca }) {
               bloqueado: !fasesDesbloqueadas.includes(modulo.teste.id),
               onClick: () => carregarAula(modulo.teste.id, modulo.teste.nome),
               badges: (
-                <div className="menu-badges-wrapper">
+                <span className="menu-badges-wrapper">
                   <span className="xp-badge tech-font teste-xp-badge">{modulo.teste.xp} XP</span>
-                </div>
+                </span>
               ),
             })}
 
@@ -146,7 +152,7 @@ export function Trilhas({ refBusca }) {
               icone: comprado ? 'check_circle' : 'lock',
               onClick: () => abrirBonus(modulo.bonus),
               badges: (
-                <div className="margin-left-auto">
+                <span className="margin-left-auto">
                   {comprado ? (
                     <Moeda
                       valor="Liberado"
@@ -155,13 +161,15 @@ export function Trilhas({ refBusca }) {
                   ) : (
                     <Moeda valor={modulo.bonus.custoMoedas} />
                   )}
-                </div>
+                </span>
               ),
             });
           })()}
-        </React.Fragment>
+          </ul>
+        </section>
       ))}
 
+      <ul className="trilha-lista">
       {item({
         id: 'certificado',
         titulo: '📜 [ CERTIFICADO ] Conclusão de Curso',
@@ -170,6 +178,7 @@ export function Trilhas({ refBusca }) {
         bloqueado: !certificadoLiberado,
         onClick: abrirCertificado,
       })}
+      </ul>
     </nav>
   );
 }

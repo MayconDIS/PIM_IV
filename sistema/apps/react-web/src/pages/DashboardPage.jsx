@@ -44,6 +44,9 @@ function useAtalhos(refBusca) {
       }
 
       if (!s.faseAtiva || !s.cartaAtual || s.enade || editando || s.modal || s.dialogo) return;
+      // Com o foco num botão (uma fase, a carta), o Espaço é dele: não vira a carta por aqui também.
+      const emBotao = document.activeElement?.matches?.('button, [role="button"], a[href]');
+      if (e.code === 'Space' && emBotao) return;
 
       if (e.code === 'Space') {
         e.preventDefault();

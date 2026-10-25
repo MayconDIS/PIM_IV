@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '@nexti/shared/css/global.css';
 import '@nexti/shared/css/sobre.css';
 import logo from '@nexti/shared/img/logo.png';
+import { ativarComTeclado } from '../lib/acessibilidade';
 
 /** Porte da página Sobre do app vanilla original: páginas institucionais, de ecossistema e legais. */
 const GRUPOS = [
@@ -108,7 +109,7 @@ const GRUPOS = [
           <React.Fragment key="p1">
             <strong>P: Como recomeço o meu progresso?</strong>
             <br />
-            R: No Dashboard, abra o menu superior direito e clique em "Formatar Sistema". ISSO APAGARÁ TODO SEU PROGRESSO ATUAL.
+            R: No painel, abra o menu (canto superior direito) e clique em "Limpar dados do navegador": isso limpa o que está guardado neste navegador, e o que está salvo na sua conta volta ao recarregar. Para apagar tudo de verdade, use "Minha conta" → "Excluir conta".
           </React.Fragment>,
           <React.Fragment key="p2">
             <strong>P: Como o algoritmo decide quando vou ver a carta de novo?</strong>
@@ -161,6 +162,7 @@ const secaoDoHash = () => {
 
 /** Endereço do app: tira ?pagina=sobre e o hash, voltando ao login/dashboard. */
 const URL_APP = `${window.location.pathname}`;
+const voltarAoApp = () => window.location.assign(URL_APP);
 
 export default function SobrePage() {
   const [ativa, setAtiva] = useState(secaoDoHash);
@@ -179,7 +181,8 @@ export default function SobrePage() {
   return (
     <>
       <header role="banner">
-        <div className="logo logo-header-box cursor-pointer" onClick={() => window.location.assign(URL_APP)}>
+        <div className="logo logo-header-box cursor-pointer" role="link" tabIndex={0} aria-label="Nex_TI: voltar ao app"
+          onClick={voltarAoApp} onKeyDown={ativarComTeclado(voltarAoApp, ['Enter'])}>
           <img src={logo} alt="Nex_TI" className="logo-image-header" />
         </div>
         <div className="header-right">
