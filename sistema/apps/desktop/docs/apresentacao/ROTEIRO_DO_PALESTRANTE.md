@@ -2,7 +2,8 @@
 
 A apresentação é sobre o **Nex_TI Desktop**, a aplicação desktop feita para esta atividade
 (`sistema/apps/desktop`). Tudo o que aparece nos slides vem dessa pasta: os diagramas de
-`docs/diagramas`, as telas de `docs/telas` e o código de `src/`.
+`docs/diagramas`, as telas de `docs/telas` e o código de `src/`. Para entender cada critério antes de
+ensaiar, leia o [`ESTUDOS.md`](../../ESTUDOS.md).
 
 ## Informações Gerais
 
