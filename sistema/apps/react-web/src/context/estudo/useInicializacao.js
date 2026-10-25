@@ -23,6 +23,7 @@ export function useInicializacao({ nomeUsuario, userKey, progresso, ui, sessao }
 
       if (online && nomeUsuario !== 'Desenvolvedor' && nomeUsuario !== 'Admin') {
         let nivelNoServidor = 1;
+        let xpNoServidor = 0;
         let remoto = [];
         try {
           const usuario = await ApiService.getUsuario(nomeUsuario);
@@ -31,6 +32,7 @@ export function useInicializacao({ nomeUsuario, userKey, progresso, ui, sessao }
             progresso.setMoedas(usuario.moedas);
             progresso.definirRank(rotuloDoNivelDaApi(usuario.nivel));
             nivelNoServidor = usuario.nivel;
+            xpNoServidor = usuario.xp;
           }
         } catch {
           /* segue com o que está salvo localmente */
@@ -60,8 +62,8 @@ export function useInicializacao({ nomeUsuario, userKey, progresso, ui, sessao }
         // Continuar de outro aparelho: as fases liberadas também vêm do que está no servidor.
         const doServidor = fasesLiberadasNoServidor({ nivel: nivelNoServidor, progresso: remoto });
         progresso.setFasesDesbloqueadas((atual) => ORDEM_FASES.filter((f) => atual.includes(f) || doServidor.includes(f)));
-        // Quem já tem nível ou progresso no servidor já fez o nivelamento (talvez em outro aparelho).
-        if (nivelNoServidor > 1 || remoto.length) localStorage.setItem(`${userKey}nivelado`, 'true');
+        // Quem já tem nível, XP ou progresso no servidor já fez o nivelamento (talvez em outro aparelho).
+        if (nivelNoServidor > 1 || xpNoServidor > 0 || remoto.length) localStorage.setItem(`${userKey}nivelado`, 'true');
       }
 
       if (!localStorage.getItem(`${userKey}nivelado`)) {
