@@ -30,7 +30,7 @@
             "label": "Apresentação: abrir os diagramas do desktop no Astah",
             "type": "process",
             "command": "powershell",
-            "args": ["-NoProfile", "-Command", "Start-Process 'modelagem-uml/02_Modelagem_UML/Diagrams Nex_TI Desktop - PA DotNet.asta'"],
+            "args": ["-NoProfile", "-Command", "Start-Process 'sistema/apps/desktop/docs/diagramas/Diagrams Nex_TI Desktop - PA DotNet.asta'"],
             "options": { "cwd": "${workspaceFolder}" },
             "problemMatcher": []
         },

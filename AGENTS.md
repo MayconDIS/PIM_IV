@@ -42,7 +42,7 @@ A ordem é sempre a mesma: **código → modelagem → relatório e Word** (e, n
 | Qualquer diagrama | gerador do Astah → gerar o `.asta` → exportar imagens → copiar as principais para `02_Modelagem_UML` e `04_Banco_de_Dados` → copiar para `relatorio/assets` → Word |
 | Texto ou página do relatório | conferir que toda página cabe em A4 e gerar o Word de novo; resumo e abstract andam juntos |
 | Tela do site | tirar nova foto para o Apêndice A do relatório |
-| Programa desktop (`sistema/apps/desktop`) | testes do desktop, `GerarDiagramasDesktop.java` → exportar → copiar para `docs/diagramas`, fotos em `docs/telas`, README do desktop, slides e roteiro em `docs/apresentacao` → PDF dos slides |
+| Programa desktop (`sistema/apps/desktop`) | testes do desktop, `GerarDiagramasDesktop.java` (o `.asta` fica em `docs/diagramas`) → exportar para `docs/diagramas/exportadas-astah` → copiar para `docs/diagramas`, fotos em `docs/telas`, README do desktop, slides e roteiro em `docs/apresentacao` → PDF dos slides |
 
 Antes de abrir um pull request, rode **`node scripts/verificar-sincronia.mjs`**. Ele confere se os
 números dos documentos batem com o código, se as rotas do manual e o dicionário de dados batem com a
