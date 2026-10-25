@@ -40,7 +40,7 @@ const DOCUMENTOS = [
 ].filter(existe);
 // A apresentação de P.A. em .NET é uma atividade à parte: fala só do Nex_TI Desktop e é conferida
 // com o próprio programa (seção 2b), não com os números do site e da API.
-const DOCUMENTOS_DESKTOP = ['sistema/apps/desktop/README.md', 'sistema/apps/desktop/docs/apresentacao/slides.html',
+const DOCUMENTOS_DESKTOP = ['sistema/apps/desktop/README.md', 'sistema/apps/desktop/ESTUDOS.md', 'sistema/apps/desktop/docs/apresentacao/slides.html',
   'sistema/apps/desktop/docs/apresentacao/ROTEIRO_DO_PALESTRANTE.md'].filter(existe);
 // Sem as tags e com um espaço só entre as palavras: assim "<p>90</p><p>testes da API</p>" também é lido como "90 testes da API".
 const semTags = (d) => ler(d).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');

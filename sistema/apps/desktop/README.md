@@ -9,6 +9,8 @@ O programa faz o centro do Nex_TI: o aluno entra com um nickname, vê a trilha d
 estuda as cartas com o **SM-2** e ganha **XP e moedas** ao concluir cada fase (só na primeira vez).
 As cartas e os prêmios são os mesmos do site, do app e da API.
 
+📚 **Para estudar a apresentação:** [`ESTUDOS.md`](ESTUDOS.md) explica o que o professor pede, cada critério (POO, camadas, modularização e os diagramas) com o nosso código e as perguntas prováveis.
+
 | Entrada | Painel e trilha |
 |---|---|
 | ![Tela de entrada](docs/telas/1-entrada.png) | ![Painel do aluno com a trilha de fases](docs/telas/2-principal.png) |
