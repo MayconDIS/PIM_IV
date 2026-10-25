@@ -60,6 +60,10 @@ O passo a passo, com o banco de dados, está em
 [`docs/MANUAL_DE_EXECUCAO.md`](docs/MANUAL_DE_EXECUCAO.md). Como publicar na
 Azure e na Vercel: [`docs/DEPLOY.md`](docs/DEPLOY.md).
 
+Qualidade: o programa de testes (unitários, caixa preta, caixa branca, carga e usabilidade) está em
+[`docs/TESTES.md`](docs/TESTES.md), e a auditoria (responsividade, acessibilidade, HTML semântico,
+heurísticas de Nielsen, Clean Code e código sem uso) em [`docs/AUDITORIA.md`](docs/AUDITORIA.md).
+
 ## Pastas
 
 ```text

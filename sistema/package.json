@@ -22,7 +22,9 @@
     "seed:api": "node scripts/gerar-semente-api.mjs && node scripts/gerar-recompensas-api.mjs",
     "seed:api:check": "node scripts/gerar-semente-api.mjs --check && node scripts/gerar-recompensas-api.mjs --check",
     "test:mobile": "npm test --prefix apps/react-mobile",
-    "test:desktop": "dotnet test apps/desktop/tests/NexTI.Desktop.Testes/NexTI.Desktop.Testes.csproj"
+    "test:desktop": "dotnet test apps/desktop/tests/NexTI.Desktop.Testes/NexTI.Desktop.Testes.csproj",
+    "carga:api": "node tests/carga/carga-api.mjs",
+    "auditoria": "node scripts/auditoria-codigo.mjs"
   },
   "keywords": [
     "edtech",
