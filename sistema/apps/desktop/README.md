@@ -61,6 +61,18 @@ dotnet test                                          # roda os testes
 Start-Process "docs/apresentacao/Nex_TI - Apresentacao PA DotNet.pdf"   # abre os slides
 ```
 
+**Ou com dois cliques, sem editor:** nesta pasta há um `.bat` para cada atalho. O `menu.bat`
+mostra todos numa lista.
+
+| Arquivo | O que faz |
+|---|---|
+| `menu.bat` | Menu com as opções abaixo |
+| `abrir-programa.bat` | Compila e abre o programa (avisa se o .NET 10 não estiver instalado) |
+| `rodar-testes.bat` | Roda os testes e deixa a janela aberta com o resultado |
+| `abrir-slides.bat` | Abre o PDF dos slides |
+| `abrir-diagramas.bat` | Abre o `.asta` no Astah (sem o Astah, abre a pasta das imagens) |
+| `comecar-do-zero.bat` | Apaga o banco local, depois de perguntar |
+
 **4. Onde está cada coisa** (`Ctrl+P` e digite o nome do arquivo para abrir direto):
 
 | O quê | Arquivo ou pasta | Como mostrar |

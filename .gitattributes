@@ -7,6 +7,10 @@
 ###############################################################################
 * text=auto eol=lf
 
+# Scripts do Windows precisam de CRLF: com LF o cmd se perde nos rótulos e no goto.
+*.bat   text eol=crlf
+*.cmd   text eol=crlf
+
 ###############################################################################
 # Binarios - nunca aplicar conversao de fim de linha.
 ###############################################################################
