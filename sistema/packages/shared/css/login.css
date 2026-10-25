@@ -294,7 +294,12 @@ body {
 @media (max-width: 800px) {
     .extra-links a {
         display: inline-block;
-        padding: 11px 4px;
+        padding: 13px 4px;
     }
     .extra-links p { margin: 0; }
+}
+
+/* Celular: olho de mostrar a senha com 44px de área de toque */
+@media (max-width: 800px) {
+    .btn-ver-senha { width: 44px; height: 44px; right: 4px; }
 }

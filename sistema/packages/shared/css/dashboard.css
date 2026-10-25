@@ -2038,8 +2038,15 @@ button.dropdown-item {
     .btn-close { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
     .a11y-btn { min-height: 44px; }
 
+    /* Busca de disciplina: a caixa inteira com 44px, e o campo ocupando a altura dela */
+    .search-panel-container { padding: 0 12px; min-height: 44px; }
+    .search-panel-container input { min-height: 42px; }
+
+    /* Botões das janelas (Salvar e-mail, Salvar senha, backup...) com 44px de toque */
+    .modal-body .btn-action { min-height: 44px; }
+
     /* Links do rodapé com altura de toque */
-    .footer-links a { display: inline-block; padding: 8px 0; }
+    .footer-links a { display: inline-block; padding: 10px 0; min-height: 44px; }
 
     /* Modais: a barra continua por cima (troca de tela sem fechar nada), então o modal
        reserva o espaço dela embaixo em vez de ter o fim coberto. */
@@ -2098,4 +2105,6 @@ button.dropdown-item {
         left: 12px !important;
     }
     .map-a11y-widget .a11y-toggle { width: 46px !important; height: 46px !important; }
+    .map-a11y-widget .a11y-options { height: 52px; }
+    .map-a11y-widget .a11y-options .btn-action { min-width: 44px !important; height: 44px !important; }
 }
