@@ -1,0 +1,31 @@
+name: Nex_TI Desktop
+
+# Testes do programa desktop (atividade de P.A. em .NET). Os testes usam só Domínio, Aplicação e
+# Infraestrutura, então rodam no Linux; as telas (Windows Forms) ficam de fora.
+on:
+  pull_request:
+    paths:
+      - 'sistema/apps/desktop/**'
+      - 'sistema/apps/api/Data/Seed/**'
+      - 'sistema/packages/shared/tests/*.json'
+      - '.github/workflows/desktop.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'sistema/apps/desktop/**'
+      - 'sistema/apps/api/Data/Seed/**'
+      - 'sistema/packages/shared/tests/*.json'
+
+permissions:
+  contents: read
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Testes do Nex_TI Desktop
+        run: dotnet test sistema/apps/desktop/tests/NexTI.Desktop.Testes/NexTI.Desktop.Testes.csproj

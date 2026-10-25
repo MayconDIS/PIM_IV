@@ -67,7 +67,8 @@ sistema/
 ├── apps/
 │   ├── api/            API em C# (.NET 10): Endpoints → Services → Data → Models
 │   ├── react-web/      O site (React + Vite)
-│   └── react-mobile/   O app de celular (Expo)
+│   ├── react-mobile/   O app de celular (Expo)
+│   └── desktop/        Nex_TI Desktop (Windows Forms), para a apresentação de P.A. em .NET
 ├── packages/
 │   ├── shared/         Cartas, SM-2 do navegador, cliente da API e CSS do site
 │   └── design-dna/     Cores e fontes do Nex_TI
