@@ -101,6 +101,12 @@ public class AgendadorSm2 : IAgendadorDeRevisao { ... }
 
 📄 `src/NexTI.Desktop.Dominio/Regras/Regras.cs` e `AgendadorSm2.cs`
 
+**A regra do SM-2 em uma frase:** "Bom" multiplica o intervalo pelo fator (começa em 2,5), "Fácil"
+vai mais longe, "Difícil" soma pelo menos 1 dia e "Errei" volta amanhã. O fator nunca fica abaixo de
+1,3 e o intervalo **nunca passa de 100 anos** (`IntervaloMaximo = 36500` dias, o mesmo teto do Anki).
+Esse teto entrou depois que o teste de carga achou o problema: sem ele, uma carta respondida "Fácil"
+umas 12 vezes passava do ano 9999 e o programa travava ao calcular a data.
+
 ### Composição: "é dono de"
 
 O Aluno **é dono** das fases que concluiu (`FaseConcluida`); a Fase **é dona** das cartas. Se o dono
@@ -266,6 +272,7 @@ O livro da disciplina (PERES, 2026) ensina desenvolvimento web com .NET usando u
 | Quem liga as camadas? | O `Program.cs`, que cria os repositórios e entrega aos serviços pelo construtor (injeção de dependência). |
 | O que é «include» e «extend»? | Include acontece sempre (estudar inclui responder); extend só às vezes (concluir, quando acaba). |
 | O que é uma migration? | O histórico das mudanças no banco; a `Inicial` cria as tabelas. |
+| Por que o intervalo do SM-2 tem limite? | Sem limite, a data passava do ano 9999 e travava; o teste de carga achou. Agora para em 100 anos (`IntervaloMaximo`). |
 | Como sabem que funciona? | 28 testes automáticos, rodados no GitHub a cada Pull Request. |
 | Por que SQLite? | O banco é um arquivo no computador, sem servidor; é o que o livro usa no PetMatch. |
 
