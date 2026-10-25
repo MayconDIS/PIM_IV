@@ -7,6 +7,9 @@
  *
  * "Difícil" soma pelo menos 1 dia: sem isso, uma carta com intervalo de 1 dia ficaria
  * presa em 1 dia, porque arredondar 1 × 1,2 dá 1.
+ *
+ * O intervalo para em INTERVALO_MAXIMO (100 anos, o mesmo teto do Anki). Sem ele, uma carta
+ * respondida "Fácil" umas 12 vezes passava do ano 9999 e a API não conseguia gravar a data.
  */
 
 /** Estado inicial de uma carta nunca estudada. */
@@ -16,6 +19,9 @@ export const ESTADO_INICIAL = Object.freeze({ rep: 0, interval: 0, ease: 2.5, ne
 export const RESPOSTAS = Object.freeze(['again', 'hard', 'good', 'easy']);
 
 const DIA_EM_MS = 86400000;
+
+/** O maior intervalo entre duas revisões, em dias (100 anos). */
+export const INTERVALO_MAXIMO = 36500;
 
 /** Rótulo curto de um intervalo em dias: "<10m", "1d", "12d", "3m", "2a". */
 export function formatarIntervalo(dias) {
@@ -40,9 +46,9 @@ export function previsoes(estado = ESTADO_INICIAL) {
   if (!estado.rep) return { again: '<1m', hard: '<6m', good: '<10m', easy: '3d' };
   return {
     again: '<1m',
-    hard: formatarIntervalo(Math.max(estado.interval + 1, estado.interval * 1.2)),
-    good: formatarIntervalo(Math.max(1, estado.interval * estado.ease)),
-    easy: formatarIntervalo(Math.max(1, estado.interval * estado.ease * 1.3)),
+    hard: formatarIntervalo(Math.min(INTERVALO_MAXIMO, Math.max(estado.interval + 1, estado.interval * 1.2))),
+    good: formatarIntervalo(Math.min(INTERVALO_MAXIMO, Math.max(1, estado.interval * estado.ease))),
+    easy: formatarIntervalo(Math.min(INTERVALO_MAXIMO, Math.max(1, estado.interval * estado.ease * 1.3))),
   };
 }
 
@@ -80,6 +86,7 @@ export function aplicarResposta(estado = ESTADO_INICIAL, resultado, agora = Date
       return novo;
   }
 
+  novo.interval = Math.min(novo.interval, INTERVALO_MAXIMO);
   novo.next = agora + novo.interval * DIA_EM_MS;
   return novo;
 }

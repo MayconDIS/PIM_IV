@@ -21,6 +21,7 @@ export const SEQUENCIAS = [
   ['Difícil 12 vezes (soma pelo menos 1 dia; o fator para em 1,3)', Array(12).fill('hard')],
   ['Errei 8 vezes (o fator para em 1,3)', Array(8).fill('again')],
   ['Fácil, Bom, Difícil, Errei, Bom, Fácil', ['easy', 'good', 'hard', 'again', 'good', 'easy']],
+  ['Fácil 20 vezes (o intervalo para em 36.500 dias)', Array(20).fill('easy')],
 ];
 
 const arredondar = (x) => Math.round(x * 1e6) / 1e6;

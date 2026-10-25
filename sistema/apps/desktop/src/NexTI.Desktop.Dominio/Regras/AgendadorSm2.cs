@@ -9,7 +9,16 @@ public class AgendadorSm2 : IAgendadorDeRevisao
 {
     public const double FatorMinimo = 1.3;
 
+    /// <summary>O maior intervalo, em dias (100 anos, o teto do Anki): sem ele a data da próxima revisão passava do ano 9999.</summary>
+    public const double IntervaloMaximo = 36500;
+
     public Agendamento Calcular(Agendamento atual, Resposta resposta)
+    {
+        var novo = CalcularSemTeto(atual, resposta);
+        return novo with { IntervaloDias = Math.Min(novo.IntervaloDias, IntervaloMaximo) };
+    }
+
+    private static Agendamento CalcularSemTeto(Agendamento atual, Resposta resposta)
     {
         var (repeticoes, intervalo, fator) = atual;
         switch (resposta)

@@ -4,7 +4,7 @@ using NexTI.Desktop.Dominio.Entidades;
 namespace NexTI.Desktop.Apresentacao.Telas;
 
 /// <summary>Painel do aluno: XP, moedas e nível no topo e a trilha de fases embaixo.</summary>
-internal class TelaPrincipal : Form
+internal sealed class TelaPrincipal : Form
 {
     private readonly ServicoDeEstudo _estudo;
     private readonly Aluno _aluno;

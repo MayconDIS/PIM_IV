@@ -8,7 +8,7 @@ namespace NexTI.Desktop.Apresentacao.Telas;
 /// O estudo de uma fase: mostra a pergunta, depois a resposta e os quatro botões do SM-2.
 /// Atalhos: Espaço mostra a resposta; 1, 2, 3 e 4 respondem Errei, Difícil, Bom e Fácil.
 /// </summary>
-internal class TelaEstudo : Form
+internal sealed class TelaEstudo : Form
 {
     private readonly ServicoDeEstudo _estudo;
     private readonly Aluno _aluno;

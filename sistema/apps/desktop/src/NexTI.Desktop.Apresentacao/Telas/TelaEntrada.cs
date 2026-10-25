@@ -4,7 +4,7 @@ using NexTI.Desktop.Dominio.Entidades;
 namespace NexTI.Desktop.Apresentacao.Telas;
 
 /// <summary>Primeira tela: o aluno digita o nickname. Se ele ainda não existe neste computador, é criado.</summary>
-internal class TelaEntrada : Form
+internal sealed class TelaEntrada : Form
 {
     private readonly ServicoDeAlunos _alunos;
     private readonly TextBox _nickname = new() { Width = 300, Font = Tema.Fonte(12), BackColor = Tema.Cartao, ForeColor = Tema.Texto, BorderStyle = BorderStyle.FixedSingle };

@@ -13,6 +13,12 @@ namespace NexTI_API.Services
     {
         public const double FatorMinimo = 1.3;
 
+        /// <summary>
+        /// O maior intervalo, em dias (100 anos, o teto do Anki). Sem ele, uma carta respondida
+        /// "Fácil" umas 12 vezes passava do ano 9999 e o AddDays estourava (erro 500).
+        /// </summary>
+        public const double IntervaloMaximo = 36500;
+
         /// <summary>As respostas da tela, a partir da nota que o site envia (1, 3, 4 ou 5).</summary>
         public enum Resposta { Errei, Dificil, Bom, Facil }
 
@@ -59,6 +65,7 @@ namespace NexTI_API.Services
                     break;
             }
 
+            progresso.IntervaloDias = Math.Min(progresso.IntervaloDias, IntervaloMaximo);
             progresso.DataProximaRevisao = DateTime.UtcNow.Date.AddDays((int)progresso.IntervaloDias);
         }
 

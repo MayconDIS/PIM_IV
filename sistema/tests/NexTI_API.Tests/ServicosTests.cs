@@ -104,13 +104,20 @@ namespace NexTI_API.Tests
 
         // --- ProgressoService ---
 
+        private static async Task ComCarta7Async(AppDbContext db)
+        {
+            db.Flashcards.Add(new Flashcard { Id = 7, CodigoFase = "fase1", Frente = "Pergunta", Verso = "Resposta" });
+            await db.SaveChangesAsync();
+        }
+
         [Fact]
         public async Task PrimeiraResposta_CriaProgressoEAplicaSm2()
         {
             using var db = NovoBanco();
+            await ComCarta7Async(db);
             var progresso = new ProgressoService(db, new Sm2Engine());
 
-            var registro = await progresso.RegistrarRespostaAsync(usuarioId: 1, flashcardId: 7, qualidade: 5);
+            var registro = (await progresso.RegistrarRespostaAsync(usuarioId: 1, flashcardId: 7, qualidade: 5)).Valor!;
 
             Assert.Equal(1, registro.Repeticoes);
             Assert.Equal(3, registro.IntervaloDias);   // Fácil numa carta nova: 3 dias, como no site
@@ -122,10 +129,11 @@ namespace NexTI_API.Tests
         public async Task RespostasSeguidas_AtualizamOMesmoRegistro()
         {
             using var db = NovoBanco();
+            await ComCarta7Async(db);
             var progresso = new ProgressoService(db, new Sm2Engine());
 
             await progresso.RegistrarRespostaAsync(1, 7, 5);
-            var segunda = await progresso.RegistrarRespostaAsync(1, 7, 4);
+            var segunda = (await progresso.RegistrarRespostaAsync(1, 7, 4)).Valor!;
 
             Assert.Equal(2, segunda.Repeticoes);
             Assert.Equal(8, segunda.IntervaloDias);   // Bom: 3 dias × fator 2,65 = 7,95 → 8

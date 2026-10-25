@@ -68,7 +68,10 @@ public class ContaService(AppDbContext db, IPoliticaDeSenha politica, IHistorico
         email = email?.Trim() ?? "";
         if (email.Length > 100 || !EmailValido.IsMatch(email))
             return Resultado<ContaDados>.Erro(TipoFalha.Invalido, "Informe um e-mail válido.");
-        if (await db.Usuarios.AnyAsync(outro => outro.Id != usuarioId && outro.Email.ToLower() == email.ToLower()))
+        // O lado do banco vira LOWER() no SQL; o lado do C# usa a forma invariável (num Windows em turco,
+        // "I".ToLower() daria "ı" e o e-mail repetido passaria).
+        var emailMinusculo = email.ToLowerInvariant();
+        if (await db.Usuarios.AnyAsync(outro => outro.Id != usuarioId && outro.Email.ToLower() == emailMinusculo))
             return Resultado<ContaDados>.Erro(TipoFalha.Invalido, "Este e-mail já está cadastrado.");
         u.Email = email;
         try { await db.SaveChangesAsync(); }

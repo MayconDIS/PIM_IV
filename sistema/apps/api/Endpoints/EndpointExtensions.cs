@@ -130,7 +130,7 @@ namespace NexTI_API.Endpoints
                 if (IdDoUsuario(userClaims) is not int currentUserId) return Results.Unauthorized();
                 if (request.UsuarioId > 0 && currentUserId != request.UsuarioId) return Results.Forbid();
 
-                return Results.Ok(await progresso.RegistrarRespostaAsync(currentUserId, request.FlashcardId, request.Qualidade));
+                return ParaHttp(await progresso.RegistrarRespostaAsync(currentUserId, request.FlashcardId, request.Qualidade), Results.Ok);
             }).RequireAuthorization();
 
             // Estatísticas Detalhadas do Usuário
