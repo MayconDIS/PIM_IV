@@ -37,14 +37,19 @@ const DOCUMENTOS = [
   'README.md', 'sistema/README.md', 'sistema/docs/MANUAL_TECNICO.md', 'modelagem-uml/README.md',
   'modelagem-uml/02_Modelagem_UML/gerador-astah/README.md', 'modelagem-uml/04_Banco_de_Dados/README.md',
   'relatorio/README.md', 'relatorio/index.html',
-  'sistema/apps/desktop/docs/apresentacao/slides.html', 'sistema/apps/desktop/docs/apresentacao/ROTEIRO_DO_PALESTRANTE.md',
 ].filter(existe);
+// A apresentação de P.A. em .NET é uma atividade à parte: fala só do Nex_TI Desktop e é conferida
+// com o próprio programa (seção 2b), não com os números do site e da API.
+const DOCUMENTOS_DESKTOP = ['sistema/apps/desktop/README.md', 'sistema/apps/desktop/docs/apresentacao/slides.html',
+  'sistema/apps/desktop/docs/apresentacao/ROTEIRO_DO_PALESTRANTE.md'].filter(existe);
 // Sem as tags e com um espaço só entre as palavras: assim "<p>90</p><p>testes da API</p>" também é lido como "90 testes da API".
-const textos = Object.fromEntries(DOCUMENTOS.map((d) => [d, ler(d).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ')]));
+const semTags = (d) => ler(d).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
+const textos = Object.fromEntries(DOCUMENTOS.map((d) => [d, semTags(d)]));
+const textosDesktop = Object.fromEntries(DOCUMENTOS_DESKTOP.map((d) => [d, semTags(d)]));
 
-function citacoes(regex) {
+function citacoes(regex, deQuais = textos) {
   const achados = [];
-  for (const [doc, texto] of Object.entries(textos)) for (const m of texto.matchAll(regex)) achados.push({ doc, m });
+  for (const [doc, texto] of Object.entries(deQuais)) for (const m of texto.matchAll(regex)) achados.push({ doc, m });
   return achados;
 }
 
@@ -66,6 +71,28 @@ const cartas = conteudo.flashcards.length;
 for (const { doc, m } of citacoes(/\b(\d+) fases(?:,| e) (\d+) (?:cartas|flashcards)\b/g)) {
   checar(`fases e cartas em ${doc}`, Number(m[1]) === fases && Number(m[2]) === cartas,
     `diz ${m[1]} fases e ${m[2]} cartas, o conteúdo tem ${fases} e ${cartas}`);
+}
+
+// --- 2b. Nex_TI Desktop: os documentos dele batem com o próprio programa -------------------
+// O desktop carrega só as fases da trilha (fase1 a fase25), sem os bônus (SemeadorDeConteudo.cs).
+const fasesDesktop = conteudo.fases.filter((f) => f.codigo.startsWith('fase')).map((f) => f.codigo);
+const cartasDesktop = conteudo.flashcards.filter((c) => fasesDesktop.includes(c.codigoFase)).length;
+for (const { doc, m } of citacoes(/\b(\d+) fases(?:,| e) (\d+) (?:cartas|flashcards)\b/g, textosDesktop)) {
+  checar(`fases e cartas em ${doc}`, Number(m[1]) === fasesDesktop.length && Number(m[2]) === cartasDesktop,
+    `diz ${m[1]} fases e ${m[2]} cartas, o desktop carrega ${fasesDesktop.length} e ${cartasDesktop}`);
+}
+for (const { doc, m } of citacoes(/\b(\d+) fases\b/g, textosDesktop)) {
+  checar(`fases em ${doc}`, Number(m[1]) === fasesDesktop.length, `diz ${m[1]}, o desktop carrega ${fasesDesktop.length}`);
+}
+// Testes do desktop: cada [Fact] e cada [InlineData] é um teste; a teoria do SM-2 roda um por caso do sm2-casos.json.
+let testesDesktop = 0;
+for (const f of arquivos('sistema/apps/desktop/tests', (c) => c.endsWith('.cs'))) {
+  const codigo = ler(f);
+  testesDesktop += (codigo.match(/\[Fact\]/g) ?? []).length + (codigo.match(/\[InlineData\(/g) ?? []).length;
+  if (codigo.includes('MemberData(nameof(CasosSm2))')) testesDesktop += JSON.parse(ler('sistema/packages/shared/tests/sm2-casos.json')).length;
+}
+for (const { doc, m } of citacoes(/\b(\d+) testes\b/g, textosDesktop)) {
+  checar(`testes do desktop em ${doc}`, Number(m[1]) === testesDesktop, `diz ${m[1]}, os testes do desktop são ${testesDesktop}`);
 }
 
 // --- 3. testes da API: o mesmo número em todos os documentos --------------------------

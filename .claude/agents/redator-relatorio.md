@@ -19,3 +19,6 @@ Como trabalhar:
   quem pode usar cada rota antes de escrever. Atualize também os cartões RN, RF e RNF do Trello.
 - Depois de mudar o relatório, gere o Word (`relatorio/word`, `npm run gerar`), abra no Word para
   atualizar o sumário e confira. Mudou slide? Gere o PDF dos slides de novo.
+- Os slides e o roteiro de P.A. em .NET são uma atividade à parte: falam só do Nex_TI Desktop e usam
+  só `sistema/apps/desktop` (diagramas de `docs/diagramas`, telas de `docs/telas`, código de `src/`).
+  Não leve para eles números ou diagramas do site e da API.
