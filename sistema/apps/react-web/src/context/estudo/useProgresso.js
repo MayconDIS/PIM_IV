@@ -4,7 +4,7 @@ import { carregarDecks, gravaJson, leJson } from './apoio.js';
 
 /**
  * O que fica salvo no navegador: XP, moedas, rank, SM-2 de cada carta, decks,
- * fases e bônus liberados e o certificado. Também guarda se a API está no ar.
+ * fases e bônus liberados, o certificado e a foto do avatar. Também guarda se a API está no ar.
  */
 export function useProgresso(userKey) {
   const [xp, setXp] = useState(() => Number.parseInt(localStorage.getItem(`${userKey}xp`), 10) || 0);
@@ -19,6 +19,7 @@ export function useProgresso(userKey) {
   const [certificadoLiberado, setCertificadoLiberado] = useState(
     () => localStorage.getItem(`${userKey}certificado_unlocked`) === 'true',
   );
+  const [avatar, setAvatar] = useState(() => localStorage.getItem(`${userKey}avatar_custom`));
   const [apiOnline, setApiOnline] = useState(false);
   const apiOnlineRef = useRef(false);
 
@@ -40,13 +41,23 @@ export function useProgresso(userKey) {
     setApiOnline(online);
   };
 
+  /** Troca a foto do avatar (data URL). Grande demais para o localStorage, vale só nesta sessão. */
+  const trocarAvatar = (foto) => {
+    try {
+      localStorage.setItem(`${userKey}avatar_custom`, foto);
+    } catch {
+      /* sem espaço no localStorage */
+    }
+    setAvatar(foto);
+  };
+
   const faseLiberada = (faseId) => fasesDesbloqueadas.includes(faseId) || bonusDesbloqueados.includes(faseId);
 
   const liberarFase = (id) => setFasesDesbloqueadas((atual) => (atual.includes(id) ? atual : [...atual, id]));
 
   return {
-    xp, moedas, rank, srsData, decks, fasesDesbloqueadas, bonusDesbloqueados, certificadoLiberado, apiOnline, apiOnlineRef,
+    xp, moedas, rank, srsData, decks, fasesDesbloqueadas, bonusDesbloqueados, certificadoLiberado, avatar, apiOnline, apiOnlineRef,
     setXp, setMoedas, definirRank, setSrsData, setDecks, setFasesDesbloqueadas, setBonusDesbloqueados,
-    setCertificadoLiberado, definirApiOnline, faseLiberada, liberarFase,
+    setCertificadoLiberado, trocarAvatar, definirApiOnline, faseLiberada, liberarFase,
   };
 }

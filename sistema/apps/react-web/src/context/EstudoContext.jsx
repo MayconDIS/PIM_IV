@@ -42,6 +42,8 @@ export function EstudoProvider({ children }) {
     fasesDesbloqueadas: progresso.fasesDesbloqueadas,
     bonusDesbloqueados: progresso.bonusDesbloqueados,
     certificadoLiberado: progresso.certificadoLiberado,
+    avatar: progresso.avatar,
+    trocarAvatar: progresso.trocarAvatar,
     apiOnline: progresso.apiOnline,
     faseLiberada: progresso.faseLiberada,
     faseAtiva: sessao.faseAtiva,

@@ -284,7 +284,11 @@ header[role="banner"] {
     gap: 10px;
 }
 
-.dropdown-header .avatar {
+/* Linha do "Olá": avatar + texto. O avatar só aparece no celular (regra na seção CELULAR). */
+.welcome-linha { display: flex; align-items: center; gap: 12px; min-width: 0; }
+
+.dropdown-header .avatar,
+.welcome-linha .avatar-painel {
     width: 45px;
     height: 45px;
     background: linear-gradient(135deg, var(--nexti-purple), var(--nexti-cyan));
@@ -295,6 +299,7 @@ header[role="banner"] {
     color: white;
     animation: floatAvatar 3s ease-in-out infinite;
 }
+.welcome-linha .avatar-painel { display: none; flex-shrink: 0; }
 
 .dropdown-item {
     padding: 12px 15px;
@@ -2042,6 +2047,8 @@ button.dropdown-item {
 
     /* Cartão do usuário: o nome em cima, XP e moedas embaixo (antes o nome ficava atrás do XP) */
     .dashboard-header-main { flex-direction: column; align-items: flex-start; gap: 4px; }
+    /* Avatar (o mesmo do menu do cabeçalho) à esquerda do "Olá" */
+    .welcome-linha .avatar-painel { display: flex; }
     .welcome-text h1 { overflow-wrap: anywhere; }
 
     /* Fechar dos modais e botões de acessibilidade do menu com área de toque de 44px */

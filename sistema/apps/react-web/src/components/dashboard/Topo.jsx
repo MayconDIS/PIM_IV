@@ -6,15 +6,15 @@ import { useEstudo } from '../../context/EstudoContext';
 import { alternarAltoContraste, ativarComTeclado, mudarZoom } from '../../lib/acessibilidade';
 import { abrirVLibras } from '../../lib/vlibras';
 import { perfilAtual, podeAdministrar } from '../modais/ModalAdmin';
+import { Avatar } from './Avatar';
 
 /** <header> do dashboard: frase motivacional, áudio, criação de carta e menu do usuário. */
 export function Topo() {
   const {
-    nomeUsuario, userKey, rank, audioMudo, alternarAudio, abrirModal,
-    resetarProgresso, deslogar, toast,
+    nomeUsuario, rank, audioMudo, alternarAudio, abrirModal,
+    resetarProgresso, deslogar, toast, avatar, trocarAvatar,
   } = useEstudo();
   const [menuAberto, setMenuAberto] = useState(false);
-  const [avatar, setAvatar] = useState(() => localStorage.getItem(`${userKey}avatar_custom`));
   const menuRef = useRef(null);
   const botaoMenu = useRef(null);
   const inputAvatar = useRef(null);
@@ -44,31 +44,16 @@ export function Topo() {
     fn();
   };
 
-  const trocarAvatar = (e) => {
+  const lerFoto = (e) => {
     const arquivo = e.target.files?.[0];
     if (!arquivo) return;
     const leitor = new FileReader();
     leitor.onload = () => {
-      try {
-        localStorage.setItem(`${userKey}avatar_custom`, leitor.result);
-      } catch {
-        /* imagem grande demais para o localStorage: vale só nesta sessão */
-      }
-      setAvatar(leitor.result);
+      trocarAvatar(leitor.result);
       toast('success', 'Avatar Atualizado', 'Foto de perfil atualizada com sucesso!');
     };
     leitor.readAsDataURL(arquivo);
   };
-
-  const estiloAvatar = avatar
-    ? {
-        backgroundImage: `url('${avatar}'), linear-gradient(135deg, var(--nexti-purple), var(--nexti-cyan))`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        cursor: 'pointer',
-      }
-    : { cursor: 'pointer' };
 
   return (
     <header role="banner">
@@ -104,19 +89,17 @@ export function Topo() {
           </button>
           <div className={`dropdown-content${menuAberto ? ' show' : ''}`}>
             <div className="dropdown-header">
-              <div
-                className="avatar tech-font flex-align"
-                style={estiloAvatar}
+              <Avatar
+                foto={avatar}
+                className="cursor-pointer"
                 title="Clique para alterar a foto do seu avatar"
                 role="button"
                 tabIndex={0}
                 aria-label="Alterar a foto do avatar"
                 onClick={escolherFoto}
                 onKeyDown={ativarComTeclado(escolherFoto)}
-              >
-                {!avatar && <span className="material-symbols-outlined" aria-hidden="true">terminal</span>}
-              </div>
-              <input ref={inputAvatar} type="file" accept="image/*" style={{ display: 'none' }} onChange={trocarAvatar} />
+              />
+              <input ref={inputAvatar} type="file" accept="image/*" style={{ display: 'none' }} onChange={lerFoto} />
               <div>
                 <div className="menu-user-name">{nomeUsuario}</div>
                 <div className="tech-font menu-user-level">{rank}</div>
