@@ -8,7 +8,7 @@ export default function ResumoAcademico({ disciplina }) {
   return (
     <View style={styles.caixa}>
       <TouchableOpacity onPress={() => setAberto(!aberto)} accessibilityRole="button" accessibilityState={{ expanded: aberto }} style={styles.botao}>
-        <Text style={styles.titulo}>{aberto ? 'Ocultar resumo' : 'Resumo e materiais'} · {disciplina.origem} · {disciplina.semestre}º semestre</Text>
+        <Text style={styles.titulo}>{aberto ? 'Ocultar resumo' : 'Resumo e materiais'} · Módulo {disciplina.semestre}</Text>
       </TouchableOpacity>
       {aberto && <View style={styles.textos}>
         {disciplina.resumo.map((texto, indice) => <Text key={indice} style={styles.texto}>{texto}</Text>)}

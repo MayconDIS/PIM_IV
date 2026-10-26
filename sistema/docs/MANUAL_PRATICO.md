@@ -73,12 +73,12 @@ No Dashboard, o menu esquerdo ("Missões de Aprendizagem") exibe todas as discip
 
 ### Consultar a Trilha e os resumos
 No computador e no navegador do celular, abra o menu **☰ → Trilha**, logo abaixo
-de **Mapa Neural**. Escolha um dos quatro semestres para consultar as disciplinas,
+de **Mapa Neural**. Escolha **Módulo 1**, **Módulo 2**, **Módulo 3** ou **Módulo 4** para consultar as disciplinas,
 seus resumos, tópicos e fontes. **Estudar** abre a fase correspondente quando ela
 está liberada; consultar um resumo não ignora o bloqueio da trilha. Os resumos
 também aparecem junto das disciplinas no painel e no aplicativo Expo.
 
-São 31 disciplinas de AVA e ED nos quatro módulos do curso, com 496 novas cartas
+São 31 disciplinas nos quatro módulos do curso, com 496 novas cartas
 autorais. O módulo 5 mantém o ENADE, e as disciplinas complementares do módulo 2
 continuam disponíveis. Os materiais originais não são distribuídos pelo site: as
 fontes indicam arquivo e página ou slide para consulta no acervo da faculdade.

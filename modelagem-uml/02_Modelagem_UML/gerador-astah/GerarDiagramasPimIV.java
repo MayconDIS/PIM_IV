@@ -464,8 +464,8 @@ public class GerarDiagramasPimIV {
             {"enadeOficial.js", "Provas oficiais do ENADE de ADS (2017 e 2021), com gabarito do INEP, e o guia de estudos."},
             {"ModalNivelamento", "Janela do teste de nivelamento (diagnóstico) no site."},
             {"ModalProgresso", "Janela Minhas Estatísticas: os números do SM-2 do aluno e as fases concluídas de cada módulo, calculados no navegador com o progresso local, atualizado pela API quando disponível."},
-            {"ModalTrilha", "Janela Trilha: apresenta os quatro semestres, disciplinas, resumos de AVA e ED e progresso; abre uma disciplina liberada no EstudoContext. O preparatório ENADE permanece em módulo próprio."},
-            {"ResumoDisciplina", "Resumos autorais, tópicos e referências por página dos materiais de AVA e ED, recebidos do catálogo compartilhado. Os arquivos originais do acervo não são publicados."},
+            {"ModalTrilha", "Janela Trilha: apresenta os módulos 1 a 4, disciplinas, resumos dos materiais de estudo e progresso; abre uma disciplina liberada no EstudoContext. O preparatório ENADE permanece em módulo próprio."},
+            {"ResumoDisciplina", "Resumos autorais, tópicos e referências por página dos materiais acadêmicos, recebidos do catálogo compartilhado. Os arquivos originais do acervo não são publicados."},
             {"ModalAdmin", "Painel do Tutor/Admin no site: abas Alunos, Cartas e Usuários."},
             {"ModalCriacao", "Janela Criar Carta, onde o aluno cria um flashcard numa fase."},
             {"ModalConta", "Janela Minha conta: dados, troca de e-mail e senha, exportação e exclusão da conta."},
@@ -536,9 +536,9 @@ public class GerarDiagramasPimIV {
         elemento(front, "assistente.js", "módulo JS", false, new String[] {"responderPergunta(pergunta : string) : object"});
         elemento(front, "content.js", "módulo JS", false, new String[0]);
         elemento(front, "ModalTrilha", "React", false, new String[0]);
-        classes.get("ModalTrilha").setDefinition("Janela Trilha aberta no menu abaixo de Mapa Neural: organiza os quatro semestres, mostra disciplinas e progresso e abre uma fase liberada pelo EstudoContext. O ENADE permanece separado.");
+        classes.get("ModalTrilha").setDefinition("Janela Trilha aberta no menu abaixo de Mapa Neural: organiza os módulos 1 a 4, mostra disciplinas e progresso e abre uma fase liberada pelo EstudoContext. O ENADE permanece separado.");
         elemento(front, "ResumoDisciplina", "React", false, new String[0]);
-        classes.get("ResumoDisciplina").setDefinition("Componente que apresenta resumos autorais, tópicos e referências por página dos materiais de AVA e ED. Recebe a disciplina do catálogo compartilhado; os PDFs originais não são publicados.");
+        classes.get("ResumoDisciplina").setDefinition("Componente que apresenta resumos autorais, tópicos e referências por página dos materiais acadêmicos. Recebe a disciplina do catálogo compartilhado; os PDFs originais não são publicados.");
         elemento(front, "orientacoesAssistente.js", "módulo JS", false, new String[0]);
         for (String m : new String[] {"ModalNivelamento", "ModalProgresso", "ModalAdmin", "ModalCriacao", "ModalConta", "Topo"})
             elemento(front, m, "React", false, new String[0]);
@@ -684,13 +684,13 @@ public class GerarDiagramasPimIV {
             "Token JWT, limite de tentativas e perfil no token.");
 
         detalhe(casos, "Estudar Flashcards",
-            "O aluno consulta os quatro semestres na Trilha, lê resumos de AVA e ED e estuda as cartas de uma disciplina liberada. Cada resposta vai para a API, que aplica o SM-2 e agenda a próxima revisão. O ENADE tem módulo próprio.",
+            "O aluno consulta os módulos 1 a 4 na Trilha, lê resumos dos materiais de estudo e estuda as cartas de uma disciplina liberada. Cada resposta vai para a API, que aplica o SM-2 e agenda a próxima revisão. O ENADE tem módulo próprio.",
             new String[] {"ModalTrilha", "ResumoDisciplina", "content.js", "EstudoContext", "deck.js", "ApiService", "EndpointExtensions", "IProgressoService", "ProgressoService", "ISm2Engine", "Sm2Engine", "ProgressoFlashcard", "Flashcard"},
-            new String[][] {{"usa", "ModalTrilha", "EstudoContext"}, {"usa", "ModalTrilha", "ResumoDisciplina"}, {"usa", "ModalTrilha", "content.js", "semestres e disciplinas"}, {"usa", "EstudoContext", "deck.js"}, {"usa", "EstudoContext", "ApiService"}, {"implementa", "ProgressoService", "IProgressoService"},
+            new String[][] {{"usa", "ModalTrilha", "EstudoContext"}, {"usa", "ModalTrilha", "ResumoDisciplina"}, {"usa", "ModalTrilha", "content.js", "módulos e disciplinas"}, {"usa", "EstudoContext", "deck.js"}, {"usa", "EstudoContext", "ApiService"}, {"implementa", "ProgressoService", "IProgressoService"},
                 {"usa", "ProgressoService", "ISm2Engine", "usa"}, {"implementa", "Sm2Engine", "ISm2Engine"}, {"usa", "ProgressoService", "ProgressoFlashcard", "grava"},
                 {"usa", "ApiService", "EndpointExtensions", "HTTP"}, {"usa", "EndpointExtensions", "IProgressoService"}, {"usa", "ProgressoFlashcard", "Flashcard", "da carta"}},
             new String[] {"a=:Aluno", "tr=:ModalTrilha", "ctx=:EstudoContext", "deck=:deck.js", "rota=:EndpointExtensions", "ps=:ProgressoService", "sm2=:Sm2Engine", "bd=:SQL Server"},
-            new String[][] {{"a", "tr", "seleciona semestre e consulta resumo e fontes"}, {"tr", "tr", "mostra disciplinas e situação pelo progresso"}, {"a", "tr", "escolhe disciplina liberada"}, {"tr", "ctx", "carregarAula(faseId)"}, {"ctx", "rota", "GET /api/fases/{codigo}/flashcards"},
+            new String[][] {{"a", "tr", "seleciona módulo e consulta resumo e fontes"}, {"tr", "tr", "mostra disciplinas e situação pelo progresso"}, {"a", "tr", "escolhe disciplina liberada"}, {"tr", "ctx", "carregarAula(faseId)"}, {"ctx", "rota", "GET /api/fases/{codigo}/flashcards"},
                 {"rota", "ctx", "cartas da fase", "retorno"}, {"ctx", "deck", "montarDeckDaFase(cartas): vencidas primeiro"},
                 {"a", "ctx", "responder(Errei, Difícil, Bom ou Fácil)"}, {"ctx", "ctx", "atualiza o SM-2 local"},
                 {"ctx", "rota", "POST /api/progresso/atualizar (nota 1, 3, 4 ou 5)"}, {"rota", "ps", "RegistrarRespostaAsync(usuarioId, flashcardId, qualidade)"},
@@ -1334,7 +1334,7 @@ public class GerarDiagramasPimIV {
         Map.entry("Realizar Login", "Entrar com nickname ou e-mail e senha; a API devolve um token JWT de 24 horas com o perfil."),
         Map.entry("Ajustar Acessibilidade", "Aumentar a fonte, ligar o alto contraste ou usar o VLibras."),
         Map.entry("Gerenciar Minha Conta", "Ver e exportar os próprios dados, trocar e-mail e senha e excluir a conta (PB02)."),
-        Map.entry("Estudar Flashcards", "Consultar a Trilha de quatro semestres, ler resumos autorais de AVA e ED com referências e estudar as cartas de uma disciplina liberada. O SM-2 agenda a próxima revisão de cada carta; o ENADE permanece em módulo próprio."),
+        Map.entry("Estudar Flashcards", "Consultar a Trilha dos módulos 1 a 4, ler resumos autorais dos materiais de estudo com referências e estudar as cartas de uma disciplina liberada. O SM-2 agenda a próxima revisão de cada carta; o ENADE permanece em módulo próprio."),
         Map.entry("Realizar Teste de Nivelamento", "Responder 10 perguntas que definem a fase inicial."),
         Map.entry("Realizar Simulado ENADE", "Fazer o teste do módulo ou uma prova oficial do ENADE, com correção e justificativa."),
         Map.entry("Visualizar Painel de Desempenho", "Ver os próprios números do SM-2."),

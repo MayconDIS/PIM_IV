@@ -52,7 +52,7 @@ Detalhes de portas, banco de dados e API estão em [`sistema/README.md`](sistema
 O conteúdo reúne **43 fases e 1198 cartas**, incluindo **31 disciplinas de AVA e ED**
 dos quatro semestres. Os resumos e 496 novas cartas ampliam os quatro módulos do curso;
 o módulo 5 mantém o preparatório ENADE. As referências indicam o material e a página
-ou slide consultado. O menu **Trilha** organiza essa consulta por semestre.
+ou slide consultado. O menu **Trilha** organiza essa consulta por módulo (Módulo 1 a 4).
 
 ## 🎤 Apresentação de P.A. em .NET (27/10)
 

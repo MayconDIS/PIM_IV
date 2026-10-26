@@ -175,8 +175,8 @@ Os códigos antigos das fases continuam iguais; apenas a sequência visível dos
 e sem recuperar cartas removidas pela moderação. A lista `fasesConcluidas` do perfil
 ajuda a manter o acesso às fases seguintes quando o aluno troca de aparelho.
 
-No Web, `ModalTrilha` abre pelo menu, abaixo de Mapa Neural, com quatro seletores de
-semestre, resumo, fontes e acesso ao estudo conforme a liberação da fase. O painel e
+No Web, `ModalTrilha` abre pelo menu, abaixo de Mapa Neural, com os seletores
+Módulo 1 a 4, resumo, fontes e acesso ao estudo conforme a liberação da fase. O painel e
 o Expo também exibem resumos por disciplina. Esse catálogo é local, sem nova rota
 ou tabela; a API continua com 26 rotas e as mesmas autorizações.
 

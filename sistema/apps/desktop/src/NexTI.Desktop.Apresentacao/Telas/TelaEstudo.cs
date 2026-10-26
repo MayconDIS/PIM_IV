@@ -78,7 +78,8 @@ internal sealed class TelaEstudo : Form
         _contador.Text = $"Faltam {_sessao.Restantes} de {_sessao.TotalDeCartas} cartas · respondidas: {_sessao.Respondidas}";
         _frente.Text = carta.Frente;
         _verso.Text = string.Empty;
-        _dica.Text = carta.Dica ?? string.Empty;
+        _dica.Text = System.Text.RegularExpressions.Regex.Replace(
+            carta.Dica ?? string.Empty, @"^(?:ED|AVA) · ([1-4])º semestre · ", "Módulo $1 · ");
         _mostrar.Visible = true;
         _respostas.Visible = false;
         _mostrar.Focus();

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ApiService, MODULOS } from '@nexti/shared';
+import { formatarDica, ApiService, MODULOS } from '@nexti/shared';
 import { useEstudo } from '../../context/EstudoContext';
 import { Modal } from '../ui/Modal';
 
@@ -129,7 +129,7 @@ function Cartas({ toast, confirmar }) {
                 <td>{c.frente}</td>
                 <td>{c.verso}</td>
                 <td><div className="admin-acoes">
-                  <button className="btn-backup-action" title="Editar" aria-label={`Editar: ${c.frente}`} onClick={() => setEditando({ id: c.id, frente: c.frente, verso: c.verso, dica: c.dica })}>
+                  <button className="btn-backup-action" title="Editar" aria-label={`Editar: ${c.frente}`} onClick={() => setEditando({ id: c.id, frente: c.frente, verso: c.verso, dica: formatarDica(c.dica) })}>
                     <span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }} aria-hidden="true">edit</span>
                   </button>
                   <button className="btn-backup-action admin-perigo" title="Excluir" aria-label={`Excluir: ${c.frente}`} onClick={() => excluir(c)}>

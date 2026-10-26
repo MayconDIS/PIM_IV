@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { FASES, corteDoTeste, estadoDaCarta, isTeste, previsoes } from '@nexti/shared';
+import { formatarDica, FASES, corteDoTeste, estadoDaCarta, isTeste, previsoes } from '@nexti/shared';
 import { useEstudo } from '../../context/EstudoContext';
 import { ativarComTeclado } from '../../lib/acessibilidade';
 import { ResumoDisciplina } from './ResumoDisciplina';
@@ -195,7 +195,7 @@ export function PainelEstudo({ ativo }) {
           </div>
           <div className="carta-verso">
             <div className="carta-texto" style={enade ? { textAlign: 'left' } : undefined}>{verso}</div>
-            <div className="carta-dica tech-font">{cartaAtual?.dica || ''}</div>
+            <div className="carta-dica tech-font">{formatarDica(cartaAtual?.dica)}</div>
           </div>
         </div>
       </div>

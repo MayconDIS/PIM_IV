@@ -3,11 +3,18 @@ import assert from 'node:assert/strict';
 import { BANCO_DE_DADOS, FASES, MODULOS } from '../src/content.js';
 import { DISCIPLINAS_ACADEMICAS } from '../src/academico/catalogo.js';
 import { responderPergunta } from '../src/assistente.js';
+import { formatarDica } from '../src/rotulos.js';
 
 test('o acervo AVA e ED cobre as 31 disciplinas dos quatro semestres sem criar módulos paralelos', () => {
   assert.deepEqual([1, 2, 3, 4].map(s => DISCIPLINAS_ACADEMICAS.filter(d => d.semestre === s).length), [9, 5, 9, 8]);
   assert.equal(MODULOS.length, 5);
   assert.deepEqual(MODULOS.slice(0, 4).map(m => m.semestre), [1, 2, 3, 4]);
+  assert.deepEqual(MODULOS.slice(0, 4).map(m => m.codigo), ['MOD 01', 'MOD 02', 'MOD 03', 'MOD 04']);
+  for (const modulo of MODULOS.slice(0, 4)) assert.ok(modulo.nome.startsWith(`Módulo ${modulo.numero}:`));
+  assert.equal(formatarDica('ED · 1º semestre · Pense na entrada.'), 'Módulo 1 · Pense na entrada.');
+  assert.equal(formatarDica('AVA · 4º semestre · Revise o conceito.'), 'Módulo 4 · Revise o conceito.');
+  assert.equal(formatarDica('Dica personalizada: ED e AVA'), 'Dica personalizada: ED e AVA');
+  assert.equal(formatarDica(null), '');
   assert.equal(MODULOS[4].id, 'mod5');
   assert.deepEqual(MODULOS[4].fases.map(f => f.id), ['fase21', 'fase22', 'fase23', 'fase24', 'fase25']);
   assert.equal(new Set(DISCIPLINAS_ACADEMICAS.map(d => d.faseId)).size, 31);

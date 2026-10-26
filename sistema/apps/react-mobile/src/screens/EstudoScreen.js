@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { devolveParaRevisao, estadoDaCarta, previsoes } from '@nexti/shared/sm2';
+import { formatarDica } from '@nexti/shared';
 import { tokens } from '../theme/tokens';
 import ResumoAcademico from '../components/ResumoAcademico';
 
@@ -94,7 +95,7 @@ export default function EstudoScreen({ fase, api, sinc, onSair, onErroDeSessao }
         <Text style={styles.etiqueta}>{virada ? '✓ RESPOSTA' : '? PERGUNTA'}</Text>
         <Text style={styles.textoCarta}>{virada ? carta.verso : carta.frente}</Text>
         {!virada && carta.opcoes?.length ? carta.opcoes.map((opcao) => <Text key={opcao} style={styles.opcao}>{opcao}</Text>) : null}
-        {!virada && carta.dica ? <Text style={styles.dica}>💡 {carta.dica}</Text> : null}
+        {!virada && carta.dica ? <Text style={styles.dica}>💡 {formatarDica(carta.dica)}</Text> : null}
       </TouchableOpacity>
 
       {virada ? (
