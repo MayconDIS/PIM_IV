@@ -35,7 +35,8 @@ export function useEvitarControles(aberto, faseAtiva) {
       const comandos = document.querySelectorAll('#right-panel .game-controls, #right-panel .btn-proxima');
       setSobreControles(Boolean(botao && [...comandos].some(comando => {
         const r = comando.getBoundingClientRect();
-        return r.width > 0 && r.height > 0 && r.left < botao.right && r.right > botao.left && r.top < botao.bottom && r.bottom > botao.top;
+        // Reserva também os 8px percorridos pela animação de flutuação.
+        return r.width > 0 && r.height > 0 && r.left < botao.right && r.right > botao.left && r.top < botao.bottom && r.bottom > botao.top - 8;
       })));
     };
     conferir();
