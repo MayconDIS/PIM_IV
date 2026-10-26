@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { parse } = require('node-html-parser');
+const { imageSize } = require('image-size');
 const {
   AlignmentType, BorderStyle, Document, Footer, Header, HeadingLevel, ImageRun, LineRuleType, Packer, PageBreak,
   HeightRule, PageNumber, Paragraph, ShadingType, Table, TableCell, TableOfContents, TableRow, TextRun, VerticalAlign, WidthType,
@@ -66,15 +67,19 @@ const titulo = (texto, nivel, centro = false) => new Paragraph({
 });
 
 // ---------------------------------------------------------------- imagens
-function tamanhoPng(arquivo) {
-  const b = fs.readFileSync(arquivo);
-  return { w: b.readUInt32BE(16), h: b.readUInt32BE(20), dados: b };
+function tamanhoImagem(arquivo) {
+  const dados = fs.readFileSync(arquivo);
+  const { width: w, height: h, type } = imageSize(dados);
+  if (!w || !h || !['png', 'jpg', 'gif', 'bmp'].includes(type)) {
+    throw new Error(`Formato de imagem não suportado no Word: ${arquivo}`);
+  }
+  return { w, h, dados, tipo: type };
 }
 
 function imagem(img, larguraFixaCm) {
   const src = decodeURI(img.getAttribute('src'));
   const arquivo = path.join(PASTA, src);
-  const { w, h, dados } = tamanhoPng(arquivo);
+  const { w, h, dados, tipo } = tamanhoImagem(arquivo);
   const classe = img.getAttribute('class') || '';
   const estilo = /max-height:\s*([\d.]+)cm/.exec(img.getAttribute('style') || '');
   const porClasse = /img-height-(\d+)/.exec(classe);
@@ -85,7 +90,7 @@ function imagem(img, larguraFixaCm) {
   if (altura > alturaMax) { altura = alturaMax; largura = alturaMax * w / h; }
   const px = (cm) => Math.round(cm / 2.54 * 96);
   return new Paragraph({
-    children: [new ImageRun({ data: dados, type: 'png', transformation: { width: px(largura), height: px(altura) },
+    children: [new ImageRun({ data: dados, type: tipo, transformation: { width: px(largura), height: px(altura) },
       altText: { name: img.getAttribute('alt') || 'Figura', description: img.getAttribute('alt') || '', title: img.getAttribute('alt') || '' } })],
     alignment: AlignmentType.CENTER,
     spacing: { after: 60 },
