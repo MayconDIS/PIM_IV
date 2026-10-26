@@ -1,4 +1,22 @@
 .assistente-nexti { --assistente-base: 30px; color: #e6edf3; font-family: 'Inter', sans-serif; }
+/* Rolagem com a mesma paleta do chat, inclusive nas sugestões e no campo de texto. */
+.assistente-nexti { --assistente-scroll-trilho: #10212a; --assistente-scroll-cor: #00bfc7; color-scheme: dark; }
+.assistente-nexti :is(.assistente-historico, .assistente-sugestoes, textarea) { scrollbar-width: thin; scrollbar-color: var(--assistente-scroll-cor) var(--assistente-scroll-trilho); }
+.assistente-nexti :is(.assistente-historico, .assistente-sugestoes, textarea)::-webkit-scrollbar { width: 6px; height: 6px; }
+.assistente-nexti :is(.assistente-historico, .assistente-sugestoes, textarea)::-webkit-scrollbar-track { background: var(--assistente-scroll-trilho); border-radius: 10px; }
+.assistente-nexti :is(.assistente-historico, .assistente-sugestoes, textarea)::-webkit-scrollbar-thumb { background: var(--assistente-scroll-cor); border-radius: 10px; }
+.assistente-nexti :is(.assistente-historico, .assistente-sugestoes, textarea)::-webkit-scrollbar-thumb:hover { background: var(--nexti-cyan); }
+.assistente-nexti :is(.assistente-historico, .assistente-sugestoes, textarea)::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
+.assistente-nexti :is(.assistente-historico, .assistente-sugestoes, textarea)::-webkit-scrollbar-corner { background: var(--assistente-scroll-trilho); }
+@supports selector(::-webkit-scrollbar) {
+  .assistente-nexti :is(.assistente-historico, .assistente-sugestoes, textarea) { scrollbar-width: auto; scrollbar-color: auto; }
+}
+body.high-contrast-mode .assistente-nexti { --assistente-scroll-cor: #fff; --assistente-scroll-trilho: #000; }
+@media (forced-colors: active) {
+  .assistente-nexti :is(.assistente-historico, .assistente-sugestoes, textarea) { scrollbar-color: auto; scrollbar-width: auto; }
+  .assistente-nexti :is(.assistente-historico, .assistente-sugestoes, textarea)::-webkit-scrollbar-thumb { background: ButtonText; }
+  .assistente-nexti :is(.assistente-historico, .assistente-sugestoes, textarea)::-webkit-scrollbar-track { background: Canvas; }
+}
 .assistente-nexti button, .assistente-nexti textarea { font: inherit; }
 .assistente-nexti button { cursor: pointer; }
 .assistente-nexti button:focus-visible, .assistente-nexti textarea:focus-visible, .assistente-nexti summary:focus-visible { outline: 2px solid var(--nexti-cyan); outline-offset: 3px; }
