@@ -23,12 +23,17 @@ As medições de cobertura, carga e usabilidade anteriores permanecem identifica
 | **Auditoria do código** (código morto, ARIA, depuração) | 5 checagens | `node scripts/auditoria-codigo.mjs` |
 | **Usabilidade** (7 tarefas, computador e celular, e 5 do menu no celular) | 19 execuções | roteiro na seção 6 |
 
-Na execução de 26/10/2026, foram **440 casos aprovados, cinco ignorados e nenhuma
-falha**: API 265 aprovados e cinco testes opcionais de LocalDB ignorados, pacote
-compartilhado 118, Mobile 26 e desktop 31. O build Web passou; a verificação da
-interface em 390 px e 1440 px passou. A auditoria registrou zero problemas e
-13 avisos de tamanho de arquivo. As medições anteriores de carga não foram refeitas
-para esta ampliação.
+Em 26/10/2026, as execuções complementares no mesmo código somaram **445 casos
+aprovados, sem falhas**: API 270, pacote compartilhado 118, Mobile 26 e desktop 31.
+A execução inicial aprovou 440 e ignorou os cinco opcionais. Depois, esses cinco
+foram executados com `NEXTI_TEST_LOCALDB=1` e filtro específico: **5 aprovados, zero
+falhas e zero ignorados**, usando bancos locais descartáveis. O comando padrão sem
+essa variável continua ignorando os cinco; o total consolidado inclui as duas execuções.
+
+O build Web e a interface em 320 px, 390 px e 1440 px passaram. A auditoria registrou
+zero problemas e 13 avisos de tamanho de arquivo. As medições anteriores de carga
+não foram refeitas. A [evidência dos testes complementares](evidencias/testes-complementares-2026-10-26.json)
+registra o código testado, os cinco casos de SQL Server e os cenários do diagnóstico.
 
 ### Diagnóstico dos quatro módulos
 
@@ -39,10 +44,22 @@ base fraca que não pode ser compensada por acertos avançados. API e JavaScript
 usam a mesma semente. Também se verifica que refazer não reduz acessos, XP ou rank,
 não paga recompensas e que o resultado acompanha o perfil e a exportação da conta.
 
-Na interface, conferir seleção e confirmação, **Não sei**, cancelamento, repetição,
-resultado por módulo, revisão das respostas e indicação de envio pendente. Repetir
-em tela de celular, com texto ampliado e após recarregar. O Expo deve recuperar os
-acessos do diagnóstico pelo perfil; o desktop não oferece esse questionário.
+No site publicado, uma conta temporária concluiu o diagnóstico em navegador com
+largura de 1440 px: retomou o rascunho em 3/20 após atualizar e terminou com 15/20,
+recomendação do Mod_02 e 11 acessos liberados. Em outra sessão, com largura de
+390 px, recuperou o resultado, refez a avaliação com 20/20, recebeu o Mod_05 e abriu
+a recomendação antes e depois de recarregar. Ao refazer com 0/20 no computador,
+recebeu o Mod_01 sem perder os acessos anteriores. Também passaram o layout em
+320 px e a exportação dos dados, sem gerar XP, moedas ou conclusões.
+
+A conta temporária foi excluída e seu login passou a responder 401. A conta de aluno
+usada na conferência permaneceu com o mesmo estado antes e depois. Esses cenários
+validam o **site responsivo em navegador**, não o Expo em aparelho físico. O uso real
+do aplicativo pelo Expo Go continua pendente; o Nex_TI Desktop não oferece diagnóstico.
+
+O roteiro de interface também inclui seleção e confirmação, **Não sei**, cancelamento,
+revisão das respostas, indicação de envio pendente e texto ampliado. A execução
+complementar descrita acima não substitui as demais verificações do roteiro.
 
 ### Acesso direto do Admin e do Tutor
 
