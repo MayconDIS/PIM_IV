@@ -2135,16 +2135,14 @@ button.dropdown-item {
 
 @media (max-width: 800px) {
     /* Os controles da câmera do mapa usam o visual do widget de acessibilidade, que some no
-       celular; estes continuam (aproximar, afastar e centralizar), no canto inferior esquerdo. */
+       celular; estes continuam (aproximar, afastar e centralizar), no canto de cima. */
     .a11y-widget.map-a11y-widget {
         display: flex !important;
-        top: auto !important;
-        bottom: 12px !important;
+        top: 12px !important;
+        bottom: auto !important;
         left: 12px !important;
     }
     .map-a11y-widget .a11y-toggle { width: 46px !important; height: 46px !important; }
     .map-a11y-widget .a11y-options { height: 52px; }
     .map-a11y-widget .a11y-options .btn-action { min-width: 44px !important; height: 44px !important; }
-    /* A carta aberta fica acima dos controles, sem cobrir os botões nem o texto. */
-    .mini-flashcard-fixo { bottom: 76px; }
 }
