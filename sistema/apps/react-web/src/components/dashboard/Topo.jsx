@@ -71,7 +71,9 @@ export function Topo() {
 
         <div className="hamburger-menu" ref={menuRef}>
           <button ref={botaoMenu} type="button" className="hamburger-btn flex-align" aria-label="Abrir menu" aria-haspopup="menu" aria-expanded={menuAberto} onClick={() => setMenuAberto((v) => !v)}>
-            <span className="material-symbols-outlined hamburger-icon" aria-hidden="true">menu</span>
+            <svg className="hamburger-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true" focusable="false">
+              <path d="M5 9h22M5 16h22M5 23h22" />
+            </svg>
           </button>
           <div className={`dropdown-content${menuAberto ? ' show' : ''}`}>
             <div className="dropdown-header">
