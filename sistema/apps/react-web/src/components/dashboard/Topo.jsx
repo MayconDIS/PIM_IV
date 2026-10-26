@@ -6,18 +6,17 @@ import { useEstudo } from '../../context/EstudoContext';
 import { alternarAltoContraste, ativarComTeclado, mudarZoom } from '../../lib/acessibilidade';
 import { abrirVLibras } from '../../lib/vlibras';
 import { perfilAtual, podeAdministrar } from '../modais/ModalAdmin';
-import { Avatar } from './Avatar';
+import { AvatarEditavel } from './Avatar';
 
 /** <header> do dashboard: frase motivacional, áudio, criação de carta e menu do usuário. */
 export function Topo() {
   const {
     nomeUsuario, rank, audioMudo, alternarAudio, abrirModal,
-    resetarProgresso, deslogar, toast, avatar, trocarAvatar,
+    resetarProgresso, deslogar,
   } = useEstudo();
   const [menuAberto, setMenuAberto] = useState(false);
   const menuRef = useRef(null);
   const botaoMenu = useRef(null);
-  const inputAvatar = useRef(null);
 
   const [frase] = useState(() => {
     const modelo = FRASES_MOTIVACIONAIS[Math.floor(Math.random() * FRASES_MOTIVACIONAIS.length)];
@@ -35,24 +34,12 @@ export function Topo() {
   }, []);
 
   const voltarAoTopo = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-  const escolherFoto = () => inputAvatar.current?.click();
 
   const acao = (fn) => () => {
     setMenuAberto(false);
     // O item some com o menu: o foco volta ao botão do menu, e é para ele que a janela aberta devolve o foco.
     botaoMenu.current?.focus();
     fn();
-  };
-
-  const lerFoto = (e) => {
-    const arquivo = e.target.files?.[0];
-    if (!arquivo) return;
-    const leitor = new FileReader();
-    leitor.onload = () => {
-      trocarAvatar(leitor.result);
-      toast('success', 'Avatar Atualizado', 'Foto de perfil atualizada com sucesso!');
-    };
-    leitor.readAsDataURL(arquivo);
   };
 
   return (
@@ -89,17 +76,7 @@ export function Topo() {
           </button>
           <div className={`dropdown-content${menuAberto ? ' show' : ''}`}>
             <div className="dropdown-header">
-              <Avatar
-                foto={avatar}
-                className="cursor-pointer"
-                title="Clique para alterar a foto do seu avatar"
-                role="button"
-                tabIndex={0}
-                aria-label="Alterar a foto do avatar"
-                onClick={escolherFoto}
-                onKeyDown={ativarComTeclado(escolherFoto)}
-              />
-              <input ref={inputAvatar} type="file" accept="image/*" style={{ display: 'none' }} onChange={lerFoto} />
+              <AvatarEditavel />
               <div>
                 <div className="menu-user-name">{nomeUsuario}</div>
                 <div className="tech-font menu-user-level">{rank}</div>

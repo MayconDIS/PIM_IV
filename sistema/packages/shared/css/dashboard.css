@@ -284,7 +284,7 @@ header[role="banner"] {
     gap: 10px;
 }
 
-/* Linha do "Olá": avatar + texto. O avatar só aparece no celular (regra na seção CELULAR). */
+/* Linha do "Olá": avatar + texto, no computador e no celular. */
 .welcome-linha { display: flex; align-items: center; gap: 12px; min-width: 0; }
 
 .dropdown-header .avatar,
@@ -299,7 +299,16 @@ header[role="banner"] {
     color: white;
     animation: floatAvatar 3s ease-in-out infinite;
 }
-.welcome-linha .avatar-painel { display: none; flex-shrink: 0; }
+.welcome-linha .avatar-painel { flex-shrink: 0; }
+
+/* Campo de arquivo dentro do avatar: invisível, mas tocável pelo <label> e focável pelo teclado */
+.avatar-editavel { position: relative; }
+.avatar-arquivo {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+/* Contorno só para quem chega pelo teclado (Tab), não depois de clicar */
+.avatar-editavel:has(.avatar-arquivo:focus-visible) { outline: 2px solid var(--nexti-cyan); outline-offset: 3px; }
 
 .dropdown-item {
     padding: 12px 15px;
@@ -2047,8 +2056,6 @@ button.dropdown-item {
 
     /* Cartão do usuário: o nome em cima, XP e moedas embaixo (antes o nome ficava atrás do XP) */
     .dashboard-header-main { flex-direction: column; align-items: flex-start; gap: 4px; }
-    /* Avatar (o mesmo do menu do cabeçalho) à esquerda do "Olá" */
-    .welcome-linha .avatar-painel { display: flex; }
     .welcome-text h1 { overflow-wrap: anywhere; }
 
     /* Fechar dos modais e botões de acessibilidade do menu com área de toque de 44px */
