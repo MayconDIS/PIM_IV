@@ -21,9 +21,9 @@ body.high-contrast-mode .assistente-nexti { --assistente-scroll-cor: #fff; --ass
 .assistente-nexti button { cursor: pointer; }
 .assistente-nexti button:focus-visible, .assistente-nexti textarea:focus-visible, .assistente-nexti summary:focus-visible { outline: 2px solid var(--nexti-cyan); outline-offset: 3px; }
 .assistente-abrir { position: fixed; right: 30px; bottom: var(--assistente-base); z-index: 999; width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; color: var(--nexti-cyan); background: #101c24; border: 1px solid var(--nexti-cyan); border-radius: 50%; box-shadow: 0 4px 16px #0008; }
-.assistente-abrir { animation: floatButton 3s ease-in-out infinite; transition: transform .2s ease, box-shadow .2s ease, background .2s ease; }
-.assistente-abrir:hover, .assistente-abrir:focus-visible { background: #17333c; animation: none; transform: translateY(-5px) scale(1.1); box-shadow: 0 8px 25px rgba(0, 230, 230, .6); }
-.assistente-abrir:active { transform: translateY(2px) scale(.95); box-shadow: 0 2px 10px rgba(0, 230, 230, .4); }
+.assistente-abrir { opacity: .8; animation: floatButton 3s ease-in-out infinite; transition: opacity .2s ease, transform .2s ease, box-shadow .2s ease, background .2s ease; }
+.assistente-abrir:hover, .assistente-abrir:focus-visible { opacity: 1; background: #17333c; animation: none; transform: translateY(-5px) scale(1.1); box-shadow: 0 8px 25px rgba(0, 230, 230, .6); }
+.assistente-abrir:active { opacity: 1; transform: translateY(2px) scale(.95); box-shadow: 0 2px 10px rgba(0, 230, 230, .4); }
 @media (prefers-reduced-motion: reduce) {
   .assistente-abrir { animation: none; transition: none; }
   .assistente-abrir:hover, .assistente-abrir:focus-visible, .assistente-abrir:active { transform: none; }
