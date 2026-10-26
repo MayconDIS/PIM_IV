@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useLayoutEffect, useRef } from 'react';
 import '@nexti/shared/css/global.css';
 import '@nexti/shared/css/dashboard.css';
 import { EstudoProvider, useEstudo } from '../context/EstudoContext';
@@ -101,10 +101,11 @@ function Dashboard() {
 }
 
 export default function DashboardPage() {
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.title = 'Nex_TI';
-    window.scrollTo(0, 0);
     aplicarPreferencias();
+    // Posiciona depois das preferências e antes de exibir o painel, sem rolagem animada.
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   }, []);
 
   return (
