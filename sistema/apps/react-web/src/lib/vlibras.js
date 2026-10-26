@@ -38,8 +38,8 @@ function montarMarcacao() {
 
 // O botão do plugin fica dentro de um shadow DOM (#vlibras-access-wrapper), fora do alcance do CSS
 // da página. No celular ele flutuava por cima da lista e dos botões do estudo (cobria o "Fácil").
-// Como no CasalFlow, abaixo de 800px o botão flutuante some; aqui, em vez de perder o tradutor, ele
-// abre pelo botão "Libras" do painel de acessibilidade do menu (abrirVLibras).
+// Abaixo de 800px o botão flutuante some para deixar espaço para o estudo.
+// No computador, o tradutor continua disponível pelo próprio botão azul do plugin.
 const SEM_BOTAO_NO_CELULAR = '@media (max-width: 800px) { #vlibras-access { display: none !important; } }';
 
 function esconderBotaoNoCelular(tentativas = 40) {
@@ -51,14 +51,6 @@ function esconderBotaoNoCelular(tentativas = 40) {
   } else if (tentativas > 0) {
     setTimeout(() => esconderBotaoNoCelular(tentativas - 1), 250);
   }
-}
-
-/** Abre o tradutor de Libras (o mesmo que tocar no botão azul do plugin). */
-export function abrirVLibras() {
-  const botao = document.getElementById('vlibras-access-wrapper')?.shadowRoot?.getElementById('vlibras-access')
-    ?? document.querySelector('[vw-access-button]');
-  if (botao) botao.click();
-  else console.warn('[VLibras] o tradutor ainda não carregou ou está fora do ar.');
 }
 
 export function instalarVLibras() {

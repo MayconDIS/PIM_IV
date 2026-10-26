@@ -19,12 +19,13 @@ respostas; ele não prevê exatamente quando uma pessoa esquecerá um conteúdo.
 ### No celular
 O site se adapta à tela do celular (abaixo de 800px de largura):
 - uma **barra no rodapé da tela** leva a Fases, Estatísticas, Criar carta, Mapa e Conta;
-- o **menu** (☰, no canto de cima) tem o refazer nivelamento, o painel do Tutor/Admin, a saída e a **Acessibilidade**: A-, A+, alto contraste e **Libras**, que abre o tradutor VLibras.
+- o **menu** (☰, no canto de cima) reúne Minha Conta, Minhas Estatísticas, Mapa Neural, Refazer Diagnóstico, Limpar Dados, Acessibilidade e Sair. O painel do Tutor/Admin também aparece para esses perfis.
 
 ### Acessibilidade e volta ao topo
 No computador e no celular, abra o **menu** (☰) para encontrar **Acessibilidade**:
-**A-** diminui o texto, **A+** aumenta, o botão de contraste alterna o alto contraste
-e **Libras** abre o tradutor. Ao rolar a página, a seta **Voltar ao topo** aparece
+**A-** diminui o texto, **A+** aumenta e o botão de contraste alterna o alto contraste.
+O **VLibras** fica disponível pelo botão azul flutuante somente no computador.
+Ao rolar a página, a seta **Voltar ao topo** aparece
 no canto inferior esquerdo; no celular, fica acima da barra de navegação.
 
 ### Foto do avatar
