@@ -30,6 +30,19 @@ function apiFalsa({ falha = () => null, perfil = { xp: 0, moedas: 0, nivel: 1 },
 
 const carta = { id: 7, frente: 'O que é SM-2?' };
 
+test('app usa acessos do diagnóstico atual sem confundir rank alto com módulos avaliados', async () => {
+  const diagnostico = { versao: 2, moduloRecomendado: 1, fasesLiberadas: ['fase1'] };
+  const api = apiFalsa({ perfil: { xp: 400, moedas: 20, nivel: 6, diagnostico } });
+  const s = criarSincronizador({ api, armazenamento: memoria(), username: 'ana' });
+  await s.carregar(); await s.sincronizar();
+  assert.deepEqual(s.estado.liberadas, ['fase1']);
+  assert.deepEqual(s.estado.diagnostico, diagnostico);
+  s.estado.liberadas.push('fase2');
+  await s.sincronizar();
+  assert.deepEqual(s.estado.liberadas, ['fase1', 'fase2']);
+  assert.equal(s.estado.nivel, 6);
+});
+
 test('resposta com internet vai direto para a API', async () => {
   const api = apiFalsa();
   const s = criarSincronizador({ api, armazenamento: memoria(), username: 'ana', agora: () => 0 });

@@ -21,7 +21,7 @@ public class RevisaoExportada
 }
 public record FaseConcluidaExportada(string CodigoFase, DateTime DataConclusao);
 public record ExportacaoConta(DateTime ExportadoEm, ContaDados Conta, List<ProgressoExportado> Progresso, List<RevisaoExportada> Historico,
-    List<FaseConcluidaExportada> FasesConcluidas);
+    List<FaseConcluidaExportada> FasesConcluidas, ResultadoDiagnostico? Diagnostico = null);
 
 public interface IHistoricoConta
 {
@@ -107,7 +107,9 @@ public class ContaService(AppDbContext db, IPoliticaDeSenha politica, IHistorico
             .OrderBy(f => f.DataConclusao)
             .Select(f => new FaseConcluidaExportada(f.CodigoFase, f.DataConclusao))
             .ToListAsync();
-        return Resultado<ExportacaoConta>.Ok(new(DateTime.UtcNow, conta.Valor!, progresso, await historico.LerAsync(usuarioId), concluidas));
+        var diagnosticoJson = await db.Usuarios.Where(u => u.Id == usuarioId).Select(u => u.DiagnosticoJson).SingleAsync();
+        return Resultado<ExportacaoConta>.Ok(new(DateTime.UtcNow, conta.Valor!, progresso, await historico.LerAsync(usuarioId), concluidas,
+            DiagnosticoService.LerResultado(diagnosticoJson)));
     }
 
     public Task<Resultado<bool>> ExcluirAsync(int usuarioId, string? senhaAtual) =>

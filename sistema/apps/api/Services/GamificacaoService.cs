@@ -8,7 +8,8 @@ using NexTI_API.Models;
 
 namespace NexTI_API.Services
 {
-    public record PerfilUsuario(int Id, string Username, int Nivel, int XP, int Moedas, List<string> FasesConcluidas);
+    public record PerfilUsuario(int Id, string Username, int Nivel, int XP, int Moedas, List<string> FasesConcluidas,
+        ResultadoDiagnostico? Diagnostico = null);
 
     public record RankingAluno(string Username, int XP, int Nivel, int Moedas);
 
@@ -59,13 +60,15 @@ namespace NexTI_API.Services
             return null;
         }
 
-        public Task<PerfilUsuario?> PerfilAsync(string username) =>
-            _db.Usuarios
-                .Where(u => u.Username == username)
-                .Select(u => new PerfilUsuario(u.Id, u.Username, u.Nivel, u.XP, u.Moedas,
-                    _db.FasesConcluidas.Where(f => f.UsuarioId == u.Id).OrderBy(f => f.CodigoFase)
-                        .Select(f => f.CodigoFase).ToList()))
-                .FirstOrDefaultAsync();
+        public async Task<PerfilUsuario?> PerfilAsync(string username)
+        {
+            var usuario = await _db.Usuarios.AsNoTracking().SingleOrDefaultAsync(u => u.Username == username);
+            if (usuario is null) return null;
+            var concluidas = await _db.FasesConcluidas.Where(f => f.UsuarioId == usuario.Id)
+                .OrderBy(f => f.CodigoFase).Select(f => f.CodigoFase).ToListAsync();
+            return new(usuario.Id, usuario.Username, usuario.Nivel, usuario.XP, usuario.Moedas, concluidas,
+                DiagnosticoService.LerResultado(usuario.DiagnosticoJson));
+        }
 
         public async Task<Resultado<Usuario>> AtualizarAsync(int usuarioId, int xp, int moedas, int nivel)
         {

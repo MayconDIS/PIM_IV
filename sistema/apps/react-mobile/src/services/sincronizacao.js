@@ -88,6 +88,7 @@ export function criarSincronizador({ api, armazenamento, username, agora = () =>
       estado.xp = perfil.xp;
       estado.moedas = perfil.moedas;
       estado.nivel = Math.max(estado.nivel, perfil.nivel);
+      estado.diagnostico = perfil.diagnostico ?? null;
 
       const progresso = await api.progresso();
       for (const p of progresso) {
@@ -100,7 +101,7 @@ export function criarSincronizador({ api, armazenamento, username, agora = () =>
       }
       // Continuar de outro aparelho: as fases liberadas também vêm do servidor (o app não tem os testes).
       const doServidor = fasesLiberadasNoServidor({ nivel: estado.nivel, progresso,
-        fasesConcluidas: perfil.fasesConcluidas ?? [], pularTestes: true });
+        diagnostico: estado.diagnostico, fasesConcluidas: perfil.fasesConcluidas ?? [], pularTestes: true });
       estado.liberadas = preservarFasesLiberadas([...estado.liberadas, ...doServidor]);
       await salvar();
       return estado;

@@ -523,3 +523,24 @@ END;
 COMMIT;
 GO
 
+BEGIN TRANSACTION;
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [migration_id] = N'20261026180024_DiagnosticoPorModulo'
+)
+BEGIN
+    ALTER TABLE [usuarios] ADD [diagnostico_json] nvarchar(max) NULL;
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [migration_id] = N'20261026180024_DiagnosticoPorModulo'
+)
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([migration_id], [product_version])
+    VALUES (N'20261026180024_DiagnosticoPorModulo', N'10.0.12');
+END;
+
+COMMIT;
+GO
+

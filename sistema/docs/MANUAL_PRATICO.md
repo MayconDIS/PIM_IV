@@ -14,7 +14,16 @@ respostas; ele não prevê exatamente quando uma pessoa esquecerá um conteúdo.
 ## 🚀 2. Acesso à Plataforma
 1. Na primeira visita aparece uma tela de abertura com o carregamento dos módulos.
 2. Na tela de entrada, crie uma conta (**Criar conta**) ou entre com seu nickname ou e-mail e senha (**Entrar**). Cadastro e login precisam da API disponível.
-3. No primeiro acesso, o **teste de nivelamento** (10 perguntas) define por qual fase você começa. Depois disso você vai para o painel.
+3. No primeiro acesso, o **diagnóstico** apresenta 20 perguntas, cinco de cada módulo do curso. Selecione uma alternativa e confirme, ou escolha **Não sei**. Ao terminar, veja o resultado por módulo e a sugestão de onde começar.
+
+### Refazer Diagnóstico
+Abra o menu (☰) e escolha **Refazer Diagnóstico**. Cada avaliação seleciona 20 perguntas de um banco de 34, com uma pergunta por disciplina da trilha dos quatro módulos. A seleção muda, então nem todas as disciplinas aparecem na mesma avaliação.
+
+Quatro acertos em cinco indicam domínio dos temas avaliados naquele módulo. O primeiro módulo abaixo desse resultado é a recomendação de revisão; se os quatro atingirem o mínimo, a sugestão é seguir ao preparatório ENADE, no Mod_05. O resultado é uma orientação inicial, não uma nota oficial nem uma conclusão de disciplina.
+
+O diagnóstico libera o caminho até a primeira fase recomendada e mantém acessos já conquistados. Ele **não dá XP, moedas, rank, bônus ou certificado** e não apaga revisões. Refazer com menos acertos apenas muda a recomendação; não bloqueia fases antigas. As explicações ajudam a revisar as respostas.
+
+Quando há conexão, a API confere e salva o resultado na conta para recuperar em outro aparelho. Se o envio falhar, a tela informa que o resultado está pendente e tenta novamente ao abrir o painel. O aplicativo Expo recebe os acessos sincronizados; o questionário fica no site, no computador e no navegador do celular.
 
 ### No celular
 O site se adapta à tela do celular (abaixo de 800px de largura):

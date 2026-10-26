@@ -10,6 +10,7 @@ export function useProgresso(userKey) {
   const [xp, setXp] = useState(() => Number.parseInt(localStorage.getItem(`${userKey}xp`), 10) || 0);
   const [moedas, setMoedas] = useState(() => Number.parseInt(localStorage.getItem(`${userKey}coins`), 10) || 0);
   const [rank, setRank] = useState(() => localStorage.getItem(`${userKey}rank`) || 'Rank: Pendente');
+  const [diagnostico, setDiagnostico] = useState(() => leJson(`${userKey}diagnostico`, null));
   const [srsData, setSrsData] = useState(() => leJson(`${userKey}srs`, {}));
   const [decks, setDecks] = useState(() => carregarDecks(`${userKey}decks`));
   const [fasesDesbloqueadas, setFasesDesbloqueadas] = useState(() =>
@@ -56,7 +57,7 @@ export function useProgresso(userKey) {
   const liberarFase = (id) => setFasesDesbloqueadas((atual) => (atual.includes(id) ? atual : [...atual, id]));
 
   return {
-    xp, moedas, rank, srsData, decks, fasesDesbloqueadas, bonusDesbloqueados, certificadoLiberado, avatar, apiOnline, apiOnlineRef,
+    xp, moedas, rank, diagnostico, setDiagnostico, srsData, decks, fasesDesbloqueadas, bonusDesbloqueados, certificadoLiberado, avatar, apiOnline, apiOnlineRef,
     setXp, setMoedas, definirRank, setSrsData, setDecks, setFasesDesbloqueadas, setBonusDesbloqueados,
     setCertificadoLiberado, trocarAvatar, definirApiOnline, faseLiberada, liberarFase,
   };

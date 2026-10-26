@@ -1,5 +1,6 @@
-import { ApiService, resultadoDoDiagnostico } from '@nexti/shared';
+import { ApiService } from '@nexti/shared';
 import { confete, som } from './apoio.js';
+import { concluirDiagnosticoLocal, reenviarDiagnostico } from '../../lib/diagnosticoLocal';
 
 /** Ações fora da fase aberta: loja de bônus, certificado, nivelamento, criar carta, apagar dados e sair. */
 export function useAcoesDoAluno({ nomeUsuario, userKey, progresso, ui, sessao }) {
@@ -52,20 +53,29 @@ export function useAcoesDoAluno({ nomeUsuario, userKey, progresso, ui, sessao })
     abrirModal('modalCertificado');
   };
 
-  const concluirDiagnostico = (acertos) => {
-    const resultado = resultadoDoDiagnostico(acertos);
-    localStorage.setItem(`${userKey}nivelado`, 'true');
-    // Soma ao que já estava liberado: refazer o nivelamento não tranca fases já abertas.
-    progresso.setFasesDesbloqueadas((atual) => [...new Set([...atual, ...resultado.fases])]);
-    progresso.definirRank(resultado.rotuloRank);
-
-    if (progresso.apiOnlineRef.current) {
-      ApiService.updateUserStats(progresso.xp, progresso.moedas, resultado.nivel).catch(() => {});
-    }
-
+  const aplicarDiagnostico = (resultado) => {
+    try { localStorage.setItem(`${userKey}nivelado`, 'true'); } catch { /* o resultado continua nesta sessão */ }
+    progresso.setDiagnostico(resultado);
+    progresso.setFasesDesbloqueadas(atual => [...new Set([...atual, ...resultado.fasesLiberadas])]);
+    return resultado;
+  };
+  const concluirDiagnostico = async (respostas) => {
+    const resultado = await concluirDiagnosticoLocal({ userKey, respostas,
+      anteriores: progresso.fasesDesbloqueadas, online: progresso.apiOnlineRef.current,
+      temConta: Boolean(localStorage.getItem('quest_jwt_token')) });
+    aplicarDiagnostico(resultado);
     som('playLevelUp');
     confete('burst', 60);
     return resultado;
+  };
+
+  const sincronizarDiagnostico = async (emMemoria) => {
+    const resultado = emMemoria?.sincronizacao === 'sessao'
+      ? await concluirDiagnosticoLocal({ userKey,
+        respostas: emMemoria.revisoes.map(r => ({ perguntaId: r.perguntaId, alternativa: r.respondida })),
+        anteriores: progresso.fasesDesbloqueadas, online: true, temConta: Boolean(localStorage.getItem('quest_jwt_token')) })
+      : await reenviarDiagnostico(userKey);
+    return resultado ? aplicarDiagnostico(resultado) : progresso.diagnostico;
   };
 
   const criarCarta = ({ faseId, frente, verso, dica }) => {
@@ -100,7 +110,7 @@ export function useAcoesDoAluno({ nomeUsuario, userKey, progresso, ui, sessao })
     );
     if (!ok) return;
     ['xp', 'coins', 'nivelado', 'desbloqueadas', 'bonus_unlocked', 'decks', 'rank', 'srs', 'map_state',
-      'avatar_custom', 'certificado_unlocked', 'active_state']
+      'avatar_custom', 'certificado_unlocked', 'active_state', 'diagnostico', 'diagnostico_pendente', 'diagnostico_rascunho']
       .forEach((sufixo) => localStorage.removeItem(userKey + sufixo));
     window.location.reload();
   };
@@ -112,5 +122,5 @@ export function useAcoesDoAluno({ nomeUsuario, userKey, progresso, ui, sessao })
     window.location.reload();
   };
 
-  return { abrirBonus, abrirCertificado, concluirDiagnostico, criarCarta, resetarProgresso, deslogar };
+  return { abrirBonus, abrirCertificado, concluirDiagnostico, sincronizarDiagnostico, criarCarta, resetarProgresso, deslogar };
 }

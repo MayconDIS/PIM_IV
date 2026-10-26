@@ -1,0 +1,34 @@
+.modal-nivelamento { width: min(760px, 96vw); }
+.diagnostico-corpo { color: #d4e0e8; line-height: 1.6; overflow-wrap: anywhere; }
+.diagnostico-corpo h3 { color: var(--nexti-cyan); margin: 0 0 16px; }
+.diagnostico-corpo p { margin: 12px 0; }
+.diagnostico-corpo ul { padding-left: 22px; margin: 16px 0; }
+.diagnostico-corpo progress { display: block; width: 100%; height: 10px; margin: 12px 0 20px; accent-color: var(--nexti-cyan); }
+.diagnostico-pergunta { border: 0; padding: 0; margin: 20px 0; min-width: 0; }
+.diagnostico-pergunta legend { color: #fff; font-size: 1.1rem; font-weight: 600; margin-bottom: 16px; width: 100%; }
+.diagnostico-alternativa { display: flex; align-items: flex-start; gap: 12px; border: 1px solid #34535d; padding: 14px; border-radius: 10px; margin: 10px 0; cursor: pointer; background: #101c24; }
+.diagnostico-alternativa input { flex: 0 0 auto; margin-top: .4em; accent-color: var(--nexti-cyan); }
+.diagnostico-alternativa:has(input:checked) { background: #12333b; border-color: var(--nexti-cyan); }
+.diagnostico-alternativa:focus-within { outline: 2px solid var(--nexti-cyan); outline-offset: 2px; }
+.diagnostico-corpo .btn-action { min-height: 44px; white-space: normal; line-height: 1.4; overflow-wrap: anywhere; }
+.diagnostico-corpo .btn-action:disabled { opacity: .55; cursor: default; }
+.diagnostico-confirmar { width: 100%; }
+.diagnostico-ajuda, .diagnostico-salvamento { font-size: .85rem; color: #b7c6d2; }
+.diagnostico-recomendacao { padding: 16px; border: 1px solid var(--nexti-cyan); border-radius: 12px; background: #102329; margin: 20px 0; }
+.diagnostico-modulos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 20px 0; }
+.diagnostico-modulos section { border: 1px solid #34535d; padding: 14px; border-radius: 10px; background: #101c24; }
+.diagnostico-modulos h4 { font-size: .95rem; }
+.diagnostico-modulos progress { margin-bottom: 0; }
+.diagnostico-acoes { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+.diagnostico-acoes > button { flex: 1 1 220px; }
+.diagnostico-revisao { margin: 20px 0; }
+.diagnostico-revisao summary { padding: 12px 0; cursor: pointer; color: var(--nexti-cyan); }
+.diagnostico-revisao ol { padding-left: 22px; }
+.diagnostico-revisao li { padding: 16px 0; border-bottom: 1px solid #34535d; }
+body.high-contrast-mode :is(.diagnostico-alternativa, .diagnostico-recomendacao, .diagnostico-modulos section) { background: #000; color: #fff; border-color: #fff; }
+body.high-contrast-mode :is(.diagnostico-ajuda, .diagnostico-salvamento, .diagnostico-corpo h3, .diagnostico-revisao summary) { color: #fff; }
+@media (max-width: 600px) {
+  .diagnostico-modulos { grid-template-columns: minmax(0, 1fr); }
+  .diagnostico-acoes { flex-direction: column; }
+  .diagnostico-acoes > button { flex: auto; width: 100%; }
+}

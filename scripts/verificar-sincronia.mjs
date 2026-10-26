@@ -34,7 +34,7 @@ const checar = (nome, passou, detalhe) => (passou ? ok : falhas).push(`${nome}${
 
 // Documentos que falam do projeto: o que eles dizem tem de bater com o código.
 const DOCUMENTOS = [
-  'README.md', 'sistema/README.md', 'sistema/docs/MANUAL_TECNICO.md', 'modelagem-uml/README.md',
+  'README.md', 'sistema/README.md', 'sistema/docs/MANUAL_TECNICO.md', 'sistema/docs/MANUAL_PRATICO.md', 'modelagem-uml/README.md',
   'modelagem-uml/02_Modelagem_UML/gerador-astah/README.md', 'modelagem-uml/04_Banco_de_Dados/README.md',
   'relatorio/README.md', 'relatorio/index.html', 'sistema/docs/TESTES.md',
 ].filter(existe);
@@ -72,6 +72,21 @@ for (const { doc, m } of citacoes(/\b(\d+) fases(?:,| e) (\d+) (?:cartas|flashca
   checar(`fases e cartas em ${doc}`, Number(m[1]) === fases && Number(m[2]) === cartas,
     `diz ${m[1]} fases e ${m[2]} cartas, o conteúdo tem ${fases} e ${cartas}`);
 }
+
+// Diagnóstico: a descrição acompanha a semente que a API realmente usa.
+const diagnostico = JSON.parse(ler('sistema/apps/api/Data/Seed/diagnostico.json'));
+const modulosDiagnostico = new Set(diagnostico.perguntas.map((p) => p.modulo));
+const totalDiagnostico = modulosDiagnostico.size * diagnostico.perguntasPorModulo;
+for (const doc of ['sistema/docs/MANUAL_PRATICO.md', 'sistema/docs/MANUAL_TECNICO.md', 'relatorio/index.html']) {
+  const texto = semTags(doc);
+  checar(`quantidade do diagnóstico em ${doc}`, texto.includes(`${totalDiagnostico} perguntas`) && !/\b(?:10|dez) perguntas\b/i.test(texto),
+    `a avaliação tem ${totalDiagnostico} perguntas`);
+  checar(`banco do diagnóstico em ${doc}`, new RegExp(`(?:banco (?:canônico )?(?:de |contém )|selecionadas de )${diagnostico.perguntas.length}\\b`, 'i').test(texto),
+    `a semente tem ${diagnostico.perguntas.length} perguntas`);
+}
+checar('diagnóstico com uma pergunta por disciplina dos módulos 1 a 4',
+  diagnostico.perguntas.length === new Set(diagnostico.perguntas.map((p) => p.faseId)).size
+  && diagnostico.perguntas.length === diagnostico.modulos.filter((m) => m.numero <= 4).reduce((n, m) => n + m.fases.length, 0));
 
 // --- 2b. Nex_TI Desktop: os documentos dele batem com o próprio programa -------------------
 // O desktop carrega só as fases da trilha (fase1 a fase25), sem os bônus (SemeadorDeConteudo.cs).

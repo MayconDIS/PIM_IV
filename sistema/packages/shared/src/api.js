@@ -241,6 +241,7 @@ const ApiService = {
     // XP e moedas calculados no servidor: o site manda só o que o aluno fez.
     concluirFase: (faseId, acertos = 0, total = 0) => requisicaoAutenticada('POST', '/progresso/concluir-fase', { faseId, acertos, total }),
     comprarBonus: (bonusId) => requisicaoAutenticada('POST', `/usuarios/bonus/${encodeURIComponent(bonusId)}/comprar`),
+    salvarDiagnostico: (respostas) => requisicaoAutenticada('POST', '/diagnostico', { respostas }),
 
     // 13. Estrutura administrativa (Tutor e Admin). Erros sobem com a mensagem da API.
     getPainelAlunos: () => requisicaoAutenticada('GET', '/tutor/alunos'),

@@ -23,6 +23,14 @@ test('nível 6 libera a trilha inteira', () => {
   assert.deepEqual(fasesLiberadasNoServidor({ nivel: 6 }), [...ORDEM_FASES]);
 });
 
+test('diagnóstico atual separa acesso do rank por XP e mantém as conclusões posteriores', () => {
+  const diagnostico = { fasesLiberadas: ['fase1'] };
+  assert.deepEqual(fasesLiberadasNoServidor({ nivel: 6, diagnostico }), ['fase1']);
+  assert.deepEqual(fasesLiberadasNoServidor({ nivel: 6, diagnostico, fasesConcluidas: ['fase1'] }), ['fase1', 'fase2']);
+  const ateModulo3 = ORDEM_FASES.slice(0, ORDEM_FASES.indexOf('fase11') + 1);
+  assert.deepEqual(fasesLiberadasNoServidor({ nivel: 1, diagnostico: { fasesLiberadas: ateModulo3 } }), ateModulo3);
+});
+
 test('fase com todas as cartas respondidas libera a seguinte', () => {
   assert.deepEqual(fasesLiberadasNoServidor({ progresso: respondeuTudo('fase1') }), ['fase1', 'fase2']);
 });

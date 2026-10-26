@@ -10,25 +10,39 @@ As medições de cobertura, carga e usabilidade anteriores permanecem identifica
 
 | Suíte | Casos | Comando (na pasta `sistema/`) |
 | :--- | ---: | :--- |
-| API: unitários e integração | 200 | `npm test` |
+| API: unitários e integração | 220 | `npm test` |
 | API: **caixa preta** (regras de negócio pelas rotas) | 24 | idem (`CaixaPreta/`) |
 | API: **caixa branca** (caminhos do código) | 20 | idem (`CaixaBranca/`) |
 | API: concorrência (achado da carga) | 2 | idem (`Carga/`) |
-| **API, total** | **246** | `npm test` (4 deles só com `NEXTI_TEST_LOCALDB=1`) |
-| Pacote compartilhado (inclui **carga** e assistente local) | 98 | `npm run test:shared` |
-| App de celular | 17 | `npm run test:mobile` |
+| **API, total** | **266** | `npm test` (5 deles só com `NEXTI_TEST_LOCALDB=1`) |
+| Pacote compartilhado (inclui **carga** e assistente local) | 116 | `npm run test:shared` |
+| App de celular | 18 | `npm run test:mobile` |
 | Nex_TI Desktop | 30 | `npm run test:desktop` |
-| **Total automatizado** | **391** | |
+| **Total automatizado** | **430** | |
 | **Carga da API** (requisições reais) | 6 cenários | `node tests/carga/carga-api.mjs` com a API no ar |
 | **Auditoria do código** (código morto, ARIA, depuração) | 5 checagens | `node scripts/auditoria-codigo.mjs` |
 | **Usabilidade** (7 tarefas, computador e celular, e 5 do menu no celular) | 19 execuções | roteiro na seção 6 |
 
-Na execução de 26/10/2026, foram **387 casos aprovados, quatro ignorados e nenhuma
-falha**: API 242 aprovados e quatro testes opcionais de LocalDB ignorados, pacote
-compartilhado 98, Mobile 17 e desktop 30. O build Web passou; a verificação da
+Na execução de 26/10/2026, foram **425 casos aprovados, cinco ignorados e nenhuma
+falha**: API 261 aprovados e cinco testes opcionais de LocalDB ignorados, pacote
+compartilhado 116, Mobile 18 e desktop 30. O build Web passou; a verificação da
 interface em 390 px e 1440 px passou. A auditoria registrou zero problemas e
 12 avisos de tamanho de arquivo. As medições anteriores de carga não foram refeitas
 para esta ampliação.
+
+### Diagnóstico dos quatro módulos
+
+A avaliação seleciona 20 perguntas (cinco por módulo) de um banco canônico de 34.
+Os testes conferem cobertura das disciplinas, IDs e alternativas válidos, ausência
+de repetições, limites do corte de quatro acertos, todas certas, todas erradas e
+base fraca que não pode ser compensada por acertos avançados. API e JavaScript
+usam a mesma semente. Também se verifica que refazer não reduz acessos, XP ou rank,
+não paga recompensas e que o resultado acompanha o perfil e a exportação da conta.
+
+Na interface, conferir seleção e confirmação, **Não sei**, cancelamento, repetição,
+resultado por módulo, revisão das respostas e indicação de envio pendente. Repetir
+em tela de celular, com texto ampliado e após recarregar. O Expo deve recuperar os
+acessos do diagnóstico pelo perfil; o desktop não oferece esse questionário.
 
 ### Conteúdo acadêmico e continuidade
 

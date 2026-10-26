@@ -33,7 +33,7 @@ export const ORIENTACOES_ASSISTENTE = [
   {
     titulo: 'Trilha e diagnóstico',
     perguntas: ['Como desbloquear fases?', 'Como refazer diagnóstico?', 'Como funciona o nivelamento?', 'Por onde começar?', 'Como liberar módulos?'],
-    texto: 'O diagnóstico inicial tem 10 perguntas e define o ponto de partida. Depois, concluir etapas libera a próxima na trilha. Para repetir o diagnóstico, abra o menu e escolha Refazer Diagnóstico. Uma fase liberada ainda não significa que todas as suas cartas foram estudadas. Fases bônus são compradas com moedas.',
+    texto: 'O diagnóstico tem 20 perguntas, cinco por módulo, sorteadas de um banco de 34 disciplinas dos quatro módulos. Quatro acertos em cinco indicam boa base naquele módulo. O resultado recomenda o primeiro módulo que precisa de revisão; se todos estiverem bem, recomenda Mod_05, o preparatório ENADE. No menu, Refazer Diagnóstico também permite continuar respostas salvas e ver o último resultado. Refazer preserva XP, moedas, rank, revisões e fases já liberadas. O resultado é salvo na conta; sem conexão, o envio fica pendente neste navegador. O diagnóstico não conclui disciplinas, não aprova testes nem concede bônus ou certificado.',
   },
   {
     titulo: 'Minhas Estatísticas',
