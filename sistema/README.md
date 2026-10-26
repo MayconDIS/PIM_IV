@@ -42,7 +42,7 @@ As três disciplinas complementares que já existiam no módulo 2 permanecem na 
 | Mapa Neural | ✅ | Só no navegador |
 | Certificado | ✅ | Gerado no navegador e impresso como PDF |
 | App de celular | ✅ | Login, fases e estudo pela API; sem internet, as respostas esperam numa fila no aparelho |
-| Perfis e painel do Tutor/Admin | ✅ | Perfil no banco e no JWT; Tutor vê os alunos e edita/exclui cartas; Admin também define perfis e acessa todos os módulos e disciplinas sem diagnóstico, pré-requisitos ou compra de bônus |
+| Perfis e painel do Tutor/Admin | ✅ | Perfil no banco e no JWT; Tutor vê os alunos e edita/exclui cartas; Admin também define perfis; ambos acessam os módulos e disciplinas sem diagnóstico, pré-requisitos ou compra de bônus |
 
 Cadastro e login exigem a API. Com uma sessão já salva no navegador, o painel
 pode usar as cartas locais de `packages/shared` quando a API está indisponível.

@@ -40,7 +40,7 @@ interface, não da classe.
 | `GET /api/usuarios/{username}` | Perfil de acesso, XP, moedas, nível, `fasesConcluidas` e `diagnostico` (resultado salvo ou `null`) | Sim, só o dono |
 | `GET /api/usuarios/{username}/stats-detalhadas` | Números do SM-2 do aluno | Sim, só o dono |
 | `POST /api/progresso/concluir-fase` | Conclui uma fase: a API paga XP e moedas pela tabela de recompensas só na primeira conclusão (grava em `fases_concluidas`) e devolve o prêmio pago e os totais | Sim |
-| `POST /api/usuarios/bonus/{id}/comprar` | Compra um bônus: confere e desconta o saldo de Aluno/Tutor; Admin mantém o saldo | Sim |
+| `POST /api/usuarios/bonus/{id}/comprar` | Compra um bônus: confere e desconta o saldo de Aluno; Admin e Tutor mantêm o saldo | Sim |
 | `PUT /api/usuarios/stats` | Grava XP, moedas e nível como reserva quando a rota de concluir fase falha | Sim |
 | `POST /api/diagnostico` | Valida as 20 respostas, calcula a recomendação por módulo e salva o diagnóstico e os acessos preservados | Sim, só o titular |
 | `GET /api/fases` · `GET /api/fases/{codigo}/flashcards` | Fases e cartas | Não |
@@ -158,8 +158,8 @@ para cada caso de uso, MER, DER (modelo lógico) e modelo físico. As imagens es
 | Fases liberadas, bônus comprados, Mapa Neural | Estado local no navegador (`localStorage`); conclusões da API também participam da liberação |
 | Conversa do Nexor, assistente do Nex_TI | Só na memória da tela; não vai para o servidor nem para `localStorage` |
 
-Para Aluno e Tutor, a compra de bônus usa a API para conferir e descontar o saldo.
-O Admin acessa os bônus sem compra; se chamar a rota de compra, a API devolve o saldo sem desconto. A conclusão de fase
+Para Aluno, a compra de bônus usa a API para conferir e descontar o saldo.
+Admin e Tutor acessam os bônus sem compra; se chamarem a rota de compra, a API devolve o saldo sem desconto. A conclusão de fase
 paga o prêmio no servidor uma única vez. O Web não tem fila de reenvio de respostas
 que falham; o Expo mantém essa fila. A rota de atualização de totais permanece como
 reserva para falhas na conclusão de fase. O diagnóstico usa sua própria rota e não altera os totais.
@@ -207,18 +207,19 @@ O Web mantém o envio pendente quando não consegue salvar e tenta reenviá-lo a
 painel. O Expo usa o diagnóstico devolvido no perfil para reconstruir os acessos; não
 possui tela de questionário. O desktop continua independente, com avanço por estudo.
 
-### 6.3 Acesso direto do Administrador
+### 6.3 Acesso direto do Administrador e do Tutor
 
-O perfil `Admin` tem acesso a todos os módulos e disciplinas no site e no Expo,
+Os perfis `Admin` e `Tutor` têm acesso a todos os módulos e disciplinas no site e no Expo,
 sem realizar diagnóstico, concluir etapas anteriores ou gastar moedas. Os testes de
 módulo, simulados e bônus do site também ficam disponíveis. A interface usa o perfil retornado
 pela API e aplica essa permissão na consulta do acesso, sem gravá-la como fases
-conquistadas ou bônus comprados. Ao deixar de ser Admin, voltam a valer os acessos
+conquistadas ou bônus comprados. Ao voltar ao perfil Aluno, voltam a valer os acessos
 obtidos pelo estudo e pelo diagnóstico.
 
 A permissão não cria respostas, conclusões, XP, moedas, nível ou certificado. Estudar e
 concluir uma fase continua seguindo as regras de revisão e recompensa. O diagnóstico
-permanece opcional para orientar o Admin; os perfis Aluno e Tutor mantêm a trilha normal.
+permanece opcional para orientar Admin e Tutor; o Aluno mantém a trilha normal.
+A gestão dos perfis de usuários continua exclusiva do Admin.
 O Expo continua sem a tela de diagnóstico nem os testes de módulo do site.
 
 ## 7. Segurança

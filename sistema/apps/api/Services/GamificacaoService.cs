@@ -132,8 +132,8 @@ namespace NexTI_API.Services
 
             var usuario = await _db.Usuarios.FindAsync(usuarioId);
             if (usuario == null) return Resultado<Usuario>.Erro(TipoFalha.NaoEncontrado, "Usuário não encontrado");
-            // O Admin consulta todo o conteúdo sem comprar acesso nem modificar seu saldo.
-            if (usuario.Perfil == Perfis.Admin) return Resultado<Usuario>.Ok(usuario);
+            // Admin e Tutor consultam todo o conteúdo sem comprar acesso nem modificar o saldo.
+            if (usuario.Perfil is Perfis.Admin or Perfis.Tutor) return Resultado<Usuario>.Ok(usuario);
             if (usuario.Moedas < bonus.Custo)
                 return Resultado<Usuario>.Erro(TipoFalha.Invalido, $"Saldo insuficiente: o bônus custa {bonus.Custo} moedas.");
 

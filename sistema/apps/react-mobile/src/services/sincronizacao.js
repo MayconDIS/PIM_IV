@@ -56,7 +56,7 @@ export function criarSincronizador({ api, armazenamento, username, perfil, novoL
       return estado;
     },
 
-    // Acesso do Admin não entra em estado.liberadas: retirar o perfil restaura os bloqueios.
+    // Acesso de Admin/Tutor não entra em estado.liberadas: voltar a Aluno restaura os bloqueios.
     get fasesDisponiveis() {
       return fasesDisponiveis(estado.liberadas, estado.perfil);
     },

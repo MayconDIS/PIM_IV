@@ -56,7 +56,7 @@ ou slide consultado. O menu **Trilha** organiza essa consulta por módulo (Módu
 
 O **Refazer Diagnóstico** avalia os quatro módulos com 20 perguntas e recomenda
 por onde continuar. O resultado fica na conta e preserva o progresso anterior;
-o diagnóstico não concede XP, moedas ou conclusão de disciplinas. O perfil Admin acessa
+o diagnóstico não concede XP, moedas ou conclusão de disciplinas. Os perfis Admin e Tutor acessam
 todos os módulos e disciplinas diretamente no site e no app, sem diagnóstico
 ou pré-requisitos, além dos bônus do site; esse acesso não cria progresso nem recompensas.
 

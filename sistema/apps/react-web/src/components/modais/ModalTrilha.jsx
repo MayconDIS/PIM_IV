@@ -24,7 +24,7 @@ function Disciplina({ fase, concluida, liberada, estudar }) {
 }
 
 function Percurso() {
-  const { decks, srsData, fasesDesbloqueadas, acessoCompleto, faseAtiva, carregarAula, fecharModal } = useEstudo();
+  const { decks, srsData, fasesDesbloqueadas, perfil, acessoCompleto, faseAtiva, carregarAula, fecharModal } = useEstudo();
   const concluidas = new Set(fasesConcluidas(decks, srsData));
   const [selecionado, setSelecionado] = useState(() =>
     MODULOS_CURSO.find(modulo => modulo.fases.some(fase => fasesDesbloqueadas.includes(fase.id) && !concluidas.has(fase.id)))?.numero ?? 1);
@@ -38,7 +38,7 @@ function Percurso() {
   return (
     <div className="modal-body trilha-corpo">
       <p className="trilha-introducao">{acessoCompleto
-        ? 'Como Admin, você tem acesso a todos os módulos e disciplinas, sem diagnóstico ou desbloqueio. As estatísticas mostram somente o que você estudou.'
+        ? `Como ${perfil}, você tem acesso a todos os módulos e disciplinas, sem diagnóstico ou desbloqueio. As estatísticas mostram somente o que você estudou.`
         : 'Seu caminho pelos quatro módulos de ADS. Revise os resumos e estude as disciplinas para avançar. As fases e os testes liberam as próximas etapas.'}</p>
       <div className="trilha-modulos" role="group" aria-label="Escolher módulo">
         {MODULOS_CURSO.map(item => (
