@@ -138,7 +138,7 @@ public class GerarDiagramasPimIV {
             {"Realizar Teste de Nivelamento", "Aluno", "300", "450", ""},
             {"Visualizar Painel de Desempenho", "Aluno", "300", "525", ""},
             {"Criar Flashcards", "Aluno", "300", "600", ""},
-            {"Consultar Assistente Local", "Aluno", "300", "665", ""},
+            {"Consultar Nexor", "Aluno", "300", "665", ""},
             {"Acompanhar Desempenho dos Usuários", "Tutor", "300", "750", ""},
             {"Gerenciar Conteúdo das Cartas", "Tutor", "300", "805", ""},
             {"Gerenciar Perfis e Acessos", "Administrador", "300", "875", ""},
@@ -161,7 +161,7 @@ public class GerarDiagramasPimIV {
                 ILinkPresentation ligacao = d.createLinkPresentation(modelo.createAssociation(atores.get(c[1]), caso, "", "", ""), ator, p);
                 // O novo caso fica abaixo dos outros do Aluno. A dobra antes das elipses
                 // evita que a associação atravesse Criar Flashcards.
-                if (c[0].equals("Consultar Assistente Local"))
+                if (c[0].equals("Consultar Nexor"))
                     ligacao.setPoints(new Point2D[] {ponto(ator.getRectangle().getCenterX(), ator.getRectangle().getCenterY()),
                         ponto(270, p.getRectangle().getCenterY()), ponto(p.getRectangle().getCenterX(), p.getRectangle().getCenterY())});
             }
@@ -832,7 +832,7 @@ public class GerarDiagramasPimIV {
                 {"as", "rota", "UsuarioResumo", "retorno"}, {"rota", "modal", "200 OK", "retorno"}},
             "Perfil no banco com CHECK e conferido pela API.");
 
-        detalhe(casos, "Consultar Assistente Local",
+        detalhe(casos, "Consultar Nexor",
             "O aluno consulta cartas e orientações do Nex_TI no próprio navegador, com fontes e aviso quando não há correspondência. Não usa IA generativa, API externa nem banco de conversas.",
             new String[] {"AssistenteNexTI", "assistente.js", "content.js", "orientacoesAssistente.js"},
             new String[][] {{"usa", "AssistenteNexTI", "assistente.js", "pergunta"}, {"usa", "assistente.js", "content.js", "consulta cartas"},
@@ -1346,7 +1346,7 @@ public class GerarDiagramasPimIV {
         Map.entry("Realizar Simulado ENADE", "Fazer o teste do módulo ou uma prova oficial do ENADE, com correção e justificativa."),
         Map.entry("Visualizar Painel de Desempenho", "Ver os próprios números do SM-2."),
         Map.entry("Criar Flashcards", "Criar uma carta numa fase."),
-        Map.entry("Consultar Assistente Local", "O aluno pergunta sobre os estudos e o uso da plataforma no site, tanto no computador quanto no celular. A busca consulta apenas cartas canônicas e orientações do Nex_TI, mostra as fontes e avisa quando não encontra correspondência. Pergunta limitada a 400 caracteres; conversa somente em memória. Não usa IA generativa, serviço externo, dados pessoais nem rotas novas da API."),
+        Map.entry("Consultar Nexor", "O aluno pergunta sobre os estudos e o uso da plataforma no site, tanto no computador quanto no celular. A busca consulta apenas cartas canônicas e orientações do Nex_TI, mostra as fontes e avisa quando não encontra correspondência. Pergunta limitada a 400 caracteres; conversa somente em memória. Não usa IA generativa, serviço externo, dados pessoais nem rotas novas da API."),
         Map.entry("Acompanhar Desempenho dos Usuários", "O Tutor vê o XP e o SM-2 de cada aluno."),
         Map.entry("Gerenciar Conteúdo das Cartas", "O Tutor edita ou exclui cartas."),
         Map.entry("Gerenciar Perfis e Acessos", "O Administrador define o perfil de cada usuário."),
