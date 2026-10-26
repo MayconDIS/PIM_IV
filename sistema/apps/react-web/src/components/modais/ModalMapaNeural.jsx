@@ -51,20 +51,20 @@ function Teia() {
       <div className="neural-canvas" ref={canvasRef} />
       <div className={`a11y-widget map-a11y-widget${controlesAbertos ? ' open' : ''}`}>
         <button className="a11y-toggle flex-align-center" onClick={() => setControlesAbertos((v) => !v)} title="Controles da Câmera">
-          <span className="material-symbols-outlined large-icon">settings_overscan</span>
+          <span className="material-symbols-outlined large-icon" aria-hidden="true">settings_overscan</span>
         </button>
         <div className="a11y-options">
           <button className="btn-action tech-font flex-align-center" title="Afastar (Zoom Out)" onClick={() => mapaRef.current?.afastar()}>
-            <span className="material-symbols-outlined">zoom_out</span>
+            <span className="material-symbols-outlined" aria-hidden="true">zoom_out</span>
           </button>
           <button className="btn-action tech-font flex-align-center" title="Aproximar (Zoom In)" onClick={() => mapaRef.current?.aproximar()}>
-            <span className="material-symbols-outlined">zoom_in</span>
+            <span className="material-symbols-outlined" aria-hidden="true">zoom_in</span>
           </button>
           <button className="btn-action tech-font flex-align-center" title="Centralizar Câmera" onClick={() => mapaRef.current?.centralizar()}>
-            <span className="material-symbols-outlined">filter_center_focus</span>
+            <span className="material-symbols-outlined" aria-hidden="true">filter_center_focus</span>
           </button>
           <button className="btn-action tech-font flex-align-center" title="Alternar Alto Contraste" onClick={alternarAltoContraste}>
-            <span className="material-symbols-outlined">contrast</span>
+            <span className="material-symbols-outlined" aria-hidden="true">contrast</span>
           </button>
         </div>
       </div>

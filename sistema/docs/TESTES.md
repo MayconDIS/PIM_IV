@@ -14,13 +14,13 @@ um encontrou. Medido em **25/10/2026**, no Windows 11 com .NET 10 e Node 24.
 | API: **caixa branca** (caminhos do código) | 20 | idem (`CaixaBranca/`) |
 | API: concorrência (achado da carga) | 2 | idem (`Carga/`) |
 | **API, total** | **231** | `npm test` (4 deles só com `NEXTI_TEST_LOCALDB=1`) |
-| Pacote compartilhado (inclui **carga**) | 72 | `npm run test:shared` |
+| Pacote compartilhado (inclui **carga**) | 77 | `npm run test:shared` |
 | App de celular | 16 | `npm run test:mobile` |
 | Nex_TI Desktop | 28 | `npm run test:desktop` |
-| **Total automatizado** | **347** | |
+| **Total automatizado** | **352** | |
 | **Carga da API** (requisições reais) | 6 cenários | `node tests/carga/carga-api.mjs` com a API no ar |
 | **Auditoria do código** (código morto, ARIA, depuração) | 5 checagens | `node scripts/auditoria-codigo.mjs` |
-| **Usabilidade** (7 tarefas, computador e celular) | 14 execuções | roteiro na seção 6 |
+| **Usabilidade** (7 tarefas, computador e celular, e 5 do menu no celular) | 19 execuções | roteiro na seção 6 |
 
 ### Cobertura do código de produção
 
@@ -47,6 +47,10 @@ o banco por um em memória.
 Já existia: SM-2, tabela de recompensas, política de senha, serviços com banco em memória, CORS,
 sessão. Os três SM-2 (site/app, API e desktop) passam pelos **mesmos 12 casos**
 (`packages/shared/tests/sm2-casos.json`), então não podem divergir.
+
+Depois do teste de usabilidade do menu (seção 6), entrou `fasesConcluidas`
+(`packages/shared/tests/fases-concluidas.test.js`): fase concluída é a que tem todas as cartas
+respondidas, a mesma regra do servidor; fase só liberada pelo diagnóstico não conta.
 
 **Não responde:** se as peças funcionam juntas, nem se a rota certa chama a função certa.
 
@@ -174,6 +178,24 @@ Roteiro executado pela interface (formulário, botões e busca, sem atalhos inte
 | T5 Ver as estatísticas | ✅ | ✅ |
 | T6 Criar uma carta | ✅ | ✅ |
 | T7 Ligar o alto contraste | ✅ | ✅ |
+
+No celular, cada item do menu do cabeçalho (☰) também foi aberto, conferindo que a informação bate
+com o que o aluno fez, que o título da janela não cobre o conteúdo e que a barra do rodapé some
+enquanto a janela aberta pelo menu está na tela:
+
+| Tarefa (celular, depois de responder 3 cartas da fase 1) | Resultado |
+| :--- | :---: |
+| M1 Minhas Estatísticas: todos os módulos em 0% (0/5), pois nenhuma fase foi concluída | ✅ |
+| M2 Mapa Neural: o botão da câmera fica abaixo do título | ✅ |
+| M3 Minha conta: mostra o usuário certo | ✅ |
+| M4 Refazer Diagnóstico: abre o teste | ✅ |
+| M5 Ao fechar a janela, a barra do rodapé volta | ✅ |
+
+Na primeira rodada, M1 e M2 falharam. As estatísticas contavam as fases **liberadas** como
+concluídas (depois do diagnóstico, o Mod 01 e o Mod 02 apareciam em 100% com 5 XP), e o título de
+todas as janelas cobria o começo do conteúdo (a regra do cabeçalho fixo da página pegava também o
+`<header>` das janelas). Os dois foram corrigidos, e os ícones passaram a ter `aria-hidden` para o
+leitor de tela não ler o nome deles ("arrow_back Voltar ao App").
 
 Erros no console: nenhum. A avaliação pelas 10 heurísticas de Nielsen está em
 [`AUDITORIA.md`](AUDITORIA.md#heuristicas-de-nielsen).

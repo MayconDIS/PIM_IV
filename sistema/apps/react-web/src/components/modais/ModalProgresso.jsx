@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { MODULOS } from '@nexti/shared';
+import { MODULOS, fasesConcluidas } from '@nexti/shared';
 import { useEstudo } from '../../context/EstudoContext';
 import { baixarArquivo } from '../../lib/arquivos';
 import { Modal } from '../ui/Modal';
@@ -45,6 +45,12 @@ export function ModalProgresso() {
   if (!aberto) return null;
 
   const m = calcularMetricas(srsData, decks);
+  // Concluída é a fase com todas as cartas respondidas; liberada (pelo diagnóstico, por exemplo) não conta.
+  const concluidas = fasesConcluidas(decks, srsData);
+  const progressoDoModulo = (modulo) => {
+    const feitas = modulo.fases.filter((f) => concluidas.includes(f.id)).length;
+    return { feitas, pct: Math.round((feitas / modulo.fases.length) * 100) };
+  };
 
   const exportarJson = () => {
     const backup = {
@@ -148,9 +154,8 @@ export function ModalProgresso() {
       '',
       'PROGRESSO DOS MÓDULOS',
       ...MODULOS.map((modulo) => {
-        const liberadas = modulo.fases.filter((f) => fasesDesbloqueadas.includes(f.id)).length;
-        const pct = Math.round((liberadas / modulo.fases.length) * 100);
-        return `  ${modulo.nome.padEnd(32, '.')} ${String(pct).padStart(3)}% (${liberadas}/${modulo.fases.length})`;
+        const { feitas, pct } = progressoDoModulo(modulo);
+        return `  ${modulo.nome.padEnd(32, '.')} ${String(pct).padStart(3)}% (${feitas}/${modulo.fases.length} fases concluídas)`;
       }),
       '',
       linha,
@@ -190,7 +195,7 @@ export function ModalProgresso() {
 
   const secao = (icone, titulo) => (
     <div className="stats-section-title tech-font">
-      <span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }}>{icone}</span>
+      <span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }} aria-hidden="true">{icone}</span>
       {titulo}
     </div>
   );
@@ -217,13 +222,12 @@ export function ModalProgresso() {
           {secao('account_tree', 'Progresso das Trilhas e Módulos')}
           <div className="module-progress-list">
             {MODULOS.map((modulo) => {
-              const concluidas = modulo.fases.filter((f) => fasesDesbloqueadas.includes(f.id)).length;
-              const pct = Math.round((concluidas / modulo.fases.length) * 100);
+              const { feitas, pct } = progressoDoModulo(modulo);
               return (
                 <div className="module-stat-row" key={modulo.id}>
                   <div className="module-stat-header">
                     <span>{modulo.nome}</span>
-                    <span className="tech-font">{pct}% ({concluidas}/{modulo.fases.length})</span>
+                    <span className="tech-font" aria-label={`${feitas} de ${modulo.fases.length} fases concluídas`}>{pct}% ({feitas}/{modulo.fases.length})</span>
                   </div>
                   <div className="module-stat-bar-track">
                     <div className="module-stat-bar-fill" style={{ width: `${pct}%`, backgroundColor: modulo.cor }} />
@@ -236,17 +240,17 @@ export function ModalProgresso() {
           {secao('cloud_sync', 'Gerenciamento de Dados & Backup')}
           <div className="backup-actions-grid tech-font">
             <button className="btn-backup-action" onClick={exportarJson}>
-              <span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }}>download</span> Backup .JSON
+              <span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }} aria-hidden="true">download</span> Backup .JSON
             </button>
             <button className="btn-backup-action" onClick={() => inputRef.current?.click()}>
-              <span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }}>upload</span> Restaurar .JSON
+              <span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }} aria-hidden="true">upload</span> Restaurar .JSON
             </button>
             <input ref={inputRef} type="file" accept=".json" style={{ display: 'none' }} onChange={importarJson} />
             <button className="btn-backup-action" onClick={exportarCsv}>
-              <span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }}>table_view</span> Excel (.CSV)
+              <span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }} aria-hidden="true">table_view</span> Excel (.CSV)
             </button>
             <button className="btn-backup-action" onClick={exportarTxt}>
-              <span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }}>description</span> Relatório (.TXT)
+              <span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }} aria-hidden="true">description</span> Relatório (.TXT)
             </button>
           </div>
         </div>

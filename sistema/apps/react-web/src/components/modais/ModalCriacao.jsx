@@ -79,7 +79,7 @@ function Formulario({ opcoes, faseAtiva, criarCarta, fecharModal }) {
         <input type="text" id="nova-dica" placeholder="Ex: Lembre-se da regra X" value={dica} onChange={(e) => setDica(e.target.value)} />
       </div>
       <button className="btn-action btn-right tech-font flex-align" onClick={salvar}>
-        <span className="material-symbols-outlined control-icon-spacing">save</span> Salvar_Dado()
+        <span className="material-symbols-outlined control-icon-spacing" aria-hidden="true">save</span> Salvar_Dado()
       </button>
     </div>
   );

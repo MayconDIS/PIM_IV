@@ -149,6 +149,18 @@ export function fasesLiberadasNoServidor({ nivel = 1, progresso = [], pularTeste
   return ORDEM_FASES.filter((f) => liberadas.has(f));
 }
 
+/**
+ * Fases concluídas pelo aluno, com a mesma regra do servidor: todas as cartas da fase já foram
+ * respondidas pelo menos uma vez. Fase só liberada (pelo diagnóstico ou pela anterior) não conta.
+ * `decks` é { faseId: [cartas] } e `srsData` é { frente: estado do SM-2 } (só cartas respondidas).
+ */
+export function fasesConcluidas(decks = {}, srsData = {}) {
+  return FASES
+    .filter((f) => f.totalCards > 0
+      && (decks[f.id] ?? []).filter((carta) => srsData[carta.frente]).length >= f.totalCards)
+    .map((f) => f.id);
+}
+
 /** true quando concluir esta fase libera o certificado. */
 export function liberaCertificado(faseId) {
   return faseId === 'teste-mod5';

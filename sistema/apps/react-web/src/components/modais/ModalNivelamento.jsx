@@ -60,7 +60,7 @@ function Quiz({ concluirDiagnostico, fecharModal, som }) {
           Antes de começar, responda a 10 perguntas rápidas. Assim descobrimos por qual fase você deve começar.
         </p>
         <button className="btn-action btn-right tech-font flex-align-center btn-full-width" onClick={() => setEtapa(0)}>
-          <span className="material-symbols-outlined control-icon-spacing">play_arrow</span> Começar teste
+          <span className="material-symbols-outlined control-icon-spacing" aria-hidden="true">play_arrow</span> Começar teste
         </button>
       </div>
     );

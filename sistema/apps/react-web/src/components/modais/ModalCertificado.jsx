@@ -76,10 +76,10 @@ export function ModalCertificado() {
         </div>
         <div className="certificado-actions">
           <button className="btn-action btn-gold tech-font flex-align-center" onClick={imprimir}>
-            <span className="material-symbols-outlined control-icon-spacing">picture_as_pdf</span> IMPRIMIR / SALVAR_PDF()
+            <span className="material-symbols-outlined control-icon-spacing" aria-hidden="true">picture_as_pdf</span> IMPRIMIR / SALVAR_PDF()
           </button>
           <button className="btn-action btn-right tech-font flex-align-center" onClick={fecharModal}>
-            <span className="material-symbols-outlined control-icon-spacing">close</span> FECHAR()
+            <span className="material-symbols-outlined control-icon-spacing" aria-hidden="true">close</span> FECHAR()
           </button>
         </div>
       </div>

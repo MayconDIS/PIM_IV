@@ -28,7 +28,7 @@ export function ModalAdmin() {
         <div className="admin-abas" role="tablist">
           {abas.map(([id, icone, rotulo]) => (
             <button key={id} role="tab" aria-selected={aba === id} className={`btn-backup-action${aba === id ? ' admin-aba-ativa' : ''}`} onClick={() => setAba(id)}>
-              <span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }}>{icone}</span> {rotulo}
+              <span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }} aria-hidden="true">{icone}</span> {rotulo}
             </button>
           ))}
         </div>
@@ -113,7 +113,7 @@ function Cartas({ toast, confirmar }) {
           <div className="input-group"><label htmlFor="admin-verso">Verso</label><textarea id="admin-verso" rows={3} value={editando.verso} onChange={(e) => setEditando({ ...editando, verso: e.target.value })} /></div>
           <div className="input-group"><label htmlFor="admin-dica">Dica</label><input id="admin-dica" value={editando.dica ?? ''} onChange={(e) => setEditando({ ...editando, dica: e.target.value })} /></div>
           <div className="admin-acoes">
-            <button className="btn-backup-action" onClick={salvar}><span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }}>save</span> Salvar</button>
+            <button className="btn-backup-action" onClick={salvar}><span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }} aria-hidden="true">save</span> Salvar</button>
             <button className="btn-backup-action" onClick={() => setEditando(null)}>Cancelar</button>
           </div>
         </div>
@@ -130,10 +130,10 @@ function Cartas({ toast, confirmar }) {
                 <td>{c.verso}</td>
                 <td><div className="admin-acoes">
                   <button className="btn-backup-action" title="Editar" aria-label={`Editar: ${c.frente}`} onClick={() => setEditando({ id: c.id, frente: c.frente, verso: c.verso, dica: c.dica })}>
-                    <span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }}>edit</span>
+                    <span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }} aria-hidden="true">edit</span>
                   </button>
                   <button className="btn-backup-action admin-perigo" title="Excluir" aria-label={`Excluir: ${c.frente}`} onClick={() => excluir(c)}>
-                    <span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }}>delete</span>
+                    <span className="material-symbols-outlined" style={{ fontSize: '1.1rem' }} aria-hidden="true">delete</span>
                   </button>
                 </div></td>
               </tr>
