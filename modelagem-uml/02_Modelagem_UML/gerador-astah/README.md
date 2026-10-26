@@ -1,18 +1,18 @@
 # Gerador do `Diagrams Nex_TI - PIM IV.asta`
 
 O `GerarDiagramasPimIV.java` monta, pela API do Astah, o arquivo com a modelagem do Nex_TI.
-São 37 diagramas:
+São 39 diagramas:
 
 | Diagrama | O que mostra |
 |---|---|
-| 1. Casos de Uso | Os 15 casos de uso do Nex_TI, por perfil |
+| 1. Casos de Uso | Os 16 casos de uso do Nex_TI, por perfil |
 | 2. Classes – entidades | As classes de `sistema/apps/api/Models`, com atributos, herança e multiplicidades |
 | 3. Classes – camadas da API | Endpoints → interfaces dos serviços → classes → `AppDbContext` |
 | 4. Atividade | A sessão de estudo, com raias para Aluno, site/app, API e banco |
 | 5. MER | Entidades e relacionamentos do negócio, com cardinalidade |
 | 6. DER – modelo lógico | As tabelas com colunas, PK, FK e cardinalidade, com tipos genéricos |
 | 7. Modelo físico | As mesmas tabelas com os tipos do SQL Server |
-| Casos de uso/… | Para **cada um dos 15 casos de uso**, um diagrama de classes e um de sequência, tirados do código |
+| Casos de uso/… | Para **cada um dos 16 casos de uso**, um diagrama de classes e um de sequência, tirados do código |
 
 Todo elemento de todo diagrama tem a explicação no campo **Definition**: classes, atributos,
 operações, casos de uso, atores, linhas de vida, mensagens, ações, fluxos, relações e os próprios
@@ -21,6 +21,7 @@ diagramas (todos conferidos um a um).
 Nos diagramas de classes (incluindo MER e DER) as caixas não se sobrepõem e as linhas são em
 ângulo reto (retas ou em L), escolhidas para não passar por cima de outras caixas. Em cada caso
 de uso as classes ficam em camadas, de cima para baixo: tela → API → serviço → entidade.
+No assistente local, a sequência é tela → busca no navegador → material canônico, sem API.
 
 Todos os diagramas do projeto saem daqui. As imagens principais da pasta de cima e as de
 `../../04_Banco_de_Dados` são cópias das exportadas para `../imagens-astah`. O Astah UML não tem

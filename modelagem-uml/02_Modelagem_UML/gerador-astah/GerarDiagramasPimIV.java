@@ -55,7 +55,7 @@ public class GerarDiagramasPimIV {
             IPackage pimIV = modelo.createPackage(raiz, "Nex_TI - PIM IV");
 
             pimIV.setDefinition("Modelagem do Nex_TI (PIM IV), com cada diagrama ligado ao código atual.");
-            IPackage pacoteCasos = pacote(pimIV, "Casos de uso", "Os 15 casos de uso do Nex_TI. Cada um tem um diagrama de classes e um de sequência.");
+            IPackage pacoteCasos = pacote(pimIV, "Casos de uso", "Os 16 casos de uso do Nex_TI. Cada um tem um diagrama de classes e um de sequência.");
             casosDeUso(pacoteCasos);
             entidades(pacote(pimIV, "Modelo (entidades)", "Classes de domínio da API (pasta Models), mapeadas para as tabelas do SQL Server."));
             camadas(pacote(pimIV, "API (camadas)", "Camadas da API em .NET 10: rotas, serviços (com interfaces) e dados."));
@@ -102,21 +102,21 @@ public class GerarDiagramasPimIV {
     // ------------------------------------------------------------------ casos de uso
 
     /**
-     * Os 15 casos de uso do Nex_TI, ligados aos perfis (Usuário → Aluno → Tutor → Administrador).
+     * Os 16 casos de uso do Nex_TI, ligados aos perfis (Usuário → Aluno → Tutor → Administrador).
      */
     private static void casosDeUso(IPackage pacote) throws Exception {
         UseCaseModelEditor uc = ModelEditorFactory.getUseCaseModelEditor();
         UseCaseDiagramEditor d = projeto.getDiagramEditorFactory().getUseCaseDiagramEditor();
         d.createUseCaseDiagram(pacote, "1. Casos de Uso").setDefinition("Os casos de uso do Nex_TI por perfil, cada um ligado ao código atual.");
 
-        d.createRect(new Point2D.Double(250, 20), 640, 870);
+        d.createRect(new Point2D.Double(250, 20), 640, 940);
         d.createText("Sistema Nex_TI (site, app e API)", new Point2D.Double(270, 30));
 
         Map<String, IClass> atores = new HashMap<>();
         Map<String, INodePresentation> pAtores = new HashMap<>();
         // O Aluno fica à esquerda e na altura do meio dos seus casos de uso: assim nenhuma linha
         // dele passa por cima de outro caso de uso (conferido com a geometria das elipses).
-        double[][] posicao = {{0, 150}, {0, 430}, {0, 695}, {0, 805}};
+        double[][] posicao = {{0, 150}, {0, 465}, {0, 755}, {0, 875}};
         String[] nomesAtores = {"Usuário", "Aluno", "Tutor", "Administrador"};
         for (int i = 0; i < nomesAtores.length; i++) {
             atores.put(nomesAtores[i], uc.createActor(pacote, nomesAtores[i]));
@@ -138,9 +138,10 @@ public class GerarDiagramasPimIV {
             {"Realizar Teste de Nivelamento", "Aluno", "300", "450", ""},
             {"Visualizar Painel de Desempenho", "Aluno", "300", "525", ""},
             {"Criar Flashcards", "Aluno", "300", "600", ""},
-            {"Acompanhar Desempenho dos Usuários", "Tutor", "300", "690", ""},
-            {"Gerenciar Conteúdo das Cartas", "Tutor", "300", "745", ""},
-            {"Gerenciar Perfis e Acessos", "Administrador", "300", "815", ""},
+            {"Consultar Assistente Local", "Aluno", "300", "665", ""},
+            {"Acompanhar Desempenho dos Usuários", "Tutor", "300", "750", ""},
+            {"Gerenciar Conteúdo das Cartas", "Tutor", "300", "805", ""},
+            {"Gerenciar Perfis e Acessos", "Administrador", "300", "875", ""},
             // à direita, na altura do caso base: as setas de «extend» e «include» saem quase retas
             {"Estudar sem Internet (app)", "", "620", "225", ""},
             {"Desbloquear Fases e Módulos", "", "620", "295", ""},
@@ -155,8 +156,15 @@ public class GerarDiagramasPimIV {
             INodePresentation p = d.createNodePresentation(caso, ponto(Double.parseDouble(c[2]), Double.parseDouble(c[3])));
             p.setWidth(250);
             p.setHeight(c[4].isEmpty() ? 44 : 54);
-            if (!c[1].isEmpty())
-                d.createLinkPresentation(modelo.createAssociation(atores.get(c[1]), caso, "", "", ""), pAtores.get(c[1]), p);
+            if (!c[1].isEmpty()) {
+                INodePresentation ator = pAtores.get(c[1]);
+                ILinkPresentation ligacao = d.createLinkPresentation(modelo.createAssociation(atores.get(c[1]), caso, "", "", ""), ator, p);
+                // O novo caso fica abaixo dos outros do Aluno. A dobra antes das elipses
+                // evita que a associação atravesse Criar Flashcards.
+                if (c[0].equals("Consultar Assistente Local"))
+                    ligacao.setPoints(new Point2D[] {ponto(ator.getRectangle().getCenterX(), ator.getRectangle().getCenterY()),
+                        ponto(270, p.getRectangle().getCenterY()), ponto(p.getRectangle().getCenterX(), p.getRectangle().getCenterY())});
+            }
             casos.put(c[0], caso);
             pCasos.put(c[0], p);
         }
@@ -172,7 +180,7 @@ public class GerarDiagramasPimIV {
             d.createLinkPresentation(uc.createExtend(casos.get(r[1]), casos.get(r[0]), ""), pCasos.get(r[0]), pCasos.get(r[1]));
 
         d.createNote("Cada perfil herda o anterior:\nUsuário → Aluno → Tutor → Administrador.\nA API confere o perfil gravado no banco.",
-            ponto(600, 700));
+            ponto(600, 770));
     }
 
     // ------------------------------------------------------------------ classes: entidades
@@ -460,6 +468,10 @@ public class GerarDiagramasPimIV {
             {"ModalCriacao", "Janela Criar Carta, onde o aluno cria um flashcard numa fase."},
             {"ModalConta", "Janela Minha conta: dados, troca de e-mail e senha, exportação e exclusão da conta."},
             {"Topo", "Barra superior do site, com o menu do usuário e os botões de acessibilidade."},
+            {"AssistenteNexTI", "Conversa do Assistente Nex_TI no site React, no computador e no navegador do celular. Recebe perguntas de até 400 caracteres e mostra respostas com as fontes. Mensagens ficam só na memória da tela; podem ser limpas e somem ao sair."},
+            {"assistente.js", "Busca local do Assistente Nex_TI no pacote compartilhado. Consulta as cartas canônicas de content.js e orientações do projeto, sem chamar API nem serviço externo. Retorna respostas encontradas com fontes ou informa que não encontrou correspondência suficiente. Não gera texto com inteligência artificial."},
+            {"content.js", "Material canônico de estudo do Nex_TI (packages/shared/src/content.js): cartas por fase, módulos e fases. O assistente consulta esse material incluído no site; não lê dados pessoais nem cartas particulares dos alunos."},
+            {"orientacoesAssistente.js", "Orientações locais sobre o uso do Nex_TI, com perguntas equivalentes e respostas escritas a partir das regras da plataforma. São incluídas no site e consultadas pelo assistente sem chamadas externas."},
             {"acessibilidade.js", "Zoom da fonte e modo de alto contraste, guardados no navegador."},
             {"EstudoScreen", "Tela de estudo do aplicativo (React Native com Expo)."},
             {"sincronizacao.js", "No app, envia as respostas à API e as guarda numa fila quando não há internet."},
@@ -518,6 +530,10 @@ public class GerarDiagramasPimIV {
         elemento(front, "diagnostico.js", "módulo JS", false, new String[] {"resultadoDoDiagnostico(acertos : int) : object"});
         elemento(front, "deck.js", "módulo JS", false, new String[] {"montarDeckDaFase(cards : array) : array", "montarTesteDoModulo(testeId : string) : array"});
         elemento(front, "enadeOficial.js", "módulo JS", false, new String[] {"cartasDaProva(ano : int) : array"});
+        elemento(front, "AssistenteNexTI", "React", false, new String[] {"enviar(texto : string) : void", "limpar() : void", "fechar() : void"});
+        elemento(front, "assistente.js", "módulo JS", false, new String[] {"responderPergunta(pergunta : string) : object"});
+        elemento(front, "content.js", "módulo JS", false, new String[0]);
+        elemento(front, "orientacoesAssistente.js", "módulo JS", false, new String[0]);
         for (String m : new String[] {"ModalNivelamento", "ModalProgresso", "ModalAdmin", "ModalCriacao", "ModalConta", "Topo"})
             elemento(front, m, "React", false, new String[0]);
         elemento(front, "acessibilidade.js", "módulo JS", false, new String[] {"mudarZoom(direcao : int) : void", "alternarAltoContraste() : void"});
@@ -802,6 +818,24 @@ public class GerarDiagramasPimIV {
                 {"as", "as", "não pode o próprio; perfil Aluno, Tutor ou Admin"}, {"as", "bd", "UPDATE usuarios.perfil (CHECK)"},
                 {"as", "rota", "UsuarioResumo", "retorno"}, {"rota", "modal", "200 OK", "retorno"}},
             "Perfil no banco com CHECK e conferido pela API.");
+
+        detalhe(casos, "Consultar Assistente Local",
+            "O aluno consulta cartas e orientações do Nex_TI no próprio navegador, com fontes e aviso quando não há correspondência. Não usa IA generativa, API externa nem banco de conversas.",
+            new String[] {"AssistenteNexTI", "assistente.js", "content.js", "orientacoesAssistente.js"},
+            new String[][] {{"usa", "AssistenteNexTI", "assistente.js", "pergunta"}, {"usa", "assistente.js", "content.js", "consulta cartas"},
+                {"usa", "assistente.js", "orientacoesAssistente.js", "consulta orientações"}},
+            new String[] {"a=:Aluno", "chat=:AssistenteNexTI", "busca=:assistente.js", "base=:content.js", "guia=:orientacoesAssistente.js"},
+            new String[][] {{"a", "chat", "digita a primeira pergunta"},
+                {"chat", "busca", "responderPergunta(pergunta)"},
+                {"busca", "base", "lê cartas canônicas"},
+                {"base", "busca", "cartas", "retorno"},
+                {"busca", "guia", "lê orientações locais"},
+                {"guia", "busca", "orientações", "retorno"},
+                {"busca", "busca", "monta índice local e classifica"},
+                {"busca", "chat", "texto, fontes ou aviso", "retorno"},
+                {"chat", "chat", "exibe resposta na conversa"},
+                {"a", "chat", "limpa a conversa"}},
+            "Busca no navegador, sem serviço externo. Pergunta: até 400 caracteres.\nO índice é montado só na primeira consulta; conversa somente em memória.\nNão altera progresso, XP, moedas nem dados da conta.");
 
         detalhe(casos, "Ajustar Acessibilidade",
             "O usuário aumenta a fonte, liga o alto contraste ou usa o VLibras; as escolhas ficam salvas no navegador.",
@@ -1299,6 +1333,7 @@ public class GerarDiagramasPimIV {
         Map.entry("Realizar Simulado ENADE", "Fazer o teste do módulo ou uma prova oficial do ENADE, com correção e justificativa."),
         Map.entry("Visualizar Painel de Desempenho", "Ver os próprios números do SM-2."),
         Map.entry("Criar Flashcards", "Criar uma carta numa fase."),
+        Map.entry("Consultar Assistente Local", "O aluno pergunta sobre os estudos e o uso da plataforma no site, tanto no computador quanto no celular. A busca consulta apenas cartas canônicas e orientações do Nex_TI, mostra as fontes e avisa quando não encontra correspondência. Pergunta limitada a 400 caracteres; conversa somente em memória. Não usa IA generativa, serviço externo, dados pessoais nem rotas novas da API."),
         Map.entry("Acompanhar Desempenho dos Usuários", "O Tutor vê o XP e o SM-2 de cada aluno."),
         Map.entry("Gerenciar Conteúdo das Cartas", "O Tutor edita ou exclui cartas."),
         Map.entry("Gerenciar Perfis e Acessos", "O Administrador define o perfil de cada usuário."),

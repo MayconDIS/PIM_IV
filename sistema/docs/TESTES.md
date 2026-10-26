@@ -14,15 +14,20 @@ um encontrou. Medido em **25/10/2026**, no Windows 11 com .NET 10 e Node 24.
 | API: **caixa branca** (caminhos do código) | 20 | idem (`CaixaBranca/`) |
 | API: concorrência (achado da carga) | 2 | idem (`Carga/`) |
 | **API, total** | **231** | `npm test` (4 deles só com `NEXTI_TEST_LOCALDB=1`) |
-| Pacote compartilhado (inclui **carga**) | 77 | `npm run test:shared` |
+| Pacote compartilhado (inclui **carga** e assistente local) | 84 | `npm run test:shared` |
 | App de celular | 16 | `npm run test:mobile` |
 | Nex_TI Desktop | 28 | `npm run test:desktop` |
-| **Total automatizado** | **352** | |
+| **Total automatizado** | **359** | |
 | **Carga da API** (requisições reais) | 6 cenários | `node tests/carga/carga-api.mjs` com a API no ar |
 | **Auditoria do código** (código morto, ARIA, depuração) | 5 checagens | `node scripts/auditoria-codigo.mjs` |
 | **Usabilidade** (7 tarefas, computador e celular, e 5 do menu no celular) | 19 execuções | roteiro na seção 6 |
 
 ### Cobertura do código de produção
+
+Os 7 testes do assistente local foram acrescentados em 26/10/2026: conferem fontes literais,
+variações de escrita, orientações da plataforma, assuntos fora da base, limite da pergunta,
+ausência de gabaritos isolados e independência entre consultas. Os percentuais abaixo foram
+medidos antes dessa inclusão.
 
 Só os arquivos do projeto (sem migrations e sem código gerado pelo .NET).
 
