@@ -62,6 +62,7 @@ export function EstudoProvider({ children }) {
     toasts: ui.toasts,
     dialogo: ui.dialogo,
     modal: ui.modal,
+    modalDoMenu: ui.modalDoMenu,
     audioMudo: ui.audioMudo,
     abrirModal: ui.abrirModal,
     fecharModal: ui.fecharModal,

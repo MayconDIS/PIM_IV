@@ -202,7 +202,7 @@ export function PainelEstudo({ ativo }) {
 
       {final && (
         <button className="btn-action btn-proxima tech-font flex-align-center" style={{ display: 'flex' }} onClick={concluirRotina}>
-          <span className="material-symbols-outlined control-icon-spacing">keyboard_double_arrow_right</span> Concluir fase
+          <span className="material-symbols-outlined control-icon-spacing" aria-hidden="true">keyboard_double_arrow_right</span> Concluir fase
         </button>
       )}
     </article>

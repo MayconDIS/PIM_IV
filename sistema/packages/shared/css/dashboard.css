@@ -78,7 +78,8 @@ body {
 /* =========================================
    HEADER & NAVBAR (100% FIXO)
    ========================================= */
-header {
+/* Só o cabeçalho do topo da página: as janelas também têm <header> (.modal-header) e não podem ficar fixas. */
+header[role="banner"] {
     background-color: rgba(22, 27, 34, 0.9);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
@@ -1176,7 +1177,7 @@ body.high-contrast-mode .xp-badge {
    RESPONSIVIDADE E LINHAS PONTILHADAS MOBILE
    ========================================= */
 @media (max-width: 800px) {
-    header {
+    header[role="banner"] {
         padding: 0 15px;
         height: 70px;
         flex-direction: row;
@@ -2007,6 +2008,9 @@ button.dropdown-item {
         border-top: 1px solid rgba(255, 255, 255, 0.1);
         z-index: 9000;
     }
+    /* Escondida com o menu do cabeçalho aberto e com o que ele abriu (classe posta pelo React) */
+    body:has(.dropdown-content.show) .nav-celular,
+    .nav-celular.oculta { display: none; }
     .nav-celular-item {
         flex: 1;
         min-width: 48px;

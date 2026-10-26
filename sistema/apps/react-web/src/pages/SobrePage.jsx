@@ -187,7 +187,7 @@ export default function SobrePage() {
         </div>
         <div className="header-right">
           <a href={URL_APP} className="btn-back tech-font">
-            <span className="material-symbols-outlined">arrow_back</span> Voltar ao App
+            <span className="material-symbols-outlined" aria-hidden="true">arrow_back</span> Voltar ao App
           </a>
         </div>
       </header>
@@ -202,7 +202,7 @@ export default function SobrePage() {
               </div>
               {grupo.secoes.map((s) => (
                 <a key={s.id} href={`#${s.id}`} className={`aula-item${ativa === s.id ? ' active' : ''}`}>
-                  <span className={`material-symbols-outlined icon-${grupo.cor}`}>{s.icone}</span>
+                  <span className={`material-symbols-outlined icon-${grupo.cor}`} aria-hidden="true">{s.icone}</span>
                   <span>{s.menu}</span>
                 </a>
               ))}
@@ -214,7 +214,7 @@ export default function SobrePage() {
           {SECOES.map((s) => (
             <div key={s.id} id={`content-${s.id}`} className={`content-section${ativa === s.id ? ' active' : ''}`}>
               <h1>
-                <span className={`material-symbols-outlined title-icon-${s.cor}`}>{s.icone}</span> {s.titulo}
+                <span className={`material-symbols-outlined title-icon-${s.cor}`} aria-hidden="true">{s.icone}</span> {s.titulo}
               </h1>
               {s.corpo.map((paragrafo, i) => (
                 <p key={i}>{paragrafo}</p>

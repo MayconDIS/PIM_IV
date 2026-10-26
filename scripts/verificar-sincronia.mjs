@@ -36,7 +36,7 @@ const checar = (nome, passou, detalhe) => (passou ? ok : falhas).push(`${nome}${
 const DOCUMENTOS = [
   'README.md', 'sistema/README.md', 'sistema/docs/MANUAL_TECNICO.md', 'modelagem-uml/README.md',
   'modelagem-uml/02_Modelagem_UML/gerador-astah/README.md', 'modelagem-uml/04_Banco_de_Dados/README.md',
-  'relatorio/README.md', 'relatorio/index.html',
+  'relatorio/README.md', 'relatorio/index.html', 'sistema/docs/TESTES.md',
 ].filter(existe);
 // A apresentação de P.A. em .NET é uma atividade à parte: fala só do Nex_TI Desktop e é conferida
 // com o próprio programa (seção 2b), não com os números do site e da API.
@@ -100,6 +100,15 @@ const testes = citacoes(/\b(\d+) testes(?: automáticos)? da API\b/g).map(({ doc
 const valores = [...new Set(testes.map((t) => t.n))];
 checar('testes da API iguais em todos os documentos', valores.length <= 1,
   testes.map((t) => `${t.doc}: ${t.n}`).join('; '));
+
+// --- 3b. testes do pacote compartilhado: cada test(...) dos arquivos de teste é um teste ---------
+let testesShared = 0;
+for (const f of arquivos('sistema/packages/shared/tests', (c) => c.endsWith('.test.js'))) {
+  testesShared += (ler(f).match(/^\s*test\(/gm) ?? []).length;
+}
+for (const { doc, m } of [...citacoes(/\b(\d+) (?:no|do) pacote compartilhado\b/g), ...citacoes(/Pacote compartilhado[^|]*\| (\d+) \|/g)]) {
+  checar(`testes do pacote compartilhado em ${doc}`, Number(m[1]) === testesShared, `diz ${m[1]}, os arquivos de teste têm ${testesShared}`);
+}
 
 // --- 4. diagramas: só do Astah ----------------------------------------------------------
 const ASTAH = 'modelagem-uml/02_Modelagem_UML/imagens-astah';

@@ -14,7 +14,7 @@ export function CyberDialog() {
     >
       <div className="cyber-dialog-box">
         <div className="cyber-dialog-title tech-font" id="cyber-dialog-title">
-          <span className="material-symbols-outlined text-cyan">terminal</span> {dialogo?.titulo ?? 'Confirmação'}
+          <span className="material-symbols-outlined text-cyan" aria-hidden="true">terminal</span> {dialogo?.titulo ?? 'Confirmação'}
         </div>
         <div className="cyber-dialog-desc" style={{ whiteSpace: 'pre-line' }}>
           {dialogo?.mensagem ?? 'Deseja prosseguir com esta operação?'}

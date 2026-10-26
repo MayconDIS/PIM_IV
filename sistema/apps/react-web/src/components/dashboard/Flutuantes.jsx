@@ -8,13 +8,13 @@ export function WidgetAcessibilidade() {
   return (
     <div className={`a11y-widget${aberto ? ' open' : ''}`}>
       <button className="a11y-toggle flex-align-center" onClick={() => setAberto((v) => !v)} title="Acessibilidade">
-        <span className="material-symbols-outlined large-icon">accessibility_new</span>
+        <span className="material-symbols-outlined large-icon" aria-hidden="true">accessibility_new</span>
       </button>
       <div className="a11y-options">
         <button className="btn-action tech-font flex-align-center" onClick={() => mudarZoom(-1)} title="Diminuir Texto">A-</button>
         <button className="btn-action tech-font flex-align-center" onClick={() => mudarZoom(1)} title="Aumentar Texto">A+</button>
         <button className="btn-action tech-font flex-align-center" onClick={alternarAltoContraste} title="Alternar Alto Contraste">
-          <span className="material-symbols-outlined">contrast</span>
+          <span className="material-symbols-outlined" aria-hidden="true">contrast</span>
         </button>
       </div>
     </div>
@@ -40,7 +40,7 @@ export function BotaoTopo() {
       style={{ display: rolou && !estudandoNoCelular ? 'flex' : 'none' }}
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
     >
-      <span className="material-symbols-outlined">keyboard_arrow_up</span>
+      <span className="material-symbols-outlined" aria-hidden="true">keyboard_arrow_up</span>
     </button>
   );
 }

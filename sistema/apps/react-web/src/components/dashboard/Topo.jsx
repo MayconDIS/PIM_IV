@@ -7,6 +7,9 @@ import { alternarAltoContraste, ativarComTeclado, mudarZoom } from '../../lib/ac
 import { abrirVLibras } from '../../lib/vlibras';
 import { perfilAtual, podeAdministrar } from '../modais/ModalAdmin';
 
+// Janela aberta pelo menu: no celular, a barra do rodapé some até ela fechar.
+const PELO_MENU = { peloMenu: true };
+
 /** <header> do dashboard: frase motivacional, áudio, criação de carta e menu do usuário. */
 export function Topo() {
   const {
@@ -92,15 +95,15 @@ export function Topo() {
           onClick={alternarAudio}
           title="Alternar Efeitos Sonoros"
         >
-          <span className="material-symbols-outlined">{audioMudo ? 'volume_off' : 'volume_up'}</span>
+          <span className="material-symbols-outlined" aria-hidden="true">{audioMudo ? 'volume_off' : 'volume_up'}</span>
         </button>
         <button className="btn-action tech-font flex-align btn-criar-carta" onClick={() => abrirModal('modalCriacao')}>
-          <span className="material-symbols-outlined">add_box</span> Criar Carta
+          <span className="material-symbols-outlined" aria-hidden="true">add_box</span> Criar Carta
         </button>
 
         <div className="hamburger-menu" ref={menuRef}>
           <button ref={botaoMenu} type="button" className="hamburger-btn flex-align" aria-label="Abrir menu" aria-haspopup="menu" aria-expanded={menuAberto} onClick={() => setMenuAberto((v) => !v)}>
-            <span className="material-symbols-outlined hamburger-icon">menu</span>
+            <span className="material-symbols-outlined hamburger-icon" aria-hidden="true">menu</span>
           </button>
           <div className={`dropdown-content${menuAberto ? ' show' : ''}`}>
             <div className="dropdown-header">
@@ -114,7 +117,7 @@ export function Topo() {
                 onClick={escolherFoto}
                 onKeyDown={ativarComTeclado(escolherFoto)}
               >
-                {!avatar && <span className="material-symbols-outlined">terminal</span>}
+                {!avatar && <span className="material-symbols-outlined" aria-hidden="true">terminal</span>}
               </div>
               <input ref={inputAvatar} type="file" accept="image/*" style={{ display: 'none' }} onChange={trocarAvatar} />
               <div>
@@ -122,21 +125,21 @@ export function Topo() {
                 <div className="tech-font menu-user-level">{rank}</div>
               </div>
             </div>
-            <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalNivelamento'))}>
-              <span className="material-symbols-outlined target-icon">radar</span> Refazer Diagnóstico
+            <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalNivelamento', PELO_MENU))}>
+              <span className="material-symbols-outlined target-icon" aria-hidden="true">radar</span> Refazer Diagnóstico
             </button>
-            <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalProgresso'))}>
-              <span className="material-symbols-outlined stats-icon">monitoring</span> Minhas Estatísticas
+            <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalProgresso', PELO_MENU))}>
+              <span className="material-symbols-outlined stats-icon" aria-hidden="true">monitoring</span> Minhas Estatísticas
             </button>
-            <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalMapaMental'))}>
-              <span className="material-symbols-outlined">hub</span> Mapa Neural
+            <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalMapaMental', PELO_MENU))}>
+              <span className="material-symbols-outlined" aria-hidden="true">hub</span> Mapa Neural
             </button>
-            <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalConta'))}>
-              <span className="material-symbols-outlined">manage_accounts</span> Minha conta
+            <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalConta', PELO_MENU))}>
+              <span className="material-symbols-outlined" aria-hidden="true">manage_accounts</span> Minha conta
             </button>
             {podeAdministrar() && (
-              <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalAdmin'))}>
-                <span className="material-symbols-outlined">admin_panel_settings</span> Painel do {perfilAtual() === 'Admin' ? 'Admin' : 'Tutor'}
+              <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalAdmin', PELO_MENU))}>
+                <span className="material-symbols-outlined" aria-hidden="true">admin_panel_settings</span> Painel do {perfilAtual() === 'Admin' ? 'Admin' : 'Tutor'}
               </button>
             )}
             <button type="button" className="dropdown-item danger flex-align" onClick={acao(resetarProgresso)}>
@@ -144,13 +147,13 @@ export function Topo() {
             </button>
             <div className="dropdown-item mobile-a11y mobile-a11y-container">
               <span className="flex-align a11y-title-text">
-                <span className="material-symbols-outlined">accessibility_new</span> Acessibilidade
+                <span className="material-symbols-outlined" aria-hidden="true">accessibility_new</span> Acessibilidade
               </span>
               <div className="a11y-buttons-container">
                 <button className="btn-action tech-font flex-align-center a11y-btn" onClick={() => mudarZoom(-1)}>A-</button>
                 <button className="btn-action tech-font flex-align-center a11y-btn" onClick={() => mudarZoom(1)}>A+</button>
                 <button className="btn-action tech-font flex-align-center a11y-btn" onClick={alternarAltoContraste} title="Alto Contraste">
-                  <span className="material-symbols-outlined contrast-icon">contrast</span>
+                  <span className="material-symbols-outlined contrast-icon" aria-hidden="true">contrast</span>
                 </button>
                 <button className="btn-action tech-font flex-align-center a11y-btn" onClick={acao(abrirVLibras)} title="Tradutor de Libras (VLibras)">
                   Libras

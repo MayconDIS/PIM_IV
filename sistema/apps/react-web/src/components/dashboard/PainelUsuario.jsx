@@ -22,7 +22,7 @@ export function PainelUsuario() {
         <div className="xp-wrapper xp-wrapper-flex">
           <div className="xp-badge-col">
             <span className="xp-badge tech-font flex-align xp-display-badge">
-              <span className="material-symbols-outlined" style={{ fontSize: '1.2rem' }}>military_tech</span> {xp} XP
+              <span className="material-symbols-outlined" style={{ fontSize: '1.2rem' }} aria-hidden="true">military_tech</span> {xp} XP
             </span>
             <span className="badge-title-sub">XP</span>
           </div>
