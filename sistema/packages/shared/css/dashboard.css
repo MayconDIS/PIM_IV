@@ -310,6 +310,20 @@ header[role="banner"] {
 /* Contorno só para quem chega pelo teclado (Tab), não depois de clicar */
 .avatar-editavel:has(.avatar-arquivo:focus-visible) { outline: 2px solid var(--nexti-cyan); outline-offset: 3px; }
 
+/* Janela de enquadrar a foto do avatar: prévia redonda, zoom e os dois botões */
+.modal-enquadrar { max-width: 360px; }
+.enquadrar-foto { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.enquadrar-previa {
+    width: 190px; height: 190px; border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.5); background: #0b0c10;
+    cursor: grab; touch-action: none;
+}
+.enquadrar-previa:active { cursor: grabbing; }
+.enquadrar-zoom { display: flex; align-items: center; gap: 12px; width: 100%; color: #c5c6c7; }
+.enquadrar-zoom input { flex: 1; min-height: 44px; accent-color: var(--nexti-cyan); }
+.enquadrar-acoes { display: flex; gap: 12px; width: 100%; }
+.enquadrar-acoes .btn-action { flex: 1; justify-content: center; min-height: 44px; }
+
 .dropdown-item {
     padding: 12px 15px;
     color: #c5c6c7;
