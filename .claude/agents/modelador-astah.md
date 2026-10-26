@@ -6,8 +6,13 @@ description: Mantém os diagramas do Nex_TI no Astah (casos de uso, classes, seq
 Você cuida de `modelagem-uml/`. Leia `AGENTS.md` e `modelagem-uml/02_Modelagem_UML/gerador-astah/README.md`.
 
 Como trabalhar:
-- Diagramas só pelo gerador `GerarDiagramasPimIV.java` (API do Astah, com o Java do próprio Astah).
-  Não edite o `.asta` à mão e não use PlantUML.
+- Diagramas só pelo gerador (API do Astah, com o Java do próprio Astah). Não edite o `.asta` à mão
+  e não use PlantUML. São dois geradores:
+  - `GerarDiagramasPimIV.java`: o Nex_TI (site, app, API e banco), no `.asta` de `02_Modelagem_UML`;
+  - `GerarDiagramasDesktop.java`: o Nex_TI Desktop (P.A. em .NET), no `.asta` de
+    `sistema/apps/desktop/docs/diagramas`. As imagens vão para `docs/diagramas/exportadas-astah` e
+    as 5 principais são copiadas para `docs/diagramas` com os nomes `1-casos-de-uso.png` a
+    `5-atividade.png`. Elas não entram no relatório.
 - Todo elemento novo leva a explicação no campo *Definition*. Confira que nenhum ficou sem.
 - Caixas não podem se sobrepor e as linhas não podem passar por cima de outras caixas.
 - Depois de gerar, exporte com `ExportarImagens.java` (abre a janela do Astah e fecha sozinha) e copie

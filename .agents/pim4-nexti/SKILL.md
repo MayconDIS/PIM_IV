@@ -191,7 +191,7 @@ corpo: (AUTOR, ANO). Continue o parágrafo normalmente.</p>
 **Equipe (Alunos):**
 | Nome | RA | E-mail |
 |---|---|---|
-| Gabriel Alves Moreira | H67HJ4 | gabriel.moreira52@aluno.unip.br |
+| Gabriel Alves Moreira | H67HJI4 | gabriel.moreira52@aluno.unip.br |
 | Maciel Costa da Silva | R280985 | maciel.silva18@aluno.unip.br |
 | Maycon Douglas Inácio Silva | H719CD3 | maycon.silva87@aluno.unip.br |
 | Miguel Angel Fernandez Ortiz | H7858F9 | miguel.ortiz1@aluno.unip.br |
@@ -201,21 +201,48 @@ corpo: (AUTOR, ANO). Continue o parágrafo normalmente.</p>
 
 ## Tecnologias do Projeto (contexto para geração de conteúdo)
 
-- **Front-end**: HTML5 semântico, CSS3 Puro responsivo, Vanilla JavaScript, WAI-ARIA (Alto Contraste e Zoom), física de molas no Obsidian View (Mapa Neural) com JSON dinâmico.
-- **Back-end**: C# (.NET 10), APIs RESTful assíncronas baseadas em Minimal APIs, Entity Framework Core, autenticação baseada em JWT Bearer Token, ISm2Engine para repetição espaçada.
-- **Banco de Dados**: Microsoft SQL Server (SGBD Relacional) com restrições e relacionamentos N:N indexados.
-- **Módulos Centrais**: Simulado ENADE (Questões e Alternativas associadas), Gamificação (XP, Moedas Virtuais e Nível integrados ao usuário), Motor de Aprendizado SM-2.
-- **Metodologia e Qualidade**: Scrum + Kanban, normas ISO/IEC 25010 e conformidade com a LGPD.
-- **Tabelas principais do banco**: tb_usuarios, tb_flashcards, tb_revisoes_sm2,
-  tb_questoes, tb_alternativas, tb_areas_conhecimento, tb_tags, tb_provas,
-  tb_prova_questao, tb_questao_tag, tb_historico_simulado
+- **Site**: React 18 + Vite (HTML semântico, CSS responsivo, ARIA, VLibras), publicado na Vercel; o Mapa Neural é um grafo com física de molas.
+- **App**: React Native (Expo), com fila para estudar sem internet.
+- **API**: C# (.NET 10), Minimal APIs em camadas (rotas → serviços → `AppDbContext`), EF Core, JWT, `Sm2Engine` para a revisão espaçada; publicada no Azure.
+- **Pacote compartilhado** (`packages/shared`): fases e cartas, SM-2 e XP/moedas, usados pelo site e pelo app.
+- **Banco**: SQL Server / Azure SQL. Tabelas (em `sistema/database/NexTI_DB.sql`): usuarios, fases, flashcards,
+  progresso_flashcards, fases_concluidas, tb_historico_revisoes, cartas_moderadas, tb_areas_conhecimento,
+  tb_provas, tb_questoes, tb_alternativas e tb_prova_questao.
+- **Metodologia e qualidade**: Scrum + Kanban (Trello), ISO/IEC 25010, LGPD; testes unitários, caixa preta,
+  caixa branca, carga e usabilidade (seção 2.8.2).
+- O Nex_TI Desktop (`sistema/apps/desktop`) é de outra atividade (P.A. em .NET) e não entra no relatório.
+
+Números (rotas, fases, cartas, testes) nunca vêm desta lista: tire do código.
 
 ---
 
-## Seções já existentes no documento (referência)
+## Seções do documento (referência)
+
+Páginas de 25/10/2026. Elas mudam: confira no `index.html` e rode `python atualizar-sumario.py`
+depois de incluir ou tirar página.
 
 | ID | Título | Página |
 |---|---|---|
+| sec-1 | 1 INTRODUÇÃO | 7 |
+| sec-1-1 | 1.1 Objetivo geral | 7 |
+| sec-1-2 | 1.2 Objetivos específicos | 7 |
+| sec-1-3 | 1.3 Método e delimitação | 7 |
+| sec-1-4 | 1.4 Melhorias em relação ao PIM III | 8 |
+| sec-1-5 | 1.5 Base teórica das disciplinas | 9 |
+| sec-2 | 2 DESENVOLVIMENTO | 10 |
+| sec-2-1 | 2.1 Etapa 1 – Caracterização da organização | 10 |
+| sec-2-2 | 2.2 Etapa 2 – Planejamento da solução tecnológica | 11 |
+| sec-2-3 | 2.3 Etapa 3 – Responsabilidade social e diversidade | 15 |
+| sec-2-4 | 2.4 Etapa 4 – Desenvolvimento da solução Web | 16 |
+| sec-2-5 | 2.5 Etapa 5 – Desenvolvimento da solução Mobile | 18 |
+| sec-2-6 | 2.6 Etapa 6 – Arquitetura de Software | 19 |
+| sec-2-7 | 2.7 Etapa 7 – Projeto do Banco de Dados | 25 |
+| sec-2-8 | 2.8 Etapa 8 – Infraestrutura em Nuvem e DevOps | 31 |
+| sec-2-9 | 2.9 Etapa 9 – Gerenciamento Ágil do Projeto | 34 |
+| sec-3 | 3 CONCLUSÃO | 40 |
+| sec-ref | REFERÊNCIAS | 41 |
+
+---|---|---|
 | sec-1 | 1 INTRODUÇÃO | 6 |
 | sec-1-1 | 1.1 Objetivo Geral | 6 |
 | sec-1-2 | 1.2 Objetivos Específicos | 6 |
@@ -247,23 +274,28 @@ corpo: (AUTOR, ANO). Continue o parágrafo normalmente.</p>
 4. **Se o conteúdo for novo**, adicione o item correspondente ao `<nav class="sumario-container">`.
 5. **Entregue apenas o trecho HTML** a ser inserido/substituído, não o arquivo inteiro
    (a menos que o usuário peça o arquivo completo).
-6. **Valide mentalmente**: a página tem `num-pagina`? Os parágrafos usam `.paragrafo`?
+6. **Valide**: a página tem `num-pagina`? Os parágrafos usam `.paragrafo`?
    Nenhum `<strong>` foi usado para destacar novidade? O texto é corrido e orgânico?
+7. **Feche o ciclo**: `python atualizar-sumario.py` (páginas e sumário), confira que nenhuma página
+   passa de 29,7 cm, gere o Word (`relatorio/word`: `npm run gerar`) e rode
+   `node scripts/verificar-sincronia.mjs` na raiz.
 
 ---
 
 ## Referências Bibliográficas do Projeto (para citações)
 
-- ALURA (2026) — plataforma de cursos online
-- ANKI (2026) — flashcards inteligentes
-- BRASIL, Lei nº 13.709/2018 — LGPD
-- DESCHAMPS, Filipe (2024) — Curso.dev
-- ELMASRI; NAVATHE (2011) — Sistemas de Banco de Dados, 6ª ed.
-- FOWLER, Martin (2014) — UML Essencial
-- ISO/IEC 25010 (2011) — Qualidade de Software
-- KRUG, Steve (2014) — Não Me Faça Pensar, 3ª ed.
-- PRESSMAN; MAXIM (2016) — Engenharia de Software, 8ª ed.
-- REPOSITÓRIO GitHub: https://github.com/MayconDIS/PIM_IV (2026)
-- SCHWABER; SUTHERLAND (2020) — The Scrum Guide
-- SOFTEX (2021) — MPS.BR Guia Geral
-- SOMMERVILLE, Ian (2019) — Engenharia de Software, 10ª ed.
+A lista completa e atual está na seção REFERÊNCIAS do `index.html`; use as entradas de lá, com a
+mesma grafia. Cada etapa cita o livro-texto da sua disciplina (quadro da seção 1.5):
+
+- ARANTES (2026a, 2026b…) — Gerenciamento de projetos ágil (apostilas)
+- ARAÚJO NETO (2026) — Empreendedorismo em TI
+- BOZOLAN (2025) — Desenvolvimento mobile com JavaScript
+- MARTINS (2026) — Programação de banco de dados: SQL Server/T-SQL
+- MONTEIRO (2026) — Desenvolvimento mobile
+- PERES (2026) — Desenvolvimento web com .NET
+- REIS (2026) — Cloud computing e DevOps
+- TOLEDO-PLAÇA (2023) — Relações étnico-raciais e afrodescendência
+
+Outras usadas no texto: ANKI, BRASIL (LGPD), ELMASRI; NAVATHE, FOWLER, INEP (ENADE), ISO/IEC 25010,
+KRUG, PRESSMAN; MAXIM, SCHWABER; SUTHERLAND, SOFTEX, SOMMERVILLE, UNIVERSIDADE PAULISTA (Manual
+PIM IV) e o repositório da equipe. As do PIM III só aparecem na seção 1.4 e nas referências.

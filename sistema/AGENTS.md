@@ -23,5 +23,7 @@ Aqui fica só o que é específico do código.
   `TabelaDeRecompensas`, as duas com a mesma regra do `packages/shared`.
 - Mudou regra ou conteúdo em `packages/shared`? Rode `npm run seed:api` e `npm run seed:api:check`.
 - Toda mudança vem com teste: `npm test` (API), `npm run test:shared`, `npm run test:mobile` e `npm run test:desktop`.
+- Antes do PR, `npm run auditoria`: código sem uso, `TODO`, acessibilidade e tamanho das funções
+  (o GitHub roda a mesma). Como testamos cada coisa: `docs/TESTES.md` e `docs/AUDITORIA.md`.
 - Mudou rota, tabela ou regra? Os diagramas (Astah), o manual, o relatório e os slides também
   mudam: veja a tabela "Se mudar X, atualize Y" no `AGENTS.md`.
