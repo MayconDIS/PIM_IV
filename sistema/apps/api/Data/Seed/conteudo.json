@@ -26,7 +26,7 @@
     },
     {
       "codigo": "fase27",
-      "descricao": "LGPD"
+      "descricao": "LGPD (Lei Geral de Proteção de Dados)"
     },
     {
       "codigo": "fase28",
@@ -34,7 +34,7 @@
     },
     {
       "codigo": "fase29",
-      "descricao": "TIC"
+      "descricao": "TIC (Tecnologia da Informação e Comunicação)"
     },
     {
       "codigo": "bonus1",
@@ -110,7 +110,7 @@
     },
     {
       "codigo": "fase36",
-      "descricao": "UX e UI Design"
+      "descricao": "UX e UI Design (Experiência e Interface do Usuário)"
     },
     {
       "codigo": "bonus3",
@@ -134,7 +134,7 @@
     },
     {
       "codigo": "fase20",
-      "descricao": "Empreendedorismo em TI"
+      "descricao": "Empreendedorismo em TI (Tecnologia da Informação)"
     },
     {
       "codigo": "fase37",

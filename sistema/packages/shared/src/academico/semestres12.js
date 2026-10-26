@@ -348,7 +348,7 @@ export const DISCIPLINAS_SEMESTRES_12 = [
     "id": "s1-ava-lgpd",
     "semestre": 1,
     "origem": "AVA",
-    "nome": "LGPD",
+    "nome": "LGPD (Lei Geral de Proteção de Dados)",
     "resumo": [
       "A disciplina apresenta a proteção de dados pessoais como parte da organização de processos e sistemas. O estudo começa pelos princípios: uma coleta precisa ter finalidade definida, ser compatível com essa finalidade e limitar-se aos dados necessários. A transparência permite compreender o tratamento realizado. Também é importante distinguir as responsabilidades de quem decide sobre o tratamento, de quem o executa e de quem atua como canal de comunicação com titulares e autoridade de proteção de dados.",
       "Na construção de software, privacidade precisa ser considerada desde o projeto e nas configurações iniciais. Controle de acesso, proteção de dados armazenados e transmitidos, registros e acompanhamento de riscos fazem parte desse trabalho. A disciplina também aborda o cuidado com transferências internacionais, fiscalização e responsabilização. Os conceitos aqui servem à revisão acadêmica dos materiais: a análise de um caso concreto exige considerar sua finalidade, contexto e regras aplicáveis, sem reduzir toda proteção de dados a obter uma autorização genérica."
@@ -1422,7 +1422,7 @@ export const DISCIPLINAS_SEMESTRES_12 = [
     "id": "s1-ed-tic",
     "semestre": 1,
     "origem": "ED",
-    "nome": "TIC",
+    "nome": "TIC (Tecnologia da Informação e Comunicação)",
     "resumo": [
       "Tecnologia da Informação e da Comunicação reúne recursos para processar, armazenar e transmitir informações. Hardware, software, redes, bancos de dados e serviços precisam atuar em conjunto para atender às necessidades das pessoas e das organizações. A disciplina acompanha a evolução desses recursos e discute sua importância estratégica. Nem toda organização utiliza a tecnologia da mesma forma: ela pode apoiar operações básicas ou participar diretamente da criação de produtos e da transformação do negócio.",
       "Sistemas de informação organizam atividades e fornecem apoio às decisões. Relatórios gerenciais, integração de processos e ferramentas de análise atendem necessidades diferentes. Tecnologias emergentes também trazem possibilidades e desafios, como a gestão do conhecimento, a experiência do usuário e a conexão entre ambientes físicos e digitais. O estudo inclui ferramentas de produtividade: planilhas organizam dados, fórmulas calculam resultados e filtros facilitam consultas. Usar essas ferramentas de maneira consciente exige compreender o objetivo da tarefa e conferir a qualidade das informações, em vez de apenas executar comandos."

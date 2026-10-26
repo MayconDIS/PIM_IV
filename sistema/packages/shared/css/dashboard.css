@@ -568,7 +568,7 @@ header[role="banner"] {
 
 .aula-locked-item { opacity: 0.5; cursor: not-allowed; }
 .icon-status { color: #8b92a5; min-width: 25px; text-align: center; }
-.aula-title { font-weight: 500; color: #fff; font-size: 1.05rem; }
+.aula-title { min-width: 0; overflow-wrap: anywhere; font-weight: 500; color: #fff; font-size: 1.05rem; }
 
 .dia-header, .aula-item { transition: opacity 0.5s ease-in-out !important; }
 /* Com uma fase aberta, o que vem depois dela some: as fases seguintes do mesmo módulo e os

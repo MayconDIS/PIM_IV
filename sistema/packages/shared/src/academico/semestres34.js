@@ -1415,7 +1415,7 @@ export const DISCIPLINAS_SEMESTRES_34 = [
     "id": "s3-ed-ux-ui-design",
     "semestre": 3,
     "origem": "ED",
-    "nome": "UX e UI Design",
+    "nome": "UX e UI Design (Experiência e Interface do Usuário)",
     "resumo": [
       "UX trata da experiência de realizar tarefas e atingir objetivos; UI se concentra nos elementos da interface que tornam essa interação possível. Um produto visualmente agradável pode continuar difícil de usar se seus fluxos, mensagens e organização não fizerem sentido. O design centrado no usuário procura compreender necessidades, contexto, limitações e expectativas por meio de pesquisa, transformando observações em decisões que podem ser verificadas e revistas ao longo do desenvolvimento.",
       "Entrevistas, observação e outros métodos ajudam a construir personas baseadas em evidências, evitando representar usuários apenas por suposições. A arquitetura da informação organiza conteúdos; wireframes permitem discutir estrutura antes do acabamento; protótipos ajudam a explorar interações. Hierarquia visual e tipografia orientam a atenção e a leitura. Testes de usabilidade observam como pessoas realizam tarefas, enquanto dados quantitativos e qualitativos orientam novas versões. Microinterações e feedbacks devem esclarecer o que acontece, sem competir desnecessariamente com a atividade principal do usuário."
@@ -1924,7 +1924,7 @@ export const DISCIPLINAS_SEMESTRES_34 = [
     "id": "s4-ava-empreendedorismo-ti",
     "semestre": 4,
     "origem": "AVA",
-    "nome": "Empreendedorismo em TI",
+    "nome": "Empreendedorismo em TI (Tecnologia da Informação)",
     "resumo": [
       "Empreender em TI envolve reconhecer necessidades, avaliar oportunidades e organizar recursos para criar soluções com valor. Uma ideia tecnicamente interessante não se transforma automaticamente em negócio: é necessário compreender o público, alternativas existentes e capacidade de entrega. A administração combina habilidades técnicas, humanas e conceituais para coordenar pessoas e recursos. Estratégia conecta objetivos de longo prazo às escolhas de operação, enquanto inovação pode surgir tanto de novas soluções quanto de melhorias relevantes em produtos e processos.",
       "O plano de negócios organiza objetivos, mercado, operação e recursos necessários, funcionando como instrumento de análise e acompanhamento. A seleção de oportunidades deve considerar alinhamento e viabilidade, evitando dispersar esforço em muitas ideias ao mesmo tempo. Planejamento operacional define capacidade e organização do trabalho; planejamento financeiro examina receitas, custos e continuidade. O marketing comunica uma proposta de valor a públicos escolhidos. A revisão desses conceitos ajuda a discutir projetos tecnológicos com base em evidências, riscos e necessidades concretas, sem confundir crescimento de uso com sustentabilidade do empreendimento."
