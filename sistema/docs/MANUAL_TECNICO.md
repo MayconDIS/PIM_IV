@@ -37,10 +37,10 @@ interface, não da classe.
 |---|---|---|
 | `GET /api/status` | A API está no ar? | Não |
 | `POST /api/auth/register` · `POST /api/auth/login` | Cadastro e login (devolve o JWT) | Não |
-| `GET /api/usuarios/{username}` | Perfil: XP, moedas, nível, `fasesConcluidas` e `diagnostico` (resultado salvo ou `null`) | Sim, só o dono |
+| `GET /api/usuarios/{username}` | Perfil de acesso, XP, moedas, nível, `fasesConcluidas` e `diagnostico` (resultado salvo ou `null`) | Sim, só o dono |
 | `GET /api/usuarios/{username}/stats-detalhadas` | Números do SM-2 do aluno | Sim, só o dono |
 | `POST /api/progresso/concluir-fase` | Conclui uma fase: a API paga XP e moedas pela tabela de recompensas só na primeira conclusão (grava em `fases_concluidas`) e devolve o prêmio pago e os totais | Sim |
-| `POST /api/usuarios/bonus/{id}/comprar` | Compra um bônus: a API confere o saldo e desconta as moedas | Sim |
+| `POST /api/usuarios/bonus/{id}/comprar` | Compra um bônus: confere e desconta o saldo de Aluno/Tutor; Admin mantém o saldo | Sim |
 | `PUT /api/usuarios/stats` | Grava XP, moedas e nível como reserva quando a rota de concluir fase falha | Sim |
 | `POST /api/diagnostico` | Valida as 20 respostas, calcula a recomendação por módulo e salva o diagnóstico e os acessos preservados | Sim, só o titular |
 | `GET /api/fases` · `GET /api/fases/{codigo}/flashcards` | Fases e cartas | Não |
@@ -141,7 +141,7 @@ para cada caso de uso, MER, DER (modelo lógico) e modelo físico. As imagens es
 3. **SM-2 e gamificação:** ficam em `Sm2Engine` e `GamificacaoService`, com a
    mesma regra do `sm2.js` e do `gamificacao.js` do site.
 4. **Perfis do caso de uso (Aluno, Tutor, Admin):** viraram o campo `Perfil` de `Usuario`,
-   enviado no JWT; as rotas de Tutor e Admin conferem esse perfil.
+   enviado no JWT e no perfil consultado; as rotas de Tutor e Admin conferem esse perfil.
 5. **Acessibilidade:** fica só no site (zoom, alto contraste e VLibras), sem
    classe na API.
 
@@ -158,7 +158,8 @@ para cada caso de uso, MER, DER (modelo lógico) e modelo físico. As imagens es
 | Fases liberadas, bônus comprados, Mapa Neural | Estado local no navegador (`localStorage`); conclusões da API também participam da liberação |
 | Conversa do Nexor, assistente do Nex_TI | Só na memória da tela; não vai para o servidor nem para `localStorage` |
 
-A compra de bônus usa a API para conferir e descontar o saldo. A conclusão de fase
+Para Aluno e Tutor, a compra de bônus usa a API para conferir e descontar o saldo.
+O Admin acessa os bônus sem compra; se chamar a rota de compra, a API devolve o saldo sem desconto. A conclusão de fase
 paga o prêmio no servidor uma única vez. O Web não tem fila de reenvio de respostas
 que falham; o Expo mantém essa fila. A rota de atualização de totais permanece como
 reserva para falhas na conclusão de fase. O diagnóstico usa sua própria rota e não altera os totais.
@@ -205,6 +206,20 @@ bônus e certificado. A API devolve o resultado no perfil e na exportação da c
 O Web mantém o envio pendente quando não consegue salvar e tenta reenviá-lo ao abrir o
 painel. O Expo usa o diagnóstico devolvido no perfil para reconstruir os acessos; não
 possui tela de questionário. O desktop continua independente, com avanço por estudo.
+
+### 6.3 Acesso direto do Administrador
+
+O perfil `Admin` tem acesso a todos os módulos e disciplinas no site e no Expo,
+sem realizar diagnóstico, concluir etapas anteriores ou gastar moedas. Os testes de
+módulo, simulados e bônus do site também ficam disponíveis. A interface usa o perfil retornado
+pela API e aplica essa permissão na consulta do acesso, sem gravá-la como fases
+conquistadas ou bônus comprados. Ao deixar de ser Admin, voltam a valer os acessos
+obtidos pelo estudo e pelo diagnóstico.
+
+A permissão não cria respostas, conclusões, XP, moedas, nível ou certificado. Estudar e
+concluir uma fase continua seguindo as regras de revisão e recompensa. O diagnóstico
+permanece opcional para orientar o Admin; os perfis Aluno e Tutor mantêm a trilha normal.
+O Expo continua sem a tela de diagnóstico nem os testes de módulo do site.
 
 ## 7. Segurança
 

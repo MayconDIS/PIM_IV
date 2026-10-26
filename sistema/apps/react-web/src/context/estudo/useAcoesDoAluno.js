@@ -7,7 +7,7 @@ export function useAcoesDoAluno({ nomeUsuario, userKey, progresso, ui, sessao })
   const { toast, confirmar, abrirModal } = ui;
 
   const abrirBonus = async (bonus) => {
-    if (progresso.bonusDesbloqueados.includes(bonus.id)) {
+    if (progresso.acessoCompleto || progresso.bonusDesbloqueados.includes(bonus.id)) {
       sessao.carregarAula(bonus.id, bonus.nome);
       return;
     }

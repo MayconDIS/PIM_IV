@@ -24,7 +24,7 @@ function Disciplina({ fase, concluida, liberada, estudar }) {
 }
 
 function Percurso() {
-  const { decks, srsData, fasesDesbloqueadas, faseAtiva, carregarAula, fecharModal } = useEstudo();
+  const { decks, srsData, fasesDesbloqueadas, acessoCompleto, faseAtiva, carregarAula, fecharModal } = useEstudo();
   const concluidas = new Set(fasesConcluidas(decks, srsData));
   const [selecionado, setSelecionado] = useState(() =>
     MODULOS_CURSO.find(modulo => modulo.fases.some(fase => fasesDesbloqueadas.includes(fase.id) && !concluidas.has(fase.id)))?.numero ?? 1);
@@ -37,7 +37,9 @@ function Percurso() {
   };
   return (
     <div className="modal-body trilha-corpo">
-      <p className="trilha-introducao">Seu caminho pelos quatro módulos de ADS. Revise os resumos e estude as disciplinas para avançar. As fases e os testes liberam as próximas etapas.</p>
+      <p className="trilha-introducao">{acessoCompleto
+        ? 'Como Admin, você tem acesso a todos os módulos e disciplinas, sem diagnóstico ou desbloqueio. As estatísticas mostram somente o que você estudou.'
+        : 'Seu caminho pelos quatro módulos de ADS. Revise os resumos e estude as disciplinas para avançar. As fases e os testes liberam as próximas etapas.'}</p>
       <div className="trilha-modulos" role="group" aria-label="Escolher módulo">
         {MODULOS_CURSO.map(item => (
           <button key={item.id} type="button" aria-pressed={item.numero === selecionado} onClick={() => setSelecionado(item.numero)}>
@@ -54,7 +56,7 @@ function Percurso() {
         <ul className="trilha-disciplinas">{modulo.fases.map(fase => (
           <Disciplina key={fase.id} fase={fase} concluida={concluidas.has(fase.id)} liberada={fasesDesbloqueadas.includes(fase.id)} estudar={estudar} />
         ))}</ul>
-        <p className="trilha-teste">Ao terminar, faça o teste do módulo para seguir ao próximo módulo.</p>
+        <p className="trilha-teste">{acessoCompleto ? 'O teste também está disponível para você praticar quando quiser.' : 'Ao terminar, faça o teste do módulo para seguir ao próximo módulo.'}</p>
         <button className="btn-action" type="button" disabled={!fasesDesbloqueadas.includes(modulo.teste.id)} onClick={() => estudar(modulo.teste)}>{modulo.teste.nome}</button>
       </section>
       <p className="trilha-introducao">O preparatório ENADE permanece no módulo próprio, após os quatro módulos. As disciplinas complementares da trilha original continuam disponíveis.</p>

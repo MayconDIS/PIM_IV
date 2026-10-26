@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 
 import { FASES, MODULOS } from '../src/content.js';
-import { ORDEM_FASES, fasesLiberadasNoServidor, preservarFasesLiberadas } from '../src/gamificacao.js';
+import { ORDEM_FASES, fasesDisponiveis, fasesLiberadasNoServidor, preservarFasesLiberadas, temAcessoCompleto } from '../src/gamificacao.js';
 
 // Progresso como a API devolve: uma linha por carta respondida, com a fase dela.
 const respondeuTudo = (faseId) => {
@@ -12,6 +12,24 @@ const respondeuTudo = (faseId) => {
 
 test('aluno novo, sem nada no servidor, começa só na Fase 01', () => {
   assert.deepEqual(fasesLiberadasNoServidor(), ['fase1']);
+});
+
+test('Admin acessa toda a trilha sem alterar liberações e sem precisar de diagnóstico ou nível', () => {
+  const liberadas = ['fase1'];
+  const disponiveis = fasesDisponiveis(liberadas, 'Admin');
+  assert.deepEqual(disponiveis, ORDEM_FASES);
+  assert.ok(disponiveis.includes('teste-mod5'));
+  assert.deepEqual(liberadas, ['fase1']);
+  disponiveis.pop();
+  assert.deepEqual(fasesDisponiveis(liberadas, 'Admin'), ORDEM_FASES);
+});
+
+test('retirar o perfil Admin restaura somente o acesso obtido pelo estudo', () => {
+  for (const perfil of ['Aluno', 'Tutor', undefined, null, '', 'admin', 'Administrador']) {
+    assert.equal(temAcessoCompleto(perfil), false);
+    assert.deepEqual(fasesDisponiveis(['fase1', 'fase2'], perfil), ['fase1', 'fase2']);
+  }
+  assert.equal(temAcessoCompleto('Admin'), true);
 });
 
 test('nível 3 (nivelamento intermediário) libera os Módulos 01 e 02, como o diagnóstico', () => {

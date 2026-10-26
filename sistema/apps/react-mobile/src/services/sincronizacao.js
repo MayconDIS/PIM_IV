@@ -6,16 +6,16 @@
  * Regras de SM-2, prêmio e nível vêm do @nexti/shared, as mesmas do site.
  */
 import { aplicarResposta, estadoDaCarta, qualidadeSm2 } from '@nexti/shared/sm2';
-import { FASES_INICIAIS, fasesLiberadasNoServidor, isTeste, nivelPorXp, preservarFasesLiberadas, proximaFase, recompensa } from '@nexti/shared/gamificacao';
+import { FASES_INICIAIS, fasesDisponiveis, fasesLiberadasNoServidor, isTeste, nivelPorXp, preservarFasesLiberadas, proximaFase, recompensa } from '@nexti/shared/gamificacao';
 import { ErroDaApi, ErroDeRede } from './api.js';
 
 // Função, não constante: cada usuário precisa de listas próprias (um objeto
 // compartilhado faria a fila de um usuário aparecer para o outro).
-const estadoVazio = () => ({ srs: {}, liberadas: [...FASES_INICIAIS], xp: 0, moedas: 0, nivel: 1, fila: [] });
+const estadoVazio = () => ({ srs: {}, liberadas: [...FASES_INICIAIS], xp: 0, moedas: 0, nivel: 1, fila: [], perfil: 'Aluno' });
 
 const DIA_EM_MS = 86400000;
 
-export function criarSincronizador({ api, armazenamento, username, agora = () => Date.now() }) {
+export function criarSincronizador({ api, armazenamento, username, perfil, novoLogin = false, agora = () => Date.now() }) {
   const chave = `nexti_estado_${username}`;
   let estado = estadoVazio();
 
@@ -56,10 +56,20 @@ export function criarSincronizador({ api, armazenamento, username, agora = () =>
       return estado;
     },
 
+    // Acesso do Admin não entra em estado.liberadas: retirar o perfil restaura os bloqueios.
+    get fasesDisponiveis() {
+      return fasesDisponiveis(estado.liberadas, estado.perfil);
+    },
+
     /** Carrega o que está salvo no aparelho. */
     async carregar() {
-      estado = { ...estadoVazio(), ...((await armazenamento.ler(chave)) ?? {}) };
+      const salvo = (await armazenamento.ler(chave)) ?? {};
+      estado = { ...estadoVazio(), ...salvo };
+      // Uma sessão restaurada pode ter um perfil anterior ao último sincronismo.
+      // Só um login novo ou a ausência de perfil salvo dá prioridade à sessão.
+      if (perfil !== undefined && (novoLogin || salvo.perfil === undefined)) estado.perfil = perfil;
       estado.liberadas = preservarFasesLiberadas(estado.liberadas);
+      if (novoLogin) await salvar();
       return estado;
     },
 
@@ -89,6 +99,7 @@ export function criarSincronizador({ api, armazenamento, username, agora = () =>
       estado.moedas = perfil.moedas;
       estado.nivel = Math.max(estado.nivel, perfil.nivel);
       estado.diagnostico = perfil.diagnostico ?? null;
+      estado.perfil = perfil.perfil ?? 'Aluno';
 
       const progresso = await api.progresso();
       for (const p of progresso) {

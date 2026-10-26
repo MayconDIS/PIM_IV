@@ -1,4 +1,5 @@
 import React, { createContext, useContext } from 'react';
+import { BONUS, fasesDisponiveis } from '@nexti/shared';
 import { confete, som } from './estudo/apoio.js';
 import { useAcoesDoAluno } from './estudo/useAcoesDoAluno.js';
 import { useInicializacao } from './estudo/useInicializacao.js';
@@ -34,14 +35,18 @@ export function EstudoProvider({ children }) {
   const valor = {
     nomeUsuario,
     userKey,
+    perfil: progresso.perfil,
+    acessoCompleto: progresso.acessoCompleto,
     xp: progresso.xp,
     moedas: progresso.moedas,
     rank: progresso.rank,
     diagnostico: progresso.diagnostico,
     srsData: progresso.srsData,
     decks: progresso.decks,
-    fasesDesbloqueadas: progresso.fasesDesbloqueadas,
-    bonusDesbloqueados: progresso.bonusDesbloqueados,
+    fasesDesbloqueadas: fasesDisponiveis(progresso.fasesDesbloqueadas, progresso.perfil),
+    bonusDesbloqueados: progresso.acessoCompleto ? BONUS.map(bonus => bonus.id) : progresso.bonusDesbloqueados,
+    fasesConquistadas: progresso.fasesDesbloqueadas,
+    bonusComprados: progresso.bonusDesbloqueados,
     certificadoLiberado: progresso.certificadoLiberado,
     avatar: progresso.avatar,
     trocarAvatar: progresso.trocarAvatar,

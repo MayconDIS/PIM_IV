@@ -23,6 +23,7 @@ export default function App() {
   const [faseAberta, setFaseAberta] = useState(null);
   const [, setVersao] = useState(0);
   const sincRef = useRef(null);
+  const novoLoginRef = useRef(false);
 
   const atualizarTela = () => setVersao((v) => v + 1);
   const api = useMemo(() => criarApi({ baseUrl: API_URL, obterToken: () => sessao?.token }), [sessao]);
@@ -34,7 +35,9 @@ export default function App() {
   // Ao ter uma sessão: carrega o progresso do aparelho e sincroniza com a API.
   useEffect(() => {
     if (!sessao) return;
-    const sinc = criarSincronizador({ api, armazenamento, username: sessao.user.username });
+    const sinc = criarSincronizador({ api, armazenamento, username: sessao.user.username,
+      perfil: sessao.user.perfil, novoLogin: novoLoginRef.current });
+    novoLoginRef.current = false;
     sincRef.current = sinc;
     sinc.carregar().then(atualizarTela).then(() => sincronizar());
   }, [sessao]);
@@ -58,6 +61,7 @@ export default function App() {
     await armazenamento.salvarSessao(novaSessao);
     setAviso('');
     setAba('fases');
+    novoLoginRef.current = true;
     setSessao(novaSessao);
   }
 
@@ -90,7 +94,7 @@ export default function App() {
     conteudo = (
       <>
         {aba === 'fases'
-          ? <FasesScreen liberadas={sincRef.current.estado.liberadas} onAbrir={setFaseAberta} />
+          ? <FasesScreen liberadas={sincRef.current.fasesDisponiveis} onAbrir={setFaseAberta} />
           : <ProgressoScreen api={api} sinc={sincRef.current} username={sessao.user.username} onSincronizar={sincronizar} onSair={() => sair()} />}
         <View style={styles.abas}>
           <Aba titulo="📚 Fases" ativa={aba === 'fases'} onPress={() => setAba('fases')} />

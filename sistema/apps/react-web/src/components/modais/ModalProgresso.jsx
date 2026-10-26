@@ -39,7 +39,7 @@ const umaLinha = (texto) => (texto || '').replace(/\s*\n\s*/g, ' ').trim();
 export function ModalProgresso() {
   const {
     modal, fecharModal, nomeUsuario, userKey, xp, moedas, rank, srsData, decks,
-    fasesDesbloqueadas, bonusDesbloqueados, toast, confirmar, som,
+    fasesConquistadas, bonusComprados, toast, confirmar, som,
   } = useEstudo();
   const inputRef = useRef(null);
   const aberto = modal === 'modalProgresso';
@@ -62,8 +62,8 @@ export function ModalProgresso() {
       xp,
       coins: moedas,
       rank,
-      fasesDesbloqueadas,
-      bonusDesbloqueados,
+      fasesDesbloqueadas: fasesConquistadas,
+      bonusDesbloqueados: bonusComprados,
       srsData,
       decks,
       migracaoConteudo: exportarMetadadosDoConteudo(`${userKey}decks`),

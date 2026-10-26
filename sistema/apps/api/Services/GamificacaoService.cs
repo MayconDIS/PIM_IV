@@ -9,7 +9,7 @@ using NexTI_API.Models;
 namespace NexTI_API.Services
 {
     public record PerfilUsuario(int Id, string Username, int Nivel, int XP, int Moedas, List<string> FasesConcluidas,
-        ResultadoDiagnostico? Diagnostico = null);
+        ResultadoDiagnostico? Diagnostico = null, string Perfil = Perfis.Aluno);
 
     public record RankingAluno(string Username, int XP, int Nivel, int Moedas);
 
@@ -67,7 +67,7 @@ namespace NexTI_API.Services
             var concluidas = await _db.FasesConcluidas.Where(f => f.UsuarioId == usuario.Id)
                 .OrderBy(f => f.CodigoFase).Select(f => f.CodigoFase).ToListAsync();
             return new(usuario.Id, usuario.Username, usuario.Nivel, usuario.XP, usuario.Moedas, concluidas,
-                DiagnosticoService.LerResultado(usuario.DiagnosticoJson));
+                DiagnosticoService.LerResultado(usuario.DiagnosticoJson), usuario.Perfil);
         }
 
         public async Task<Resultado<Usuario>> AtualizarAsync(int usuarioId, int xp, int moedas, int nivel)
@@ -132,6 +132,8 @@ namespace NexTI_API.Services
 
             var usuario = await _db.Usuarios.FindAsync(usuarioId);
             if (usuario == null) return Resultado<Usuario>.Erro(TipoFalha.NaoEncontrado, "Usuário não encontrado");
+            // O Admin consulta todo o conteúdo sem comprar acesso nem modificar seu saldo.
+            if (usuario.Perfil == Perfis.Admin) return Resultado<Usuario>.Ok(usuario);
             if (usuario.Moedas < bonus.Custo)
                 return Resultado<Usuario>.Erro(TipoFalha.Invalido, $"Saldo insuficiente: o bônus custa {bonus.Custo} moedas.");
 
