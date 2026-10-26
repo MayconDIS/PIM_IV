@@ -1769,7 +1769,7 @@ export const DISCIPLINAS_SEMESTRES_34 = [
     "id": "s4-ava-mobile-javascript",
     "semestre": 4,
     "origem": "AVA",
-    "nome": "Desenvolvimento Mobile com JavaScript (Optativa)",
+    "nome": "Desenvolvimento Mobile com JavaScript",
     "resumo": [
       "O desenvolvimento mobile com JavaScript reúne formas de construir interfaces e integrar recursos do aparelho em diferentes plataformas. React Native permite compartilhar uma base de código e trabalhar com componentes próprios para aplicações móveis. View organiza regiões, Text exibe conteúdo textual e componentes personalizados reúnem estrutura, estilo e comportamento reutilizáveis. Props transportam dados entre componentes, enquanto estado representa informações que mudam durante a interação e influenciam a apresentação.",
       "Aplicativos precisam lidar com navegação, dados remotos, permissões e interrupções de conectividade. APIs expõem recursos acessíveis por operações HTTP; indicadores de carregamento e mensagens de erro tornam essas operações compreensíveis para o usuário. Listas virtualizadas ajudam a limitar trabalho de renderização em conjuntos extensos. Persistência local mantém dados entre sessões, e filas de operações podem registrar ações para sincronização posterior. O projeto deve distinguir dados locais, dados confirmados pelo servidor e operações pendentes, preservando uma experiência consistente mesmo quando a rede não está disponível."

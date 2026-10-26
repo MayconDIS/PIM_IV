@@ -31,7 +31,7 @@ const FASE_POR_DISCIPLINA = {
   '4|Programação de Banco de Dados': 'fase18',
   '4|Cloud Computing e DevOps': 'fase19',
   '4|Empreendedorismo em TI (Tecnologia da Informação)': 'fase20',
-  '4|Desenvolvimento Mobile com JavaScript (Optativa)': 'fase37',
+  '4|Desenvolvimento Mobile com JavaScript': 'fase37',
   '4|Relações Étnico-Raciais e Afrodescendência': 'fase38',
   '4|Gerenciamento de Projetos Ágil': 'fase39',
 };
