@@ -2,22 +2,27 @@ import React from 'react';
 import { progressoDeNivel } from '@nexti/shared';
 import { useEstudo } from '../../context/EstudoContext';
 import { nivelParaApi } from '../../context/estudo/apoio.js';
+import { Avatar } from './Avatar';
 
 /** Seção `.dashboard-header`: usuário, XP, moedas e barra de rank (porte de `atualizarBarraNivel`). */
 export function PainelUsuario() {
-  const { nomeUsuario, xp, moedas, rank } = useEstudo();
+  const { nomeUsuario, xp, moedas, rank, avatar } = useEstudo();
   const nivel = progressoDeNivel(xp, nivelParaApi(rank, xp));
 
   return (
     <section className="dashboard-header" aria-labelledby="header-user-name">
       <div className="dashboard-header-main">
-        <div className="welcome-text">
-          <h1>
-            Olá, <span className="tech-text" id="header-user-name">{nomeUsuario}</span>
-          </h1>
-          <p>
-            Servidor: <span className="status-online">conectado</span>
-          </p>
+        <div className="welcome-linha">
+          {/* No computador o avatar fica no menu do cabeçalho; no celular aparece também aqui (CSS). */}
+          <Avatar foto={avatar} className="avatar-painel" aria-hidden="true" />
+          <div className="welcome-text">
+            <h1>
+              Olá, <span className="tech-text" id="header-user-name">{nomeUsuario}</span>
+            </h1>
+            <p>
+              Servidor: <span className="status-online">conectado</span>
+            </p>
+          </div>
         </div>
         <div className="xp-wrapper xp-wrapper-flex">
           <div className="xp-badge-col">
