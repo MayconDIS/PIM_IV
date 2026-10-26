@@ -19,7 +19,7 @@ internal sealed class TelaEstudo : Form
     private readonly Label _verso = CaixaDeTexto(14, FontStyle.Regular, Tema.Verde);
     private readonly Label _dica = CaixaDeTexto(9, FontStyle.Italic, Tema.TextoApagado);
     private readonly Button _mostrar = Tema.Botao("Mostrar resposta (Espaço)", Tema.Ciano, 300);
-    private readonly FlowLayoutPanel _respostas = new() { AutoSize = true, Visible = false };
+    private readonly FlowLayoutPanel _respostas = new() { AutoSize = true, WrapContents = false, Visible = false };
 
     public TelaEstudo(ServicoDeEstudo estudo, Aluno aluno, SessaoDeEstudo sessao)
     {
@@ -30,16 +30,22 @@ internal sealed class TelaEstudo : Form
         MinimumSize = new Size(640, 480);
 
         var titulo = Tema.Rotulo(sessao.Fase.Descricao, 14, Tema.Ciano, FontStyle.Bold);
-        var topo = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 70, Padding = new Padding(20, 14, 20, 0), FlowDirection = FlowDirection.TopDown };
+        var topo = new FlowLayoutPanel { Dock = DockStyle.Top, AutoSize = true, Padding = new Padding(20, 14, 20, 12), FlowDirection = FlowDirection.TopDown, WrapContents = false };
         topo.Controls.AddRange([titulo, _contador]);
+        topo.SizeChanged += (_, _) => titulo.MaximumSize = new Size(Math.Max(1, topo.ClientSize.Width - 46), 0);
 
-        var carta = new TableLayoutPanel { Dock = DockStyle.Fill, BackColor = Tema.Cartao, Padding = new Padding(24), ColumnCount = 1, RowCount = 3 };
-        carta.RowStyles.Add(new RowStyle(SizeType.Percent, 45));
-        carta.RowStyles.Add(new RowStyle(SizeType.Percent, 40));
-        carta.RowStyles.Add(new RowStyle(SizeType.Percent, 15));
-        carta.Controls.Add(_frente, 0, 0);
-        carta.Controls.Add(_verso, 0, 1);
-        carta.Controls.Add(_dica, 0, 2);
+        var carta = new FlowLayoutPanel { Dock = DockStyle.Fill, BackColor = Tema.Cartao, Padding = new Padding(24),
+            FlowDirection = FlowDirection.TopDown, WrapContents = false, AutoScroll = true };
+        carta.Controls.AddRange([_frente, _verso, _dica]);
+        carta.SizeChanged += (_, _) =>
+        {
+            var largura = Math.Max(1, carta.ClientSize.Width - 48 - SystemInformation.VerticalScrollBarWidth);
+            foreach (var texto in new[] { _frente, _verso, _dica })
+            {
+                texto.MaximumSize = new Size(largura, 0);
+                texto.MinimumSize = new Size(largura, 0);
+            }
+        };
         var moldura = new Panel { Dock = DockStyle.Fill, Padding = new Padding(20, 0, 20, 0) };
         moldura.Controls.Add(carta);
 
@@ -56,6 +62,10 @@ internal sealed class TelaEstudo : Form
         }
 
         var rodape = new FlowLayoutPanel { Dock = DockStyle.Bottom, Height = 70, Padding = new Padding(20, 14, 20, 0) };
+        rodape.SizeChanged += (_, _) =>
+        {
+            foreach (Control botao in _respostas.Controls) botao.Width = Math.Max(100, (rodape.ClientSize.Width - 52) / 4 - 6);
+        };
         rodape.Controls.AddRange([_mostrar, _respostas]);
 
         Controls.AddRange([moldura, rodape, topo]);
@@ -65,11 +75,11 @@ internal sealed class TelaEstudo : Form
 
     private static Label CaixaDeTexto(float tamanho, FontStyle estilo, Color cor) => new()
     {
-        Dock = DockStyle.Fill,
         TextAlign = ContentAlignment.MiddleCenter,
         Font = Tema.Fonte(tamanho, estilo),
         ForeColor = cor,
-        AutoSize = false,
+        AutoSize = true,
+        Margin = new Padding(0, 0, 0, 24),
     };
 
     private void MostrarCarta()
@@ -79,7 +89,7 @@ internal sealed class TelaEstudo : Form
         _frente.Text = carta.Frente;
         _verso.Text = string.Empty;
         _dica.Text = System.Text.RegularExpressions.Regex.Replace(
-            carta.Dica ?? string.Empty, @"^(?:ED|AVA) · ([1-4])º semestre · ", "Módulo $1 · ");
+            carta.Dica ?? string.Empty, @"^(?:ED|AVA) · ([1-4])º semestre · ", "Mod_0$1 · ");
         _mostrar.Visible = true;
         _respostas.Visible = false;
         _mostrar.Focus();

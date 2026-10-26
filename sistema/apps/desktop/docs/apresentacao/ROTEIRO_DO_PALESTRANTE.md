@@ -12,7 +12,7 @@ ensaiar, leia o [`ESTUDOS.md`](../../ESTUDOS.md).
 | **Atividade** | 9 – Apresentação em grupo, disciplina P.A. em .NET |
 | **Data** | 27/10/2026, em aula (entrega no AVA até 26/10, 23:59) |
 | **Duração** | 10 minutos + perguntas, cerca de 2 minutos por pessoa |
-| **O que avaliam** | Orientação a objetos, arquitetura em camadas, modularização e os 4 diagramas UML (caso de uso, classe, sequência e atividade). O GitHub faz parte. |
+| **O que avaliam** | Orientação a objetos, arquitetura em camadas, modularização e quatro tipos de UML em cinco diagramas: caso de uso, classes (camadas e domínio), sequência e atividade. O GitHub faz parte. |
 | **Slides** | `Nex_TI - Apresentacao PA DotNet.pdf`, nesta pasta, em tela cheia. Se mudar algo no `slides.html`: abrir no Chrome, `Ctrl+P`, papel A4, paisagem, margens "Nenhuma", "Gráficos de segundo plano" marcado, salvar como PDF. |
 | **Ter aberto** | O PDF dos slides, o projeto no **Antigravity** (pasta `PIM_IV` inteira) e uma aba com https://github.com/MayconDIS/PIM_IV. Como abrir cada coisa: [README do desktop, "Como abrir cada parte no Antigravity"](../../README.md#como-abrir-cada-parte-no-antigravity) |
 | **Antes de começar** | No Antigravity, rodar a tarefa **Desktop: começar do zero** e depois **Desktop: abrir o programa** uma vez (a primeira compilação demora) e fechar. Assim a demonstração do slide 11 abre rápido. |
@@ -44,7 +44,7 @@ ensaiar, leia o [`ESTUDOS.md`](../../ESTUDOS.md).
 - **Objetivo:** explicar o que o programa faz, com a tela principal (`docs/telas/2-principal.png`).
 - **Tópicos-chave:**
   1. O aluno entra só com o nickname; os dados ficam num banco SQLite no computador dele, sem internet.
-  2. São **39 fases e 1078 cartas** sobre TI. Só a primeira começa liberada; concluir uma fase libera a próxima.
+  2. São **39 fases e 1078 cartas** dos quatro módulos e do preparatório ENADE. Só a primeira começa liberada; concluir uma fase libera a próxima.
   3. O **SM-2** decide quando cada carta volta. A fase dá **XP e moedas só na primeira vez**.
   4. Feito em **Windows Forms** com **.NET 10**.
 - **Passar a vez:** *"O Gabriel mostra o que o aluno faz no programa."*
@@ -134,7 +134,7 @@ ensaiar, leia o [`ESTUDOS.md`](../../ESTUDOS.md).
 
 - **Objetivo:** mostrar o programa de verdade.
 - **Ao vivo no Antigravity (40 s):** tarefa **Desktop: abrir o programa** (ou, no terminal, em `sistema/apps/desktop`: `dotnet run --project src/NexTI.Desktop.Apresentacao`). Entrar com um nickname, abrir a fase 1 e responder duas cartas com as teclas (Espaço mostra a resposta; 1 a 4 respondem). Se algo travar, seguir com as fotos do slide.
-- **Tópicos-chave:** EF Core com SQLite, num arquivo no computador do aluno. A migration `Inicial` cria as 5 tabelas e a semente coloca as fases e as cartas, como no exemplo PetMatch do livro da disciplina.
+- **Tópicos-chave:** EF Core com SQLite, num arquivo no computador do aluno. A migration `Inicial` cria as 5 tabelas e a semente carrega as fases e as cartas do conteúdo compartilhado. Ao atualizar o programa, ela também corrige versos e dicas, preservando IDs e progresso. A persistência segue o exemplo PetMatch do livro da disciplina.
 
 ---
 
@@ -143,7 +143,7 @@ ensaiar, leia o [`ESTUDOS.md`](../../ESTUDOS.md).
 - **Objetivo:** mostrar o repositório e os testes.
 - **No GitHub:** abrir o **Pull Request #33** (o programa desktop e os diagramas) e a aba **Actions**, com a checagem "Nex_TI Desktop" passando.
 - **Fala sugerida:**
-  > *"Cada mudança entra por um Pull Request. O GitHub Actions roda os 30 testes do programa: o SM-2, o prêmio uma vez só e o programa de ponta a ponta, com um banco em memória. Se passarem, damos merge na main."*
+  > *"Cada mudança entra por um Pull Request. O GitHub Actions roda os 31 testes do programa: o SM-2, o prêmio uma vez só, a atualização do conteúdo sem perder progresso e o programa de ponta a ponta, com um banco em memória. Se passarem, damos merge na main."*
 
 ---
 
@@ -159,4 +159,4 @@ ensaiar, leia o [`ESTUDOS.md`](../../ESTUDOS.md).
 | O que o diagrama de atividade mostra? | Gabriel | Uma sessão de estudo, do nickname até ganhar XP, com uma raia por camada. |
 | Onde fica o banco? | Maycon | Um arquivo SQLite em `%LOCALAPPDATA%\NexTI.Desktop`, criado pela migration na primeira vez. |
 | Por que o intervalo tem limite? | Maycon | Sem limite, a data da próxima revisão passava do ano 9999 e travava. O teste de carga achou; agora o intervalo para em 100 anos, como no Anki, no site, na API e no desktop. |
-| Como sabem que funciona? | Maycon | 30 testes automáticos, rodados no GitHub a cada Pull Request. |
+| Como sabem que funciona? | Maycon | 31 testes automáticos, rodados no GitHub a cada Pull Request. |

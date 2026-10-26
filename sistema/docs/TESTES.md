@@ -17,15 +17,15 @@ As medições de cobertura, carga e usabilidade anteriores permanecem identifica
 | **API, total** | **266** | `npm test` (5 deles só com `NEXTI_TEST_LOCALDB=1`) |
 | Pacote compartilhado (inclui **carga** e assistente local) | 116 | `npm run test:shared` |
 | App de celular | 18 | `npm run test:mobile` |
-| Nex_TI Desktop | 30 | `npm run test:desktop` |
-| **Total automatizado** | **430** | |
+| Nex_TI Desktop | 31 | `npm run test:desktop` |
+| **Total automatizado** | **431** | |
 | **Carga da API** (requisições reais) | 6 cenários | `node tests/carga/carga-api.mjs` com a API no ar |
 | **Auditoria do código** (código morto, ARIA, depuração) | 5 checagens | `node scripts/auditoria-codigo.mjs` |
 | **Usabilidade** (7 tarefas, computador e celular, e 5 do menu no celular) | 19 execuções | roteiro na seção 6 |
 
-Na execução de 26/10/2026, foram **425 casos aprovados, cinco ignorados e nenhuma
+Na execução de 26/10/2026, foram **426 casos aprovados, cinco ignorados e nenhuma
 falha**: API 261 aprovados e cinco testes opcionais de LocalDB ignorados, pacote
-compartilhado 116, Mobile 18 e desktop 30. O build Web passou; a verificação da
+compartilhado 116, Mobile 18 e desktop 31. O build Web passou; a verificação da
 interface em 390 px e 1440 px passou. A auditoria registrou zero problemas e
 12 avisos de tamanho de arquivo. As medições anteriores de carga não foram refeitas
 para esta ampliação.

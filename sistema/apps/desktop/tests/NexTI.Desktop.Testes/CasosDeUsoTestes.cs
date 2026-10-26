@@ -198,6 +198,61 @@ public sealed class CasosDeUsoTestes : IDisposable
     }
 
     [Fact]
+    public void SementeAtualizada_CorrigeTextoSemPerderIdentidadeProgressoOuCartasExtras()
+    {
+        var aluno = _alunos.Entrar("conteudoatual");
+        var sessao = _estudo.IniciarSessao(aluno, "fase1");
+        var carta = sessao.CartaAtual!;
+        EstudarTudo(aluno, sessao);
+        _estudo.ConcluirFase(aluno, sessao);
+        var revisaoAntes = _contexto.Revisoes.AsNoTracking().Single(r => r.AlunoId == aluno.Id && r.FlashcardId == carta.Id);
+        var conclusaoAntes = _contexto.FasesConcluidas.AsNoTracking().Single(f => f.AlunoId == aluno.Id);
+        var extra = new Dominio.Entidades.Flashcard("fase1", "Carta fora da fonte", "Resposta preservada", "Dica preservada");
+        _contexto.Flashcards.Add(extra);
+        _contexto.SaveChanges();
+        var idsAntes = _contexto.Flashcards.OrderBy(c => c.Id).Select(c => c.Id).ToArray();
+        var conteudo = JsonNode.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "Dados", "conteudo.json")))!;
+        var atualizada = conteudo["flashcards"]!.AsArray().First(c =>
+            c!["codigoFase"]!.GetValue<string>() == carta.CodigoFase && c["frente"]!.GetValue<string>() == carta.Frente)!;
+        atualizada["verso"] = "Explicação corrigida da disciplina";
+        atualizada["dica"] = "Mod_01 · Material atualizado";
+        var caminho = Path.GetTempFileName();
+        try
+        {
+            File.WriteAllText(caminho, conteudo.ToJsonString());
+            Assert.Equal(0, SemeadorDeConteudo.Semear(_contexto, caminho));
+            Assert.Equal(0, SemeadorDeConteudo.Semear(_contexto, caminho));
+            ReabrirPrograma();
+            aluno = _alunos.Entrar("conteudoatual");
+            var salva = _contexto.Flashcards.Single(c => c.Id == carta.Id);
+            Assert.Equal(carta.Frente, salva.Frente);
+            Assert.Equal(carta.CodigoFase, salva.CodigoFase);
+            Assert.Equal("Explicação corrigida da disciplina", salva.Verso);
+            Assert.Equal("Mod_01 · Material atualizado", salva.Dica);
+            Assert.Equal(idsAntes, _contexto.Flashcards.OrderBy(c => c.Id).Select(c => c.Id).ToArray());
+            var revisao = _contexto.Revisoes.Single(r => r.AlunoId == aluno.Id && r.FlashcardId == carta.Id);
+            Assert.Equal(revisaoAntes.Id, revisao.Id);
+            Assert.Equal(revisaoAntes.Repeticoes, revisao.Repeticoes);
+            Assert.Equal(revisaoAntes.IntervaloDias, revisao.IntervaloDias);
+            Assert.Equal(revisaoAntes.FatorFacilidade, revisao.FatorFacilidade);
+            Assert.Equal(revisaoAntes.ProximaRevisao, revisao.ProximaRevisao);
+            Assert.Equal(conclusaoAntes.Id, _contexto.FasesConcluidas.Single(f => f.AlunoId == aluno.Id).Id);
+            Assert.Equal(5, aluno.Xp);
+            Assert.Equal(10, aluno.Moedas);
+            Assert.True(_estudo.ListarFases(aluno).Single(f => f.Codigo == "fase2").Liberada);
+            var cartaExtra = _contexto.Flashcards.Single(c => c.Id == extra.Id);
+            Assert.Equal("Resposta preservada", cartaExtra.Verso);
+            Assert.Equal("Dica preservada", cartaExtra.Dica);
+            atualizada["dica"] = null;
+            File.WriteAllText(caminho, conteudo.ToJsonString());
+            SemeadorDeConteudo.Semear(_contexto, caminho);
+            ReabrirPrograma();
+            Assert.Null(_contexto.Flashcards.Single(c => c.Id == carta.Id).Dica);
+        }
+        finally { File.Delete(caminho); }
+    }
+
+    [Fact]
     public void DisciplinaJaIniciada_NaoTrancaQuandoUmaNovaEInseridaAntes()
     {
         var aluno = _alunos.Entrar("retomada");

@@ -10,7 +10,7 @@
       margens "Nenhuma", "Gráficos de segundo plano" marcado, salvar como PDF
       e apresentar o PDF em tela cheia. O que falar em cada slide está em
       ROTEIRO_DO_PALESTRANTE.md, nesta mesma pasta.
-      As imagens dos diagramas vêm de modelagem-uml/02_Modelagem_UML/.
+      As imagens dos diagramas vêm de ../diagramas/, exportadas do Astah pelo gerador do desktop.
     -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -156,7 +156,7 @@
         .diagrama .lado b { color: var(--nx-ink); }
         .diagrama ol { padding-left: 5mm; display: flex; flex-direction: column; gap: 2mm; }
 
-        /* Os quatro diagramas do desktop, dois por linha */
+        /* Quatro tipos de UML, com duas visões de classes no desktop */
         .galeria { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm 5mm; flex: 1; min-height: 0; }
         .galeria figure { background: #ffffff; border: 1.5px solid var(--nx-border); border-radius: 6px; padding: 1.5mm; display: flex; flex-direction: column; min-height: 0; }
         .galeria img { width: 100%; height: 58mm; object-fit: contain; }
@@ -238,7 +238,7 @@
             <figure><img src="../telas/2-principal.png" alt="Tela principal do Nex_TI Desktop: XP, moedas, nível e a trilha de fases com a situação de cada uma" style="height:105mm;max-width:150mm"></figure>
             <div class="lado">
                 <div class="card"><h3>Entrar</h3><p>O aluno digita só o nickname. Os dados ficam no computador dele.</p></div>
-                <div class="card"><h3>Trilha</h3><p>39 fases e 1078 cartas sobre TI. Concluir uma fase libera a próxima.</p></div>
+                <div class="card"><h3>Trilha</h3><p>39 fases e 1078 cartas: quatro módulos e preparatório ENADE. Concluir libera a próxima fase.</p></div>
                 <div class="card"><h3>SM-2, XP e moedas</h3><p>O SM-2 decide quando cada carta volta. A fase dá XP e moedas só na primeira vez.</p></div>
                 <p><b>Windows Forms</b> + <b>.NET 10</b> + <b>SQLite</b>.</p>
             </div>
@@ -403,7 +403,7 @@
             <tr><td><code>NexTI.Desktop.Aplicacao</code></td><td>ServicoDeAlunos, ServicoDeEstudo e SessaoDeEstudo</td><td>Domínio</td></tr>
             <tr><td><code>NexTI.Desktop.Dominio</code></td><td>Entidades, SM-2 e interfaces</td><td>nenhum</td></tr>
             <tr><td><code>NexTI.Desktop.Infraestrutura</code></td><td>EF Core + SQLite: contexto, repositórios, migration e semente</td><td>Domínio</td></tr>
-            <tr><td><code>NexTI.Desktop.Testes</code></td><td>30 testes automáticos (xUnit)</td><td>Domínio, Aplicação e Infraestrutura</td></tr>
+            <tr><td><code>NexTI.Desktop.Testes</code></td><td>31 testes automáticos (xUnit)</td><td>Domínio, Aplicação e Infraestrutura</td></tr>
         </table>
         <p class="destaque"><strong>Por quê:</strong> o compilador não deixa o Domínio usar a tela ou o banco. Os testes trocam o banco por um em memória sem mudar as regras.</p>
     </div>
@@ -447,7 +447,7 @@
         </div>
         <div class="grid-3">
             <div class="card"><h3>EF Core + SQLite</h3><p>Um arquivo de banco no computador do aluno, sem servidor.</p></div>
-            <div class="card"><h3>Migration e semente</h3><p>A migration Inicial cria as 5 tabelas; a semente coloca as fases e as cartas.</p></div>
+            <div class="card"><h3>Migration e semente</h3><p>5 tabelas pela migration. A semente atualiza cartas e preserva IDs e progresso.</p></div>
             <div class="card"><h3>Atalhos</h3><p>Espaço mostra a resposta; 1 a 4 respondem Errei, Difícil, Bom e Fácil.</p></div>
         </div>
     </div>
@@ -464,15 +464,15 @@
     <div class="slide-body">
         <h2 class="slide-title">Testes e GitHub</h2>
         <div class="grid-4">
-            <div><p class="numero">30</p><p>testes automáticos</p></div>
+            <div><p class="numero">31</p><p>testes automáticos</p></div>
             <div><p class="numero">4</p><p>camadas, uma por projeto</p></div>
             <div><p class="numero">5</p><p>tabelas no SQLite</p></div>
-            <div><p class="numero">4</p><p>tipos de diagrama UML</p></div>
+            <div><p class="numero">4</p><p>tipos de UML em 5 diagramas</p></div>
         </div>
         <div class="fluxo">
             <span>Pull Request</span><i>→</i><span>GitHub Actions roda os testes</span><i>→</i><span>Merge na main</span>
         </div>
-        <p class="destaque"><strong>Os testes</strong> conferem o SM-2, o prêmio uma vez só e o programa de ponta a ponta, com um banco SQLite em memória.</p>
+        <p class="destaque"><strong>Os testes</strong> conferem o SM-2, o prêmio único, a atualização de cartas sem perder progresso e os casos de uso com SQLite em memória.</p>
     </div>
     <div class="slide-footer"><span>Nex_TI Desktop · P.A. em .NET</span><span><strong>Maycon</strong> · Slide 12 / 13</span></div>
     <div class="progresso"><i style="width:92%"></i></div>

@@ -17,7 +17,7 @@ public static class FabricaDoContexto
     public static ContextoNexTI Criar(string conexao) =>
         new(new DbContextOptionsBuilder<ContextoNexTI>().UseSqlite(conexao).Options);
 
-    /// <summary>Abre o banco, aplica as migrations pendentes e põe o conteúdo se estiver vazio.</summary>
+    /// <summary>Abre o banco, aplica as migrations pendentes e atualiza o conteúdo preservando o progresso.</summary>
     public static ContextoNexTI AbrirEPreparar(string caminhoDoBanco, string caminhoDoConteudo)
     {
         var contexto = Criar($"Data Source={caminhoDoBanco}");

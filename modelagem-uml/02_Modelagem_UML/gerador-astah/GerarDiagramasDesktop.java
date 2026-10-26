@@ -30,8 +30,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Gera "Diagrams Nex_TI Desktop - PA DotNet.asta" (guardado em sistema/apps/desktop/docs/diagramas): os quatro diagramas UML pedidos na
- * apresentação de P.A. em .NET (caso de uso, classes, sequência e atividade), todos tirados do
+ * Gera "Diagrams Nex_TI Desktop - PA DotNet.asta" (guardado em sistema/apps/desktop/docs/diagramas): cinco diagramas dos quatro tipos de UML pedidos na
+ * apresentação de P.A. em .NET (caso de uso, classes em duas visões, sequência e atividade), todos tirados do
  * código de sistema/apps/desktop. Todo elemento recebe uma Definition.
  *
  * Uso (PowerShell, nesta pasta; a API do Astah precisa do Java 21 que vem com ele):
@@ -102,7 +102,7 @@ public class GerarDiagramasDesktop {
         // {nome, definição, x, y, ligado ao ator?}
         String[][] casos = {
             {"Entrar com nickname", "O aluno digita o nickname (3 a 20 letras). Se ainda não existe neste computador, o programa cria o aluno. ServicoDeAlunos.Entrar.", "240", "70", "s"},
-            {"Ver painel e trilha", "Mostra XP, moedas, nível e as fases do catálogo compartilhado, na ordem dos módulos 1 a 4 e do preparatório ENADE, com a situação de cada uma (concluída, liberada ou trancada). A atualização do conteúdo acrescenta cartas sem apagar as revisões anteriores. ServicoDeEstudo.Painel e ListarFases.", "240", "170", "s"},
+            {"Ver painel e trilha", "Mostra XP, moedas, nível e as fases do catálogo compartilhado, na ordem dos módulos 1 a 4 e do preparatório ENADE, com a situação de cada uma (concluída, liberada ou trancada). A carga acrescenta cartas e atualiza versos e dicas sem apagar IDs, revisões ou conclusões. ServicoDeEstudo.Painel e ListarFases.", "240", "170", "s"},
             {"Estudar fase", "Abre uma fase liberada com as cartas vencidas primeiro, depois as novas. ServicoDeEstudo.IniciarSessao.", "240", "290", "s"},
             {"Responder carta", "O aluno vê a pergunta, mostra a resposta e escolhe Errei, Difícil, Bom ou Fácil; o SM-2 marca a próxima revisão. ServicoDeEstudo.Responder.", "520", "250", ""},
             {"Concluir fase", "Quando todas as cartas foram acertadas: paga XP e moedas só na primeira vez e libera a próxima fase. ServicoDeEstudo.ConcluirFase.", "520", "360", ""},
@@ -127,8 +127,8 @@ public class GerarDiagramasDesktop {
     /** {nome, camada, tipo (classe, abstrata, interface), definição, atributos (;), operações (;)} */
     private static final String[][] CLASSES = {
         {"TelaEntrada", "Apresentação", "classe", "Tela de entrada (Form): o aluno digita o nickname.", "AlunoQueEntrou : Aluno", "Entrar() : void"},
-        {"TelaPrincipal", "Apresentação", "classe", "Painel do aluno (Form): XP, moedas, nível e a lista de fases.", "", "Atualizar() : void;EstudarSelecionada() : void"},
-        {"TelaEstudo", "Apresentação", "classe", "Tela de estudo (Form): pergunta, resposta e os quatro botões do SM-2.", "", "MostrarResposta() : void;Responder(resposta : Resposta) : void;Concluir() : void"},
+        {"TelaPrincipal", "Apresentação", "classe", "Painel do aluno (Form): XP, moedas, nível e a lista das 39 fases. A coluna de disciplina acompanha o espaço disponível e a dica mostra o nome completo.", "", "Atualizar() : void;EstudarSelecionada() : void"},
+        {"TelaEstudo", "Apresentação", "classe", "Tela de estudo (Form): pergunta, resposta e quatro botões do SM-2. Cabeçalho e textos acomodam nomes longos; o conteúdo da carta pode rolar e os botões acompanham a largura da janela.", "", "MostrarResposta() : void;Responder(resposta : Resposta) : void;Concluir() : void"},
         {"ServicoDeAlunos", "Aplicação", "classe", "Caso de uso Entrar: acha o aluno pelo nickname ou cria um novo.", "", "Entrar(nickname : string) : Aluno"},
         {"ServicoDeEstudo", "Aplicação", "classe", "Casos de uso do estudo: painel, trilha, abrir a fase, responder e concluir. Só conhece interfaces.", "",
             "Painel(aluno : Aluno) : PainelDoAluno;ListarFases(aluno : Aluno) : ResumoDaFase[*];IniciarSessao(aluno : Aluno, codigoFase : string) : SessaoDeEstudo;Responder(aluno : Aluno, sessao : SessaoDeEstudo, resposta : Resposta) : void;ConcluirFase(aluno : Aluno, sessao : SessaoDeEstudo) : ResultadoDaConclusao"},
@@ -149,6 +149,7 @@ public class GerarDiagramasDesktop {
         {"IRepositorioDeRevisoes", "Domínio", "interface", "Contrato para ler e guardar as revisões do aluno.", "", "DoAluno(alunoId : int) : Revisao[*];Adicionar(revisao : Revisao) : void"},
         {"IUnidadeDeTrabalho", "Domínio", "interface", "Grava de uma vez tudo o que mudou.", "", "Salvar() : void"},
         {"ContextoNexTI", "Infraestrutura", "classe", "DbContext do EF Core com SQLite: cada DbSet vira uma tabela (migration Inicial).", "", "OnModelCreating(modelo : ModelBuilder) : void"},
+        {"SemeadorDeConteudo", "Infraestrutura", "classe", "Classe estática executada na abertura pelo Program.cs. Lê conteudo.json, inclui fases e cartas novas e atualiza descrição e ordem das fases. Para uma carta reconhecida pelo código da fase e pela pergunta, atualiza Verso e Dica preservando Id, revisões, conclusões e recompensas. Importa apenas as 39 fases regulares (1078 cartas), sem bônus.", "", "Semear(contexto : ContextoNexTI, caminhoDoConteudo : string) : int"},
         {"RepositorioDeAlunos", "Infraestrutura", "classe", "Implementa IRepositorioDeAlunos com EF Core.", "", ""},
         {"RepositorioDeFases", "Infraestrutura", "classe", "Implementa IRepositorioDeFases com EF Core.", "", ""},
         {"RepositorioDeRevisoes", "Infraestrutura", "classe", "Implementa IRepositorioDeRevisoes com EF Core.", "", ""},
@@ -188,7 +189,7 @@ public class GerarDiagramasDesktop {
             {"ServicoDeAlunos", "ServicoDeEstudo", "", "TabelaDeRecompensas", ""},
             {"IRepositorioDeAlunos", "IRepositorioDeFases", "IRepositorioDeRevisoes", "IUnidadeDeTrabalho", "IAgendadorDeRevisao"},
             {"RepositorioDeAlunos", "RepositorioDeFases", "RepositorioDeRevisoes", "UnidadeDeTrabalho", "AgendadorSm2"},
-            {"", "", "ContextoNexTI", "", ""},
+            {"SemeadorDeConteudo", "", "ContextoNexTI", "", ""},
         };
         String[][] relCamadas = {
             {"usa", "TelaEntrada", "ServicoDeAlunos"}, {"usa", "TelaPrincipal", "ServicoDeEstudo"}, {"usa", "TelaEstudo", "ServicoDeEstudo"},
@@ -202,6 +203,7 @@ public class GerarDiagramasDesktop {
             {"implementa", "RepositorioDeRevisoes", "IRepositorioDeRevisoes"}, {"implementa", "UnidadeDeTrabalho", "IUnidadeDeTrabalho"},
             {"usa", "RepositorioDeAlunos", "ContextoNexTI"}, {"usa", "RepositorioDeFases", "ContextoNexTI"},
             {"usa", "RepositorioDeRevisoes", "ContextoNexTI"}, {"usa", "UnidadeDeTrabalho", "ContextoNexTI"},
+            {"usa", "SemeadorDeConteudo", "ContextoNexTI"},
         };
         diagramaDeClasses(pacote, "2. Classes - camadas",
             "As quatro camadas do programa (cada uma é um projeto): telas → serviços → interfaces do domínio ← implementações com EF Core. As linhas tracejadas com seta aberta são \"usa\"; as com triângulo, \"implementa\".",
@@ -668,7 +670,8 @@ public class GerarDiagramasDesktop {
         if (e instanceof com.change_vision.jude.api.inf.model.IRealization r)
             return r.getClient().getName() + " implementa a interface " + r.getSupplier().getName() + ".";
         if (e instanceof com.change_vision.jude.api.inf.model.IDependency dep)
-            return dep.getClient().getName() + " usa " + dep.getSupplier().getName() + " (recebe pelo construtor).";
+            return dep.getClient().getName() + " usa " + dep.getSupplier().getName()
+                + (dep.getClient().getName().equals("SemeadorDeConteudo") ? " (recebe como parâmetro de Semear)." : " (recebe pelo construtor).");
         if (e instanceof com.change_vision.jude.api.inf.model.IInclude inc)
             return inc.getIncludingCase().getName() + " sempre inclui " + inc.getAddition().getName() + " («include»).";
         if (e instanceof com.change_vision.jude.api.inf.model.IExtend ext)
