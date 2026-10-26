@@ -21,14 +21,11 @@ body.high-contrast-mode .assistente-nexti { --assistente-scroll-cor: #fff; --ass
 .assistente-nexti button { cursor: pointer; }
 .assistente-nexti button:focus-visible, .assistente-nexti textarea:focus-visible, .assistente-nexti summary:focus-visible { outline: 2px solid var(--nexti-cyan); outline-offset: 3px; }
 .assistente-abrir { position: fixed; right: 30px; bottom: var(--assistente-base); z-index: 999; width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; color: var(--nexti-cyan); background: #101c24; border: 1px solid var(--nexti-cyan); border-radius: 50%; box-shadow: 0 4px 16px #0008; }
+/* Mantém a mesma flutuação contínua configurada no botão de voltar ao topo. */
 .assistente-abrir { opacity: .8; animation: floatButton 3s ease-in-out infinite; transition: opacity .2s ease, scale .2s ease, background .2s ease; }
 /* O foco volta ao botão ao fechar o chat; ele não deve interromper a flutuação. */
 .assistente-abrir:hover, .assistente-abrir:focus-visible { opacity: 1; background: #17333c; scale: 1.1; }
 .assistente-abrir:active { opacity: 1; scale: .95; }
-@media (prefers-reduced-motion: reduce) {
-  .assistente-abrir { animation: none; transition: none; }
-  .assistente-abrir:hover, .assistente-abrir:focus-visible, .assistente-abrir:active { scale: none; }
-}
 .icone-nexor { width: 30px; height: 30px; flex-shrink: 0; }
 .nexor-chapeu { fill: #101c24; }
 .assistente-cabecalho .icone-nexor { width: 26px; height: 26px; }
