@@ -15,6 +15,7 @@ import { ModalConta } from '../components/modais/ModalConta';
 import { ModalProgresso } from '../components/modais/ModalProgresso';
 import { ModalNivelamento } from '../components/modais/ModalNivelamento';
 import { ModalMapaNeural } from '../components/modais/ModalMapaNeural';
+import { ModalTrilha } from '../components/modais/ModalTrilha';
 import { ModalCertificado } from '../components/modais/ModalCertificado';
 import { Toasts } from '../components/ui/Toasts';
 import { CyberDialog } from '../components/ui/CyberDialog';
@@ -39,13 +40,14 @@ function useAtalhos(refBusca) {
       }
 
       if (e.key === '/' && !editando) {
+        if (s.modal || s.dialogo) return;
         e.preventDefault();
         refBusca.current?.focus();
         refBusca.current?.select();
         return;
       }
 
-      if (!s.faseAtiva || !s.cartaAtual || s.enade || editando || s.modal || s.dialogo) return;
+      if (!s.faseAtiva || !s.cartaAtual || s.enade || editando || s.modal || s.dialogo || e.target.closest?.('.resumo-disciplina')) return;
       // Com o foco num botão (uma fase, a carta), o Espaço é dele: não vira a carta por aqui também.
       const emBotao = document.activeElement?.matches?.('button, [role="button"], a[href]');
       if (e.code === 'Space' && emBotao) return;
@@ -83,6 +85,7 @@ function Dashboard() {
       <ModalProgresso />
       <ModalNivelamento />
       <ModalMapaNeural />
+      <ModalTrilha />
       <ModalCertificado />
       <ModalAdmin />
       <ModalConta />

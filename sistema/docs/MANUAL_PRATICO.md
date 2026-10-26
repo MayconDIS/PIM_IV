@@ -19,7 +19,7 @@ respostas; ele não prevê exatamente quando uma pessoa esquecerá um conteúdo.
 ### No celular
 O site se adapta à tela do celular (abaixo de 800px de largura):
 - uma **barra no rodapé da tela** leva a Fases, Estatísticas, Criar carta, Mapa e Conta;
-- o **menu** (☰, no canto de cima) reúne Minha Conta, Minhas Estatísticas, Mapa Neural, Refazer Diagnóstico, Limpar Dados, Acessibilidade e Sair. O painel do Tutor/Admin também aparece para esses perfis.
+- o **menu** (☰, no canto de cima) reúne Minha Conta, Minhas Estatísticas, Mapa Neural, Trilha, Refazer Diagnóstico, Limpar Dados, Acessibilidade e Sair. O painel do Tutor/Admin também aparece para esses perfis.
 
 ### Acessibilidade e volta ao topo
 No computador e no celular, abra o **menu** (☰) para encontrar **Acessibilidade**:
@@ -71,6 +71,18 @@ Para manter os alunos motivados e engajados a longo prazo (especialmente em proj
 ## 📚 4. Explorando Módulos e Flashcards
 No Dashboard, o menu esquerdo ("Missões de Aprendizagem") exibe todas as disciplinas mapeadas (ex: Lógica de Programação, Redes, UX/UI, Cibersegurança), culminando nos **Simulados ENADE** nas etapas finais do percurso técnico.
 
+### Consultar a Trilha e os resumos
+No computador e no navegador do celular, abra o menu **☰ → Trilha**, logo abaixo
+de **Mapa Neural**. Escolha um dos quatro semestres para consultar as disciplinas,
+seus resumos, tópicos e fontes. **Estudar** abre a fase correspondente quando ela
+está liberada; consultar um resumo não ignora o bloqueio da trilha. Os resumos
+também aparecem junto das disciplinas no painel e no aplicativo Expo.
+
+São 31 disciplinas de AVA e ED nos quatro módulos do curso, com 496 novas cartas
+autorais. O módulo 5 mantém o ENADE, e as disciplinas complementares do módulo 2
+continuam disponíveis. Os materiais originais não são distribuídos pelo site: as
+fontes indicam arquivo e página ou slide para consulta no acervo da faculdade.
+
 ### Como estudar:
 1. Clique em uma **Fase/Disciplina** ou no **Simulado ENADE**.
 2. O sistema consulta as cartas da fase na API. Se ela estiver indisponível e sua sessão já estiver salva, usa o conteúdo local; testes de módulo são montados no navegador.
@@ -82,9 +94,10 @@ No Dashboard, o menu esquerdo ("Missões de Aprendizagem") exibe todas as discip
 
 ## 5. Dados salvos neste navegador
 
-Fases liberadas, compras de bônus e posições do Mapa Neural ficam neste
-navegador. Limpar os dados do site ou trocar de dispositivo pode perder essas
-informações. O progresso das cartas pode ser enviado à API, mas respostas cujo
+A API guarda as fases concluídas e ajuda a recuperar a continuidade da trilha
+em outro aparelho. Preferências locais, compras de bônus e posições do Mapa
+Neural também dependem dos dados deste navegador. Limpar os dados do site pode
+apagar essas informações locais. O progresso das cartas pode ser enviado à API, mas respostas cujo
 envio falhou não são reenviadas automaticamente no Web. O aplicativo móvel usa
 login próprio e sincroniza o progresso com a API; preferências locais do site
 não são compartilhadas automaticamente com o aparelho.

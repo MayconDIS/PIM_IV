@@ -37,7 +37,7 @@ interface, não da classe.
 |---|---|---|
 | `GET /api/status` | A API está no ar? | Não |
 | `POST /api/auth/register` · `POST /api/auth/login` | Cadastro e login (devolve o JWT) | Não |
-| `GET /api/usuarios/{username}` | Perfil: XP, moedas e nível | Sim, só o dono |
+| `GET /api/usuarios/{username}` | Perfil: XP, moedas, nível e `fasesConcluidas` (`string[]` com códigos de fases) | Sim, só o dono |
 | `GET /api/usuarios/{username}/stats-detalhadas` | Números do SM-2 do aluno | Sim, só o dono |
 | `POST /api/progresso/concluir-fase` | Conclui uma fase: a API paga XP e moedas pela tabela de recompensas só na primeira conclusão (grava em `fases_concluidas`) e devolve o prêmio pago e os totais | Sim |
 | `POST /api/usuarios/bonus/{id}/comprar` | Compra um bônus: a API confere o saldo e desconta as moedas | Sim |
@@ -152,13 +152,33 @@ para cada caso de uso, MER, DER (modelo lógico) e modelo físico. As imagens es
 | JWT e identificação da sessão web | `localStorage` do navegador |
 | XP, moedas, nível | No navegador e no banco, nas atualizações enviadas pelo cliente |
 | Progresso do SM-2 | No navegador; enviado ao banco para cartas com ID quando a API está disponível |
-| Fases liberadas, bônus comprados, Mapa Neural | Só no navegador (`localStorage`) |
+| Fases concluídas | Banco, retornadas em `GET /api/usuarios/{username}` para recuperar a continuidade da trilha |
+| Fases liberadas, bônus comprados, Mapa Neural | Estado local no navegador (`localStorage`); conclusões da API também participam da liberação |
 | Conversa do Nexor, assistente do Nex_TI | Só na memória da tela; não vai para o servidor nem para `localStorage` |
 
-A compra de bônus desconta moedas localmente, mas não chama a API nessa ação.
-Não há fila de reenvio de respostas nem garantia de sincronização após uma
-falha de rede. O backend limita incrementos de XP e moedas, mas ainda recebe
-do cliente os totais calculados; não calcula a recompensa a partir de cada resposta.
+A compra de bônus usa a API para conferir e descontar o saldo. A conclusão de fase
+paga o prêmio no servidor uma única vez. O Web não tem fila de reenvio de respostas
+que falham; o Expo mantém essa fila. A rota de atualização de totais permanece como
+reserva para falhas e para o diagnóstico.
+
+### 6.1 Conteúdo de AVA e ED
+
+O catálogo em `packages/shared/src/academico` reúne 31 disciplinas dos quatro semestres,
+com resumos, tópicos, referências relativas ao acervo e 496 cartas autorais. Cada carta
+indica sua fonte e página física do PDF ou slide do PPTX. Os arquivos originais não
+são publicados com a aplicação. A integração amplia os quatro módulos existentes e
+preserva o módulo 5, ENADE, além das três disciplinas complementares do módulo 2.
+O conteúdo final tem 39 fases regulares e quatro bônus, com 1198 cartas.
+
+Os códigos antigos das fases continuam iguais; apenas a sequência visível dos títulos
+é reorganizada. O cache recebe cartas novas sem substituir seu estado de revisão SM-2
+e sem recuperar cartas removidas pela moderação. A lista `fasesConcluidas` do perfil
+ajuda a manter o acesso às fases seguintes quando o aluno troca de aparelho.
+
+No Web, `ModalTrilha` abre pelo menu, abaixo de Mapa Neural, com quatro seletores de
+semestre, resumo, fontes e acesso ao estudo conforme a liberação da fase. O painel e
+o Expo também exibem resumos por disciplina. Esse catálogo é local, sem nova rota
+ou tabela; a API continua com 26 rotas e as mesmas autorizações.
 
 ## 7. Segurança
 

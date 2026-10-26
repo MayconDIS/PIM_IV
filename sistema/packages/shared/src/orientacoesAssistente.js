@@ -1,6 +1,11 @@
 /** Orientações locais conferidas com os fluxos e regras do Nex_TI. */
 export const ORIENTACOES_ASSISTENTE = [
   {
+    titulo: 'Trilha por semestre',
+    perguntas: ['Onde fica a trilha?', 'Como estudar AVA e ED?', 'Onde encontro os resumos?', 'Como passar de semestre?', 'Como estudar as disciplinas dos quatro semestres?'],
+    texto: 'Abra o menu e escolha Trilha, abaixo de Mapa Neural. Os quatro semestres mostram as disciplinas, seus resumos, materiais de referência e flashcards. AVA identifica os materiais on-line e ED, os presenciais do acervo. As fases e os testes liberam as próximas etapas; resumos podem ser consultados antes. As disciplinas complementares anteriores foram mantidas. O preparatório ENADE tem um módulo próprio após os quatro semestres. O progresso indica as disciplinas com todas as cartas estudadas, não a aprovação acadêmica da faculdade.',
+  },
+  {
     titulo: 'Revisão espaçada (SM-2)',
     perguntas: ['Como funciona o SM-2?', 'Como revisar os flashcards?', 'O que significam De novo Difícil Bom Fácil?'],
     texto: 'Depois de revelar a resposta da carta, escolha De novo, Difícil, Bom ou Fácil conforme sua lembrança. O SM-2 usa essa resposta para agendar a próxima revisão. A trilha prioriza cartas novas ou com revisão vencida. Revisar uma fase já concluída atualiza as revisões, sem repetir o prêmio de XP e moedas.',

@@ -77,3 +77,4 @@ export {
 export { verificarSenhaVazada, mensagemDeSenhaVazada, sha1HexWeb } from './senhaVazada.js';
 
 export { responderPergunta } from './assistente.js';
+export { DISCIPLINAS_ACADEMICAS } from './academico/catalogo.js';

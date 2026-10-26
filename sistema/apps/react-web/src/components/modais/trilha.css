@@ -1,0 +1,34 @@
+.modal-trilha { width: min(900px, 96vw); max-width: 900px; }
+.trilha-corpo { color: var(--nexti-text, #e6edf3); }
+.trilha-introducao, .trilha-teste { line-height: 1.6; color: #b7c6d2; margin: 0 0 18px; }
+.trilha-semestres { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 24px; }
+.trilha-semestres button { min-height: 80px; padding: 12px 8px; border: 1px solid #34535d; border-radius: 12px; background: #101c24; color: #e6edf3; font: inherit; cursor: pointer; }
+.trilha-semestres button[aria-pressed="true"] { border-color: var(--nexti-cyan); background: #12333b; }
+.trilha-semestres strong, .trilha-semestres span { display: block; }
+.trilha-semestres strong { color: var(--nexti-cyan); }
+.trilha-semestres span { font-size: .72rem; margin-top: 8px; line-height: 1.4; }
+.trilha-progresso { display: block; margin: 12px 0 20px; font-size: .85rem; line-height: 1.5; }
+.trilha-progresso progress { display: block; width: 100%; height: 12px; margin-top: 8px; accent-color: var(--nexti-cyan); }
+.trilha-disciplinas { list-style: none; padding: 0; margin: 0; }
+.trilha-disciplina { padding: 16px; margin-bottom: 14px; border: 1px solid #34535d; border-radius: 12px; background: #101c24; }
+.trilha-disciplina-titulo { display: flex; justify-content: space-between; align-items: start; gap: 12px; }
+.trilha-disciplina h4 { margin: 0; line-height: 1.4; }
+.trilha-disciplina-titulo > span { font-size: .72rem; color: var(--nexti-cyan); flex-shrink: 0; }
+.trilha-disciplina > p { color: #b7c6d2; font-size: .8rem; margin: 8px 0 12px; }
+.trilha-disciplina .btn-action, .trilha-corpo section > .btn-action { min-height: 44px; max-width: 100%; white-space: normal; line-height: 1.4; }
+.trilha-corpo .btn-action:disabled { opacity: .65; cursor: default; box-shadow: none; text-shadow: none; }
+.trilha-corpo button:focus-visible, .resumo-disciplina summary:focus-visible { outline: 2px solid var(--nexti-cyan); outline-offset: 3px; }
+.resumo-disciplina { margin: 12px 0; text-align: left; color: #d4e0e8; font-size: .88rem; line-height: 1.65; overflow-wrap: anywhere; }
+.resumo-disciplina > summary, .fontes-disciplina > summary { cursor: pointer; color: var(--nexti-cyan); padding: 8px 0; }
+.resumo-disciplina p { margin: 10px 0; }
+.resumo-disciplina ul { padding-left: 22px; }
+.resumo-disciplina h4 { margin-top: 16px; }
+.fontes-disciplina { font-size: .78rem; margin-top: 14px; border-top: 1px solid #34535d; }
+body.high-contrast-mode :is(.trilha-semestres button, .trilha-disciplina) { background: #000; color: #fff; border-color: #fff; }
+body.high-contrast-mode :is(.trilha-introducao, .trilha-teste, .trilha-disciplina p, .trilha-disciplina-titulo > span, .trilha-semestres strong, .resumo-disciplina, .resumo-disciplina summary) { color: #fff; }
+@media (max-width: 600px) {
+  .trilha-semestres { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .trilha-disciplina-titulo { flex-direction: column; gap: 5px; }
+  .trilha-disciplina { padding: 12px; }
+  .trilha-disciplina .btn-action { width: 100%; }
+}

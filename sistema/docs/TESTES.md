@@ -1,7 +1,8 @@
 # Programa de testes do Nex_TI
 
 Este documento diz **o que cada tipo de teste responde**, **o que ele não responde** e o que cada
-um encontrou. Medido em **25/10/2026**, no Windows 11 com .NET 10 e Node 24.
+um encontrou. Placar atualizado em **26/10/2026**, no Windows 11 com .NET 10 e Node 24.
+As medições de cobertura, carga e usabilidade anteriores permanecem identificadas nas seções abaixo.
 
 ---
 
@@ -9,18 +10,34 @@ um encontrou. Medido em **25/10/2026**, no Windows 11 com .NET 10 e Node 24.
 
 | Suíte | Casos | Comando (na pasta `sistema/`) |
 | :--- | ---: | :--- |
-| API: unitários e integração | 186 | `npm test` |
-| API: **caixa preta** (regras de negócio pelas rotas) | 23 | idem (`CaixaPreta/`) |
+| API: unitários e integração | 200 | `npm test` |
+| API: **caixa preta** (regras de negócio pelas rotas) | 24 | idem (`CaixaPreta/`) |
 | API: **caixa branca** (caminhos do código) | 20 | idem (`CaixaBranca/`) |
 | API: concorrência (achado da carga) | 2 | idem (`Carga/`) |
-| **API, total** | **231** | `npm test` (4 deles só com `NEXTI_TEST_LOCALDB=1`) |
-| Pacote compartilhado (inclui **carga** e assistente local) | 84 | `npm run test:shared` |
-| App de celular | 16 | `npm run test:mobile` |
-| Nex_TI Desktop | 28 | `npm run test:desktop` |
-| **Total automatizado** | **359** | |
+| **API, total** | **246** | `npm test` (4 deles só com `NEXTI_TEST_LOCALDB=1`) |
+| Pacote compartilhado (inclui **carga** e assistente local) | 98 | `npm run test:shared` |
+| App de celular | 17 | `npm run test:mobile` |
+| Nex_TI Desktop | 30 | `npm run test:desktop` |
+| **Total automatizado** | **391** | |
 | **Carga da API** (requisições reais) | 6 cenários | `node tests/carga/carga-api.mjs` com a API no ar |
 | **Auditoria do código** (código morto, ARIA, depuração) | 5 checagens | `node scripts/auditoria-codigo.mjs` |
 | **Usabilidade** (7 tarefas, computador e celular, e 5 do menu no celular) | 19 execuções | roteiro na seção 6 |
+
+Na execução de 26/10/2026, foram **387 casos aprovados, quatro ignorados e nenhuma
+falha**: API 242 aprovados e quatro testes opcionais de LocalDB ignorados, pacote
+compartilhado 98, Mobile 17 e desktop 30. O build Web passou; a verificação da
+interface em 390 px e 1440 px passou. A auditoria registrou zero problemas e
+12 avisos de tamanho de arquivo. As medições anteriores de carga não foram refeitas
+para esta ampliação.
+
+### Conteúdo acadêmico e continuidade
+
+Os testes de AVA e ED conferem as 31 disciplinas nos quatro módulos existentes,
+resumos, fontes e páginas, contagens, ausência de perguntas duplicadas e consulta
+conceitual pelo Nexor. A integração também verifica o acréscimo de cartas ao cache
+sem substituir a revisão SM-2 ou recuperar exclusões da moderação, a preservação
+dos códigos antigos e a ordem das fases. A consulta do perfil devolve as conclusões
+para o Web e o Expo recuperarem a continuidade da trilha.
 
 ### Cobertura do código de produção
 
@@ -73,7 +90,7 @@ cita a regra que verifica. Só entram pela porta da frente: as rotas HTTP, com l
 | RN01 Recompensa só no servidor | 5 XP e 10 moedas só na 1ª conclusão; teste de módulo só paga com o corte (70%; ENADE 80%); fase inexistente não paga |
 | RN02 Perfis | Aluno cria carta mas não edita/exclui; Tutor modera; painéis só para o perfil certo; só o Admin muda perfil; sem login, 401; aluno não lê dados de outro |
 | RN03 Moedas | bônus custa 50 e é recusado sem saldo |
-| RN04 Trilha | fases na ordem; a fase concluída fica no servidor (outro aparelho vê) |
+| RN04 Trilha | fases na ordem; conclusões devolvidas no perfil; resumos não liberam fases; conteúdo novo preserva os códigos e a revisão existente |
 | RN05 Progresso não volta | XP e nível não descem; salto de mais de 200 XP é recusado |
 | RN06 Sempre um Admin | o último Admin não perde o perfil nem exclui a conta |
 | RN07 Senha segura | curta, com o nickname ou longa demais é recusada; guardada com BCrypt; senha errada dá 401 |
@@ -144,7 +161,7 @@ aqui o objetivo é achar gargalo e defeito no código.
 
 ### 4.2 Algoritmos do navegador e do celular — `packages/shared/tests/carga.test.js`
 
-Hoje são 702 cartas. Os testes usam 50.000 e 100.000 (70 a 140 vezes o real). Duas checagens, como
+Hoje são 1198 cartas. Os testes usam 50.000 e 100.000 (cerca de 42 a 83 vezes o real). Duas checagens, como
 no CasalFlow: a **forma da curva** (dobrar a entrada não pode mais que ~dobrar o tempo) e um **teto**
 com ~10x de folga sobre o medido.
 

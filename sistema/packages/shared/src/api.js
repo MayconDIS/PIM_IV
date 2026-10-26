@@ -134,14 +134,9 @@ const ApiService = {
 
     // 6. Busca os Flashcards de uma Fase específica
     getFlashcardsPorFase: async (codigoFase) => {
-        try {
-            const response = await fetch(`${baseAtual()}/fases/${encodeURIComponent(codigoFase)}/flashcards`);
-            if (!response.ok) throw new Error("Flashcards não encontrados");
-            return await response.json();
-        } catch (error) {
-            console.error("Erro ao buscar flashcards da fase:", error);
-            return [];
-        }
+        const response = await fetch(`${baseAtual()}/fases/${encodeURIComponent(codigoFase)}/flashcards`);
+        if (!response.ok) throw new Error("Não foi possível buscar as cartas desta fase.");
+        return await response.json();
     },
 
     // 7. Cria um novo flashcard no servidor

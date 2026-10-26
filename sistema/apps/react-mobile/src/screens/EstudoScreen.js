@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { devolveParaRevisao, estadoDaCarta, previsoes } from '@nexti/shared/sm2';
 import { tokens } from '../theme/tokens';
+import ResumoAcademico from '../components/ResumoAcademico';
 
 const BOTOES = [
   { resultado: 'again', rotulo: 'Errei', cor: tokens.colors.sm2Again },
@@ -88,6 +89,7 @@ export default function EstudoScreen({ fase, api, sinc, onSair, onErroDeSessao }
         <Text style={styles.contador}>{fase.titulo} · faltam {fila.length}</Text>
       </View>
 
+      <ResumoAcademico key={fase.id} disciplina={fase.academico} />
       <TouchableOpacity activeOpacity={0.9} onPress={() => setVirada(!virada)} style={[styles.carta, virada && styles.cartaVirada]} accessibilityRole="button" accessibilityHint="Vira a carta">
         <Text style={styles.etiqueta}>{virada ? '✓ RESPOSTA' : '? PERGUNTA'}</Text>
         <Text style={styles.textoCarta}>{virada ? carta.verso : carta.frente}</Text>

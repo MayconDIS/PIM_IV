@@ -125,6 +125,7 @@ namespace NexTI_API.Tests
             using var db = NovoBanco();
             var seeder = new NexTI_API.Services.Seed.ConteudoSeeder();
             await seeder.ExecutarAsync(db);
+            var totalAntes = await db.Flashcards.CountAsync();
             var cartas = await db.Flashcards.OrderBy(f => f.Id).Take(2).ToListAsync();
             var (editada, excluida) = (cartas[0], cartas[1]);
             var frenteOriginal = editada.Frente;
@@ -135,7 +136,7 @@ namespace NexTI_API.Tests
             var inseridosNoReinicio = await seeder.ExecutarAsync(db);   // a API sobe de novo
 
             Assert.Equal(0, inseridosNoReinicio);
-            Assert.Equal(701, await db.Flashcards.CountAsync());
+            Assert.Equal(totalAntes - 1, await db.Flashcards.CountAsync());
             Assert.False(await db.Flashcards.AnyAsync(f => f.Frente == frenteOriginal));
             Assert.False(await db.Flashcards.AnyAsync(f => f.Frente == excluida.Frente));
         }

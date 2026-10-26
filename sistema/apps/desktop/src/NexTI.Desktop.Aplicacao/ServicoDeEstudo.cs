@@ -42,7 +42,9 @@ public class ServicoDeEstudo
         {
             var paraRevisar = fase.Cartas.Count(c => revisoes.TryGetValue(c.Id, out var r) && r.VenceAte(hoje));
             var concluida = aluno.JaConcluiu(fase.Codigo);
-            lista.Add(new ResumoDaFase(fase.Codigo, fase.Descricao, fase.Cartas.Count, paraRevisar, concluida, anteriorConcluida || concluida));
+            // Uma disciplina já iniciada continua acessível quando entram fases antes dela.
+            var iniciada = fase.Cartas.Any(c => revisoes.ContainsKey(c.Id));
+            lista.Add(new ResumoDaFase(fase.Codigo, fase.Descricao, fase.Cartas.Count, paraRevisar, concluida, anteriorConcluida || concluida || iniciada));
             anteriorConcluida = concluida;
         }
         return lista;

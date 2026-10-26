@@ -46,6 +46,42 @@
       }
     },
     {
+      "faseId": "fase26",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 5,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase27",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 5,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase28",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 5,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase29",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 5,
+        "moedas": 10
+      }
+    },
+    {
       "faseId": "fase6",
       "acertos": 0,
       "total": 0,
@@ -83,6 +119,33 @@
     },
     {
       "faseId": "fase10",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 10,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase30",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 10,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase31",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 10,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase32",
       "acertos": 0,
       "total": 0,
       "esperado": {
@@ -136,6 +199,42 @@
       }
     },
     {
+      "faseId": "fase33",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 15,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase34",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 15,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase35",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 15,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase36",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 15,
+        "moedas": 10
+      }
+    },
+    {
       "faseId": "fase16",
       "acertos": 0,
       "total": 0,
@@ -173,6 +272,33 @@
     },
     {
       "faseId": "fase20",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 20,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase37",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 20,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase38",
+      "acertos": 0,
+      "total": 0,
+      "esperado": {
+        "xp": 20,
+        "moedas": 10
+      }
+    },
+    {
+      "faseId": "fase39",
       "acertos": 0,
       "total": 0,
       "esperado": {

@@ -74,12 +74,12 @@ namespace NexTI_API.Tests
                 .Options);
 
         [Fact]
-        public async Task Semente_TemAsMesmas29FasesE702CartasDoFront()
+        public async Task Semente_TemAsMesmas43FasesE1198CartasDoFront()
         {
             var semente = await new ConteudoSeeder().LerAsync();
 
-            Assert.Equal(29, semente.Fases.Count);
-            Assert.Equal(702, semente.Flashcards.Count);
+            Assert.Equal(43, semente.Fases.Count);
+            Assert.Equal(1198, semente.Flashcards.Count);
             Assert.All(semente.Flashcards, c => Assert.Contains(semente.Fases, f => f.Codigo == c.CodigoFase));
             Assert.All(semente.Flashcards.Where(c => c.Opcoes is not null), c =>
                 Assert.InRange(c.Correta ?? -1, 0, c.Opcoes!.Count - 1));
@@ -94,9 +94,9 @@ namespace NexTI_API.Tests
             var primeira = await seeder.ExecutarAsync(db);
             var segunda = await seeder.ExecutarAsync(db);
 
-            Assert.Equal(29 + 702, primeira);
+            Assert.Equal(43 + 1198, primeira);
             Assert.Equal(0, segunda);
-            Assert.Equal(702, await db.Flashcards.CountAsync());
+            Assert.Equal(1198, await db.Flashcards.CountAsync());
         }
 
         [Fact]
@@ -110,7 +110,7 @@ namespace NexTI_API.Tests
             await db.SaveChangesAsync();
             await seeder.ExecutarAsync(db);
 
-            Assert.Equal(703, await db.Flashcards.CountAsync());
+            Assert.Equal(1199, await db.Flashcards.CountAsync());
         }
 
         [Fact]

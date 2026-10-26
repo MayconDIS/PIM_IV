@@ -8,7 +8,7 @@ using NexTI_API.Models;
 
 namespace NexTI_API.Services
 {
-    public record PerfilUsuario(int Id, string Username, int Nivel, int XP, int Moedas);
+    public record PerfilUsuario(int Id, string Username, int Nivel, int XP, int Moedas, List<string> FasesConcluidas);
 
     public record RankingAluno(string Username, int XP, int Nivel, int Moedas);
 
@@ -62,7 +62,9 @@ namespace NexTI_API.Services
         public Task<PerfilUsuario?> PerfilAsync(string username) =>
             _db.Usuarios
                 .Where(u => u.Username == username)
-                .Select(u => new PerfilUsuario(u.Id, u.Username, u.Nivel, u.XP, u.Moedas))
+                .Select(u => new PerfilUsuario(u.Id, u.Username, u.Nivel, u.XP, u.Moedas,
+                    _db.FasesConcluidas.Where(f => f.UsuarioId == u.Id).OrderBy(f => f.CodigoFase)
+                        .Select(f => f.CodigoFase).ToList()))
                 .FirstOrDefaultAsync();
 
         public async Task<Resultado<Usuario>> AtualizarAsync(int usuarioId, int xp, int moedas, int nivel)

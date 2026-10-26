@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { ApiService, ORDEM_FASES, fasesLiberadasNoServidor } from '@nexti/shared';
+import { preservarFasesLiberadas } from '@nexti/shared/gamificacao';
 import { leJson, rotuloDoNivelDaApi } from './apoio.js';
 
 /**
@@ -11,6 +12,7 @@ export function useInicializacao({ nomeUsuario, userKey, progresso, ui, sessao }
   useEffect(() => {
     if (inicializado.current) return; // StrictMode monta duas vezes em dev
     inicializado.current = true;
+    progresso.setFasesDesbloqueadas((atual) => preservarFasesLiberadas(atual));
 
     (async () => {
       let online = false;
@@ -24,6 +26,7 @@ export function useInicializacao({ nomeUsuario, userKey, progresso, ui, sessao }
       if (online && nomeUsuario !== 'Desenvolvedor' && nomeUsuario !== 'Admin') {
         let nivelNoServidor = 1;
         let xpNoServidor = 0;
+        let fasesConcluidas = [];
         let remoto = [];
         try {
           const usuario = await ApiService.getUsuario(nomeUsuario);
@@ -33,6 +36,7 @@ export function useInicializacao({ nomeUsuario, userKey, progresso, ui, sessao }
             progresso.definirRank(rotuloDoNivelDaApi(usuario.nivel));
             nivelNoServidor = usuario.nivel;
             xpNoServidor = usuario.xp;
+            fasesConcluidas = usuario.fasesConcluidas ?? [];
           }
         } catch {
           /* segue com o que está salvo localmente */
@@ -60,8 +64,8 @@ export function useInicializacao({ nomeUsuario, userKey, progresso, ui, sessao }
         }
 
         // Continuar de outro aparelho: as fases liberadas também vêm do que está no servidor.
-        const doServidor = fasesLiberadasNoServidor({ nivel: nivelNoServidor, progresso: remoto });
-        progresso.setFasesDesbloqueadas((atual) => ORDEM_FASES.filter((f) => atual.includes(f) || doServidor.includes(f)));
+        const doServidor = fasesLiberadasNoServidor({ nivel: nivelNoServidor, progresso: remoto, fasesConcluidas });
+        progresso.setFasesDesbloqueadas((atual) => preservarFasesLiberadas([...atual, ...doServidor]));
         // Quem já tem nível, XP ou progresso no servidor já fez o nivelamento (talvez em outro aparelho).
         if (nivelNoServidor > 1 || xpNoServidor > 0 || remoto.length) localStorage.setItem(`${userKey}nivelado`, 'true');
       }

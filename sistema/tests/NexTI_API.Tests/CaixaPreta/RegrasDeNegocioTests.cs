@@ -61,6 +61,22 @@ public class RegrasDeNegocioTests
     // --- RN02 · Perfis de acesso ------------------------------------------------------------
 
     [Fact]
+    public async Task Perfil_EntregaConclusoesApenasAoProprioAluno()
+    {
+        await using var api = await ApiEmMemoria.IniciarAsync();
+        var aluno = await api.CadastrarELogarAsync("perfil_trilha");
+        var outro = await api.CadastrarELogarAsync("perfil_outro");
+        var conclusao = await aluno.PostAsJsonAsync("/api/progresso/concluir-fase", new { faseId = "fase1", acertos = 0, total = 0 });
+        conclusao.EnsureSuccessStatusCode();
+        var perfil = await (await aluno.GetAsync("/api/usuarios/perfil_trilha")).JsonAsync();
+        Assert.Equal("fase1", Assert.Single(perfil.GetProperty("fasesConcluidas").EnumerateArray()).GetString());
+        Assert.Equal(5, perfil.GetProperty("xp").GetInt32());
+        Assert.Equal(HttpStatusCode.Forbidden, (await outro.GetAsync("/api/usuarios/perfil_trilha")).StatusCode);
+        var perfilOutro = await (await outro.GetAsync("/api/usuarios/perfil_outro")).JsonAsync();
+        Assert.Empty(perfilOutro.GetProperty("fasesConcluidas").EnumerateArray());
+    }
+
+    [Fact]
     public async Task RN02_AlunoCriaCartaMasNaoEditaNemExclui_TutorModera()
     {
         await using var api = await ApiEmMemoria.IniciarAsync();

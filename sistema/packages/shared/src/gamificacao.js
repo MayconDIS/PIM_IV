@@ -7,16 +7,13 @@
  * apps/api/Data/Seed/recompensas.json para calcular o XP e as moedas no servidor.
  */
 
-import { BONUS, FASES, TESTES } from './content.js';
+import { BONUS, FASES, MODULOS, TESTES } from './content.js';
 
 /** Sequência oficial de desbloqueio: fases e testes, na ordem do menu. */
-export const ORDEM_FASES = Object.freeze([
-  'fase1', 'fase2', 'fase3', 'fase4', 'fase5', 'teste-mod1',
-  'fase6', 'fase7', 'fase8', 'fase9', 'fase10', 'teste-mod2',
-  'fase11', 'fase12', 'fase13', 'fase14', 'fase15', 'teste-mod3',
-  'fase16', 'fase17', 'fase18', 'fase19', 'fase20', 'teste-mod4',
-  'fase21', 'fase22', 'fase23', 'fase24', 'fase25', 'teste-mod5',
-]);
+export const ORDEM_FASES = Object.freeze(MODULOS.flatMap((modulo) => [
+  ...modulo.fases.map((fase) => fase.id),
+  ...(modulo.teste ? [modulo.teste.id] : []),
+]));
 
 /** Fase liberada no primeiro acesso. */
 export const FASES_INICIAIS = Object.freeze(['fase1']);
@@ -122,20 +119,28 @@ export function proximaFase(faseId) {
   return ORDEM_FASES[indice + 1];
 }
 
+/** Ao inserir disciplinas, quem já chegou adiante mantém o acesso e recebe as intermediárias. */
+export function preservarFasesLiberadas(liberadas = []) {
+  const validas = Array.isArray(liberadas) ? liberadas : [];
+  const ultima = Math.max(-1, ...validas.map((fase) => ORDEM_FASES.indexOf(fase)));
+  return ORDEM_FASES.slice(0, Math.max(ultima + 1, FASES_INICIAIS.length));
+}
+
 /**
  * Fases liberadas pelo que está no servidor, para o aluno continuar em outro aparelho:
  * - o nível gravado na API (vem do nivelamento) dá o ponto de partida, como no diagnóstico;
  * - fase com todas as cartas respondidas conta como concluída e libera a trilha até a seguinte.
  * Com `pularTestes` (app, que não tem os testes de módulo), a fase depois do teste também é liberada.
  */
-export function fasesLiberadasNoServidor({ nivel = 1, progresso = [], pularTestes = false } = {}) {
+export function fasesLiberadasNoServidor({ nivel = 1, progresso = [], fasesConcluidas = [], pularTestes = false } = {}) {
   const liberadas = new Set(FASES_INICIAIS);
   if (nivel >= 6) ORDEM_FASES.forEach((f) => liberadas.add(f));
   else if (nivel >= 3) ORDEM_FASES.slice(0, ORDEM_FASES.indexOf('teste-mod2') + 1).forEach((f) => liberadas.add(f));
 
   const respondidas = {};
   for (const p of progresso) (respondidas[p.codigoFase] ??= new Set()).add(p.flashcardId);
-  let ultimaConcluida = -1;
+  // Conclusões já premiadas continuam válidas quando a disciplina ganha novas cartas.
+  let ultimaConcluida = Math.max(-1, ...fasesConcluidas.map((fase) => ORDEM_FASES.indexOf(fase)));
   for (const fase of FASES) {
     if (fase.totalCards > 0 && (respondidas[fase.id]?.size ?? 0) >= fase.totalCards) {
       ultimaConcluida = Math.max(ultimaConcluida, ORDEM_FASES.indexOf(fase.id));

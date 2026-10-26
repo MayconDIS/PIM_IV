@@ -47,7 +47,7 @@ test('deck de fase preserva todas as cartas', () => {
 });
 
 test('fasesDoModulo segue a composição dos módulos', () => {
-  assert.deepEqual(fasesDoModulo('teste-mod1'), ['fase1', 'fase2', 'fase3', 'fase4', 'fase5']);
+  assert.deepEqual(fasesDoModulo('teste-mod1'), ['fase1', 'fase2', 'fase3', 'fase4', 'fase5', 'fase26', 'fase27', 'fase28', 'fase29']);
   assert.deepEqual(fasesDoModulo('teste-mod5'), ['fase21', 'fase22', 'fase23', 'fase24', 'fase25']);
   assert.deepEqual(fasesDoModulo('teste-mod9'), []);
 });

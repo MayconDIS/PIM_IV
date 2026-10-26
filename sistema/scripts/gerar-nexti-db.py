@@ -49,7 +49,11 @@ def valor(v):
         return "1" if v else "0"
     if isinstance(v, (int, float)):
         return str(v)
-    return "N'" + str(v).replace("'", "''") + "'"
+    # SQLCMD e arquivos de texto no Windows podem trocar LF por CRLF. As cartas
+    # usam a frente como chave do SM-2: preserve cada caractere da origem.
+    texto = str(v).replace("'", "''")
+    texto = texto.replace("\r", "' + NCHAR(13) + N'").replace("\n", "' + NCHAR(10) + N'")
+    return "N'" + texto + "'"
 
 
 def bloco_insert(tabela, colunas, identidade, linhas):
@@ -106,7 +110,7 @@ GO
         dados.append("")
         print(f"{tabela}: {len(linhas)}")
     destino = RAIZ / "database" / "NexTI_DB.sql"
-    destino.write_text(cabecalho + esquema.strip() + "\nGO\n" + "\n".join(dados), encoding="utf-8")
+    destino.write_text(cabecalho + esquema.strip() + "\nGO\n" + "\n".join(dados), encoding="utf-8", newline="\n")
     print(f"gerado: {destino}")
 
 

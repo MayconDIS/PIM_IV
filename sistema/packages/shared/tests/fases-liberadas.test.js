@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { FASES } from '../src/content.js';
-import { ORDEM_FASES, fasesLiberadasNoServidor } from '../src/gamificacao.js';
+import { FASES, MODULOS } from '../src/content.js';
+import { ORDEM_FASES, fasesLiberadasNoServidor, preservarFasesLiberadas } from '../src/gamificacao.js';
 
 // Progresso como a API devolve: uma linha por carta respondida, com a fase dela.
 const respondeuTudo = (faseId) => {
@@ -38,10 +38,30 @@ test('a última fase concluída libera tudo antes dela, incluindo o teste que j�
 });
 
 test('depois da última fase do módulo: o site libera o teste; o app (sem testes) libera a fase seguinte', () => {
-  const site = fasesLiberadasNoServidor({ progresso: respondeuTudo('fase5') });
+  const ultima = MODULOS[0].fases.at(-1).id;
+  const site = fasesLiberadasNoServidor({ progresso: respondeuTudo(ultima) });
   assert.equal(site.at(-1), 'teste-mod1');
-  const app = fasesLiberadasNoServidor({ progresso: respondeuTudo('fase5'), pularTestes: true });
+  const app = fasesLiberadasNoServidor({ progresso: respondeuTudo(ultima), pularTestes: true });
   assert.equal(app.at(-1), 'fase6');
+});
+
+test('aluno antigo mantém acesso até a fase já liberada quando entram disciplinas intermediárias', () => {
+  const liberadas = preservarFasesLiberadas(['fase1', 'fase2', 'fase6']);
+  assert.ok(liberadas.includes('fase6'));
+  assert.ok(liberadas.includes('teste-mod1'));
+  assert.equal(liberadas.at(-1), 'fase6');
+  assert.ok(!liberadas.includes('fase7'));
+  assert.deepEqual(preservarFasesLiberadas(['fase-inexistente']), ['fase1']);
+  assert.deepEqual(preservarFasesLiberadas(null), ['fase1']);
+});
+
+test('conclusão registrada na API mantém o caminho aberto mesmo com novas cartas na disciplina', () => {
+  const liberadas = fasesLiberadasNoServidor({ fasesConcluidas: ['fase1'], progresso: [] });
+  assert.deepEqual(liberadas, ['fase1', 'fase2']);
+  const moduloConcluido = fasesLiberadasNoServidor({ fasesConcluidas: ['teste-mod1'] });
+  assert.equal(moduloConcluido.at(-1), 'fase6');
+  assert.ok(!moduloConcluido.includes('fase7'));
+  assert.deepEqual(fasesLiberadasNoServidor({ fasesConcluidas: ['bonus1', 'inexistente'] }), ['fase1']);
 });
 
 test('carta repetida no progresso conta uma vez só', () => {

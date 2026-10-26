@@ -1,10 +1,11 @@
 using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
 using NexTI.Desktop.Dominio.Entidades;
 
 namespace NexTI.Desktop.Infraestrutura.Dados;
 
 /// <summary>
-/// Enche o banco vazio com as fases e as cartas do Nex_TI. Lê o mesmo conteudo.json que a API
+/// Acrescenta fases e cartas do Nex_TI sem apagar IDs, revisões ou conclusões. Lê o mesmo conteudo.json que a API
 /// usa (gerado de packages/shared por "npm run seed:api"), então as cartas são as do site.
 /// Entram só as fases da trilha; os bônus (comprados com moedas no site) ficam de fora.
 /// </summary>
@@ -18,21 +19,36 @@ public static class SemeadorDeConteudo
 
     public static int Semear(ContextoNexTI contexto, string caminhoDoConteudo)
     {
-        if (contexto.Fases.Any()) return 0;
-
         var conteudo = JsonSerializer.Deserialize<ConteudoJson>(File.ReadAllText(caminhoDoConteudo),
                            Json)
                        ?? throw new InvalidDataException($"Conteúdo vazio: {caminhoDoConteudo}");
 
+        var existentes = contexto.Fases.Include(f => f.Cartas).ToDictionary(f => f.Codigo);
         var ordem = 0;
+        var novasFases = 0;
         foreach (var f in conteudo.Fases.Where(f => f.Codigo.StartsWith("fase")))
         {
-            var fase = new Fase(f.Codigo, f.Descricao, ++ordem);
-            fase.Cartas.AddRange(conteudo.Flashcards.Where(c => c.CodigoFase == f.Codigo)
-                .Select(c => new Flashcard(c.CodigoFase, c.Frente, c.Verso, c.Dica)));
-            contexto.Fases.Add(fase);
+            ordem++;
+            if (!existentes.TryGetValue(f.Codigo, out var fase))
+            {
+                fase = new Fase(f.Codigo, f.Descricao, ordem);
+                existentes.Add(f.Codigo, fase);
+                contexto.Fases.Add(fase);
+                novasFases++;
+            }
+            else
+            {
+                contexto.Entry(fase).Property(x => x.Descricao).CurrentValue = f.Descricao;
+                contexto.Entry(fase).Property(x => x.Ordem).CurrentValue = ordem;
+            }
+            var frentes = fase.Cartas.Select(c => c.Frente).ToHashSet(StringComparer.Ordinal);
+            foreach (var carta in conteudo.Flashcards.Where(c => c.CodigoFase == f.Codigo))
+            {
+                if (frentes.Add(carta.Frente))
+                    fase.Cartas.Add(new Flashcard(carta.CodigoFase, carta.Frente, carta.Verso, carta.Dica));
+            }
         }
         contexto.SaveChanges();
-        return ordem;
+        return novasFases;
     }
 }
