@@ -2,6 +2,7 @@ import React, { useEffect, useId, useRef, useState } from 'react';
 import { responderPergunta } from '@nexti/shared';
 import { useEstudo } from '../../context/EstudoContext';
 import { useEvitarControles, useJanelaAssistente } from './useJanelaAssistente';
+import { IconeNexor } from './IconeNexor';
 import './assistente.css';
 
 const SUGESTOES = ['Como funciona o SM-2?', 'Como ganhar XP?', 'O que é uma variável?', 'Como usar o ENADE?'];
@@ -89,22 +90,22 @@ export function AssistenteNexTI() {
     <aside className={`assistente-nexti${janela.teclado > 120 ? ' assistente-com-teclado' : ''}${janela.altura < 480 ? ' assistente-compacto' : ''}`}
       data-assistente-nexti onKeyDown={aoTeclar}
       style={{ '--assistente-altura': `${janela.altura}px`, '--assistente-teclado': `${janela.teclado}px` }}>
-      {!visivel && <button ref={botao} type="button" className="assistente-abrir" aria-label="Abrir Assistente Nex_TI"
-        aria-expanded={false} aria-controls={id} title="Assistente Nex_TI" style={{ visibility: sobreControles ? 'hidden' : 'visible' }} onClick={() => setAberto(true)}>
-        <span className="material-symbols-outlined" aria-hidden="true">smart_toy</span>
+      {!visivel && <button ref={botao} type="button" className="assistente-abrir" aria-label="Abrir Nexor"
+        aria-expanded={false} aria-controls={id} title="Nexor — assistente do Nex_TI" style={{ visibility: sobreControles ? 'hidden' : 'visible' }} onClick={() => setAberto(true)}>
+        <IconeNexor />
       </button>}
       {visivel && <section className="assistente-janela" id={id} role="dialog" aria-modal="false" aria-labelledby={`${id}-titulo`}>
         <div className="assistente-cabecalho">
-          <div><h2 id={`${id}-titulo`}>Assistente Nex_TI</h2><p>Respostas dos materiais do projeto</p></div>
+          <div><h2 id={`${id}-titulo`}><IconeNexor /> Nexor</h2><p>Assistente de estudos do Nex_TI</p></div>
           <button type="button" className="assistente-icone" aria-label="Fechar assistente" title="Fechar assistente" onClick={fechar}>
             <span className="material-symbols-outlined" aria-hidden="true">close</span>
           </button>
         </div>
-        <div className="assistente-historico" ref={historico} role="log" aria-label="Conversa com o Assistente Nex_TI" aria-live="polite" aria-relevant="additions">
-          <div className="assistente-mensagem assistente-resposta"><p>Olá! Busco explicações nas cartas de estudo e orientações do Nex_TI. Qual é sua dúvida?</p></div>
+        <div className="assistente-historico" ref={historico} role="log" aria-label="Conversa com o Nexor" aria-live="polite" aria-relevant="additions">
+          <div className="assistente-mensagem assistente-resposta"><p>Olá! Eu sou o Nexor, seu assistente de estudos. Busco respostas nos materiais do Nex_TI. Qual é sua dúvida?</p></div>
           {mensagens.map((mensagem, indice) => <React.Fragment key={indice}>
             <div className="assistente-mensagem assistente-pergunta"><strong>Você</strong><p>{mensagem.pergunta}</p></div>
-            <div className="assistente-mensagem assistente-resposta"><strong>Nex_TI</strong><Resposta resposta={mensagem.resposta} /></div>
+            <div className="assistente-mensagem assistente-resposta"><strong>Nexor</strong><Resposta resposta={mensagem.resposta} /></div>
           </React.Fragment>)}
         </div>
         <div className="assistente-sugestoes" aria-label="Sugestões de perguntas">

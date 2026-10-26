@@ -43,7 +43,7 @@ cartas respondidas alcança o total previsto para ela. Fases apenas liberadas pe
 trilha não entram nessa contagem. No site, os números são calculados com o
 progresso das cartas disponível na sessão.
 
-### Assistente Nex_TI
+### Nexor, assistente do Nex_TI
 No site, abra o balão no canto inferior direito; no celular, ele fica acima da
 barra de navegação. Digite uma pergunta de até 400 caracteres ou escolha uma
 sugestão, como **Como funciona o SM-2?**. O assistente busca nas cartas conceituais

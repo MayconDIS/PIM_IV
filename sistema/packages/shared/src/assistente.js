@@ -68,7 +68,7 @@ export function responderPergunta(pergunta) {
   if (pergunta.length > 400) return semResposta('Use até 400 caracteres e faça uma pergunta por vez.');
   const limpo = normalizar(pergunta);
   if (/^(oi|ola|bom dia|boa tarde|boa noite|obrigado|obrigada|valeu)$/.test(limpo)) {
-    return { tipo: 'orientacao', texto: 'Olá! Posso buscar conteúdos de TI e orientações do Nex_TI. Sobre qual assunto você quer perguntar?', fontes: [], sugestoes: [...SUGESTOES] };
+    return { tipo: 'orientacao', texto: 'Olá! Eu sou o Nexor, seu assistente de estudos. Posso buscar conteúdos de TI e orientações do Nex_TI. Sobre qual assunto você quer perguntar?', fontes: [], sugestoes: [...SUGESTOES] };
   }
   const busca = termos(pergunta);
   if (!busca.length) return semResposta('Diga qual assunto você quer consultar, como variável, SQL ou revisão SM-2.');

@@ -25,6 +25,8 @@ test('assistente: orienta SM-2, XP, conta e ENADE sem ler dados pessoais', () =>
     assert.match(resposta.fontes[0].titulo, /Guia do Nex_TI/);
   }
   assert.match(responderPergunta('Qual meu XP?').fontes[0].texto, /não lê os dados da sua conta/);
+  assert.match(responderPergunta('Qual é seu nome?').fontes[0].texto, /Sou o Nexor/);
+  assert.match(responderPergunta('Olá!').texto, /Eu sou o Nexor/);
 });
 
 test('assistente: não inventa respostas para temas desconhecidos ou instruções arbitrárias', () => {

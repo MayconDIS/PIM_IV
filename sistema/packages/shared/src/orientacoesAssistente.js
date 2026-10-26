@@ -61,8 +61,8 @@ export const ORIENTACOES_ASSISTENTE = [
     texto: 'Toque no avatar do painel ou do menu e escolha uma imagem. Em Enquadrar foto, posicione a imagem, ajuste o zoom e escolha Usar foto. Ela fica guardada somente neste navegador para esta conta.',
   },
   {
-    titulo: 'Sobre o Assistente Nex_TI',
-    perguntas: ['O que você faz?', 'Como funciona este assistente?', 'Como usar o chatbot?', 'Você usa inteligência artificial?', 'As conversas ficam salvas?', 'Preciso de ajuda'],
-    texto: 'Busco trechos das cartas incluídas no Nex_TI e orientações sobre a plataforma. Não uso IA generativa nem um serviço externo. Cada resposta mostra sua fonte. Não consulto sua conta nem executo ações. A conversa fica apenas na memória desta tela: você pode limpá-la, e ela desaparece ao recarregar ou sair. Faça uma pergunta por vez, citando o assunto.',
+    titulo: 'Sobre o Nexor',
+    perguntas: ['Qual é seu nome?', 'Quem é o Nexor?', 'O que você faz?', 'Como funciona este assistente?', 'Como usar o chatbot?', 'Você usa inteligência artificial?', 'As conversas ficam salvas?', 'Preciso de ajuda'],
+    texto: 'Sou o Nexor, assistente de estudos do Nex_TI. Meu nome une Nex_TI e Tutor. Busco trechos das cartas incluídas no projeto e orientações sobre a plataforma. Não uso IA generativa nem um serviço externo. Cada resposta mostra sua fonte. Não consulto sua conta nem executo ações. A conversa fica apenas na memória desta tela: você pode limpá-la, e ela desaparece ao recarregar ou sair. Faça uma pergunta por vez, citando o assunto.',
   },
 ];

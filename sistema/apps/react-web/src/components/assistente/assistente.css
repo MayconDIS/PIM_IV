@@ -28,11 +28,15 @@ body.high-contrast-mode .assistente-nexti { --assistente-scroll-cor: #fff; --ass
   .assistente-abrir { animation: none; transition: none; }
   .assistente-abrir:hover, .assistente-abrir:focus-visible, .assistente-abrir:active { transform: none; }
 }
-.assistente-abrir .material-symbols-outlined { font-size: 1.7rem; }
+.icone-nexor { width: 30px; height: 30px; flex-shrink: 0; }
+.nexor-chapeu { fill: #101c24; }
+.assistente-cabecalho .icone-nexor { width: 26px; height: 26px; }
+.assistente-cabecalho .nexor-chapeu { fill: #16252e; }
+body.high-contrast-mode .nexor-chapeu { fill: #000; }
 /* A janela deixa espaço para o botão azul do VLibras na borda direita do computador. */
 .assistente-janela { position: fixed; z-index: 1001; right: 70px; bottom: calc(var(--assistente-base) + var(--assistente-teclado, 0px)); width: min(390px, calc(100vw - 40px)); height: min(600px, calc(var(--assistente-altura, 100dvh) - var(--assistente-base) - 12px)); display: flex; flex-direction: column; overflow: hidden; background: #10151d; border: 1px solid #2f555d; border-radius: 16px; box-shadow: 0 12px 45px #0009; text-align: left; }
 .assistente-cabecalho { display: flex; flex-shrink: 0; justify-content: space-between; align-items: center; gap: 8px; padding: 12px 12px 12px 16px; background: #16252e; border-bottom: 1px solid #29424c; }
-.assistente-cabecalho h2 { margin: 0 0 5px; font-size: 1rem; color: var(--nexti-cyan); }
+.assistente-cabecalho h2 { display: flex; align-items: center; gap: 8px; margin: 0 0 5px; font-size: 1rem; color: var(--nexti-cyan); }
 .assistente-cabecalho p { margin: 0; font-size: .72rem; color: #c5d1d9; }
 .assistente-icone, .assistente-enviar { display: flex; align-items: center; justify-content: center; flex-shrink: 0; min-width: 44px; min-height: 44px; padding: 8px; border: 1px solid #34535d; background: #10212a; color: var(--nexti-cyan); border-radius: 9px; }
 .assistente-historico { flex: 1; min-height: 50px; padding: 16px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
