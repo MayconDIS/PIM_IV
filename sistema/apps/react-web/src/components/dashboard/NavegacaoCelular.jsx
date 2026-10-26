@@ -5,8 +5,6 @@ import { useEstudo } from '../../context/EstudoContext';
  * Barra de navegação no rodapé da tela, só no celular (mesmo padrão do CasalFlow).
  * No computador estas ações ficam no cabeçalho e no menu; no celular o cabeçalho não
  * tem espaço para elas, e o polegar alcança melhor o rodapé.
- * Some enquanto o menu do cabeçalho está aberto (regra no CSS), enquanto a janela aberta por ele
- * não fecha e durante as confirmações, para não ficar por cima delas.
  */
 const ITENS = [
   { id: null, rotulo: 'Fases', icone: 'home' },
@@ -17,8 +15,7 @@ const ITENS = [
 ];
 
 export function NavegacaoCelular() {
-  const { modal, modalDoMenu, dialogo, abrirModal, fecharModal } = useEstudo();
-  const oculta = modalDoMenu || Boolean(dialogo);
+  const { modal, abrirModal, fecharModal } = useEstudo();
 
   const irPara = (id) => {
     if (id) {
@@ -31,7 +28,7 @@ export function NavegacaoCelular() {
   };
 
   return (
-    <nav className={`nav-celular${oculta ? ' oculta' : ''}`} aria-label="Navegação principal">
+    <nav className="nav-celular" aria-label="Navegação principal">
       {ITENS.map((item) => {
         const ativo = item.id === null ? !modal : modal === item.id;
         return (
