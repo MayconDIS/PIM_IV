@@ -102,13 +102,13 @@ export function Topo() {
             <button type="button" className="dropdown-item danger flex-align" onClick={acao(resetarProgresso)}>
               <span className="material-symbols-outlined" aria-hidden="true">warning</span> Limpar dados do navegador
             </button>
-            <div className="dropdown-item mobile-a11y mobile-a11y-container">
+            <div className="dropdown-item menu-a11y-container">
               <span className="flex-align a11y-title-text">
                 <span className="material-symbols-outlined" aria-hidden="true">accessibility_new</span> Acessibilidade
               </span>
               <div className="a11y-buttons-container">
-                <button className="btn-action tech-font flex-align-center a11y-btn" onClick={() => mudarZoom(-1)}>A-</button>
-                <button className="btn-action tech-font flex-align-center a11y-btn" onClick={() => mudarZoom(1)}>A+</button>
+                <button className="btn-action tech-font flex-align-center a11y-btn" onClick={() => mudarZoom(-1)} title="Diminuir Texto">A-</button>
+                <button className="btn-action tech-font flex-align-center a11y-btn" onClick={() => mudarZoom(1)} title="Aumentar Texto">A+</button>
                 <button className="btn-action tech-font flex-align-center a11y-btn" onClick={alternarAltoContraste} title="Alto Contraste">
                   <span className="material-symbols-outlined contrast-icon" aria-hidden="true">contrast</span>
                 </button>

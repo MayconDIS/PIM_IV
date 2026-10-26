@@ -165,10 +165,6 @@ header[role="banner"] {
     }
 }
 
-.mobile-a11y {
-    display: none !important;
-}
-
 .logo {
     font-size: 1.4rem;
     font-weight: bold;
@@ -728,7 +724,7 @@ button.aula-item { width: 100%; font: inherit; color: inherit; text-align: left;
 #btn-voltar-topo {
     position: fixed !important;
     bottom: 30px !important;
-    right: 30px !important;
+    left: 30px !important;
     width: 55px !important;
     height: 55px !important;
     border-radius: 50% !important;
@@ -1148,7 +1144,7 @@ body.high-contrast-mode .xp-badge {
 .hamburger-icon { font-size: 2rem; }
 .menu-user-name { color: #fff; font-weight: bold; }
 .menu-user-level { color: var(--nexti-cyan); font-size: 0.8rem; }
-.mobile-a11y-container { cursor: default; flex-direction: column; align-items: flex-start; gap: 10px; }
+.menu-a11y-container { display: flex; cursor: default; flex-direction: column; align-items: flex-start; gap: 10px; }
 .a11y-title-text { color: var(--nexti-cyan); font-weight: bold; }
 .a11y-buttons-container { display: flex; gap: 5px; width: 100%; }
 .a11y-btn { flex: 1; padding: 6px; }
@@ -1309,17 +1305,6 @@ body.high-contrast-mode .xp-badge {
         min-height: 50px !important;
         max-height: 50px !important;
         padding: 0 12px !important;
-    }
-
-    /* =======================================
-       AJUSTES DE ACESSIBILIDADE NO MOBILE
-       ======================================= */
-    .mobile-a11y {
-        display: flex !important;
-    }
-
-    .a11y-widget {
-        display: none !important;
     }
 
     /* Ajustes do Rodapé no Mobile */
@@ -2134,8 +2119,7 @@ button.dropdown-item {
 }
 
 @media (max-width: 800px) {
-    /* Os controles da câmera do mapa usam o visual do widget de acessibilidade, que some no
-       celular; estes continuam (aproximar, afastar e centralizar), no canto de cima. */
+    /* Controles da câmera do mapa: aproximar, afastar e centralizar, no canto de cima no celular. */
     .a11y-widget.map-a11y-widget {
         display: flex !important;
         top: 12px !important;
