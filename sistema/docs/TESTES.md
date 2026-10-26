@@ -180,8 +180,8 @@ Roteiro executado pela interface (formulário, botões e busca, sem atalhos inte
 | T7 Ligar o alto contraste | ✅ | ✅ |
 
 No celular, cada item do menu do cabeçalho (☰) também foi aberto, conferindo que a informação bate
-com o que o aluno fez, que o título da janela não cobre o conteúdo e que a barra do rodapé some
-enquanto a janela aberta pelo menu está na tela:
+com o que o aluno fez, que o título da janela não cobre o conteúdo e que a barra do rodapé continua
+à mostra (escondê-la deixava uma faixa preta no espaço reservado para ela):
 
 | Tarefa (celular, depois de responder 3 cartas da fase 1) | Resultado |
 | :--- | :---: |
@@ -189,7 +189,7 @@ enquanto a janela aberta pelo menu está na tela:
 | M2 Mapa Neural: o botão da câmera fica abaixo do título | ✅ |
 | M3 Minha conta: mostra o usuário certo | ✅ |
 | M4 Refazer Diagnóstico: abre o teste | ✅ |
-| M5 Ao fechar a janela, a barra do rodapé volta | ✅ |
+| M5 Ao fechar a janela, o painel volta com a barra do rodapé | ✅ |
 
 Na primeira rodada, M1 e M2 falharam. As estatísticas contavam as fases **liberadas** como
 concluídas (depois do diagnóstico, o Mod 01 e o Mod 02 apareciam em 100% com 5 XP), e o título de

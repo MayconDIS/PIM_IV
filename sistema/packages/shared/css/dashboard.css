@@ -2008,9 +2008,6 @@ button.dropdown-item {
         border-top: 1px solid rgba(255, 255, 255, 0.1);
         z-index: 9000;
     }
-    /* Escondida com o menu do cabeçalho aberto e com o que ele abriu (classe posta pelo React) */
-    body:has(.dropdown-content.show) .nav-celular,
-    .nav-celular.oculta { display: none; }
     .nav-celular-item {
         flex: 1;
         min-width: 48px;

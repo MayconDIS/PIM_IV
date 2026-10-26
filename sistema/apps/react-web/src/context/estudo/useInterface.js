@@ -11,8 +11,6 @@ export function useInterface(userKey) {
   const [dialogo, setDialogo] = useState(null); // { titulo, mensagem }
   const resolverDialogo = useRef(null);
   const [modal, setModal] = useState(null);
-  // A janela foi aberta pelo menu do cabeçalho: no celular, a barra do rodapé fica escondida até ela fechar.
-  const [modalDoMenu, setModalDoMenu] = useState(false);
   const [audioMudo, setAudioMudo] = useState(() => Boolean(AudioEngine?.isMuted?.()));
 
   const removerToast = (id) => {
@@ -39,9 +37,8 @@ export function useInterface(userKey) {
     setDialogo(null);
   };
 
-  const abrirModal = (id, { peloMenu = false } = {}) => {
+  const abrirModal = (id) => {
     setModal(id);
-    setModalDoMenu(peloMenu);
     gravaJson(`${userKey}active_state`, { type: 'modal', id });
   };
 
@@ -49,7 +46,6 @@ export function useInterface(userKey) {
     const estado = leJson(`${userKey}active_state`, null);
     if (estado?.type === 'modal') localStorage.removeItem(`${userKey}active_state`);
     setModal(null);
-    setModalDoMenu(false);
   };
 
   const alternarAudio = () => {
@@ -60,7 +56,7 @@ export function useInterface(userKey) {
   };
 
   return {
-    toasts, dialogo, modal, modalDoMenu, audioMudo, setModal,
+    toasts, dialogo, modal, audioMudo, setModal,
     removerToast, toast, confirmar, responderDialogo, abrirModal, fecharModal, alternarAudio,
   };
 }

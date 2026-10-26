@@ -7,9 +7,6 @@ import { alternarAltoContraste, ativarComTeclado, mudarZoom } from '../../lib/ac
 import { abrirVLibras } from '../../lib/vlibras';
 import { perfilAtual, podeAdministrar } from '../modais/ModalAdmin';
 
-// Janela aberta pelo menu: no celular, a barra do rodapé some até ela fechar.
-const PELO_MENU = { peloMenu: true };
-
 /** <header> do dashboard: frase motivacional, áudio, criação de carta e menu do usuário. */
 export function Topo() {
   const {
@@ -125,20 +122,20 @@ export function Topo() {
                 <div className="tech-font menu-user-level">{rank}</div>
               </div>
             </div>
-            <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalNivelamento', PELO_MENU))}>
+            <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalNivelamento'))}>
               <span className="material-symbols-outlined target-icon" aria-hidden="true">radar</span> Refazer Diagnóstico
             </button>
-            <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalProgresso', PELO_MENU))}>
+            <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalProgresso'))}>
               <span className="material-symbols-outlined stats-icon" aria-hidden="true">monitoring</span> Minhas Estatísticas
             </button>
-            <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalMapaMental', PELO_MENU))}>
+            <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalMapaMental'))}>
               <span className="material-symbols-outlined" aria-hidden="true">hub</span> Mapa Neural
             </button>
-            <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalConta', PELO_MENU))}>
+            <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalConta'))}>
               <span className="material-symbols-outlined" aria-hidden="true">manage_accounts</span> Minha conta
             </button>
             {podeAdministrar() && (
-              <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalAdmin', PELO_MENU))}>
+              <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalAdmin'))}>
                 <span className="material-symbols-outlined" aria-hidden="true">admin_panel_settings</span> Painel do {perfilAtual() === 'Admin' ? 'Admin' : 'Tutor'}
               </button>
             )}
