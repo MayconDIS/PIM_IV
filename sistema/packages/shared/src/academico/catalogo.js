@@ -66,7 +66,6 @@ export function integrarConteudoAcademico(banco, modulos) {
     if (modulo.numero <= 4) {
       modulo.semestre = modulo.numero;
       modulo.nome = `Módulo ${modulo.numero}: ${modulo.titulo}`;
-      modulo.codigo = `MOD ${String(modulo.numero).padStart(2, '0')}`;
     }
     for (const fase of modulo.fases) {
       numeroDaFase += 1;

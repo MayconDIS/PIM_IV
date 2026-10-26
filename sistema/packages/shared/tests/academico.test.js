@@ -9,7 +9,7 @@ test('o acervo AVA e ED cobre as 31 disciplinas dos quatro semestres sem criar m
   assert.deepEqual([1, 2, 3, 4].map(s => DISCIPLINAS_ACADEMICAS.filter(d => d.semestre === s).length), [9, 5, 9, 8]);
   assert.equal(MODULOS.length, 5);
   assert.deepEqual(MODULOS.slice(0, 4).map(m => m.semestre), [1, 2, 3, 4]);
-  assert.deepEqual(MODULOS.slice(0, 4).map(m => m.codigo), ['MOD 01', 'MOD 02', 'MOD 03', 'MOD 04']);
+  assert.deepEqual(MODULOS.map(m => m.codigo), ['Mod_01', 'Mod_02', 'Mod_03', 'Mod_04', 'Mod_05']);
   for (const modulo of MODULOS.slice(0, 4)) assert.ok(modulo.nome.startsWith(`Módulo ${modulo.numero}:`));
   assert.equal(formatarDica('ED · 1º semestre · Pense na entrada.'), 'Módulo 1 · Pense na entrada.');
   assert.equal(formatarDica('AVA · 4º semestre · Revise o conceito.'), 'Módulo 4 · Revise o conceito.');
