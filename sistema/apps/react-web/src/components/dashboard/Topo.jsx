@@ -4,7 +4,6 @@ import logo from '@nexti/shared/img/logo.png';
 import iconeTerminal from '@nexti/shared/img/terminal-icon.png';
 import { useEstudo } from '../../context/EstudoContext';
 import { alternarAltoContraste, ativarComTeclado, mudarZoom } from '../../lib/acessibilidade';
-import { abrirVLibras } from '../../lib/vlibras';
 import { perfilAtual, podeAdministrar } from '../modais/ModalAdmin';
 import { AvatarEditavel } from './Avatar';
 
@@ -82,8 +81,8 @@ export function Topo() {
                 <div className="tech-font menu-user-level">{rank}</div>
               </div>
             </div>
-            <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalNivelamento'))}>
-              <span className="material-symbols-outlined target-icon" aria-hidden="true">radar</span> Refazer Diagnóstico
+            <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalConta'))}>
+              <span className="material-symbols-outlined" aria-hidden="true">manage_accounts</span> Minha Conta
             </button>
             <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalProgresso'))}>
               <span className="material-symbols-outlined stats-icon" aria-hidden="true">monitoring</span> Minhas Estatísticas
@@ -91,29 +90,26 @@ export function Topo() {
             <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalMapaMental'))}>
               <span className="material-symbols-outlined" aria-hidden="true">hub</span> Mapa Neural
             </button>
-            <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalConta'))}>
-              <span className="material-symbols-outlined" aria-hidden="true">manage_accounts</span> Minha conta
+            <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalNivelamento'))}>
+              <span className="material-symbols-outlined target-icon" aria-hidden="true">radar</span> Refazer Diagnóstico
             </button>
             {podeAdministrar() && (
               <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalAdmin'))}>
                 <span className="material-symbols-outlined" aria-hidden="true">admin_panel_settings</span> Painel do {perfilAtual() === 'Admin' ? 'Admin' : 'Tutor'}
               </button>
             )}
-            <button type="button" className="dropdown-item danger flex-align" onClick={acao(resetarProgresso)}>
-              <span className="material-symbols-outlined" aria-hidden="true">warning</span> Limpar dados do navegador
+            <button type="button" className="dropdown-item danger flex-align" onClick={acao(resetarProgresso)} title="Limpar dados do navegador">
+              <span className="material-symbols-outlined" aria-hidden="true">warning</span> Limpar Dados
             </button>
-            <div className="dropdown-item mobile-a11y mobile-a11y-container">
+            <div className="dropdown-item menu-a11y-container">
               <span className="flex-align a11y-title-text">
                 <span className="material-symbols-outlined" aria-hidden="true">accessibility_new</span> Acessibilidade
               </span>
               <div className="a11y-buttons-container">
-                <button className="btn-action tech-font flex-align-center a11y-btn" onClick={() => mudarZoom(-1)}>A-</button>
-                <button className="btn-action tech-font flex-align-center a11y-btn" onClick={() => mudarZoom(1)}>A+</button>
+                <button className="btn-action tech-font flex-align-center a11y-btn" onClick={() => mudarZoom(-1)} title="Diminuir Texto">A-</button>
+                <button className="btn-action tech-font flex-align-center a11y-btn" onClick={() => mudarZoom(1)} title="Aumentar Texto">A+</button>
                 <button className="btn-action tech-font flex-align-center a11y-btn" onClick={alternarAltoContraste} title="Alto Contraste">
                   <span className="material-symbols-outlined contrast-icon" aria-hidden="true">contrast</span>
-                </button>
-                <button className="btn-action tech-font flex-align-center a11y-btn" onClick={acao(abrirVLibras)} title="Tradutor de Libras (VLibras)">
-                  Libras
                 </button>
               </div>
             </div>
