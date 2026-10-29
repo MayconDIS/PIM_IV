@@ -153,6 +153,7 @@ para cada caso de uso, MER, DER (modelo lógico) e modelo físico. As imagens es
 | XP, moedas, nível | No navegador e no banco, nas atualizações enviadas pelo cliente |
 | Progresso do SM-2 | No navegador; enviado ao banco para cartas com ID quando a API está disponível |
 | Fases liberadas, bônus comprados, Mapa Neural | Só no navegador (`localStorage`) |
+| Conversa do Nexor, assistente do Nex_TI | Só na memória da tela; não vai para o servidor nem para `localStorage` |
 
 A compra de bônus desconta moedas localmente, mas não chama a API nessa ação.
 Não há fila de reenvio de respostas nem garantia de sincronização após uma
@@ -165,3 +166,19 @@ do cliente os totais calculados; não calcula a recompensa a partir de cada resp
 - Login e cadastro limitados a 30 tentativas por minuto por IP.
 - Dados de um aluno só para o próprio aluno (o nome no token precisa bater com a rota).
 - CORS só para o site e os previews do projeto; no site, CSP e HSTS (`apps/react-web/vercel.json`).
+
+## 8. Nexor, assistente do Nex_TI no site
+
+O assistente oferece uma conversa de consulta à base local no React Web, no
+computador e no navegador do celular. Recebe perguntas de até 400 caracteres e
+busca correspondências nas cartas conceituais canônicas (incluindo o guia do
+ENADE) e nas orientações de uso incluídas no código. Cartas com `opcoes` ficam
+fora do índice: um gabarito isolado não serve como explicação. Mostra as fontes
+encontradas e avisa quando não há correspondência
+suficiente. Não usa IA generativa, serviço externo ou pesquisa na internet.
+
+A busca roda no navegador, sem nova rota da API ou tabela no banco. Não lê dados
+da conta ou do progresso, nem usa cartas particulares da sessão como fonte.
+Mensagens ficam no estado da tela e podem ser limpas; recarregar ou sair encerra
+a conversa. Depois de carregados os materiais do site, a consulta local não
+precisa de conexão. O aplicativo Expo e o programa Windows não têm essa interface.

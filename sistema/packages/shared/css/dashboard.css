@@ -251,6 +251,10 @@ header[role="banner"] {
     color: #fff;
     cursor: pointer;
     padding: 5px;
+    border-radius: 8px;
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
 }
 
 .dropdown-content {
@@ -1141,7 +1145,7 @@ body.high-contrast-mode .xp-badge {
    ========================================= */
 .cursor-pointer { cursor: pointer; }
 .logo span.logo-brand-white { color: #fff; }
-.hamburger-icon { font-size: 2rem; }
+.hamburger-icon { width: 32px; height: 32px; flex-shrink: 0; }
 .menu-user-name { color: #fff; font-weight: bold; }
 .menu-user-level { color: var(--nexti-cyan); font-size: 0.8rem; }
 .menu-a11y-container { display: flex; cursor: default; flex-direction: column; align-items: flex-start; gap: 10px; }

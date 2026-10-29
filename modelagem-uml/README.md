@@ -11,13 +11,13 @@ A UML e o banco de dados do Nex_TI, feitos a partir do código do sistema (`../s
 
 | Pasta | O que tem |
 |---|---|
-| [`02_Modelagem_UML/`](02_Modelagem_UML) | O arquivo do Astah (`Diagrams Nex_TI - PIM IV.asta`) com 37 diagramas, as imagens de todos eles em [`imagens-astah/`](02_Modelagem_UML/imagens-astah) e, soltas na pasta, as principais: casos de uso, classes (entidades e camadas), atividade e sequência |
+| [`02_Modelagem_UML/`](02_Modelagem_UML) | O arquivo do Astah (`Diagrams Nex_TI - PIM IV.asta`) com 39 diagramas, as imagens de todos eles em [`imagens-astah/`](02_Modelagem_UML/imagens-astah) e, soltas na pasta, as principais: casos de uso, classes (entidades e camadas), atividade e sequência |
 | [`02_Modelagem_UML/gerador-astah/`](02_Modelagem_UML/gerador-astah) | O programa que monta o `.asta` pela API do Astah e o que exporta as imagens |
 | [`04_Banco_de_Dados/`](04_Banco_de_Dados) | MER, DER (modelo lógico) e modelo físico do SQL Server, exportados do Astah, e a lista de procedures e triggers |
 
 ## Os diagramas
 
-- **Casos de uso:** os 15 casos de uso por perfil (Usuário → Aluno → Tutor → Administrador).
+- **Casos de uso:** os 16 casos de uso por perfil (Usuário → Aluno → Tutor → Administrador), incluindo a consulta local ao Assistente Nex_TI no site.
 - **Para cada caso de uso:** um diagrama de classes e um de sequência, tirados do código.
 - **Classes:** as entidades da API e as camadas (rotas → interfaces → serviços → banco).
 - **Atividade:** a sessão de estudo com flashcards, com raias para o aluno, o site ou app, a API e o banco.

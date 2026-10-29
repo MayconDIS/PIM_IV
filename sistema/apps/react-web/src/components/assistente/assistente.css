@@ -1,0 +1,83 @@
+.assistente-nexti { --assistente-base: 30px; color: #e6edf3; font-family: 'Inter', sans-serif; }
+/* Rolagem com a mesma paleta do chat, inclusive nas sugestões e no campo de texto. */
+.assistente-nexti { --assistente-scroll-trilho: #10212a; --assistente-scroll-cor: #00bfc7; color-scheme: dark; }
+.assistente-nexti :is(.assistente-historico, .assistente-sugestoes, textarea) { scrollbar-width: thin; scrollbar-color: var(--assistente-scroll-cor) var(--assistente-scroll-trilho); }
+.assistente-nexti :is(.assistente-historico, .assistente-sugestoes, textarea)::-webkit-scrollbar { width: 6px; height: 6px; }
+.assistente-nexti :is(.assistente-historico, .assistente-sugestoes, textarea)::-webkit-scrollbar-track { background: var(--assistente-scroll-trilho); border-radius: 10px; }
+.assistente-nexti :is(.assistente-historico, .assistente-sugestoes, textarea)::-webkit-scrollbar-thumb { background: var(--assistente-scroll-cor); border-radius: 10px; }
+.assistente-nexti :is(.assistente-historico, .assistente-sugestoes, textarea)::-webkit-scrollbar-thumb:hover { background: var(--nexti-cyan); }
+.assistente-nexti :is(.assistente-historico, .assistente-sugestoes, textarea)::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
+.assistente-nexti :is(.assistente-historico, .assistente-sugestoes, textarea)::-webkit-scrollbar-corner { background: var(--assistente-scroll-trilho); }
+@supports selector(::-webkit-scrollbar) {
+  .assistente-nexti :is(.assistente-historico, .assistente-sugestoes, textarea) { scrollbar-width: auto; scrollbar-color: auto; }
+}
+body.high-contrast-mode .assistente-nexti { --assistente-scroll-cor: #fff; --assistente-scroll-trilho: #000; }
+@media (forced-colors: active) {
+  .assistente-nexti :is(.assistente-historico, .assistente-sugestoes, textarea) { scrollbar-color: auto; scrollbar-width: auto; }
+  .assistente-nexti :is(.assistente-historico, .assistente-sugestoes, textarea)::-webkit-scrollbar-thumb { background: ButtonText; }
+  .assistente-nexti :is(.assistente-historico, .assistente-sugestoes, textarea)::-webkit-scrollbar-track { background: Canvas; }
+}
+.assistente-nexti button, .assistente-nexti textarea { font: inherit; }
+.assistente-nexti button { cursor: pointer; }
+.assistente-nexti button:focus-visible, .assistente-nexti textarea:focus-visible, .assistente-nexti summary:focus-visible { outline: 2px solid var(--nexti-cyan); outline-offset: 3px; }
+.assistente-abrir { position: fixed; right: 30px; bottom: var(--assistente-base); z-index: 999; width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; color: var(--nexti-cyan); background: #101c24; border: 1px solid var(--nexti-cyan); border-radius: 50%; box-shadow: 0 4px 16px #0008; }
+/* Mantém a mesma flutuação contínua configurada no botão de voltar ao topo. */
+.assistente-abrir { opacity: .8; animation: floatButton 3s ease-in-out infinite; transition: opacity .2s ease, scale .2s ease, background .2s ease; }
+/* O foco volta ao botão ao fechar o chat; ele não deve interromper a flutuação. */
+.assistente-abrir:hover, .assistente-abrir:focus-visible { opacity: 1; background: #17333c; scale: 1.1; }
+.assistente-abrir:active { opacity: 1; scale: .95; }
+.icone-nexor { width: 30px; height: 30px; flex-shrink: 0; }
+.nexor-chapeu { fill: #101c24; }
+.assistente-cabecalho .icone-nexor { width: 26px; height: 26px; }
+.assistente-cabecalho .nexor-chapeu { fill: #16252e; }
+body.high-contrast-mode .nexor-chapeu { fill: #000; }
+/* A janela deixa espaço para o botão azul do VLibras na borda direita do computador. */
+.assistente-janela { position: fixed; z-index: 1001; right: 70px; bottom: calc(var(--assistente-base) + var(--assistente-teclado, 0px)); width: min(390px, calc(100vw - 40px)); height: min(600px, calc(var(--assistente-altura, 100dvh) - var(--assistente-base) - 12px)); display: flex; flex-direction: column; overflow: hidden; background: #10151d; border: 1px solid #2f555d; border-radius: 16px; box-shadow: 0 12px 45px #0009; text-align: left; }
+.assistente-cabecalho { display: flex; flex-shrink: 0; justify-content: space-between; align-items: center; gap: 8px; padding: 12px 12px 12px 16px; background: #16252e; border-bottom: 1px solid #29424c; }
+.assistente-cabecalho h2 { display: flex; align-items: center; gap: 8px; margin: 0 0 5px; font-size: 1rem; color: var(--nexti-cyan); }
+.assistente-cabecalho p { margin: 0; font-size: .72rem; color: #c5d1d9; }
+.assistente-icone, .assistente-enviar { display: flex; align-items: center; justify-content: center; flex-shrink: 0; min-width: 44px; min-height: 44px; padding: 8px; border: 1px solid #34535d; background: #10212a; color: var(--nexti-cyan); border-radius: 9px; }
+.assistente-historico { flex: 1; min-height: 50px; padding: 16px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+.assistente-mensagem { max-width: 100%; padding: 12px; margin: 0 0 12px; border-radius: 12px; font-size: .86rem; line-height: 1.6; overflow-wrap: anywhere; }
+.assistente-mensagem p { margin: 0; white-space: pre-wrap; }
+.assistente-mensagem > strong { display: block; margin-bottom: 5px; font-size: .75rem; color: #c4d7e2; }
+.assistente-resposta { background: #1c2734; border: 1px solid #2c3949; margin-right: 12px; }
+.assistente-pergunta { background: #123c42; border: 1px solid #265d61; margin-left: 22px; }
+.assistente-fontes { border-top: 1px solid #475563; margin-top: 12px; padding-top: 8px; font-size: .78rem; }
+.assistente-fontes > strong { color: #c7d5df; }
+.assistente-fontes details { margin-top: 8px; }
+.assistente-fontes summary { cursor: pointer; color: var(--nexti-cyan); padding: 5px 0; }
+.assistente-fontes p { margin-top: 8px; }
+.assistente-sugestoes { display: flex; flex-shrink: 0; gap: 6px; overflow-x: auto; padding: 8px 12px; border-top: 1px solid #283746; scrollbar-width: thin; }
+.assistente-sugestoes button { flex-shrink: 0; max-width: 90%; min-height: 36px; padding: 8px 10px; color: #d0eced; background: #132a34; border: 1px solid #31505b; border-radius: 16px; font-size: .73rem; }
+.assistente-formulario { flex-shrink: 0; padding: 6px 12px 10px; }
+.assistente-rotulo { display: block; margin-bottom: 6px; font-size: .76rem; color: #c5d1d9; }
+.assistente-entrada { display: flex; gap: 8px; align-items: stretch; }
+.assistente-entrada textarea { flex: 1; min-width: 0; width: 100%; max-height: 100px; resize: none; background: #0b1016; color: #e6edf3; border: 1px solid #41515f; border-radius: 8px; padding: 10px; font-size: .88rem; line-height: 1.4; }
+.assistente-entrada textarea::placeholder { color: #9eafbb; }
+.assistente-enviar:disabled { opacity: .45; cursor: default; }
+.assistente-rodape { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 7px; font-size: .65rem; color: #acbdc9; }
+.assistente-rodape button { min-height: 30px; border: 0; background: transparent; color: #d0eced; text-decoration: underline; font-size: .7rem; padding: 4px 0; }
+.assistente-aviso:empty { display: none; }
+.assistente-aviso { display: block; margin-top: 4px; color: #c5d1d9; font-size: .72rem; }
+.assistente-com-teclado .assistente-sugestoes, .assistente-compacto .assistente-sugestoes, .assistente-compacto .assistente-cabecalho p { display: none; }
+.assistente-compacto .assistente-cabecalho { padding-top: 5px; padding-bottom: 5px; }
+.assistente-compacto .assistente-cabecalho h2 { margin: 0; }
+.assistente-compacto .assistente-rotulo { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.assistente-compacto .assistente-formulario { padding-top: 4px; padding-bottom: 4px; }
+.assistente-compacto .assistente-historico { padding: 8px; }
+body.high-contrast-mode .assistente-janela, body.high-contrast-mode .assistente-cabecalho, body.high-contrast-mode .assistente-mensagem, body.high-contrast-mode .assistente-nexti button, body.high-contrast-mode .assistente-nexti textarea { background: #000; color: #fff; border-color: #fff; }
+@media (max-width: 800px) {
+  .assistente-nexti { --assistente-base: calc(78px + env(safe-area-inset-bottom, 0px)); }
+  .assistente-abrir { right: 20px; width: 50px; height: 50px; }
+  .assistente-janela { right: 10px; width: calc(100vw - 20px); }
+  .assistente-entrada textarea { font-size: 16px; }
+  .assistente-sugestoes button, .assistente-rodape button { min-height: 44px; }
+  .assistente-com-teclado { --assistente-base: 10px; }
+}
+@media (max-height: 500px) {
+  .assistente-cabecalho { padding-top: 6px; padding-bottom: 6px; }
+  .assistente-cabecalho p, .assistente-sugestoes { display: none; }
+  .assistente-historico { padding: 8px; }
+  .assistente-formulario { padding-bottom: 4px; }
+}

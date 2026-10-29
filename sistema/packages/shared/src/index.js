@@ -75,3 +75,5 @@ export {
 } from './senha.js';
 
 export { verificarSenhaVazada, mensagemDeSenhaVazada, sha1HexWeb } from './senhaVazada.js';
+
+export { responderPergunta } from './assistente.js';

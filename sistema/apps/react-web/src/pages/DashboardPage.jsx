@@ -18,6 +18,7 @@ import { ModalMapaNeural } from '../components/modais/ModalMapaNeural';
 import { ModalCertificado } from '../components/modais/ModalCertificado';
 import { Toasts } from '../components/ui/Toasts';
 import { CyberDialog } from '../components/ui/CyberDialog';
+import { AssistenteNexTI } from '../components/assistente/AssistenteNexTI';
 
 /** Atalhos de teclado do vanilla: Esc, "/" e Espaço/1–4 durante o estudo. */
 function useAtalhos(refBusca) {
@@ -27,6 +28,7 @@ function useAtalhos(refBusca) {
 
   useEffect(() => {
     const aoTeclar = (e) => {
+      if (e.target.closest?.('[data-assistente-nexti]')) return;
       const s = atual.current;
       const editando = ['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName);
 
@@ -88,6 +90,7 @@ function Dashboard() {
       <Rodape />
       <BotaoTopo />
       <NavegacaoCelular />
+      <AssistenteNexTI />
       <Toasts />
       <CyberDialog />
     </>
