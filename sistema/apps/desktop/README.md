@@ -3,7 +3,8 @@
 Versão **desktop** do Nex_TI em escala pequena, feita para a atividade *9 – Apresentação em grupo
 da disciplina P.A. em .NET* (apresentação em 27/10/2026). Ela mostra como construir uma
 aplicação desktop organizada, com **orientação a objetos**, **arquitetura em camadas**,
-**modularização** e os **quatro diagramas UML** pedidos: caso de uso, classe, sequência e atividade.
+**modularização** e os **quatro tipos de UML** pedidos: caso de uso, classes, sequência e atividade.
+São cinco diagramas, pois classes aparece em duas visões: camadas e domínio.
 
 O programa faz o centro do Nex_TI: o aluno entra com um nickname, vê a trilha de 39 fases,
 estuda as 1078 cartas com o **SM-2** e ganha **XP e moedas** ao concluir cada fase (só na primeira vez).
@@ -24,11 +25,14 @@ Precisa do **.NET 10 SDK** no Windows (o programa usa Windows Forms).
 ```powershell
 cd sistema/apps/desktop
 dotnet run --project src/NexTI.Desktop.Apresentacao     # abre o programa
-dotnet test                                            # roda os 30 testes
+dotnet test                                            # roda os 31 testes
 ```
 
 Na primeira vez, o programa cria o banco SQLite em `%LOCALAPPDATA%\NexTI.Desktop\nexti-desktop.db`,
-aplica a migration e coloca as fases e as cartas. Não precisa de internet nem da API.
+aplica a migration e carrega as fases e as cartas. A cada abertura, atualiza a ordem e os
+nomes das fases e o verso e a dica das cartas já reconhecidas pela fase e pela pergunta.
+Acrescenta o que for novo e preserva IDs, revisões, XP, moedas e conclusões. Não precisa
+de internet nem da API.
 
 **Atalhos no estudo:** Espaço mostra a resposta; 1, 2, 3 e 4 respondem Errei, Difícil, Bom e Fácil;
 Esc fecha a fase.
@@ -45,7 +49,7 @@ repositório, não só esta pasta). Assim os atalhos abaixo funcionam.
 | Tarefa | O que faz |
 |---|---|
 | Desktop: abrir o programa | Compila e abre o Nex_TI Desktop (a primeira vez leva uns 20 segundos) |
-| Desktop: rodar os testes | Roda os 30 testes no terminal |
+| Desktop: rodar os testes | Roda os 31 testes no terminal |
 | Apresentação: abrir os slides (PDF) | Abre o PDF dos slides no leitor de PDF do Windows |
 | Apresentação: abrir os diagramas do desktop no Astah | Abre o `.asta` no Astah |
 | Apresentação: abrir o GitHub | Abre o repositório no navegador |
@@ -79,7 +83,7 @@ mostra todos numa lista.
 |---|---|---|
 | Slides e roteiro | `docs/apresentacao/` | O PDF pela tarefa acima. O roteiro (`ROTEIRO_DO_PALESTRANTE.md`) fica mais legível com `Ctrl+Shift+V` |
 | Este guia, com fotos e diagramas | `README.md` (este arquivo) | `Ctrl+Shift+V` abre a visualização com as imagens |
-| Os quatro diagramas | `docs/diagramas/` | Clique no `.png`: abre como imagem no editor |
+| Os cinco diagramas | `docs/diagramas/` | Clique no `.png`: abre como imagem no editor |
 | Arquivo do Astah | `docs/diagramas/Diagrams Nex_TI Desktop - PA DotNet.asta` | Pela tarefa, ou com dois cliques no Explorer do Windows |
 | Herança e classe abstrata | `Usuario.cs` e `Aluno.cs` | `Ctrl+P` → `Aluno.cs` |
 | Encapsulamento (prêmio uma vez só) | `Aluno.cs`, método `ReceberPremio` | `Ctrl+P` → `Aluno.cs` |
@@ -144,11 +148,14 @@ usa EF Core com SQLite:
   com a coluna `TipoDeUsuario`.
 - **Migration:** `Dados/Migrations/…_Inicial.cs`, criada com `dotnet ef migrations add Inicial`.
   O programa aplica as migrations pendentes ao abrir (`Database.Migrate()`).
-- **Seed:** `SemeadorDeConteudo` lê o mesmo `conteudo.json` da API (`apps/api/Data/Seed`).
+- **Seed:** `SemeadorDeConteudo` lê o mesmo `conteudo.json` da API (`apps/api/Data/Seed`),
+  gerado do conteúdo compartilhado. Usa as 39 fases regulares e 1078 cartas dos quatro
+  módulos e do preparatório ENADE. Atualiza descrições, ordem, versos e dicas, mantendo
+  a identidade das cartas existentes e os registros de estudo. Os bônus ficam fora do desktop.
 - **Unidade de trabalho:** `UnidadeDeTrabalho.Salvar()` grava de uma vez o aluno, as revisões e as
   fases concluídas.
 
-## Os quatro diagramas UML
+## Quatro tipos de UML em cinco diagramas
 
 Feitos no Astah, pelo gerador `modelagem-uml/02_Modelagem_UML/gerador-astah/GerarDiagramasDesktop.java`
 (arquivo `docs/diagramas/Diagrams Nex_TI Desktop - PA DotNet.asta`), com a explicação de cada elemento no campo
@@ -174,13 +181,13 @@ Feitos no Astah, pelo gerador `modelagem-uml/02_Modelagem_UML/gerador-astah/Gera
 
 ![Diagrama de atividade](docs/diagramas/5-atividade.png)
 
-O conteúdo das fases inclui a ampliação de AVA e ED dos quatro semestres,
+O conteúdo das fases reúne as disciplinas dos quatro módulos e o preparatório ENADE,
 com os códigos antigos preservados e a ordem atual da trilha. O desktop usa as
 cartas da base compartilhada; a consulta de resumos pelo menu Trilha pertence ao site.
 
 ## Testes
 
-`dotnet test` roda **30 testes** (xUnit):
+`dotnet test` roda **31 testes** (xUnit):
 
 - **Mesmas regras do resto do Nex_TI:** o SM-2 e os prêmios passam pelos mesmos casos que o site,
   o app e a API conferem (`packages/shared/tests/sm2-casos.json` e `recompensa-casos.json`).
@@ -189,6 +196,8 @@ cartas da base compartilhada; a consulta de resumos pelo menu Trilha pertence ao
 - **Casos de uso de ponta a ponta**, passando por todas as camadas de verdade (SQLite em memória
   com a migration e o conteúdo reais): só a fase 1 começa liberada, concluir paga uma vez e libera
   a próxima, os dados continuam lá depois de "reabrir o programa" e as cartas vencidas vêm primeiro.
+- **Atualização de conteúdo:** trocar o verso e a dica na fonte atualiza a carta existente,
+  sem duplicá-la e sem apagar sua revisão ou a conclusão da fase.
 
 ## Referência
 

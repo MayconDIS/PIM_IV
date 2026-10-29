@@ -21,6 +21,7 @@ internal sealed class TelaPrincipal : Form
         FullRowSelect = true,
         MultiSelect = false,
         HideSelection = false,
+        ShowItemToolTips = true,
         BackColor = Tema.Cartao,
         ForeColor = Tema.Texto,
         BorderStyle = BorderStyle.None,
@@ -31,7 +32,7 @@ internal sealed class TelaPrincipal : Form
     {
         _estudo = estudo;
         _aluno = aluno;
-        Tema.Aplicar(this, $"Nex_TI Desktop · {aluno.Nickname}", new Size(820, 600));
+        Tema.Aplicar(this, $"Nex_TI Desktop · {aluno.Nickname}", new Size(960, 640));
         MinimumSize = new Size(700, 500);
 
         var topo = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 110, Padding = new Padding(20, 16, 20, 0), BackColor = Tema.Cartao };
@@ -52,7 +53,7 @@ internal sealed class TelaPrincipal : Form
             TextRenderer.DrawText(e.Graphics, e.Header!.Text, Tema.Fonte(9, FontStyle.Bold), e.Bounds, Tema.Ciano,
                 TextFormatFlags.VerticalCenter | TextFormatFlags.LeftAndRightPadding);
         };
-        _fases.Resize += (_, _) => EsticarUltimaColuna();
+        _fases.Resize += (_, _) => AjustarColunas();
         _fases.DrawItem += (_, e) => e.DrawDefault = true;
         _fases.DrawSubItem += (_, e) => e.DrawDefault = true;
         _fases.ItemActivate += (_, _) => EstudarSelecionada();   // duplo clique ou Enter na fase
@@ -90,6 +91,7 @@ internal sealed class TelaPrincipal : Form
             var item = new ListViewItem([f.Codigo, f.Descricao, f.TotalDeCartas.ToString(), f.ParaRevisarHoje.ToString(), situacao])
             {
                 Tag = f,
+                ToolTipText = f.Descricao,
                 ForeColor = f.Liberada ? Tema.Texto : Tema.TextoApagado,
                 UseItemStyleForSubItems = false,
             };
@@ -111,14 +113,19 @@ internal sealed class TelaPrincipal : Form
     protected override void OnShown(EventArgs e)
     {
         base.OnShown(e);
-        EsticarUltimaColuna();
+        AjustarColunas();
         _fases.Focus();
     }
 
-    /// <summary>A coluna "Situação" ocupa o resto da largura (senão sobra uma faixa clara no cabeçalho).</summary>
-    private void EsticarUltimaColuna()
+    /// <summary>Prioriza o nome da disciplina sem esconder a situação em janelas menores.</summary>
+    private void AjustarColunas()
     {
-        if (_fases.Columns.Count > 0) _fases.Columns[^1].Width = -2;   // -2 = até a borda da lista
+        if (_fases.Columns.Count != 5) return;
+        _fases.Columns[0].Width = 65;
+        _fases.Columns[2].Width = 60;
+        _fases.Columns[3].Width = 100;
+        _fases.Columns[4].Width = 135;
+        _fases.Columns[1].Width = Math.Max(240, _fases.ClientSize.Width - 360 - SystemInformation.VerticalScrollBarWidth);
     }
 
     private void EstudarSelecionada()

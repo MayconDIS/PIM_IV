@@ -15,8 +15,8 @@ Em *Meu trabalho → Anexo*, envie o PDF dos slides, que está nesta pasta:
 > Aplicação desktop em C# (.NET 10, Windows Forms) para estudar TI com flashcards e revisão
 > espaçada (SM-2), organizada em quatro camadas, cada uma num projeto separado: Apresentação,
 > Aplicação, Domínio e Infraestrutura (EF Core com SQLite). Usa orientação a objetos (classe
-> abstrata, herança, polimorfismo, encapsulamento e interfaces) e tem 28 testes automáticos.
-> Os quatro diagramas UML (caso de uso, classes, sequência e atividade) foram feitos no Astah.
+> abstrata, herança, polimorfismo, encapsulamento e interfaces) e tem 31 testes automáticos.
+> Os cinco diagramas feitos no Astah cobrem quatro tipos de UML: caso de uso, classes (camadas e domínio), sequência e atividade.
 >
 > Código e diagramas: https://github.com/MayconDIS/PIM_IV/tree/main/sistema/apps/desktop
 >

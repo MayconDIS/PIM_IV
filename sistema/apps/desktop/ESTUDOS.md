@@ -17,7 +17,7 @@ coisas:
 | **Orientação a objetos** | O código é feito de classes que guardam dados e regras juntos | `src/NexTI.Desktop.Dominio/Entidades` |
 | **Arquitetura em camadas** | Cada parte cuida de uma coisa (tela, regra, banco) | As 4 pastas de `src/` |
 | **Modularização** | Cada camada é um módulo separado, que pode ser trocado ou testado sozinho | Os 4 projetos `.csproj` |
-| **Quatro diagramas UML** | Caso de uso, classe, sequência e atividade | `docs/diagramas` |
+| **Quatro tipos de UML** | Caso de uso, classes (camadas e domínio), sequência e atividade: cinco diagramas | `docs/diagramas` |
 
 E três regras da apresentação:
 
@@ -33,13 +33,13 @@ E três regras da apresentação:
 
 ## 2. O programa em 30 segundos
 
-O aluno abre o programa, digita um **nickname**, vê a **trilha de 39 fases** (1078 cartas sobre TI) e
+O aluno abre o programa, digita um **nickname**, vê a **trilha de 39 fases** (1078 cartas dos quatro módulos e do preparatório ENADE) e
 estuda: vê a pergunta, mostra a resposta e escolhe **Errei, Difícil, Bom ou Fácil**. O **SM-2**
 decide quando cada carta volta. Ao acertar todas as cartas da fase, ganha **XP e moedas** (só na
 primeira vez) e libera a próxima fase. Tudo fica num banco **SQLite** no computador, sem internet.
 
 - **Tecnologia:** C#, .NET 10, Windows Forms (telas), EF Core (acesso ao banco) e SQLite (banco num arquivo).
-- **Testes:** 30 testes automáticos com xUnit.
+- **Testes:** 31 testes automáticos com xUnit.
 
 ---
 
@@ -144,7 +144,7 @@ construtor. Isso se chama **injeção de dependência**, outro assunto da Unidad
 
 **Por que vale a pena?**
 
-- Dá para **testar** as regras sem abrir tela nenhuma (os 30 testes fazem isso).
+- Dá para **testar** as regras sem abrir tela nenhuma (os 31 testes fazem isso).
 - Dá para **trocar o banco** sem mexer nas regras (nos testes, o banco é um SQLite em memória).
 - Fica fácil **achar** onde está cada coisa.
 
@@ -169,7 +169,7 @@ compilador não deixa** uma regra usar uma tela ou o banco por engano.
 
 ---
 
-## 6. Os quatro diagramas UML
+## 6. Quatro tipos de UML em cinco diagramas
 
 Todos foram feitos no **Astah** (arquivo `docs/diagramas/Diagrams Nex_TI Desktop - PA DotNet.asta`),
 e cada elemento tem a explicação no campo *Definition*. As imagens estão em `docs/diagramas`.
@@ -233,7 +233,8 @@ O livro da disciplina (PERES, 2026) ensina desenvolvimento web com .NET usando u
 - **DbContext:** a classe que representa o banco; cada `DbSet` vira uma tabela. A nossa é a `ContextoNexTI`.
 - **Migration:** o "histórico" das mudanças no banco. A `Inicial` cria as 5 tabelas (Fases,
   Flashcards, Usuarios, Revisoes e FasesConcluidas). O programa aplica as migrations sozinho ao abrir.
-- **Seed (semente):** os dados iniciais. O nosso coloca as fases e as cartas do Nex_TI.
+- **Seed (semente):** carrega o conteúdo compartilhado e atualiza nomes, ordem, versos e dicas.
+  A carta reconhecida pela fase e pela pergunta mantém seu ID; revisões, XP e conclusões continuam intactos.
 - **SQLite:** um banco que é só um arquivo, sem servidor. O nosso fica em `%LOCALAPPDATA%\NexTI.Desktop`.
 
 ---
@@ -273,7 +274,7 @@ O livro da disciplina (PERES, 2026) ensina desenvolvimento web com .NET usando u
 | O que é «include» e «extend»? | Include acontece sempre (estudar inclui responder); extend só às vezes (concluir, quando acaba). |
 | O que é uma migration? | O histórico das mudanças no banco; a `Inicial` cria as tabelas. |
 | Por que o intervalo do SM-2 tem limite? | Sem limite, a data passava do ano 9999 e travava; o teste de carga achou. Agora para em 100 anos (`IntervaloMaximo`). |
-| Como sabem que funciona? | 30 testes automáticos, rodados no GitHub a cada Pull Request. |
+| Como sabem que funciona? | 31 testes automáticos, incluindo atualização de conteúdo sem apagar o progresso, rodados no GitHub a cada Pull Request. |
 | Por que SQLite? | O banco é um arquivo no computador, sem servidor; é o que o livro usa no PetMatch. |
 
 ---

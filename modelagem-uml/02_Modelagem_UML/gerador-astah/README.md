@@ -63,8 +63,9 @@ Astah (`astah-command -image`) não serve: ela para na verificação da licença
 ## Nex_TI Desktop (apresentação de P.A. em .NET)
 
 O `GerarDiagramasDesktop.java` monta o `Diagrams Nex_TI Desktop - PA DotNet.asta`, que fica com o
-programa, em [`sistema/apps/desktop/docs/diagramas`](../../../sistema/apps/desktop/docs/diagramas), com os quatro
-diagramas pedidos na apresentação de P.A. em .NET, tirados do programa em
+programa, em [`sistema/apps/desktop/docs/diagramas`](../../../sistema/apps/desktop/docs/diagramas), com cinco
+diagramas que cobrem os quatro tipos de UML pedidos na apresentação de P.A. em .NET
+(classes tem as visões de camadas e domínio), tirados do programa em
 [`sistema/apps/desktop`](../../../sistema/apps/desktop):
 
 | Diagrama | O que mostra |
