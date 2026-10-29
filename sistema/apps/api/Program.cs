@@ -96,6 +96,8 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IProgressoService, ProgressoService>();
 builder.Services.AddSingleton(TabelaDeRecompensas.Carregar());   // Data/Seed/recompensas.json
 builder.Services.AddScoped<IGamificacaoService, GamificacaoService>();
+builder.Services.AddSingleton(_ => CatalogoDiagnostico.Carregar());
+builder.Services.AddScoped<IDiagnosticoService, DiagnosticoService>();
 builder.Services.AddScoped<IConteudoService, ConteudoService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<IContaService, ContaService>();

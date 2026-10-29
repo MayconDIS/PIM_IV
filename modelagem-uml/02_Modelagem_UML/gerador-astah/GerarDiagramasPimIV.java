@@ -192,7 +192,7 @@ public class GerarDiagramasPimIV {
         Map<String, INodePresentation> p = new HashMap<>();
         p.put("Usuario", classe(d, pacote, "Usuario", 20, 200, new String[] {
             "Id : int", "Username : string", "Email : string", "SenhaHash : string", "Perfil : string = \"Aluno\"",
-            "Nivel : int = 1", "XP : int = 0", "Moedas : int = 0", "DataCriacao : DateTime"}, new String[0]));
+            "Nivel : int = 1", "XP : int = 0", "Moedas : int = 0", "DataCriacao : DateTime", "DiagnosticoJson : string [0..1]"}, new String[0]));
         p.put("Aluno", classe(d, pacote, "Aluno", 20, 470, new String[0], new String[] {"EstudarFlashCard() : void"}));
         p.put("Tutor", classe(d, pacote, "Tutor", 230, 470, new String[0], new String[] {"GerenciarConteudo() : void"}));
         p.put("Fase", classe(d, pacote, "Fase", 480, 40, new String[] {"CodigoFase : string", "Descricao : string"}, new String[0]));
@@ -255,6 +255,7 @@ public class GerarDiagramasPimIV {
             {"IGamificacaoService", "GamificacaoService", "ConcluirFaseAsync(...) : Task<Resultado<Conclusao>>", "ComprarBonusAsync(...) : Task<Resultado<Usuario>>"},
             {"IConteudoService", "ConteudoService", "ListarFlashcardsAsync(codigoFase : string) : Task<List<Flashcard>>", "EditarFlashcardAsync(...) : Task<Resultado<Flashcard>>"},
             {"IAdminService", "AdminService", "PainelDosAlunosAsync() : Task<List<AlunoNoPainel>>", "DefinirPerfilAsync(...) : Task<Resultado<UsuarioResumo>>"},
+            {"IDiagnosticoService", "DiagnosticoService", "ConcluirAsync(...) : Task<Resultado<ResultadoDiagnostico>>"},
             {"IContaService", "ContaService", "AlterarSenhaAsync(...) : Task<Resultado<bool>>", "ExcluirAsync(...) : Task<Resultado<bool>>"},
         };
         // Uma coluna por serviço: a interface em cima e a classe que a implementa logo abaixo.
@@ -269,7 +270,7 @@ public class GerarDiagramasPimIV {
             x += pi.getWidth() + 50;
         }
         larguraTotal = x - 50 - 20;
-        // Rotas por cima das colunas que usam: EndpointExtensions das cinco primeiras, ContaEndpoints da última.
+        // Rotas por cima das colunas que usam: EndpointExtensions das primeiras colunas, ContaEndpoints da última.
         INodePresentation conta = p.get("IContaService");
         p.get("EndpointExtensions").setLocation(new Point2D.Double(20, 40));
         p.get("EndpointExtensions").setWidth(conta.getLocation().getX() - 50 - 20);
@@ -445,6 +446,9 @@ public class GerarDiagramasPimIV {
             {"ConteudoService", "Lista fases, cartas e questões; cria, edita e exclui cartas, registrando as moderadas."},
             {"IAdminService", "Contrato da área administrativa: painel do Tutor e perfis de acesso."},
             {"AdminService", "Monta o painel dos alunos para o Tutor e define o perfil de cada usuário (o Admin não muda o próprio)."},
+            {"IDiagnosticoService", "Contrato de validação e gravação do diagnóstico do titular autenticado."},
+            {"DiagnosticoService", "Valida 20 respostas, cinco por módulo, calcula a recomendação e salva em Usuario.DiagnosticoJson. Preserva acessos e não altera XP, nível, moedas ou revisões."},
+            {"CatalogoDiagnostico", "Banco canônico de 34 perguntas e regras em Data/Seed/diagnostico.json, gerado do pacote compartilhado."},
             {"IContaService", "Contrato de Minha conta: consultar, exportar, alterar e excluir a própria conta."},
             {"ContaService", "Minha conta: confere a senha atual antes de alterar e protege o último Administrador."},
             {"AppDbContext", "Contexto do Entity Framework Core: tabelas, chaves e relações do SQL Server, com as migrations."},
@@ -459,10 +463,10 @@ public class GerarDiagramasPimIV {
             {"senha.js", "Regras de senha forte no navegador, iguais às da API, para avisar antes de enviar."},
             {"senhaVazada.js", "Confere se a senha já apareceu em vazamentos (Have I Been Pwned), enviando só os 5 primeiros caracteres do hash SHA-1."},
             {"gamificacao.js", "Regras de progressão: ordem das fases, recompensas, nota de corte dos testes, compra de bônus e fases concluídas no painel. O painel conta as cartas com registro de resposta até atingir a quantidade prevista no conteúdo da fase; não consulta o registro de recompensas FasesConcluidas da API."},
-            {"diagnostico.js", "Perguntas do teste de nivelamento e a fase inicial de acordo com os acertos."},
+            {"diagnostico.js", "Banco de 34 perguntas, uma por disciplina dos módulos 1 a 4. Seleciona cinco por módulo (20 por avaliação) e recomenda o primeiro módulo com menos de quatro acertos, ou o ENADE se todos atingirem o mínimo."},
             {"deck.js", "Monta o deck da fase (revisões vencidas primeiro) e os testes de módulo com 20 questões."},
             {"enadeOficial.js", "Provas oficiais do ENADE de ADS (2017 e 2021), com gabarito do INEP, e o guia de estudos."},
-            {"ModalNivelamento", "Janela do teste de nivelamento (diagnóstico) no site."},
+            {"ModalNivelamento", "Entrada compatível do diagnóstico, que reexporta DiagnosticoModulos. useDiagnostico controla as respostas e ResultadoDiagnostico apresenta a revisão: introdução, 20 perguntas com confirmação ou Não sei, resultado por módulo e explicações. Pode ser refeito sem perder progresso; informa se o envio está pendente."},
             {"ModalProgresso", "Janela Minhas Estatísticas: os números do SM-2 do aluno e as fases concluídas de cada módulo, calculados no navegador com o progresso local, atualizado pela API quando disponível."},
             {"ModalTrilha", "Janela Trilha: apresenta os módulos 1 a 4, disciplinas, resumos dos materiais de estudo e progresso; abre uma disciplina liberada no EstudoContext. O preparatório ENADE permanece em módulo próprio."},
             {"ResumoDisciplina", "Resumos autorais, tópicos e referências por página dos materiais acadêmicos, recebidos do catálogo compartilhado. Os arquivos originais do acervo não são publicados."},
@@ -520,16 +524,16 @@ public class GerarDiagramasPimIV {
         front.setDefinition("Telas e módulos JavaScript do site (React), do app (React Native) e do pacote compartilhado packages/shared.");
         elemento(front, "LoginPage", "React", false, new String[] {"entrar() : void", "cadastrar() : void"});
         elemento(front, "EstudoContext", "React", false, new String[] {"carregarAula(faseId : string) : void", "responder(resultado : string) : void",
-            "concluirRotina() : void", "concluirDiagnostico(acertos : int) : void", "criarCarta(dados : object) : bool"});
+            "concluirRotina() : void", "concluirDiagnostico(respostas : array) : Promise", "criarCarta(dados : object) : bool"});
         elemento(front, "ApiService", "módulo JS", false, new String[] {"login(usuario : string, senha : string) : Promise", "register(nickname : string, email : string, senha : string) : Promise",
             "getFlashcardsPorFase(codigo : string) : Promise", "atualizarProgresso(usuarioId : int, flashcardId : int, qualidade : int) : Promise",
             "concluirFase(faseId : string, acertos : int, total : int) : Promise", "comprarBonus(bonusId : string) : Promise",
-            "updateUserStats(xp : int, moedas : int, nivel : int) : Promise", "getEstatisticasDetalhadas(username : string) : Promise", "getProgressoUsuario() : Promise"});
+            "updateUserStats(xp : int, moedas : int, nivel : int) : Promise", "salvarDiagnostico(respostas : array) : Promise", "getEstatisticasDetalhadas(username : string) : Promise", "getProgressoUsuario() : Promise"});
         elemento(front, "senha.js", "módulo JS", false, new String[] {"senhaEhForte(senha : string) : bool"});
         elemento(front, "senhaVazada.js", "módulo JS", false, new String[] {"verificarSenhaVazada(senha : string) : Promise<int>"});
         elemento(front, "gamificacao.js", "módulo JS", false, new String[] {"recompensa(faseId : string) : object", "proximaFase(faseId : string) : string",
             "passouNoTeste(faseId : string, acertos : int, total : int) : bool", "podeComprarBonus(moedas : int, custo : int) : bool", "fasesConcluidas(decks : object, srsData : object) : array"});
-        elemento(front, "diagnostico.js", "módulo JS", false, new String[] {"resultadoDoDiagnostico(acertos : int) : object"});
+        elemento(front, "diagnostico.js", "módulo JS", false, new String[] {"selecionarPerguntasDiagnostico() : array", "resultadoDoDiagnostico(respostas : array) : object"});
         elemento(front, "deck.js", "módulo JS", false, new String[] {"montarDeckDaFase(cards : array) : array", "montarTesteDoModulo(testeId : string) : array"});
         elemento(front, "enadeOficial.js", "módulo JS", false, new String[] {"cartasDaProva(ano : int) : array"});
         elemento(front, "AssistenteNexTI", "React", false, new String[] {"enviar(texto : string) : void", "limpar() : void", "fechar() : void"});
@@ -732,15 +736,18 @@ public class GerarDiagramasPimIV {
             "A liberação é automática ao concluir a fase anterior; a compra de bônus é conferida no servidor.");
 
         detalhe(casos, "Realizar Teste de Nivelamento",
-            "No primeiro acesso, 10 perguntas definem por qual fase o aluno começa.",
-            new String[] {"ModalNivelamento", "EstudoContext", "diagnostico.js", "ApiService"},
-            new String[][] {{"usa", "ModalNivelamento", "EstudoContext"}, {"usa", "EstudoContext", "diagnostico.js"}, {"usa", "EstudoContext", "ApiService"}},
-            new String[] {"a=:Aluno", "modal=:ModalNivelamento", "ctx=:EstudoContext", "diag=:diagnostico.js", "rota=:EndpointExtensions"},
-            new String[][] {{"a", "modal", "responde as 10 perguntas"}, {"modal", "ctx", "concluirDiagnostico(acertos)"},
-                {"ctx", "diag", "resultadoDoDiagnostico(acertos)"}, {"diag", "ctx", "fases liberadas, rank e nível", "retorno"},
-                {"ctx", "ctx", "libera as fases e marca como nivelado"}, {"ctx", "rota", "PUT /api/usuarios/stats (nível)"},
-                {"ctx", "modal", "resultado", "retorno"}},
-            "Diagnostico.js no pacote compartilhado.");
+            "Diagnóstico de 20 perguntas, cinco por módulo. Quatro acertos indicam domínio no módulo avaliado. O resultado recomenda o primeiro módulo com lacuna, ou o ENADE, e preserva os acessos antigos.",
+            new String[] {"ModalNivelamento", "EstudoContext", "diagnostico.js", "ApiService", "EndpointExtensions", "IDiagnosticoService", "DiagnosticoService", "Usuario", "AppDbContext"},
+            new String[][] {{"usa", "ModalNivelamento", "EstudoContext"}, {"usa", "EstudoContext", "diagnostico.js"}, {"usa", "EstudoContext", "ApiService"},
+                {"usa", "ApiService", "EndpointExtensions"}, {"usa", "EndpointExtensions", "IDiagnosticoService"}, {"implementa", "DiagnosticoService", "IDiagnosticoService"},
+                {"usa", "DiagnosticoService", "AppDbContext"}, {"usa", "DiagnosticoService", "Usuario"}},
+            new String[] {"a=:Aluno", "modal=:ModalNivelamento", "ctx=:EstudoContext", "rota=:EndpointExtensions", "ds=:DiagnosticoService", "bd=:SQL Server"},
+            new String[][] {{"a", "modal", "confirma 20 respostas ou Não sei"}, {"modal", "ctx", "concluirDiagnostico(respostas)"},
+                {"ctx", "rota", "POST /api/diagnostico (JWT)"}, {"rota", "ds", "ConcluirAsync(usuarioId, respostas)"},
+                {"ds", "ds", "valida IDs e cinco respostas por módulo; calcula"}, {"ds", "bd", "UPDATE usuarios.diagnostico_json; preserva acessos"},
+                {"ds", "rota", "resultado por módulo e fasesLiberadas", "retorno"}, {"rota", "ctx", "200: diagnóstico salvo (ou 400)", "retorno"},
+                {"ctx", "modal", "mostra recomendação e revisão das respostas", "retorno"}},
+            "A API recalcula com a semente canônica. Não altera XP, rank, moedas, SM-2, bônus ou conclusões. Sem conexão, o site informa que o envio está pendente e tenta ao abrir o painel. O perfil e a exportação incluem o resultado.");
 
         detalhe(casos, "Realizar Simulado ENADE",
             "O aluno faz o teste do módulo ou uma prova oficial do ENADE, com correção na hora e justificativa.",
@@ -916,7 +923,7 @@ public class GerarDiagramasPimIV {
             {"Fase", "Disciplina da trilha de estudo.", "30", "30", "código : texto", "descrição : texto"},
             {"Flashcard", "Carta de estudo de uma fase; pode ser de múltipla escolha.", "30", "240", "frente : texto", "verso : texto", "dica : texto", "alternativas : texto", "resposta certa : número"},
             {"Carta moderada", "Carta que um Tutor editou ou excluiu.", "400", "30", "frente original : texto", "data : data"},
-            {"Usuário", "Pessoa com conta no sistema, com perfil Aluno, Tutor ou Admin.", "800", "240", "nome de usuário : texto", "e-mail : texto", "perfil : texto", "senha (hash) : texto", "XP : número", "moedas : número", "nível : número"},
+            {"Usuário", "Pessoa com conta no sistema, com perfil Aluno, Tutor ou Admin.", "800", "240", "nome de usuário : texto", "e-mail : texto", "perfil : texto", "senha (hash) : texto", "XP : número", "moedas : número", "nível : número", "diagnóstico : texto [0..1]"},
             {"Progresso de estudo", "Como um aluno está numa carta (SM-2).", "400", "240", "repetições : número", "intervalo : número", "fator de facilidade : número", "próxima revisão : data"},
             {"Revisão registrada", "Cada resposta do aluno, guardada pela trigger.", "400", "500", "intervalo : número", "data da revisão : data"},
             {"Fase concluída", "Fase que o aluno já concluiu; o prêmio sai só na primeira vez.", "800", "30", "data da conclusão : data"},
@@ -953,7 +960,7 @@ public class GerarDiagramasPimIV {
             {"fases", "Disciplinas da trilha.", "30", "30", "codigo_fase : NVARCHAR(20) {PK}", "descricao : NVARCHAR(100)"},
             {"flashcards", "Cartas de estudo.", "30", "240", "id : INT {PK}", "codigo_fase : NVARCHAR(20) {FK}", "frente : NVARCHAR(MAX)", "verso : NVARCHAR(MAX)", "dica : NVARCHAR(255)", "opcoes : NVARCHAR(MAX)", "correta : INT"},
             {"cartas_moderadas", "Cartas editadas ou excluídas por tutores (ligação lógica com fases, sem FK).", "420", "30", "id : INT {PK}", "codigo_fase : NVARCHAR(20)", "frente : NVARCHAR(MAX)", "data_moderacao : DATETIME2"},
-            {"usuarios", "Contas; o CHECK limita o perfil a Aluno, Tutor ou Admin.", "820", "240", "id : INT {PK}", "username : NVARCHAR(50)", "email : NVARCHAR(100)", "perfil : NVARCHAR(20)", "senha_hash : NVARCHAR(255)", "nivel : INT", "xp : INT", "moedas : INT", "data_criacao : DATETIME2"},
+            {"usuarios", "Contas; o CHECK limita o perfil a Aluno, Tutor ou Admin.", "820", "240", "id : INT {PK}", "username : NVARCHAR(50)", "email : NVARCHAR(100)", "perfil : NVARCHAR(20)", "senha_hash : NVARCHAR(255)", "nivel : INT", "xp : INT", "moedas : INT", "data_criacao : DATETIME2", "diagnostico_json : NVARCHAR(MAX) [0..1]"},
             {"progresso_flashcards", "Estado do SM-2 por aluno e carta (chave composta).", "420", "240", "usuario_id : INT {PK, FK}", "flashcard_id : INT {PK, FK}", "repeticoes : INT", "intervalo_dias : FLOAT", "fator_facilidade : FLOAT", "data_proxima_revisao : DATETIME2"},
             {"tb_historico_revisoes", "Uma linha por revisão, gravada pela trigger tg_progresso_historico.", "420", "520", "id_historico : INT {PK}", "usuario_id : INT {FK}", "flashcard_id : INT {FK}", "intervalo_dias : FLOAT", "data_revisao : DATETIME2"},
             {"fases_concluidas", "Fases que cada aluno concluiu; a chave composta garante o prêmio uma vez só.", "820", "30", "usuario_id : INT {PK, FK}", "codigo_fase : NVARCHAR(20) {PK}", "data_conclusao : DATETIME2"},
@@ -1335,7 +1342,7 @@ public class GerarDiagramasPimIV {
         Map.entry("Ajustar Acessibilidade", "Aumentar a fonte, ligar o alto contraste ou usar o VLibras."),
         Map.entry("Gerenciar Minha Conta", "Ver e exportar os próprios dados, trocar e-mail e senha e excluir a conta (PB02)."),
         Map.entry("Estudar Flashcards", "Consultar a Trilha dos módulos 1 a 4, ler resumos autorais dos materiais de estudo com referências e estudar as cartas de uma disciplina liberada. O SM-2 agenda a próxima revisão de cada carta; o ENADE permanece em módulo próprio."),
-        Map.entry("Realizar Teste de Nivelamento", "Responder 10 perguntas que definem a fase inicial."),
+        Map.entry("Realizar Teste de Nivelamento", "Responder 20 perguntas, cinco por módulo, para orientar o estudo. O servidor salva o resultado e preserva acessos; não dá XP, rank, moedas ou conclusão."),
         Map.entry("Realizar Simulado ENADE", "Fazer o teste do módulo ou uma prova oficial do ENADE, com correção e justificativa."),
         Map.entry("Visualizar Painel de Desempenho", "Ver os próprios números do SM-2."),
         Map.entry("Criar Flashcards", "Criar uma carta numa fase."),

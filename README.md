@@ -54,6 +54,10 @@ dos quatro semestres. Os resumos e 496 novas cartas ampliam os quatro módulos d
 o módulo 5 mantém o preparatório ENADE. As referências indicam o material e a página
 ou slide consultado. O menu **Trilha** organiza essa consulta por módulo (Módulo 1 a 4).
 
+O **Refazer Diagnóstico** avalia os quatro módulos com 20 perguntas e recomenda
+por onde continuar. O resultado fica na conta e preserva o progresso anterior;
+o diagnóstico não concede XP, moedas ou conclusão de disciplinas.
+
 ## 🎤 Apresentação de P.A. em .NET (27/10)
 
 O programa desktop da atividade, os slides, o roteiro e o guia de como abrir cada parte no
@@ -98,7 +102,7 @@ No PIM IV ele virou um sistema completo, publicado na nuvem. O que mudou:
 |---|---|---|
 | **Site** | HTML, CSS e JavaScript | React, publicado na internet (Vercel) |
 | **Celular** | Não tinha | App (Expo) com login, estudo das fases e fila para estudar sem internet |
-| **API em C#** | 7 rotas, com todo o código junto | 26 rotas, separadas em camadas (rotas → serviços → banco), cada serviço com sua interface |
+| **API em C#** | 7 rotas, com todo o código junto | 27 rotas, separadas em camadas (rotas → serviços → banco), cada serviço com sua interface |
 | **Repetição espaçada (SM-2)** | Só no navegador | Uma regra só no site, no app e na API, conferida pelos mesmos casos de teste |
 | **XP e moedas** | Calculados no navegador | Calculados no servidor, com a mesma tabela do site; moedas compram disciplinas bônus |
 | **Simulados ENADE** | Ficou para o futuro | Provas oficiais do ENADE ADS 2017 e 2021, com o gabarito do INEP |

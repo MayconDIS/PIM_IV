@@ -65,7 +65,10 @@ export {
   podeComprarBonus,
 } from './gamificacao.js';
 
-export { PERGUNTAS_DIAGNOSTICO, resultadoDoDiagnostico } from './diagnostico.js';
+export {
+  PERGUNTAS_DIAGNOSTICO, VERSAO_DIAGNOSTICO, PERGUNTAS_POR_MODULO,
+  MINIMO_ACERTOS_POR_MODULO, selecionarPerguntasDiagnostico, resultadoDoDiagnostico,
+} from './diagnostico.js';
 
 export {
   TAMANHO_MINIMO_DE_SENHA,

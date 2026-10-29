@@ -301,6 +301,10 @@ namespace NexTI_API.Data.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("data_criacao");
 
+                    b.Property<string>("DiagnosticoJson")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("diagnostico_json");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(100)

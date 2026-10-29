@@ -23,8 +23,9 @@ fala só com a API; o banco não é exposto ao navegador.
 A primeira requisição depois de um tempo parado pode levar ~1 min (App Service +
 banco acordando). A API tenta de novo automaticamente e o front espera até 60 s
 antes de indicar indisponibilidade. Uma sessão já salva pode continuar com
-as cartas locais; cadastro e login exigem a API. Não há fila de reenvio
-automático das respostas que falharem.
+as cartas locais; cadastro e login exigem a API. No site, as respostas de
+flashcards que falham não têm fila de reenvio automático. O diagnóstico mantém
+rascunho e envio pendente por usuário e tenta salvar novamente ao abrir o painel.
 
 ## 1. Azure (banco + API)
 
@@ -71,8 +72,14 @@ Ao iniciar, a API aplica as migrations pendentes e a carga canônica de 43 fases
 acrescenta conteúdo sem substituir cartas editadas ou restaurar exclusões do Tutor.
 Os códigos das fases existentes são preservados; os títulos seguem a nova sequência.
 Antes da publicação, execute `npm run seed:api` e `npm run seed:api:check` em `sistema/`.
-Publique a API antes do site para disponibilizar as novas cartas e `fasesConcluidas`
-no perfil. Para testar, abra
+Publique a API antes do site para disponibilizar as novas cartas, `fasesConcluidas`
+e `diagnostico` no perfil. A migration `20261026180024_DiagnosticoPorModulo`
+acrescenta `usuarios.diagnostico_json` (`nvarchar(max)`, anulável), sem apagar o
+progresso existente. A API passa a aceitar `POST /api/diagnostico` autenticado,
+valida as 20 respostas e grava o resultado usando a semente `Data/Seed/diagnostico.json`.
+Antes de publicar o site na Vercel, confira essa rota com uma conta de teste e
+verifique o resultado em `GET /api/usuarios/{username}`. A rota de status sozinha
+não verifica a migration nem a gravação do diagnóstico. Para testar disponibilidade, abra
 `https://<app>.azurewebsites.net/api/status`.
 
 ### Monitoramento

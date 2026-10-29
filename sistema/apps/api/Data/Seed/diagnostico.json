@@ -1,0 +1,610 @@
+{
+  "versao": 2,
+  "perguntasPorModulo": 5,
+  "minimoAcertosPorModulo": 4,
+  "modulos": [
+    {
+      "numero": 1,
+      "codigo": "Mod_01",
+      "titulo": "Fundamentos Algorítmicos",
+      "fases": [
+        "fase1",
+        "fase2",
+        "fase3",
+        "fase4",
+        "fase5",
+        "fase26",
+        "fase27",
+        "fase28",
+        "fase29"
+      ],
+      "testeId": "teste-mod1"
+    },
+    {
+      "numero": 2,
+      "codigo": "Mod_02",
+      "titulo": "Engenharia e Estruturas",
+      "fases": [
+        "fase6",
+        "fase7",
+        "fase8",
+        "fase9",
+        "fase10",
+        "fase30",
+        "fase31",
+        "fase32"
+      ],
+      "testeId": "teste-mod2"
+    },
+    {
+      "numero": 3,
+      "codigo": "Mod_03",
+      "titulo": "Desenvolvimento Profissional",
+      "fases": [
+        "fase11",
+        "fase12",
+        "fase13",
+        "fase14",
+        "fase15",
+        "fase33",
+        "fase34",
+        "fase35",
+        "fase36"
+      ],
+      "testeId": "teste-mod3"
+    },
+    {
+      "numero": 4,
+      "codigo": "Mod_04",
+      "titulo": "Tecnologias Avançadas",
+      "fases": [
+        "fase16",
+        "fase17",
+        "fase18",
+        "fase19",
+        "fase20",
+        "fase37",
+        "fase38",
+        "fase39"
+      ],
+      "testeId": "teste-mod4"
+    },
+    {
+      "numero": 5,
+      "codigo": "Mod_05",
+      "titulo": "Preparatório ENADE",
+      "fases": [
+        "fase21",
+        "fase22",
+        "fase23",
+        "fase24",
+        "fase25"
+      ],
+      "testeId": "teste-mod5"
+    }
+  ],
+  "ordemFases": [
+    "fase1",
+    "fase2",
+    "fase3",
+    "fase4",
+    "fase5",
+    "fase26",
+    "fase27",
+    "fase28",
+    "fase29",
+    "teste-mod1",
+    "fase6",
+    "fase7",
+    "fase8",
+    "fase9",
+    "fase10",
+    "fase30",
+    "fase31",
+    "fase32",
+    "teste-mod2",
+    "fase11",
+    "fase12",
+    "fase13",
+    "fase14",
+    "fase15",
+    "fase33",
+    "fase34",
+    "fase35",
+    "fase36",
+    "teste-mod3",
+    "fase16",
+    "fase17",
+    "fase18",
+    "fase19",
+    "fase20",
+    "fase37",
+    "fase38",
+    "fase39",
+    "teste-mod4",
+    "fase21",
+    "fase22",
+    "fase23",
+    "fase24",
+    "fase25",
+    "teste-mod5"
+  ],
+  "perguntas": [
+    {
+      "id": "diag-fase1",
+      "modulo": 1,
+      "faseId": "fase1",
+      "p": "Antes de escrever um programa em Python, para que serve organizar um algoritmo?",
+      "r": [
+        "Escolher automaticamente a melhor biblioteca.",
+        "Descrever os passos e as decisões da solução.",
+        "Garantir que nunca haverá erros de execução.",
+        "Substituir a necessidade de testar o programa."
+      ],
+      "certa": 1,
+      "explicacao": "O algoritmo organiza a lógica da solução antes dos detalhes da linguagem. Ajuda a analisar os passos, mas não elimina os testes."
+    },
+    {
+      "id": "diag-fase2",
+      "modulo": 1,
+      "faseId": "fase2",
+      "p": "Se duas grandezas são diretamente proporcionais, o que ocorre com a segunda quando a primeira dobra?",
+      "r": [
+        "Ela cai pela metade.",
+        "Ela aumenta sempre uma unidade.",
+        "Ela permanece igual.",
+        "Ela também dobra."
+      ],
+      "certa": 3,
+      "explicacao": "Na proporcionalidade direta, a razão entre as grandezas permanece constante. Multiplicar uma por dois também multiplica a outra por dois."
+    },
+    {
+      "id": "diag-fase3",
+      "modulo": 1,
+      "faseId": "fase3",
+      "p": "Qual característica pertence à arquitetura de computadores, apresentada ao programador?",
+      "r": [
+        "O conjunto de instruções executadas pelo processador.",
+        "A forma física de interligar os componentes na placa.",
+        "A implementação dos sinais de controle do processador.",
+        "A tecnologia usada na construção dos circuitos de memória."
+      ],
+      "certa": 0,
+      "explicacao": "A arquitetura apresenta características que afetam a execução lógica, como instruções e endereçamento. A organização trata da implementação dessas características."
+    },
+    {
+      "id": "diag-fase4",
+      "modulo": 1,
+      "faseId": "fase4",
+      "p": "Uma pessoa altera notas de alunos sem autorização. Qual princípio de segurança foi diretamente comprometido?",
+      "r": [
+        "Disponibilidade.",
+        "Portabilidade.",
+        "Integridade.",
+        "Escalabilidade."
+      ],
+      "certa": 2,
+      "explicacao": "Integridade trata da correção e da proteção dos dados contra alterações indevidas. Confidencialidade trata do acesso; disponibilidade, do acesso quando necessário."
+    },
+    {
+      "id": "diag-fase5",
+      "modulo": 1,
+      "faseId": "fase5",
+      "p": "Uma equipe precisa escolher uma solução tecnológica. Qual atitude representa uma análise ética e sustentável?",
+      "r": [
+        "Comparar custos, impactos sociais e ambientais e respeito aos direitos.",
+        "Considerar somente a velocidade de implantação.",
+        "Escolher sempre a opção mais recente, sem avaliar efeitos.",
+        "Tratar consequências sociais como responsabilidade exclusiva do usuário."
+      ],
+      "certa": 0,
+      "explicacao": "A decisão ética considera interesses, direitos e consequências. Ganhos técnicos ou econômicos não dispensam a avaliação de impactos sociais e ambientais."
+    },
+    {
+      "id": "diag-fase26",
+      "modulo": 1,
+      "faseId": "fase26",
+      "p": "O que expressa a universalidade dos direitos humanos?",
+      "r": [
+        "Os direitos dependem da renda de cada pessoa.",
+        "A proteção deve alcançar todas as pessoas.",
+        "Cada profissão define quem pode ter direitos.",
+        "Somente cidadãos com formação superior têm proteção."
+      ],
+      "certa": 1,
+      "explicacao": "A universalidade exige proteção de todas as pessoas. A dignidade humana não depende de renda, profissão ou escolaridade."
+    },
+    {
+      "id": "diag-fase27",
+      "modulo": 1,
+      "faseId": "fase27",
+      "p": "Um cadastro de estudos pede dados sem relação com o serviço. Qual mudança aplica o princípio da necessidade?",
+      "r": [
+        "Manter todos os campos desde que o banco esteja criptografado.",
+        "Coletar dados extras para possíveis usos futuros ainda indefinidos.",
+        "Manter a coleta irrestrita após um consentimento genérico.",
+        "Solicitar somente dados pertinentes e proporcionais à finalidade."
+      ],
+      "certa": 3,
+      "explicacao": "O princípio da necessidade orienta limitar a coleta ao que é pertinente e proporcional ao propósito informado. Mais dados não significam um cadastro melhor."
+    },
+    {
+      "id": "diag-fase28",
+      "modulo": 1,
+      "faseId": "fase28",
+      "p": "Quais estruturas básicas organizam um algoritmo estruturado?",
+      "r": [
+        "Entrada, arquivo e internet.",
+        "Classe, herança e polimorfismo.",
+        "Sequência, decisão e repetição.",
+        "Tabela, linha e coluna."
+      ],
+      "certa": 2,
+      "explicacao": "Sequência ordena ações, decisão escolhe caminhos e repetição executa tarefas mais de uma vez. As três podem ser combinadas em algoritmos estruturados."
+    },
+    {
+      "id": "diag-fase29",
+      "modulo": 1,
+      "faseId": "fase29",
+      "p": "Qual conjunto representa recursos de TIC usados por uma organização?",
+      "r": [
+        "Somente computadores e impressoras.",
+        "Hardware, software, redes, bancos de dados e serviços.",
+        "Somente aplicativos usados no celular.",
+        "Somente mensagens e chamadas telefônicas."
+      ],
+      "certa": 1,
+      "explicacao": "TIC reúne recursos para processar, armazenar e transmitir informações. Hardware, software, redes, bancos de dados e serviços atuam de forma integrada."
+    },
+    {
+      "id": "diag-fase6",
+      "modulo": 2,
+      "faseId": "fase6",
+      "p": "Em uma fila de atendimento com regra FIFO, qual elemento deve sair primeiro?",
+      "r": [
+        "O último que entrou.",
+        "O que tiver o maior valor.",
+        "Um elemento escolhido ao acaso.",
+        "O primeiro que entrou."
+      ],
+      "certa": 3,
+      "explicacao": "FIFO significa primeiro a entrar, primeiro a sair. A pilha usa a regra LIFO, na qual o último elemento inserido é o primeiro a sair."
+    },
+    {
+      "id": "diag-fase7",
+      "modulo": 2,
+      "faseId": "fase7",
+      "p": "Para que serve uma struct em C?",
+      "r": [
+        "Agrupar variáveis, inclusive de tipos diferentes, em uma estrutura.",
+        "Repetir um bloco enquanto uma condição for verdadeira.",
+        "Reservar exclusivamente um vetor de caracteres.",
+        "Garantir que todas as variáveis sejam constantes."
+      ],
+      "certa": 0,
+      "explicacao": "Uma struct reúne campos sob um mesmo tipo estruturado. Os campos podem ter tipos diferentes, como nome, idade e nota de um aluno."
+    },
+    {
+      "id": "diag-fase8",
+      "modulo": 2,
+      "faseId": "fase8",
+      "p": "Por que os requisitos são uma referência importante ao validar um sistema?",
+      "r": [
+        "Porque substituem todos os testes de software.",
+        "Porque determinam obrigatoriamente a linguagem de programação.",
+        "Porque registram expectativas para comparar com o que foi entregue.",
+        "Porque tornam desnecessária a participação dos usuários."
+      ],
+      "certa": 2,
+      "explicacao": "Os requisitos descrevem expectativas e necessidades aceitas. A validação compara a solução entregue com essas expectativas e envolve os interessados."
+    },
+    {
+      "id": "diag-fase9",
+      "modulo": 2,
+      "faseId": "fase9",
+      "p": "Uma videoconferência tem largura de banda suficiente, mas apresenta interrupções. O que também deve ser investigado?",
+      "r": [
+        "Somente a velocidade nominal contratada com o provedor.",
+        "A latência e a variação do atraso, chamada jitter.",
+        "Somente a quantidade de endereços disponíveis na rede.",
+        "Apenas a taxa máxima suportada pelo cabo de rede."
+      ],
+      "certa": 1,
+      "explicacao": "Comunicações em tempo real dependem de mais que capacidade de transmissão. Atraso e jitter afetam a continuidade do áudio e do vídeo."
+    },
+    {
+      "id": "diag-fase10",
+      "modulo": 2,
+      "faseId": "fase10",
+      "p": "O que caracteriza o aprendizado de máquina?",
+      "r": [
+        "Uma sequência fixa de regras escritas manualmente para todos os casos.",
+        "A execução repetida de um algoritmo sem alterar seu comportamento.",
+        "O armazenamento de exemplos sem extrair relações entre eles.",
+        "O aprendizado de padrões a partir de dados para realizar uma tarefa."
+      ],
+      "certa": 3,
+      "explicacao": "No aprendizado de máquina, modelos identificam padrões em dados. A qualidade dos dados e a forma de avaliação influenciam os resultados."
+    },
+    {
+      "id": "diag-fase30",
+      "modulo": 2,
+      "faseId": "fase30",
+      "p": "Qual abordagem é mais adequada para um projeto de educação ambiental?",
+      "r": [
+        "Investigar o contexto, envolver a comunidade e acompanhar os resultados.",
+        "Distribuir uma mensagem única sem conhecer o público.",
+        "Considerar apenas a aparência dos materiais de divulgação.",
+        "Tratar problemas ambientais como assuntos sem relação com hábitos locais."
+      ],
+      "certa": 0,
+      "explicacao": "A educação ambiental relaciona conhecimentos, participação e decisões. Projetos precisam considerar o contexto e avaliar seus resultados para melhorar as ações."
+    },
+    {
+      "id": "diag-fase31",
+      "modulo": 2,
+      "faseId": "fase31",
+      "p": "Por que uma explicação científica pode ser revisada?",
+      "r": [
+        "Porque qualquer opinião tem o mesmo valor que uma investigação.",
+        "Porque resultados científicos devem ser mantidos sem questionamento.",
+        "Porque novas evidências e análises podem alterar a explicação.",
+        "Porque um resultado só é científico se nunca for testado."
+      ],
+      "certa": 2,
+      "explicacao": "O conhecimento científico é verificável e falível. Novas evidências podem apoiar, limitar ou levar à revisão de uma explicação."
+    },
+    {
+      "id": "diag-fase32",
+      "modulo": 2,
+      "faseId": "fase32",
+      "p": "Qual exemplo descreve um requisito não funcional?",
+      "r": [
+        "O aluno pode cadastrar um flashcard.",
+        "O sistema deve responder à consulta em até dois segundos nas condições definidas.",
+        "O tutor pode editar uma pergunta.",
+        "O usuário pode solicitar a exportação de seus dados."
+      ],
+      "certa": 1,
+      "explicacao": "Requisitos não funcionais descrevem qualidades e restrições, como desempenho. Cadastrar, editar e exportar são comportamentos funcionais."
+    },
+    {
+      "id": "diag-fase11",
+      "modulo": 3,
+      "faseId": "fase11",
+      "p": "Ao começar a modelagem de dados de uma biblioteca, qual é o foco do modelo conceitual?",
+      "r": [
+        "Definir os tipos físicos e o tamanho exato de cada coluna.",
+        "Definir primeiro os índices específicos de um banco.",
+        "Escrever as consultas SQL que serão usadas em cada tela.",
+        "Representar entidades, atributos e relações relevantes do domínio."
+      ],
+      "certa": 3,
+      "explicacao": "O modelo conceitual representa o domínio antes dos detalhes de implementação. Livros, leitores e empréstimos são exemplos de conceitos e relações a analisar."
+    },
+    {
+      "id": "diag-fase12",
+      "modulo": 3,
+      "faseId": "fase12",
+      "p": "Qual é a função de um construtor em uma classe C#?",
+      "r": [
+        "Inicializar o estado necessário de uma nova instância.",
+        "Excluir automaticamente todos os objetos antigos.",
+        "Converter qualquer classe em interface.",
+        "Impedir que a classe possua métodos."
+      ],
+      "certa": 0,
+      "explicacao": "O construtor participa da criação do objeto e inicializa seu estado. Pode receber parâmetros necessários para que a instância comece em uma condição válida."
+    },
+    {
+      "id": "diag-fase13",
+      "modulo": 3,
+      "faseId": "fase13",
+      "p": "Em HTML, quando a região main é adequada?",
+      "r": [
+        "Para identificar uma região de navegação complementar.",
+        "Para identificar o conteúdo principal do documento.",
+        "Para reunir os metadados e o título da aba.",
+        "Para identificar o cabeçalho de cada seção do documento."
+      ],
+      "certa": 1,
+      "explicacao": "O elemento main identifica o conteúdo principal. A estrutura semântica ajuda pessoas e tecnologias assistivas a compreender a organização da página."
+    },
+    {
+      "id": "diag-fase14",
+      "modulo": 3,
+      "faseId": "fase14",
+      "p": "Um modelo supervisionado foi treinado com rótulos incorretos. Qual consequência é plausível?",
+      "r": [
+        "O modelo corrige todos os rótulos automaticamente.",
+        "A qualidade dos rótulos não afeta o aprendizado.",
+        "O modelo pode aprender os erros e vieses desses rótulos.",
+        "Os dados deixam de ser necessários na avaliação."
+      ],
+      "certa": 2,
+      "explicacao": "O modelo aprende relações a partir dos exemplos fornecidos. Rótulos inadequados ou pouco representativos podem introduzir erros e vieses nos resultados."
+    },
+    {
+      "id": "diag-fase15",
+      "modulo": 3,
+      "faseId": "fase15",
+      "p": "Quem participa da construção da qualidade de software?",
+      "r": [
+        "Somente a equipe de testes depois da implementação.",
+        "Somente quem aprova a compra do sistema.",
+        "Somente a pessoa que escreve a documentação final.",
+        "Todos os envolvidos nas decisões e atividades do desenvolvimento."
+      ],
+      "certa": 3,
+      "explicacao": "Qualidade é construída ao longo do processo. Requisitos, projeto, implementação, testes e colaboração com usuários influenciam a adequação do produto."
+    },
+    {
+      "id": "diag-fase33",
+      "modulo": 3,
+      "faseId": "fase33",
+      "p": "Em uma negociação, qual ação demonstra escuta ativa?",
+      "r": [
+        "Ouvir, fazer perguntas e confirmar se a mensagem foi compreendida.",
+        "Preparar a resposta sem acompanhar o que a outra pessoa diz.",
+        "Interpretar silêncio sempre como concordância.",
+        "Evitar perguntas para encerrar a conversa rapidamente."
+      ],
+      "certa": 0,
+      "explicacao": "A escuta ativa busca compreender o sentido da mensagem. Perguntar e confirmar o entendimento reduz ruídos e interpretações precipitadas."
+    },
+    {
+      "id": "diag-fase34",
+      "modulo": 3,
+      "faseId": "fase34",
+      "p": "Por que a língua de sinais é importante para a comunicação de pessoas surdas?",
+      "r": [
+        "Porque depende de ouvir corretamente todos os sons.",
+        "Porque oferece uma língua visual para comunicação e expressão.",
+        "Porque dispensa qualquer aprendizagem de linguagem.",
+        "Porque é apenas um conjunto universal de gestos sem estrutura."
+      ],
+      "certa": 1,
+      "explicacao": "As línguas de sinais têm estrutura linguística e utilizam recursos visuais. Favorecem comunicação, expressão e desenvolvimento da linguagem."
+    },
+    {
+      "id": "diag-fase35",
+      "modulo": 3,
+      "faseId": "fase35",
+      "p": "Por que incluir stdio.h em um programa C que usa printf e scanf?",
+      "r": [
+        "Para disponibilizar as declarações de todas as funções matemáticas.",
+        "Para alocar automaticamente os buffers de todas as variáveis.",
+        "Para disponibilizar as declarações dos recursos de entrada e saída utilizados.",
+        "Para validar automaticamente todos os dados digitados pelo usuário."
+      ],
+      "certa": 2,
+      "explicacao": "O cabeçalho stdio.h declara recursos de entrada e saída, incluindo printf e scanf. Sua inclusão não substitui a validação das entradas."
+    },
+    {
+      "id": "diag-fase36",
+      "modulo": 3,
+      "faseId": "fase36",
+      "p": "Uma tela é visualmente agradável, mas o usuário não consegue concluir sua tarefa. O que isso mostra?",
+      "r": [
+        "Que aparência e experiência de uso são sempre equivalentes.",
+        "Que testar a navegação é desnecessário quando a tela é bonita.",
+        "Que somente a quantidade de cores determina a qualidade.",
+        "Que avaliar a experiência exige considerar fluxos, mensagens e objetivos."
+      ],
+      "certa": 3,
+      "explicacao": "UX envolve a experiência de realizar tarefas. UI reúne elementos da interface; uma boa aparência não garante que o fluxo permita atingir o objetivo."
+    },
+    {
+      "id": "diag-fase16",
+      "modulo": 4,
+      "faseId": "fase16",
+      "p": "Por que a ordem dos middlewares importa em uma aplicação ASP.NET Core?",
+      "r": [
+        "Porque cada etapa pode preparar dados usados pelas etapas seguintes.",
+        "Porque ela ordena os componentes apenas pela velocidade de execução.",
+        "Porque todos os componentes são executados em paralelo, sem dependências.",
+        "Porque ela define apenas a ordem de criação das tabelas do banco."
+      ],
+      "certa": 0,
+      "explicacao": "A requisição percorre uma sequência de componentes. Etapas podem preparar informações, encaminhar a requisição ou encerrar o processamento, criando dependências de ordem."
+    },
+    {
+      "id": "diag-fase17",
+      "modulo": 4,
+      "faseId": "fase17",
+      "p": "Um app precisa continuar útil quando a conexão cai. Qual decisão deve ser considerada desde o projeto?",
+      "r": [
+        "Descartar os dados locais sempre que a conexão for interrompida.",
+        "Planejar armazenamento local e sincronização quando a conexão voltar.",
+        "Depender somente da memória temporária, mesmo após fechar o aplicativo.",
+        "Repetir requisições continuamente sem controlar tentativas ou duplicações."
+      ],
+      "certa": 1,
+      "explicacao": "Aplicativos móveis lidam com conectividade variável e recursos limitados. Armazenamento local e sincronização ajudam a manter a continuidade das tarefas."
+    },
+    {
+      "id": "diag-fase18",
+      "modulo": 4,
+      "faseId": "fase18",
+      "p": "Qual é a diferença entre UPDATE e ALTER em SQL?",
+      "r": [
+        "Ambos servem apenas para consultar registros.",
+        "UPDATE muda estruturas e ALTER sempre remove registros.",
+        "UPDATE altera dados; ALTER modifica a estrutura de um objeto do banco.",
+        "UPDATE cria tabelas e ALTER ordena consultas."
+      ],
+      "certa": 2,
+      "explicacao": "UPDATE é usado para alterar registros existentes. ALTER modifica estruturas e objetos do banco, como a definição de uma tabela."
+    },
+    {
+      "id": "diag-fase19",
+      "modulo": 4,
+      "faseId": "fase19",
+      "p": "Uma equipe usa uma plataforma gerenciada para publicar sua aplicação sem administrar o sistema operacional do servidor. Qual modelo isso caracteriza?",
+      "r": [
+        "IaaS, com máquinas virtuais e sistema operacional administrados pela equipe.",
+        "SaaS, com consumo de um aplicativo pronto do provedor.",
+        "Hospedagem física própria, com gestão local do servidor.",
+        "PaaS, que oferece uma plataforma para executar aplicações."
+      ],
+      "certa": 3,
+      "explicacao": "Em PaaS, o provedor gerencia a plataforma e parte da infraestrutura. A equipe concentra-se na aplicação e nos dados dentro das responsabilidades do serviço."
+    },
+    {
+      "id": "diag-fase20",
+      "modulo": 4,
+      "faseId": "fase20",
+      "p": "Antes de transformar uma ideia de TI em negócio, o que precisa ser validado?",
+      "r": [
+        "O problema do público, as alternativas existentes e a viabilidade da proposta.",
+        "Somente a originalidade técnica, mesmo sem demanda identificada.",
+        "A preferência da equipe por uma tecnologia, antes de investigar o mercado.",
+        "A quantidade de funcionalidades, independentemente dos custos e do público."
+      ],
+      "certa": 0,
+      "explicacao": "Uma ideia técnica precisa atender a uma necessidade real e ter condições de operação. Público, alternativas, recursos e viabilidade ajudam a avaliar a proposta."
+    },
+    {
+      "id": "diag-fase37",
+      "modulo": 4,
+      "faseId": "fase37",
+      "p": "Um app JavaScript compartilha código entre Android e iOS. Por que ainda testar nas duas plataformas?",
+      "r": [
+        "Porque todo código compartilhado precisa ser reescrito em linguagem nativa.",
+        "Porque aparência, permissões e recursos podem ter comportamentos diferentes.",
+        "Porque testes em uma plataforma garantem a mesma experiência na outra.",
+        "Porque o uso de JavaScript elimina a necessidade de testar recursos nativos."
+      ],
+      "certa": 1,
+      "explicacao": "Compartilhar código não elimina diferenças de plataforma. Permissões e recursos como câmera e localização precisam ser verificados no contexto de cada sistema."
+    },
+    {
+      "id": "diag-fase38",
+      "modulo": 4,
+      "faseId": "fase38",
+      "p": "Nos estudos de relações étnico-raciais, o que significa tratar raça como construção social?",
+      "r": [
+        "Aceitar hierarquias biológicas entre grupos humanos.",
+        "Negar que o racismo produza consequências concretas.",
+        "Analisar os significados e efeitos sociais atribuídos às diferenças em contextos históricos.",
+        "Considerar que todas as culturas têm exatamente a mesma história."
+      ],
+      "certa": 2,
+      "explicacao": "A abordagem analisa como diferenças recebem significados e consequências sociais. Permite compreender o racismo sem aceitar hierarquias biológicas entre pessoas."
+    },
+    {
+      "id": "diag-fase39",
+      "modulo": 4,
+      "faseId": "fase39",
+      "p": "Por que um planejamento ágil deve ser revisado ao longo do projeto?",
+      "r": [
+        "Porque objetivos e prioridades nunca precisam ser definidos.",
+        "Porque revisar o plano significa abandonar qualquer compromisso.",
+        "Porque a equipe deve evitar o retorno dos usuários.",
+        "Porque o trabalho e o uso do produto revelam necessidades e riscos novos."
+      ],
+      "certa": 3,
+      "explicacao": "O planejamento ágil incorpora aprendizado durante a execução. Revisões ajudam a ajustar prioridades e decisões para produzir resultados úteis."
+    }
+  ]
+}

@@ -78,6 +78,12 @@ namespace NexTI_API.Endpoints
             }).RequireAuthorization();
 
             // --- FASES ---
+            app.MapPost("/api/diagnostico", async (DiagnosticoRequest request, IDiagnosticoService diagnostico, ClaimsPrincipal userClaims) =>
+            {
+                if (IdDoUsuario(userClaims) is not int usuarioId) return Results.Unauthorized();
+                return ParaHttp(await diagnostico.ConcluirAsync(usuarioId, request.Respostas), Results.Ok);
+            }).RequireAuthorization();
+
             app.MapGet("/api/fases", async (IConteudoService conteudo) => Results.Ok(await conteudo.ListarFasesAsync()));
 
             // --- FLASHCARDS ---
@@ -186,4 +192,5 @@ namespace NexTI_API.Endpoints
     public record EditarFlashcardRequest(string Frente, string Verso, string? Dica);
     public record PerfilRequest(string Perfil);
     public record ConclusaoRequest(string? FaseId, int Acertos, int Total);
+    public record DiagnosticoRequest(System.Collections.Generic.List<RespostaDiagnostico?>? Respostas);
 }

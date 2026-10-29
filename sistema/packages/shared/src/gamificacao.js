@@ -132,9 +132,13 @@ export function preservarFasesLiberadas(liberadas = []) {
  * - fase com todas as cartas respondidas conta como concluída e libera a trilha até a seguinte.
  * Com `pularTestes` (app, que não tem os testes de módulo), a fase depois do teste também é liberada.
  */
-export function fasesLiberadasNoServidor({ nivel = 1, progresso = [], fasesConcluidas = [], pularTestes = false } = {}) {
+export function fasesLiberadasNoServidor({ nivel = 1, diagnostico = null, progresso = [], fasesConcluidas = [], pularTestes = false } = {}) {
   const liberadas = new Set(FASES_INICIAIS);
-  if (nivel >= 6) ORDEM_FASES.forEach((f) => liberadas.add(f));
+  // O diagnóstico atual guarda seus acessos: ganhar XP não muda a avaliação pedagógica.
+  // Sem esse registro, a regra antiga continua valendo para preservar contas existentes.
+  if (diagnostico && Array.isArray(diagnostico.fasesLiberadas)) {
+    diagnostico.fasesLiberadas.filter(f => ORDEM_FASES.includes(f)).forEach(f => liberadas.add(f));
+  } else if (nivel >= 6) ORDEM_FASES.forEach((f) => liberadas.add(f));
   else if (nivel >= 3) ORDEM_FASES.slice(0, ORDEM_FASES.indexOf('teste-mod2') + 1).forEach((f) => liberadas.add(f));
 
   const respondidas = {};

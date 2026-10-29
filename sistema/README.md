@@ -33,6 +33,7 @@ As três disciplinas complementares que já existiam no módulo 2 permanecem na 
 | Parte | Situação | Onde fica salvo |
 |---|---|---|
 | Cadastro e login | ✅ | API (JWT) e SQL Server |
+| Diagnóstico por módulo | ✅ | 20 perguntas no site responsivo; a API valida e salva recomendação e acessos em `usuarios.diagnostico_json`, também consultados pelo app Expo |
 | Estudo com flashcards e SM-2 | ✅ | No navegador; respostas de cartas com ID são enviadas a `POST /api/progresso/atualizar` quando a API está disponível |
 | Simulados ENADE | ✅ | Guia de estudos e provas oficiais de 2017 e 2021 (módulo 5); cartas por fase vêm da API e as provas também ficam em `GET /api/simulados/questoes` |
 | XP, moedas e nível | ✅ | Calculados na API (`POST /api/progresso/concluir-fase`), com a mesma tabela do site; o site e o app mostram o prêmio na hora e ficam com os totais do servidor |
@@ -45,7 +46,8 @@ As três disciplinas complementares que já existiam no módulo 2 permanecem na 
 
 Cadastro e login exigem a API. Com uma sessão já salva no navegador, o painel
 pode usar as cartas locais de `packages/shared` quando a API está indisponível.
-Não existe uma fila para reenviar automaticamente respostas que falharam.
+As respostas de flashcards não têm fila automática no site. O diagnóstico tem
+rascunho por usuário e reenvio próprio quando seu salvamento está pendente.
 O cálculo da revisão (SM-2) é o mesmo no site, no app e na API, testado com os mesmos casos.
 
 ## Como rodar

@@ -1,6 +1,7 @@
 // Lista explícita evita apagar/exportar outra conta cujo nickname tenha o mesmo prefixo.
 const SUFIXOS = ['xp', 'coins', 'nivelado', 'desbloqueadas', 'bonus_unlocked', 'decks', 'rank',
-  'srs', 'map_state', 'avatar_custom', 'certificado_unlocked', 'active_state'];
+  'srs', 'map_state', 'avatar_custom', 'certificado_unlocked', 'active_state',
+  'diagnostico', 'diagnostico_pendente', 'diagnostico_rascunho'];
 
 export function dadosLocaisDaConta(username, storage = localStorage) {
   return Object.fromEntries(SUFIXOS.map((s) => [s, storage.getItem(`quest_${username}_${s}`)])

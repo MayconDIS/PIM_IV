@@ -37,6 +37,7 @@ export function EstudoProvider({ children }) {
     xp: progresso.xp,
     moedas: progresso.moedas,
     rank: progresso.rank,
+    diagnostico: progresso.diagnostico,
     srsData: progresso.srsData,
     decks: progresso.decks,
     fasesDesbloqueadas: progresso.fasesDesbloqueadas,

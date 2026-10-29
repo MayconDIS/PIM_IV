@@ -30,6 +30,9 @@ namespace NexTI_API.Models
         public int XP { get; set; } = 0;
         public int Moedas { get; set; } = 0;
 
+        /// <summary>Último diagnóstico e acessos preservados; separado do nível ganho por XP.</summary>
+        public string? DiagnosticoJson { get; set; }
+
         public DateTime DataCriacao { get; set; } = DateTime.UtcNow;
 
         public ICollection<ProgressoFlashcard> Progressos { get; set; } = new List<ProgressoFlashcard>();
