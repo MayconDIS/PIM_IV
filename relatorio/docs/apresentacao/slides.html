@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nex_TI — Apresentação do PIM IV</title>
     <!--
-      Apresentação do PIM IV (Nex_TI), 26 slides em A4 paisagem, com começo, meio e fim:
+      Apresentação do PIM IV (Nex_TI), 34 slides em A4 paisagem, com começo, meio e fim:
         começo (1–7): a equipe, o problema, a elicitação de requisitos e a solução em números;
         meio (8–22): as oito disciplinas do semestre, uma por slide (o que ensinou → onde usamos → a prova),
                      e uma resposta do aluno passando pelas oito;
@@ -269,6 +269,27 @@
         .funcoes li { font-size: 12pt; color: var(--nx-txt-2); line-height: 1.45; }
         .funcoes li b { color: var(--nx-ink); }
 
+        /* ── Slides de exemplo: código real do projeto, dois diagramas e agradecimento ── */
+        .lado-codigo { display: grid; grid-template-columns: 1.55fr 1fr; gap: 5mm; align-items: start; min-height: 0; }
+        figure.codigo { align-items: stretch; margin: 0; min-width: 0; }
+        figure.codigo figcaption {
+            display: flex; justify-content: space-between; gap: 4mm; text-align: left;
+            background: #1f2937; border: 1px solid var(--nx-border); border-bottom: 0; border-radius: 6px 6px 0 0; padding: 1.5mm 3mm;
+        }
+        figure.codigo figcaption span { color: var(--nx-primary); font-weight: 700; font-size: 8.5pt; text-transform: uppercase; letter-spacing: 0.06em; }
+        figure.codigo figcaption code { color: var(--nx-txt-3); font-size: 8pt; }
+        figure.codigo pre {
+            margin: 0; background: #0d1117; border: 1px solid var(--nx-border); border-radius: 0 0 6px 6px; padding: 3mm 4mm;
+            font-family: var(--nx-mono); font-size: 8.6pt; line-height: 1.5; color: #e6edf3; white-space: pre-wrap; word-break: break-word;
+            font-variant-ligatures: none; font-feature-settings: "liga" 0, "calt" 0; /* => e !== aparecem como no arquivo */
+        }
+        .dois-diagramas { display: grid; grid-template-columns: 0.8fr 1.4fr; gap: 6mm; align-items: center; }
+        .obrigado .slide-body { align-items: center; text-align: center; gap: 5mm; }
+        .obrigado .equipe { justify-content: center; }
+        .obrigado-titulo { font-family: var(--nx-brand); font-size: 48pt; font-weight: 900; line-height: 1; background: var(--nx-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .logo-unip.grande { height: 30mm; }
+        @media print { .obrigado-titulo { background: none !important; -webkit-background-clip: border-box; background-clip: border-box; color: var(--nx-primary); } }
+
         /* ── Uma disciplina por slide: o que ensinou → onde usamos → a prova ─────── */
         .disciplina { display: grid; grid-template-columns: 1fr 1.25fr 1fr; gap: 5mm; align-items: stretch; }
         .disciplina.com-imagem { grid-template-columns: 0.9fr 1.15fr 1.35fr; align-items: center; }
@@ -324,7 +345,7 @@
         </div>
     </div>
     <footer class="rodape"><img class="logo-unip" src="../../assets/branding/Logo UNIP.png" alt="UNIP – Universidade Paulista"><span>github.com/MayconDIS/PIM_IV · nexti-pim-iv.vercel.app</span></footer>
-    <div class="barra-slide" aria-hidden="true"><i style="width:4%"></i></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:3%"></i></div>
     <aside class="notas">Maciel: "Somos a equipe do Nex_TI: Gabriel, Maciel, Maycon, Miguel e Rafael. Vamos contar o projeto do começo ao fim: o problema e como levantamos os requisitos, depois como cada disciplina do semestre entrou no sistema, e no fim os resultados e o sistema funcionando."</aside>
 </section>
 
@@ -342,8 +363,8 @@
             <span>Empreendedorismo em TI</span><span>Relações Étnico-Raciais</span><span>Web com .NET</span><span>Mobile</span><span>Programação Aplicada em .NET</span><span>Banco de Dados</span><span>Cloud e DevOps</span><span>Projetos Ágil</span>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Maciel</strong> · Slide 2 / 26</span></div>
-    <div class="barra-slide" aria-hidden="true"><i style="width:8%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Maciel</strong> · Slide 2 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:6%"></i></div>
     <aside class="notas">Maciel: apresentar o caminho. "Vocês vão ver as oito disciplinas do semestre, cada uma no lugar onde foi usada."</aside>
 </section>
 
@@ -368,8 +389,8 @@
             <li><b>C · Desenvolvedores (Rafael, Gabriel e Miguel):</b> áreas definidas no planejamento: banco de dados (Rafael) e prototipação das telas (Gabriel).</li>
         </ul>
     </div>
-    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Maciel</strong> · Slide 3 / 26</span></div>
-    <div class="barra-slide" aria-hidden="true"><i style="width:12%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Maciel</strong> · Slide 3 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:9%"></i></div>
     <aside class="notas">Maciel: "Eu fui o Scrum Master: montei o quadro e organizei as sprints. Estes foram os papéis que definimos no começo." Se perguntarem quem fez cada parte, responder com sinceridade: o histórico do GitHub e do Trello mostra as entregas.</aside>
 </section>
 
@@ -386,8 +407,8 @@
         <div class="card amarelo"><h3>Persona</h3><p>Jovem de 18 a 20 anos, recém-saído do ensino médio, que quer entrar em TI e sente dificuldade com os termos técnicos. Faz o nivelamento, revisa com flashcards e usa os simulados do ENADE; XP e moedas mantêm o ritmo.</p></div>
         <p class="slide-subtitle">São hipóteses: o próximo slide mostra de onde elas vieram, e o fim mostra como validá-las.</p>
     </div>
-    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Maciel</strong> · Slide 4 / 26</span></div>
-    <div class="barra-slide" aria-hidden="true"><i style="width:15%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Maciel</strong> · Slide 4 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:12%"></i></div>
     <aside class="notas">Maciel: explicar os três problemas e a persona. Deixar claro que são hipóteses a validar com alunos reais.</aside>
 </section>
 
@@ -406,8 +427,8 @@
         </div>
         <p class="slide-subtitle"><b class="destaque">Ainda falta:</b> entrevistas e questionário com ingressantes reais, num piloto com uma turma.</p>
     </div>
-    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Maciel</strong> · Slide 5 / 26</span></div>
-    <div class="barra-slide" aria-hidden="true"><i style="width:19%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Maciel</strong> · Slide 5 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:15%"></i></div>
     <aside class="notas">Maciel: as seis técnicas que usamos, com as fontes. Ser honesto: a elicitação com usuários reais (entrevista, questionário e piloto) é o próximo passo.</aside>
 </section>
 
@@ -434,8 +455,8 @@
             <div class="card"><h3>Teste</h3><p>26 testes do app: envio com e sem internet e a fila.</p></div>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Maciel</strong> · Slide 6 / 26</span></div>
-    <div class="barra-slide" aria-hidden="true"><i style="width:23%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Maciel</strong> · Slide 6 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:18%"></i></div>
     <aside class="notas">Maciel: todo requisito segue esse caminho, e cada item do Trello leva o link do pull request que o entregou. Passar a vez: "Agora o meio: o Gabriel abre com as duas primeiras disciplinas."</aside>
 </section>
 
@@ -456,8 +477,8 @@
         </div>
         <p class="slide-subtitle">O conteúdo reúne 43 fases e 1198 cartas: além de ser feito com as disciplinas, o Nex_TI ensina um pouco de cada disciplina do curso.</p>
     </div>
-    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Maciel</strong> · Slide 7 / 26</span></div>
-    <div class="barra-slide" aria-hidden="true"><i style="width:27%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Maciel</strong> · Slide 7 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:21%"></i></div>
     <aside class="notas">Maciel: ler os números e passar ao meio: "O Gabriel mostra as duas primeiras disciplinas."</aside>
 </section>
 
@@ -474,8 +495,8 @@
             <div class="card roxo"><h3>Organograma proposto</h3><div class="organograma"><b class="topo">Nex_TI Educacional</b><span>Produto e parcerias</span><span>Curadoria pedagógica</span><span>Desenvolvimento e operação</span><span>Atendimento e inclusão</span></div></div>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Gabriel</strong> · Slide 8 / 26</span></div>
-    <div class="barra-slide" aria-hidden="true"><i style="width:31%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Gabriel</strong> · Slide 8 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:24%"></i></div>
     <aside class="notas">Gabriel: a empresa é fictícia. A disciplina deu o formato do negócio; o ponto de equilíbrio depende de dados que ainda não temos.</aside>
 </section>
 
@@ -497,8 +518,8 @@
         </div>
         <p class="slide-subtitle">Ponto de equilíbrio = custos fixos ÷ (receita unitária − custo variável unitário): será calculado com os dados do piloto.</p>
     </div>
-    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Gabriel</strong> · Slide 9 / 26</span></div>
-    <div class="barra-slide" aria-hidden="true"><i style="width:35%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Gabriel</strong> · Slide 9 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:26%"></i></div>
     <aside class="notas">Gabriel: o Canvas resume o negócio em nove blocos. Receita e custo ainda são hipóteses: a viabilidade econômica não foi demonstrada com dados, e o ponto de equilíbrio sai do piloto.</aside>
 </section>
 
@@ -514,8 +535,8 @@
             <div class="card roxo"><h3>Ameaças</h3><ul><li>Baixa adesão dos alunos.</li><li>Custos de operação.</li><li>Inconsistência entre dispositivos.</li><li>Necessidade de revisão pedagógica.</li></ul></div>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Gabriel</strong> · Slide 10 / 26</span></div>
-    <div class="barra-slide" aria-hidden="true"><i style="width:38%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Gabriel</strong> · Slide 10 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:29%"></i></div>
     <aside class="notas">Gabriel: as ameaças são os riscos do relatório; a mitigação é um piloto limitado, com critérios de aceite. Passar para a próxima disciplina.</aside>
 </section>
 
@@ -531,8 +552,8 @@
             <div class="card amarelo"><h3>Promoção</h3><p>Parcerias com cursos de TI, demonstração para coordenações, redes sociais e indicação entre alunos.</p></div>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Gabriel</strong> · Slide 11 / 26</span></div>
-    <div class="barra-slide" aria-hidden="true"><i style="width:42%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Gabriel</strong> · Slide 11 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:32%"></i></div>
     <aside class="notas">Gabriel: o produto já existe; o preço é uma premissa da equipe, para ser validada no piloto. Todas as premissas e contas estão em relatorio/docs/PLANO_DE_NEGOCIOS.md.</aside>
 </section>
 
@@ -552,8 +573,8 @@
             <div class="card amarelo"><h3>Leitura honesta</h3><p>Os números são bons porque ninguém recebe no piloto. Com R$ 500 de pró-labore para cada integrante, o ponto de equilíbrio sobe para <b class="destaque">563 alunos</b>: para virar empresa de verdade, a Nex_TI precisa de várias instituições.</p></div>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Gabriel</strong> · Slide 12 / 26</span></div>
-    <div class="barra-slide" aria-hidden="true"><i style="width:46%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Gabriel</strong> · Slide 12 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:35%"></i></div>
     <aside class="notas">Gabriel: ponto de equilíbrio = custo fixo ÷ margem por aluno (202 ÷ 4,80). Payback = investimento ÷ lucro mensal. Deixar claro que preço e número de alunos são premissas, e que o piloto vai trazer os números reais.</aside>
 </section>
 
@@ -569,13 +590,28 @@
         </div>
         <p class="slide-subtitle">Acessibilidade ajuda, mas não substitui ações contra a discriminação: a política e o canal ainda precisam ser publicados e testados.</p>
     </div>
-    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Gabriel</strong> · Slide 13 / 26</span></div>
-    <div class="barra-slide" aria-hidden="true"><i style="width:50%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Gabriel</strong> · Slide 13 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:38%"></i></div>
     <aside class="notas">Gabriel: separar o que é proposta do que já está no sistema. Passar a vez: "O Maycon mostra as disciplinas de Web e Mobile."</aside>
 </section>
 
+<!-- Exemplo: acessibilidade -->
+<section class="slide" id="slide-14" aria-label="Slide 14: exemplo, acessibilidade">
+    <header class="slide-header"><span class="slide-tag">Exemplo · Relações Étnico-Raciais</span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">Acessibilidade <span class="grad">de verdade, na tela</span></h2>
+        <div class="lado">
+            <figure><img class="tela alt-120" src="acessibilidade-alto-contraste.png" alt="Painel com o alto contraste ligado e o menu de acessibilidade aberto"><figcaption>Alto contraste ligado pelo menu ☰ (tela real)</figcaption></figure>
+            <div class="card"><h3>O que aparece</h3><ul><li><b class="destaque">A- e A+:</b> aumentam ou diminuem o texto do site inteiro.</li><li><b class="destaque">Contraste:</b> fundo preto e destaques em amarelo, para quem enxerga pouco.</li><li><b class="destaque">VLibras</b> (a mão azul à direita): traduz o texto para Libras.</li><li>Tudo também pelo teclado, com foco visível.</li></ul></div>
+        </div>
+    </div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Gabriel</strong> · Slide 14 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:41%"></i></div>
+    <aside class="notas">Gabriel: o contraste foi ligado pelo próprio botão do menu. Lembrar que a acessibilidade é uma parte da proposta; o canal de relato e a curadoria ainda são propostas.</aside>
+</section>
+
 <!-- 9 · Web com .NET (1/2) -->
-<section class="slide" id="slide-14" aria-label="Slide 14: Desenvolvimento Web com .NET, o site e a API">
+<section class="slide" id="slide-15" aria-label="Slide 15: Desenvolvimento Web com .NET, o site e a API">
     <header class="slide-header"><span class="slide-tag">Disciplina 3 de 8 · Etapa 4</span></header>
     <div class="slide-body">
         <h2 class="slide-title">Desenvolvimento Web com .NET: <span class="grad">o site e a API</span></h2>
@@ -585,13 +621,34 @@
             <figure><img class="tela alt-90" src="../../assets/telas/Tela_Painel_Recarregado_Web.png" alt="Painel do aluno com avatar, XP, moedas e a trilha de fases"><figcaption>Painel do aluno (tela real)</figcaption></figure>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Maycon</strong> · Slide 14 / 26</span></div>
-    <div class="barra-slide" aria-hidden="true"><i style="width:54%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Maycon</strong> · Slide 15 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:44%"></i></div>
     <aside class="notas">Maycon: cada conceito da disciplina tem lugar na API. Mostrar o painel e explicar a conversa site → API → banco.</aside>
 </section>
 
+<!-- Exemplo: rota da API -->
+<section class="slide" id="slide-16" aria-label="Slide 16: exemplo, rota da API">
+    <header class="slide-header"><span class="slide-tag">Exemplo · Web com .NET</span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">Uma rota da API: <span class="grad">Minimal API com JWT</span></h2>
+<div class="lado-codigo">
+            <figure class="codigo"><figcaption><span>C#</span><code>sistema/apps/api/Endpoints/EndpointExtensions.cs</code></figcaption><pre>app.MapPost(&quot;/api/progresso/atualizar&quot;, async (ProgressoUpdate request, IProgressoService progresso, ClaimsPrincipal userClaims) =&gt;
+{
+    if (IdDoUsuario(userClaims) is not int currentUserId) return Results.Unauthorized();
+    if (request.UsuarioId &gt; 0 &amp;&amp; currentUserId != request.UsuarioId) return Results.Forbid();
+
+    return ParaHttp(await progresso.RegistrarRespostaAsync(currentUserId, request.FlashcardId, request.Qualidade), Results.Ok);
+}).RequireAuthorization();</pre></figure>
+            <div class="card"><h3>O que a disciplina ensinou, aqui</h3><ul><li><b class="destaque">Minimal API:</b> a rota é um <code>MapPost</code>.</li><li><b class="destaque">JWT:</b> <code>RequireAuthorization()</code>; sem login, 401.</li><li>Só o próprio aluno grava a resposta dele; outro usuário recebe 403.</li><li>A rota não fala com o banco: chama a interface do serviço.</li></ul></div>
+        </div>
+    </div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Maycon</strong> · Slide 16 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:47%"></i></div>
+    <aside class="notas">Maycon: é a rota que grava cada resposta do aluno. Ligar com a próxima parte: a rota só chama o serviço, que aplica o SM-2.</aside>
+</section>
+
 <!-- 10 · Web com .NET (2/2) -->
-<section class="slide" id="slide-15" aria-label="Slide 15: Desenvolvimento Web com .NET, estudo e área administrativa">
+<section class="slide" id="slide-17" aria-label="Slide 17: Desenvolvimento Web com .NET, estudo e área administrativa">
     <header class="slide-header"><span class="slide-tag">Disciplina 3 de 8 · Etapa 4</span></header>
     <div class="slide-body">
         <h2 class="slide-title">O estudo e a <span class="grad">estrutura administrativa</span></h2>
@@ -605,13 +662,13 @@
             <div class="card roxo"><h3>Trilha e Nexor</h3><p>31 disciplinas por módulo; o Nexor responde com os materiais da plataforma, sem serviço externo.</p></div>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Maycon</strong> · Slide 15 / 26</span></div>
-    <div class="barra-slide" aria-hidden="true"><i style="width:58%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Maycon</strong> · Slide 17 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:50%"></i></div>
     <aside class="notas">Maycon: a estrutura administrativa vale ponto na Etapa 4. A Trilha é onde o Nex_TI ensina "um pouco de cada disciplina" do curso.</aside>
 </section>
 
 <!-- 11 · Mobile -->
-<section class="slide" id="slide-16" aria-label="Slide 16: Desenvolvimento Mobile">
+<section class="slide" id="slide-18" aria-label="Slide 18: Desenvolvimento Mobile">
     <header class="slide-header"><span class="slide-tag">Disciplina 4 de 8 · Etapa 5</span></header>
     <div class="slide-body">
         <h2 class="slide-title">Desenvolvimento Mobile: <span class="grad">o app que estuda sem internet</span></h2>
@@ -624,13 +681,42 @@
             </div>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Maycon</strong> · Slide 16 / 26</span></div>
-    <div class="barra-slide" aria-hidden="true"><i style="width:62%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Maycon</strong> · Slide 18 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:53%"></i></div>
     <aside class="notas">Maycon: autenticação, sincronização e integração com a API valem ponto na Etapa 5. Passar a vez: "O Miguel mostra a arquitetura e o banco."</aside>
 </section>
 
+<!-- Exemplo: fila do app -->
+<section class="slide" id="slide-19" aria-label="Slide 19: exemplo, fila do app">
+    <header class="slide-header"><span class="slide-tag">Exemplo · Mobile</span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">A fila do app: <span class="grad">sem internet, nada se perde</span></h2>
+<div class="lado-codigo">
+            <figure class="codigo"><figcaption><span>JavaScript</span><code>sistema/apps/react-mobile/src/services/sincronizacao.js</code></figcaption><pre>async function enviarOuEnfileirar(item) {
+  let resposta = null;
+  try {
+    resposta = await enviar(item);
+  } catch (erro) {
+    if (erro instanceof ErroDeRede) {
+      if (item.tipo === &#x27;stats&#x27;) estado.fila = estado.fila.filter((i) =&gt; i.tipo !== &#x27;stats&#x27;);
+      estado.fila.push(item);
+    } else if (erro instanceof ErroDaApi &amp;&amp; erro.status === 401) {
+      estado.fila.push(item);
+      await salvar();
+      throw erro;
+    }
+    // Outros erros da API (ex.: 400) não adiantam repetir: o item é descartado.
+  }</pre></figure>
+            <div class="card"><h3>Como funciona</h3><ul><li><b class="destaque">Com internet:</b> a resposta vai direto à API.</li><li><b class="destaque">Sem internet:</b> entra na fila, guardada no aparelho (AsyncStorage).</li><li><b class="destaque">Sessão expirada (401):</b> guarda e volta ao login.</li><li>Na próxima sincronização a fila é enviada, e o servidor recalcula o SM-2.</li></ul></div>
+        </div>
+    </div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Maycon</strong> · Slide 19 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:56%"></i></div>
+    <aside class="notas">Maycon: este é o código que cumpre o RF12 e o RNF05 do slide da elicitação.</aside>
+</section>
+
 <!-- 12 · Programação Aplicada em .NET (1/2) -->
-<section class="slide" id="slide-17" aria-label="Slide 17: Programação Aplicada em .NET, camadas">
+<section class="slide" id="slide-20" aria-label="Slide 20: Programação Aplicada em .NET, camadas">
     <header class="slide-header"><span class="slide-tag">Disciplina 5 de 8 · Etapa 6</span></header>
     <div class="slide-body">
         <h2 class="slide-title">Programação Aplicada em .NET: <span class="grad">orientação a objetos e camadas</span></h2>
@@ -640,31 +726,46 @@
         </div>
         <figure><img class="alt-90" src="../../assets/diagrams/Class Diagram Nex_TI - Camadas.png" alt="Diagrama de classes das camadas da API"><figcaption>Diagrama de classes das camadas (Astah, gerado do código)</figcaption></figure>
     </div>
-    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Miguel</strong> · Slide 17 / 26</span></div>
-    <div class="barra-slide" aria-hidden="true"><i style="width:65%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Miguel</strong> · Slide 20 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:59%"></i></div>
     <aside class="notas">Miguel: cada camada só conhece a de baixo; por isso dá para testar o serviço sem a tela e trocar o banco sem mexer nas regras. A disciplina também teve uma atividade própria, o Nex_TI Desktop, com 31 testes.</aside>
 </section>
 
 <!-- 13 · Programação Aplicada em .NET (2/2) -->
-<section class="slide" id="slide-18" aria-label="Slide 18: Programação Aplicada em .NET, UML">
+<section class="slide" id="slide-21" aria-label="Slide 21: Programação Aplicada em .NET, UML">
     <header class="slide-header"><span class="slide-tag">Disciplina 5 de 8 · Etapa 6</span></header>
     <div class="slide-body">
         <div class="lado-estreito">
             <div>
                 <h2 class="slide-title">16 casos de uso, <span class="grad">todos tirados do código</span></h2>
-                <div class="card" style="margin-top: 5mm"><h3>Diagramas só do Astah</h3><ul><li>Um gerador monta o arquivo do Astah a partir do código.</li><li>Cada caso de uso tem um diagrama de classes e um de sequência.</li><li>Todo elemento tem a explicação no campo Definition.</li></ul></div>
-                <div class="card verde" style="margin-top: 4mm"><h3>Por que gerar do código</h3><p>Assim o diagrama nunca fica diferente do sistema: mudou o código, gera de novo.</p></div>
+                <div class="card" style="margin-top: 5mm"><h3>Para cada caso de uso, dois diagramas</h3><ul><li>Um <b class="destaque">diagrama de classes</b>: quem participa.</li><li>Um <b class="destaque">diagrama de sequência</b>: a ordem das mensagens.</li><li>Um par para cada um dos 16 casos de uso; o exemplo vem no próximo slide.</li></ul></div>
+                <div class="card verde" style="margin-top: 4mm"><h3>Gerados do código, no Astah</h3><p>Um gerador monta o arquivo do Astah a partir do código, com a explicação de cada elemento: mudou o código, gera de novo.</p></div>
             </div>
             <figure><img class="alt-140" src="../../assets/diagrams/UseCase Diagram Nex_TI.png" alt="Diagrama de casos de uso do Nex_TI"><figcaption>Diagrama de casos de uso</figcaption></figure>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Miguel</strong> · Slide 18 / 26</span></div>
-    <div class="barra-slide" aria-hidden="true"><i style="width:69%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Miguel</strong> · Slide 21 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:62%"></i></div>
     <aside class="notas">Miguel: mostrar os atores e dois casos de uso (Estudar Flashcards e Acompanhar Desempenho dos Usuários).</aside>
 </section>
 
+<!-- Exemplo: caso de uso Estudar Flashcards -->
+<section class="slide" id="slide-22" aria-label="Slide 22: exemplo, caso de uso Estudar Flashcards">
+    <header class="slide-header"><span class="slide-tag">Exemplo · Programação Aplicada em .NET</span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">Exemplo: <span class="grad">Estudar Flashcards</span>, em classes e em sequência</h2>
+        <div class="dois-diagramas">
+            <figure><img class="alt-128" src="../../assets/casos-de-uso/estudar-flashcards-classes.png" alt="Diagrama de classes do caso de uso Estudar Flashcards"><figcaption>Classes: quem participa (tela → API → serviço → entidade)</figcaption></figure>
+            <figure><img class="alt-128" src="../../assets/casos-de-uso/estudar-flashcards-sequencia.png" alt="Diagrama de sequência do caso de uso Estudar Flashcards"><figcaption>Sequência: a ordem das mensagens quando o aluno responde</figcaption></figure>
+        </div>
+    </div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Miguel</strong> · Slide 22 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:65%"></i></div>
+    <aside class="notas">Miguel: todos os 16 casos de uso têm o mesmo par de diagramas, no Apêndice B do relatório e no arquivo do Astah.</aside>
+</section>
+
 <!-- 14 · Banco de Dados -->
-<section class="slide" id="slide-19" aria-label="Slide 19: Programação de Banco de Dados">
+<section class="slide" id="slide-23" aria-label="Slide 23: Programação de Banco de Dados">
     <header class="slide-header"><span class="slide-tag">Disciplina 6 de 8 · Etapa 7</span></header>
     <div class="slide-body">
         <h2 class="slide-title">Programação de Banco de Dados: <span class="grad">regras dentro do banco</span></h2>
@@ -674,13 +775,41 @@
             <figure><img class="alt-90" src="../../assets/diagrams/DER Nex_TI.png" alt="DER, modelo lógico do banco"><figcaption>DER (modelo lógico)</figcaption></figure>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Miguel</strong> · Slide 19 / 26</span></div>
-    <div class="barra-slide" aria-hidden="true"><i style="width:73%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Miguel</strong> · Slide 23 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:68%"></i></div>
     <aside class="notas">Miguel: do MER ao modelo físico; o script NexTI_DB.sql cria tudo. Passar a vez: "O Rafael mostra as duas últimas disciplinas e junta tudo."</aside>
 </section>
 
+<!-- Exemplo: trigger do banco -->
+<section class="slide" id="slide-24" aria-label="Slide 24: exemplo, trigger do banco">
+    <header class="slide-header"><span class="slide-tag">Exemplo · Banco de Dados</span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">Uma trigger: <span class="grad">o XP nunca diminui</span></h2>
+<div class="lado-codigo">
+            <figure class="codigo"><figcaption><span>T-SQL</span><code>sistema/database/NexTI_DB.sql</code></figcaption><pre>CREATE OR ALTER TRIGGER tg_usuarios_protege_gamificacao
+ON usuarios
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    IF EXISTS (
+        SELECT 1
+        FROM inserted i
+        JOIN deleted d ON d.id = i.id
+        WHERE i.xp &lt; d.xp OR i.nivel &lt; d.nivel
+    )
+        THROW 50001, &#x27;XP e nível do aluno não podem diminuir.&#x27;, 1;
+END;</pre></figure>
+            <div class="card"><h3>O que a disciplina ensinou, aqui</h3><ul><li><b class="destaque">Trigger AFTER UPDATE:</b> roda depois de cada alteração em <code>usuarios</code>.</li><li><code>inserted</code> tem o valor novo e <code>deleted</code>, o antigo.</li><li>Se o XP ou o nível caírem, <code>THROW</code> desfaz a alteração.</li><li>Vale até para quem mexer no banco por fora da API (regra RN05).</li></ul></div>
+        </div>
+    </div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Miguel</strong> · Slide 24 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:71%"></i></div>
+    <aside class="notas">Miguel: a regra existe também na API, mas o banco é a última barreira.</aside>
+</section>
+
 <!-- 15 · Cloud e DevOps -->
-<section class="slide" id="slide-20" aria-label="Slide 20: Cloud Computing e DevOps">
+<section class="slide" id="slide-25" aria-label="Slide 25: Cloud Computing e DevOps">
     <header class="slide-header"><span class="slide-tag">Disciplina 7 de 8 · Etapa 8</span></header>
     <div class="slide-body">
         <h2 class="slide-title">Cloud Computing e DevOps: <span class="grad">no ar, com deploy automático</span></h2>
@@ -699,13 +828,45 @@
         </div>
         <p class="slide-subtitle">Tudo em camadas gratuitas: depois de um tempo parado, a primeira requisição pode levar até um minuto.</p>
     </div>
-    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Rafael</strong> · Slide 20 / 26</span></div>
-    <div class="barra-slide" aria-hidden="true"><i style="width:77%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Rafael</strong> · Slide 25 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:74%"></i></div>
     <aside class="notas">Rafael: os três itens exigidos na Etapa 8: contêineres, CI/CD e monitoramento.</aside>
 </section>
 
+<!-- Exemplo: deploy automático -->
+<section class="slide" id="slide-26" aria-label="Slide 26: exemplo, deploy automático">
+    <header class="slide-header"><span class="slide-tag">Exemplo · Cloud e DevOps</span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">O deploy automático: <span class="grad">do merge ao Azure</span></h2>
+<div class="lado-codigo">
+            <figure class="codigo"><figcaption><span>GitHub Actions</span><code>.github/workflows/api-azure.yml (trecho)</code></figcaption><pre>on:
+  push:
+    branches: [main]
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Testes
+        run: dotnet test sistema/tests/NexTI_API.Tests/NexTI_API.Tests.csproj -c Release
+
+      - name: Publicar
+        run: dotnet publish sistema/apps/api/NexTI_API.csproj -c Release -o ${{ runner.temp }}/api
+
+      - name: Deploy no App Service
+        uses: azure/webapps-deploy@v3
+
+      - name: Conferir a API publicada</pre></figure>
+            <div class="card"><h3>Como funciona (CI/CD)</h3><ul><li>Cada merge na <code>main</code> dispara o GitHub Actions.</li><li><b class="destaque">Testes primeiro:</b> se algum falhar, nada é publicado.</li><li>Publica a API e faz o deploy no Azure App Service.</li><li>No fim, chama a API publicada e só fica verde se ela responder.</li></ul></div>
+        </div>
+    </div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Rafael</strong> · Slide 26 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:76%"></i></div>
+    <aside class="notas">Rafael: é o "CD" do CI/CD. O site faz o mesmo na Vercel, e os contêineres são testados a cada pull request.</aside>
+</section>
+
 <!-- 16 · Projetos Ágil -->
-<section class="slide" id="slide-21" aria-label="Slide 21: Gerenciamento de Projetos Ágil">
+<section class="slide" id="slide-27" aria-label="Slide 27: Gerenciamento de Projetos Ágil">
     <header class="slide-header"><span class="slide-tag">Disciplina 8 de 8 · Etapa 9</span></header>
     <div class="slide-body">
         <h2 class="slide-title">Gerenciamento de Projetos Ágil: <span class="grad">como a equipe trabalhou</span></h2>
@@ -715,13 +876,28 @@
             <figure><img class="tela alt-90" src="../../assets/trello/quadro-kanban.jpg" alt="Quadro Kanban do PIM IV no Trello"><figcaption>Quadro do PIM IV no Trello</figcaption></figure>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Rafael</strong> · Slide 21 / 26</span></div>
-    <div class="barra-slide" aria-hidden="true"><i style="width:81%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Rafael</strong> · Slide 27 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:79%"></i></div>
     <aside class="notas">Rafael: S1 planejamento, S2 banco e API, S3 site, S4 app, S5 testes, nuvem e entrega.</aside>
 </section>
 
+<!-- Exemplo: cartão do Trello -->
+<section class="slide" id="slide-28" aria-label="Slide 28: exemplo, cartão do Trello">
+    <header class="slide-header"><span class="slide-tag">Exemplo · Projetos Ágil</span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">Um cartão do Trello <span class="grad">por dentro</span></h2>
+        <div class="lado">
+            <figure><img class="tela alt-120" src="../../assets/trello/cartao-etapa-6.jpg" alt="Cartão da Etapa 6 no Trello, com responsável, prazo, checklist e link do pull request"><figcaption>Cartão da Etapa 6 no quadro do PIM IV</figcaption></figure>
+            <div class="card"><h3>O que tem no cartão</h3><ul><li>Responsável e prazo.</li><li>Checklist com os critérios de pronto.</li><li>O link do pull request que fez a entrega.</li><li>As etiquetas de prioridade e de área.</li></ul></div>
+        </div>
+    </div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Rafael</strong> · Slide 28 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:82%"></i></div>
+    <aside class="notas">Rafael: é a definição de pronto: o cartão só vai para Concluído com os critérios marcados e o pull request aprovado.</aside>
+</section>
+
 <!-- 17 · Tudo junto -->
-<section class="slide" id="slide-22" aria-label="Slide 22: as oito disciplinas numa resposta">
+<section class="slide" id="slide-29" aria-label="Slide 29: as oito disciplinas numa resposta">
     <header class="slide-header"><span class="slide-tag">Tudo junto</span></header>
     <div class="slide-body">
         <h2 class="slide-title">Uma resposta do aluno <span class="grad">passa pelas oito disciplinas</span></h2>
@@ -737,7 +913,7 @@
             <li><b>Relações Étnico-Raciais</b> estudar sem internet amplia o acesso de quem tem conexão ruim.</li>
         </ol>
     </div>
-    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Rafael</strong> · Slide 22 / 26</span></div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Rafael</strong> · Slide 29 / 34</span></div>
     <div class="barra-slide" aria-hidden="true"><i style="width:85%"></i></div>
     <aside class="notas">Rafael: contar como uma história curta. É aqui que o professor vê as disciplinas trabalhando juntas. Passar a vez: "O Maciel fecha a história."</aside>
 </section>
@@ -745,7 +921,7 @@
 <!-- ═════════════════════════ FIM ═════════════════════════ -->
 
 <!-- 18 · Resultados -->
-<section class="slide" id="slide-23" aria-label="Slide 23: resultados e testes">
+<section class="slide" id="slide-30" aria-label="Slide 30: resultados e testes">
     <header class="slide-header"><span class="slide-tag">Resultados</span></header>
     <div class="slide-body">
         <h2 class="slide-title"><span class="grad">445 testes</span> aprovados, rodando a cada pull request</h2>
@@ -763,13 +939,13 @@
         </div>
         <div class="card verde"><h3>Sincronia automática</h3><p>Um script confere se os números do relatório, do README e destes slides batem com o código, e se os diagramas são os do Astah.</p></div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Maciel</strong> · Slide 23 / 26</span></div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Maciel</strong> · Slide 30 / 34</span></div>
     <div class="barra-slide" aria-hidden="true"><i style="width:88%"></i></div>
     <aside class="notas">Maciel: destacar que os testes acharam e corrigiram defeitos reais. O total de 445 testes é de 26/10/2026.</aside>
 </section>
 
 <!-- Experiência da equipe -->
-<section class="slide" id="slide-24" aria-label="Slide 24: experiência da equipe">
+<section class="slide" id="slide-31" aria-label="Slide 31: experiência da equipe">
     <header class="slide-header"><span class="slide-tag">Experiência da equipe</span></header>
     <div class="slide-body">
         <h2 class="slide-title">O que aprendemos <span class="grad">trabalhando juntos</span></h2>
@@ -783,13 +959,13 @@
             <div class="card verde"><p>Revisar a capacidade no planejamento de cada sprint e acompanhar o caminho crítico até a entrega.</p></div>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Maciel</strong> · Slide 24 / 26</span></div>
-    <div class="barra-slide" aria-hidden="true"><i style="width:92%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Maciel</strong> · Slide 31 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:91%"></i></div>
     <aside class="notas">Maciel: como no projeto da miniempresa, o ponto não é não ter problema, e sim como a equipe lida com ele. Os três casos estão na Etapa 9 do relatório.</aside>
 </section>
 
 <!-- 19 · Conclusão -->
-<section class="slide" id="slide-25" aria-label="Slide 25: conclusão">
+<section class="slide" id="slide-32" aria-label="Slide 32: conclusão">
     <header class="slide-header"><span class="slide-tag">Conclusão</span></header>
     <div class="slide-body">
         <h2 class="slide-title">Voltando ao problema: <span class="grad">o que resolvemos e o que falta</span></h2>
@@ -803,13 +979,13 @@
             <div class="card amarelo"><h3>Próximo passo</h3><p>Completar a elicitação com ingressantes reais: entrevista, questionário e um piloto medindo o desempenho antes e depois.</p></div>
         </div>
     </div>
-    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Maciel</strong> · Slide 25 / 26</span></div>
-    <div class="barra-slide" aria-hidden="true"><i style="width:96%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Maciel</strong> · Slide 32 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:94%"></i></div>
     <aside class="notas">Maciel: fechar a história respondendo aos três problemas do começo. Ser honesto: o efeito no aprendizado ainda precisa ser medido. Chamar a demonstração: "O Maycon mostra o sistema funcionando."</aside>
 </section>
 
 <!-- 20 · Demonstração e perguntas -->
-<section class="slide capa" id="slide-26" aria-label="Slide 26: demonstração e perguntas">
+<section class="slide capa" id="slide-33" aria-label="Slide 33: demonstração e perguntas">
     <header class="slide-header"><span class="slide-tag">Demonstração</span></header>
     <div class="slide-body">
         <div class="marca">Nex_<span class="ti">TI</span></div>
@@ -819,12 +995,30 @@
             <div class="card verde"><h3>Código e documentação</h3><p><code>github.com/MayconDIS/PIM_IV</code></p></div>
             <div class="card roxo"><h3>Relatório</h3><p>Relatório ABNT e versão em Word na pasta <code>relatorio/</code></p></div>
         </div>
-        <p class="slide-subtitle">Obrigado!</p>
-        <img class="logo-unip" src="../../assets/branding/Logo UNIP.png" alt="UNIP – Universidade Paulista">
     </div>
-    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Todos</strong> · Slide 26 / 26</span></div>
-    <div class="barra-slide" aria-hidden="true"><i style="width:100%"></i></div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Todos</strong> · Slide 33 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:97%"></i></div>
     <aside class="notas">Maycon: demonstração de 1 minuto (entrar, abrir a fase 1, responder duas cartas, abrir Minhas Estatísticas). Se a API estiver "acordando", avisar que a primeira requisição pode demorar. Depois, perguntas: todos.</aside>
+</section>
+
+<!-- Agradecimento -->
+<section class="slide obrigado" id="slide-34" aria-label="Slide 34: agradecimento">
+    <header class="slide-header"><span class="slide-tag">Obrigado</span></header>
+    <div class="slide-body">
+        <img class="logo-unip grande" src="../../assets/branding/Logo UNIP.png" alt="UNIP – Universidade Paulista">
+        <p class="obrigado-titulo">Obrigado!</p>
+        <p class="slide-subtitle">Nex_<span class="grad">TI</span> · estudar TI no tempo certo</p>
+        <div class="equipe">
+            <div><b>Gabriel Alves Moreira</b>H67HJI4</div>
+            <div><b>Maciel Costa da Silva</b>R280985</div>
+            <div><b>Maycon Douglas Inácio Silva</b>H719CD3</div>
+            <div><b>Miguel Angel Fernandez Ortiz</b>H7858F9</div>
+            <div><b>Rafael Mesquita</b>H6722I0</div>
+        </div>
+    </div>
+    <div class="slide-footer"><span>Nex_TI · PIM IV</span><span><strong>Todos</strong> · Slide 34 / 34</span></div>
+    <div class="barra-slide" aria-hidden="true"><i style="width:100%"></i></div>
+    <aside class="notas">Todos: agradecer à banca e aos professores. Se ainda houver perguntas, voltar ao slide anterior.</aside>
 </section>
 
 <section class="painel" aria-label="Fala do apresentador" aria-live="polite">
