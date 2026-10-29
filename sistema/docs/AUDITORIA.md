@@ -10,7 +10,7 @@ Os testes estão em [`TESTES.md`](TESTES.md).
 | Acessibilidade (ARIA, teclado, foco) | ✅ corrigido: fases sem teclado, janelas sem `role="dialog"`, foco invisível, busca sem rótulo |
 | HTML semântico | ✅ corrigido: trilha, janelas, avisos e rodapé deixaram de ser `div` genéricas |
 | 10 heurísticas de Nielsen | ✅ 1 defeito (mensagem que prometia o que não fazia) e 3 textos com jargão corrigidos |
-| Clean Code | ⚠️ ok, com 10 funções/arquivos longos registrados como dívida técnica |
+| Clean Code | ⚠️ ok, com 13 funções/arquivos longos registrados como dívida técnica |
 | Orientação a objetos | ✅ API e desktop em camadas com interfaces |
 | Código sem uso e resíduos | ✅ nenhum arquivo, export ou membro privado sem uso; nada de build ou lixo versionado |
 | Análise do compilador (C#) | ✅ 2 regras de cultura corrigidas; o resto é estilo, aceito |
@@ -110,12 +110,13 @@ linhas; quebrar agora mexeria no site inteiro na véspera da entrega, com risco 
 
 | Arquivo | Linhas | Como dividir depois |
 | :--- | ---: | :--- |
-| `lib/mapaNeural.js` (`montarMapaNeural`) | 367 | separar física, câmera e eventos de toque |
-| `context/estudo/useSessaoDeEstudo.js` | 262 | separar a conclusão da fase (prêmio) da fila de cartas |
+| `lib/mapaNeural.js` (`montarMapaNeural`; o arquivo tem 421 linhas) | 367 | separar física, câmera e eventos de toque |
+| `context/estudo/useSessaoDeEstudo.js` | 253 | separar a conclusão da fase (prêmio) da fila de cartas |
 | `pages/LoginPage.jsx` | 229 | formulário de login e de cadastro em componentes próprios |
-| `modais/ModalProgresso.jsx` | 219 | um componente por bloco de estatísticas |
+| `modais/ModalProgresso.jsx` | 224 | um componente por bloco de estatísticas |
 | `packages/shared/src/audio.js` (`AudioEngine`) | 176 | um efeito sonoro por função |
-| `Trilhas.jsx`, `PainelEstudo.jsx`, `ModalConta.jsx`, `sincronizacao.js` | 129–156 | extrair o item da fase e os formulários |
+| `Trilhas.jsx`, `PainelEstudo.jsx`, `ModalConta.jsx`, `sincronizacao.js`, `useAcoesDoAluno.js` | 121–164 | extrair o item da fase, os formulários e as ações da conta |
+| `packages/shared/src/academico/semestres12.js` e `semestres34.js` | 2.487 e 2.977 | são dados (as disciplinas e os materiais dos semestres), não lógica; dá para dividir um arquivo por semestre |
 
 ---
 
