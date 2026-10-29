@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { FASES_INICIAIS } from '@nexti/shared';
+import { BONUS, FASES_INICIAIS, fasesDisponiveis, temAcessoCompleto } from '@nexti/shared';
 import { carregarDecks, gravaJson, leJson } from './apoio.js';
 
 /**
@@ -7,6 +7,13 @@ import { carregarDecks, gravaJson, leJson } from './apoio.js';
  * fases e bônus liberados, o certificado e a foto do avatar. Também guarda se a API está no ar.
  */
 export function useProgresso(userKey) {
+  const [perfil, setPerfil] = useState(() => localStorage.getItem('quest_user_perfil') || 'Aluno');
+  const perfilRef = useRef(perfil);
+  const definirPerfil = (novoPerfil) => {
+    perfilRef.current = novoPerfil || 'Aluno';
+    setPerfil(perfilRef.current);
+    localStorage.setItem('quest_user_perfil', perfilRef.current);
+  };
   const [xp, setXp] = useState(() => Number.parseInt(localStorage.getItem(`${userKey}xp`), 10) || 0);
   const [moedas, setMoedas] = useState(() => Number.parseInt(localStorage.getItem(`${userKey}coins`), 10) || 0);
   const [rank, setRank] = useState(() => localStorage.getItem(`${userKey}rank`) || 'Rank: Pendente');
@@ -52,11 +59,15 @@ export function useProgresso(userKey) {
     setAvatar(foto);
   };
 
-  const faseLiberada = (faseId) => fasesDesbloqueadas.includes(faseId) || bonusDesbloqueados.includes(faseId);
+  // A permissão do Admin vale na sessão: não vira progresso salvo nem compra de bônus.
+  const faseLiberada = (faseId) => fasesDisponiveis(fasesDesbloqueadas, perfilRef.current).includes(faseId)
+    || bonusDesbloqueados.includes(faseId)
+    || (temAcessoCompleto(perfilRef.current) && BONUS.some(bonus => bonus.id === faseId));
 
   const liberarFase = (id) => setFasesDesbloqueadas((atual) => (atual.includes(id) ? atual : [...atual, id]));
 
   return {
+    perfil, definirPerfil, acessoCompleto: temAcessoCompleto(perfil),
     xp, moedas, rank, diagnostico, setDiagnostico, srsData, decks, fasesDesbloqueadas, bonusDesbloqueados, certificadoLiberado, avatar, apiOnline, apiOnlineRef,
     setXp, setMoedas, definirRank, setSrsData, setDecks, setFasesDesbloqueadas, setBonusDesbloqueados,
     setCertificadoLiberado, trocarAvatar, definirApiOnline, faseLiberada, liberarFase,

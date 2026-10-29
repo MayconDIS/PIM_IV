@@ -18,6 +18,14 @@ export const ORDEM_FASES = Object.freeze(MODULOS.flatMap((modulo) => [
 /** Fase liberada no primeiro acesso. */
 export const FASES_INICIAIS = Object.freeze(['fase1']);
 
+/** Acesso de administração: não representa estudo concluído nem liberações permanentes. */
+export const temAcessoCompleto = (perfil) => perfil === 'Admin';
+
+/** Permissão para abrir a trilha agora, separada do progresso que fica salvo. */
+export function fasesDisponiveis(liberadas, perfil) {
+  return temAcessoCompleto(perfil) ? [...ORDEM_FASES] : preservarFasesLiberadas(liberadas);
+}
+
 /** Faixas de XP de cada rank, do maior para o menor. */
 export const RANKS = Object.freeze([
   { nome: 'Mestre da Computação', xpMinimo: 600, proximo: 'Nível Máximo', alvo: 600, nivel: 6 },

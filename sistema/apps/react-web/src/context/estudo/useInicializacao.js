@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { ApiService, ORDEM_FASES, fasesLiberadasNoServidor } from '@nexti/shared';
+import { ApiService, BONUS, ORDEM_FASES, fasesLiberadasNoServidor, temAcessoCompleto } from '@nexti/shared';
 import { preservarFasesLiberadas } from '@nexti/shared/gamificacao';
 import { leJson, rotuloDoNivelDaApi } from './apoio.js';
 import { reenviarDiagnostico, guardarDiagnosticoLocal, lerDiagnosticoLocal } from '../../lib/diagnosticoLocal';
@@ -16,6 +16,7 @@ export function useInicializacao({ nomeUsuario, userKey, progresso, ui, sessao }
     progresso.setFasesDesbloqueadas((atual) => preservarFasesLiberadas(atual));
 
     (async () => {
+      let perfil = progresso.perfil;
       let online = false;
       try {
         online = Boolean(await ApiService.checkStatus());
@@ -43,6 +44,8 @@ export function useInicializacao({ nomeUsuario, userKey, progresso, ui, sessao }
         try {
           const usuario = await ApiService.getUsuario(nomeUsuario);
           if (usuario) {
+            perfil = usuario.perfil ?? 'Aluno';
+            progresso.definirPerfil(perfil);
             progresso.setXp(usuario.xp);
             progresso.setMoedas(usuario.moedas);
             progresso.definirRank(rotuloDoNivelDaApi(usuario.nivel));
@@ -91,14 +94,15 @@ export function useInicializacao({ nomeUsuario, userKey, progresso, ui, sessao }
         if (diagnostico || nivelNoServidor > 1 || xpNoServidor > 0 || remoto.length) localStorage.setItem(`${userKey}nivelado`, 'true');
       }
 
-      if (!localStorage.getItem(`${userKey}nivelado`)) {
+      if (!temAcessoCompleto(perfil) && !localStorage.getItem(`${userKey}nivelado`)) {
         ui.setModal('modalNivelamento');
         return;
       }
 
       const ativo = leJson(`${userKey}active_state`, null);
-      if (ativo?.type === 'modal' && ativo.id !== 'modalCertificado') ui.setModal(ativo.id);
-      else if (ativo?.type === 'aula' && ORDEM_FASES.concat(progresso.bonusDesbloqueados).includes(ativo.id)) {
+      if (ativo?.type === 'modal' && ativo.id !== 'modalCertificado'
+        && !(temAcessoCompleto(perfil) && ativo.id === 'modalNivelamento')) ui.setModal(ativo.id);
+      else if (ativo?.type === 'aula' && ORDEM_FASES.concat(BONUS.map(bonus => bonus.id)).includes(ativo.id)) {
         sessao.carregarAula(ativo.id, ativo.title);
       }
     })();

@@ -49,6 +49,8 @@ export {
 export {
   ORDEM_FASES,
   FASES_INICIAIS,
+  temAcessoCompleto,
+  fasesDisponiveis,
   RANKS,
   isTeste,
   isBonus,

@@ -179,7 +179,7 @@ public class GerarDiagramasPimIV {
         for (String[] r : estende)
             d.createLinkPresentation(uc.createExtend(casos.get(r[1]), casos.get(r[0]), ""), pCasos.get(r[0]), pCasos.get(r[1]));
 
-        d.createNote("Cada perfil herda o anterior:\nUsuário → Aluno → Tutor → Administrador.\nA API confere o perfil gravado no banco.",
+        d.createNote("Cada perfil herda o anterior:\nUsuário → Aluno → Tutor → Administrador.\nA API confere o perfil gravado no banco.\nAdmin: acesso direto ao conteúdo,\nsem diagnóstico, pré-requisitos ou compra.\nAcesso não gera progresso nem prêmios.",
             ponto(600, 770));
     }
 
@@ -458,11 +458,11 @@ public class GerarDiagramasPimIV {
             {"ISm2Engine", "Contrato do algoritmo de repetição espaçada."},
             {"Sm2Engine", "Algoritmo SM-2 no estilo do Anki, igual ao do site (sm2.js): Bom multiplica o intervalo pelo fator, Fácil vai mais longe, Difícil soma pelo menos 1 dia e Errei volta para 1 dia. Os dois lados são testados com os mesmos casos."},
             {"LoginPage", "Tela de login e cadastro do site (React)."},
-            {"EstudoContext", "Estado do estudo no site (React): deck, respostas, XP, moedas e fases liberadas. Fala com a API pelo ApiService."},
+            {"EstudoContext", "Estado do estudo no site (React): deck, respostas, XP, moedas e fases liberadas. Aplica o acesso direto do Admin sem salvar conquistas artificiais. Fala com a API pelo ApiService."},
             {"ApiService", "Cliente da API usado pelo site e pelo app (packages/shared/src/api.js). Envia o token JWT no cabeçalho."},
             {"senha.js", "Regras de senha forte no navegador, iguais às da API, para avisar antes de enviar."},
             {"senhaVazada.js", "Confere se a senha já apareceu em vazamentos (Have I Been Pwned), enviando só os 5 primeiros caracteres do hash SHA-1."},
-            {"gamificacao.js", "Regras de progressão: ordem das fases, recompensas, nota de corte dos testes, compra de bônus e fases concluídas no painel. O painel conta as cartas com registro de resposta até atingir a quantidade prevista no conteúdo da fase; não consulta o registro de recompensas FasesConcluidas da API."},
+            {"gamificacao.js", "Regras de progressão: ordem das fases, recompensas, nota de corte dos testes, compra de bônus e fases concluídas no painel. O acesso direto do Admin é separado das conquistas do aluno. O painel conta as cartas com registro de resposta até atingir a quantidade prevista no conteúdo da fase; não consulta o registro de recompensas FasesConcluidas da API."},
             {"diagnostico.js", "Banco de 34 perguntas, uma por disciplina dos módulos 1 a 4. Seleciona cinco por módulo (20 por avaliação) e recomenda o primeiro módulo com menos de quatro acertos, ou o ENADE se todos atingirem o mínimo."},
             {"deck.js", "Monta o deck da fase (revisões vencidas primeiro) e os testes de módulo com 20 questões."},
             {"enadeOficial.js", "Provas oficiais do ENADE de ADS (2017 e 2021), com gabarito do INEP, e o guia de estudos."},
@@ -485,7 +485,7 @@ public class GerarDiagramasPimIV {
             {"Usuário", "Qualquer pessoa com conta no Nex_TI. É a base dos outros perfis."},
             {"SQL Server", "Banco de dados do Nex_TI (LocalDB no desenvolvimento, Azure SQL em produção)."},
             {"API", "A API do Nex_TI em .NET 10, publicada no Azure App Service."},
-            {"Administrador", "Perfil que, além de tudo o que o Tutor faz, define o perfil de cada usuário."},
+            {"Administrador", "Perfil que, além de tudo o que o Tutor faz, define perfis e acessa todos os módulos, disciplinas, testes e bônus disponíveis no site e no app, sem diagnóstico, pré-requisitos ou compra. A permissão não cria conclusões, XP, moedas ou certificado."},
         };
         for (String[] par : d) DEF.put(par[0], par[1]);
     }
@@ -688,7 +688,7 @@ public class GerarDiagramasPimIV {
             "Token JWT, limite de tentativas e perfil no token.");
 
         detalhe(casos, "Estudar Flashcards",
-            "O aluno consulta os módulos 1 a 4 na Trilha, lê resumos dos materiais de estudo e estuda as cartas de uma disciplina liberada. Cada resposta vai para a API, que aplica o SM-2 e agenda a próxima revisão. O ENADE tem módulo próprio.",
+            "O aluno consulta os módulos 1 a 4 na Trilha, lê resumos dos materiais de estudo e estuda as cartas de uma disciplina liberada. Cada resposta vai para a API, que aplica o SM-2 e agenda a próxima revisão. O ENADE tem módulo próprio. O Admin acessa todas as fases sem pré-requisitos; a permissão não conta como conclusão.",
             new String[] {"ModalTrilha", "ResumoDisciplina", "content.js", "EstudoContext", "deck.js", "ApiService", "EndpointExtensions", "IProgressoService", "ProgressoService", "ISm2Engine", "Sm2Engine", "ProgressoFlashcard", "Flashcard"},
             new String[][] {{"usa", "ModalTrilha", "EstudoContext"}, {"usa", "ModalTrilha", "ResumoDisciplina"}, {"usa", "ModalTrilha", "content.js", "módulos e disciplinas"}, {"usa", "EstudoContext", "deck.js"}, {"usa", "EstudoContext", "ApiService"}, {"implementa", "ProgressoService", "IProgressoService"},
                 {"usa", "ProgressoService", "ISm2Engine", "usa"}, {"implementa", "Sm2Engine", "ISm2Engine"}, {"usa", "ProgressoService", "ProgressoFlashcard", "grava"},
@@ -721,7 +721,7 @@ public class GerarDiagramasPimIV {
             "A tabela vem do gamificacao.js (npm run seed:api): site, app e API pagam o mesmo valor; o cliente não manda o XP.");
 
         detalhe(casos, "Desbloquear Fases e Módulos",
-            "Concluir uma fase (ou passar no teste do módulo) libera a próxima; moedas compram fases bônus.",
+            "Aluno e Tutor avançam pela trilha e compram bônus. O Admin acessa todo o conteúdo sem diagnóstico, pré-requisitos ou compra, sem gerar progresso ou prêmios.",
             new String[] {"EstudoContext", "gamificacao.js", "ApiService", "EndpointExtensions", "IGamificacaoService", "GamificacaoService"},
             new String[][] {{"usa", "EstudoContext", "gamificacao.js"}, {"usa", "EstudoContext", "ApiService"},
                 {"usa", "ApiService", "EndpointExtensions", "HTTP"}, {"usa", "EndpointExtensions", "IGamificacaoService"},
@@ -731,9 +731,9 @@ public class GerarDiagramasPimIV {
                 {"gam", "ctx", "aprovado pela nota de corte?", "retorno"}, {"ctx", "gam", "proximaFase(faseId)"},
                 {"gam", "ctx", "próxima fase da ORDEM_FASES", "retorno"}, {"ctx", "ctx", "libera a fase e salva no navegador"},
                 {"a", "ctx", "compra uma fase bônus"}, {"ctx", "rota", "POST /api/usuarios/bonus/{id}/comprar"},
-                {"rota", "gs", "ComprarBonusAsync(usuarioId, bonusId)"}, {"gs", "bd", "confere o saldo e desconta as moedas"},
+                {"rota", "gs", "ComprarBonusAsync(usuarioId, bonusId)"}, {"gs", "bd", "confere e desconta moedas (exceto Admin)"},
                 {"gs", "rota", "Usuario com o novo saldo (ou saldo insuficiente)", "retorno"}, {"rota", "ctx", "200: moedas restantes (ou 400)", "retorno"}},
-            "A liberação é automática ao concluir a fase anterior; a compra de bônus é conferida no servidor.");
+            "Admin: acesso direto por perfil, sem diagnóstico, pré-requisitos ou compra.\nA permissão não cria progresso. Demais perfis seguem a sequência acima.");
 
         detalhe(casos, "Realizar Teste de Nivelamento",
             "Diagnóstico de 20 perguntas, cinco por módulo. Quatro acertos indicam domínio no módulo avaliado. O resultado recomenda o primeiro módulo com lacuna, ou o ENADE, e preserva os acessos antigos.",
@@ -1341,7 +1341,7 @@ public class GerarDiagramasPimIV {
         Map.entry("Realizar Login", "Entrar com nickname ou e-mail e senha; a API devolve um token JWT de 24 horas com o perfil."),
         Map.entry("Ajustar Acessibilidade", "Aumentar a fonte, ligar o alto contraste ou usar o VLibras."),
         Map.entry("Gerenciar Minha Conta", "Ver e exportar os próprios dados, trocar e-mail e senha e excluir a conta (PB02)."),
-        Map.entry("Estudar Flashcards", "Consultar a Trilha dos módulos 1 a 4, ler resumos autorais dos materiais de estudo com referências e estudar as cartas de uma disciplina liberada. O SM-2 agenda a próxima revisão de cada carta; o ENADE permanece em módulo próprio."),
+        Map.entry("Estudar Flashcards", "Consultar a Trilha dos módulos 1 a 4, ler resumos autorais dos materiais de estudo com referências e estudar as cartas de uma disciplina liberada. O SM-2 agenda a próxima revisão de cada carta; o ENADE permanece em módulo próprio. O Admin tem acesso direto a todo o conteúdo, sem gerar conclusões pela permissão."),
         Map.entry("Realizar Teste de Nivelamento", "Responder 20 perguntas, cinco por módulo, para orientar o estudo. O servidor salva o resultado e preserva acessos; não dá XP, rank, moedas ou conclusão."),
         Map.entry("Realizar Simulado ENADE", "Fazer o teste do módulo ou uma prova oficial do ENADE, com correção e justificativa."),
         Map.entry("Visualizar Painel de Desempenho", "Ver os próprios números do SM-2."),
@@ -1352,7 +1352,7 @@ public class GerarDiagramasPimIV {
         Map.entry("Gerenciar Perfis e Acessos", "O Administrador define o perfil de cada usuário."),
         Map.entry("Estudar sem Internet (app)", "No app, respostas sem internet esperam numa fila e são enviadas depois."),
         Map.entry("Atribuir XP e Moedas", "Ao concluir uma fase, a API paga o XP e as moedas da tabela de recompensas, a mesma do site, só na primeira conclusão."),
-        Map.entry("Desbloquear Fases e Módulos", "Concluir uma fase libera a próxima; moedas compram fases bônus."));
+        Map.entry("Desbloquear Fases e Módulos", "Aluno e Tutor avançam pela trilha e compram bônus. O Admin acessa todo o conteúdo diretamente, sem registrar progresso ou prêmios."));
 
     // ------------------------------------------------------------------ ajudantes
 
