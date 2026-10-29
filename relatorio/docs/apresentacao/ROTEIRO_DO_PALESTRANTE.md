@@ -5,8 +5,8 @@ A apresentação conta o projeto como uma história, com **começo, meio e fim**
 | Parte | Slides | O que mostra |
 |---|---|---|
 | **Começo** | 1–6 | O problema, **como levantamos os requisitos (elicitação)**, o caminho da necessidade até o teste e a solução em números |
-| **Meio** | 7–19 | **As oito disciplinas do semestre**: o que a disciplina ensinou → onde usamos no Nex_TI → a prova no sistema. Empreendedorismo traz também o organograma, o Canvas e a SWOT do Nex_TI. No fim, uma resposta do aluno passando pelas oito |
-| **Fim** | 20–23 | O que os testes mostraram, o que a equipe aprendeu (problema → solução), a conclusão respondendo aos problemas do começo e o sistema funcionando |
+| **Meio** | 7–21 | **As oito disciplinas do semestre**: o que a disciplina ensinou → onde usamos no Nex_TI → a prova no sistema. Empreendedorismo traz também o organograma, o Canvas, a SWOT e o plano de negócios do Nex_TI. No fim, uma resposta do aluno passando pelas oito |
+| **Fim** | 22–25 | O que os testes mostraram, o que a equipe aprendeu (problema → solução), a conclusão respondendo aos problemas do começo e o sistema funcionando |
 
 O Maciel abre e fecha a história; o meio vai na ordem das etapas do manual. Os números e as
 imagens são os do relatório. A fala curta de cada slide também está dentro dos slides: no modo
@@ -17,7 +17,7 @@ apresentação, aperte **N**.
 | Item | Detalhe |
 |---|---|
 | **O quê** | Apresentação do PIM IV para a avaliação (24/11 a 03/12/2026) |
-| **Duração** | 20 minutos, cerca de 4 por pessoa, mais as perguntas. Se a banca der outro tempo, ajuste a coluna "Tempo" abaixo |
+| **Duração** | 22 minutos, cerca de 4 por pessoa, mais as perguntas. Se a banca der outro tempo, ajuste a coluna "Tempo" abaixo |
 | **Slides** | `slides.html` no navegador (botão **Apresentar** ou tecla **P**) ou o PDF `Nex_TI - Apresentacao PIM IV.pdf` em tela cheia |
 | **Ter aberto** | Os slides, o site (https://nexti-pim-iv.vercel.app) já logado numa conta de teste, e o GitHub (https://github.com/MayconDIS/PIM_IV) |
 | **Antes de começar** | Abra o site uns 2 minutos antes: no plano gratuito a API "dorme" e a primeira requisição pode levar até um minuto |
@@ -38,12 +38,12 @@ apresentação, aperte **N**.
 | Integrante | RA | Slides | Tempo |
 |---|---|---|---|
 | Maciel Costa da Silva | R280985 | 1–6 · Começo: problema, elicitação, requisitos e números | 00:00 – 04:30 |
-| Gabriel Alves Moreira | H67HJI4 | 7–10 · Empreendedorismo em TI (com Canvas e SWOT) e Relações Étnico-Raciais | 04:30 – 07:30 |
-| Maycon Douglas Inácio Silva | H719CD3 | 11–13 · Web com .NET e Mobile | 07:30 – 10:30 |
-| Miguel Angel Fernandez Ortiz | H7858F9 | 14–16 · Programação Aplicada em .NET e Banco de Dados | 10:30 – 13:30 |
-| Rafael Mesquita | H6722I0 | 17–19 · Cloud e DevOps, Projetos Ágil e "tudo junto" | 13:30 – 16:00 |
-| Maciel Costa da Silva | R280985 | 20–22 · Fim: resultados, experiência da equipe e conclusão | 16:00 – 18:45 |
-| Maycon e todos | — | 23 · Demonstração e perguntas | 18:45 – 20:00 |
+| Gabriel Alves Moreira | H67HJI4 | 7–12 · Empreendedorismo em TI (organograma, Canvas, SWOT e plano de negócios) e Relações Étnico-Raciais | 04:30 – 09:00 |
+| Maycon Douglas Inácio Silva | H719CD3 | 13–15 · Web com .NET e Mobile | 09:00 – 12:00 |
+| Miguel Angel Fernandez Ortiz | H7858F9 | 16–18 · Programação Aplicada em .NET e Banco de Dados | 12:00 – 15:00 |
+| Rafael Mesquita | H6722I0 | 19–21 · Cloud e DevOps, Projetos Ágil e "tudo junto" | 15:00 – 17:30 |
+| Maciel Costa da Silva | R280985 | 22–24 · Fim: resultados, experiência da equipe e conclusão | 17:30 – 20:15 |
+| Maycon e todos | — | 25 · Demonstração e perguntas | 20:15 – 21:30 |
 
 ---|---|---|---|
 | Maciel Costa da Silva | R280985 | 1–6 · Começo: problema, elicitação, requisitos e números | 00:00 – 04:30 |
@@ -104,68 +104,76 @@ depois **"onde usamos"** e aponte a prova (tela ou diagrama).
 ### 9 — SWOT do Nex_TI (06:00 – 06:45) · Gabriel
 - Forças (mesma API, regras no servidor, testes, estudo sem internet), fraquezas (sem alunos reais ainda, nuvem gratuita que "dorme", viabilidade econômica não demonstrada), oportunidades e ameaças (os riscos do relatório).
 
-### 10 — Relações Étnico-Raciais e Afrodescendência · Etapa 3 (06:45 – 07:30) · Gabriel
+### 10 — Plano de negócios: os 4 P's (06:45 – 07:30) · Gabriel
+- Produto, Preço, Praça e Promoção do Nex_TI. O produto já existe; o **preço é premissa** da equipe (R$ 5,00 por aluno de instituição e R$ 9,90 individual), para validar no piloto.
+
+### 11 — Plano de negócios: os números (07:30 – 08:15) · Gabriel
+- Investimento inicial R$ 946, custo fixo R$ 202 por mês (Azure, Vercel e domínio), ponto de equilíbrio de 43 alunos de instituição e payback de cerca de 1,7 mês.
+- **Leitura honesta:** os números são bons porque ninguém recebe no piloto; com R$ 500 de pró-labore para cada um, o ponto de equilíbrio sobe para 563 alunos.
+- Premissas, contas e fontes: `relatorio/docs/PLANO_DE_NEGOCIOS.md`.
+
+### 12 — Relações Étnico-Raciais e Afrodescendência · Etapa 3 (08:15 – 09:00) · Gabriel
 - Ensinou ações afirmativas, a Lei 10.639/2003 e o Estatuto da Igualdade Racial.
 - Separar o que é **proposta** (curadoria sem estereótipos, canal de relato) do que **já está no sistema** (VLibras, contraste, zoom, teclado, leitor de tela, estudo sem internet).
 - **Passar a vez:** *"O Maycon mostra Web e Mobile."*
 
-### 11 — Desenvolvimento Web com .NET, o site e a API · Etapa 4 (07:30 – 08:30) · Maycon
+### 13 — Desenvolvimento Web com .NET, o site e a API · Etapa 4 (09:00 – 10:00) · Maycon
 - Ensinou Minimal APIs, EF Core e migrations, JWT, CORS, limite de requisições e OpenAPI.
 - Usamos todas essas peças na API .NET 10 (27 rotas); mostrar o painel e a conversa site → API → banco.
 
-### 12 — Web com .NET, estudo e estrutura administrativa · Etapa 4 (08:30 – 09:30) · Maycon
+### 14 — Web com .NET, estudo e estrutura administrativa · Etapa 4 (10:00 – 11:00) · Maycon
 - Os quatro botões do SM-2; XP e moedas calculados no servidor.
 - A estrutura administrativa vale ponto na Etapa 4: Tutor acompanha e modera; Administrador define perfis.
 - A Trilha com as 31 disciplinas e o Nexor.
 
-### 13 — Desenvolvimento Mobile · Etapa 5 (09:30 – 10:30) · Maycon
+### 15 — Desenvolvimento Mobile · Etapa 5 (11:00 – 12:00) · Maycon
 - Ensinou multiplataforma, React Native com Expo, armazenamento local e acessibilidade.
 - Usamos no app Expo: mesma API, token no cofre do aparelho, fila sem internet, 26 testes.
 - **Passar a vez:** *"O Miguel mostra a arquitetura e o banco."*
 
-### 14 — Programação Aplicada em .NET, orientação a objetos e camadas · Etapa 6 (10:30 – 11:30) · Miguel
+### 16 — Programação Aplicada em .NET, orientação a objetos e camadas · Etapa 6 (12:00 – 13:00) · Miguel
 - Ensinou classes, herança, interfaces, encapsulamento e camadas.
 - Usamos na API: rotas → serviços → banco, uma interface por serviço, perfis que herdam.
 - Citar que a disciplina também teve a atividade do Nex_TI Desktop.
 
-### 15 — Programação Aplicada em .NET, UML · Etapa 6 (11:30 – 12:30) · Miguel
+### 17 — Programação Aplicada em .NET, UML · Etapa 6 (13:00 – 14:00) · Miguel
 - 16 casos de uso; os diagramas saem de um gerador do Astah que lê o código.
 
-### 16 — Programação de Banco de Dados · Etapa 7 (12:30 – 13:30) · Miguel
+### 18 — Programação de Banco de Dados · Etapa 7 (14:00 – 15:00) · Miguel
 - Ensinou integridade referencial, joins e views, procedures, triggers, funções, backup e restore.
 - Usamos: triggers (histórico e proteção do XP), procedures (ranking, estatísticas, cadastro de carta), views, chaves estrangeiras e backup na Azure.
 - **Passar a vez:** *"O Rafael mostra as duas últimas disciplinas e junta tudo."*
 
-### 17 — Cloud Computing e DevOps · Etapa 8 (13:30 – 14:20) · Rafael
+### 19 — Cloud Computing e DevOps · Etapa 8 (15:00 – 15:50) · Rafael
 - Ensinou IaaS, PaaS e SaaS, elasticidade, LGPD, contêineres, CI/CD e monitoramento.
 - Usamos: App Service e Azure SQL (PaaS), Docker, deploy automático, Application Insights e os direitos do titular.
 
-### 18 — Gerenciamento de Projetos Ágil · Etapa 9 (14:20 – 15:10) · Rafael
+### 20 — Gerenciamento de Projetos Ágil · Etapa 9 (15:50 – 16:40) · Rafael
 - Ensinou Scrum, Kanban, backlog, sprints, caminho crítico e organização do tempo.
 - Usamos: backlog PB01 a PB22 no Trello, cinco sprints, um pull request por cartão.
 
-### 19 — Tudo junto (15:10 – 16:00) · Rafael
+### 21 — Tudo junto (16:40 – 17:30) · Rafael
 - **O slide mais importante para a banca.** Contar como uma história: o aluno responde "Bom" no celular, dentro do ônibus, e a resposta passa pelas oito disciplinas, do aparelho (Mobile) até o Trello (Projetos Ágil).
 - **Passar a vez:** *"O Maciel fecha a história."*
 
 ## ⏱️ Fim (Maciel e Maycon)
 
-### 20 — Resultados (16:00 – 16:50) · Maciel
+### 22 — Resultados (17:30 – 18:20) · Maciel
 - 445 testes aprovados; eles **acharam defeitos reais** (o teto do SM-2, a nota sem validação, as estatísticas erradas), todos corrigidos com teste novo.
 
-### 21 — Experiência da equipe (16:50 – 17:45) · Maciel
+### 23 — Experiência da equipe (18:20 – 19:15) · Maciel
 - Problema → solução, em três casos reais da Etapa 9: a troca de contexto (um cartão por pessoa), a integração do app que não coube na Sprint 4 (voltou ao backlog) e a Sprint 5 que concentrou entregas (revisar a capacidade).
 - *"O ponto não é não ter problema, e sim como a equipe lida com ele."*
 
-### 22 — Conclusão (17:45 – 18:45) · Maciel
+### 24 — Conclusão (19:15 – 20:15) · Maciel
 - Voltar aos três problemas do começo e mostrar o que resolveu cada um.
 - Confirmado: a parte técnica funciona de ponta a ponta.
 - Próximo passo: completar a elicitação com ingressantes reais (entrevista, questionário e piloto).
 - **Passar a vez:** *"O Maycon mostra o sistema funcionando."*
 
-### 23 — Demonstração e perguntas (18:45 – 20:00) · Maycon e todos
+### 25 — Demonstração e perguntas (20:15 – 21:30) · Maycon e todos
 - **Ao vivo (1 minuto):** entrar no site → abrir a Fase 1 → responder duas cartas → abrir Minhas Estatísticas.
-- Se a internet falhar, seguir com as telas dos slides 11 a 13.
+- Se a internet falhar, seguir com as telas dos slides 13 a 15.
 
 ---
 
@@ -174,8 +182,8 @@ depois **"onde usamos"** e aponte a prova (tela ou diagrama).
 | Pergunta | Quem responde | Resposta curta |
 |---|---|---|
 | Como vocês levantaram os requisitos? | Maciel | Análise de documentos (manual, materiais das disciplinas e provas do ENADE), comparação com o Anki, persona, priorização no backlog, protótipo e testes de usabilidade. Entrevista e questionário com ingressantes reais ficam para o piloto. |
-| Qual disciplina pesou mais no projeto? | Maycon | Web com .NET e Mobile, que viraram o site, a API e o app; mas a resposta do aluno (slide 19) só funciona com as oito juntas. |
-| O negócio se paga? | Gabriel | Ainda não dá para dizer: receita e custo são hipóteses, e o ponto de equilíbrio será calculado com os dados do piloto. |
+| Qual disciplina pesou mais no projeto? | Maycon | Web com .NET e Mobile, que viraram o site, a API e o app; mas a resposta do aluno (slide 21) só funciona com as oito juntas. |
+| O negócio se paga? | Gabriel | Na simulação, o piloto se paga com 43 alunos de instituição, mas sem salários; com pró-labore, são 563 alunos. Preço e número de alunos são premissas que o piloto vai confirmar. |
 | Por que o XP é calculado no servidor? | Maycon | Se fosse no navegador, qualquer um mudaria o próprio XP. A API calcula pela tabela de recompensas, e o banco ainda impede que o XP diminua. |
 | Como o app funciona sem internet? | Maycon | A resposta fica numa fila no aparelho e é enviada na próxima sincronização; o servidor recalcula o SM-2. |
 | Por que separar a API em camadas? | Miguel | Cada parte cuida de uma coisa: dá para testar a regra sem a tela e trocar o banco sem mexer nas regras. |

@@ -5,20 +5,21 @@ com **começo, meio e fim**, como o professor pediu:
 
 - **Começo (slides 1–6):** o problema, como a equipe levantou os requisitos (elicitação), o caminho
   de uma necessidade até o teste e a solução em números.
-- **Meio (7–19):** as oito disciplinas do semestre, sempre no mesmo formato: o que a disciplina
-  ensinou → onde usamos no Nex_TI → a prova no sistema. Empreendedorismo traz o organograma, o Canvas
-  e a SWOT do Nex_TI. Fecha com uma resposta do aluno passando pelas oito.
-- **Fim (20–23):** os resultados dos testes, o que a equipe aprendeu (problema → solução), a conclusão
+- **Meio (7–21):** as oito disciplinas do semestre, sempre no mesmo formato: o que a disciplina
+  ensinou → onde usamos no Nex_TI → a prova no sistema. Empreendedorismo traz o organograma, o Canvas,
+  a SWOT e o plano de negócios do Nex_TI. Fecha com uma resposta do aluno passando pelas oito.
+- **Fim (22–25):** os resultados dos testes, o que a equipe aprendeu (problema → solução), a conclusão
   respondendo aos problemas do começo e a demonstração.
 
 Usa os mesmos números e imagens do relatório.
 
 | Arquivo | O que é |
 |---|---|
-| [`apresentacao/slides.html`](apresentacao/slides.html) | Os 23 slides. Abrem no navegador e têm modo apresentação próprio |
+| [`apresentacao/slides.html`](apresentacao/slides.html) | Os 25 slides. Abrem no navegador e têm modo apresentação próprio |
 | [`apresentacao/Nex_TI - Apresentacao PIM IV.pdf`](apresentacao/Nex_TI%20-%20Apresentacao%20PIM%20IV.pdf) | Os mesmos slides em PDF (A4 paisagem), para enviar ou projetar |
-| [`apresentacao/ROTEIRO_DO_PALESTRANTE.md`](apresentacao/ROTEIRO_DO_PALESTRANTE.md) | Quem fala o quê (20 minutos), o tempo de cada slide e as perguntas prováveis |
+| [`apresentacao/ROTEIRO_DO_PALESTRANTE.md`](apresentacao/ROTEIRO_DO_PALESTRANTE.md) | Quem fala o quê (22 minutos), o tempo de cada slide e as perguntas prováveis |
 | [`apresentacao/gerar-pdf.mjs`](apresentacao/gerar-pdf.mjs) | Gera o PDF de novo depois de mudar os slides |
+| [`PLANO_DE_NEGOCIOS.md`](PLANO_DE_NEGOCIOS.md) | O plano de negócios do Nex_TI (simulação): 4 P's, premissas, contas e fontes dos preços |
 
 ## Como apresentar
 
