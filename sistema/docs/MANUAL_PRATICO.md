@@ -14,14 +14,15 @@ respostas; ele não prevê exatamente quando uma pessoa esquecerá um conteúdo.
 ## 🚀 2. Acesso à Plataforma
 1. Na primeira visita aparece uma tela de abertura com o carregamento dos módulos.
 2. Na tela de entrada, crie uma conta (**Criar conta**) ou entre com seu nickname ou e-mail e senha (**Entrar**). Cadastro e login precisam da API disponível.
-3. No primeiro acesso do Aluno ou Tutor, o **diagnóstico** apresenta 20 perguntas, cinco de cada módulo do curso. Selecione uma alternativa e confirme, ou escolha **Não sei**. Ao terminar, veja o resultado por módulo e a sugestão de onde começar.
+3. No primeiro acesso do Aluno, o **diagnóstico** apresenta 20 perguntas, cinco de cada módulo do curso. Selecione uma alternativa e confirme, ou escolha **Não sei**. Ao terminar, veja o resultado por módulo e a sugestão de onde começar.
 
-### Acesso do Administrador
-Ao entrar com o perfil **Admin**, todos os módulos e disciplinas já ficam
+### Acesso do Administrador e do Tutor
+Ao entrar com o perfil **Admin** ou **Tutor**, todos os módulos e disciplinas já ficam
 disponíveis no site e no aplicativo. No site, isso também inclui bônus, testes e simulados.
 Não é preciso fazer o diagnóstico, concluir fases anteriores ou comprar bônus.
 Esse acesso não marca matérias como concluídas nem concede XP, moedas ou certificado.
-O Admin pode fazer o diagnóstico pelo menu se quiser uma orientação de estudo.
+Admin e Tutor podem fazer o diagnóstico pelo menu se quiserem uma orientação de estudo.
+A gestão dos perfis de usuários continua exclusiva do Admin.
 
 ### Refazer Diagnóstico
 Abra o menu (☰) e escolha **Refazer Diagnóstico**. Cada avaliação seleciona 20 perguntas de um banco de 34, com uma pergunta por disciplina da trilha dos quatro módulos. A seleção muda, então nem todas as disciplinas aparecem na mesma avaliação.

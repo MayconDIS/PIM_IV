@@ -60,17 +60,19 @@ public class RegrasDeNegocioTests
 
     // --- RN02 · Perfis de acesso ------------------------------------------------------------
 
-    [Fact]
-    public async Task RN02_AdminAcessaBonusSemSaldoEPerfilNaoFabricaProgresso()
+    [Theory]
+    [InlineData(Perfis.Admin)]
+    [InlineData(Perfis.Tutor)]
+    public async Task RN02_AdminETutorAcessamBonusSemSaldoEPerfilNaoFabricaProgresso(string papel)
     {
         await using var api = await ApiEmMemoria.IniciarAsync();
-        var admin = await api.UsuarioComPerfilAsync("acesso_gestor", Perfis.Admin);
+        var admin = await api.UsuarioComPerfilAsync("acesso_gestor", papel);
 
         var compra = await admin.PostAsync("/api/usuarios/bonus/bonus1/comprar", null);
         Assert.Equal(HttpStatusCode.OK, compra.StatusCode);
         Assert.Equal(0, (await compra.JsonAsync()).GetProperty("moedas").GetInt32());
         var perfil = await (await admin.GetAsync("/api/usuarios/acesso_gestor")).JsonAsync();
-        Assert.Equal(Perfis.Admin, perfil.GetProperty("perfil").GetString());
+        Assert.Equal(papel, perfil.GetProperty("perfil").GetString());
         Assert.Equal(0, perfil.GetProperty("xp").GetInt32());
         Assert.Equal(0, perfil.GetProperty("moedas").GetInt32());
         Assert.Equal(1, perfil.GetProperty("nivel").GetInt32());
@@ -80,18 +82,17 @@ public class RegrasDeNegocioTests
         Assert.Equal(HttpStatusCode.BadRequest, (await admin.PostAsync("/api/usuarios/bonus/inexistente/comprar", null)).StatusCode);
     }
 
-    [Fact]
-    public async Task RN02_PerfilAtualizaAoPerderAdminEBonusVoltaAExigirMoedas()
+    [Theory]
+    [InlineData(Perfis.Admin)]
+    [InlineData(Perfis.Tutor)]
+    public async Task RN02_VoltarAAlunoAtualizaPerfilEBonusVoltaAExigirMoedas(string papel)
     {
         await using var api = await ApiEmMemoria.IniciarAsync();
-        var cliente = await api.UsuarioComPerfilAsync("acesso_antigo", Perfis.Admin);
-        foreach (var novoPerfil in new[] { Perfis.Tutor, Perfis.Aluno })
-        {
-            await api.NoBancoAsync(async db => (await db.Usuarios.SingleAsync(u => u.Username == "acesso_antigo")).Perfil = novoPerfil);
-            var perfil = await (await cliente.GetAsync("/api/usuarios/acesso_antigo")).JsonAsync();
-            Assert.Equal(novoPerfil, perfil.GetProperty("perfil").GetString());
-            Assert.Equal(HttpStatusCode.BadRequest, (await cliente.PostAsync("/api/usuarios/bonus/bonus1/comprar", null)).StatusCode);
-        }
+        var cliente = await api.UsuarioComPerfilAsync("acesso_antigo", papel);
+        await api.NoBancoAsync(async db => (await db.Usuarios.SingleAsync(u => u.Username == "acesso_antigo")).Perfil = Perfis.Aluno);
+        var perfil = await (await cliente.GetAsync("/api/usuarios/acesso_antigo")).JsonAsync();
+        Assert.Equal(Perfis.Aluno, perfil.GetProperty("perfil").GetString());
+        Assert.Equal(HttpStatusCode.BadRequest, (await cliente.PostAsync("/api/usuarios/bonus/bonus1/comprar", null)).StatusCode);
     }
 
     [Fact]

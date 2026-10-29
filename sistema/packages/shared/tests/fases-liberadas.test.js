@@ -14,22 +14,25 @@ test('aluno novo, sem nada no servidor, começa só na Fase 01', () => {
   assert.deepEqual(fasesLiberadasNoServidor(), ['fase1']);
 });
 
-test('Admin acessa toda a trilha sem alterar liberações e sem precisar de diagnóstico ou nível', () => {
-  const liberadas = ['fase1'];
-  const disponiveis = fasesDisponiveis(liberadas, 'Admin');
-  assert.deepEqual(disponiveis, ORDEM_FASES);
-  assert.ok(disponiveis.includes('teste-mod5'));
-  assert.deepEqual(liberadas, ['fase1']);
-  disponiveis.pop();
-  assert.deepEqual(fasesDisponiveis(liberadas, 'Admin'), ORDEM_FASES);
+test('Admin e Tutor acessam toda a trilha sem alterar liberações nem exigir diagnóstico ou nível', () => {
+  for (const perfil of ['Admin', 'Tutor']) {
+    const liberadas = ['fase1'];
+    const disponiveis = fasesDisponiveis(liberadas, perfil);
+    assert.deepEqual(disponiveis, ORDEM_FASES);
+    assert.ok(disponiveis.includes('teste-mod5'));
+    assert.deepEqual(liberadas, ['fase1']);
+    disponiveis.pop();
+    assert.deepEqual(fasesDisponiveis(liberadas, perfil), ORDEM_FASES);
+  }
 });
 
-test('retirar o perfil Admin restaura somente o acesso obtido pelo estudo', () => {
-  for (const perfil of ['Aluno', 'Tutor', undefined, null, '', 'admin', 'Administrador']) {
+test('sem perfil Admin ou Tutor, somente o acesso obtido pelo estudo fica disponível', () => {
+  for (const perfil of ['Aluno', undefined, null, '', 'admin', 'tutor', 'Administrador']) {
     assert.equal(temAcessoCompleto(perfil), false);
     assert.deepEqual(fasesDisponiveis(['fase1', 'fase2'], perfil), ['fase1', 'fase2']);
   }
   assert.equal(temAcessoCompleto('Admin'), true);
+  assert.equal(temAcessoCompleto('Tutor'), true);
 });
 
 test('nível 3 (nivelamento intermediário) libera os Módulos 01 e 02, como o diagnóstico', () => {

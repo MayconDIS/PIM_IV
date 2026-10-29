@@ -7,7 +7,7 @@ O app de celular do Nex_TI. Usa a mesma API e as mesmas regras do site.
 | Tela | O que tem |
 |---|---|
 | **Login** | Entrar com nickname ou e-mail, ou criar conta. O token fica no cofre do aparelho (`expo-secure-store`). |
-| **Fases** | As 39 fases regulares por módulo, com os acessos recuperados do diagnóstico e do estudo. O Admin abre todas diretamente. |
+| **Fases** | As 39 fases regulares por módulo, com os acessos recuperados do diagnóstico e do estudo. Admin e Tutor abrem todas diretamente. |
 | **Estudo** | Cartas vindas da API, as vencidas primeiro. Errou, a carta volta no fim da sessão. No fim: XP e moedas. |
 | **Progresso** | Nível, cartas estudadas e para revisar hoje (da API), envios pendentes e o botão "Sincronizar agora". |
 
@@ -22,10 +22,10 @@ Fluxo: Login → Fases ⇄ Progresso → Estudo → Fases.
 
 O SM-2, a ordem das fases e o prêmio de cada fase vêm de `@nexti/shared`, os mesmos do site. Os testes de módulo e as disciplinas bônus continuam só no site.
 
-O perfil **Admin** não precisa de diagnóstico nem de concluir fases anteriores para
+Os perfis **Admin** e **Tutor** não precisam de diagnóstico nem de concluir fases anteriores para
 abrir qualquer disciplina do app. Essa permissão é separada das fases conquistadas:
 não cria conclusões, XP, moedas ou certificado. O perfil é atualizado na sincronização;
-sem conexão, o app usa a última sessão conhecida. Aluno e Tutor continuam com a trilha normal.
+sem conexão, o app usa a última sessão conhecida. O Aluno continua com a trilha normal.
 
 ## Como rodar
 

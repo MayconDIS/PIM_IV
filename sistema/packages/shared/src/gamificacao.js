@@ -18,8 +18,8 @@ export const ORDEM_FASES = Object.freeze(MODULOS.flatMap((modulo) => [
 /** Fase liberada no primeiro acesso. */
 export const FASES_INICIAIS = Object.freeze(['fase1']);
 
-/** Acesso de administração: não representa estudo concluído nem liberações permanentes. */
-export const temAcessoCompleto = (perfil) => perfil === 'Admin';
+/** Acesso de acompanhamento: não representa estudo concluído nem liberações permanentes. */
+export const temAcessoCompleto = (perfil) => perfil === 'Admin' || perfil === 'Tutor';
 
 /** Permissão para abrir a trilha agora, separada do progresso que fica salvo. */
 export function fasesDisponiveis(liberadas, perfil) {

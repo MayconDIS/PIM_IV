@@ -31,76 +31,78 @@ function apiFalsa({ falha = () => null, perfil = { xp: 0, moedas: 0, nivel: 1 },
 
 const carta = { id: 7, frente: 'O que é SM-2?' };
 
-test('Admin no app abre toda a trilha sem diagnóstico e sem salvar progresso fictício', async () => {
-  const arm = memoria();
-  const perfil = { xp: 0, moedas: 0, nivel: 1, perfil: 'Admin', diagnostico: null, fasesConcluidas: [] };
-  const s = criarSincronizador({ api: apiFalsa({ perfil }), armazenamento: arm, username: 'gestor', perfil: 'Admin' });
-  await s.carregar();
-  assert.deepEqual(s.fasesDisponiveis, ORDEM_FASES, 'o perfil do login já permite abrir as disciplinas');
-  await s.sincronizar();
-  assert.deepEqual(s.fasesDisponiveis, ORDEM_FASES);
-  assert.deepEqual(arm.dados.nexti_estado_gestor.liberadas, ['fase1']);
-  assert.equal(s.estado.xp, 0);
-  assert.equal(s.estado.moedas, 0);
-  assert.equal(s.estado.nivel, 1);
-  assert.equal(s.estado.diagnostico, null);
-  assert.deepEqual(s.estado.srs, {});
-  assert.deepEqual(s.estado.fila, []);
-});
+for (const papel of ['Admin', 'Tutor']) {
+  test(`${papel} no app abre toda a trilha sem diagnóstico e sem salvar progresso fictício`, async () => {
+    const arm = memoria();
+    const perfil = { xp: 0, moedas: 0, nivel: 1, perfil: papel, diagnostico: null, fasesConcluidas: [] };
+    const s = criarSincronizador({ api: apiFalsa({ perfil }), armazenamento: arm, username: 'gestor', perfil: papel });
+    await s.carregar();
+    assert.deepEqual(s.fasesDisponiveis, ORDEM_FASES, 'o perfil do login já permite abrir as disciplinas');
+    await s.sincronizar();
+    assert.deepEqual(s.fasesDisponiveis, ORDEM_FASES);
+    assert.deepEqual(arm.dados.nexti_estado_gestor.liberadas, ['fase1']);
+    assert.equal(s.estado.xp, 0);
+    assert.equal(s.estado.moedas, 0);
+    assert.equal(s.estado.nivel, 1);
+    assert.equal(s.estado.diagnostico, null);
+    assert.deepEqual(s.estado.srs, {});
+    assert.deepEqual(s.estado.fila, []);
+  });
 
-test('sincronização aplica promoção e retirada do perfil Admin sem liberar a trilha permanentemente', async () => {
-  const perfil = { xp: 5, moedas: 10, nivel: 1, perfil: 'Aluno', fasesConcluidas: ['fase1'] };
-  const arm = memoria();
-  const s = criarSincronizador({ api: apiFalsa({ perfil }), armazenamento: arm, username: 'ana' });
-  await s.carregar(); await s.sincronizar();
-  assert.deepEqual(s.fasesDisponiveis, ['fase1', 'fase2']);
-  perfil.perfil = 'Admin';
-  await s.sincronizar();
-  assert.deepEqual(s.fasesDisponiveis, ORDEM_FASES);
-  perfil.perfil = 'Tutor';
-  await s.sincronizar();
-  assert.deepEqual(s.fasesDisponiveis, ['fase1', 'fase2']);
-  assert.deepEqual(arm.dados.nexti_estado_ana.liberadas, ['fase1', 'fase2']);
-});
+  test(`sincronização aplica promoção e retirada do perfil ${papel} sem liberar a trilha permanentemente`, async () => {
+    const perfil = { xp: 5, moedas: 10, nivel: 1, perfil: 'Aluno', fasesConcluidas: ['fase1'] };
+    const arm = memoria();
+    const s = criarSincronizador({ api: apiFalsa({ perfil }), armazenamento: arm, username: 'ana' });
+    await s.carregar(); await s.sincronizar();
+    assert.deepEqual(s.fasesDisponiveis, ['fase1', 'fase2']);
+    perfil.perfil = papel;
+    await s.sincronizar();
+    assert.deepEqual(s.fasesDisponiveis, ORDEM_FASES);
+    perfil.perfil = 'Aluno';
+    await s.sincronizar();
+    assert.deepEqual(s.fasesDisponiveis, ['fase1', 'fase2']);
+    assert.deepEqual(arm.dados.nexti_estado_ana.liberadas, ['fase1', 'fase2']);
+  });
 
-test('acesso Admin salvo funciona offline e não passa para outro usuário nem para novo login Aluno', async () => {
-  const arm = memoria();
-  const admin = criarSincronizador({ api: apiFalsa({ perfil: { xp: 0, moedas: 0, nivel: 1, perfil: 'Admin' } }), armazenamento: arm, username: 'gestor' });
-  await admin.carregar(); await admin.sincronizar();
-  const apiOffline = apiFalsa({ falha: () => new ErroDeRede('off') });
-  const offline = criarSincronizador({ api: apiOffline, armazenamento: arm, username: 'gestor' });
-  await offline.carregar();
-  await assert.rejects(() => offline.sincronizar(), ErroDeRede);
-  assert.deepEqual(offline.fasesDisponiveis, ORDEM_FASES);
-  const outro = criarSincronizador({ api: apiOffline, armazenamento: arm, username: 'bia', perfil: 'Aluno' });
-  await outro.carregar();
-  assert.deepEqual(outro.fasesDisponiveis, ['fase1']);
-  const rebaixado = criarSincronizador({ api: apiOffline, armazenamento: arm, username: 'gestor', perfil: 'Aluno', novoLogin: true });
-  await rebaixado.carregar();
-  assert.deepEqual(rebaixado.fasesDisponiveis, ['fase1']);
-});
+  test(`acesso ${papel} salvo funciona offline e não passa para outro usuário nem para novo login Aluno`, async () => {
+    const arm = memoria();
+    const admin = criarSincronizador({ api: apiFalsa({ perfil: { xp: 0, moedas: 0, nivel: 1, perfil: papel } }), armazenamento: arm, username: 'gestor' });
+    await admin.carregar(); await admin.sincronizar();
+    const apiOffline = apiFalsa({ falha: () => new ErroDeRede('off') });
+    const offline = criarSincronizador({ api: apiOffline, armazenamento: arm, username: 'gestor' });
+    await offline.carregar();
+    await assert.rejects(() => offline.sincronizar(), ErroDeRede);
+    assert.deepEqual(offline.fasesDisponiveis, ORDEM_FASES);
+    const outro = criarSincronizador({ api: apiOffline, armazenamento: arm, username: 'bia', perfil: 'Aluno' });
+    await outro.carregar();
+    assert.deepEqual(outro.fasesDisponiveis, ['fase1']);
+    const rebaixado = criarSincronizador({ api: apiOffline, armazenamento: arm, username: 'gestor', perfil: 'Aluno', novoLogin: true });
+    await rebaixado.carregar();
+    assert.deepEqual(rebaixado.fasesDisponiveis, ['fase1']);
+  });
 
-test('reiniciar offline mantém o último perfil confirmado, enquanto um login novo prevalece sobre o cache', async () => {
-  const arm = memoria();
-  const perfil = { xp: 0, moedas: 0, nivel: 1, perfil: 'Aluno' };
-  const api = apiFalsa({ perfil });
-  const apiOffline = apiFalsa({ falha: () => new ErroDeRede('off') });
-  const s = criarSincronizador({ api, armazenamento: arm, username: 'ana', perfil: 'Admin' });
-  await s.carregar(); await s.sincronizar();
-  const revogado = criarSincronizador({ api: apiOffline, armazenamento: arm, username: 'ana', perfil: 'Admin' });
-  await revogado.carregar();
-  await assert.rejects(() => revogado.sincronizar(), ErroDeRede);
-  assert.deepEqual(revogado.fasesDisponiveis, ['fase1'], 'o perfil Admin antigo da sessão não restaura o privilégio revogado');
-  perfil.perfil = 'Admin';
-  await s.sincronizar();
-  const promovido = criarSincronizador({ api: apiOffline, armazenamento: arm, username: 'ana', perfil: 'Aluno' });
-  await promovido.carregar();
-  assert.deepEqual(promovido.fasesDisponiveis, ORDEM_FASES, 'a promoção mais recente também prevalece sobre uma sessão antiga');
-  const novoLogin = criarSincronizador({ api: apiOffline, armazenamento: arm, username: 'ana', perfil: 'Aluno', novoLogin: true });
-  await novoLogin.carregar();
-  assert.deepEqual(novoLogin.fasesDisponiveis, ['fase1']);
-  assert.equal(arm.dados.nexti_estado_ana.perfil, 'Aluno', 'o perfil confirmado no login fica salvo mesmo sem sincronização posterior');
-});
+  test(`reiniciar offline preserva promoção e revogação de ${papel}, e o login novo prevalece sobre o cache`, async () => {
+    const arm = memoria();
+    const perfil = { xp: 0, moedas: 0, nivel: 1, perfil: 'Aluno' };
+    const api = apiFalsa({ perfil });
+    const apiOffline = apiFalsa({ falha: () => new ErroDeRede('off') });
+    const s = criarSincronizador({ api, armazenamento: arm, username: 'ana', perfil: papel });
+    await s.carregar(); await s.sincronizar();
+    const revogado = criarSincronizador({ api: apiOffline, armazenamento: arm, username: 'ana', perfil: papel });
+    await revogado.carregar();
+    await assert.rejects(() => revogado.sincronizar(), ErroDeRede);
+    assert.deepEqual(revogado.fasesDisponiveis, ['fase1'], 'o perfil antigo da sessão não restaura o privilégio revogado');
+    perfil.perfil = papel;
+    await s.sincronizar();
+    const promovido = criarSincronizador({ api: apiOffline, armazenamento: arm, username: 'ana', perfil: 'Aluno' });
+    await promovido.carregar();
+    assert.deepEqual(promovido.fasesDisponiveis, ORDEM_FASES, 'a promoção mais recente também prevalece sobre uma sessão antiga');
+    const novoLogin = criarSincronizador({ api: apiOffline, armazenamento: arm, username: 'ana', perfil: 'Aluno', novoLogin: true });
+    await novoLogin.carregar();
+    assert.deepEqual(novoLogin.fasesDisponiveis, ['fase1']);
+    assert.equal(arm.dados.nexti_estado_ana.perfil, 'Aluno', 'o perfil confirmado no login fica salvo mesmo sem sincronização posterior');
+  });
+}
 
 test('app usa acessos do diagnóstico atual sem confundir rank alto com módulos avaliados', async () => {
   const diagnostico = { versao: 2, moduloRecomendado: 1, fasesLiberadas: ['fase1'] };

@@ -59,7 +59,7 @@ export function useProgresso(userKey) {
     setAvatar(foto);
   };
 
-  // A permissão do Admin vale na sessão: não vira progresso salvo nem compra de bônus.
+  // O acesso de Admin e Tutor vale na sessão: não vira progresso salvo nem compra de bônus.
   const faseLiberada = (faseId) => fasesDisponiveis(fasesDesbloqueadas, perfilRef.current).includes(faseId)
     || bonusDesbloqueados.includes(faseId)
     || (temAcessoCompleto(perfilRef.current) && BONUS.some(bonus => bonus.id === faseId));
