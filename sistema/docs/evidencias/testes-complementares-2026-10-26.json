@@ -1,0 +1,97 @@
+{
+  "data": "2026-10-26",
+  "fusoHorario": "America/Sao_Paulo",
+  "commitTestado": "fc1810b9ff853c1742e620495bc9c99f5f6028fc",
+  "observacao": "Os cinco testes SQL complementam os 440 casos aprovados anteriormente no mesmo código. O fluxo de navegador é uma validação adicional, fora dessa contagem.",
+  "suites": {
+    "api": 270,
+    "compartilhado": 118,
+    "mobile": 26,
+    "desktop": 31,
+    "totalAprovado": 445,
+    "falhas": 0,
+    "casosPendentes": 0
+  },
+  "sqlLocal": {
+    "inicio": "2026-10-26T16:36:40.5047234-03:00",
+    "fim": "2026-10-26T16:36:47.7623245-03:00",
+    "runId": "7e99697b-f379-4651-b1cf-bab63aa3cd7b",
+    "executados": 5,
+    "aprovados": 5,
+    "falhas": 0,
+    "ignorados": 0,
+    "habilitacao": "NEXTI_TEST_LOCALDB=1",
+    "ambiente": "SQL Server LocalDB, bancos descartáveis próprios dos testes",
+    "testes": [
+      {
+        "nome": "NexTI_API.Tests.ContaSqlTests.ExclusoesConcorrentes_NaoRemovemTodosOsAdmins",
+        "resultado": "Passed",
+        "duracao": "00:00:03.7658756"
+      },
+      {
+        "nome": "NexTI_API.Tests.Carga.ConcorrenciaTests.TrintaPrimeirasRespostasAoMesmoTempo_NenhumaFalhaEFicaUmRegistro",
+        "resultado": "Passed",
+        "duracao": "00:00:02.7252465"
+      },
+      {
+        "nome": "NexTI_API.Tests.ContaSqlTests.ExportaHistoricoReal_EExcluiEmCascataSemApagarOutroAlunoOuConteudo",
+        "resultado": "Passed",
+        "duracao": "00:00:02.7792691"
+      },
+      {
+        "nome": "NexTI_API.Tests.DiagnosticoSqlTests.DiagnosticosConcorrentes_PreservamAcessos_EExportacaoEExclusaoUsamAConta",
+        "resultado": "Passed",
+        "duracao": "00:00:02.7495683"
+      },
+      {
+        "nome": "NexTI_API.Tests.ContaHttpTests.ApiReal_ProtegeContaERevogaTokensAposTrocaEExclusao",
+        "resultado": "Passed",
+        "duracao": "00:00:05.4204676"
+      }
+    ]
+  },
+  "diagnostico": {
+    "ambiente": "Site publicado na Vercel e API Azure, navegador Edge automatizado",
+    "quantidadeRespostas": 60,
+    "largurasPixels": [
+      1440,
+      390,
+      320
+    ],
+    "cenarios": [
+      {
+        "etapa": "desktop",
+        "respostas": "20/20",
+        "nota": "15/20",
+        "recomendacao": "Mod_02",
+        "retomada": "3/20 após atualizar",
+        "fasesLiberadas": 11,
+        "bloqueios": "corretos"
+      },
+      {
+        "etapa": "mobile",
+        "resultadoAnterior": "recuperado em outro aparelho",
+        "respostas": "20/20",
+        "nota": "20/20",
+        "recomendacao": "Mod_05",
+        "abrirRecomendacao": "OK",
+        "recarregar": "OK"
+      },
+      {
+        "etapa": "refazer",
+        "respostas": "20/20",
+        "nota": "0/20",
+        "recomendacao": "Mod_01",
+        "acessosAnteriores": "preservados",
+        "xp": 0,
+        "moedas": 0,
+        "conclusoes": 0,
+        "exportacao": "OK"
+      }
+    ],
+    "contaTemporariaExcluida": true,
+    "loginAposExclusao": 401,
+    "contaAlunoAntesEDepoisIdentica": true,
+    "celularFisicoExpoTestado": false
+  }
+}
