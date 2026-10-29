@@ -34,3 +34,6 @@ Thumbs.db
 
 # Arquivos de trava do Word e do Excel (documento aberto)
 ~$*
+
+# Modelos e arquivos pessoais usados só como referência para a apresentação (não vão para o repositório)
+relatorio/docs/MODELO/
