@@ -1,13 +1,23 @@
 # relatorio/docs — apresentação do PIM IV
 
-A apresentação do Nex_TI para a avaliação do PIM IV (24/11 a 03/12/2026). Ela segue as nove
-etapas do Manual do PIM IV, na mesma ordem do relatório, e usa os mesmos números e imagens dele.
+A apresentação do Nex_TI para a avaliação do PIM IV (24/11 a 03/12/2026). Ela conta o projeto
+com **começo, meio e fim**, como o professor pediu:
+
+- **Começo (slides 1–6):** o problema, como a equipe levantou os requisitos (elicitação), o caminho
+  de uma necessidade até o teste e a solução em números.
+- **Meio (7–17):** as oito disciplinas do semestre, uma por slide, sempre no mesmo formato: o que a
+  disciplina ensinou → onde usamos no Nex_TI → a prova no sistema. Fecha com uma resposta do aluno
+  passando pelas oito.
+- **Fim (18–20):** os resultados dos testes, a conclusão respondendo aos problemas do começo e a
+  demonstração.
+
+Usa os mesmos números e imagens do relatório.
 
 | Arquivo | O que é |
 |---|---|
-| [`apresentacao/slides.html`](apresentacao/slides.html) | Os 18 slides. Abrem no navegador e têm modo apresentação próprio |
+| [`apresentacao/slides.html`](apresentacao/slides.html) | Os 20 slides. Abrem no navegador e têm modo apresentação próprio |
 | [`apresentacao/Nex_TI - Apresentacao PIM IV.pdf`](apresentacao/Nex_TI%20-%20Apresentacao%20PIM%20IV.pdf) | Os mesmos slides em PDF (A4 paisagem), para enviar ou projetar |
-| [`apresentacao/ROTEIRO_DO_PALESTRANTE.md`](apresentacao/ROTEIRO_DO_PALESTRANTE.md) | Quem fala o quê, o tempo de cada slide e as perguntas prováveis |
+| [`apresentacao/ROTEIRO_DO_PALESTRANTE.md`](apresentacao/ROTEIRO_DO_PALESTRANTE.md) | Quem fala o quê (20 minutos), o tempo de cada slide e as perguntas prováveis |
 | [`apresentacao/gerar-pdf.mjs`](apresentacao/gerar-pdf.mjs) | Gera o PDF de novo depois de mudar os slides |
 
 ## Como apresentar

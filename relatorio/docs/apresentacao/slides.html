@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nex_TI — Apresentação do PIM IV</title>
     <!--
-      Apresentação do PIM IV (Nex_TI), 18 slides em A4 paisagem.
-      - Para apresentar: abrir este arquivo no navegador e apertar P (ou o botão "Apresentar").
-        Setas ou Espaço trocam de slide, F põe em tela cheia, N mostra a fala e o tempo, Esc sai.
+      Apresentação do PIM IV (Nex_TI), 20 slides em A4 paisagem, com começo, meio e fim:
+        começo (1–6): o problema, a elicitação de requisitos e a solução em números;
+        meio (7–17): as oito disciplinas do semestre, uma por slide (o que ensinou → onde usamos → a prova),
+                     e uma resposta do aluno passando pelas oito;
+        fim (18–20): resultados, conclusão e demonstração.
+      - Para apresentar: abrir no navegador e apertar P (ou "Apresentar"). Setas trocam de slide,
+        F põe em tela cheia, N mostra a fala e o tempo, Esc sai.
       - Para o PDF: na pasta apresentacao, `node gerar-pdf.mjs`.
-      - O que falar em cada slide está em ROTEIRO_DO_PALESTRANTE.md e nas notas de cada slide.
-      - Imagens: as mesmas do relatório (../../assets): telas reais do site e diagramas exportados do Astah.
-      - Números: os mesmos do relatório e do README, conferidos por scripts/verificar-sincronia.mjs.
+      - Imagens: as do relatório (../../assets); números: os do relatório, conferidos por scripts/verificar-sincronia.mjs.
     -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -211,6 +213,39 @@
             .numero.roxo b { color: #b46cff; }
             .numero.amarelo b { color: var(--nx-yellow); }
         }
+
+        /* ── Começo, meio e fim: em que parte da história o slide está ──────────── */
+        .arco { display: flex; gap: 1.5mm; }
+        .arco b {
+            font-size: 7.5pt; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--nx-txt-3); border: 1px solid var(--nx-border); border-radius: 20px; padding: 1mm 3mm;
+        }
+        .arco b.on { color: #0b0c10; background: var(--nx-green); border-color: var(--nx-green); }
+
+        /* ── Uma disciplina por slide: o que ensinou → onde usamos → a prova ─────── */
+        .disciplina { display: grid; grid-template-columns: 1fr 1.25fr 1fr; gap: 5mm; align-items: stretch; }
+        .disciplina.com-imagem { grid-template-columns: 0.9fr 1.15fr 1.35fr; align-items: center; }
+        .disciplina.com-celular { grid-template-columns: 0.9fr 1.1fr 1.1fr; align-items: center; }
+        .disciplina .card h3 { color: var(--nx-ink); }
+        .fonte { margin-top: 2mm; font-family: var(--nx-mono); font-size: 9pt !important; color: var(--nx-txt-3) !important; }
+        .destaque { color: var(--nx-primary); }
+        .card .destaque + * { display: inline; }
+        .disciplinas-linha { display: flex; flex-wrap: wrap; gap: 2mm; }
+        .disciplinas-linha span {
+            font-size: 10pt; color: var(--nx-ink); border: 1.5px solid var(--nx-rule);
+            border-radius: 20px; padding: 1.5mm 4mm; background: rgba(0, 230, 230, 0.06);
+        }
+        ol.caminho { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 3mm 6mm; counter-reset: passo; }
+        ol.caminho li {
+            counter-increment: passo; position: relative; font-size: 12pt; color: var(--nx-txt-2); line-height: 1.4;
+            background: var(--nx-card); border: 1.5px solid var(--nx-border); border-radius: 6px; padding: 3mm 4mm 3mm 13mm;
+        }
+        ol.caminho li::before {
+            content: counter(passo); position: absolute; left: 3.5mm; top: 3mm;
+            width: 7mm; height: 7mm; border-radius: 50%; background: var(--nx-primary); color: #0b0c10;
+            font: 700 10pt var(--nx-font); display: flex; align-items: center; justify-content: center;
+        }
+        ol.caminho li b { display: block; color: var(--nx-ink); font-family: var(--nx-title); }
     </style>
 </head>
 <body>
@@ -221,6 +256,8 @@
     <span>ou aperte <kbd>P</kbd> · no modo apresentação: <kbd>←</kbd> <kbd>→</kbd> trocam o slide, <kbd>F</kbd> tela cheia, <kbd>N</kbd> fala e tempo, <kbd>Esc</kbd> sai</span>
 </nav>
 
+<!-- ═════════════════════════ COMEÇO ═════════════════════════ -->
+
 <!-- 1 · Capa -->
 <section class="slide capa" id="slide-1" aria-label="Slide 1: capa">
     <header class="slide-header">
@@ -230,7 +267,7 @@
     <div class="slide-body">
         <div class="marca">Nex_<span class="ti">TI</span></div>
         <h1 class="slide-title">Solução Web e Mobile de <span class="grad">avaliação e apoio à aprendizagem</span><br>para uma empresa fictícia de tecnologia educacional</h1>
-        <p class="slide-subtitle">Flashcards, revisão espaçada (SM-2), gamificação e as provas oficiais do ENADE, no site e no celular.</p>
+        <p class="slide-subtitle">Como as oito disciplinas do semestre viraram um só sistema: do problema à plataforma no ar.</p>
         <div class="equipe">
             <div><b>Gabriel Alves Moreira</b>H67HJI4</div>
             <div><b>Maciel Costa da Silva</b>R280985</div>
@@ -240,12 +277,29 @@
         </div>
     </div>
     <footer class="rodape"><img class="logo-unip" src="../../assets/branding/Logo UNIP.png" alt="UNIP"><span>github.com/MayconDIS/PIM_IV · nexti-pim-iv.vercel.app</span></footer>
-    <aside class="notas">Maciel: "Somos a equipe do Nex_TI: Gabriel, Maciel, Maycon, Miguel e Rafael. Vamos mostrar a plataforma que fizemos no PIM IV, seguindo as nove etapas do manual, e no fim o sistema funcionando."</aside>
+    <aside class="notas">Maciel: "Somos a equipe do Nex_TI: Gabriel, Maciel, Maycon, Miguel e Rafael. Vamos contar o projeto do começo ao fim: o problema e como levantamos os requisitos, depois como cada disciplina do semestre entrou no sistema, e no fim os resultados e o sistema funcionando."</aside>
 </section>
 
-<!-- 2 · Problema -->
-<section class="slide" id="slide-2" aria-label="Slide 2: o problema">
-    <header class="slide-header"><span class="slide-tag">O problema</span><span class="slide-meta">Introdução · <b>Maciel</b></span></header>
+<!-- 2 · Roteiro -->
+<section class="slide" id="slide-2" aria-label="Slide 2: o roteiro da apresentação">
+    <header class="slide-header"><span class="slide-tag">Roteiro</span><span class="arco"><b class="on">Começo</b><b>Meio</b><b>Fim</b></span><span class="slide-meta"><b>Maciel</b></span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">Começo, meio e fim: <span class="grad">a história do Nex_TI</span></h2>
+        <div class="grid-3">
+            <div class="card"><h3>Começo · o problema</h3><ul><li>Quem é o aluno e o que o atrapalha.</li><li>Como levantamos os requisitos (elicitação).</li><li>Da necessidade ao teste.</li></ul></div>
+            <div class="card verde"><h3>Meio · as disciplinas</h3><ul><li>Uma disciplina por slide: o que ela ensinou, onde usamos e a prova no sistema.</li><li>No fim do meio, uma resposta do aluno passando pelas oito.</li></ul></div>
+            <div class="card roxo"><h3>Fim · os resultados</h3><ul><li>O que os testes mostraram.</li><li>O que resolvemos e o que ainda falta medir.</li><li>O sistema funcionando.</li></ul></div>
+        </div>
+        <div class="disciplinas-linha">
+            <span>Empreendedorismo em TI</span><span>Relações Étnico-Raciais</span><span>Web com .NET</span><span>Mobile</span><span>Programação Aplicada em .NET</span><span>Banco de Dados</span><span>Cloud e DevOps</span><span>Projetos Ágil</span>
+        </div>
+    </div>
+    <aside class="notas">Maciel: apresentar o caminho. "Vocês vão ver as oito disciplinas do semestre, cada uma no lugar onde foi usada."</aside>
+</section>
+
+<!-- 3 · Problema -->
+<section class="slide" id="slide-3" aria-label="Slide 3: o problema">
+    <header class="slide-header"><span class="slide-tag">O problema</span><span class="arco"><b class="on">Começo</b><b>Meio</b><b>Fim</b></span><span class="slide-meta"><b>Maciel</b></span></header>
     <div class="slide-body">
         <h2 class="slide-title">Quem começa em TI tropeça nos <span class="grad">termos técnicos</span></h2>
         <div class="grid-3">
@@ -254,14 +308,58 @@
             <div class="card roxo"><h3>Sem acompanhamento</h3><p>Ninguém vê quem está ficando para trás até a nota chegar.</p></div>
         </div>
         <div class="card amarelo"><h3>Persona</h3><p>Jovem de 18 a 20 anos, recém-saído do ensino médio, que quer entrar em TI e sente dificuldade com os termos técnicos. Faz o nivelamento, revisa com flashcards e usa os simulados do ENADE; XP e moedas mantêm o ritmo.</p></div>
-        <p class="slide-subtitle">Esses problemas são hipóteses: a equipe propõe validá-los com usuários num piloto.</p>
+        <p class="slide-subtitle">São hipóteses: o próximo slide mostra de onde elas vieram, e o fim mostra como validá-las.</p>
     </div>
-    <aside class="notas">Maciel: explicar os três problemas e a persona. Deixar claro que são hipóteses, que o projeto ainda não foi testado com alunos reais.</aside>
+    <aside class="notas">Maciel: explicar os três problemas e a persona. Deixar claro que são hipóteses a validar com alunos reais.</aside>
 </section>
 
-<!-- 3 · Em números -->
-<section class="slide" id="slide-3" aria-label="Slide 3: a solução em números">
-    <header class="slide-header"><span class="slide-tag">A solução</span><span class="slide-meta">Visão geral · <b>Maciel</b></span></header>
+<!-- 4 · Elicitação -->
+<section class="slide" id="slide-4" aria-label="Slide 4: elicitação de requisitos">
+    <header class="slide-header"><span class="slide-tag">Elicitação</span><span class="arco"><b class="on">Começo</b><b>Meio</b><b>Fim</b></span><span class="slide-meta"><b>Maciel</b></span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">Como descobrimos <span class="grad">o que o sistema precisava fazer</span></h2>
+        <div class="grid-3">
+            <div class="card"><h3>1. Análise de documentos</h3><p>O Manual do PIM IV (o que cada etapa exige), os materiais das 31 disciplinas de AVA e ED do curso e as provas oficiais do ENADE de ADS (INEP).</p></div>
+            <div class="card verde"><h3>2. Comparação com o Anki</h3><p>O app de flashcards mais usado mostrou a revisão espaçada (SM-2) e os quatro botões de resposta.</p></div>
+            <div class="card roxo"><h3>3. Persona e cenários</h3><p>A equipe é de alunos de ADS: a persona e os cenários de estudo partiram da nossa própria experiência de ingressantes.</p></div>
+            <div class="card amarelo"><h3>4. Priorização</h3><p>As necessidades viraram épicos e itens do Product Backlog (PB01 a PB22) no Trello, ordenados por sprint.</p></div>
+            <div class="card"><h3>5. Protótipo e iteração</h3><p>Cada entrega foi um sistema funcionando, revisado num pull request antes de entrar.</p></div>
+            <div class="card verde"><h3>6. Validação</h3><p>Testes de usabilidade com roteiro de tarefas, no computador e no celular.</p></div>
+        </div>
+        <p class="slide-subtitle"><b class="destaque">Ainda falta:</b> entrevistas e questionário com ingressantes reais, num piloto com uma turma.</p>
+    </div>
+    <aside class="notas">Maciel: as seis técnicas que usamos, com as fontes. Ser honesto: a elicitação com usuários reais (entrevista, questionário e piloto) é o próximo passo.</aside>
+</section>
+
+<!-- 5 · Da necessidade ao teste -->
+<section class="slide" id="slide-5" aria-label="Slide 5: da necessidade ao teste">
+    <header class="slide-header"><span class="slide-tag">Requisitos</span><span class="arco"><b class="on">Começo</b><b>Meio</b><b>Fim</b></span><span class="slide-meta"><b>Maciel</b></span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">Da necessidade <span class="grad">até o teste</span></h2>
+        <div class="grid-3">
+            <div class="card numero"><b>8</b><span>regras de negócio (RN01 a RN08)</span></div>
+            <div class="card numero verde"><b>14</b><span>requisitos funcionais (RF01 a RF14)</span></div>
+            <div class="card numero roxo"><b>6</b><span>requisitos não funcionais (RNF01 a RNF06)</span></div>
+        </div>
+        <p class="slide-subtitle">Exemplo de rastreio, de ponta a ponta:</p>
+        <div class="fluxo">
+            <div class="card"><h3>Necessidade</h3><p>"Quero estudar no ônibus, sem internet."</p></div>
+            <span class="seta" aria-hidden="true">→</span>
+            <div class="card verde"><h3>Requisito</h3><p>RF12 e RNF05: o app estuda sem internet e envia depois.</p></div>
+            <span class="seta" aria-hidden="true">→</span>
+            <div class="card roxo"><h3>Backlog</h3><p>PB10 a PB12 (Mobile e sincronização), na Sprint 4.</p></div>
+            <span class="seta" aria-hidden="true">→</span>
+            <div class="card amarelo"><h3>Código</h3><p>Fila de respostas no aparelho, enviada quando a conexão volta.</p></div>
+            <span class="seta" aria-hidden="true">→</span>
+            <div class="card"><h3>Teste</h3><p>26 testes do app: envio com e sem internet e a fila.</p></div>
+        </div>
+    </div>
+    <aside class="notas">Maciel: todo requisito segue esse caminho, e cada item do Trello leva o link do pull request que o entregou. Passar a vez: "Agora o meio: o Gabriel abre com as duas primeiras disciplinas."</aside>
+</section>
+
+<!-- 6 · A solução em números -->
+<section class="slide" id="slide-6" aria-label="Slide 6: a solução em números">
+    <header class="slide-header"><span class="slide-tag">A solução</span><span class="arco"><b class="on">Começo</b><b>Meio</b><b>Fim</b></span><span class="slide-meta"><b>Maciel</b></span></header>
     <div class="slide-body">
         <h2 class="slide-title">Nex_TI: um site, um app e uma API, <span class="grad">com o mesmo banco</span></h2>
         <div class="grid-4">
@@ -272,207 +370,199 @@
             <div class="card numero"><b>27</b><span>rotas na API, em camadas</span></div>
             <div class="card numero verde"><b>16</b><span>casos de uso modelados no Astah</span></div>
             <div class="card numero roxo"><b>445</b><span>testes automáticos aprovados</span></div>
-            <div class="card numero amarelo"><b>2</b><span>provas oficiais do ENADE (2017 e 2021)</span></div>
+            <div class="card numero amarelo"><b>8</b><span>disciplinas do semestre aplicadas</span></div>
         </div>
-        <p class="slide-subtitle">O conteúdo reúne 43 fases e 1198 cartas. Site em React (Vercel), app em React Native, API em .NET 10 e banco SQL Server (Azure); a regra do SM-2 e das recompensas é a mesma no site, no app e na API.</p>
+        <p class="slide-subtitle">O conteúdo reúne 43 fases e 1198 cartas: além de ser feito com as disciplinas, o Nex_TI ensina um pouco de cada disciplina do curso.</p>
     </div>
-    <aside class="notas">Maciel: ler os números principais e passar para o Gabriel: "O Gabriel mostra como pensamos a empresa e o planejamento."</aside>
+    <aside class="notas">Maciel: ler os números e passar ao meio: "O Gabriel mostra as duas primeiras disciplinas."</aside>
 </section>
 
-<!-- 4 · Etapa 1 -->
-<section class="slide" id="slide-4" aria-label="Slide 4: Etapa 1, organização">
-    <header class="slide-header"><span class="slide-tag">Etapa 1</span><span class="slide-meta">Caracterização da organização · <b>Gabriel</b></span></header>
+<!-- ═════════════════════════ MEIO ═════════════════════════ -->
+
+<!-- 7 · Empreendedorismo em TI -->
+<section class="slide" id="slide-7" aria-label="Slide 7: Empreendedorismo em TI">
+    <header class="slide-header"><span class="slide-tag">Disciplina 1 de 8 · Etapas 1 e 2</span><span class="arco"><b>Começo</b><b class="on">Meio</b><b>Fim</b></span><span class="slide-meta"><b>Gabriel</b></span></header>
     <div class="slide-body">
-        <h2 class="slide-title">Nex_TI Educacional: uma <span class="grad">EdTech</span> fictícia</h2>
+        <h2 class="slide-title">Empreendedorismo em TI: <span class="grad">o negócio por trás do sistema</span></h2>
+        <div class="disciplina">
+            <div class="card"><h3>O que a disciplina ensinou</h3><ul><li>Plano de negócios e proposta de valor.</li><li>Ponto de equilíbrio e sustentabilidade.</li></ul><p class="fonte">ARAÚJO NETO (2026)</p></div>
+            <div class="card verde"><h3>Onde usamos</h3><ul><li>Nex_TI Educacional, uma EdTech fictícia: estudantes (B2C) e instituições (B2B).</li><li>Quatro funções: produto e parcerias, curadoria pedagógica, desenvolvimento e operação, atendimento e inclusão.</li><li>Hipóteses de receita e custo; o ponto de equilíbrio será calculado com dados do piloto.</li></ul></div>
+            <div class="card roxo"><h3>Na prática</h3><p><b class="destaque">Proposta de valor:</b> estudo ativo dos fundamentos de TI, revisão no tempo certo e acompanhamento do tutor, numa experiência acessível.</p><p><b class="destaque">Processo:</b> curadoria → aluno estuda a trilha → tutor acompanha.</p></div>
+        </div>
+    </div>
+    <aside class="notas">Gabriel: a empresa é fictícia. A disciplina deu o formato do negócio; o ponto de equilíbrio depende de dados que ainda não temos.</aside>
+</section>
+
+<!-- 8 · Relações Étnico-Raciais -->
+<section class="slide" id="slide-8" aria-label="Slide 8: Relações Étnico-Raciais e Afrodescendência">
+    <header class="slide-header"><span class="slide-tag">Disciplina 2 de 8 · Etapa 3</span><span class="arco"><b>Começo</b><b class="on">Meio</b><b>Fim</b></span><span class="slide-meta"><b>Gabriel</b></span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">Relações Étnico-Raciais e Afrodescendência: <span class="grad">estudar sem barreiras</span></h2>
+        <div class="disciplina">
+            <div class="card"><h3>O que a disciplina ensinou</h3><ul><li>Ações afirmativas.</li><li>Lei 10.639/2003 e Estatuto da Igualdade Racial (Lei 12.288/2010).</li></ul><p class="fonte">TOLEDO-PLAÇA (2023)</p></div>
+            <div class="card verde"><h3>Onde usamos</h3><ul><li>Proposta: curadoria de conteúdo sem estereótipos, incluindo profissionais negros e afrodescendentes, com fontes.</li><li>Proposta: política de uso e canal de relato contra discriminação.</li><li>Estudo gratuito, inclusive sem internet no app.</li></ul></div>
+            <div class="card roxo"><h3>Já no sistema</h3><ul><li>VLibras, alto contraste e zoom da fonte.</li><li>Tudo pelo teclado, com foco visível e janelas anunciadas ao leitor de tela.</li><li>Botões de pelo menos 44 px no celular.</li></ul></div>
+        </div>
+        <p class="slide-subtitle">Acessibilidade ajuda, mas não substitui ações contra a discriminação: a política e o canal ainda precisam ser publicados e testados.</p>
+    </div>
+    <aside class="notas">Gabriel: separar o que é proposta do que já está no sistema. Passar a vez: "O Maycon mostra as disciplinas de Web e Mobile."</aside>
+</section>
+
+<!-- 9 · Web com .NET (1/2) -->
+<section class="slide" id="slide-9" aria-label="Slide 9: Desenvolvimento Web com .NET, o site e a API">
+    <header class="slide-header"><span class="slide-tag">Disciplina 3 de 8 · Etapa 4</span><span class="arco"><b>Começo</b><b class="on">Meio</b><b>Fim</b></span><span class="slide-meta"><b>Maycon</b></span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">Desenvolvimento Web com .NET: <span class="grad">o site e a API</span></h2>
+        <div class="disciplina com-imagem">
+            <div class="card"><h3>O que a disciplina ensinou</h3><ul><li>Minimal APIs, EF Core e migrations.</li><li>JWT, CORS, limite de requisições e OpenAPI.</li></ul><p class="fonte">PERES (2026)</p></div>
+            <div class="card verde"><h3>Onde usamos</h3><ul><li>API em .NET 10 com essas mesmas peças: 27 rotas REST.</li><li>Login com JWT de 24 horas e limite de tentativas; o banco é criado pelas migrations.</li><li>Site em React conversando com a API.</li></ul></div>
+            <figure><img class="tela alt-90" src="../../assets/telas/Tela_Painel_Recarregado_Web.png" alt="Painel do aluno com avatar, XP, moedas e a trilha de fases"><figcaption>Painel do aluno (tela real)</figcaption></figure>
+        </div>
+    </div>
+    <aside class="notas">Maycon: cada conceito da disciplina tem lugar na API. Mostrar o painel e explicar a conversa site → API → banco.</aside>
+</section>
+
+<!-- 10 · Web com .NET (2/2) -->
+<section class="slide" id="slide-10" aria-label="Slide 10: Desenvolvimento Web com .NET, estudo e área administrativa">
+    <header class="slide-header"><span class="slide-tag">Disciplina 3 de 8 · Etapa 4</span><span class="arco"><b>Começo</b><b class="on">Meio</b><b>Fim</b></span><span class="slide-meta"><b>Maycon</b></span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">O estudo e a <span class="grad">estrutura administrativa</span></h2>
         <div class="grid-2">
-            <div class="card"><h3>Modelo de negócio</h3><ul><li>Estudantes (B2C): plataforma de estudo e revisão.</li><li>Instituições (B2B): ações de nivelamento com tutores acompanhando a turma.</li></ul></div>
-            <div class="card verde"><h3>Produtos e serviços</h3><ul><li>Site e app de flashcards com revisão espaçada.</li><li>Simulados do ENADE e teste de nivelamento.</li><li>Painel do Tutor com o desempenho de cada aluno.</li></ul></div>
-            <div class="card roxo"><h3>Estrutura proposta</h3><p>Quatro funções: produto e parcerias; curadoria pedagógica; desenvolvimento e operação; atendimento e inclusão.</p></div>
-            <div class="card amarelo"><h3>Processo principal</h3><p>Curadoria seleciona e revisa o conteúdo → o aluno se cadastra, faz o nivelamento, estuda a trilha e acompanha o progresso → o tutor acompanha e modera.</p></div>
-        </div>
-    </div>
-    <aside class="notas">Gabriel: a empresa é fictícia; apresentar B2C e B2B, os produtos e as quatro funções. Disciplina: Empreendedorismo em TI.</aside>
-</section>
-
-<!-- 5 · Etapa 2 -->
-<section class="slide" id="slide-5" aria-label="Slide 5: Etapa 2, planejamento">
-    <header class="slide-header"><span class="slide-tag">Etapa 2</span><span class="slide-meta">Planejamento da solução · <b>Gabriel</b></span></header>
-    <div class="slide-body">
-        <h2 class="slide-title">Do problema às <span class="grad">regras e requisitos</span></h2>
-        <div class="grid-3">
-            <div class="card numero"><b>8</b><span>regras de negócio (RN01 a RN08)</span></div>
-            <div class="card numero verde"><b>14</b><span>requisitos funcionais (RF01 a RF14)</span></div>
-            <div class="card numero roxo"><b>6</b><span>requisitos não funcionais (RNF01 a RNF06)</span></div>
-        </div>
-        <div class="grid-2">
-            <div class="card"><h3>Exemplos de regras</h3><ul><li><b>RN01</b> XP e moedas calculados pela API: 5 XP e 10 moedas por fase, só na primeira conclusão.</li><li><b>RN03</b> Moedas só compram bônus (50 moedas cada).</li><li><b>RN05</b> Progresso não volta: XP e nível nunca diminuem.</li><li><b>RN06</b> Sempre existe um Administrador.</li></ul></div>
-            <div class="card verde"><h3>Rastreabilidade</h3><p>Cada requisito está ligado a um épico e a um item do Product Backlog (PB01 a PB22) no Trello, e cada item, ao pull request que o entregou.</p></div>
-        </div>
-    </div>
-    <aside class="notas">Gabriel: mostrar os números de regras e requisitos e dar dois exemplos de regra. Explicar que tudo se liga ao backlog do Trello.</aside>
-</section>
-
-<!-- 6 · Etapa 3 -->
-<section class="slide" id="slide-6" aria-label="Slide 6: Etapa 3, diversidade e inclusão">
-    <header class="slide-header"><span class="slide-tag">Etapa 3</span><span class="slide-meta">Responsabilidade social e diversidade · <b>Gabriel</b></span></header>
-    <div class="slide-body">
-        <h2 class="slide-title">Estudar TI <span class="grad">sem barreiras</span></h2>
-        <div class="grid-2">
-            <div class="card"><h3>Já no sistema</h3><ul><li>VLibras (Libras), alto contraste e zoom da fonte.</li><li>Tudo funciona pelo teclado, com foco visível e janelas anunciadas ao leitor de tela.</li><li>Site no celular com botões de pelo menos 44 px.</li><li>App que estuda sem internet.</li></ul></div>
-            <div class="card verde"><h3>Ações propostas</h3><ul><li>Revisar exemplos e imagens para evitar estereótipos e incluir profissionais negros e afrodescendentes, com fontes.</li><li>Política de uso e canal de relato contra discriminação.</li><li>Orientação de privacidade e uso responsável (LGPD).</li></ul></div>
-        </div>
-        <p class="slide-subtitle">Acessibilidade ajuda, mas não substitui ações explícitas contra a discriminação; a política e o canal ainda precisam ser publicados e testados.</p>
-    </div>
-    <aside class="notas">Gabriel: separar o que já está no sistema do que é proposta. Disciplina: Relações étnico-raciais e afrodescendência. Passar a vez: "O Maycon mostra o site."</aside>
-</section>
-
-<!-- 7 · Etapa 4 Web -->
-<section class="slide" id="slide-7" aria-label="Slide 7: Etapa 4, o site">
-    <header class="slide-header"><span class="slide-tag">Etapa 4</span><span class="slide-meta">Desenvolvimento Web · <b>Maycon</b></span></header>
-    <div class="slide-body">
-        <h2 class="slide-title">O site: <span class="grad">React</span> conversando com a <span class="grad">API .NET 10</span></h2>
-        <div class="lado">
-            <figure><img class="tela alt-120" src="../../assets/telas/Tela_Painel_Recarregado_Web.png" alt="Painel do aluno com avatar, XP, moedas e a trilha de fases"><figcaption>Painel do aluno (tela real)</figcaption></figure>
-            <div class="card"><h3>Como funciona</h3><ul><li>Login com token JWT de 24 horas e limite de tentativas.</li><li>27 rotas REST: as rotas chamam serviços, e só os serviços falam com o banco.</li><li>Perfis Aluno, Tutor e Administrador conferidos pela API.</li><li>Senha forte conferida no navegador e na API, com aviso de senha vazada.</li></ul></div>
-        </div>
-    </div>
-    <aside class="notas">Maycon: mostrar o painel e explicar a conversa site → API → banco. Disciplina: Desenvolvimento Web com .NET.</aside>
-</section>
-
-<!-- 8 · Estudo e SM-2 -->
-<section class="slide" id="slide-8" aria-label="Slide 8: estudo e revisão espaçada">
-    <header class="slide-header"><span class="slide-tag">Etapa 4</span><span class="slide-meta">Estudo e revisão espaçada · <b>Maycon</b></span></header>
-    <div class="slide-body">
-        <h2 class="slide-title">Cada resposta decide <span class="grad">quando a carta volta</span></h2>
-        <div class="grid-2">
-            <figure><img class="tela alt-90" src="../../assets/telas/Tela_Estudo_Pergunta.png" alt="Carta de estudo mostrando a pergunta"><figcaption>Frente da carta</figcaption></figure>
-            <figure><img class="tela alt-90" src="../../assets/telas/Tela_Estudo_Resposta.png" alt="Carta virada com a resposta e os quatro botões do SM-2"><figcaption>Verso, com os quatro botões do SM-2</figcaption></figure>
+            <figure><img class="tela alt-90" src="../../assets/telas/Tela_Estudo_Resposta.png" alt="Carta virada com a resposta e os quatro botões do SM-2"><figcaption>Estudo: os quatro botões do SM-2</figcaption></figure>
+            <figure><img class="tela alt-90" src="../../assets/telas/Tela_Painel_Tutor.png" alt="Painel do Tutor com o desempenho de cada aluno"><figcaption>Acompanhamento dos alunos (Tutor e Admin)</figcaption></figure>
         </div>
         <div class="grid-3">
-            <div class="card"><h3>SM-2</h3><p>Errei volta amanhã; Difícil, Bom e Fácil afastam a revisão. O intervalo para em 100 anos.</p></div>
-            <div class="card verde"><h3>Recompensas</h3><p>Concluir a fase paga XP e moedas uma vez; quem calcula é o servidor, não o navegador.</p></div>
-            <div class="card roxo"><h3>ENADE</h3><p>Provas oficiais de 2017 e 2021, com o gabarito do INEP e a justificativa.</p></div>
+            <div class="card"><h3>SM-2</h3><p>Errei volta amanhã; Difícil, Bom e Fácil afastam a revisão. XP e moedas: quem calcula é o servidor.</p></div>
+            <div class="card verde"><h3>Tutor e Administrador</h3><p>O Tutor acompanha os alunos e modera as cartas; o Administrador também define perfis.</p></div>
+            <div class="card roxo"><h3>Trilha e Nexor</h3><p>31 disciplinas por módulo; o Nexor responde com os materiais da plataforma, sem serviço externo.</p></div>
         </div>
     </div>
-    <aside class="notas">Maycon: explicar os quatro botões. A mesma regra do SM-2 está no site, no app e na API, testada pelos mesmos casos.</aside>
+    <aside class="notas">Maycon: a estrutura administrativa vale ponto na Etapa 4. A Trilha é onde o Nex_TI ensina "um pouco de cada disciplina" do curso.</aside>
 </section>
 
-<!-- 9 · Área administrativa, trilha e Nexor -->
-<section class="slide" id="slide-9" aria-label="Slide 9: área administrativa, trilha e Nexor">
-    <header class="slide-header"><span class="slide-tag">Etapa 4</span><span class="slide-meta">Estrutura administrativa e conteúdo · <b>Maycon</b></span></header>
+<!-- 11 · Mobile -->
+<section class="slide" id="slide-11" aria-label="Slide 11: Desenvolvimento Mobile">
+    <header class="slide-header"><span class="slide-tag">Disciplina 4 de 8 · Etapa 5</span><span class="arco"><b>Começo</b><b class="on">Meio</b><b>Fim</b></span><span class="slide-meta"><b>Maycon</b></span></header>
     <div class="slide-body">
-        <h2 class="slide-title">Tutor, Administrador, <span class="grad">Trilha</span> e o assistente <span class="grad">Nexor</span></h2>
-        <div class="grid-2">
-            <figure><img class="tela alt-90" src="../../assets/telas/Tela_Painel_Tutor.png" alt="Painel do Tutor com o desempenho de cada aluno"><figcaption>Painel do Tutor</figcaption></figure>
-            <figure><img class="tela alt-90" src="../../assets/telas/Tela_Trilha_Admin.png" alt="Trilha por módulos com as disciplinas"><figcaption>Trilha por módulos</figcaption></figure>
-        </div>
-        <div class="grid-3">
-            <div class="card"><h3>Tutor</h3><p>Acompanha XP e SM-2 de cada aluno e modera as cartas.</p></div>
-            <div class="card verde"><h3>Administrador</h3><p>Faz tudo o que o Tutor faz e define o perfil de cada usuário.</p></div>
-            <div class="card roxo"><h3>Trilha e Nexor</h3><p>31 disciplinas organizadas por módulo; o Nexor consulta os materiais sem serviço externo.</p></div>
-        </div>
-    </div>
-    <aside class="notas">Maycon: a estrutura administrativa vale ponto na Etapa 4. Mostrar o Tutor e a Trilha; citar que o Nexor responde com os materiais da própria plataforma. Passar a vez: "Agora o app."</aside>
-</section>
-
-<!-- 10 · Etapa 5 Mobile -->
-<section class="slide" id="slide-10" aria-label="Slide 10: Etapa 5, o app">
-    <header class="slide-header"><span class="slide-tag">Etapa 5</span><span class="slide-meta">Desenvolvimento Mobile · <b>Maycon</b></span></header>
-    <div class="slide-body">
-        <h2 class="slide-title">O app estuda <span class="grad">até sem internet</span></h2>
-        <div class="lado-estreito">
+        <h2 class="slide-title">Desenvolvimento Mobile: <span class="grad">o app que estuda sem internet</span></h2>
+        <div class="disciplina com-celular">
+            <div class="card"><h3>O que a disciplina ensinou</h3><ul><li>Aplicações multiplataforma.</li><li>React Native com Expo.</li><li>Armazenamento local e acessibilidade.</li></ul><p class="fonte">MONTEIRO (2026); BOZOLAN (2025)</p></div>
+            <div class="card verde"><h3>Onde usamos</h3><ul><li>App Expo com a mesma API e o mesmo banco do site.</li><li>Token guardado no cofre do aparelho (SecureStore).</li><li>Fila de respostas no AsyncStorage para estudar sem internet.</li><li>26 testes automáticos.</li></ul></div>
             <div class="grid-2">
                 <figure><img class="tela celular" src="../../assets/telas/Tela_Painel_Recarregado_Mobile.png" alt="Painel no celular"><figcaption>Painel</figcaption></figure>
                 <figure><img class="tela celular" src="../../assets/telas/Tela_Flashcard_Materiais_Mobile.png" alt="Carta com materiais no celular"><figcaption>Carta e materiais</figcaption></figure>
             </div>
-            <div class="grid-2">
-                <div class="card"><h3>Telas e navegação</h3><p>Login → Fases → Estudo → resultado → Fases, com o Progresso a um toque.</p></div>
-                <div class="card verde"><h3>Autenticação</h3><p>Token JWT guardado no cofre do aparelho (SecureStore); sessão expirada volta ao login.</p></div>
-                <div class="card roxo"><h3>Sincronização</h3><p>Sem internet, a resposta espera numa fila no aparelho e é enviada depois.</p></div>
-                <div class="card amarelo"><h3>Integração</h3><p>As mesmas rotas e o mesmo pacote compartilhado do site; 26 testes automáticos.</p></div>
-            </div>
         </div>
     </div>
-    <aside class="notas">Maycon: autenticação, sincronização e integração valem ponto na Etapa 5. Disciplina: Desenvolvimento Mobile. Passar a vez: "O Miguel mostra a arquitetura."</aside>
+    <aside class="notas">Maycon: autenticação, sincronização e integração com a API valem ponto na Etapa 5. Passar a vez: "O Miguel mostra a arquitetura e o banco."</aside>
 </section>
 
-<!-- 11 · Etapa 6 Arquitetura -->
-<section class="slide" id="slide-11" aria-label="Slide 11: Etapa 6, arquitetura">
-    <header class="slide-header"><span class="slide-tag">Etapa 6</span><span class="slide-meta">Arquitetura de Software · <b>Miguel</b></span></header>
+<!-- 12 · Programação Aplicada em .NET (1/2) -->
+<section class="slide" id="slide-12" aria-label="Slide 12: Programação Aplicada em .NET, camadas">
+    <header class="slide-header"><span class="slide-tag">Disciplina 5 de 8 · Etapa 6</span><span class="arco"><b>Começo</b><b class="on">Meio</b><b>Fim</b></span><span class="slide-meta"><b>Miguel</b></span></header>
     <div class="slide-body">
-        <h2 class="slide-title">API em camadas: <span class="grad">rotas → serviços → banco</span></h2>
-        <figure><img class="alt-90" src="../../assets/diagrams/Class Diagram Nex_TI - Camadas.png" alt="Diagrama de classes das camadas da API"><figcaption>Diagrama de classes das camadas (Astah, gerado do código)</figcaption></figure>
-        <div class="fluxo">
-            <div class="card"><h3>Site e app</h3><p>Telas e o pacote compartilhado (conteúdo, SM-2, recompensas).</p></div>
-            <span class="seta" aria-hidden="true">→</span>
-            <div class="card verde"><h3>Rotas</h3><p>Recebem o pedido e conferem o perfil.</p></div>
-            <span class="seta" aria-hidden="true">→</span>
-            <div class="card roxo"><h3>Serviços</h3><p>Uma interface por serviço, ligada por injeção de dependência.</p></div>
-            <span class="seta" aria-hidden="true">→</span>
-            <div class="card amarelo"><h3>Banco</h3><p>Só os serviços usam o <code>AppDbContext</code> (EF Core).</p></div>
+        <h2 class="slide-title">Programação Aplicada em .NET: <span class="grad">orientação a objetos e camadas</span></h2>
+        <div class="grid-2">
+            <div class="card"><h3>O que a disciplina ensinou</h3><p>Classes, herança, interfaces e encapsulamento; separar o programa em camadas com responsabilidades distintas.</p></div>
+            <div class="card verde"><h3>Onde usamos</h3><p>Rotas → serviços → banco: cada serviço tem uma interface, ligada por injeção de dependência; os perfis herdam (Usuário → Aluno → Tutor → Administrador).</p></div>
         </div>
+        <figure><img class="alt-90" src="../../assets/diagrams/Class Diagram Nex_TI - Camadas.png" alt="Diagrama de classes das camadas da API"><figcaption>Diagrama de classes das camadas (Astah, gerado do código)</figcaption></figure>
     </div>
-    <aside class="notas">Miguel: cada camada só conhece a de baixo; por isso dá para testar o serviço sem a tela e trocar o banco sem mexer nas regras. Disciplina: Programação Aplicada em .NET.</aside>
+    <aside class="notas">Miguel: cada camada só conhece a de baixo; por isso dá para testar o serviço sem a tela e trocar o banco sem mexer nas regras. A disciplina também teve uma atividade própria, o Nex_TI Desktop, com 31 testes.</aside>
 </section>
 
-<!-- 12 · Casos de uso -->
-<section class="slide" id="slide-12" aria-label="Slide 12: casos de uso">
-    <header class="slide-header"><span class="slide-tag">Etapa 6</span><span class="slide-meta">Modelagem UML · <b>Miguel</b></span></header>
+<!-- 13 · Programação Aplicada em .NET (2/2) -->
+<section class="slide" id="slide-13" aria-label="Slide 13: Programação Aplicada em .NET, UML">
+    <header class="slide-header"><span class="slide-tag">Disciplina 5 de 8 · Etapa 6</span><span class="arco"><b>Começo</b><b class="on">Meio</b><b>Fim</b></span><span class="slide-meta"><b>Miguel</b></span></header>
     <div class="slide-body">
         <div class="lado-estreito">
             <div>
                 <h2 class="slide-title">16 casos de uso, <span class="grad">todos tirados do código</span></h2>
                 <div class="card" style="margin-top: 5mm"><h3>Diagramas só do Astah</h3><ul><li>Um gerador monta o arquivo do Astah a partir do código.</li><li>Cada caso de uso tem um diagrama de classes e um de sequência.</li><li>Todo elemento tem a explicação no campo Definition.</li></ul></div>
-                <div class="card verde" style="margin-top: 4mm"><h3>Perfis herdam</h3><p>Usuário → Aluno → Tutor → Administrador: cada perfil faz tudo o que o anterior faz.</p></div>
+                <div class="card verde" style="margin-top: 4mm"><h3>Por que gerar do código</h3><p>Assim o diagrama nunca fica diferente do sistema: mudou o código, gera de novo.</p></div>
             </div>
             <figure><img class="alt-140" src="../../assets/diagrams/UseCase Diagram Nex_TI.png" alt="Diagrama de casos de uso do Nex_TI"><figcaption>Diagrama de casos de uso</figcaption></figure>
         </div>
     </div>
-    <aside class="notas">Miguel: mostrar os atores e dois casos de uso (Estudar Flashcards e Acompanhar Desempenho dos Usuários). Os diagramas saem de um gerador, então não ficam diferentes do código.</aside>
+    <aside class="notas">Miguel: mostrar os atores e dois casos de uso (Estudar Flashcards e Acompanhar Desempenho dos Usuários).</aside>
 </section>
 
-<!-- 13 · Etapa 7 Banco -->
-<section class="slide" id="slide-13" aria-label="Slide 13: Etapa 7, banco de dados">
-    <header class="slide-header"><span class="slide-tag">Etapa 7</span><span class="slide-meta">Projeto do Banco de Dados · <b>Miguel</b></span></header>
+<!-- 14 · Banco de Dados -->
+<section class="slide" id="slide-14" aria-label="Slide 14: Programação de Banco de Dados">
+    <header class="slide-header"><span class="slide-tag">Disciplina 6 de 8 · Etapa 7</span><span class="arco"><b>Começo</b><b class="on">Meio</b><b>Fim</b></span><span class="slide-meta"><b>Miguel</b></span></header>
     <div class="slide-body">
-        <h2 class="slide-title">SQL Server com <span class="grad">regras dentro do banco</span></h2>
-        <figure><img class="alt-90" src="../../assets/diagrams/DER Nex_TI.png" alt="DER, modelo lógico do banco"><figcaption>DER (modelo lógico); MER e modelo físico estão no relatório</figcaption></figure>
-        <div class="grid-3">
-            <div class="card"><h3>Triggers</h3><p><code>tg_progresso_historico</code> grava cada revisão; <code>tg_usuarios_protege_gamificacao</code> impede que XP ou nível diminuam.</p></div>
-            <div class="card verde"><h3>Procedures e views</h3><p><code>sp_ranking_alunos</code>, <code>sp_estatisticas_aluno</code>, <code>sp_cadastrar_flashcard</code>; ranking e desempenho por fase.</p></div>
-            <div class="card roxo"><h3>Script completo</h3><p><code>NexTI_DB.sql</code> cria tudo; as migrations do EF Core versionam o esquema.</p></div>
+        <h2 class="slide-title">Programação de Banco de Dados: <span class="grad">regras dentro do banco</span></h2>
+        <div class="disciplina com-imagem">
+            <div class="card"><h3>O que a disciplina ensinou</h3><ul><li>Integridade referencial, joins e views.</li><li>Procedures, triggers e funções.</li><li>Backup e restore.</li></ul><p class="fonte">MARTINS (2026)</p></div>
+            <div class="card verde"><h3>Onde usamos</h3><ul><li><code>tg_progresso_historico</code> grava cada revisão; <code>tg_usuarios_protege_gamificacao</code> impede que o XP diminua.</li><li><code>sp_ranking_alunos</code>, <code>sp_estatisticas_aluno</code>, <code>sp_cadastrar_flashcard</code> e views de ranking.</li><li>Chaves estrangeiras e backup automático na Azure.</li></ul></div>
+            <figure><img class="alt-90" src="../../assets/diagrams/DER Nex_TI.png" alt="DER, modelo lógico do banco"><figcaption>DER (modelo lógico)</figcaption></figure>
         </div>
     </div>
-    <aside class="notas">Miguel: do MER ao modelo físico, e as rotinas do banco. Disciplina: Programação de Banco de Dados. Passar a vez: "O Rafael mostra a nuvem, os testes e a gestão."</aside>
+    <aside class="notas">Miguel: do MER ao modelo físico; o script NexTI_DB.sql cria tudo. Passar a vez: "O Rafael mostra as duas últimas disciplinas e junta tudo."</aside>
 </section>
 
-<!-- 14 · Etapa 8 Nuvem -->
-<section class="slide" id="slide-14" aria-label="Slide 14: Etapa 8, nuvem e DevOps">
-    <header class="slide-header"><span class="slide-tag">Etapa 8</span><span class="slide-meta">Infraestrutura em Nuvem e DevOps · <b>Rafael</b></span></header>
+<!-- 15 · Cloud e DevOps -->
+<section class="slide" id="slide-15" aria-label="Slide 15: Cloud Computing e DevOps">
+    <header class="slide-header"><span class="slide-tag">Disciplina 7 de 8 · Etapa 8</span><span class="arco"><b>Começo</b><b class="on">Meio</b><b>Fim</b></span><span class="slide-meta"><b>Rafael</b></span></header>
     <div class="slide-body">
-        <h2 class="slide-title">Publicado na nuvem, <span class="grad">com deploy automático</span></h2>
+        <h2 class="slide-title">Cloud Computing e DevOps: <span class="grad">no ar, com deploy automático</span></h2>
+        <div class="grid-2">
+            <div class="card"><h3>O que a disciplina ensinou</h3><p>Modelos de serviço (IaaS, PaaS, SaaS), elasticidade, LGPD, contêineres, CI/CD e monitoramento.</p><p class="fonte">REIS (2026)</p></div>
+            <div class="card verde"><h3>Onde usamos</h3><p>App Service e Azure SQL (PaaS), Docker, deploy automático a cada merge, Application Insights e os direitos do titular (exportar e excluir a conta).</p></div>
+        </div>
         <div class="fluxo">
             <div class="card"><h3>Navegador</h3><p>Site e app</p></div>
             <span class="seta" aria-hidden="true">→</span>
-            <div class="card verde"><h3>Vercel</h3><p>Site em React, com prévia de cada pull request</p></div>
+            <div class="card verde"><h3>Vercel</h3><p>Site em React</p></div>
             <span class="seta" aria-hidden="true">→</span>
             <div class="card roxo"><h3>Azure App Service</h3><p>API .NET 10</p></div>
             <span class="seta" aria-hidden="true">→</span>
-            <div class="card amarelo"><h3>Azure SQL</h3><p>Banco serverless, acessado só pela API</p></div>
+            <div class="card amarelo"><h3>Azure SQL</h3><p>Banco serverless</p></div>
         </div>
-        <div class="grid-3">
-            <div class="card"><h3>Contêineres</h3><p>Dockerfile da API e do site; o docker-compose sobe banco, API e site com um comando.</p></div>
-            <div class="card verde"><h3>CI/CD</h3><p>A cada pull request: testes, imagens Docker e checagem de sincronia. A cada merge: deploy no Azure.</p></div>
-            <div class="card roxo"><h3>Monitoramento</h3><p>Application Insights com erros e tempo de resposta, e teste de disponibilidade a cada 15 minutos.</p></div>
-        </div>
-        <p class="slide-subtitle">Tudo em camadas gratuitas: a primeira requisição depois de um tempo parado pode levar até um minuto.</p>
+        <p class="slide-subtitle">Tudo em camadas gratuitas: depois de um tempo parado, a primeira requisição pode levar até um minuto.</p>
     </div>
-    <aside class="notas">Rafael: mostrar o caminho do pedido e os três itens exigidos (contêineres, CI/CD e monitoramento). Disciplina: Cloud Computing e DevOps.</aside>
+    <aside class="notas">Rafael: os três itens exigidos na Etapa 8: contêineres, CI/CD e monitoramento.</aside>
 </section>
 
-<!-- 15 · Qualidade -->
-<section class="slide" id="slide-15" aria-label="Slide 15: testes e qualidade">
-    <header class="slide-header"><span class="slide-tag">Qualidade</span><span class="slide-meta">Testes e auditoria · <b>Rafael</b></span></header>
+<!-- 16 · Projetos Ágil -->
+<section class="slide" id="slide-16" aria-label="Slide 16: Gerenciamento de Projetos Ágil">
+    <header class="slide-header"><span class="slide-tag">Disciplina 8 de 8 · Etapa 9</span><span class="arco"><b>Começo</b><b class="on">Meio</b><b>Fim</b></span><span class="slide-meta"><b>Rafael</b></span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">Gerenciamento de Projetos Ágil: <span class="grad">como a equipe trabalhou</span></h2>
+        <div class="disciplina com-imagem">
+            <div class="card"><h3>O que a disciplina ensinou</h3><ul><li>Scrum e Kanban.</li><li>Backlog e sprints.</li><li>Caminho crítico (CPM) e organização do tempo.</li></ul><p class="fonte">ARANTES (2026a)</p></div>
+            <div class="card verde"><h3>Onde usamos</h3><ul><li>Product Backlog PB01 a PB22 no Trello.</li><li>Cinco sprints, cada uma com meta e entrega.</li><li>Cada cartão leva o link do pull request; caminho crítico até a entrega.</li></ul></div>
+            <figure><img class="tela alt-90" src="../../assets/trello/quadro-kanban.jpg" alt="Quadro Kanban do PIM IV no Trello"><figcaption>Quadro do PIM IV no Trello</figcaption></figure>
+        </div>
+    </div>
+    <aside class="notas">Rafael: S1 planejamento, S2 banco e API, S3 site, S4 app, S5 testes, nuvem e entrega.</aside>
+</section>
+
+<!-- 17 · Tudo junto -->
+<section class="slide" id="slide-17" aria-label="Slide 17: as oito disciplinas numa resposta">
+    <header class="slide-header"><span class="slide-tag">Tudo junto</span><span class="arco"><b>Começo</b><b class="on">Meio</b><b>Fim</b></span><span class="slide-meta"><b>Rafael</b></span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">Uma resposta do aluno <span class="grad">passa pelas oito disciplinas</span></h2>
+        <p class="slide-subtitle">O aluno responde "Bom" numa carta, no celular, dentro do ônibus:</p>
+        <ol class="caminho">
+            <li><b>Mobile</b> a resposta espera na fila do aparelho até a internet voltar.</li>
+            <li><b>Web com .NET</b> chega à rota de progresso, com o token JWT conferido.</li>
+            <li><b>Programação Aplicada em .NET</b> o serviço de progresso usa a interface do SM-2 para calcular a próxima revisão.</li>
+            <li><b>Banco de Dados</b> o trigger grava a revisão no histórico.</li>
+            <li><b>Cloud e DevOps</b> tudo roda no Azure, e o Application Insights registra a requisição.</li>
+            <li><b>Projetos Ágil</b> essa função entrou pelo backlog (PB12), num pull request com teste.</li>
+            <li><b>Empreendedorismo</b> a revisão no tempo certo é a proposta de valor da Nex_TI.</li>
+            <li><b>Relações Étnico-Raciais</b> estudar sem internet amplia o acesso de quem tem conexão ruim.</li>
+        </ol>
+    </div>
+    <aside class="notas">Rafael: contar como uma história curta. É aqui que o professor vê as disciplinas trabalhando juntas. Passar a vez: "O Maciel fecha a história."</aside>
+</section>
+
+<!-- ═════════════════════════ FIM ═════════════════════════ -->
+
+<!-- 18 · Resultados -->
+<section class="slide" id="slide-18" aria-label="Slide 18: resultados e testes">
+    <header class="slide-header"><span class="slide-tag">Resultados</span><span class="arco"><b>Começo</b><b>Meio</b><b class="on">Fim</b></span><span class="slide-meta"><b>Maciel</b></span></header>
     <div class="slide-body">
         <h2 class="slide-title"><span class="grad">445 testes</span> aprovados, rodando a cada pull request</h2>
         <div class="grid-2">
@@ -489,39 +579,30 @@
         </div>
         <div class="card verde"><h3>Sincronia automática</h3><p>Um script confere se os números do relatório, do README e destes slides batem com o código, e se os diagramas são os do Astah.</p></div>
     </div>
-    <aside class="notas">Rafael: destacar que os testes acharam e corrigiram defeitos reais. O total de 445 testes é de 26/10/2026.</aside>
+    <aside class="notas">Maciel: destacar que os testes acharam e corrigiram defeitos reais. O total de 445 testes é de 26/10/2026.</aside>
 </section>
 
-<!-- 16 · Etapa 9 Ágil -->
-<section class="slide" id="slide-16" aria-label="Slide 16: Etapa 9, gestão ágil">
-    <header class="slide-header"><span class="slide-tag">Etapa 9</span><span class="slide-meta">Gerenciamento Ágil do Projeto · <b>Rafael</b></span></header>
+<!-- 19 · Conclusão -->
+<section class="slide" id="slide-19" aria-label="Slide 19: conclusão">
+    <header class="slide-header"><span class="slide-tag">Conclusão</span><span class="arco"><b>Começo</b><b>Meio</b><b class="on">Fim</b></span><span class="slide-meta"><b>Maciel</b></span></header>
     <div class="slide-body">
-        <h2 class="slide-title">Scrum com <span class="grad">Kanban no Trello</span>, em cinco sprints</h2>
-        <div class="lado">
-            <figure><img class="tela alt-120" src="../../assets/trello/quadro-kanban.jpg" alt="Quadro Kanban do PIM IV no Trello"><figcaption>Quadro do PIM IV no Trello</figcaption></figure>
-            <div class="card"><h3>Como trabalhamos</h3><ul><li>S1 planejamento · S2 banco e API · S3 site · S4 app · S5 testes, nuvem e entrega.</li><li>Cada cartão leva o link do pull request que o entregou.</li><li>Cada mudança entra por pull request revisado, um assunto por vez.</li><li>Caminho crítico (CPM) calculado até a entrega.</li></ul></div>
+        <h2 class="slide-title">Voltando ao problema: <span class="grad">o que resolvemos e o que falta</span></h2>
+        <div class="grid-3">
+            <div class="card"><h3>Muitos termos novos</h3><p>43 fases e 1198 cartas, com resumos e fontes das disciplinas do curso.</p></div>
+            <div class="card verde"><h3>Estudo pouco sistemático</h3><p>O SM-2 traz a carta de volta no tempo certo, no site e no app, até sem internet.</p></div>
+            <div class="card roxo"><h3>Sem acompanhamento</h3><p>O Tutor vê o XP e as revisões de cada aluno.</p></div>
         </div>
-    </div>
-    <aside class="notas">Rafael: mostrar o quadro e a ligação cartão → pull request. Disciplina: Gerenciamento de Projetos Ágil.</aside>
-</section>
-
-<!-- 17 · Conclusão -->
-<section class="slide" id="slide-17" aria-label="Slide 17: conclusão">
-    <header class="slide-header"><span class="slide-tag">Conclusão</span><span class="slide-meta">Resultados e próximos passos · <b>Rafael</b></span></header>
-    <div class="slide-body">
-        <h2 class="slide-title">A técnica funcionou; <span class="grad">o aprendizado ainda precisa ser medido</span></h2>
         <div class="grid-2">
-            <div class="card verde"><h3>Confirmado</h3><ul><li>Site e app usam a mesma API e o mesmo banco.</li><li>SM-2 e recompensas com a mesma regra nas três partes, calculadas no servidor.</li><li>Publicado na nuvem, com testes, contêineres e monitoramento.</li></ul></div>
-            <div class="card amarelo"><h3>Ainda a medir</h3><ul><li>Se a plataforma melhora a retenção do conteúdo.</li><li>O efeito das ações de inclusão.</li><li>A viabilidade econômica.</li></ul></div>
+            <div class="card verde"><h3>Confirmado</h3><p>A parte técnica funciona de ponta a ponta: mesma API e mesmo banco, regras no servidor, nuvem, testes e monitoramento.</p></div>
+            <div class="card amarelo"><h3>Próximo passo</h3><p>Completar a elicitação com ingressantes reais: entrevista, questionário e um piloto medindo o desempenho antes e depois.</p></div>
         </div>
-        <div class="card"><h3>Próximos passos</h3><p>Testar o app em aparelhos reais, fazer um piloto com uma turma de ingressantes (desempenho antes e depois) e ajustar a capacidade das sprints.</p></div>
     </div>
-    <aside class="notas">Rafael: ser honesto sobre o que foi comprovado e o que falta medir. Chamar a demonstração: "O Maycon mostra o sistema funcionando."</aside>
+    <aside class="notas">Maciel: fechar a história respondendo aos três problemas do começo. Ser honesto: o efeito no aprendizado ainda precisa ser medido. Chamar a demonstração: "O Maycon mostra o sistema funcionando."</aside>
 </section>
 
-<!-- 18 · Demonstração e perguntas -->
-<section class="slide capa" id="slide-18" aria-label="Slide 18: demonstração e perguntas">
-    <header class="slide-header"><span class="slide-tag">Demonstração</span><span class="slide-meta">Todos</span></header>
+<!-- 20 · Demonstração e perguntas -->
+<section class="slide capa" id="slide-20" aria-label="Slide 20: demonstração e perguntas">
+    <header class="slide-header"><span class="slide-tag">Demonstração</span><span class="arco"><b>Começo</b><b>Meio</b><b class="on">Fim</b></span><span class="slide-meta">Todos</span></header>
     <div class="slide-body">
         <div class="marca">Nex_<span class="ti">TI</span></div>
         <h2 class="slide-title">Demonstração <span class="grad">e perguntas</span></h2>
