@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-nati
 import { MODULOS } from '@nexti/shared/content';
 import { tokens } from '../theme/tokens';
 
-/** As 25 fases da trilha, por módulo. Fase bloqueada não abre. */
+/** Disciplinas dos quatro semestres e preparatório ENADE. Fase bloqueada não abre. */
 export default function FasesScreen({ liberadas, onAbrir }) {
   return (
     <ScrollView contentContainerStyle={styles.lista}>

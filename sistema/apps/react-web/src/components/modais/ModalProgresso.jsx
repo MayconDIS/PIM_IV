@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
-import { MODULOS, fasesConcluidas } from '@nexti/shared';
+import { formatarDica, MODULOS, fasesConcluidas } from '@nexti/shared';
 import { useEstudo } from '../../context/EstudoContext';
+import { exportarMetadadosDoConteudo, restaurarDecksDoBackup } from '../../context/estudo/apoio.js';
 import { baixarArquivo } from '../../lib/arquivos';
 import { Modal } from '../ui/Modal';
 
@@ -65,6 +66,7 @@ export function ModalProgresso() {
       bonusDesbloqueados,
       srsData,
       decks,
+      migracaoConteudo: exportarMetadadosDoConteudo(`${userKey}decks`),
       mapState: JSON.parse(localStorage.getItem(`${userKey}map_state`) || '{}'),
     };
     const carimbo = new Date().toISOString().slice(0, 10);
@@ -99,7 +101,7 @@ export function ModalProgresso() {
       if (dados.fasesDesbloqueadas) gravar('desbloqueadas', dados.fasesDesbloqueadas);
       if (dados.bonusDesbloqueados) gravar('bonus_unlocked', dados.bonusDesbloqueados);
       if (dados.srsData) gravar('srs', dados.srsData);
-      if (dados.decks) gravar('decks', dados.decks);
+      if (dados.decks) restaurarDecksDoBackup(`${userKey}decks`, dados.decks, dados.migracaoConteudo);
       if (dados.mapState) gravar('map_state', dados.mapState);
       gravar('nivelado', 'true');
       localStorage.removeItem(`${userKey}active_state`);
@@ -120,7 +122,7 @@ export function ModalProgresso() {
       cartas.forEach((c) => {
         const srs = srsData[c.frente] || { rep: 0, interval: 0, ease: 2.5, next: 0 };
         const proxima = srs.next ? new Date(srs.next).toLocaleDateString('pt-BR') : 'Não agendado';
-        linhas.push(`${fase.toUpperCase()};${limparCsv(c.frente)};${limparCsv(c.verso)};${limparCsv(c.dica)};${srs.rep};${srs.interval};${srs.ease};${proxima}`);
+        linhas.push(`${fase.toUpperCase()};${limparCsv(c.frente)};${limparCsv(c.verso)};${limparCsv(formatarDica(c.dica))};${srs.rep};${srs.interval};${srs.ease};${proxima}`);
       });
     });
     const carimbo = new Date().toISOString().slice(0, 10);
@@ -174,7 +176,7 @@ export function ModalProgresso() {
         partes.push(
           `  ${i + 1}. P: ${umaLinha(c.frente)}`,
           `     R: ${umaLinha(c.verso)}`,
-          ...(c.dica ? [`     Dica: ${umaLinha(c.dica)}`] : []),
+          ...(c.dica ? [`     Dica: ${umaLinha(formatarDica(c.dica))}`] : []),
           `     SM-2: ${agenda}`,
         );
       });

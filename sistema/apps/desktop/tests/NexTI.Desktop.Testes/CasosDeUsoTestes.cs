@@ -1,5 +1,6 @@
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Nodes;
 using NexTI.Desktop.Aplicacao;
 using NexTI.Desktop.Dominio.Regras;
 using NexTI.Desktop.Infraestrutura.Dados;
@@ -66,7 +67,10 @@ public sealed class CasosDeUsoTestes : IDisposable
     {
         var fases = _estudo.ListarFases(_alunos.Entrar("maycon"));
 
-        Assert.Equal(25, fases.Count);   // fase1 a fase25; os bônus ficam de fora
+        var semente = JsonNode.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "Dados", "conteudo.json")))!;
+        var codigos = semente["fases"]!.AsArray().Select(f => f!["codigo"]!.GetValue<string>())
+            .Where(c => c.StartsWith("fase")).ToArray();
+        Assert.Equal(codigos, fases.Select(f => f.Codigo));
         Assert.Equal("fase1", fases[0].Codigo);
         Assert.All(fases, f => Assert.True(f.TotalDeCartas > 0, $"{f.Codigo} sem cartas"));
     }
@@ -143,5 +147,77 @@ public sealed class CasosDeUsoTestes : IDisposable
 
         Assert.Equal(1, _estudo.ListarFases(aluno)[0].ParaRevisarHoje);
         Assert.Equal(primeira.Id, _estudo.IniciarSessao(aluno, "fase1").CartaAtual!.Id);
+    }
+
+    private static string SementeComDisciplinaInserida()
+    {
+        var conteudo = JsonNode.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "Dados", "conteudo.json")))!;
+        conteudo["fases"]!.AsArray().Insert(1, new JsonObject { ["codigo"] = "faseExtra", ["descricao"] = "Disciplina nova" });
+        conteudo["flashcards"]!.AsArray().Add(new JsonObject { ["codigoFase"] = "fase1", ["frente"] = "Conceito novo do semestre", ["verso"] = "Nova explicação" });
+        conteudo["flashcards"]!.AsArray().Add(new JsonObject { ["codigoFase"] = "faseExtra", ["frente"] = "Conceito da disciplina nova", ["verso"] = "Explicação" });
+        var caminho = Path.GetTempFileName();
+        File.WriteAllText(caminho, conteudo.ToJsonString());
+        return caminho;
+    }
+
+    [Fact]
+    public void SementeIncremental_PreservaIdsRevisoesPremiosECartasDoAluno()
+    {
+        var aluno = _alunos.Entrar("atualizacao");
+        var sessao = _estudo.IniciarSessao(aluno, "fase1");
+        var primeiraCarta = sessao.CartaAtual!.Id;
+        EstudarTudo(aluno, sessao);
+        _estudo.ConcluirFase(aluno, sessao);
+        var revisaoAntes = _contexto.Revisoes.Single(r => r.AlunoId == aluno.Id && r.FlashcardId == primeiraCarta);
+        var dataAntes = revisaoAntes.ProximaRevisao;
+        var idAntes = revisaoAntes.Id;
+        _contexto.Flashcards.Add(new Dominio.Entidades.Flashcard("fase1", "Carta escrita pelo aluno", "Resposta pessoal", null));
+        _contexto.SaveChanges();
+        var quantidade = _contexto.Flashcards.Count();
+        var caminho = SementeComDisciplinaInserida();
+        try
+        {
+            Assert.Equal(1, SemeadorDeConteudo.Semear(_contexto, caminho));
+            Assert.Equal(0, SemeadorDeConteudo.Semear(_contexto, caminho));
+            Assert.Equal(quantidade + 2, _contexto.Flashcards.Count());
+            Assert.Equal(2, _contexto.Fases.Single(f => f.Codigo == "faseExtra").Ordem);
+            ReabrirPrograma();
+            aluno = _alunos.Entrar("atualizacao");
+            var revisao = _contexto.Revisoes.Single(r => r.AlunoId == aluno.Id && r.FlashcardId == primeiraCarta);
+            Assert.Equal(idAntes, revisao.Id);
+            Assert.Equal(dataAntes, revisao.ProximaRevisao);
+            Assert.Equal(5, aluno.Xp);
+            Assert.Equal(10, aluno.Moedas);
+            Assert.True(aluno.JaConcluiu("fase1"));
+            Assert.Contains(_contexto.Flashcards, c => c.Frente == "Carta escrita pelo aluno");
+            var revisaoSessao = _estudo.IniciarSessao(aluno, "fase1");
+            EstudarTudo(aluno, revisaoSessao);
+            Assert.Equal(Premio.Nenhum, _estudo.ConcluirFase(aluno, revisaoSessao).Premio);
+        }
+        finally { File.Delete(caminho); }
+    }
+
+    [Fact]
+    public void DisciplinaJaIniciada_NaoTrancaQuandoUmaNovaEInseridaAntes()
+    {
+        var aluno = _alunos.Entrar("retomada");
+        var primeira = _estudo.IniciarSessao(aluno, "fase1");
+        EstudarTudo(aluno, primeira);
+        _estudo.ConcluirFase(aluno, primeira);
+        var segunda = _estudo.IniciarSessao(aluno, "fase2");
+        _estudo.Responder(aluno, segunda, Resposta.Bom);
+        var caminho = SementeComDisciplinaInserida();
+        try
+        {
+            SemeadorDeConteudo.Semear(_contexto, caminho);
+            ReabrirPrograma();
+            aluno = _alunos.Entrar("retomada");
+            Assert.True(_estudo.ListarFases(aluno).Single(f => f.Codigo == "fase2").Liberada);
+            Assert.NotNull(_estudo.IniciarSessao(aluno, "fase2").CartaAtual);
+            var novo = _alunos.Entrar("alunonovo");
+            Assert.False(_estudo.ListarFases(novo).Single(f => f.Codigo == "fase2").Liberada);
+            Assert.False(_estudo.ListarFases(novo).Single(f => f.Codigo == "faseExtra").Liberada);
+        }
+        finally { File.Delete(caminho); }
     }
 }

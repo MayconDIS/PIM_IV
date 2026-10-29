@@ -18,11 +18,11 @@ import {
 } from '../src/gamificacao.js';
 
 test('o conteúdo canônico tem o material completo', () => {
-  assert.equal(Object.keys(BANCO_DE_DADOS).length, 29);
+  assert.equal(Object.keys(BANCO_DE_DADOS).length, 43);
   const total = Object.values(BANCO_DE_DADOS).reduce((soma, cards) => soma + cards.length, 0);
-  assert.equal(total, 702);
+  assert.equal(total, 1198);
   assert.equal(MODULOS.length, 5);
-  assert.equal(FASES.length, 25);
+  assert.equal(FASES.length, 39);
   assert.equal(BONUS.length, 4);
   assert.equal(TESTES.length, 5);
 });
@@ -115,7 +115,7 @@ test('teste de módulo só paga quando o aluno passa', () => {
 });
 
 test('a trilha avança na ordem e o ENADE libera o certificado', () => {
-  assert.equal(proximaFase('fase5'), 'teste-mod1');
+  assert.equal(proximaFase(MODULOS[0].fases.at(-1).id), 'teste-mod1');
   assert.equal(proximaFase('teste-mod1'), 'fase6');
   assert.equal(proximaFase('fase22'), 'fase23');
   assert.equal(proximaFase('fase25'), 'teste-mod5');

@@ -1,5 +1,5 @@
 /**
- * Conteúdo canônico do Nex_TI: 29 fases, 702 cards e 5 módulos.
+ * Conteúdo canônico do Nex_TI: 43 fases, 1198 cards e 5 módulos.
  *
  * Fonte da verdade para o React (web e mobile). Depois de editar, rode
  * `npm run seed:api` para atualizar a semente do banco da API C#.
@@ -7,6 +7,7 @@
  */
 
 import { GUIA_DE_ESTUDOS, cartasDaProva } from './enadeOficial.js';
+import { integrarConteudoAcademico } from './academico/catalogo.js';
 
 export const BANCO_DE_DADOS = {
   "fase1": [
@@ -4182,6 +4183,8 @@ export const MODULOS = [
     "bonus": null
   }
 ];
+
+integrarConteudoAcademico(BANCO_DE_DADOS, MODULOS);
 
 export const FRASES_MOTIVACIONAIS = [
   "Bora estudar, {name}! Um pouco por dia faz diferença.",

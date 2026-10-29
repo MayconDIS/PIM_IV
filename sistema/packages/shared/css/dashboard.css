@@ -568,7 +568,7 @@ header[role="banner"] {
 
 .aula-locked-item { opacity: 0.5; cursor: not-allowed; }
 .icon-status { color: #8b92a5; min-width: 25px; text-align: center; }
-.aula-title { font-weight: 500; color: #fff; font-size: 1.05rem; }
+.aula-title { min-width: 0; overflow-wrap: anywhere; font-weight: 500; color: #fff; font-size: 1.05rem; }
 
 .dia-header, .aula-item { transition: opacity 0.5s ease-in-out !important; }
 /* Com uma fase aberta, o que vem depois dela some: as fases seguintes do mesmo módulo e os
@@ -596,12 +596,13 @@ button.aula-item { width: 100%; font: inherit; color: inherit; text-align: left;
     max-height: 0;
     overflow: hidden;
     transform: translateY(-15px);
-    transition: max-height 1s ease-in-out, opacity 1s ease-in-out, transform 1s ease-in-out, margin 1s ease-in-out;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out, margin 1s ease-in-out;
     margin: 0; padding: 0;
 }
 
 #right-panel.active {
-    opacity: 1; max-height: 1000px; transform: translateY(0); margin-top: 15px; margin-bottom: 30px;
+    /* Resumos, referências e respostas longas precisam caber inteiros no painel. */
+    opacity: 1; max-height: none; transform: translateY(0); margin-top: 15px; margin-bottom: 30px;
 }
 
 .painel-header {

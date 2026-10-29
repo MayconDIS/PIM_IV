@@ -1,6 +1,6 @@
 // Carga: as funções que rodam no navegador e no celular a cada fase aberta aguentam muito mais
-// do que o Nex_TI tem? Hoje são 702 cartas; um aluno que estudou tudo tem 702 registros de
-// progresso. Os testes usam 50.000 e 100.000 (70 a 140 vezes o real).
+// do que o Nex_TI tem? O cenário real usa o total atual do conteúdo canônico.
+// Os cenários maiores usam 50.000 e 100.000 registros de progresso.
 //
 // Duas checagens por função, como no programa de testes do CasalFlow:
 //  - FORMA DA CURVA: dobrar a entrada não pode mais que ~dobrar o tempo (pega um laço dentro de
@@ -12,7 +12,7 @@ import assert from 'node:assert/strict';
 import { aplicarResposta, ESTADO_INICIAL } from '../src/sm2.js';
 import { montarDeckDaFase } from '../src/deck.js';
 import { fasesLiberadasNoServidor } from '../src/gamificacao.js';
-import { FASES } from '../src/content.js';
+import { BANCO_DE_DADOS, FASES } from '../src/content.js';
 
 /** Menor tempo de 5 rodadas (o menor descarta pausas do coletor de lixo e de outros programas). */
 function medir(fn) {
@@ -72,9 +72,10 @@ test('carga · aplicarResposta (SM-2): 1 milhão de respostas abaixo de 1 s', ()
   assert.ok(t < 1000, `1.000.000 de respostas em ${t.toFixed(1)} ms`);
 });
 
-test('carga · o tamanho real (702 cartas) cabe num quadro de tela (16 ms)', () => {
-  const lista = cartas(702);
-  const progresso = progressoDe(702);
+test('carga · o conteúdo canônico atual cabe num quadro de tela (16 ms)', () => {
+  const total = Object.values(BANCO_DE_DADOS).reduce((soma, lista) => soma + lista.length, 0);
+  const lista = cartas(total);
+  const progresso = progressoDe(total);
   const t = medir(() => {
     montarDeckDaFase(lista, {});
     fasesLiberadasNoServidor({ nivel: 1, progresso });

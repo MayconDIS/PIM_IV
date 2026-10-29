@@ -66,8 +66,13 @@ publica a cada push em `main` que mexa na API. Configure no GitHub:
 | Variable | `AZURE_WEBAPP_NAME` | nome do App Service |
 | Secret | `AZURE_WEBAPP_PUBLISH_PROFILE` | App Service → *Download publish profile* (o XML inteiro) |
 
-No primeiro start, a API aplica a migration `InicialAzureSql` e insere as 29 fases,
-os 702 flashcards e as provas oficiais do ENADE (2017 e 2021). Para testar, abra
+Ao iniciar, a API aplica as migrations pendentes e a carga canônica de 43 fases,
+1198 flashcards e provas oficiais do ENADE (2017 e 2021). A ampliação de AVA e ED
+acrescenta conteúdo sem substituir cartas editadas ou restaurar exclusões do Tutor.
+Os códigos das fases existentes são preservados; os títulos seguem a nova sequência.
+Antes da publicação, execute `npm run seed:api` e `npm run seed:api:check` em `sistema/`.
+Publique a API antes do site para disponibilizar as novas cartas e `fasesConcluidas`
+no perfil. Para testar, abra
 `https://<app>.azurewebsites.net/api/status`.
 
 ### Monitoramento

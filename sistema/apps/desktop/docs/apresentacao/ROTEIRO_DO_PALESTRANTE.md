@@ -44,7 +44,7 @@ ensaiar, leia o [`ESTUDOS.md`](../../ESTUDOS.md).
 - **Objetivo:** explicar o que o programa faz, com a tela principal (`docs/telas/2-principal.png`).
 - **Tópicos-chave:**
   1. O aluno entra só com o nickname; os dados ficam num banco SQLite no computador dele, sem internet.
-  2. São **25 fases e 582 cartas** sobre TI. Só a primeira começa liberada; concluir uma fase libera a próxima.
+  2. São **39 fases e 1078 cartas** sobre TI. Só a primeira começa liberada; concluir uma fase libera a próxima.
   3. O **SM-2** decide quando cada carta volta. A fase dá **XP e moedas só na primeira vez**.
   4. Feito em **Windows Forms** com **.NET 10**.
 - **Passar a vez:** *"O Gabriel mostra o que o aluno faz no programa."*
@@ -143,7 +143,7 @@ ensaiar, leia o [`ESTUDOS.md`](../../ESTUDOS.md).
 - **Objetivo:** mostrar o repositório e os testes.
 - **No GitHub:** abrir o **Pull Request #33** (o programa desktop e os diagramas) e a aba **Actions**, com a checagem "Nex_TI Desktop" passando.
 - **Fala sugerida:**
-  > *"Cada mudança entra por um Pull Request. O GitHub Actions roda os 28 testes do programa: o SM-2, o prêmio uma vez só e o programa de ponta a ponta, com um banco em memória. Se passarem, damos merge na main."*
+  > *"Cada mudança entra por um Pull Request. O GitHub Actions roda os 30 testes do programa: o SM-2, o prêmio uma vez só e o programa de ponta a ponta, com um banco em memória. Se passarem, damos merge na main."*
 
 ---
 
@@ -159,4 +159,4 @@ ensaiar, leia o [`ESTUDOS.md`](../../ESTUDOS.md).
 | O que o diagrama de atividade mostra? | Gabriel | Uma sessão de estudo, do nickname até ganhar XP, com uma raia por camada. |
 | Onde fica o banco? | Maycon | Um arquivo SQLite em `%LOCALAPPDATA%\NexTI.Desktop`, criado pela migration na primeira vez. |
 | Por que o intervalo tem limite? | Maycon | Sem limite, a data da próxima revisão passava do ano 9999 e travava. O teste de carga achou; agora o intervalo para em 100 anos, como no Anki, no site, na API e no desktop. |
-| Como sabem que funciona? | Maycon | 28 testes automáticos, rodados no GitHub a cada Pull Request. |
+| Como sabem que funciona? | Maycon | 30 testes automáticos, rodados no GitHub a cada Pull Request. |

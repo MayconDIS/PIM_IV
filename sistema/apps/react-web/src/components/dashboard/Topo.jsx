@@ -92,6 +92,9 @@ export function Topo() {
             <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalMapaMental'))}>
               <span className="material-symbols-outlined" aria-hidden="true">hub</span> Mapa Neural
             </button>
+            <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalTrilha'))}>
+              <span className="material-symbols-outlined" aria-hidden="true">route</span> Trilha
+            </button>
             <button type="button" className="dropdown-item flex-align" onClick={acao(() => abrirModal('modalNivelamento'))}>
               <span className="material-symbols-outlined target-icon" aria-hidden="true">radar</span> Refazer Diagnóstico
             </button>

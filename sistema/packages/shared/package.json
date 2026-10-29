@@ -1,7 +1,7 @@
 {
   "name": "@nexti/shared",
   "version": "2.0.0",
-  "description": "Conteúdo canônico (702 flashcards, 29 fases, 5 módulos) e regras do Nex_TI — SM-2, gamificação, áudio e confete — compartilhados entre apps/react-web e apps/react-mobile (e a semente da API C#)",
+  "description": "Conteúdo canônico (1198 flashcards, 43 fases, 5 módulos) e regras do Nex_TI — SM-2, gamificação, áudio e confete — compartilhados entre apps/react-web e apps/react-mobile (e a semente da API C#)",
   "private": true,
   "type": "module",
   "main": "./src/index.js",

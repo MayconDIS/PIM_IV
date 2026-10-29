@@ -25,8 +25,8 @@ test('de 4 a 7 acertos libera os Módulos 01 e 02 com seus testes', () => {
   for (const acertos of [4, 7]) {
     const r = resultadoDoDiagnostico(acertos);
     assert.deepEqual(r.fases, [
-      'fase1', 'fase2', 'fase3', 'fase4', 'fase5', 'teste-mod1',
-      'fase6', 'fase7', 'fase8', 'fase9', 'fase10', 'teste-mod2',
+      'fase1', 'fase2', 'fase3', 'fase4', 'fase5', 'fase26', 'fase27', 'fase28', 'fase29', 'teste-mod1',
+      'fase6', 'fase7', 'fase8', 'fase9', 'fase10', 'fase30', 'fase31', 'fase32', 'teste-mod2',
     ]);
     assert.equal(r.rotuloRank, 'Rank: Intermediário');
     assert.equal(r.nivel, 3);

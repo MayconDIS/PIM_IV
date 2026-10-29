@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { criarSincronizador } from '../src/services/sincronizacao.js';
 import { criarApi, ErroDaApi, ErroDeRede } from '../src/services/api.js';
+import { FASES, MODULOS } from '@nexti/shared/content';
 
 function memoria() {
   const dados = {};
@@ -70,8 +71,8 @@ test('sincronizar traz XP, moedas e o SM-2 da API', async () => {
 });
 
 test('outro aparelho: a sincronização libera as fases que o servidor indica', async () => {
-  // A fase 1 foi concluída no site (as 20 cartas têm progresso) e o nivelamento deixou o nível 1.
-  const progresso = Array.from({ length: 20 }, (_, i) => ({
+  // A fase 1 foi concluída no site e o nivelamento deixou o nível 1.
+  const progresso = Array.from({ length: FASES.find(f => f.id === 'fase1').totalCards }, (_, i) => ({
     flashcardId: 100 + i, codigoFase: 'fase1', repeticoes: 1, intervaloDias: 1, fatorFacilidade: 2.5, dataProximaRevisao: '2026-10-25T00:00:00Z',
   }));
   const s = criarSincronizador({ api: apiFalsa({ progresso }), armazenamento: memoria(), username: 'ana' });
@@ -89,15 +90,26 @@ test('outro aparelho: nível 3 do nivelamento libera os módulos 01 e 02 no app'
   assert.ok(!s.estado.liberadas.includes('fase11'));
 });
 
-test('concluir a fase 5 mostra o prêmio, libera a fase 6 (pula o teste) e avisa a API', async () => {
+test('concluir a última fase do semestre mostra o prêmio e pula o teste até a fase 6', async () => {
   const api = apiFalsa({ totais: { premio: { xp: 5, moedas: 10 }, aprovado: true, xp: 5, moedas: 10, nivel: 1 } });
   const s = criarSincronizador({ api, armazenamento: memoria(), username: 'ana' });
   await s.carregar();
-  const { premio, seguinte } = await s.concluirFase('fase5');
+  const ultima = MODULOS[0].fases.at(-1).id;
+  const { premio, seguinte } = await s.concluirFase(ultima);
   assert.deepEqual(premio, { xp: 5, moedas: 10 });
   assert.equal(seguinte, 'fase6');
   assert.ok(s.estado.liberadas.includes('fase6'));
-  assert.deepEqual(api.chamadas, [['concluirFase', 'fase5']]);
+  assert.deepEqual(api.chamadas, [['concluirFase', ultima]]);
+});
+
+test('outro aparelho mantém o avanço de uma disciplina ampliada pela conclusão registrada no perfil', async () => {
+  const api = apiFalsa({ perfil: { xp: 5, moedas: 10, nivel: 1, fasesConcluidas: ['fase1'] } });
+  const s = criarSincronizador({ api, armazenamento: memoria(), username: 'ana' });
+  await s.carregar();
+  await s.sincronizar();
+  assert.deepEqual(s.estado.liberadas, ['fase1', 'fase2']);
+  assert.equal(s.estado.xp, 5);
+  assert.equal(s.estado.moedas, 10);
 });
 
 test('o app fica com os totais que o servidor calculou', async () => {

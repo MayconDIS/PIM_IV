@@ -5,8 +5,8 @@ da disciplina P.A. em .NET* (apresentação em 27/10/2026). Ela mostra como cons
 aplicação desktop organizada, com **orientação a objetos**, **arquitetura em camadas**,
 **modularização** e os **quatro diagramas UML** pedidos: caso de uso, classe, sequência e atividade.
 
-O programa faz o centro do Nex_TI: o aluno entra com um nickname, vê a trilha de 25 fases,
-estuda as cartas com o **SM-2** e ganha **XP e moedas** ao concluir cada fase (só na primeira vez).
+O programa faz o centro do Nex_TI: o aluno entra com um nickname, vê a trilha de 39 fases,
+estuda as 1078 cartas com o **SM-2** e ganha **XP e moedas** ao concluir cada fase (só na primeira vez).
 As cartas e os prêmios são os mesmos do site, do app e da API.
 
 📚 **Para estudar a apresentação:** [`ESTUDOS.md`](ESTUDOS.md) explica o que o professor pede, cada critério (POO, camadas, modularização e os diagramas) com o nosso código e as perguntas prováveis.
@@ -24,7 +24,7 @@ Precisa do **.NET 10 SDK** no Windows (o programa usa Windows Forms).
 ```powershell
 cd sistema/apps/desktop
 dotnet run --project src/NexTI.Desktop.Apresentacao     # abre o programa
-dotnet test                                            # roda os 28 testes
+dotnet test                                            # roda os 30 testes
 ```
 
 Na primeira vez, o programa cria o banco SQLite em `%LOCALAPPDATA%\NexTI.Desktop\nexti-desktop.db`,
@@ -45,7 +45,7 @@ repositório, não só esta pasta). Assim os atalhos abaixo funcionam.
 | Tarefa | O que faz |
 |---|---|
 | Desktop: abrir o programa | Compila e abre o Nex_TI Desktop (a primeira vez leva uns 20 segundos) |
-| Desktop: rodar os testes | Roda os 28 testes no terminal |
+| Desktop: rodar os testes | Roda os 30 testes no terminal |
 | Apresentação: abrir os slides (PDF) | Abre o PDF dos slides no leitor de PDF do Windows |
 | Apresentação: abrir os diagramas do desktop no Astah | Abre o `.asta` no Astah |
 | Apresentação: abrir o GitHub | Abre o repositório no navegador |
@@ -174,9 +174,13 @@ Feitos no Astah, pelo gerador `modelagem-uml/02_Modelagem_UML/gerador-astah/Gera
 
 ![Diagrama de atividade](docs/diagramas/5-atividade.png)
 
+O conteúdo das fases inclui a ampliação de AVA e ED dos quatro semestres,
+com os códigos antigos preservados e a ordem atual da trilha. O desktop usa as
+cartas da base compartilhada; a consulta de resumos pelo menu Trilha pertence ao site.
+
 ## Testes
 
-`dotnet test` roda **28 testes** (xUnit):
+`dotnet test` roda **30 testes** (xUnit):
 
 - **Mesmas regras do resto do Nex_TI:** o SM-2 e os prêmios passam pelos mesmos casos que o site,
   o app e a API conferem (`packages/shared/tests/sm2-casos.json` e `recompensa-casos.json`).

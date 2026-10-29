@@ -236,7 +236,8 @@ checar('rotas do manual técnico iguais às da API', !faltamNoManual.length && !
 
 const relatorio = ler('relatorio/index.html');
 // Dicionário de dados (2.7.6) = tabelas do script do banco.
-const tabelasDoBanco = new Set([...ler('sistema/database/NexTI_DB.sql').matchAll(/CREATE TABLE \[?(\w+)\]?/g)]
+// Só declarações: o conteúdo dos flashcards também pode mencionar "CREATE TABLE".
+const tabelasDoBanco = new Set([...ler('sistema/database/NexTI_DB.sql').matchAll(/^\s*CREATE TABLE \[?(\w+)\]?\s*\(/gm)]
   .map((m) => m[1]).filter((t) => !t.startsWith('__')));
 const secaoDicionario = relatorio.match(/aria-label="2\.7\.6 Dicionário de dados".*?<\/section>/s)?.[0] ?? '';
 const tabelasDoDicionario = new Set([...secaoDicionario.matchAll(/<tr><td>(\w+)<\/td>/g)].map((m) => m[1]));

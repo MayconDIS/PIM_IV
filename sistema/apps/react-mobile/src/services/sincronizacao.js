@@ -6,7 +6,7 @@
  * Regras de SM-2, prêmio e nível vêm do @nexti/shared, as mesmas do site.
  */
 import { aplicarResposta, estadoDaCarta, qualidadeSm2 } from '@nexti/shared/sm2';
-import { FASES_INICIAIS, fasesLiberadasNoServidor, isTeste, nivelPorXp, proximaFase, recompensa } from '@nexti/shared/gamificacao';
+import { FASES_INICIAIS, fasesLiberadasNoServidor, isTeste, nivelPorXp, preservarFasesLiberadas, proximaFase, recompensa } from '@nexti/shared/gamificacao';
 import { ErroDaApi, ErroDeRede } from './api.js';
 
 // Função, não constante: cada usuário precisa de listas próprias (um objeto
@@ -59,6 +59,7 @@ export function criarSincronizador({ api, armazenamento, username, agora = () =>
     /** Carrega o que está salvo no aparelho. */
     async carregar() {
       estado = { ...estadoVazio(), ...((await armazenamento.ler(chave)) ?? {}) };
+      estado.liberadas = preservarFasesLiberadas(estado.liberadas);
       return estado;
     },
 
@@ -98,8 +99,9 @@ export function criarSincronizador({ api, armazenamento, username, agora = () =>
         };
       }
       // Continuar de outro aparelho: as fases liberadas também vêm do servidor (o app não tem os testes).
-      const doServidor = fasesLiberadasNoServidor({ nivel: estado.nivel, progresso, pularTestes: true });
-      estado.liberadas = [...new Set([...estado.liberadas, ...doServidor])];
+      const doServidor = fasesLiberadasNoServidor({ nivel: estado.nivel, progresso,
+        fasesConcluidas: perfil.fasesConcluidas ?? [], pularTestes: true });
+      estado.liberadas = preservarFasesLiberadas([...estado.liberadas, ...doServidor]);
       await salvar();
       return estado;
     },

@@ -33,13 +33,13 @@ E três regras da apresentação:
 
 ## 2. O programa em 30 segundos
 
-O aluno abre o programa, digita um **nickname**, vê a **trilha de 25 fases** (582 cartas sobre TI) e
+O aluno abre o programa, digita um **nickname**, vê a **trilha de 39 fases** (1078 cartas sobre TI) e
 estuda: vê a pergunta, mostra a resposta e escolhe **Errei, Difícil, Bom ou Fácil**. O **SM-2**
 decide quando cada carta volta. Ao acertar todas as cartas da fase, ganha **XP e moedas** (só na
 primeira vez) e libera a próxima fase. Tudo fica num banco **SQLite** no computador, sem internet.
 
 - **Tecnologia:** C#, .NET 10, Windows Forms (telas), EF Core (acesso ao banco) e SQLite (banco num arquivo).
-- **Testes:** 28 testes automáticos com xUnit.
+- **Testes:** 30 testes automáticos com xUnit.
 
 ---
 
@@ -144,7 +144,7 @@ construtor. Isso se chama **injeção de dependência**, outro assunto da Unidad
 
 **Por que vale a pena?**
 
-- Dá para **testar** as regras sem abrir tela nenhuma (os 28 testes fazem isso).
+- Dá para **testar** as regras sem abrir tela nenhuma (os 30 testes fazem isso).
 - Dá para **trocar o banco** sem mexer nas regras (nos testes, o banco é um SQLite em memória).
 - Fica fácil **achar** onde está cada coisa.
 
@@ -273,7 +273,7 @@ O livro da disciplina (PERES, 2026) ensina desenvolvimento web com .NET usando u
 | O que é «include» e «extend»? | Include acontece sempre (estudar inclui responder); extend só às vezes (concluir, quando acaba). |
 | O que é uma migration? | O histórico das mudanças no banco; a `Inicial` cria as tabelas. |
 | Por que o intervalo do SM-2 tem limite? | Sem limite, a data passava do ano 9999 e travava; o teste de carga achou. Agora para em 100 anos (`IntervaloMaximo`). |
-| Como sabem que funciona? | 28 testes automáticos, rodados no GitHub a cada Pull Request. |
+| Como sabem que funciona? | 30 testes automáticos, rodados no GitHub a cada Pull Request. |
 | Por que SQLite? | O banco é um arquivo no computador, sem servidor; é o que o livro usa no PetMatch. |
 
 ---

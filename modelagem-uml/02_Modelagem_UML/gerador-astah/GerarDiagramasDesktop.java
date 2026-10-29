@@ -102,7 +102,7 @@ public class GerarDiagramasDesktop {
         // {nome, definição, x, y, ligado ao ator?}
         String[][] casos = {
             {"Entrar com nickname", "O aluno digita o nickname (3 a 20 letras). Se ainda não existe neste computador, o programa cria o aluno. ServicoDeAlunos.Entrar.", "240", "70", "s"},
-            {"Ver painel e trilha", "Mostra XP, moedas, nível e as 25 fases com a situação de cada uma (concluída, liberada ou trancada). ServicoDeEstudo.Painel e ListarFases.", "240", "170", "s"},
+            {"Ver painel e trilha", "Mostra XP, moedas, nível e as fases do catálogo compartilhado, na ordem dos módulos 1 a 4 e do preparatório ENADE, com a situação de cada uma (concluída, liberada ou trancada). A atualização do conteúdo acrescenta cartas sem apagar as revisões anteriores. ServicoDeEstudo.Painel e ListarFases.", "240", "170", "s"},
             {"Estudar fase", "Abre uma fase liberada com as cartas vencidas primeiro, depois as novas. ServicoDeEstudo.IniciarSessao.", "240", "290", "s"},
             {"Responder carta", "O aluno vê a pergunta, mostra a resposta e escolhe Errei, Difícil, Bom ou Fácil; o SM-2 marca a próxima revisão. ServicoDeEstudo.Responder.", "520", "250", ""},
             {"Concluir fase", "Quando todas as cartas foram acertadas: paga XP e moedas só na primeira vez e libera a próxima fase. ServicoDeEstudo.ConcluirFase.", "520", "360", ""},

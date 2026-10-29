@@ -21,9 +21,12 @@ A monografia está em [`../relatorio`](../relatorio) e os diagramas em
 ## O que é
 
 Um app para estudar TI com flashcards. O algoritmo **SM-2** decide quando cada
-carta volta (errou, volta amanhã; acertou, demora mais). São 29 fases e 702
+carta volta (errou, volta amanhã; acertou, demora mais). São 43 fases e 1198
 cartas, com um guia de estudos para o ENADE, as provas oficiais de ADS de 2017 e
 2021 (com gabarito do INEP), XP, moedas e acessibilidade (alto contraste e VLibras).
+Os quatro módulos do curso reúnem 31 disciplinas de AVA e ED dos quatro semestres,
+com resumos, fontes e 496 cartas novas. O módulo 5 continua dedicado ao ENADE.
+As três disciplinas complementares que já existiam no módulo 2 permanecem na trilha.
 
 ## O que funciona hoje
 
@@ -31,9 +34,10 @@ cartas, com um guia de estudos para o ENADE, as provas oficiais de ADS de 2017 e
 |---|---|---|
 | Cadastro e login | ✅ | API (JWT) e SQL Server |
 | Estudo com flashcards e SM-2 | ✅ | No navegador; respostas de cartas com ID são enviadas a `POST /api/progresso/atualizar` quando a API está disponível |
-| Simulados ENADE | ✅ | Guia de estudos e provas oficiais de 2017 e 2021 (fases 23 a 25); cartas por fase vêm da API e as provas também ficam em `GET /api/simulados/questoes` |
+| Simulados ENADE | ✅ | Guia de estudos e provas oficiais de 2017 e 2021 (módulo 5); cartas por fase vêm da API e as provas também ficam em `GET /api/simulados/questoes` |
 | XP, moedas e nível | ✅ | Calculados na API (`POST /api/progresso/concluir-fase`), com a mesma tabela do site; o site e o app mostram o prêmio na hora e ficam com os totais do servidor |
-| Desbloqueio de fases e compra de bônus | ✅ | Fases liberadas no navegador; a compra de bônus é conferida e descontada na API (`POST /api/usuarios/bonus/{id}/comprar`) |
+| Desbloqueio de fases e compra de bônus | ✅ | Fases concluídas também vêm da API para recuperar a continuidade; a compra de bônus é conferida e descontada na API (`POST /api/usuarios/bonus/{id}/comprar`) |
+| Trilha e resumos de AVA/ED | ✅ | Conteúdo autoral e referências no pacote compartilhado; acesso pelo menu, painel e app Expo |
 | Mapa Neural | ✅ | Só no navegador |
 | Certificado | ✅ | Gerado no navegador e impresso como PDF |
 | App de celular | ✅ | Login, fases e estudo pela API; sem internet, as respostas esperam numa fila no aparelho |

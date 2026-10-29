@@ -18,7 +18,7 @@ import {
   recompensa,
   somDaResposta,
 } from '@nexti/shared';
-import { confete, gravaJson, nivelParaApi, rankPorXp, som } from './apoio.js';
+import { consultarCartasDaFase, confete, gravaJson, nivelParaApi, rankPorXp, som } from './apoio.js';
 
 const TEMPO_TROCA_CARTA = 300;
 const TEMPO_REVELA_ENADE = 2200;
@@ -50,24 +50,15 @@ export function useSessaoDeEstudo({ userKey, progresso, ui }) {
   /** Cartas da fase: da API quando ela está no ar, senão do deck local; vencidas primeiro. */
   async function cartasDaFase(faseId) {
     if (isTeste(faseId)) return montarTesteDoModulo(faseId, { banco: progresso.decks });
-    let cartas = [];
-    if (progresso.apiOnlineRef.current) {
-      try {
-        const daApi = await ApiService.getFlashcardsPorFase(faseId);
-        if (daApi?.length) {
-          cartas = daApi.map((c) => ({
-            id: c.id,
-            frente: c.frente,
-            verso: c.verso,
-            dica: c.dica,
-            ...(c.opcoes ? { opcoes: Array.isArray(c.opcoes) ? c.opcoes : String(c.opcoes).split(';'), correta: c.correta } : {}),
-          }));
-        }
-      } catch {
-        /* API fora do ar: seguimos com o deck local */
-      }
-    }
-    if (!cartas.length) cartas = [...(progresso.decks[faseId] ?? [])];
+    const cartas = await consultarCartasDaFase({
+      faseId, online: progresso.apiOnlineRef.current,
+      consultar: (id) => ApiService.getFlashcardsPorFase(id), locais: progresso.decks[faseId],
+      salvar: (confirmadas) => progresso.setDecks((atual) => {
+        const atualizado = { ...atual, [faseId]: confirmadas };
+        gravaJson(`${userKey}decks`, atualizado);
+        return atualizado;
+      }),
+    });
     return montarDeckDaFase(cartas, progresso.srsData, Date.now());
   }
 

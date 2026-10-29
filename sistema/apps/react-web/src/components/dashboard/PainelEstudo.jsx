@@ -1,7 +1,8 @@
 import React, { useMemo } from 'react';
-import { corteDoTeste, estadoDaCarta, isTeste, previsoes } from '@nexti/shared';
+import { formatarDica, FASES, corteDoTeste, estadoDaCarta, isTeste, previsoes } from '@nexti/shared';
 import { useEstudo } from '../../context/EstudoContext';
 import { ativarComTeclado } from '../../lib/acessibilidade';
+import { ResumoDisciplina } from './ResumoDisciplina';
 
 const BOTOES_ANKI = [
   { resultado: 'again', rotulo: 'De novo', cor: '#ff5555' },
@@ -184,6 +185,7 @@ export function PainelEstudo({ ativo }) {
       </div>
 
       {/* Com o foco na carta (Tab), Enter e Espaço viram; sem foco, o Espaço vira pelo atalho global do painel. */}
+      <ResumoDisciplina disciplina={FASES.find(fase => fase.id === faseAtiva.id)?.academico} />
       <div className="card-container" role="button" tabIndex={0} aria-label={virada ? "Mostrar a pergunta" : "Mostrar a resposta"}
         onClick={virarCarta} onKeyDown={ativarComTeclado(virarCarta)}>
         <div className={`card-inner${virada && !final ? ' flipped' : ''}`}>
@@ -193,7 +195,7 @@ export function PainelEstudo({ ativo }) {
           </div>
           <div className="carta-verso">
             <div className="carta-texto" style={enade ? { textAlign: 'left' } : undefined}>{verso}</div>
-            <div className="carta-dica tech-font">{cartaAtual?.dica || ''}</div>
+            <div className="carta-dica tech-font">{formatarDica(cartaAtual?.dica)}</div>
           </div>
         </div>
       </div>

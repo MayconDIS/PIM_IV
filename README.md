@@ -49,6 +49,11 @@ npm run dev   # sobe a API (porta 5000) e o site (porta 5501)
 
 Detalhes de portas, banco de dados e API estão em [`sistema/README.md`](sistema/README.md).
 
+O conteúdo reúne **43 fases e 1198 cartas**, incluindo **31 disciplinas de AVA e ED**
+dos quatro semestres. Os resumos e 496 novas cartas ampliam os quatro módulos do curso;
+o módulo 5 mantém o preparatório ENADE. As referências indicam o material e a página
+ou slide consultado. O menu **Trilha** organiza essa consulta por módulo (Módulo 1 a 4).
+
 ## 🎤 Apresentação de P.A. em .NET (27/10)
 
 O programa desktop da atividade, os slides, o roteiro e o guia de como abrir cada parte no
