@@ -60,6 +60,12 @@ o diagnóstico não concede XP, moedas ou conclusão de disciplinas. Os perfis A
 todos os módulos e disciplinas diretamente no site e no app, sem diagnóstico
 ou pré-requisitos, além dos bônus do site; esse acesso não cria progresso nem recompensas.
 
+## 🎤 Apresentação do PIM IV
+
+Os slides da avaliação do PIM IV, o roteiro de quem fala o quê e o PDF estão em
+[`relatorio/docs`](relatorio/docs). Os slides abrem no navegador, com modo apresentação próprio
+(botão **Apresentar**, setas, **F** para tela cheia e **N** para a fala de cada slide).
+
 ## 🎤 Apresentação de P.A. em .NET (27/10)
 
 O programa desktop da atividade, os slides, o roteiro e o guia de como abrir cada parte no

@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nex_TI — Apresentação do PIM IV</title>
+    <!--
+      Apresentação do PIM IV (Nex_TI), 18 slides em A4 paisagem.
+      - Para apresentar: abrir este arquivo no navegador e apertar P (ou o botão "Apresentar").
+        Setas ou Espaço trocam de slide, F põe em tela cheia, N mostra a fala e o tempo, Esc sai.
+      - Para o PDF: na pasta apresentacao, `node gerar-pdf.mjs`.
+      - O que falar em cada slide está em ROTEIRO_DO_PALESTRANTE.md e nas notas de cada slide.
+      - Imagens: as mesmas do relatório (../../assets): telas reais do site e diagramas exportados do Astah.
+      - Números: os mesmos do relatório e do README, conferidos por scripts/verificar-sincronia.mjs.
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700&family=Orbitron:wght@700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Cores e fontes do site (packages/shared/css), as mesmas dos slides do desktop. */
+        :root {
+            --nx-primary: #00e6e6;
+            --nx-green: #00ff88;
+            --nx-purple: #8a2be2;
+            --nx-yellow: #ffd700;
+            --nx-grad: linear-gradient(90deg, #00e6e6 0%, #00ff88 100%);
+            --nx-ink: #ffffff;
+            --nx-txt-2: #c5c6c7;
+            --nx-txt-3: #8b92a5;
+            --nx-paper: #0b0c10;
+            --nx-card: #161b22;
+            --nx-border: #30363d;
+            --nx-rule: rgba(0, 230, 230, 0.45);
+            --nx-font: 'Inter', system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
+            --nx-title: 'Space Grotesk', 'Inter', Arial, sans-serif;
+            --nx-brand: 'Orbitron', 'Space Grotesk', Arial, sans-serif;
+            --nx-mono: 'Fira Code', Consolas, monospace;
+            --escala: 1;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        body {
+            background: #050608;
+            font-family: var(--nx-font);
+            color: var(--nx-ink);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12mm;
+            padding: 22mm 0 12mm;
+        }
+
+        /* ── Barra de cima (só na tela, fora do modo apresentação) ───────────── */
+        .barra {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+            display: flex; align-items: center; gap: 12px; padding: 10px 16px;
+            background: rgba(11, 12, 16, 0.92); border-bottom: 1px solid var(--nx-border);
+            font-size: 13px; color: var(--nx-txt-2);
+        }
+        .barra strong { color: var(--nx-ink); font-family: var(--nx-brand); letter-spacing: 0.04em; }
+        .barra button {
+            background: var(--nx-primary); color: #0b0c10; border: 0; border-radius: 6px;
+            font: 700 13px var(--nx-font); padding: 8px 14px; cursor: pointer;
+        }
+        .barra button:focus-visible, .painel button:focus-visible { outline: 2px solid var(--nx-ink); outline-offset: 2px; }
+        .barra kbd, .painel kbd {
+            font-family: var(--nx-mono); font-size: 11px; border: 1px solid var(--nx-border);
+            border-radius: 4px; padding: 1px 5px; color: var(--nx-ink);
+        }
+
+        /* ── Folha do slide: A4 paisagem ─────────────────────────────────────── */
+        .slide {
+            position: relative;
+            width: 297mm;
+            height: 210mm;
+            flex-shrink: 0;
+            background:
+                radial-gradient(160mm 110mm at 0% 0%, rgba(138, 43, 226, 0.16), transparent 70%),
+                radial-gradient(160mm 110mm at 100% 100%, rgba(0, 230, 230, 0.10), transparent 70%),
+                var(--nx-paper);
+            padding: 12mm 16mm 13mm;
+            display: flex;
+            flex-direction: column;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+            overflow: hidden;
+        }
+        .notas { display: none; }
+
+        .slide-header {
+            border-bottom: 2px solid var(--nx-rule);
+            padding-bottom: 2.5mm;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .slide-tag {
+            background: var(--nx-primary); color: #0b0c10;
+            font-size: 8pt; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+            padding: 1.5mm 3.5mm; border-radius: 3px;
+        }
+        .slide-meta { font-size: 8pt; color: var(--nx-txt-2); font-weight: 600; }
+        .slide-meta b { color: var(--nx-primary); }
+
+        .slide-body {
+            flex-grow: 1; min-height: 0;
+            display: flex; flex-direction: column; justify-content: center;
+            gap: 4mm; padding: 4mm 0;
+        }
+        .slide-title { font-family: var(--nx-title); font-size: 27pt; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
+        .slide-title .grad, .grad { background: var(--nx-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .slide-subtitle { font-size: 13.5pt; color: var(--nx-txt-2); font-weight: 500; line-height: 1.4; }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4.5mm; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; }
+        .lado { display: grid; grid-template-columns: 1.25fr 1fr; gap: 6mm; align-items: center; min-height: 0; }
+        .lado-estreito { display: grid; grid-template-columns: 1fr 1.6fr; gap: 6mm; align-items: center; min-height: 0; }
+
+        .card {
+            background: var(--nx-card);
+            border: 1.5px solid var(--nx-border);
+            border-left: 4px solid var(--nx-primary);
+            border-radius: 6px;
+            padding: 4mm 5mm;
+        }
+        .card.verde { border-left-color: var(--nx-green); }
+        .card.roxo { border-left-color: var(--nx-purple); }
+        .card.amarelo { border-left-color: var(--nx-yellow); }
+        .card h3 { font-family: var(--nx-title); font-size: 14pt; margin-bottom: 1.5mm; }
+        .card p, .card li { font-size: 12pt; color: var(--nx-txt-2); line-height: 1.45; }
+        .card ul { padding-left: 4.5mm; display: grid; gap: 1mm; }
+        .card code, .slide code { font-family: var(--nx-mono); font-size: 9.5pt; color: var(--nx-green); }
+
+        .numero { text-align: center; padding: 5mm 3mm; }
+        .numero b { display: block; font-family: var(--nx-brand); font-size: 30pt; line-height: 1.1; background: var(--nx-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .numero span { font-size: 11pt; color: var(--nx-txt-2); }
+
+        figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 1.5mm; min-height: 0; }
+        figure img {
+            display: block; max-width: 100%; object-fit: contain;
+            border: 1px solid var(--nx-border); border-radius: 6px; background: #fff;
+        }
+        figure img.tela { background: var(--nx-paper); }
+        figcaption { font-size: 8pt; color: var(--nx-txt-3); text-align: center; }
+        .alt-120 { max-height: 120mm; }
+        .alt-128 { max-height: 128mm; }
+        .alt-135 { max-height: 135mm; }
+        .alt-140 { max-height: 140mm; }
+        .alt-90 { max-height: 90mm; }
+        .celular { max-height: 125mm; border-radius: 14px !important; }
+
+        .fluxo { display: flex; align-items: stretch; gap: 3mm; }
+        .fluxo .card { flex: 1; text-align: center; }
+        .fluxo .seta { align-self: center; color: var(--nx-primary); font-size: 18pt; font-weight: 700; }
+
+        table.dados { width: 100%; border-collapse: collapse; font-size: 12pt; }
+        table.dados th, table.dados td { border-bottom: 1px solid var(--nx-border); padding: 2mm 3mm; text-align: left; }
+        table.dados th { color: var(--nx-primary); font-size: 9pt; text-transform: uppercase; letter-spacing: 0.06em; }
+        table.dados td { color: var(--nx-txt-2); }
+        table.dados td.n { font-family: var(--nx-mono); color: var(--nx-green); text-align: right; white-space: nowrap; }
+
+        .rodape { font-size: 8pt; color: var(--nx-txt-3); display: flex; justify-content: space-between; }
+
+        /* Capa */
+        .capa .slide-body { align-items: flex-start; gap: 6mm; }
+        .marca { font-family: var(--nx-brand); font-size: 46pt; font-weight: 900; letter-spacing: 0.02em; }
+        .marca .ti { background: linear-gradient(90deg, #00e6e6, #8a2be2); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .equipe { display: grid; grid-template-columns: repeat(5, auto); gap: 3mm 8mm; font-size: 11pt; color: var(--nx-txt-2); }
+        .equipe b { display: block; color: var(--nx-ink); font-weight: 600; }
+        .logo-unip { height: 12mm; filter: brightness(0) invert(1); opacity: 0.9; }
+
+        /* ── Modo apresentação (só na tela) ──────────────────────────────────── */
+        .painel { display: none; }
+        @media screen {
+            body.apresentando { padding: 0; gap: 0; overflow: hidden; height: 100vh; background: #000; }
+            body.apresentando .barra { display: none; }
+            body.apresentando .slide { display: none; }
+            body.apresentando .slide.atual {
+                display: flex; position: fixed; top: 50%; left: 50%;
+                transform: translate(-50%, -50%) scale(var(--escala));
+                border-radius: 0; box-shadow: none;
+            }
+            body.apresentando.com-notas .slide.atual { top: calc(50% - 60px); }
+            body.apresentando .progresso {
+                position: fixed; left: 0; bottom: 0; height: 4px; background: var(--nx-grad);
+                transition: width 0.2s; z-index: 30;
+            }
+            body.apresentando.com-notas .painel {
+                display: grid; grid-template-columns: 1fr auto; gap: 8px 20px;
+                position: fixed; left: 0; right: 0; bottom: 0; height: 120px; z-index: 25;
+                padding: 12px 20px 16px; background: #0d1117; border-top: 1px solid var(--nx-border);
+                font-size: 15px; line-height: 1.45; color: var(--nx-txt-2); overflow: auto;
+            }
+            .painel .fala { white-space: pre-line; }
+            .painel .lateral { text-align: right; font-family: var(--nx-mono); color: var(--nx-ink); }
+            .painel .lateral .tempo { font-size: 26px; color: var(--nx-green); }
+            .painel .lateral small { display: block; color: var(--nx-txt-3); font-size: 12px; }
+        }
+
+        /* ── PDF / impressão: uma folha A4 paisagem por slide ─────────────────── */
+        @page { size: A4 landscape; margin: 0; }
+        @media print {
+            body { background: none; padding: 0; gap: 0; display: block; }
+            .barra, .painel, .progresso { display: none !important; }
+            .slide { border-radius: 0; box-shadow: none; page-break-after: always; break-after: page; }
+            .slide:last-of-type { page-break-after: auto; break-after: auto; }
+            /* O Chrome desenha uma caixa em volta do texto com gradiente no PDF: lá a cor é sólida. */
+            .grad, .slide-title .grad, .numero b, .marca .ti { background: none !important; -webkit-background-clip: border-box; background-clip: border-box; color: var(--nx-primary); }
+            .card.verde .numero b, .numero.verde b { color: var(--nx-green); }
+            .numero.roxo b { color: #b46cff; }
+            .numero.amarelo b { color: var(--nx-yellow); }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="barra" aria-label="Controles da apresentação">
+    <strong>Nex_TI · PIM IV</strong>
+    <button type="button" id="btn-apresentar">▶ Apresentar</button>
+    <span>ou aperte <kbd>P</kbd> · no modo apresentação: <kbd>←</kbd> <kbd>→</kbd> trocam o slide, <kbd>F</kbd> tela cheia, <kbd>N</kbd> fala e tempo, <kbd>Esc</kbd> sai</span>
+</nav>
+
+<!-- 1 · Capa -->
+<section class="slide capa" id="slide-1" aria-label="Slide 1: capa">
+    <header class="slide-header">
+        <span class="slide-tag">PIM IV · ADS · 4º semestre</span>
+        <span class="slide-meta">UNIP · São José dos Campos · Novembro/2026</span>
+    </header>
+    <div class="slide-body">
+        <div class="marca">Nex_<span class="ti">TI</span></div>
+        <h1 class="slide-title">Solução Web e Mobile de <span class="grad">avaliação e apoio à aprendizagem</span><br>para uma empresa fictícia de tecnologia educacional</h1>
+        <p class="slide-subtitle">Flashcards, revisão espaçada (SM-2), gamificação e as provas oficiais do ENADE, no site e no celular.</p>
+        <div class="equipe">
+            <div><b>Gabriel Alves Moreira</b>H67HJI4</div>
+            <div><b>Maciel Costa da Silva</b>R280985</div>
+            <div><b>Maycon Douglas Inácio Silva</b>H719CD3</div>
+            <div><b>Miguel Angel Fernandez Ortiz</b>H7858F9</div>
+            <div><b>Rafael Mesquita</b>H6722I0</div>
+        </div>
+    </div>
+    <footer class="rodape"><img class="logo-unip" src="../../assets/branding/Logo UNIP.png" alt="UNIP"><span>github.com/MayconDIS/PIM_IV · nexti-pim-iv.vercel.app</span></footer>
+    <aside class="notas">Maciel: "Somos a equipe do Nex_TI: Gabriel, Maciel, Maycon, Miguel e Rafael. Vamos mostrar a plataforma que fizemos no PIM IV, seguindo as nove etapas do manual, e no fim o sistema funcionando."</aside>
+</section>
+
+<!-- 2 · Problema -->
+<section class="slide" id="slide-2" aria-label="Slide 2: o problema">
+    <header class="slide-header"><span class="slide-tag">O problema</span><span class="slide-meta">Introdução · <b>Maciel</b></span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">Quem começa em TI tropeça nos <span class="grad">termos técnicos</span></h2>
+        <div class="grid-3">
+            <div class="card"><h3>Muitos termos novos</h3><p>Logo no primeiro semestre aparecem dezenas de conceitos de lógica, banco, redes e engenharia.</p></div>
+            <div class="card verde"><h3>Estudo pouco sistemático</h3><p>Sem revisão no tempo certo, o conteúdo some da memória antes da prova.</p></div>
+            <div class="card roxo"><h3>Sem acompanhamento</h3><p>Ninguém vê quem está ficando para trás até a nota chegar.</p></div>
+        </div>
+        <div class="card amarelo"><h3>Persona</h3><p>Jovem de 18 a 20 anos, recém-saído do ensino médio, que quer entrar em TI e sente dificuldade com os termos técnicos. Faz o nivelamento, revisa com flashcards e usa os simulados do ENADE; XP e moedas mantêm o ritmo.</p></div>
+        <p class="slide-subtitle">Esses problemas são hipóteses: a equipe propõe validá-los com usuários num piloto.</p>
+    </div>
+    <aside class="notas">Maciel: explicar os três problemas e a persona. Deixar claro que são hipóteses, que o projeto ainda não foi testado com alunos reais.</aside>
+</section>
+
+<!-- 3 · Em números -->
+<section class="slide" id="slide-3" aria-label="Slide 3: a solução em números">
+    <header class="slide-header"><span class="slide-tag">A solução</span><span class="slide-meta">Visão geral · <b>Maciel</b></span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">Nex_TI: um site, um app e uma API, <span class="grad">com o mesmo banco</span></h2>
+        <div class="grid-4">
+            <div class="card numero"><b>43</b><span>fases de estudo, incluindo o ENADE</span></div>
+            <div class="card numero verde"><b>1198</b><span>cartas, com resumos e fontes</span></div>
+            <div class="card numero roxo"><b>31</b><span>disciplinas de AVA e ED dos quatro semestres</span></div>
+            <div class="card numero amarelo"><b>3</b><span>perfis: Aluno, Tutor e Administrador</span></div>
+            <div class="card numero"><b>27</b><span>rotas na API, em camadas</span></div>
+            <div class="card numero verde"><b>16</b><span>casos de uso modelados no Astah</span></div>
+            <div class="card numero roxo"><b>445</b><span>testes automáticos aprovados</span></div>
+            <div class="card numero amarelo"><b>2</b><span>provas oficiais do ENADE (2017 e 2021)</span></div>
+        </div>
+        <p class="slide-subtitle">O conteúdo reúne 43 fases e 1198 cartas. Site em React (Vercel), app em React Native, API em .NET 10 e banco SQL Server (Azure); a regra do SM-2 e das recompensas é a mesma no site, no app e na API.</p>
+    </div>
+    <aside class="notas">Maciel: ler os números principais e passar para o Gabriel: "O Gabriel mostra como pensamos a empresa e o planejamento."</aside>
+</section>
+
+<!-- 4 · Etapa 1 -->
+<section class="slide" id="slide-4" aria-label="Slide 4: Etapa 1, organização">
+    <header class="slide-header"><span class="slide-tag">Etapa 1</span><span class="slide-meta">Caracterização da organização · <b>Gabriel</b></span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">Nex_TI Educacional: uma <span class="grad">EdTech</span> fictícia</h2>
+        <div class="grid-2">
+            <div class="card"><h3>Modelo de negócio</h3><ul><li>Estudantes (B2C): plataforma de estudo e revisão.</li><li>Instituições (B2B): ações de nivelamento com tutores acompanhando a turma.</li></ul></div>
+            <div class="card verde"><h3>Produtos e serviços</h3><ul><li>Site e app de flashcards com revisão espaçada.</li><li>Simulados do ENADE e teste de nivelamento.</li><li>Painel do Tutor com o desempenho de cada aluno.</li></ul></div>
+            <div class="card roxo"><h3>Estrutura proposta</h3><p>Quatro funções: produto e parcerias; curadoria pedagógica; desenvolvimento e operação; atendimento e inclusão.</p></div>
+            <div class="card amarelo"><h3>Processo principal</h3><p>Curadoria seleciona e revisa o conteúdo → o aluno se cadastra, faz o nivelamento, estuda a trilha e acompanha o progresso → o tutor acompanha e modera.</p></div>
+        </div>
+    </div>
+    <aside class="notas">Gabriel: a empresa é fictícia; apresentar B2C e B2B, os produtos e as quatro funções. Disciplina: Empreendedorismo em TI.</aside>
+</section>
+
+<!-- 5 · Etapa 2 -->
+<section class="slide" id="slide-5" aria-label="Slide 5: Etapa 2, planejamento">
+    <header class="slide-header"><span class="slide-tag">Etapa 2</span><span class="slide-meta">Planejamento da solução · <b>Gabriel</b></span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">Do problema às <span class="grad">regras e requisitos</span></h2>
+        <div class="grid-3">
+            <div class="card numero"><b>8</b><span>regras de negócio (RN01 a RN08)</span></div>
+            <div class="card numero verde"><b>14</b><span>requisitos funcionais (RF01 a RF14)</span></div>
+            <div class="card numero roxo"><b>6</b><span>requisitos não funcionais (RNF01 a RNF06)</span></div>
+        </div>
+        <div class="grid-2">
+            <div class="card"><h3>Exemplos de regras</h3><ul><li><b>RN01</b> XP e moedas calculados pela API: 5 XP e 10 moedas por fase, só na primeira conclusão.</li><li><b>RN03</b> Moedas só compram bônus (50 moedas cada).</li><li><b>RN05</b> Progresso não volta: XP e nível nunca diminuem.</li><li><b>RN06</b> Sempre existe um Administrador.</li></ul></div>
+            <div class="card verde"><h3>Rastreabilidade</h3><p>Cada requisito está ligado a um épico e a um item do Product Backlog (PB01 a PB22) no Trello, e cada item, ao pull request que o entregou.</p></div>
+        </div>
+    </div>
+    <aside class="notas">Gabriel: mostrar os números de regras e requisitos e dar dois exemplos de regra. Explicar que tudo se liga ao backlog do Trello.</aside>
+</section>
+
+<!-- 6 · Etapa 3 -->
+<section class="slide" id="slide-6" aria-label="Slide 6: Etapa 3, diversidade e inclusão">
+    <header class="slide-header"><span class="slide-tag">Etapa 3</span><span class="slide-meta">Responsabilidade social e diversidade · <b>Gabriel</b></span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">Estudar TI <span class="grad">sem barreiras</span></h2>
+        <div class="grid-2">
+            <div class="card"><h3>Já no sistema</h3><ul><li>VLibras (Libras), alto contraste e zoom da fonte.</li><li>Tudo funciona pelo teclado, com foco visível e janelas anunciadas ao leitor de tela.</li><li>Site no celular com botões de pelo menos 44 px.</li><li>App que estuda sem internet.</li></ul></div>
+            <div class="card verde"><h3>Ações propostas</h3><ul><li>Revisar exemplos e imagens para evitar estereótipos e incluir profissionais negros e afrodescendentes, com fontes.</li><li>Política de uso e canal de relato contra discriminação.</li><li>Orientação de privacidade e uso responsável (LGPD).</li></ul></div>
+        </div>
+        <p class="slide-subtitle">Acessibilidade ajuda, mas não substitui ações explícitas contra a discriminação; a política e o canal ainda precisam ser publicados e testados.</p>
+    </div>
+    <aside class="notas">Gabriel: separar o que já está no sistema do que é proposta. Disciplina: Relações étnico-raciais e afrodescendência. Passar a vez: "O Maycon mostra o site."</aside>
+</section>
+
+<!-- 7 · Etapa 4 Web -->
+<section class="slide" id="slide-7" aria-label="Slide 7: Etapa 4, o site">
+    <header class="slide-header"><span class="slide-tag">Etapa 4</span><span class="slide-meta">Desenvolvimento Web · <b>Maycon</b></span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">O site: <span class="grad">React</span> conversando com a <span class="grad">API .NET 10</span></h2>
+        <div class="lado">
+            <figure><img class="tela alt-120" src="../../assets/telas/Tela_Painel_Recarregado_Web.png" alt="Painel do aluno com avatar, XP, moedas e a trilha de fases"><figcaption>Painel do aluno (tela real)</figcaption></figure>
+            <div class="card"><h3>Como funciona</h3><ul><li>Login com token JWT de 24 horas e limite de tentativas.</li><li>27 rotas REST: as rotas chamam serviços, e só os serviços falam com o banco.</li><li>Perfis Aluno, Tutor e Administrador conferidos pela API.</li><li>Senha forte conferida no navegador e na API, com aviso de senha vazada.</li></ul></div>
+        </div>
+    </div>
+    <aside class="notas">Maycon: mostrar o painel e explicar a conversa site → API → banco. Disciplina: Desenvolvimento Web com .NET.</aside>
+</section>
+
+<!-- 8 · Estudo e SM-2 -->
+<section class="slide" id="slide-8" aria-label="Slide 8: estudo e revisão espaçada">
+    <header class="slide-header"><span class="slide-tag">Etapa 4</span><span class="slide-meta">Estudo e revisão espaçada · <b>Maycon</b></span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">Cada resposta decide <span class="grad">quando a carta volta</span></h2>
+        <div class="grid-2">
+            <figure><img class="tela alt-90" src="../../assets/telas/Tela_Estudo_Pergunta.png" alt="Carta de estudo mostrando a pergunta"><figcaption>Frente da carta</figcaption></figure>
+            <figure><img class="tela alt-90" src="../../assets/telas/Tela_Estudo_Resposta.png" alt="Carta virada com a resposta e os quatro botões do SM-2"><figcaption>Verso, com os quatro botões do SM-2</figcaption></figure>
+        </div>
+        <div class="grid-3">
+            <div class="card"><h3>SM-2</h3><p>Errei volta amanhã; Difícil, Bom e Fácil afastam a revisão. O intervalo para em 100 anos.</p></div>
+            <div class="card verde"><h3>Recompensas</h3><p>Concluir a fase paga XP e moedas uma vez; quem calcula é o servidor, não o navegador.</p></div>
+            <div class="card roxo"><h3>ENADE</h3><p>Provas oficiais de 2017 e 2021, com o gabarito do INEP e a justificativa.</p></div>
+        </div>
+    </div>
+    <aside class="notas">Maycon: explicar os quatro botões. A mesma regra do SM-2 está no site, no app e na API, testada pelos mesmos casos.</aside>
+</section>
+
+<!-- 9 · Área administrativa, trilha e Nexor -->
+<section class="slide" id="slide-9" aria-label="Slide 9: área administrativa, trilha e Nexor">
+    <header class="slide-header"><span class="slide-tag">Etapa 4</span><span class="slide-meta">Estrutura administrativa e conteúdo · <b>Maycon</b></span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">Tutor, Administrador, <span class="grad">Trilha</span> e o assistente <span class="grad">Nexor</span></h2>
+        <div class="grid-2">
+            <figure><img class="tela alt-90" src="../../assets/telas/Tela_Painel_Tutor.png" alt="Painel do Tutor com o desempenho de cada aluno"><figcaption>Painel do Tutor</figcaption></figure>
+            <figure><img class="tela alt-90" src="../../assets/telas/Tela_Trilha_Admin.png" alt="Trilha por módulos com as disciplinas"><figcaption>Trilha por módulos</figcaption></figure>
+        </div>
+        <div class="grid-3">
+            <div class="card"><h3>Tutor</h3><p>Acompanha XP e SM-2 de cada aluno e modera as cartas.</p></div>
+            <div class="card verde"><h3>Administrador</h3><p>Faz tudo o que o Tutor faz e define o perfil de cada usuário.</p></div>
+            <div class="card roxo"><h3>Trilha e Nexor</h3><p>31 disciplinas organizadas por módulo; o Nexor consulta os materiais sem serviço externo.</p></div>
+        </div>
+    </div>
+    <aside class="notas">Maycon: a estrutura administrativa vale ponto na Etapa 4. Mostrar o Tutor e a Trilha; citar que o Nexor responde com os materiais da própria plataforma. Passar a vez: "Agora o app."</aside>
+</section>
+
+<!-- 10 · Etapa 5 Mobile -->
+<section class="slide" id="slide-10" aria-label="Slide 10: Etapa 5, o app">
+    <header class="slide-header"><span class="slide-tag">Etapa 5</span><span class="slide-meta">Desenvolvimento Mobile · <b>Maycon</b></span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">O app estuda <span class="grad">até sem internet</span></h2>
+        <div class="lado-estreito">
+            <div class="grid-2">
+                <figure><img class="tela celular" src="../../assets/telas/Tela_Painel_Recarregado_Mobile.png" alt="Painel no celular"><figcaption>Painel</figcaption></figure>
+                <figure><img class="tela celular" src="../../assets/telas/Tela_Flashcard_Materiais_Mobile.png" alt="Carta com materiais no celular"><figcaption>Carta e materiais</figcaption></figure>
+            </div>
+            <div class="grid-2">
+                <div class="card"><h3>Telas e navegação</h3><p>Login → Fases → Estudo → resultado → Fases, com o Progresso a um toque.</p></div>
+                <div class="card verde"><h3>Autenticação</h3><p>Token JWT guardado no cofre do aparelho (SecureStore); sessão expirada volta ao login.</p></div>
+                <div class="card roxo"><h3>Sincronização</h3><p>Sem internet, a resposta espera numa fila no aparelho e é enviada depois.</p></div>
+                <div class="card amarelo"><h3>Integração</h3><p>As mesmas rotas e o mesmo pacote compartilhado do site; 26 testes automáticos.</p></div>
+            </div>
+        </div>
+    </div>
+    <aside class="notas">Maycon: autenticação, sincronização e integração valem ponto na Etapa 5. Disciplina: Desenvolvimento Mobile. Passar a vez: "O Miguel mostra a arquitetura."</aside>
+</section>
+
+<!-- 11 · Etapa 6 Arquitetura -->
+<section class="slide" id="slide-11" aria-label="Slide 11: Etapa 6, arquitetura">
+    <header class="slide-header"><span class="slide-tag">Etapa 6</span><span class="slide-meta">Arquitetura de Software · <b>Miguel</b></span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">API em camadas: <span class="grad">rotas → serviços → banco</span></h2>
+        <figure><img class="alt-90" src="../../assets/diagrams/Class Diagram Nex_TI - Camadas.png" alt="Diagrama de classes das camadas da API"><figcaption>Diagrama de classes das camadas (Astah, gerado do código)</figcaption></figure>
+        <div class="fluxo">
+            <div class="card"><h3>Site e app</h3><p>Telas e o pacote compartilhado (conteúdo, SM-2, recompensas).</p></div>
+            <span class="seta" aria-hidden="true">→</span>
+            <div class="card verde"><h3>Rotas</h3><p>Recebem o pedido e conferem o perfil.</p></div>
+            <span class="seta" aria-hidden="true">→</span>
+            <div class="card roxo"><h3>Serviços</h3><p>Uma interface por serviço, ligada por injeção de dependência.</p></div>
+            <span class="seta" aria-hidden="true">→</span>
+            <div class="card amarelo"><h3>Banco</h3><p>Só os serviços usam o <code>AppDbContext</code> (EF Core).</p></div>
+        </div>
+    </div>
+    <aside class="notas">Miguel: cada camada só conhece a de baixo; por isso dá para testar o serviço sem a tela e trocar o banco sem mexer nas regras. Disciplina: Programação Aplicada em .NET.</aside>
+</section>
+
+<!-- 12 · Casos de uso -->
+<section class="slide" id="slide-12" aria-label="Slide 12: casos de uso">
+    <header class="slide-header"><span class="slide-tag">Etapa 6</span><span class="slide-meta">Modelagem UML · <b>Miguel</b></span></header>
+    <div class="slide-body">
+        <div class="lado-estreito">
+            <div>
+                <h2 class="slide-title">16 casos de uso, <span class="grad">todos tirados do código</span></h2>
+                <div class="card" style="margin-top: 5mm"><h3>Diagramas só do Astah</h3><ul><li>Um gerador monta o arquivo do Astah a partir do código.</li><li>Cada caso de uso tem um diagrama de classes e um de sequência.</li><li>Todo elemento tem a explicação no campo Definition.</li></ul></div>
+                <div class="card verde" style="margin-top: 4mm"><h3>Perfis herdam</h3><p>Usuário → Aluno → Tutor → Administrador: cada perfil faz tudo o que o anterior faz.</p></div>
+            </div>
+            <figure><img class="alt-140" src="../../assets/diagrams/UseCase Diagram Nex_TI.png" alt="Diagrama de casos de uso do Nex_TI"><figcaption>Diagrama de casos de uso</figcaption></figure>
+        </div>
+    </div>
+    <aside class="notas">Miguel: mostrar os atores e dois casos de uso (Estudar Flashcards e Acompanhar Desempenho dos Usuários). Os diagramas saem de um gerador, então não ficam diferentes do código.</aside>
+</section>
+
+<!-- 13 · Etapa 7 Banco -->
+<section class="slide" id="slide-13" aria-label="Slide 13: Etapa 7, banco de dados">
+    <header class="slide-header"><span class="slide-tag">Etapa 7</span><span class="slide-meta">Projeto do Banco de Dados · <b>Miguel</b></span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">SQL Server com <span class="grad">regras dentro do banco</span></h2>
+        <figure><img class="alt-90" src="../../assets/diagrams/DER Nex_TI.png" alt="DER, modelo lógico do banco"><figcaption>DER (modelo lógico); MER e modelo físico estão no relatório</figcaption></figure>
+        <div class="grid-3">
+            <div class="card"><h3>Triggers</h3><p><code>tg_progresso_historico</code> grava cada revisão; <code>tg_usuarios_protege_gamificacao</code> impede que XP ou nível diminuam.</p></div>
+            <div class="card verde"><h3>Procedures e views</h3><p><code>sp_ranking_alunos</code>, <code>sp_estatisticas_aluno</code>, <code>sp_cadastrar_flashcard</code>; ranking e desempenho por fase.</p></div>
+            <div class="card roxo"><h3>Script completo</h3><p><code>NexTI_DB.sql</code> cria tudo; as migrations do EF Core versionam o esquema.</p></div>
+        </div>
+    </div>
+    <aside class="notas">Miguel: do MER ao modelo físico, e as rotinas do banco. Disciplina: Programação de Banco de Dados. Passar a vez: "O Rafael mostra a nuvem, os testes e a gestão."</aside>
+</section>
+
+<!-- 14 · Etapa 8 Nuvem -->
+<section class="slide" id="slide-14" aria-label="Slide 14: Etapa 8, nuvem e DevOps">
+    <header class="slide-header"><span class="slide-tag">Etapa 8</span><span class="slide-meta">Infraestrutura em Nuvem e DevOps · <b>Rafael</b></span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">Publicado na nuvem, <span class="grad">com deploy automático</span></h2>
+        <div class="fluxo">
+            <div class="card"><h3>Navegador</h3><p>Site e app</p></div>
+            <span class="seta" aria-hidden="true">→</span>
+            <div class="card verde"><h3>Vercel</h3><p>Site em React, com prévia de cada pull request</p></div>
+            <span class="seta" aria-hidden="true">→</span>
+            <div class="card roxo"><h3>Azure App Service</h3><p>API .NET 10</p></div>
+            <span class="seta" aria-hidden="true">→</span>
+            <div class="card amarelo"><h3>Azure SQL</h3><p>Banco serverless, acessado só pela API</p></div>
+        </div>
+        <div class="grid-3">
+            <div class="card"><h3>Contêineres</h3><p>Dockerfile da API e do site; o docker-compose sobe banco, API e site com um comando.</p></div>
+            <div class="card verde"><h3>CI/CD</h3><p>A cada pull request: testes, imagens Docker e checagem de sincronia. A cada merge: deploy no Azure.</p></div>
+            <div class="card roxo"><h3>Monitoramento</h3><p>Application Insights com erros e tempo de resposta, e teste de disponibilidade a cada 15 minutos.</p></div>
+        </div>
+        <p class="slide-subtitle">Tudo em camadas gratuitas: a primeira requisição depois de um tempo parado pode levar até um minuto.</p>
+    </div>
+    <aside class="notas">Rafael: mostrar o caminho do pedido e os três itens exigidos (contêineres, CI/CD e monitoramento). Disciplina: Cloud Computing e DevOps.</aside>
+</section>
+
+<!-- 15 · Qualidade -->
+<section class="slide" id="slide-15" aria-label="Slide 15: testes e qualidade">
+    <header class="slide-header"><span class="slide-tag">Qualidade</span><span class="slide-meta">Testes e auditoria · <b>Rafael</b></span></header>
+    <div class="slide-body">
+        <h2 class="slide-title"><span class="grad">445 testes</span> aprovados, rodando a cada pull request</h2>
+        <div class="grid-2">
+            <table class="dados">
+                <thead><tr><th scope="col">Parte</th><th scope="col">Testes</th></tr></thead>
+                <tbody>
+                    <tr><td>API (unitários, integração, caixa preta e caixa branca)</td><td class="n">270</td></tr>
+                    <tr><td>Pacote compartilhado (inclui carga)</td><td class="n">118</td></tr>
+                    <tr><td>App de celular</td><td class="n">26</td></tr>
+                    <tr><td>Programa desktop (P.A. em .NET)</td><td class="n">31</td></tr>
+                </tbody>
+            </table>
+            <div class="card"><h3>Os testes acharam defeitos de verdade</h3><ul><li>Carga: o intervalo do SM-2 sem teto passava do ano 9999.</li><li>Caixa branca: gravação de resposta sem validar a nota.</li><li>Usabilidade: estatísticas contavam fase liberada como concluída.</li></ul><p>Todos corrigidos, com teste novo para não voltar.</p></div>
+        </div>
+        <div class="card verde"><h3>Sincronia automática</h3><p>Um script confere se os números do relatório, do README e destes slides batem com o código, e se os diagramas são os do Astah.</p></div>
+    </div>
+    <aside class="notas">Rafael: destacar que os testes acharam e corrigiram defeitos reais. O total de 445 testes é de 26/10/2026.</aside>
+</section>
+
+<!-- 16 · Etapa 9 Ágil -->
+<section class="slide" id="slide-16" aria-label="Slide 16: Etapa 9, gestão ágil">
+    <header class="slide-header"><span class="slide-tag">Etapa 9</span><span class="slide-meta">Gerenciamento Ágil do Projeto · <b>Rafael</b></span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">Scrum com <span class="grad">Kanban no Trello</span>, em cinco sprints</h2>
+        <div class="lado">
+            <figure><img class="tela alt-120" src="../../assets/trello/quadro-kanban.jpg" alt="Quadro Kanban do PIM IV no Trello"><figcaption>Quadro do PIM IV no Trello</figcaption></figure>
+            <div class="card"><h3>Como trabalhamos</h3><ul><li>S1 planejamento · S2 banco e API · S3 site · S4 app · S5 testes, nuvem e entrega.</li><li>Cada cartão leva o link do pull request que o entregou.</li><li>Cada mudança entra por pull request revisado, um assunto por vez.</li><li>Caminho crítico (CPM) calculado até a entrega.</li></ul></div>
+        </div>
+    </div>
+    <aside class="notas">Rafael: mostrar o quadro e a ligação cartão → pull request. Disciplina: Gerenciamento de Projetos Ágil.</aside>
+</section>
+
+<!-- 17 · Conclusão -->
+<section class="slide" id="slide-17" aria-label="Slide 17: conclusão">
+    <header class="slide-header"><span class="slide-tag">Conclusão</span><span class="slide-meta">Resultados e próximos passos · <b>Rafael</b></span></header>
+    <div class="slide-body">
+        <h2 class="slide-title">A técnica funcionou; <span class="grad">o aprendizado ainda precisa ser medido</span></h2>
+        <div class="grid-2">
+            <div class="card verde"><h3>Confirmado</h3><ul><li>Site e app usam a mesma API e o mesmo banco.</li><li>SM-2 e recompensas com a mesma regra nas três partes, calculadas no servidor.</li><li>Publicado na nuvem, com testes, contêineres e monitoramento.</li></ul></div>
+            <div class="card amarelo"><h3>Ainda a medir</h3><ul><li>Se a plataforma melhora a retenção do conteúdo.</li><li>O efeito das ações de inclusão.</li><li>A viabilidade econômica.</li></ul></div>
+        </div>
+        <div class="card"><h3>Próximos passos</h3><p>Testar o app em aparelhos reais, fazer um piloto com uma turma de ingressantes (desempenho antes e depois) e ajustar a capacidade das sprints.</p></div>
+    </div>
+    <aside class="notas">Rafael: ser honesto sobre o que foi comprovado e o que falta medir. Chamar a demonstração: "O Maycon mostra o sistema funcionando."</aside>
+</section>
+
+<!-- 18 · Demonstração e perguntas -->
+<section class="slide capa" id="slide-18" aria-label="Slide 18: demonstração e perguntas">
+    <header class="slide-header"><span class="slide-tag">Demonstração</span><span class="slide-meta">Todos</span></header>
+    <div class="slide-body">
+        <div class="marca">Nex_<span class="ti">TI</span></div>
+        <h2 class="slide-title">Demonstração <span class="grad">e perguntas</span></h2>
+        <div class="grid-3" style="width: 100%">
+            <div class="card"><h3>Site</h3><p><code>nexti-pim-iv.vercel.app</code></p></div>
+            <div class="card verde"><h3>Código e documentação</h3><p><code>github.com/MayconDIS/PIM_IV</code></p></div>
+            <div class="card roxo"><h3>Relatório</h3><p>Relatório ABNT e versão em Word na pasta <code>relatorio/</code></p></div>
+        </div>
+        <p class="slide-subtitle">Obrigado!</p>
+    </div>
+    <aside class="notas">Maycon: demonstração de 1 minuto (entrar, abrir a fase 1, responder duas cartas, abrir Minhas Estatísticas). Se a API estiver "acordando", avisar que a primeira requisição pode demorar. Depois, perguntas: todos.</aside>
+</section>
+
+<div class="progresso" aria-hidden="true"></div>
+<section class="painel" aria-label="Fala do apresentador" aria-live="polite">
+    <div class="fala" id="fala"></div>
+    <div class="lateral"><div class="tempo" id="tempo">00:00</div><small id="contador"></small><small><kbd>T</kbd> zera o tempo</small></div>
+</section>
+
+<script>
+    // Modo apresentação: um slide por vez, do tamanho da tela. Na impressão (PDF) tudo isso some.
+    const slides = [...document.querySelectorAll('.slide')];
+    const corpo = document.body;
+    const progresso = document.querySelector('.progresso');
+    let atual = 0;
+    let inicio = null;
+
+    const ajustarEscala = () => {
+        const folha = { largura: 297 * 96 / 25.4, altura: 210 * 96 / 25.4 };
+        const alturaLivre = innerHeight - (corpo.classList.contains('com-notas') ? 120 : 0);
+        document.documentElement.style.setProperty('--escala', Math.min(innerWidth / folha.largura, alturaLivre / folha.altura));
+    };
+    const mostrar = (i) => {
+        atual = Math.max(0, Math.min(slides.length - 1, i));
+        slides.forEach((s, n) => s.classList.toggle('atual', n === atual));
+        progresso.style.width = `${((atual + 1) / slides.length) * 100}%`;
+        document.getElementById('fala').textContent = slides[atual].querySelector('.notas')?.textContent.trim() ?? '';
+        document.getElementById('contador').textContent = `slide ${atual + 1} de ${slides.length}`;
+        history.replaceState(null, '', `#slide-${atual + 1}`);
+    };
+    const apresentar = (ligar) => {
+        corpo.classList.toggle('apresentando', ligar);
+        if (ligar) { inicio ??= Date.now(); ajustarEscala(); mostrar(atual); }
+        else { slides[atual].scrollIntoView({ block: 'center' }); document.exitFullscreen?.().catch(() => {}); }
+    };
+
+    document.getElementById('btn-apresentar').addEventListener('click', () => apresentar(true));
+    addEventListener('resize', ajustarEscala);
+    addEventListener('keydown', (e) => {
+        const apresentando = corpo.classList.contains('apresentando');
+        if (!apresentando) { if (e.key === 'p' || e.key === 'P') apresentar(true); return; }
+        if (['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'].includes(e.key)) { e.preventDefault(); mostrar(atual + 1); }
+        else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].includes(e.key)) { e.preventDefault(); mostrar(atual - 1); }
+        else if (e.key === 'Home') mostrar(0);
+        else if (e.key === 'End') mostrar(slides.length - 1);
+        else if (e.key === 'Escape') apresentar(false);
+        else if (e.key === 'f' || e.key === 'F') { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); }
+        else if (e.key === 'n' || e.key === 'N') { corpo.classList.toggle('com-notas'); ajustarEscala(); }
+        else if (e.key === 't' || e.key === 'T') inicio = Date.now();
+    });
+    // Clicar no lado direito do slide avança; no esquerdo, volta (útil com controle remoto ou toque).
+    addEventListener('click', (e) => {
+        if (!corpo.classList.contains('apresentando') || e.target.closest('.painel')) return;
+        mostrar(atual + (e.clientX > innerWidth / 2 ? 1 : -1));
+    });
+    setInterval(() => {
+        if (!inicio) return;
+        const s = Math.floor((Date.now() - inicio) / 1000);
+        document.getElementById('tempo').textContent = `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+    }, 1000);
+
+    // Abrir com #slide-N já posiciona nesse slide.
+    const pedido = Number(location.hash.replace('#slide-', ''));
+    if (pedido) atual = pedido - 1;
+</script>
+</body>
+</html>

@@ -40,7 +40,7 @@ A ordem é sempre a mesma: **código → modelagem → relatório e Word** (e, n
 | Tabela ou entidade do banco | migration, `sistema/database/NexTI_DB.sql`, gerador do Astah (entidades, MER, DER, modelo físico), relatório Etapa 7 e dicionário de dados (2.7.6) |
 | Regra de negócio ou funcionalidade | relatório 2.2.2 (regras), 2.2.3 e 2.2.4 (requisitos), cartões RN, RF e RNF do Trello, caso de uso no gerador do Astah |
 | Qualquer diagrama | gerador do Astah → gerar o `.asta` → exportar imagens → copiar as principais para `02_Modelagem_UML` e `04_Banco_de_Dados` → copiar para `relatorio/assets` → Word |
-| Texto ou página do relatório | conferir que toda página cabe em A4 e gerar o Word de novo; resumo e abstract andam juntos |
+| Texto ou página do relatório | conferir que toda página cabe em A4 e gerar o Word de novo; resumo e abstract andam juntos; se mudou número, tela ou diagrama que aparece nos slides do PIM (`relatorio/docs/apresentacao`), atualizar os slides e o roteiro e gerar o PDF (`node gerar-pdf.mjs`) |
 | Tela do site | tirar nova foto para o Apêndice A do relatório |
 | Programa desktop (`sistema/apps/desktop`) | testes do desktop, `GerarDiagramasDesktop.java` (o `.asta` fica em `docs/diagramas`) → exportar para `docs/diagramas/exportadas-astah` → copiar para `docs/diagramas`, fotos em `docs/telas`, README do desktop, slides e roteiro em `docs/apresentacao` → PDF dos slides |
 

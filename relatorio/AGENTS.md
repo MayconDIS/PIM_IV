@@ -10,6 +10,9 @@ Aqui fica só o que é específico do relatório.
 - `assets/diagrams/` e `assets/casos-de-uso/`: cópias exatas das imagens exportadas do Astah.
 - `assets/telas/`: fotos das telas reais do site (Apêndice A).
 - `assets/trello/`: prints do quadro do Trello (Etapa 9).
+- `docs/`: a apresentação do PIM IV (slides em HTML com modo apresentação, PDF e roteiro). Usa as
+  imagens de `assets/` e os números do relatório; depois de mudar, `node gerar-pdf.mjs` em
+  `docs/apresentacao`.
 
 ## Regras do relatório
 
