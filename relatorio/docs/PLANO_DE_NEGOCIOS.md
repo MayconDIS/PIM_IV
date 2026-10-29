@@ -7,11 +7,11 @@ investimento, ponto de equilíbrio, payback e rentabilidade).
 > **É uma simulação.** O relatório (seção 2.2) registra que a viabilidade econômica ainda não foi
 > demonstrada com dados. Os **custos** abaixo vêm de preços públicos dos serviços que o Nex_TI já usa;
 > o **preço** e o **número de alunos** são **premissas da equipe**, para serem trocadas pelos dados
-> do piloto. Mudou uma premissa? Refaça as contas da seção 4 e atualize os slides 10 e 11.
+> do piloto. Mudou uma premissa? Refaça as contas da seção 4 e atualize os slides 11 e 12 da apresentação.
 
 ## 1. Canvas, SWOT e organograma
 
-Estão nos slides 8 e 9 e no slide 7 (organograma), com o conteúdo das seções 2.1 e 2.2 do relatório.
+Estão nos slides 9 e 10 e no slide 8 (organograma da empresa), com o conteúdo das seções 2.1 e 2.2 do relatório.
 
 ## 2. Os 4 P's
 
