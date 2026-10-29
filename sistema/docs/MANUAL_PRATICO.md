@@ -21,6 +21,21 @@ O site se adapta à tela do celular (abaixo de 800px de largura):
 - uma **barra no rodapé da tela** leva a Fases, Estatísticas, Criar carta, Mapa e Conta;
 - o **menu** (☰, no canto de cima) tem o refazer nivelamento, o painel do Tutor/Admin, a saída e a **Acessibilidade**: A-, A+, alto contraste e **Libras**, que abre o tradutor VLibras (no computador ele fica no botão azul flutuante).
 
+### Foto do avatar
+No celular e no computador, clique ou toque no avatar ao lado do **Olá** no
+painel (ou no menu do usuário) e escolha uma imagem. Na janela **Enquadrar foto**,
+arraste a imagem ou use as setas do teclado para posicioná-la, ajuste o **Zoom** e
+selecione **Usar foto**. **Cancelar** mantém a foto anterior. A foto fica salva
+somente neste navegador, para esta conta; não é enviada à API. Se não houver
+espaço disponível, ela aparece apenas durante a sessão atual.
+
+### Estatísticas
+Abra **Estatísticas** para ver XP, moedas, métricas do SM-2 e o progresso dos
+módulos. Uma fase só entra na contagem de concluídas quando a quantidade de
+cartas respondidas alcança o total previsto para ela. Fases apenas liberadas pelo nivelamento ou pela
+trilha não entram nessa contagem. No site, os números são calculados com o
+progresso das cartas disponível na sessão.
+
 ---
 
 ## 🎮 3. Sistema de Gamificação

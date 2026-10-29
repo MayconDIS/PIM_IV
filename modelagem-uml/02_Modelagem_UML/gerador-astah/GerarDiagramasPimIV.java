@@ -243,7 +243,7 @@ public class GerarDiagramasPimIV {
         d.createText("Serviços (regras de negócio): cada interface tem uma classe que a implementa", new Point2D.Double(20, 205));
         String[][] pares = {
             {"IAuthService", "AuthService", "CadastrarAsync(...) : Task<Resultado<Usuario>>", "EntrarAsync(...) : Task<Resultado<Sessao>>"},
-            {"IProgressoService", "ProgressoService", "RegistrarRespostaAsync(...) : Task<ProgressoFlashcard>", "EstatisticasAsync(username : string) : Task<Resultado<...>>"},
+            {"IProgressoService", "ProgressoService", "RegistrarRespostaAsync(...) : Task<ProgressoFlashcard>", "EstatisticasAsync(username : string) : Task<Resultado<...>>", "ListarAsync(usuarioId : int) : Task<List<ProgressoResumo>>"},
             {"IGamificacaoService", "GamificacaoService", "ConcluirFaseAsync(...) : Task<Resultado<Conclusao>>", "ComprarBonusAsync(...) : Task<Resultado<Usuario>>"},
             {"IConteudoService", "ConteudoService", "ListarFlashcardsAsync(codigoFase : string) : Task<List<Flashcard>>", "EditarFlashcardAsync(...) : Task<Resultado<Flashcard>>"},
             {"IAdminService", "AdminService", "PainelDosAlunosAsync() : Task<List<AlunoNoPainel>>", "DefinirPerfilAsync(...) : Task<Resultado<UsuarioResumo>>"},
@@ -252,7 +252,7 @@ public class GerarDiagramasPimIV {
         // Uma coluna por serviço: a interface em cima e a classe que a implementa logo abaixo.
         double x = 20, larguraTotal;
         for (String[] par : pares) {
-            INodePresentation pi = interfaceNo(d, servicos, par[0], x, 230, new String[] {par[2], par[3]});
+            INodePresentation pi = interfaceNo(d, servicos, par[0], x, 230, java.util.Arrays.copyOfRange(par, 2, par.length));
             INodePresentation pc = classe(d, servicos, par[1], x, 400, new String[0], new String[0]);
             pc.setLocation(new Point2D.Double(x + (pi.getWidth() - pc.getWidth()) / 2, 400));
             d.createLinkPresentation(relacao("implementa", par[1], par[0], ""), pc, pi);
@@ -450,12 +450,12 @@ public class GerarDiagramasPimIV {
             {"ApiService", "Cliente da API usado pelo site e pelo app (packages/shared/src/api.js). Envia o token JWT no cabeçalho."},
             {"senha.js", "Regras de senha forte no navegador, iguais às da API, para avisar antes de enviar."},
             {"senhaVazada.js", "Confere se a senha já apareceu em vazamentos (Have I Been Pwned), enviando só os 5 primeiros caracteres do hash SHA-1."},
-            {"gamificacao.js", "Regras de progressão: ordem das fases, recompensas, nota de corte dos testes e compra de bônus."},
+            {"gamificacao.js", "Regras de progressão: ordem das fases, recompensas, nota de corte dos testes, compra de bônus e fases concluídas no painel. O painel conta as cartas com registro de resposta até atingir a quantidade prevista no conteúdo da fase; não consulta o registro de recompensas FasesConcluidas da API."},
             {"diagnostico.js", "Perguntas do teste de nivelamento e a fase inicial de acordo com os acertos."},
             {"deck.js", "Monta o deck da fase (revisões vencidas primeiro) e os testes de módulo com 20 questões."},
             {"enadeOficial.js", "Provas oficiais do ENADE de ADS (2017 e 2021), com gabarito do INEP, e o guia de estudos."},
             {"ModalNivelamento", "Janela do teste de nivelamento (diagnóstico) no site."},
-            {"ModalProgresso", "Janela Minhas Estatísticas, com os números do SM-2 do aluno."},
+            {"ModalProgresso", "Janela Minhas Estatísticas: os números do SM-2 do aluno e as fases concluídas de cada módulo, calculados no navegador com o progresso local, atualizado pela API quando disponível."},
             {"ModalAdmin", "Painel do Tutor/Admin no site: abas Alunos, Cartas e Usuários."},
             {"ModalCriacao", "Janela Criar Carta, onde o aluno cria um flashcard numa fase."},
             {"ModalConta", "Janela Minha conta: dados, troca de e-mail e senha, exportação e exclusão da conta."},
@@ -510,11 +510,11 @@ public class GerarDiagramasPimIV {
         elemento(front, "ApiService", "módulo JS", false, new String[] {"login(usuario : string, senha : string) : Promise", "register(nickname : string, email : string, senha : string) : Promise",
             "getFlashcardsPorFase(codigo : string) : Promise", "atualizarProgresso(usuarioId : int, flashcardId : int, qualidade : int) : Promise",
             "concluirFase(faseId : string, acertos : int, total : int) : Promise", "comprarBonus(bonusId : string) : Promise",
-            "updateUserStats(xp : int, moedas : int, nivel : int) : Promise", "getEstatisticasDetalhadas(username : string) : Promise"});
+            "updateUserStats(xp : int, moedas : int, nivel : int) : Promise", "getEstatisticasDetalhadas(username : string) : Promise", "getProgressoUsuario() : Promise"});
         elemento(front, "senha.js", "módulo JS", false, new String[] {"senhaEhForte(senha : string) : bool"});
         elemento(front, "senhaVazada.js", "módulo JS", false, new String[] {"verificarSenhaVazada(senha : string) : Promise<int>"});
         elemento(front, "gamificacao.js", "módulo JS", false, new String[] {"recompensa(faseId : string) : object", "proximaFase(faseId : string) : string",
-            "passouNoTeste(faseId : string, acertos : int, total : int) : bool", "podeComprarBonus(moedas : int, custo : int) : bool"});
+            "passouNoTeste(faseId : string, acertos : int, total : int) : bool", "podeComprarBonus(moedas : int, custo : int) : bool", "fasesConcluidas(decks : object, srsData : object) : array"});
         elemento(front, "diagnostico.js", "módulo JS", false, new String[] {"resultadoDoDiagnostico(acertos : int) : object"});
         elemento(front, "deck.js", "módulo JS", false, new String[] {"montarDeckDaFase(cards : array) : array", "montarTesteDoModulo(testeId : string) : array"});
         elemento(front, "enadeOficial.js", "módulo JS", false, new String[] {"cartasDaProva(ano : int) : array"});
@@ -733,17 +733,20 @@ public class GerarDiagramasPimIV {
             "Sem limite de tempo, com as provas oficiais e o gabarito do INEP.");
 
         detalhe(casos, "Visualizar Painel de Desempenho",
-            "O aluno vê os próprios números do SM-2: cartas estudadas, maduras e para revisar.",
-            new String[] {"ModalProgresso", "ApiService", "EndpointExtensions", "IProgressoService", "ProgressoService"},
-            new String[][] {{"usa", "ModalProgresso", "ApiService"}, {"usa", "EndpointExtensions", "IProgressoService", "usa"},
-                {"implementa", "ProgressoService", "IProgressoService"},
-                {"usa", "ApiService", "EndpointExtensions", "HTTP"}},
-            new String[] {"a=:Aluno", "modal=:ModalProgresso", "api=:ApiService", "rota=:EndpointExtensions", "ps=:ProgressoService", "bd=:SQL Server"},
-            new String[][] {{"a", "modal", "abre Minhas Estatísticas"}, {"modal", "api", "getEstatisticasDetalhadas(username)"},
-                {"api", "rota", "GET /api/usuarios/{username}/stats-detalhadas"}, {"rota", "rota", "EhOProprioUsuario(): só o dono (senão 403)"},
-                {"rota", "ps", "EstatisticasAsync(username)"}, {"ps", "bd", "progresso do aluno"}, {"ps", "rota", "EstatisticasDetalhadas", "retorno"},
-                {"rota", "api", "200 OK", "retorno"}, {"api", "modal", "números do SM-2", "retorno"}, {"modal", "modal", "mostra os gráficos"}},
-            "Dados reais da API, só para o próprio aluno.");
+            "O aluno vê os próprios números do SM-2 (cartas maduras, em aprendizado e para revisar) e as fases concluídas de cada módulo.",
+            new String[] {"ModalProgresso", "gamificacao.js", "EstudoContext", "ApiService", "EndpointExtensions", "IProgressoService", "ProgressoService"},
+            new String[][] {{"usa", "ModalProgresso", "EstudoContext", "lê o progresso"}, {"usa", "ModalProgresso", "gamificacao.js", "fasesConcluidas"},
+                {"usa", "EstudoContext", "ApiService", "ao abrir o painel"}, {"usa", "ApiService", "EndpointExtensions", "HTTP"},
+                {"usa", "EndpointExtensions", "IProgressoService", "usa"}, {"implementa", "ProgressoService", "IProgressoService"}},
+            new String[] {"a=:Aluno", "modal=:ModalProgresso", "gam=:gamificacao.js", "ctx=:EstudoContext", "api=:ApiService", "rota=:EndpointExtensions", "ps=:ProgressoService", "bd=:SQL Server"},
+            new String[][] {{"a", "ctx", "abre o painel com a API disponível"}, {"ctx", "api", "getProgressoUsuario()"},
+                {"api", "rota", "GET /api/progresso/usuario"}, {"rota", "rota", "usuarioId vem do token JWT"}, {"rota", "ps", "ListarAsync(usuarioId)"}, {"ps", "bd", "progresso do aluno"},
+                {"ps", "rota", "List<ProgressoResumo>", "retorno"}, {"rota", "api", "200 OK", "retorno"}, {"api", "ctx", "SM-2 de cada carta respondida", "retorno"},
+                {"ctx", "ctx", "mescla as respostas remotas com o progresso local"},
+                {"a", "modal", "abre Minhas Estatísticas"}, {"modal", "modal", "calcularMetricas(srsData, decks)"},
+                {"modal", "gam", "fasesConcluidas(decks, srsData)"}, {"gam", "modal", "fases com a quantidade prevista de cartas respondidas", "retorno"},
+                {"modal", "modal", "mostra os números e o progresso dos módulos"}},
+            "O painel usa o progresso local, atualizado pela API quando disponível.\nConta as cartas com registro de resposta até atingir a quantidade prevista da fase; fase apenas liberada não conta.\nEsse cálculo não consulta FasesConcluidas, usado pela API para pagar o prêmio uma vez.\nO app consulta GET /api/usuarios/{username}/stats-detalhadas, só para o próprio aluno.");
 
         detalhe(casos, "Acompanhar Desempenho dos Usuários",
             "O Tutor vê cada aluno com XP e números do SM-2 no painel.",
