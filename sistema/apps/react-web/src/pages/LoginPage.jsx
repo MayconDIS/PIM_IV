@@ -11,6 +11,7 @@ import {
   verificarSenhaVazada,
 } from '@nexti/shared';
 import { AudioEngine } from '@nexti/shared/audio';
+import { lerAvisoDeSessaoExpirada } from '../lib/sessao';
 
 /**
  * Login e cadastro do Nex_TI.
@@ -31,6 +32,11 @@ const som = (metodo) => {
 const EMAIL_VALIDO = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const NICKNAME_VALIDO = /^[\p{L}\p{N}_.-]{3,30}$/u;
 const ICONES_ALERTA = { erro: 'error', sucesso: 'check_circle', info: 'terminal' };
+
+// Lido uma vez, ao carregar a página (o StrictMode chamaria um inicializador do useState duas vezes).
+const AVISO_INICIAL = lerAvisoDeSessaoExpirada()
+  ? { tipo: 'info', texto: 'Sua sessão expirou (o login vale 24 horas). Entre de novo: seu progresso continua salvo.' }
+  : null;
 
 function salvarSessao({ token, user }) {
   localStorage.setItem('quest_jwt_token', token);
@@ -105,7 +111,7 @@ export default function LoginPage() {
   const [confirmacao, setConfirmacao] = useState('');
   const [capsLigado, setCapsLigado] = useState(false);
   const [enviando, setEnviando] = useState(false);
-  const [alerta, setAlerta] = useState(null); // { tipo: 'erro'|'sucesso'|'info', texto }
+  const [alerta, setAlerta] = useState(AVISO_INICIAL); // { tipo: 'erro'|'sucesso'|'info', texto }
   const [concluido, setConcluido] = useState(null); // texto do botão após sucesso
   const primeiroCampo = useRef(null);
   const idBase = useId();

@@ -17,6 +17,7 @@
     "./senha": "./src/senha.js",
     "./senhaVazada": "./src/senhaVazada.js",
     "./api": "./src/api.js",
+    "./sessao": "./src/sessao.js",
     "./audio": "./src/audio.js",
     "./confetti": "./src/confetti.js",
     "./css/global.css": "./css/global.css",

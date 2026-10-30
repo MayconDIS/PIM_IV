@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
-import { CHAVE_SPLASH_EXIBIDO } from './lib/sessao';
+import { tokenVencido } from '@nexti/shared/sessao';
+import { CHAVE_SPLASH_EXIBIDO, encerrarSessaoVencida } from './lib/sessao';
 
 /*
  * splash.css, login.css, dashboard.css e sobre.css redefinem <body> de jeitos
@@ -20,12 +21,25 @@ function splashJaExibido() {
   }
 }
 
+// O JWT vale 24 horas; o nome do aluno fica sem prazo. Com o token vencido, o painel abriria
+// com toda chamada à API recusada: sai da conta e o login explica o motivo.
+function temSessaoValida() {
+  try {
+    if (!localStorage.getItem('quest_user_name')) return false;
+    if (!tokenVencido(localStorage.getItem('quest_jwt_token'))) return true;
+    encerrarSessaoVencida();
+  } catch {
+    // Navegadores que bloqueiam o armazenamento abrem a tela de entrada.
+  }
+  return false;
+}
+
 function escolherPagina() {
   // ?pagina=sobre#secao — páginas institucionais, abertas com ou sem login
   if (new URLSearchParams(window.location.search).get('pagina') === 'sobre') return <SobrePage />;
   // tela de inicialização uma vez por sessão do navegador (aba nova = splash de novo)
   if (!splashJaExibido()) return <SplashPage />;
-  return localStorage.getItem('quest_user_name') ? <DashboardPage /> : <LoginPage />;
+  return temSessaoValida() ? <DashboardPage /> : <LoginPage />;
 }
 
 export default function App() {

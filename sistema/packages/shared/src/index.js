@@ -35,6 +35,7 @@ export {
 } from './sm2.js';
 
 export { ApiService } from './api.js';
+export { EVENTO_SESSAO_EXPIRADA, tokenVencido, validadeDoToken } from './sessao.js';
 
 export {
   LETRAS,
