@@ -86,6 +86,7 @@ São **453 testes automáticos**: 271 da API, 125 do pacote compartilhado (site 
 |---|---|
 | [`relatorio/docs/apresentacao`](relatorio/docs/apresentacao) | Os 36 slides da avaliação (começo, meio e fim; as oito disciplinas, cada uma com um exemplo real, e o plano de negócios), o roteiro de quem fala o quê e o PDF |
 | [`relatorio/docs/pesquisa`](relatorio/docs/pesquisa) | O questionário da pesquisa (Google Forms), com dados quantitativos (nota SUS, preço, recomendação) e qualitativos (respostas abertas), o script que cria o formulário e o que analisa as respostas |
+| [`relatorio/docs/linkedin`](relatorio/docs/linkedin) | A publicação no LinkedIn para divulgar a pesquisa: texto do post, carrossel em PDF e imagens com as telas do sistema |
 | [`relatorio/docs/plano de negocios`](relatorio/docs/plano%20de%20negocios) | A apresentação do plano de negócios da Nex_TI Educacional (21 slides) e o [`PLANO_DE_NEGOCIOS.md`](relatorio/docs/plano%20de%20negocios/PLANO_DE_NEGOCIOS.md), com premissas, contas e fontes |
 
 Os slides abrem no navegador, com modo apresentação próprio (botão **Apresentar** ou **P**,
