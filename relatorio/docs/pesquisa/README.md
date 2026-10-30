@@ -15,6 +15,28 @@ apresentação e o relatório do PIM IV. Os resultados servem para:
 | [`criar-formulario.gs`](criar-formulario.gs) | Script do Google Apps Script que cria o formulário pronto, com a planilha de respostas |
 | [`analisar-respostas.mjs`](analisar-respostas.mjs) | Lê as respostas (CSV) e gera o resumo com os números e as respostas abertas por tema |
 
+## O formulário no ar
+
+| O quê | Link |
+|---|---|
+| **Responder** (é este que se divulga) | <https://nexti-pim-iv.vercel.app/pesquisa> |
+| Link do Google (o mesmo formulário) | <https://forms.gle/8r3sEngxPq5shc62A> |
+| Editar o formulário | <https://docs.google.com/forms/d/1pLrZmTJBI-TPXUWgpiQnvZXtT-0z21aKaPAZo1YRarM/edit> |
+| Planilha de respostas | <https://docs.google.com/spreadsheets/d/1OAnHjw6dpEq9iGFvh5ecoM_dRfHMPgM5wHRzSiGx398/edit> |
+
+O formulário e a planilha ficam na conta Google **mdcodeprogramming@gmail.com**; só quem tem acesso a
+ela edita o formulário ou vê as respostas. O endereço `nexti-pim-iv.vercel.app/pesquisa` é um
+redirecionamento do site (em `sistema/apps/react-web/vercel.json`), e o painel do aluno no site tem o
+link "Responder a pesquisa do PIM" (`sistema/apps/react-web/src/lib/pesquisa.js`). Se o formulário
+mudar de endereço, troque nos dois lugares: o teste `packages/shared/tests/pesquisa.test.js` confere
+que eles batem.
+
+**Se a conta estiver sem espaço no Google Drive**, o `FormApp.create` do script falha ("Falha ao criar
+o novo formulário"). Foi o que aconteceu na primeira tentativa: o formulário foi criado vazio pela API
+do Google Drive e o script, com `FormApp.openById(...)` e `SpreadsheetApp.openById(...)` no lugar dos
+`create`, preencheu as perguntas. Formulário novo também precisa do botão **Publicar** no editor
+antes de aceitar respostas.
+
 ## Que dados saem dele
 
 **Quantitativos:** perfil (curso e semestre), como a pessoa estuda e o que atrapalha, onde usou o
