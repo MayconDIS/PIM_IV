@@ -138,6 +138,12 @@ próximo start, a API insere só as cartas novas e não apaga nada, então o pro
 SM-2 dos alunos é preservado. `npm run seed:api:check` falha se a semente estiver
 desatualizada (útil no CI).
 
+Como a API não reescreve cartas que já existem, uma correção de texto em cartas antigas vai
+também para `apps/api/Data/Seed/correcoes-texto.json` (texto antigo e novo de cada campo).
+O `CorrecaoTextoSeeder` roda antes do `ConteudoSeeder` e troca só o campo que ainda está
+igual ao texto antigo: a carta não duplica, o progresso continua (ele é ligado ao id da carta)
+e o que um Tutor editou fica como está.
+
 ## Rodando local
 
 Sem configuração, a API usa o LocalDB (`(localdb)\mssqllocaldb`, banco `NexTI_Local`),

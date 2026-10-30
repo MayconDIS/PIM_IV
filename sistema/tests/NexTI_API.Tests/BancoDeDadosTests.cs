@@ -114,6 +114,45 @@ namespace NexTI_API.Tests
         }
 
         [Fact]
+        public async Task CorrecaoTexto_AtualizaBancoAntigoSemDuplicarNemApagarEdicaoDoTutor()
+        {
+            using var db = NovoBanco();
+            await new ConteudoSeeder().ExecutarAsync(db);
+            var correcoes = await new CorrecaoTextoSeeder().LerAsync();
+            Assert.NotEmpty(correcoes);
+
+            // Volta o banco para o texto antigo, como está o banco que já estava no ar.
+            foreach (var c in correcoes)
+            {
+                var carta = await db.Flashcards.SingleAsync(f => f.CodigoFase == c.CodigoFase && f.Frente == (c.Frente ?? c.FrenteAntiga));
+                carta.Frente = c.FrenteAntiga;
+                if (c.Verso is not null) carta.Verso = c.VersoAntigo!;
+                if (c.Dica is not null) carta.Dica = c.DicaAntiga;
+                if (c.Opcoes is not null) carta.Opcoes = c.OpcoesAntigas;
+            }
+            await db.SaveChangesAsync();
+            // Um Tutor editou o verso de uma carta e excluiu outra que teve a frente corrigida.
+            var editada = correcoes.First(c => c.Verso is not null);
+            (await db.Flashcards.SingleAsync(f => f.CodigoFase == editada.CodigoFase && f.Frente == editada.FrenteAntiga)).Verso = "Texto do Tutor";
+            var excluida = correcoes.First(c => c.Frente is not null && c != editada);
+            db.Flashcards.Remove(await db.Flashcards.SingleAsync(f => f.CodigoFase == excluida.CodigoFase && f.Frente == excluida.FrenteAntiga));
+            db.CartasModeradas.Add(new NexTI_API.Models.CartaModerada { CodigoFase = excluida.CodigoFase, Frente = excluida.FrenteAntiga });
+            await db.SaveChangesAsync();
+
+            var corrigidas = await new CorrecaoTextoSeeder().ExecutarAsync(db);
+            await new ConteudoSeeder().ExecutarAsync(db);
+
+            // A excluída não está mais no banco; a editada só conta se tiver outro campo corrigido.
+            var soOVersoDaEditada = editada.Frente is null && editada.Dica is null && editada.Opcoes is null;
+            Assert.Equal(correcoes.Count - 1 - (soOVersoDaEditada ? 1 : 0), corrigidas);
+            Assert.Equal(0, await new CorrecaoTextoSeeder().ExecutarAsync(db));
+            Assert.Equal(1198 - 1, await db.Flashcards.CountAsync());
+            Assert.False(await db.Flashcards.AnyAsync(f => f.Verso.Contains("utilizador") || f.Frente.Contains("utilizador")));
+            Assert.Equal("Texto do Tutor", (await db.Flashcards.SingleAsync(f =>
+                f.CodigoFase == editada.CodigoFase && f.Frente == (editada.Frente ?? editada.FrenteAntiga))).Verso);
+        }
+
+        [Fact]
         public async Task SimuladoSeeder_CriaAsProvasOficiaisUmaSoVez()
         {
             using var db = NovoBanco();

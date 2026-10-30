@@ -136,6 +136,7 @@ builder.Services.Configure<ForwardedHeadersOptions>(opcoes =>
     opcoes.KnownIPNetworks.Clear();
     opcoes.KnownProxies.Clear();
 });
+builder.Services.AddScoped<IEtapaSeed>(_ => new CorrecaoTextoSeeder()); // antes do conteúdo: renomeia as frentes corrigidas
 builder.Services.AddScoped<IEtapaSeed>(_ => new ConteudoSeeder());
 builder.Services.AddScoped<IEtapaSeed, SimuladoSeeder>();
 builder.Services.AddScoped<IDatabaseSeeder, DatabaseSeeder>();
