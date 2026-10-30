@@ -37,3 +37,7 @@ Thumbs.db
 
 # Modelos e arquivos pessoais usados só como referência (não vão para o repositório); a apresentação do plano de negócios do Nex_TI, na mesma pasta, vai
 relatorio/docs/plano de negocios/modelos/
+# Respostas brutas da pesquisa (podem ter dados pessoais): só o RESULTADOS.md entra no git.
+relatorio/docs/pesquisa/*.csv
+# Modelo de pesquisa de outra atividade (com nomes de outros alunos).
+relatorio/docs/pesquisa/modelo/
