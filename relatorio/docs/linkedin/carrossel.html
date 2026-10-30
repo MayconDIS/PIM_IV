@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Nex_TI · Publicação no LinkedIn</title>
+<link rel="icon" href="../../assets/branding/favicon-nexti.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  /* As mesmas cores dos slides do PIM (relatorio/docs/apresentacao). Cada .slide vira uma imagem 1080x1350. */
+  :root {
+    --nx-paper: #0b0c10; --nx-card: #161b22; --nx-border: #30363d; --nx-ink: #ffffff; --nx-muted: #9aa4b2;
+    --nx-primary: #00e6e6; --nx-purple: #8a2be2; --nx-green: #00ff88; --nx-yellow: #ffd700; --nx-red: #ff5c5c;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  @page { size: 1080px 1350px; margin: 0; }
+  body { background: #000; font-family: Inter, sans-serif; color: var(--nx-ink); }
+  .slide {
+    position: relative; width: 1080px; height: 1350px; overflow: hidden; margin: 0 auto 40px;
+    padding: 90px 80px 120px; display: flex; flex-direction: column; break-after: page;
+    background:
+      radial-gradient(circle at 85% 8%, rgba(138, 43, 226, .28), transparent 45%),
+      radial-gradient(circle at 10% 95%, rgba(0, 230, 230, .18), transparent 45%),
+      linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px) 0 0 / 54px 54px,
+      linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px) 0 0 / 54px 54px,
+      var(--nx-paper);
+  }
+  @media print { body { background: none; } .slide { margin: 0; } }
+  .marca { display: flex; align-items: center; gap: 16px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 34px; }
+  .marca img { width: 54px; height: 54px; }
+  .marca .t { color: var(--nx-primary); } .marca .i { color: var(--nx-purple); }
+  .etiqueta { font-family: 'Fira Code', monospace; font-size: 26px; color: var(--nx-green); letter-spacing: 1px; margin-bottom: 26px; }
+  h1, h2 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; line-height: 1.08; letter-spacing: -1px; }
+  h1 { font-size: 92px; } h2 { font-size: 70px; }
+  .grad { background: linear-gradient(90deg, var(--nx-primary), var(--nx-purple)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  p.sub { font-size: 34px; line-height: 1.45; color: #d6dbe3; margin-top: 30px; }
+  .tela { display: block; width: 100%; border-radius: 22px; border: 2px solid var(--nx-border); box-shadow: 0 30px 80px rgba(0, 0, 0, .6), 0 0 0 1px rgba(0, 230, 230, .15); }
+  .rodape {
+    position: absolute; left: 80px; right: 80px; bottom: 50px; display: flex; justify-content: space-between; align-items: center;
+    font-family: 'Fira Code', monospace; font-size: 22px; color: var(--nx-muted);
+  }
+  .rodape b { color: var(--nx-primary); font-weight: 600; }
+  .seta { color: var(--nx-primary); font-size: 26px; }
+  .cartoes { display: grid; gap: 22px; margin-top: 44px; }
+  .cartao { background: rgba(22, 27, 34, .92); border: 2px solid var(--nx-border); border-radius: 22px; padding: 30px 34px; display: flex; gap: 26px; align-items: flex-start; }
+  .cartao .n { font-family: Orbitron, sans-serif; font-size: 44px; font-weight: 900; color: var(--nx-primary); min-width: 64px; }
+  .cartao h3 { font-size: 34px; margin-bottom: 8px; }
+  .cartao p { font-size: 27px; line-height: 1.4; color: var(--nx-muted); }
+  .numeros { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+  .numero { background: rgba(22, 27, 34, .92); border: 2px solid var(--nx-border); border-radius: 20px; padding: 26px 18px; text-align: center; }
+  .numero b { display: block; font-family: Orbitron, sans-serif; font-size: 54px; font-weight: 900; }
+  .numero span { font-size: 24px; color: var(--nx-muted); }
+  .verde b { color: var(--nx-green); } .amarelo b { color: var(--nx-yellow); } .ciano b { color: var(--nx-primary); } .roxo b { color: #b77bff; }
+  .chips { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 34px; }
+  .chip { font-family: 'Fira Code', monospace; font-size: 26px; padding: 12px 22px; border-radius: 999px; border: 2px solid var(--nx-border); background: rgba(22, 27, 34, .9); }
+  .chip.c { border-color: rgba(0, 230, 230, .55); color: var(--nx-primary); }
+  .chip.p { border-color: rgba(138, 43, 226, .7); color: #c79bff; }
+  .chip.g { border-color: rgba(0, 255, 136, .55); color: var(--nx-green); }
+  .celular { width: 330px; border-radius: 46px; border: 10px solid #1d222b; box-shadow: 0 30px 70px rgba(0, 0, 0, .7), 0 0 0 2px rgba(0, 230, 230, .25); overflow: hidden; background: #000; }
+  .celular img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .recorte { overflow: hidden; border-radius: 22px; border: 2px solid var(--nx-border); box-shadow: 0 30px 80px rgba(0, 0, 0, .6), 0 0 0 1px rgba(0, 230, 230, .15); }
+  .recorte img { display: block; width: 100%; }
+  .botao {
+    display: inline-flex; align-items: center; gap: 16px; margin-top: 46px; padding: 30px 44px; border-radius: 22px;
+    background: linear-gradient(90deg, var(--nx-primary), var(--nx-purple)); color: #05070a; font-weight: 800; font-size: 40px;
+  }
+  .link { font-family: 'Fira Code', monospace; font-size: 40px; color: var(--nx-primary); margin-top: 30px; word-break: break-all; }
+  .lista { list-style: none; margin-top: 36px; display: grid; gap: 20px; }
+  .lista li { font-size: 32px; line-height: 1.35; padding-left: 52px; position: relative; color: #d6dbe3; }
+  .lista li::before { content: '✓'; position: absolute; left: 0; top: -2px; color: var(--nx-green); font-weight: 800; font-size: 36px; }
+</style>
+</head>
+<body>
+
+<!-- 1. Capa -->
+<section class="slide" data-nome="01-capa" data-carrossel>
+  <div class="marca"><img src="../../assets/branding/favicon-nexti.svg" alt=""><span>Nex_<span class="t">T</span><span class="i">I</span></span></div>
+  <h1 style="margin-top: 60px; font-size: 86px">Estudar TI <span class="grad">sem esquecer</span> tudo na semana seguinte.</h1>
+  <p class="sub">Uma plataforma de flashcards com revisão espaçada, provas do ENADE e gamificação, feita por alunos de ADS.</p>
+  <div style="position: relative; margin-top: 50px; height: 520px">
+    <img class="tela" src="../../assets/telas/Tela_Painel_Recarregado_Web.png" alt="Painel do aluno no computador" style="width: 820px">
+    <div class="celular" style="position: absolute; right: 0; top: 40px; width: 240px; height: 470px; border-width: 8px; border-radius: 38px">
+      <img src="../../assets/telas/Tela_Painel_Recarregado_Mobile.png" alt="Painel do aluno no celular">
+    </div>
+  </div>
+  <div class="rodape"><span><b>PIM IV</b> · ADS · UNIP</span><span class="seta">arraste para o lado →</span></div>
+</section>
+
+<!-- 2. O problema -->
+<section class="slide" data-nome="02-problema" data-carrossel>
+  <div class="etiqueta">// o problema</div>
+  <h2>Todo aluno de TI já passou por isso:</h2>
+  <div class="cartoes">
+    <div class="cartao"><div class="n">01</div><div><h3>Avalanche de termos novos</h3><p>Algoritmo, API, SQL, rede, nuvem… tudo ao mesmo tempo, logo no começo do curso.</p></div></div>
+    <div class="cartao"><div class="n">02</div><div><h3>Estudo na véspera</h3><p>Lê tudo de uma vez antes da prova, sem um plano para revisar depois.</p></div></div>
+    <div class="cartao"><div class="n">03</div><div><h3>Esquece em poucos dias</h3><p>Sem revisão, boa parte do que foi estudado some da memória rapidinho.</p></div></div>
+  </div>
+  <p class="sub" style="margin-top: 44px">A pergunta foi: <b style="color: var(--nx-primary)">e se o sistema lembrasse a hora certa de revisar cada assunto?</b></p>
+  <div class="rodape"><span><b>Nex_TI</b> · 2/7</span><span class="seta">→</span></div>
+</section>
+
+<!-- 3. Revisão espaçada -->
+<section class="slide" data-nome="03-revisao" data-carrossel>
+  <div class="etiqueta">// como funciona</div>
+  <h2>Cada carta volta <span class="grad">na hora certa</span>.</h2>
+  <p class="sub">Você vê a pergunta, pensa, vira a carta e diz se foi fácil ou difícil. O algoritmo <b>SM-2</b> (o mesmo do Anki) decide quando ela volta: em minutos, se errou; em dias, se acertou fácil.</p>
+  <img class="tela" src="../../assets/telas/Tela_Estudo_Resposta.png" alt="Carta virada com os botões De novo, Difícil, Bom e Fácil" style="margin-top: 50px">
+  <div class="rodape"><span><b>Nex_TI</b> · 3/7</span><span class="seta">→</span></div>
+</section>
+
+<!-- 4. Conteúdo, ENADE e gamificação -->
+<section class="slide" data-nome="04-conteudo" data-carrossel>
+  <div class="etiqueta">// o que tem dentro</div>
+  <h2>Do básico às <span class="grad">provas do ENADE</span>.</h2>
+  <div class="numeros">
+    <div class="numero ciano"><b>43</b><span>fases de estudo</span></div>
+    <div class="numero roxo"><b>1198</b><span>cartas</span></div>
+    <div class="numero verde"><b>2</b><span>provas oficiais do ENADE</span></div>
+  </div>
+  <div class="recorte" style="margin-top: 40px; height: 470px"><img src="../../assets/telas/Tela_ENADE.png" alt="Questão da prova oficial do ENADE 2017 dentro da plataforma"></div>
+  <p class="sub" style="font-size: 30px">Cada fase dá <b style="color: var(--nx-green)">XP</b> e <b style="color: var(--nx-yellow)">moedas</b>, com níveis e certificado no fim da trilha.</p>
+  <div class="rodape"><span><b>Nex_TI</b> · 4/7</span><span class="seta">→</span></div>
+</section>
+
+<!-- 5. Computador e celular -->
+<section class="slide" data-nome="05-celular" data-carrossel>
+  <div class="etiqueta">// em qualquer tela</div>
+  <h2>Começa no computador, <span class="grad">continua no celular</span>.</h2>
+  <p class="sub">O site e o app usam a mesma API: o progresso vai junto. O Mapa Neural mostra o que você já domina.</p>
+  <div style="display: flex; gap: 40px; align-items: flex-start; margin-top: 50px">
+    <div class="celular" style="height: 445px"><img src="../../assets/telas/Tela_Flashcard_Materiais_Mobile.png" alt="Carta no celular"></div>
+    <img class="tela" src="../../assets/telas/Tela_Mapa_Neural.png" alt="Mapa Neural com as cartas estudadas" style="width: 530px; margin-top: 50px">
+  </div>
+  <div class="rodape"><span><b>Nex_TI</b> · 5/7</span><span class="seta">→</span></div>
+</section>
+
+<!-- 6. Por trás -->
+<section class="slide" data-nome="06-tecnologia" data-carrossel>
+  <div class="etiqueta">// por trás</div>
+  <h2>Como foi construído</h2>
+  <div class="cartoes">
+    <div class="cartao"><div class="n">API</div><div><h3>.NET 10 + SQL Server no Azure</h3><p>Guarda o progresso e calcula XP e moedas no servidor, em camadas.</p></div></div>
+    <div class="cartao"><div class="n">UI</div><div><h3>React no site, React Native no app</h3><p>As mesmas regras num pacote compartilhado entre os dois.</p></div></div>
+    <div class="cartao"><div class="n">QA</div><div><h3>453 testes automáticos</h3><p>Rodam a cada mudança no GitHub, junto com a checagem do relatório.</p></div></div>
+  </div>
+  <div class="chips">
+    <span class="chip p">C#</span><span class="chip p">.NET 10</span><span class="chip c">React</span><span class="chip c">React Native</span>
+    <span class="chip g">SQL Server</span><span class="chip g">Azure</span><span class="chip">Vercel</span><span class="chip">Docker</span><span class="chip">GitHub Actions</span>
+  </div>
+  <div class="rodape"><span><b>Nex_TI</b> · 6/7</span><span class="seta">→</span></div>
+</section>
+
+<!-- 7. Chamada para a pesquisa -->
+<section class="slide" data-nome="07-pesquisa" data-carrossel>
+  <div class="marca"><img src="../../assets/branding/favicon-nexti.svg" alt=""><span>Nex_<span class="t">T</span><span class="i">I</span></span></div>
+  <h1 style="margin-top: 80px">Me ajuda com <span class="grad">5 minutos</span>?</h1>
+  <p class="sub">Falta a parte mais importante: saber se funciona para quem estuda de verdade.</p>
+  <ul class="lista">
+    <li>Pesquisa <b>anônima</b>: sem nome, e-mail nem RA</li>
+    <li>Melhor ainda: estude uma fase antes de responder</li>
+    <li>Não estuda TI? Compartilhar já ajuda muito</li>
+  </ul>
+  <div class="botao">Responder a pesquisa →</div>
+  <div class="link">nexti-pim-iv.vercel.app/pesquisa</div>
+  <div class="rodape"><span><b>PIM IV</b> · ADS · UNIP</span><span>link no texto do post</span></div>
+</section>
+
+<!-- Imagem única (para um post com uma foto só) -->
+<section class="slide" data-nome="imagem-unica">
+  <div class="marca"><img src="../../assets/branding/favicon-nexti.svg" alt=""><span>Nex_<span class="t">T</span><span class="i">I</span></span></div>
+  <h1 style="margin-top: 60px; font-size: 84px">Estudar TI <span class="grad">sem esquecer</span>. Me ajuda a testar?</h1>
+  <div style="position: relative; margin-top: 50px; height: 520px">
+    <img class="tela" src="../../assets/telas/Tela_Estudo_Resposta.png" alt="Carta virada com os botões de revisão" style="width: 820px">
+    <div class="celular" style="position: absolute; right: 0; top: 40px; width: 240px; height: 460px; border-width: 8px; border-radius: 38px">
+      <img src="../../assets/telas/Tela_Painel_Recarregado_Mobile.png" alt="Painel no celular">
+    </div>
+  </div>
+  <div class="botao" style="margin-top: 20px">Pesquisa anônima · 5 min</div>
+  <div class="link" style="font-size: 36px">nexti-pim-iv.vercel.app/pesquisa</div>
+  <div class="rodape"><span><b>PIM IV</b> · ADS · UNIP</span><span>flashcards · SM-2 · ENADE</span></div>
+</section>
+
+</body>
+</html>
