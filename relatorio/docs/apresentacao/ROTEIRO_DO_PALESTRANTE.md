@@ -188,6 +188,7 @@ Cada disciplina tem uma introdução ("o que ensinou → onde usamos") e, logo d
 
 ### 31 — Experiência da equipe (23:45 – 24:40) · Maciel
 - Problema → solução, em três casos reais da Etapa 9: a troca de contexto (um cartão por pessoa), a integração do app que não coube na Sprint 4 (voltou ao backlog) e a Sprint 5 que concentrou entregas (revisar a capacidade).
+- O último par é a lição sobre a divisão do trabalho: a divisão planejada não se manteve e o desenvolvimento ficou concentrado; para o próximo projeto, tarefas pequenas com responsável e prazo, acompanhamento semanal e programação em dupla. Dizer sem culpar ninguém.
 - *"O ponto não é não ter problema, e sim como a equipe lida com ele."*
 
 ### 32 — Conclusão (24:40 – 25:40) · Maciel
