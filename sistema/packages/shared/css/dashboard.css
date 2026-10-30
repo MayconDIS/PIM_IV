@@ -1156,6 +1156,11 @@ body.high-contrast-mode .xp-badge {
 .a11y-btn { flex: 1; padding: 6px; }
 .contrast-icon { font-size: 1.2rem; }
 .status-online { color: var(--nexti-green); }
+.link-pesquisa { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; min-height: 32px; color: var(--nexti-cyan); font-size: 0.9rem; text-decoration: none; }
+.link-pesquisa-texto { text-decoration: underline; text-underline-offset: 3px; }
+.link-pesquisa .sem-quebra { white-space: nowrap; }
+.link-pesquisa:hover, .link-pesquisa:focus-visible { color: #fff; }
+.link-pesquisa .material-symbols-outlined { font-size: 1.1rem; }
 .xp-wrapper-flex { display: flex; gap: 20px; align-items: center; }
 .xp-badge-col { display: flex; flex-direction: column; align-items: center; }
 .xp-display-badge { font-size: 1rem; padding: 8px 15px; margin: 0; }

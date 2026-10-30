@@ -77,7 +77,7 @@ Esse acesso não cria progresso nem recompensas.
 O login vale 24 horas. Quando vence, o site volta à tela de entrada com um aviso, e o progresso
 guardado no navegador continua lá.
 
-São **452 testes automáticos**: 271 da API, 124 do pacote compartilhado (site e app), 26 do app e
+São **453 testes automáticos**: 271 da API, 125 do pacote compartilhado (site e app), 26 do app e
 31 do programa desktop. Como cada parte é testada: [`sistema/docs/TESTES.md`](sistema/docs/TESTES.md).
 
 ## 🎤 Apresentação do PIM IV

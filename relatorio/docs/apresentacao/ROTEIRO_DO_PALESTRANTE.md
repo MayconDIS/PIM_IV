@@ -89,7 +89,7 @@ apresentação, aperte **N**.
 - Contar o exemplo: *"Quero estudar no ônibus, sem internet"* → RF12 e RNF05 → backlog PB10 a PB12 → fila no aparelho → 26 testes do app.
 
 ### 7 — A solução em números (04:35 – 05:15)
-- 43 fases e 1198 cartas, 31 disciplinas do curso dentro da plataforma, 27 rotas, 16 casos de uso, 452 testes.
+- 43 fases e 1198 cartas, 31 disciplinas do curso dentro da plataforma, 27 rotas, 16 casos de uso, 453 testes.
 - *"O Nex_TI foi feito com as disciplinas e também ensina um pouco de cada disciplina do curso."*
 - **Passar a vez:** *"Agora o meio: o Gabriel abre com as duas primeiras disciplinas."*
 
@@ -191,7 +191,7 @@ Cada disciplina tem uma introdução ("o que ensinou → onde usamos") e, logo d
 ## ⏱️ Fim
 
 ### 32 — Resultados (24:25 – 25:15) · Maciel
-- 452 testes aprovados; eles **acharam defeitos reais** (o teto do SM-2, a nota sem validação, as estatísticas erradas), todos corrigidos com teste novo.
+- 453 testes aprovados; eles **acharam defeitos reais** (o teto do SM-2, a nota sem validação, as estatísticas erradas), todos corrigidos com teste novo.
 
 ### 33 — Experiência da equipe (25:15 – 26:10) · Maciel
 - Problema → solução, em três casos reais da Etapa 9: a troca de contexto (um cartão por pessoa), a integração do app que não coube na Sprint 4 (voltou ao backlog) e a Sprint 5 que concentrou entregas (revisar a capacidade).
@@ -228,5 +228,5 @@ Cada disciplina tem uma introdução ("o que ensinou → onde usamos") e, logo d
 | Para que servem as triggers? | Miguel | Uma grava o histórico de cada revisão; a outra impede que XP ou nível diminuam, mesmo por fora da API. |
 | Onde entra a disciplina de Relações Étnico-Raciais? | Gabriel | Na proposta social (curadoria sem estereótipos e canal de relato) e no acesso: recursos de acessibilidade e estudo sem internet. A política e o canal ainda precisam ser publicados. |
 | Quanto custa manter no ar? | Rafael | Tudo está em camadas gratuitas (Vercel, App Service F1 e Azure SQL serverless); por isso a primeira requisição pode demorar. |
-| Como sabem que funciona? | Rafael | 452 testes rodam a cada pull request, e um script confere se o relatório e os slides batem com o código. |
+| Como sabem que funciona? | Rafael | 453 testes rodam a cada pull request, e um script confere se o relatório e os slides batem com o código. |
 | A plataforma melhora o aprendizado? | Maciel | Ainda não dá para afirmar: falta um piloto com alunos reais, medindo o desempenho antes e depois. |

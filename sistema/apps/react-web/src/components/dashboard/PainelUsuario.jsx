@@ -2,6 +2,7 @@ import React from 'react';
 import { progressoDeNivel } from '@nexti/shared';
 import { useEstudo } from '../../context/EstudoContext';
 import { nivelParaApi } from '../../context/estudo/apoio.js';
+import { LINK_PESQUISA } from '../../lib/pesquisa.js';
 import { AvatarEditavel } from './Avatar';
 
 /** Seção `.dashboard-header`: usuário, XP, moedas e barra de rank (porte de `atualizarBarraNivel`). */
@@ -22,6 +23,18 @@ export function PainelUsuario() {
             <p>
               Servidor: <span className="status-online">conectado</span>
             </p>
+            <a
+              className="link-pesquisa"
+              href={LINK_PESQUISA}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Responder a pesquisa do PIM, leva 5 minutos (abre em nova aba)"
+            >
+              <span className="material-symbols-outlined" aria-hidden="true">rate_review</span>
+              <span className="link-pesquisa-texto">
+                Responder a pesquisa do PIM <span className="sem-quebra">(5 min)</span>
+              </span>
+            </a>
           </div>
         </div>
         <div className="xp-wrapper xp-wrapper-flex">
