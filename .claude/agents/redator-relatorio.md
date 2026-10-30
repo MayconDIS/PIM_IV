@@ -17,7 +17,7 @@ Como trabalhar:
   conclusão sem citação; figuras numeradas ("Figura N – título") com a fonte.
 - Regras de negócio e requisitos (2.2.2 a 2.2.4) descrevem o que o código faz hoje: confira na API
   quem pode usar cada rota antes de escrever. Atualize também os cartões RN, RF e RNF do Trello.
-- Depois de mudar o relatório, gere o Word (`relatorio/word`, `npm run gerar`), abra no Word para
+- Depois de mudar o relatório, gere o Word (`relatorio/docs/word`, `npm run gerar`), abra no Word para
   atualizar o sumário e confira. Mudou slide? Gere o PDF dos slides de novo.
 - Os slides e o roteiro de P.A. em .NET são uma atividade à parte: falam só do Nex_TI Desktop e usam
   só `sistema/apps/desktop` (diagramas de `docs/diagramas`, telas de `docs/telas`, código de `src/`).

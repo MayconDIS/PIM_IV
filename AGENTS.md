@@ -28,7 +28,7 @@ A ordem é sempre a mesma: **código → modelagem → relatório e Word** (e, n
 2. Os **diagramas** saem só do Astah, pelo gerador `modelagem-uml/02_Modelagem_UML/gerador-astah/`.
    Não usamos PlantUML. As imagens são exportadas pelo próprio Astah (`ExportarImagens.java`).
 3. O **relatório** copia as imagens da modelagem e os números do código; o **Word** é gerado do
-   relatório (`relatorio/word`). Os **slides** do desktop copiam os diagramas e as telas do desktop.
+   relatório (`relatorio/docs/word`). Os **slides** do desktop copiam os diagramas e as telas do desktop.
 
 ## Se mudar X, atualize Y
 
@@ -73,7 +73,7 @@ PIM (resumo e figuras) e se o PIM III só aparece nas melhorias. O GitHub roda a
 | Tabelas da API a partir do conteúdo | `sistema/`: `npm run seed:api` (e `npm run seed:api:check` para conferir) |
 | Gerar o `.asta` | ver `modelagem-uml/02_Modelagem_UML/gerador-astah/README.md` |
 | Exportar as imagens do Astah | idem (`ExportarImagens.java`) |
-| Gerar o Word do relatório | `relatorio/word/`: `npm install` e `npm run gerar` |
+| Gerar o Word do relatório | `relatorio/docs/word/`: `npm install` e `npm run gerar` |
 | Conferir a sincronia | raiz: `node scripts/verificar-sincronia.mjs` |
 
 O Live Server do editor usa a porta **5500** (para abrir o relatório); a 5501 é do site.

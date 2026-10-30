@@ -5,7 +5,7 @@ do Manual do PIM IV. Para ler, abra o [`index.html`](index.html) no navegador; p
 gerar o PDF, use *Imprimir → Salvar como PDF* (cada `<section class="page">` é uma
 folha A4).
 
-A versão em Word está em [`word/Relatorio_PIM_IV_Nex_TI.docx`](word/Relatorio_PIM_IV_Nex_TI.docx), com o
+A versão em Word está em [`docs/word/Relatorio_PIM_IV_Nex_TI.docx`](docs/word/Relatorio_PIM_IV_Nex_TI.docx), com o
 mesmo conteúdo, formatação ABNT e sumário automático. Para gerar de novo depois de mudar o
 `index.html`: `cd word`, `npm install` e `npm run gerar`; ao abrir no Word, aceite atualizar os
 campos para o sumário ganhar os números de página.
