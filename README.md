@@ -2,16 +2,28 @@
   <h1>Nex_TI – EdTech Learning Platform</h1>
   <p><strong>Projeto Integrado Multidisciplinar (PIM IV) — Análise e Desenvolvimento de Sistemas — UNIP</strong></p>
 
-  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5"/>
-  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3"/>
+  <img src="https://img.shields.io/badge/React_18-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React 18"/>
+  <img src="https://img.shields.io/badge/Expo-000020?style=for-the-badge&logo=expo&logoColor=white" alt="Expo"/>
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript"/>
   <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white" alt="C#"/>
   <img src="https://img.shields.io/badge/.NET_10-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET 10"/>
   <img src="https://img.shields.io/badge/SQL_Server-CC2927?style=for-the-badge&logo=microsoft-sql-server&logoColor=white" alt="SQL Server"/>
+  <img src="https://img.shields.io/badge/Azure-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white" alt="Azure"/>
+  <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel"/>
   <img src="https://img.shields.io/badge/UML-Astah_10.1-orange?style=for-the-badge" alt="Astah"/>
 </div>
 
 ---
+
+## 🌐 No ar
+
+| O quê | Onde |
+|---|---|
+| **Site** (computador e celular) | [nexti-pim-iv.vercel.app](https://nexti-pim-iv.vercel.app) (Vercel) |
+| **API** | Azure App Service, com o banco no Azure SQL ([status](https://nexti-api-pimivwjad.azurewebsites.net/api/status)) |
+| **App** | Expo, na pasta [`sistema/apps/react-mobile`](sistema/apps/react-mobile) |
+
+No plano gratuito a API "dorme" sem uso: a primeira entrada do dia pode levar até um minuto.
 
 ## 📂 Estrutura
 
@@ -26,8 +38,9 @@ repositórios distintos, vivem aqui como pastas de primeiro nível:
 ├── 📁 .agents/        # Skills de IA (uma pasta só, usada pelas três frentes)
 ├── 📁 .claude/agents/ # O time de agentes (coordenador, dev, modelagem, relatório, revisão)
 ├── 📁 scripts/        # verificar-sincronia.mjs: confere se as três partes estão alinhadas
+├── 📁 .github/        # Checagens automáticas de cada pull request e publicação da API
+├── 📁 .vscode/        # Configuração do editor para o workspace inteiro
 ├── 📄 AGENTS.md       # Regras do projeto inteiro (equipe e IAs)
-├── 📁 .vscode/     # Configuração do editor para o workspace inteiro
 └── 📄 .gitattributes, .gitignore, LICENSE
 ```
 
@@ -36,7 +49,7 @@ repositórios distintos, vivem aqui como pastas de primeiro nível:
 | Pasta | Conteúdo |
 |---|---|
 | [`sistema/`](sistema) | Monorepo npm: `apps/react-web`, `apps/react-mobile`, `apps/api` (.NET), `apps/desktop` (.NET, Windows Forms), `packages/`, `database/`, `tests/` |
-| [`relatorio/`](relatorio) | Relatório ABNT em HTML/CSS, `assets/` e `design_DNA/` |
+| [`relatorio/`](relatorio) | Relatório ABNT em HTML/CSS, a versão em Word (`word/`), as imagens (`assets/`), `design_DNA/` e, em `docs/`, a apresentação do PIM e o plano de negócios |
 | [`modelagem-uml/`](modelagem-uml) | `02_Modelagem_UML/` (o `.asta` e as imagens exportadas do Astah) e `04_Banco_de_Dados/` (MER, DER e modelo físico) |
 
 ## 🚀 Como executar o sistema
@@ -58,15 +71,28 @@ O **Refazer Diagnóstico** avalia os quatro módulos com 20 perguntas e recomend
 por onde continuar. O resultado fica na conta e preserva o progresso anterior;
 o diagnóstico não concede XP, moedas ou conclusão de disciplinas. Os perfis Admin e Tutor acessam
 todos os módulos e disciplinas diretamente no site e no app, sem diagnóstico
-ou pré-requisitos, além dos bônus do site; esse acesso não cria progresso nem recompensas.
+ou pré-requisitos, além dos bônus do site; o Admin também abre o certificado, só para conferir.
+Esse acesso não cria progresso nem recompensas.
+
+O login vale 24 horas. Quando vence, o site volta à tela de entrada com um aviso, e o progresso
+guardado no navegador continua lá.
+
+São **450 testes automáticos**: 270 da API, 123 do pacote compartilhado (site e app), 26 do app e
+31 do programa desktop. Como cada parte é testada: [`sistema/docs/TESTES.md`](sistema/docs/TESTES.md).
 
 ## 🎤 Apresentação do PIM IV
 
-Os slides da avaliação do PIM IV, o roteiro de quem fala o quê e o PDF estão em
-[`relatorio/docs`](relatorio/docs). Os slides abrem no navegador, com modo apresentação próprio
-(botão **Apresentar**, setas, **F** para tela cheia e **N** para a fala de cada slide).
+| Pasta | O que tem |
+|---|---|
+| [`relatorio/docs/apresentacao`](relatorio/docs/apresentacao) | Os 36 slides da avaliação (começo, meio e fim; as oito disciplinas, cada uma com um exemplo real, e o plano de negócios), o roteiro de quem fala o quê e o PDF |
+| [`relatorio/docs/plano de negocios`](relatorio/docs/plano%20de%20negocios) | A apresentação do plano de negócios da Nex_TI Educacional (21 slides) e o [`PLANO_DE_NEGOCIOS.md`](relatorio/docs/plano%20de%20negocios/PLANO_DE_NEGOCIOS.md), com premissas, contas e fontes |
 
-## 🎤 Apresentação de P.A. em .NET (27/10)
+Os slides abrem no navegador, com modo apresentação próprio (botão **Apresentar** ou **P**,
+setas, **F** para tela cheia e **N** para a fala e o tempo de cada slide). O plano de negócios é
+uma simulação: hoje o Nex_TI roda em planos gratuitos (custo R$ 0), e os valores pagos são uma
+estimativa para quando ele crescer.
+
+## 🎤 Apresentação de P.A. em .NET (atividade à parte)
 
 O programa desktop da atividade, os slides, o roteiro e o guia de como abrir cada parte no
 Antigravity estão em [`sistema/apps/desktop`](sistema/apps/desktop#como-abrir-cada-parte-no-antigravity).
@@ -86,8 +112,8 @@ Antes de abrir um pull request, rode:
 node scripts/verificar-sincronia.mjs
 ```
 
-Ele confere se os números dos documentos batem com o código, se os diagramas do relatório são os
-do Astah e se o PIM III só aparece nas melhorias. O GitHub roda a mesma checagem em todo pull request.
+Ele confere se os números dos documentos (README, manuais, relatório e slides) batem com o
+código, se os diagramas do relatório são os do Astah e se o PIM III só aparece nas melhorias. O GitHub roda a mesma checagem em todo pull request.
 
 ## 🧬 Histórico
 
