@@ -30,14 +30,12 @@ export function dadosDoCertificado(nomeAluno, hoje = new Date()) {
 }
 
 /**
- * "Nex_TI" em SVG: `background-clip: text` (o degradê da tela) não é desenhado
- * no caminho de impressão do Chrome — no papel o nome sairia sólido ou sumiria.
+ * "Nex_TI" em SVG com cores sólidas: o "T" ciano e o "I" roxo, as duas pontas do degradê
+ * do logo. Nada de `background-clip: text` (o Chrome não imprime) nem de `url(#degrade)`:
+ * impresso pelo iframe (srcdoc), o degradê não era encontrado e o "TI" sumia do certificado.
  */
 const MARCA_SVG = `<svg class="marca" viewBox="0 0 260 56" role="img" aria-label="Nex_TI" xmlns="http://www.w3.org/2000/svg">
-  <defs><linearGradient id="degrade" x1="0%" y1="0%" x2="100%" y2="0%">
-    <stop offset="0%" stop-color="#00e6e6"/><stop offset="100%" stop-color="#8a2be2"/>
-  </linearGradient></defs>
-  <text x="0" y="44" font-family="Orbitron, Segoe UI, sans-serif" font-size="44" font-weight="800" fill="#ffffff">Nex_<tspan fill="url(#degrade) #00e6e6">TI</tspan></text>
+  <text x="0" y="44" font-family="Orbitron, Segoe UI, sans-serif" font-size="44" font-weight="800" fill="#ffffff">Nex_<tspan fill="#00e6e6">T</tspan><tspan fill="#8a2be2">I</tspan></text>
 </svg>`;
 
 export function gerarCertificadoHtml({ nome, dataPorExtenso, codigo }) {
