@@ -465,6 +465,7 @@ header[role="banner"] {
     border-radius: 6px;
     font-size: 0.85rem;
     font-weight: bold;
+    white-space: nowrap; /* "30 XP" nunca quebra em duas linhas, mesmo com título longo */
     animation: pulseNeon 2s infinite;
 }
 
@@ -1162,7 +1163,7 @@ body.high-contrast-mode .xp-badge {
 .badge-title-sub { font-size: 0.75rem; letter-spacing: 1.5px; margin-top: 6px; color: #8b92a5; font-weight: bold; text-transform: uppercase; }
 .coin-display-badge { font-size: 1rem; padding: 8px 15px; margin: 0; border-color: #ffd700; color: #ffd700; background-color: rgba(255, 215, 0, 0.05); }
 .toll-icon-main { font-size: 1.2rem; }
-.menu-badges-wrapper { display: flex; gap: 5px; margin-left: auto; }
+.menu-badges-wrapper { display: flex; gap: 5px; margin-left: auto; flex-shrink: 0; } /* quem encolhe é o título, não os selos */
 .coin-badge { border-color: #ffd700; color: #ffd700; background: rgba(255, 215, 0, 0.05); }
 .toll-icon-small { font-size: 1rem; }
 .aula-title-gold { color: #ffd700; }
