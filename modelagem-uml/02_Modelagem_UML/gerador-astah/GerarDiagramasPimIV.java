@@ -485,7 +485,7 @@ public class GerarDiagramasPimIV {
             {"Usuário", "Qualquer pessoa com conta no Nex_TI. É a base dos outros perfis."},
             {"SQL Server", "Banco de dados do Nex_TI (LocalDB no desenvolvimento, Azure SQL em produção)."},
             {"API", "A API do Nex_TI em .NET 10, publicada no Azure App Service."},
-            {"Administrador", "Perfil que, além de tudo o que o Tutor faz, define perfis e acessa todos os módulos, disciplinas, testes e bônus disponíveis no site e no app, sem diagnóstico, pré-requisitos ou compra. A permissão não cria conclusões, XP, moedas ou certificado."},
+            {"Administrador", "Perfil que, além de tudo o que o Tutor faz, define perfis e acessa todos os módulos, disciplinas, testes e bônus disponíveis no site e no app, sem diagnóstico, pré-requisitos ou compra; no site, também abre o certificado para conferi-lo. A permissão não cria conclusões, XP, moedas ou certificado."},
         };
         for (String[] par : d) DEF.put(par[0], par[1]);
     }
