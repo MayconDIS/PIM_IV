@@ -203,7 +203,7 @@ const PERMITIDOS = ['README.md', 'modelagem-uml/README.md', 'relatorio/README.md
 // Os arquivos de regras (AGENTS.md, CLAUDE.md e os agentes) citam o PIM III para proibi-lo.
 const REGRAS = (f) => /(^|\/)(AGENTS|CLAUDE)\.md$/.test(f) || f.startsWith('.claude/');
 const comPim3 = arquivos('.', (c) => /\.(md|html|js|jsx|cs|java|json)$/.test(c))
-  .filter((f) => !PERMITIDOS.includes(f) && !REGRAS(f) && !f.startsWith('relatorio/word/') && /PIM ?III/.test(ler(f)));
+  .filter((f) => !PERMITIDOS.includes(f) && !REGRAS(f) && !f.startsWith('relatorio/docs/word/') && /PIM ?III/.test(ler(f)));
 checar('PIM III só nas seções de melhorias', comPim3.length === 0, comPim3.join(', '));
 
 // --- 6. uma pasta de skills só ---------------------------------------------------------------

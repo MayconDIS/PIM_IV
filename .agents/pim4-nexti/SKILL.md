@@ -277,7 +277,7 @@ depois de incluir ou tirar página.
 6. **Valide**: a página tem `num-pagina`? Os parágrafos usam `.paragrafo`?
    Nenhum `<strong>` foi usado para destacar novidade? O texto é corrido e orgânico?
 7. **Feche o ciclo**: `python atualizar-sumario.py` (páginas e sumário), confira que nenhuma página
-   passa de 29,7 cm, gere o Word (`relatorio/word`: `npm run gerar`) e rode
+   passa de 29,7 cm, gere o Word (`relatorio/docs/word`: `npm run gerar`) e rode
    `node scripts/verificar-sincronia.mjs` na raiz.
 
 ---
