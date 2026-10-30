@@ -247,7 +247,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é um Sistema Operacional (SO)?",
-      "verso": "O software base que gere o hardware e permite executar outros programas e interfaces.",
+      "verso": "O software base que gerencia o hardware e permite executar outros programas e interfaces.",
       "dica": "Ex: Windows, Linux, macOS."
     },
     {
@@ -262,7 +262,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é uma Máquina Virtual (VM)?",
-      "verso": "Um ficheiro que atua como um computador físico independente, com o seu próprio SO, correndo isolado.",
+      "verso": "Um arquivo que atua como um computador físico independente, com o seu próprio SO, correndo isolado.",
       "dica": "Um PC dentro do PC."
     },
     {
@@ -293,11 +293,11 @@ export const BANCO_DE_DADOS = {
     {
       "frente": "Qual a diferença entre Software e Firmware?",
       "verso": "Software são os programas normais. Firmware é o software gravado diretamente na memória do hardware para o controlar.",
-      "dica": "O sistema do controlo remoto da TV é um firmware."
+      "dica": "O sistema do controle remoto da TV é um firmware."
     },
     {
       "frente": "O que são periféricos de Entrada e Saída (I/O)?",
-      "verso": "Entrada envia dados ao PC (Teclado/Rato). Saída mostra dados do PC ao utilizador (Monitor/Impressora).",
+      "verso": "Entrada envia dados ao PC (Teclado/Mouse). Saída mostra dados do PC ao usuário (Monitor/Impressora).",
       "dica": "I/O (Input / Output)."
     },
     {
@@ -340,7 +340,7 @@ export const BANCO_DE_DADOS = {
     {
       "frente": "O que é Phishing?",
       "verso": "Ataque de engenharia social que usa e-mails ou sites falsos para roubar informações da vítima.",
-      "dica": "Pense em 'pescar' a senha do utilizador."
+      "dica": "Pense em 'pescar' a senha do usuário."
     },
     {
       "frente": "O que é um Ransomware?",
@@ -359,8 +359,8 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "Qual a diferença entre Vírus e Worm?",
-      "verso": "O vírus precisa que o utilizador execute o ficheiro para o infetar. O Worm (verme) espalha-se sozinho pela rede.",
-      "dica": "Worms são autónomos."
+      "verso": "O vírus precisa que o usuário execute o arquivo para o infetar. O Worm (verme) espalha-se sozinho pela rede.",
+      "dica": "Worms são autônomos."
     },
     {
       "frente": "O que é a Engenharia Social no hacking?",
@@ -374,13 +374,13 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é uma VPN?",
-      "verso": "Uma rede privada virtual que cria um túnel criptografado, ocultando o endereço IP e o tráfego do utilizador.",
+      "verso": "Uma rede privada virtual que cria um túnel criptografado, ocultando o endereço IP e o tráfego do usuário.",
       "dica": "Virtual Private Network."
     },
     {
       "frente": "O que é Criptografia Simétrica?",
       "verso": "Usa a MESMA chave secreta tanto para encriptar quanto para desencriptar a mensagem.",
-      "dica": "Rápida, mas difícil de partilhar a chave em segurança."
+      "dica": "Rápida, mas difícil de compartilhar a chave em segurança."
     },
     {
       "frente": "O que é Criptografia Assimétrica?",
@@ -390,11 +390,11 @@ export const BANCO_DE_DADOS = {
     {
       "frente": "O que é uma função de Hash?",
       "verso": "Algoritmo de mão única que transforma qualquer dado numa string de tamanho fixo, impossível de reverter.",
-      "dica": "Usada para guardar palavras-passe no banco de dados."
+      "dica": "Usada para guardar senhas no banco de dados."
     },
     {
       "frente": "O que é a Autenticação de 2 Fatores (2FA)?",
-      "verso": "Adicionar uma camada extra de segurança (ex: SMS, Token, Biometria) além da palavra-passe padrão.",
+      "verso": "Adicionar uma camada extra de segurança (ex: SMS, Token, Biometria) além da senha padrão.",
       "dica": "Algo que você sabe + Algo que você tem."
     },
     {
@@ -446,7 +446,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é o Copyleft?",
-      "verso": "Licença que permite o livre uso, modificação e partilha de uma obra, desde que as versões alteradas mantenham as mesmas liberdades.",
+      "verso": "Licença que permite o livre uso, modificação e compartilhamento de uma obra, desde que as versões alteradas mantenham as mesmas liberdades.",
       "dica": "O oposto do Copyright restritivo."
     },
     {
@@ -462,7 +462,7 @@ export const BANCO_DE_DADOS = {
     {
       "frente": "O que é a Obsolescência Programada?",
       "verso": "A tática da indústria de fabricar aparelhos desenhados para quebrarem ou ficarem inúteis rapidamente, forçando uma nova compra.",
-      "dica": "Telemóvel que fica lento após 2 anos."
+      "dica": "Celular que fica lento após 2 anos."
     },
     {
       "frente": "O que é o Lixo Eletrônico (E-waste)?",
@@ -476,7 +476,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é Privacidade Digital?",
-      "verso": "O direito do utilizador de controlar como as suas informações pessoais são recolhidas e usadas na internet.",
+      "verso": "O direito do usuário de controlar como as suas informações pessoais são recolhidas e usadas na internet.",
       "dica": "O seu histórico de pesquisa é seu."
     },
     {
@@ -501,7 +501,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é a Sociedade da Informação?",
-      "verso": "Uma sociedade onde a criação, distribuição e uso da informação tornaram-se a atividade económica e cultural mais importante.",
+      "verso": "Uma sociedade onde a criação, distribuição e uso da informação tornaram-se a atividade econômica e cultural mais importante.",
       "dica": "A Era da Informação."
     },
     {
@@ -635,12 +635,12 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "Para que serve a função malloc()?",
-      "verso": "Memory Allocation. Serve para alocar blocos de memória dinamicamente enquanto o programa está a correr.",
+      "verso": "Memory Allocation. Serve para alocar blocos de memória dinamicamente enquanto o programa está correndo.",
       "dica": "Pede memória emprestada ao sistema."
     },
     {
       "frente": "O que a função free() faz?",
-      "verso": "Liberta a memória que foi alocada dinamicamente com o malloc(), devolvendo-a ao sistema operativo.",
+      "verso": "Liberta a memória que foi alocada dinamicamente com o malloc(), devolvendo-a ao sistema operacional.",
       "dica": "Evita o Memory Leak (Fuga de Memória)."
     },
     {
@@ -665,12 +665,12 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que faz a função printf()?",
-      "verso": "Imprime texto formatado e valores de variáveis no ecrã (console).",
+      "verso": "Imprime texto formatado e valores de variáveis na tela (console).",
       "dica": "Print Formatted."
     },
     {
       "frente": "O que faz a função scanf()?",
-      "verso": "Lê os dados formatados introduzidos pelo utilizador através do teclado.",
+      "verso": "Lê os dados formatados introduzidos pelo usuário através do teclado.",
       "dica": "Scan Formatted."
     },
     {
@@ -732,13 +732,13 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que são Requisitos Não Funcionais?",
-      "verso": "Descrevem COMO o sistema deve ser, as suas qualidades e restrições. Ex: 'O ecrã deve carregar em 1 segundo'.",
+      "verso": "Descrevem COMO o sistema deve ser, as suas qualidades e restrições. Ex: 'A tela deve carregar em 1 segundo'.",
       "dica": "Focam em performance, segurança, design."
     },
     {
       "frente": "O que é um Diagrama de Casos de Uso (UML)?",
-      "verso": "Um desenho que mostra as interações entre os Utilizadores (Atores) e o Sistema.",
-      "dica": "Foca nas ações principais do ponto de vista do utilizador."
+      "verso": "Um desenho que mostra as interações entre os Usuários (Atores) e o Sistema.",
+      "dica": "Foca nas ações principais do ponto de vista do usuário."
     },
     {
       "frente": "Qual a diferença entre a Metodologia Ágil e o modelo Cascata (Waterfall)?",
@@ -767,12 +767,12 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é o Diagrama de Atividades (UML)?",
-      "verso": "Semelhante a um fluxograma, modela o fluxo de controlo de uma atividade para outra dentro do sistema.",
+      "verso": "Semelhante a um fluxograma, modela o fluxo de controle de uma atividade para outra dentro do sistema.",
       "dica": "Mostra o caminho da lógica, passo a passo."
     },
     {
       "frente": "O que é o Framework Scrum?",
-      "verso": "Uma estrutura de trabalho ágil focada em equipas pequenas que realizam entregas de software em ciclos curtos (Sprints).",
+      "verso": "Uma estrutura de trabalho ágil focada em equipes pequenas que realizam entregas de software em ciclos curtos (Sprints).",
       "dica": "A metodologia ágil mais famosa."
     },
     {
@@ -788,7 +788,7 @@ export const BANCO_DE_DADOS = {
     {
       "frente": "O que é o padrão MVC?",
       "verso": "Model (Dados/Regras), View (Interface Visual) e Controller (Mediador). Um padrão de arquitetura que separa responsabilidades.",
-      "dica": "Não mistura HTML com acessos à base de dados."
+      "dica": "Não mistura HTML com acessos ao banco de dados."
     },
     {
       "frente": "O que são Testes Unitários?",
@@ -797,12 +797,12 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que são Testes de Integração?",
-      "verso": "Testes que verificam se os diferentes módulos, classes ou bases de dados funcionam bem quando ligados entre si.",
+      "verso": "Testes que verificam se os diferentes módulos, classes ou bancos de dados funcionam bem quando ligados entre si.",
       "dica": "Testa a junção dos tijolos."
     },
     {
-      "frente": "O que é o Teste de Aceitação do Utilizador (UAT)?",
-      "verso": "A fase final onde o cliente ou o utilizador real testa o sistema para validar se atende aos requisitos de negócio.",
+      "frente": "O que é o Teste de Aceitação do Usuário (UAT)?",
+      "verso": "A fase final onde o cliente ou o usuário real testa o sistema para validar se atende aos requisitos de negócio.",
       "dica": "A validação final antes de ir para produção."
     },
     {
@@ -835,16 +835,16 @@ export const BANCO_DE_DADOS = {
     {
       "frente": "Para que serve o DNS?",
       "verso": "Domain Name System. Traduz nomes de domínios fáceis (google.com) para endereços IP numéricos.",
-      "dica": "A lista telefónica da Web."
+      "dica": "A lista telefônica da Web."
     },
     {
       "frente": "Qual a diferença entre os protocolos TCP e UDP?",
-      "verso": "TCP garante a entrega e ordem dos dados. O UDP é muito mais rápido, mas não verifica se o dado chegou (não é fiável).",
-      "dica": "TCP para ficheiros. UDP para jogos/streaming."
+      "verso": "TCP garante a entrega e ordem dos dados. O UDP é muito mais rápido, mas não verifica se o dado chegou (não é confiável).",
+      "dica": "TCP para arquivos. UDP para jogos/streaming."
     },
     {
       "frente": "O que é um Sistema Distribuído?",
-      "verso": "Vários computadores independentes na rede a trabalharem juntos para parecerem um único sistema coeso para o utilizador.",
+      "verso": "Vários computadores independentes na rede a trabalharem juntos para parecerem um único sistema coeso para o usuário.",
       "dica": "A base arquitetural da Nuvem (Cloud)."
     },
     {
@@ -874,8 +874,8 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é o protocolo FTP?",
-      "verso": "File Transfer Protocol. Usado historicamente para transferir ficheiros de um computador para um servidor na rede.",
-      "dica": "Transferência pura de ficheiros."
+      "verso": "File Transfer Protocol. Usado historicamente para transferir arquivos de um computador para um servidor na rede.",
+      "dica": "Transferência pura de arquivos."
     },
     {
       "frente": "Para que serve o SSH?",
@@ -915,7 +915,7 @@ export const BANCO_DE_DADOS = {
     {
       "frente": "O que faz o protocolo DHCP?",
       "verso": "Dynamic Host Configuration Protocol. Atribui automaticamente endereços IP, gateways e DNS aos computadores quando estes se ligam à rede.",
-      "dica": "Imagina configurar o IP de cada telemóvel manualmente!"
+      "dica": "Imagine configurar o IP de cada celular manualmente!"
     },
     {
       "frente": "O que testa o comando Ping?",
@@ -966,7 +966,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que são Redes Neurais Artificiais?",
-      "verso": "Algoritmos matemáticos divididos em nós (neurónios) e camadas (Input, Ocultas, Output), biologicamente inspirados no cérebro humano.",
+      "verso": "Algoritmos matemáticos divididos em nós (neurônios) e camadas (Input, Ocultas, Output), biologicamente inspirados no cérebro humano.",
       "dica": "Mimetizam as sinapses cerebrais."
     },
     {
@@ -1006,7 +1006,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é um Chatbot?",
-      "verso": "Um programa de computador projetado para simular conversas com utilizadores humanos, geralmente suportado por árvores de decisão ou PNL.",
+      "verso": "Um programa de computador projetado para simular conversas com usuários humanos, geralmente suportado por árvores de decisão ou PNL.",
       "dica": "Atendimento automatizado."
     },
     {
@@ -1016,12 +1016,12 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que significa o conceito de Big Data?",
-      "verso": "O processamento e armazenamento de volumes de dados tão gigantescos, rápidos e complexos (Os 3 Vs) que as bases de dados tradicionais não suportam.",
+      "verso": "O processamento e armazenamento de volumes de dados tão gigantescos, rápidos e complexos (Os 3 Vs) que os bancos de dados tradicionais não suportam.",
       "dica": "Volume, Velocidade e Variedade."
     },
     {
       "frente": "O que é a Mineração de Dados (Data Mining)?",
-      "verso": "A exploração e análise de bases de dados colossais para descobrir padrões ocultos, correlações ou anomalias valiosas para o negócio.",
+      "verso": "A exploração e análise de bancos de dados colossais para descobrir padrões ocultos, correlações ou anomalias valiosas para o negócio.",
       "dica": "Extrair ouro comercial dos dados."
     },
     {
@@ -1034,7 +1034,7 @@ export const BANCO_DE_DADOS = {
     {
       "frente": "O que é uma Chave Primária (Primary Key)?",
       "verso": "Um campo (ou conjunto de campos) que identifica de forma exclusiva uma linha numa tabela.",
-      "dica": "Disciplina: Bases de Dados. Ex: NIF ou CPF."
+      "dica": "Disciplina: Bancos de Dados. Ex: NIF ou CPF."
     },
     {
       "frente": "O que é uma Chave Estrangeira (Foreign Key)?",
@@ -1063,13 +1063,13 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que dita a Primeira Forma Normal (1FN)?",
-      "verso": "Que uma tabela não deve conter atributos multivalorados ou compostos. Cada célula deve ter um valor atómico (único).",
+      "verso": "Que uma tabela não deve conter atributos multivalorados ou compostos. Cada célula deve ter um valor atômico (único).",
       "dica": "Não colocar dois telefones na mesma célula."
     },
     {
-      "frente": "O que significa o acrónimo ACID em transações de Bases de Dados?",
+      "frente": "O que significa o acrônimo ACID em transações de Bancos de Dados?",
       "verso": "Atomicidade, Consistência, Isolamento e Durabilidade.",
-      "dica": "Garante que a transação bancária não falha a meio."
+      "dica": "Garante que a transação bancária não para no meio do caminho."
     },
     {
       "frente": "Qual a diferença entre DDL e DML no SQL?",
@@ -1087,7 +1087,7 @@ export const BANCO_DE_DADOS = {
       "dica": "Agrupa para somar ou contar."
     },
     {
-      "frente": "O que é um Índice (Index) numa Base de Dados?",
+      "frente": "O que é um Índice (Index) numa Banco de Dados?",
       "verso": "Uma estrutura de dados especial criada para acelerar incrivelmente a velocidade das pesquisas nas tabelas.",
       "dica": "Como o índice remissivo no fim de um livro."
     },
@@ -1108,7 +1108,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é um SGBD?",
-      "verso": "Sistema Gestor de Bases de Dados. O software responsável por administrar as bases de dados.",
+      "verso": "Sistema Gerenciador de Banco de Dados. O software responsável por administrar os bancos de dados.",
       "dica": "Ex: SQL Server, PostgreSQL, Oracle."
     },
     {
@@ -1118,7 +1118,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é um Diagrama Entidade-Relacionamento (DER)?",
-      "verso": "Um modelo visual que descreve a estrutura lógica da base de dados, as suas entidades e como se conectam.",
+      "verso": "Um modelo visual que descreve a estrutura lógica do banco de dados, as suas entidades e como se conectam.",
       "dica": "A planta-baixa do banco."
     },
     {
@@ -1128,7 +1128,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "Qual a diferença entre DELETE e TRUNCATE?",
-      "verso": "DELETE apaga linhas específicas e regista isso no log (mais lento). TRUNCATE limpa a tabela inteira de imediato (rápido).",
+      "verso": "DELETE apaga linhas específicas e registra isso no log (mais lento). TRUNCATE limpa a tabela inteira de imediato (rápido).",
       "dica": "TRUNCATE é um 'reset' à tabela."
     }
   ],
@@ -1175,13 +1175,13 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "Qual a diferença entre os modificadores 'public' e 'private'?",
-      "verso": "Public: Qualquer parte do código acede. Private: Apenas a própria classe tem acesso.",
+      "verso": "Public: Qualquer parte do código acessa. Private: Apenas a própria classe tem acesso.",
       "dica": "Níveis de visibilidade."
     },
     {
       "frente": "O que é a Sobrecarga (Overloading)?",
       "verso": "Criar vários métodos com o MESMO NOME na mesma classe, mas com parâmetros diferentes (quantidade ou tipo).",
-      "dica": "Comportamentos variados consoante os argumentos."
+      "dica": "Comportamentos variados conforme os argumentos."
     },
     {
       "frente": "O que é a Sobrescrita (Overriding)?",
@@ -1195,7 +1195,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "Para que servem as Propriedades (Getters / Setters) em C#?",
-      "verso": "Para aceder e modificar os atributos privados de forma controlada e segura.",
+      "verso": "Para acessar e modificar os atributos privados de forma controlada e segura.",
       "dica": "O filtro de entrada de dados."
     },
     {
@@ -1205,7 +1205,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é o Garbage Collector (Coletor de Lixo)?",
-      "verso": "Um processo automático do .NET que limpa a memória, destruindo objetos que já não estão a ser usados pelo programa.",
+      "verso": "Um processo automático do .NET que limpa a memória, destruindo objetos que já não estão sendo usados pelo programa.",
       "dica": "Evita o Memory Leak automaticamente."
     },
     {
@@ -1242,12 +1242,12 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é o Design Responsivo?",
-      "verso": "Técnica que permite que um site adapte o seu layout automaticamente ao tamanho do ecrã (PC, Tablet, Smartphone).",
+      "verso": "Técnica que permite que um site adapte o seu layout automaticamente ao tamanho da tela (PC, Tablet, Smartphone).",
       "dica": "Feito usando Media Queries no CSS."
     },
     {
       "frente": "O que é a abordagem 'Mobile First'?",
-      "verso": "Estratégia de desenhar e programar o site primeiro para o telemóvel, e só depois expandi-lo para monitores maiores.",
+      "verso": "Estratégia de desenhar e programar o site primeiro para o celular, e só depois expandi-lo para monitores maiores.",
       "dica": "Altamente recomendado pelo Google."
     },
     {
@@ -1262,7 +1262,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é um Wireframe?",
-      "verso": "O 'esqueleto' ou rascunho estrutural de um ecrã, sem cores, fontes ou imagens finais.",
+      "verso": "O 'esqueleto' ou rascunho estrutural de uma tela, sem cores, fontes ou imagens finais.",
       "dica": "A planta-baixa do site."
     },
     {
@@ -1277,12 +1277,12 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é a Hierarquia Visual?",
-      "verso": "A organização dos elementos na interface para guiar o olhar do utilizador por ordem de importância (usando tamanho, cor, contraste).",
+      "verso": "A organização dos elementos na interface para guiar o olhar do usuário por ordem de importância (usando tamanho, cor, contraste).",
       "dica": "O que devo ler primeiro?"
     },
     {
       "frente": "O que estuda a Psicologia das Cores?",
-      "verso": "Como as cores afetam a perceção e o comportamento do utilizador (ex: Vermelho para alertas, Verde para sucesso).",
+      "verso": "Como as cores afetam a perceção e o comportamento do usuário (ex: Vermelho para alertas, Verde para sucesso).",
       "dica": "Cores transmitem emoções."
     },
     {
@@ -1292,12 +1292,12 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é uma Call to Action (CTA)?",
-      "verso": "Um elemento (geralmente um botão de destaque) que incita o utilizador a realizar uma ação desejada (ex: 'Comprar Agora').",
+      "verso": "Um elemento (geralmente um botão de destaque) que incita o usuário a realizar uma ação desejada (ex: 'Comprar Agora').",
       "dica": "Chamar para a ação."
     },
     {
       "frente": "No CSS, para que servem as Media Queries?",
-      "verso": "Para aplicar estilos condicionados ao tamanho do ecrã do dispositivo (ex: @media (max-width: 600px)).",
+      "verso": "Para aplicar estilos condicionados ao tamanho da tela do dispositivo (ex: @media (max-width: 600px)).",
       "dica": "O motor da responsividade."
     },
     {
@@ -1331,8 +1331,8 @@ export const BANCO_DE_DADOS = {
       "dica": "Dar rosto e nome ao público-alvo."
     },
     {
-      "frente": "O que é o Mapa da Jornada do Utilizador (User Journey)?",
-      "verso": "A documentação visual de todos os passos, frustrações e sucessos que um utilizador tem ao interagir com o produto.",
+      "frente": "O que é o Mapa da Jornada do Usuário (User Journey)?",
+      "verso": "A documentação visual de todos os passos, frustrações e sucessos que um usuário tem ao interagir com o produto.",
       "dica": "O passo a passo da experiência."
     }
   ],
@@ -1355,7 +1355,7 @@ export const BANCO_DE_DADOS = {
     {
       "frente": "O que é o Aprendizado Não Supervisionado?",
       "verso": "O modelo recebe dados brutos sem rótulos e tenta descobrir padrões ou agrupar os dados sozinho.",
-      "dica": "Organiza o caos de forma autónoma."
+      "dica": "Organiza o caos de forma autônoma."
     },
     {
       "frente": "O que é o Aprendizado por Reforço?",
@@ -1384,7 +1384,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que são as Redes Neurais Artificiais?",
-      "verso": "Modelos matemáticos inspirados no cérebro humano, organizados em camadas de nós (neurónios) interligados.",
+      "verso": "Modelos matemáticos inspirados no cérebro humano, organizados em camadas de nós (neurônios) interligados.",
       "dica": "A base da inteligência artificial moderna."
     },
     {
@@ -1400,7 +1400,7 @@ export const BANCO_DE_DADOS = {
     {
       "frente": "O que é a Visão Computacional?",
       "verso": "O ensino dos computadores para extraírem informações, identificarem e interpretarem imagens e vídeos do mundo real.",
-      "dica": "Carros autónomos dependem disto."
+      "dica": "Carros autônomos dependem disto."
     },
     {
       "frente": "Qual a diferença entre Dados de Treino e Dados de Teste?",
@@ -1409,7 +1409,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é o Viés Algorítmico (Bias)?",
-      "verso": "Quando a IA herda preconceitos (sociais ou raciais) devido ao uso de uma base de dados histórica defeituosa.",
+      "verso": "Quando a IA herda preconceitos (sociais ou raciais) devido ao uso de um banco de dados histórico defeituoso.",
       "dica": "A IA pode ser racista se ensinada assim."
     },
     {
@@ -1446,18 +1446,18 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é o Scrum?",
-      "verso": "Um framework ágil iterativo (por ciclos) e incremental, focado no trabalho de equipa para entregar valor rápido ao cliente.",
+      "verso": "Um framework ágil iterativo (por ciclos) e incremental, focado no trabalho de equipe para entregar valor rápido ao cliente.",
       "dica": "A metodologia mais adotada no mundo."
     },
     {
       "frente": "Quem é o Product Owner (PO)?",
-      "verso": "A voz do cliente na equipa. É o ÚNICO responsável por definir as prioridades do produto e gerir o Backlog.",
+      "verso": "A voz do cliente na equipe. É o ÚNICO responsável por definir as prioridades do produto e gerenciar o Backlog.",
       "dica": "O dono da visão do produto."
     },
     {
       "frente": "Quem é o Scrum Master?",
-      "verso": "O líder servidor da equipa. A sua função é garantir o uso correto do Scrum e remover impedimentos ou barreiras técnicas e burocráticas.",
-      "dica": "O facilitador e protetor da equipa."
+      "verso": "O líder servidor da equipe. A sua função é garantir o uso correto do Scrum e remover impedimentos ou barreiras técnicas e burocráticas.",
+      "dica": "O facilitador e protetor da equipe."
     },
     {
       "frente": "O que é uma Sprint no Scrum?",
@@ -1466,13 +1466,13 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "Qual o objetivo da reunião Daily Scrum?",
-      "verso": "Sincronização tática da equipa de Desenvolvimento. Duração máxima de 15 minutos. O que fiz ontem, farei hoje e há algum impedimento?",
+      "verso": "Sincronização tática da equipe de Desenvolvimento. Duração máxima de 15 minutos. O que fiz ontem, farei hoje e há algum impedimento?",
       "dica": "Reunião rápida, feita em pé."
     },
     {
       "frente": "O que ocorre na Sprint Planning?",
-      "verso": "A reunião onde a equipa define o Objetivo da Sprint e seleciona as histórias do Backlog que consegue construir nesse ciclo.",
-      "dica": "O planeamento inicial."
+      "verso": "A reunião onde a equipe define o Objetivo da Sprint e seleciona as histórias do Backlog que consegue construir nesse ciclo.",
+      "dica": "O planejamento inicial."
     },
     {
       "frente": "Qual o propósito da Sprint Review?",
@@ -1481,7 +1481,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é a Sprint Retrospective (Retrospectiva)?",
-      "verso": "A última cerimónia, onde a equipa debate O PROCESSO (o que correu bem, o que falhou) para encontrar melhorias contínuas para a próxima Sprint.",
+      "verso": "A última cerimônia, onde a equipe debate O PROCESSO (o que correu bem, o que falhou) para encontrar melhorias contínuas para a próxima Sprint.",
       "dica": "Melhorar a forma como se trabalha."
     },
     {
@@ -1491,7 +1491,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é o Sprint Backlog?",
-      "verso": "O subconjunto de tarefas selecionadas do Product Backlog pela equipa para serem desenvolvidas apenas durante a Sprint atual.",
+      "verso": "O subconjunto de tarefas selecionadas do Product Backlog pela equipe para serem desenvolvidas apenas durante a Sprint atual.",
       "dica": "O trabalho fechado para o mês."
     },
     {
@@ -1500,24 +1500,24 @@ export const BANCO_DE_DADOS = {
       "dica": "Valor real entregue no fim."
     },
     {
-      "frente": "O que é uma História de Utilizador (User Story)?",
+      "frente": "O que é uma História de Usuário (User Story)?",
       "verso": "A descrição simples de um requisito do ponto de vista de quem usa o sistema. 'Como [perfil], eu quero [ação], para [benefício]'.",
       "dica": "Foca no valor gerado para o cliente."
     },
     {
       "frente": "O que é um Épico (Epic)?",
-      "verso": "Uma História de Utilizador muito grande ou complexa que não cabe numa única Sprint e tem de ser fatiada em histórias menores.",
+      "verso": "Uma História de Usuário muito grande ou complexa que não cabe numa única Sprint e tem de ser fatiada em histórias menores.",
       "dica": "Um requisito gigante."
     },
     {
       "frente": "O que são Story Points (Planning Poker)?",
-      "verso": "Uma técnica da equipa para estimar o ESFORÇO e a complexidade de uma tarefa usando valores relativos (como a sequência de Fibonacci).",
+      "verso": "Uma técnica da equipe para estimar o ESFORÇO e a complexidade de uma tarefa usando valores relativos (como a sequência de Fibonacci).",
       "dica": "Não mede horas, mede esforço."
     },
     {
       "frente": "O que é um Burndown Chart?",
       "verso": "Um gráfico que mostra diariamente a quantidade de trabalho restante na Sprint em relação ao tempo. A linha 'queima' para baixo até zero.",
-      "dica": "Mede a velocidade da equipa."
+      "dica": "Mede a velocidade da equipe."
     },
     {
       "frente": "Como funciona o método Kanban?",
@@ -1526,7 +1526,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é o limite de WIP no Kanban?",
-      "verso": "Work In Progress. Consiste em limitar a quantidade máxima de tarefas que a equipa pode realizar em simultâneo na coluna 'Fazendo'.",
+      "verso": "Work In Progress. Consiste em limitar a quantidade máxima de tarefas que a equipe pode realizar em simultâneo na coluna 'Fazendo'.",
       "dica": "Pare de começar, comece a terminar."
     },
     {
@@ -1536,7 +1536,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que significa 'Timebox' nos métodos Ágeis?",
-      "verso": "A duração de tempo MÁXIMA permitida para realizar uma cerimónia ou ciclo (Ex: a Daily tem um Timebox cravado de 15 minutos).",
+      "verso": "A duração de tempo MÁXIMA permitida para realizar uma cerimônia ou ciclo (Ex: a Daily tem um Timebox cravado de 15 minutos).",
       "dica": "Bateu no tempo, a reunião acaba."
     }
   ],
@@ -1548,7 +1548,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é o Entity Framework Core (EF Core)?",
-      "verso": "Um ORM (Object-Relational Mapper) que permite manipular bases de dados usando objetos C# em vez de escrever código SQL manual.",
+      "verso": "Um ORM (Object-Relational Mapper) que permite manipular bancos de dados usando objetos C# em vez de escrever código SQL manual.",
       "dica": "Mapeamento Objeto-Relacional."
     },
     {
@@ -1578,8 +1578,8 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "Qual a diferença entre IEnumerable e IQueryable no C#?",
-      "verso": "IEnumerable executa a consulta na memória (após trazer os dados da base). IQueryable traduz os filtros para SQL e executa diretamente na base de dados.",
-      "dica": "IQueryable é muito mais otimizado para bases de dados."
+      "verso": "IEnumerable executa a consulta na memória (após trazer os dados da base). IQueryable traduz os filtros para SQL e executa diretamente no banco de dados.",
+      "dica": "IQueryable é muito mais otimizado para bancos de dados."
     },
     {
       "frente": "O que é o Swagger (OpenAPI)?",
@@ -1588,7 +1588,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "No ciclo de vida de Injeção de Dependência, o que significa 'Singleton'?",
-      "verso": "Cria uma única instância do serviço a primeira vez que é solicitado, e partilha essa mesma instância com todas as requisições futuras.",
+      "verso": "Cria uma única instância do serviço a primeira vez que é solicitado, e compartilha essa mesma instância com todas as requisições futuras.",
       "dica": "Único para todos."
     },
     {
@@ -1598,7 +1598,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é o LINQ (Language Integrated Query)?",
-      "verso": "Um conjunto de funcionalidades do C# que permite escrever consultas complexas (filtros, ordenações) em coleções de dados ou bases de dados de forma nativa.",
+      "verso": "Um conjunto de funcionalidades do C# que permite escrever consultas complexas (filtros, ordenações) em coleções de dados ou bancos de dados de forma nativa.",
       "dica": "O SQL dentro do C#."
     },
     {
@@ -1612,8 +1612,8 @@ export const BANCO_DE_DADOS = {
       "dica": "Programação Assíncrona (async/await)."
     },
     {
-      "frente": "O que é o ficheiro appsettings.json?",
-      "verso": "O ficheiro principal de configuração das aplicações .NET, usado para guardar chaves, strings de conexão e parâmetros globais.",
+      "frente": "O que é o arquivo appsettings.json?",
+      "verso": "O arquivo principal de configuração das aplicações .NET, usado para guardar chaves, strings de conexão e parâmetros globais.",
       "dica": "Onde fica a 'Connection String'."
     },
     {
@@ -1623,8 +1623,8 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é um token JWT (JSON Web Token)?",
-      "verso": "Um padrão de mercado para autenticação. É uma string encriptada gerada após o login que o cliente usa para aceder a rotas protegidas da API.",
-      "dica": "O 'passaporte' de acesso do utilizador."
+      "verso": "Um padrão de mercado para autenticação. É uma string encriptada gerada após o login que o cliente usa para acessar rotas protegidas da API.",
+      "dica": "O 'passaporte' de acesso do usuário."
     },
     {
       "frente": "O que é o Middleware no ASP.NET Core?",
@@ -1638,8 +1638,8 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que são as Migrations no Entity Framework Core?",
-      "verso": "Um sistema que permite gerar e aplicar alterações na estrutura da base de dados (criar tabelas, colunas) a partir das mudanças feitas nas classes C#.",
-      "dica": "Versionamento do esquema da base de dados."
+      "verso": "Um sistema que permite gerar e aplicar alterações na estrutura do banco de dados (criar tabelas, colunas) a partir das mudanças feitas nas classes C#.",
+      "dica": "Versionamento do esquema do banco de dados."
     }
   ],
   "fase17": [
@@ -1659,18 +1659,18 @@ export const BANCO_DE_DADOS = {
       "dica": "Multi-platform App UI."
     },
     {
-      "frente": "O que é o Ciclo de Vida (Lifecycle) de um ecrã mobile?",
+      "frente": "O que é o Ciclo de Vida (Lifecycle) de uma tela mobile?",
       "verso": "A série de estados pelos quais uma app passa: Criada (OnCreate), Visível (OnStart), Em Pausa (OnPause) e Destruída (OnDestroy).",
       "dica": "Evita consumo excessivo de bateria em 2º plano."
     },
     {
       "frente": "Para que serve a API de Geolocalização?",
-      "verso": "Permite à aplicação aceder ao GPS e às redes móveis do telemóvel para determinar a latitude e longitude do utilizador.",
+      "verso": "Permite à aplicação acessar o GPS e às redes móveis do celular para determinar a latitude e longitude do usuário.",
       "dica": "Usada no Uber, iFood, Waze."
     },
     {
       "frente": "Para que serve o SQLite em projetos Mobile?",
-      "verso": "É uma base de dados relacional extremamente leve, que fica embutida dentro do próprio telemóvel para guardar informações offline.",
+      "verso": "É um banco de dados relacional extremamente leve, que fica embutida dentro do próprio celular para guardar informações offline.",
       "dica": "Funciona sem internet."
     },
     {
@@ -1694,7 +1694,7 @@ export const BANCO_DE_DADOS = {
       "dica": "O principal concorrente do React Native."
     },
     {
-      "frente": "O que é o ficheiro APK ou AAB no Android?",
+      "frente": "O que é o arquivo APK ou AAB no Android?",
       "verso": "O pacote final compilado e compactado que contém a aplicação pronta para ser instalada ou enviada para a Google Play Store.",
       "dica": "Android Package / Android App Bundle."
     },
@@ -1705,22 +1705,22 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que são Push Notifications?",
-      "verso": "Mensagens ou alertas curtos enviados pelo servidor diretamente para o ecrã do telemóvel do utilizador, mesmo quando a app está fechada.",
+      "verso": "Mensagens ou alertas curtos enviados pelo servidor diretamente para a tela do celular do usuário, mesmo quando a app está fechada.",
       "dica": "Mensagens de aviso do WhatsApp ou Banco."
     },
     {
       "frente": "O que significa 'Background Process' no mobile?",
-      "verso": "Um processo em segundo plano, ou seja, código que continua a ser executado mesmo quando o utilizador está noutra app.",
+      "verso": "Um processo em segundo plano, ou seja, código que continua a ser executado mesmo quando o usuário está noutra app.",
       "dica": "Ex: O Spotify a tocar música enquanto lê e-mails."
     },
     {
       "frente": "Qual a diferença entre 'px' (pixels) e 'dp' (density-independent pixels)?",
-      "verso": "O pixel varia de tamanho consoante o ecrã. O 'dp' ajusta-se automaticamente à densidade do ecrã para que os botões tenham sempre o mesmo tamanho físico.",
+      "verso": "O pixel varia de tamanho conforme a tela. O 'dp' ajusta-se automaticamente à densidade da tela para que os botões tenham sempre o mesmo tamanho físico.",
       "dica": "Responsividade móvel."
     },
     {
       "frente": "O que é o Firebase?",
-      "verso": "Uma plataforma da Google (BaaS) que fornece base de dados em tempo real, autenticação, analytics e hospedagem, simplificando o Back-end de apps.",
+      "verso": "Uma plataforma da Google (BaaS) que fornece banco de dados em tempo real, autenticação, analytics e hospedagem, simplificando o Back-end de apps.",
       "dica": "Back-end as a Service."
     },
     {
@@ -1735,20 +1735,20 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é uma WebView?",
-      "verso": "Um componente invisível que embute um navegador web dentro de uma app nativa, permitindo renderizar páginas HTML diretamente no ecrã.",
+      "verso": "Um componente invisível que embute um navegador web dentro de uma app nativa, permitindo renderizar páginas HTML diretamente na tela.",
       "dica": "Um browser disfarçado de app."
     },
     {
       "frente": "O que é o sistema de Permissões Mobile?",
-      "verso": "O mecanismo de segurança (exigido por Android e iOS) que obriga a app a perguntar ao utilizador se pode aceder à câmara, microfone ou ficheiros.",
-      "dica": "'Permitir acesso à câmara?'"
+      "verso": "O mecanismo de segurança (exigido por Android e iOS) que obriga a app a perguntar ao usuário se pode acessar a câmera, microfone ou arquivos.",
+      "dica": "'Permitir acesso à câmera?'"
     }
   ],
   "fase18": [
     {
       "frente": "O que é uma Stored Procedure (Procedimento Armazenado)?",
-      "verso": "Um bloco de código SQL guardado na base de dados para ser reutilizado várias vezes pelas aplicações que se conectam a ela.",
-      "dica": "Disciplina: Programação de Bases de Dados."
+      "verso": "Um bloco de código SQL guardado no banco de dados para ser reutilizado várias vezes pelas aplicações que se conectam a ela.",
+      "dica": "Disciplina: Programação de Bancos de Dados."
     },
     {
       "frente": "O que é uma Trigger (Gatilho)?",
@@ -1762,27 +1762,27 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é o conceito ACID em transações?",
-      "verso": "Um conjunto de propriedades (Atomicidade, Consistência, Isolamento, Durabilidade) que garante que as transações na base de dados processam com segurança.",
+      "verso": "Um conjunto de propriedades (Atomicidade, Consistência, Isolamento, Durabilidade) que garante que as transações no banco de dados processam com segurança.",
       "dica": "Garante a fiabilidade do sistema bancário."
     },
     {
       "frente": "Para que serve o comando COMMIT?",
-      "verso": "Para confirmar o sucesso de uma transação, guardando e gravando permanentemente as alterações efetuadas na base de dados.",
+      "verso": "Para confirmar o sucesso de uma transação, guardando e gravando permanentemente as alterações efetuadas no banco de dados.",
       "dica": "Confirmar a gravação."
     },
     {
       "frente": "Para que serve o comando ROLLBACK?",
       "verso": "Para reverter e cancelar todas as alterações feitas numa transação caso ocorra um erro antes do comando COMMIT.",
-      "dica": "O 'Desfazer' (Ctrl+Z) da base de dados."
+      "dica": "O 'Desfazer' (Ctrl+Z) do banco de dados."
     },
     {
       "frente": "O que é um Cursor em SQL?",
-      "verso": "Uma estrutura de controlo que permite percorrer e processar os registos (linhas) resultantes de um SELECT, um por um.",
+      "verso": "Uma estrutura de controle que permite percorrer e processar os registros (linhas) resultantes de um SELECT, um por um.",
       "dica": "Como um laço 'for', mas muito lento em SQL."
     },
     {
       "frente": "O que é uma User-Defined Function (UDF)?",
-      "verso": "Uma função criada pelo utilizador para efetuar cálculos ou formatar dados e retornar um único valor (escalar) ou uma tabela.",
+      "verso": "Uma função criada pelo usuário para efetuar cálculos ou formatar dados e retornar um único valor (escalar) ou uma tabela.",
       "dica": "Pode ser usada dentro de um comando SELECT."
     },
     {
@@ -1807,7 +1807,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é o nível de isolamento 'Read Uncommitted'?",
-      "verso": "O nível mais baixo de isolamento; permite a uma transação ler dados não confirmados (sujos) que ainda estão a ser alterados por outra transação.",
+      "verso": "O nível mais baixo de isolamento; permite a uma transação ler dados não confirmados (sujos) que ainda estão sendo alterados por outra transação.",
       "dica": "Leitura fantasma/suja (Dirty Read)."
     },
     {
@@ -1822,7 +1822,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é uma Tabela Temporária (ex: #Tabela)?",
-      "verso": "Uma tabela que existe apenas temporariamente na memória (ou no tempdb) durante a ligação do utilizador e é eliminada ao encerrar a sessão.",
+      "verso": "Uma tabela que existe apenas temporariamente na memória (ou no tempdb) durante a ligação do usuário e é eliminada ao encerrar a sessão.",
       "dica": "Usa o símbolo '#' na frente do nome."
     },
     {
@@ -1842,14 +1842,14 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é um Plano de Execução (Execution Plan)?",
-      "verso": "A rota ou estratégia interna escolhida pelo motor da base de dados para recuperar os dados da forma mais otimizada possível.",
-      "dica": "Mostra se o SQL está a usar os índices corretamente."
+      "verso": "A rota ou estratégia interna escolhida pelo motor do banco de dados para recuperar os dados da forma mais otimizada possível.",
+      "dica": "Mostra se o SQL está usando os índices corretamente."
     }
   ],
   "fase19": [
     {
       "frente": "O que é a Cloud Computing (Computação em Nuvem)?",
-      "verso": "A entrega de serviços informáticos (servidores, bases de dados, software) via Internet, geridos por terceiros com base no 'pague o que utilizar'.",
+      "verso": "A entrega de serviços informáticos (servidores, bancos de dados, software) via Internet, gerenciados por terceiros com base no 'pague o que utilizar'.",
       "dica": "Disciplina: Cloud e DevOps."
     },
     {
@@ -1869,7 +1869,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "Defina IaaS, PaaS e SaaS.",
-      "verso": "IaaS (Máquina/Infraestrutura alugada); PaaS (Ambiente para desenvolvimento); SaaS (Software final pronto para o utilizador, ex: Gmail).",
+      "verso": "IaaS (Máquina/Infraestrutura alugada); PaaS (Ambiente para desenvolvimento); SaaS (Software final pronto para o usuário, ex: Gmail).",
       "dica": "Os 3 níveis do serviço Cloud."
     },
     {
@@ -1889,12 +1889,12 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é IaC (Infraestrutura como Código)?",
-      "verso": "A gestão e provisionamento de centros de dados Cloud através de ficheiros com código e scripts, em vez de configurar as coisas manualmente em painéis web.",
+      "verso": "A gestão e provisionamento de centros de dados Cloud através de arquivos com código e scripts, em vez de configurar as coisas manualmente em painéis web.",
       "dica": "O servidor configurado em linhas de código."
     },
     {
       "frente": "O que é o Terraform?",
-      "verso": "Uma ferramenta open-source popular de IaC (Infraestrutura como Código) que permite criar, alterar e gerir redes seguras e eficientes em múltiplos provedores Cloud.",
+      "verso": "Uma ferramenta open-source popular de IaC (Infraestrutura como Código) que permite criar, alterar e gerenciar redes seguras e eficientes em múltiplos provedores Cloud.",
       "dica": "Automatiza a criação do servidor."
     },
     {
@@ -1904,7 +1904,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é o Amazon S3?",
-      "verso": "Amazon Simple Storage Service. Um serviço de armazenamento de ficheiros em nuvem seguro e infinitamente escalável focado em objetos (imagens, backups).",
+      "verso": "Amazon Simple Storage Service. Um serviço de armazenamento de arquivos em nuvem seguro e infinitamente escalável focado em objetos (imagens, backups).",
       "dica": "O 'disco rígido' infinito da AWS."
     },
     {
@@ -1929,17 +1929,17 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "No Docker, o que é uma Imagem?",
-      "verso": "Um modelo/ficheiro imutável de apenas leitura contendo as instruções necessárias (SO, bibliotecas, código) para instanciar um Contentor.",
+      "verso": "Um modelo/arquivo imutável de apenas leitura contendo as instruções necessárias (SO, bibliotecas, código) para instanciar um Contentor.",
       "dica": "A 'forma de bolo' do contentor."
     },
     {
       "frente": "O que faz o comando 'docker-compose up'?",
-      "verso": "Lê o ficheiro 'docker-compose.yml' e inicia simultaneamente múltiplos contentores interligados (ex: Aplicação + Banco de Dados).",
+      "verso": "Lê o arquivo 'docker-compose.yml' e inicia simultaneamente múltiplos contentores interligados (ex: Aplicação + Banco de Dados).",
       "dica": "Sobe todo o ambiente de uma vez."
     },
     {
       "frente": "O que é o Blue-Green Deployment?",
-      "verso": "Técnica de lançamento de software em que dois ambientes idênticos coexistem (Azul ativo, Verde atualizado). O tráfego é movido do Azul para o Verde sem o utilizador notar.",
+      "verso": "Técnica de lançamento de software em que dois ambientes idênticos coexistem (Azul ativo, Verde atualizado). O tráfego é movido do Azul para o Verde sem o usuário notar.",
       "dica": "Atualização com Zero Downtime (sem paralisação)."
     },
     {
@@ -1951,7 +1951,7 @@ export const BANCO_DE_DADOS = {
   "fase20": [
     {
       "frente": "O que é um MVP (Minimum Viable Product)?",
-      "verso": "A versão mais simples de um novo produto que permite à equipa recolher o máximo de validação sobre o cliente com o mínimo esforço.",
+      "verso": "A versão mais simples de um novo produto que permite à equipe recolher o máximo de validação sobre o cliente com o mínimo esforço.",
       "dica": "Disciplina: Empreendedorismo em TI."
     },
     {
@@ -1971,7 +1971,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que é um Modelo B2C (Business to Consumer)?",
-      "verso": "Um modelo comercial em que os produtos ou serviços são vendidos diretamente da empresa para o consumidor ou utilizador final.",
+      "verso": "Um modelo comercial em que os produtos ou serviços são vendidos diretamente da empresa para o consumidor ou usuário final.",
       "dica": "Ex: Spotify, Netflix, iFood."
     },
     {
@@ -2006,7 +2006,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que significa o termo 'Pivotar' (Pivot) no mundo das startups?",
-      "verso": "Alterar fundamentalmente a estratégia do modelo de negócio ou as funcionalidades do produto ao perceber que a ideia original não está a dar lucro.",
+      "verso": "Alterar fundamentalmente a estratégia do modelo de negócio ou as funcionalidades do produto ao perceber que a ideia original não está dando lucro.",
       "dica": "Mudar a rota do barco antes dele afundar."
     },
     {
@@ -2046,7 +2046,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "O que preconiza o método 'Lean Startup' (Startup Enxuta) criado por Eric Ries?",
-      "verso": "Aplicar o ciclo 'Construir-Medir-Aprender' num processo científico focado em lançar o MVP o mais depressa possível para validar factos sem desperdiçar dinheiro e tempo.",
+      "verso": "Aplicar o ciclo 'Construir-Medir-Aprender' num processo científico focado em lançar o MVP o mais rápido possível para validar fatos sem desperdiçar dinheiro e tempo.",
       "dica": "Falhar rapidamente, aprender depressa, gastar pouco."
     }
   ],
@@ -2654,15 +2654,15 @@ export const BANCO_DE_DADOS = {
   ],
   "fase22": [
     {
-      "frente": "(ENADE - Algoritmos) Considere a estrutura de dados 'Fila' (Queue) a ser usada para gerir requisições de impressão num escritório. Foram inseridos, nesta ordem, os ficheiros: A, B e C.\n\nSe o comando 'dequeue()' for executado duas vezes, qual ficheiro restará na fila?",
+      "frente": "(ENADE - Algoritmos) Considere a estrutura de dados 'Fila' (Queue) a ser usada para gerenciar requisições de impressão num escritório. Foram inseridos, nesta ordem, os arquivos: A, B e C.\n\nSe o comando 'dequeue()' for executado duas vezes, qual arquivo restará na fila?",
       "opcoes": [
-        "A) Ficheiro A",
-        "B) Ficheiro B",
-        "C) Ficheiro C",
+        "A) Arquivo A",
+        "B) Arquivo B",
+        "C) Arquivo C",
         "D) A fila ficará vazia"
       ],
       "correta": 2,
-      "verso": "Alternativa C: Ficheiro C.\n\nJustificativa: A Fila segue o princípio FIFO (First In, First Out). O primeiro a entrar é o primeiro a sair. Sairão o A e o B, restando apenas o C.",
+      "verso": "Alternativa C: Arquivo C.\n\nJustificativa: A Fila segue o princípio FIFO (First In, First Out). O primeiro a entrar é o primeiro a sair. Sairão o A e o B, restando apenas o C.",
       "dica": "FIFO = First In, First Out."
     },
     {
@@ -2678,19 +2678,19 @@ export const BANCO_DE_DADOS = {
       "dica": "Funciona como uma cápsula de proteção."
     },
     {
-      "frente": "(ENADE - Bases de Dados) Num modelo relacional, o que caracteriza uma restrição de integridade referencial implementada através de uma Chave Estrangeira (Foreign Key)?",
+      "frente": "(ENADE - Bancos de Dados) Num modelo relacional, o que caracteriza uma restrição de integridade referencial implementada através de uma Chave Estrangeira (Foreign Key)?",
       "opcoes": [
         "A) Garante que uma coluna não tenha valores nulos (NOT NULL).",
         "B) Garante que os valores de uma coluna de uma tabela existam como valores de uma chave primária (PK) noutra tabela relacionada.",
         "C) Garante a ordenação alfabética das colunas.",
-        "D) Impede atualizações na base de dados."
+        "D) Impede atualizações no banco de dados."
       ],
       "correta": 1,
-      "verso": "Alternativa B: Garante que os valores correspondam a uma Chave Primária noutra tabela.\n\nJustificativa: A Chave Estrangeira impede que se registe um 'Pedido' para um 'Cliente' que não existe na base de dados, mantendo a integridade dos dados.",
-      "dica": "Evita registos órfãos."
+      "verso": "Alternativa B: Garante que os valores correspondam a uma Chave Primária noutra tabela.\n\nJustificativa: A Chave Estrangeira impede que se registre um 'Pedido' para um 'Cliente' que não existe no banco de dados, mantendo a integridade dos dados.",
+      "dica": "Evita registros órfãos."
     },
     {
-      "frente": "(ENADE - SQL) Qual comando DML (Data Manipulation Language) do SQL é utilizado para atualizar registos já existentes numa tabela?",
+      "frente": "(ENADE - SQL) Qual comando DML (Data Manipulation Language) do SQL é utilizado para atualizar registros já existentes numa tabela?",
       "opcoes": [
         "A) ALTER TABLE",
         "B) MODIFY",
@@ -2707,7 +2707,7 @@ export const BANCO_DE_DADOS = {
         "A) Mostrar a hierarquia de herança entre as classes.",
         "B) Descrever os estados pelos quais um objeto passa durante a sua vida.",
         "C) Modelar a interação e a troca de mensagens entre os objetos ao longo do tempo.",
-        "D) Estruturar a base de dados do sistema."
+        "D) Estruturar o banco de dados do sistema."
       ],
       "correta": 2,
       "verso": "Alternativa C: Modelar a interação e a troca de mensagens ao longo do tempo.\n\nJustificativa: O diagrama de sequência evidencia a ordem temporal cronológica das interações entre componentes ou atores num determinado cenário.",
@@ -2740,9 +2740,9 @@ export const BANCO_DE_DADOS = {
     {
       "frente": "(ENADE - Arquitetura) Qual é a principal característica da arquitetura de Microserviços em comparação com uma arquitetura Monolítica?",
       "opcoes": [
-        "A) Partilhar a mesma base de dados para todo o sistema de forma rígida.",
+        "A) Compartilhar o mesmo banco de dados para todo o sistema de forma rígida.",
         "B) Dividir a aplicação em pequenos serviços independentes que comunicam via APIs.",
-        "C) O código-fonte reside inteiramente num único ficheiro executável.",
+        "C) O código-fonte reside inteiramente num único arquivo executável.",
         "D) Não é compatível com computação na nuvem."
       ],
       "correta": 1,
@@ -2750,7 +2750,7 @@ export const BANCO_DE_DADOS = {
       "dica": "Serviços pequenos e isolados."
     },
     {
-      "frente": "(ENADE - SO) O que é o processo de 'Swapping' (troca) gerido pelo Sistema Operativo?",
+      "frente": "(ENADE - SO) O que é o processo de 'Swapping' (troca) gerenciado pelo Sistema Operacional?",
       "opcoes": [
         "A) Trocar o processador principal em tempo de execução.",
         "B) Substituir o sistema Linux pelo Windows.",
@@ -2776,7 +2776,7 @@ export const BANCO_DE_DADOS = {
     {
       "frente": "(ENADE - Web) O que é o modelo DOM (Document Object Model) no desenvolvimento Front-end?",
       "opcoes": [
-        "A) Uma base de dados nativa do navegador.",
+        "A) Um banco de dados nativo do navegador.",
         "B) Uma linguagem que substitui o HTML.",
         "C) Uma interface de programação (API) que representa o documento HTML como uma árvore de objetos.",
         "D) Um protocolo de rede."
@@ -2790,7 +2790,7 @@ export const BANCO_DE_DADOS = {
       "opcoes": [
         "A) Um loop while infinito.",
         "B) Quando uma função chama-se a si mesma até atingir uma condição de paragem.",
-        "C) Quando o código partilha variáveis globais.",
+        "C) Quando o código compartilha variáveis globais.",
         "D) Quando o código é executado num servidor remoto."
       ],
       "correta": 1,
@@ -2802,7 +2802,7 @@ export const BANCO_DE_DADOS = {
       "opcoes": [
         "A) Evitar que a classe seja instanciada diretamente, servindo apenas como modelo (superclasse) para as suas classes filhas.",
         "B) Forçar que todos os seus métodos estejam vazios (como numa Interface).",
-        "C) Esconder o código-fonte num ficheiro DLL fechado.",
+        "C) Esconder o código-fonte num arquivo DLL fechado.",
         "D) Substituir o uso de variáveis locais no escopo."
       ],
       "correta": 0,
@@ -2818,8 +2818,8 @@ export const BANCO_DE_DADOS = {
         "D) Buffer Overflow"
       ],
       "correta": 2,
-      "verso": "Alternativa C: CSRF (Falsificação de Pedido Entre Sites).\n\nJustificativa: No CSRF, o atacante usa a sessão válida (os cookies de login) do utilizador para executar ações indesejadas no servidor de destino.",
-      "dica": "Falsifica uma ação do próprio utilizador autenticado."
+      "verso": "Alternativa C: CSRF (Falsificação de Pedido Entre Sites).\n\nJustificativa: No CSRF, o atacante usa a sessão válida (os cookies de login) do usuário para executar ações indesejadas no servidor de destino.",
+      "dica": "Falsifica uma ação do próprio usuário autenticado."
     },
     {
       "frente": "(ENADE - Redes) O que diferencia o protocolo HTTPS do protocolo HTTP padrão?",
@@ -2834,7 +2834,7 @@ export const BANCO_DE_DADOS = {
       "dica": "O cadeado no navegador."
     },
     {
-      "frente": "(ENADE - ACID) A respeito das transações em Bases de Dados Relacionais, o que garante a propriedade da 'Atomicidade'?",
+      "frente": "(ENADE - ACID) A respeito das transações em Bancos de Dados Relacionais, o que garante a propriedade da 'Atomicidade'?",
       "opcoes": [
         "A) A transação será executada inteiramente com sucesso, ou falhará totalmente (tudo ou nada).",
         "B) O sistema volta sempre à versão original do dia anterior.",
@@ -2866,7 +2866,7 @@ export const BANCO_DE_DADOS = {
         "D) Criar famílias de objetos inter-relacionados."
       ],
       "correta": 1,
-      "verso": "Alternativa B: Garantir uma única instância global da classe.\n\nJustificativa: Singleton é muito usado para gerir conexões com a base de dados, onde ter várias instâncias ativas gastaria memória desnecessária.",
+      "verso": "Alternativa B: Garantir uma única instância global da classe.\n\nJustificativa: Singleton é muito usado para gerenciar conexões com o banco de dados, onde ter várias instâncias ativas gastaria memória desnecessária.",
       "dica": "Single (Uma única instância)."
     },
     {
@@ -2874,17 +2874,17 @@ export const BANCO_DE_DADOS = {
       "opcoes": [
         "A) Envia o código para a nuvem no GitHub.",
         "B) Cria uma cópia do projeto.",
-        "C) Guarda um snapshot do estado atual dos ficheiros modificados no repositório LOCAL do desenvolvedor.",
+        "C) Guarda um snapshot do estado atual dos arquivos modificados no repositório LOCAL do desenvolvedor.",
         "D) Apaga o histórico."
       ],
       "correta": 2,
-      "verso": "Alternativa C: Guarda o estado atual no repositório LOCAL.\n\nJustificativa: O comando commit regista as alterações no histórico da máquina do utilizador. Para enviar para a nuvem, usa-se o git push.",
+      "verso": "Alternativa C: Guarda o estado atual no repositório LOCAL.\n\nJustificativa: O comando commit registra as alterações no histórico da máquina do usuário. Para enviar para a nuvem, usa-se o git push.",
       "dica": "Grava a versão localmente."
     },
     {
       "frente": "(ENADE - Algoritmos) Qual é a finalidade principal do algoritmo de ordenação 'Bubble Sort'?",
       "opcoes": [
-        "A) Compactar ficheiros ZIP.",
+        "A) Compactar arquivos ZIP.",
         "B) Percorrer uma lista, comparando pares vizinhos e trocando de posição se estiverem fora de ordem, até que o maior flutue para o final.",
         "C) Pesquisar a palavra mais longa num texto.",
         "D) Criar matrizes multidimensionais vazias."
@@ -2894,19 +2894,19 @@ export const BANCO_DE_DADOS = {
       "dica": "Como bolhas a flutuar num copo."
     },
     {
-      "frente": "(ENADE - Bases de Dados) O que significa a operação de 'Normalização' aplicada a um esquema de base de dados relacional?",
+      "frente": "(ENADE - Bancos de Dados) O que significa a operação de 'Normalização' aplicada a um esquema de banco de dados relacional?",
       "opcoes": [
         "A) Aumentar propositadamente a redundância para tornar as pesquisas rápidas.",
         "B) Aumentar os tipos de dados permitidos.",
         "C) Reestruturar as tabelas para eliminar anomalias de atualização, inserção e reduzir a redundância de dados.",
-        "D) Traduzir a base de dados para ORM."
+        "D) Traduzir o banco de dados para ORM."
       ],
       "correta": 2,
       "verso": "Alternativa C: Eliminar anomalias e reduzir a redundância.\n\nJustificativa: A normalização (1FN, 2FN, 3FN) garante que não haverá inconsistências (ex: ter duas moradas diferentes para a mesma pessoa) isolando dados repetidos.",
       "dica": "Regras para organizar tabelas sem repetições."
     },
     {
-      "frente": "(ENADE - Sistemas Distribuídos) O que dita o Teorema CAP focado em Bases de Dados NoSQL e Sistemas Distribuídos?",
+      "frente": "(ENADE - Sistemas Distribuídos) O que dita o Teorema CAP focado em Bancos de Dados NoSQL e Sistemas Distribuídos?",
       "opcoes": [
         "A) Que não se pode ter uma rede sem routers.",
         "B) Que é impossível fornecer simultaneamente as três garantias: Consistência (C), Disponibilidade (A) e Tolerância a Partição (P). Só se escolhe duas.",
@@ -2926,7 +2926,7 @@ export const BANCO_DE_DADOS = {
         "D) Mover o sistema on-premises para a nuvem."
       ],
       "correta": 1,
-      "verso": "Alternativa B: Adicionar mais servidores e dividir o tráfego com Load Balancer.\n\nJustificativa: A escalabilidade vertical (Scale-up) aumenta o poder da própria máquina. A horizontal (Scale-out) resolve a alta procura colocando mais máquinas a trabalhar em equipa.",
+      "verso": "Alternativa B: Adicionar mais servidores e dividir o tráfego com Load Balancer.\n\nJustificativa: A escalabilidade vertical (Scale-up) aumenta o poder da própria máquina. A horizontal (Scale-out) resolve a alta procura colocando mais máquinas a trabalhar em equipe.",
       "dica": "Mais máquinas lado a lado = Horizontal."
     },
     {
@@ -2938,20 +2938,20 @@ export const BANCO_DE_DADOS = {
         "D) Loop Infinito."
       ],
       "correta": 1,
-      "verso": "Alternativa B: Memory Leak (Fuga de Memória).\n\nJustificativa: O sistema operativo perde a referência dessa alocação, mas não a liberta. Se ocorrer repetidamente, o computador fica sem memória RAM disponível e crasha.",
+      "verso": "Alternativa B: Memory Leak (Fuga de Memória).\n\nJustificativa: O sistema operacional perde a referência dessa alocação, mas não a liberta. Se ocorrer repetidamente, o computador fica sem memória RAM disponível e crasha.",
       "dica": "Fuga contínua de memória RAM."
     },
     {
       "frente": "(ENADE - Engenharia de Software) Qual é o objetivo do padrão arquitetural MVC (Model-View-Controller)?",
       "opcoes": [
         "A) Aumentar o acoplamento do sistema.",
-        "B) Separar a representação da informação (dados), a interação do utilizador (interface) e o controlo lógico em três componentes interligados.",
-        "C) Juntar todo o código num único ficheiro JavaScript.",
-        "D) Substituir a necessidade de uma base de dados."
+        "B) Separar a representação da informação (dados), a interação do usuário (interface) e o controle lógico em três componentes interligados.",
+        "C) Juntar todo o código num único arquivo JavaScript.",
+        "D) Substituir a necessidade de um banco de dados."
       ],
       "correta": 1,
-      "verso": "Alternativa B: Separar dados, interface e controlo lógico.\n\nJustificativa: O MVC promove a separação de preocupações (Separation of Concerns), tornando o código mais modular, fácil de testar e de manter.",
-      "dica": "Separa o ecrã da lógica."
+      "verso": "Alternativa B: Separar dados, interface e controle lógico.\n\nJustificativa: O MVC promove a separação de preocupações (Separation of Concerns), tornando o código mais modular, fácil de testar e de manter.",
+      "dica": "Separa a tela da lógica."
     },
     {
       "frente": "(ENADE - POO) A técnica em que duas ou mais funções da mesma classe têm o mesmo nome, mas diferem no número ou tipo dos seus parâmetros, chama-se:",
@@ -2966,7 +2966,7 @@ export const BANCO_DE_DADOS = {
       "dica": "Mesmo nome, assinaturas diferentes."
     },
     {
-      "frente": "(ENADE - Bases de Dados) Numa tabela de base de dados relacional, uma chave primária (Primary Key) composta é formada por:",
+      "frente": "(ENADE - Bancos de Dados) Numa tabela de banco de dados relacional, uma chave primária (Primary Key) composta é formada por:",
       "opcoes": [
         "A) Apenas um atributo numérico e autoincremental.",
         "B) Dois ou mais atributos que, combinados, identificam unicamente uma linha na tabela.",
@@ -2974,7 +2974,7 @@ export const BANCO_DE_DADOS = {
         "D) Uma chave que permite valores nulos."
       ],
       "correta": 1,
-      "verso": "Alternativa B: Dois ou mais atributos combinados.\n\nJustificativa: Quando uma única coluna não é suficiente para garantir a exclusividade do registo (ex: ID_Aluno e ID_Disciplina numa tabela de matrículas), utiliza-se a junção das colunas como Chave Primária Composta.",
+      "verso": "Alternativa B: Dois ou mais atributos combinados.\n\nJustificativa: Quando uma única coluna não é suficiente para garantir a exclusividade do registro (ex: ID_Aluno e ID_Disciplina numa tabela de matrículas), utiliza-se a junção das colunas como Chave Primária Composta.",
       "dica": "Combinação de duas ou mais colunas."
     },
     {
@@ -3010,7 +3010,7 @@ export const BANCO_DE_DADOS = {
         "D) Cláusulas LIMIT e OFFSET exclusivamente."
       ],
       "correta": 1,
-      "verso": "Alternativa B: Funções de agregação.\n\nJustificativa: O GROUP BY serve para agrupar linhas que têm os mesmos valores em colunas de resumo, permitindo calcular médias, somas ou totais por grupo (ex: COUNT(*) de utilizadores agrupados por País).",
+      "verso": "Alternativa B: Funções de agregação.\n\nJustificativa: O GROUP BY serve para agrupar linhas que têm os mesmos valores em colunas de resumo, permitindo calcular médias, somas ou totais por grupo (ex: COUNT(*) de usuários agrupados por País).",
       "dica": "Agrupa para somar ou contar."
     },
     {
@@ -3038,12 +3038,12 @@ export const BANCO_DE_DADOS = {
       "dica": "É a 'receita de bolo' do contentor."
     },
     {
-      "frente": "(ENADE - Sistemas Operativos) O conceito de 'Multithreading' refere-se à:",
+      "frente": "(ENADE - Sistemas Operacionais) O conceito de 'Multithreading' refere-se à:",
       "opcoes": [
         "A) Capacidade de ligar vários monitores ao computador.",
         "B) Capacidade de um programa se dividir em múltiplas threads (linhas de execução) que podem ser processadas em paralelo pelo CPU.",
-        "C) Transferência de ficheiros pesados via FTP.",
-        "D) Instalação de múltiplos sistemas operativos no mesmo disco."
+        "C) Transferência de arquivos pesados via FTP.",
+        "D) Instalação de múltiplos sistemas operacionais no mesmo disco."
       ],
       "correta": 1,
       "verso": "Alternativa B: Múltiplas linhas de execução paralelas.\n\nJustificativa: O Multithreading permite que a aplicação faça várias tarefas ao mesmo tempo (ex: um jogo carrega o som numa thread enquanto processa a física noutra), otimizando o uso do processador.",
@@ -3052,26 +3052,26 @@ export const BANCO_DE_DADOS = {
     {
       "frente": "(ENADE - Web) No desenvolvimento web, o que são as sessões armazenadas nos Cookies ou no Local Storage do navegador?",
       "opcoes": [
-        "A) Ficheiros de vídeo em cache.",
-        "B) Pequenos fragmentos de dados armazenados no cliente (navegador) para manter o estado da aplicação e identificar o utilizador entre as requisições HTTP (que são stateless).",
-        "C) Componentes do servidor de base de dados MySQL.",
+        "A) Arquivos de vídeo em cache.",
+        "B) Pequenos fragmentos de dados armazenados no cliente (navegador) para manter o estado da aplicação e identificar o usuário entre as requisições HTTP (que são stateless).",
+        "C) Componentes do servidor de banco de dados MySQL.",
         "D) Um protocolo de encriptação de senhas."
       ],
       "correta": 1,
-      "verso": "Alternativa B: Dados armazenados no cliente para manter o estado.\n\nJustificativa: Como o HTTP é 'sem estado' (não lembra da última requisição), os cookies e o Local Storage guardam os tokens de autenticação (ex: JWT) para manter o utilizador 'logado'.",
+      "verso": "Alternativa B: Dados armazenados no cliente para manter o estado.\n\nJustificativa: Como o HTTP é 'sem estado' (não lembra da última requisição), os cookies e o Local Storage guardam os tokens de autenticação (ex: JWT) para manter o usuário 'logado'.",
       "dica": "Memória do navegador."
     },
     {
       "frente": "(ENADE - Segurança) O que caracteriza um ataque do tipo 'SQL Injection' (Injeção de SQL)?",
       "opcoes": [
         "A) Inserir um cabo de rede não autorizado no servidor.",
-        "B) Explorar vulnerabilidades numa aplicação inserindo instruções SQL maliciosas nos campos de input (formulários) para manipular ou destruir a base de dados.",
+        "B) Explorar vulnerabilidades numa aplicação inserindo instruções SQL maliciosas nos campos de input (formulários) para manipular ou destruir o banco de dados.",
         "C) Quando o banco de dados desliga por sobrecarga de memória.",
         "D) Interceção de pacotes na rede Wi-Fi aberta."
       ],
       "correta": 1,
-      "verso": "Alternativa B: Inserir instruções SQL maliciosas em campos de input.\n\nJustificativa: Ocorre quando a aplicação não filtra/higieniza os dados do utilizador. O atacante pode enviar algo como `' OR 1=1 --` num campo de login para aceder ao sistema sem password.",
-      "dica": "Input malicioso que engana a base de dados."
+      "verso": "Alternativa B: Inserir instruções SQL maliciosas em campos de input.\n\nJustificativa: Ocorre quando a aplicação não filtra/higieniza os dados do usuário. O atacante pode enviar algo como `' OR 1=1 --` num campo de login para acessar o sistema sem senha.",
+      "dica": "Input malicioso que engana o banco de dados."
     },
     {
       "frente": "(ENADE - Redes) O Modelo OSI é um padrão de referência para interligação de sistemas abertos. É composto por quantas camadas lógicas?",
@@ -3100,7 +3100,7 @@ export const BANCO_DE_DADOS = {
     {
       "frente": "(ENADE - Arquitetura REST) Uma API RESTful deve ser 'Stateless' (Sem Estado). O que isto significa obrigatoriamente?",
       "opcoes": [
-        "A) Que não pode usar base de dados.",
+        "A) Que não pode usar banco de dados.",
         "B) Que cada requisição do cliente para o servidor deve conter todas as informações necessárias para ser compreendida e processada, sem depender de contextos salvos no servidor.",
         "C) Que o servidor deve gravar a sessão do cliente na memória RAM.",
         "D) Que o formato de resposta tem de ser em XML."
@@ -3136,19 +3136,19 @@ export const BANCO_DE_DADOS = {
     {
       "frente": "(ENADE - Criptografia) O algoritmo de Hash (como SHA-256 ou MD5) possui uma característica fundamental que o difere da Criptografia padrão (como AES ou RSA). Qual é essa característica?",
       "opcoes": [
-        "A) O Hash é utilizado para encriptar ficheiros grandes em formato zip.",
+        "A) O Hash é utilizado para encriptar arquivos grandes em formato zip.",
         "B) O Hash é uma via de mão única (One-way): é impossível (ou inviável computacionalmente) reverter o código gerado de volta para a palavra original.",
         "C) O Hash necessita sempre de uma chave pública para ser lido.",
         "D) O Hash só aceita números inteiros como entrada."
       ],
       "correta": 1,
-      "verso": "Alternativa B: É de mão única (One-way), não tem reversão.\n\nJustificativa: Criptografia serve para encriptar e depois desencriptar. O Hash destrói a string original e cria uma 'impressão digital'. É assim que as palavras-passe são guardadas com segurança no banco de dados.",
+      "verso": "Alternativa B: É de mão única (One-way), não tem reversão.\n\nJustificativa: Criptografia serve para encriptar e depois desencriptar. O Hash destrói a string original e cria uma 'impressão digital'. É assim que as senhas são guardadas com segurança no banco de dados.",
       "dica": "Pode transformar a carne na salsicha, mas não a salsicha na carne."
     },
     {
       "frente": "(ENADE - Cloud) Em provedores de nuvem (AWS, Azure, GCP), o conceito de 'Elasticidade' refere-se à capacidade do sistema de:",
       "opcoes": [
-        "A) Alterar a cor da interface dependendo do fuso horário do utilizador.",
+        "A) Alterar a cor da interface dependendo do fuso horário do usuário.",
         "B) Aumentar (Scale-out) ou diminuir (Scale-in) automaticamente e de forma dinâmica os recursos de infraestrutura com base na procura em tempo real.",
         "C) Compactar o tamanho do banco de dados relacional.",
         "D) Impedir ataques DDoS bloqueando IPs asiáticos."
@@ -3166,31 +3166,31 @@ export const BANCO_DE_DADOS = {
         "D) Não existem diferenças estruturais."
       ],
       "correta": 2,
-      "verso": "Alternativa C: A Cross-Platform usa uma base de código única para ambos os sistemas operativos.\n\nJustificativa: Aplicações nativas têm o melhor desempenho e integração, mas exigem duas equipas (Android e iOS). Frameworks híbridos ganham em produtividade e tempo de lançamento.",
+      "verso": "Alternativa C: A Cross-Platform usa uma base de código única para ambos os sistemas operacionais.\n\nJustificativa: Aplicações nativas têm o melhor desempenho e integração, mas exigem duas equipes (Android e iOS). Frameworks híbridos ganham em produtividade e tempo de lançamento.",
       "dica": "Nativa = Código diferente. Híbrida = Código único."
     },
     {
       "frente": "(ENADE - Banco de Dados) O que faz o comando JOIN da cláusula LEFT OUTER JOIN (ou LEFT JOIN) no SQL?",
       "opcoes": [
-        "A) Retorna apenas os registos que têm correspondência nas duas tabelas.",
-        "B) Retorna todos os registos da tabela da ESQUERDA, e apenas as correspondências da tabela da direita. Se não houver correspondência, preenche com NULL.",
+        "A) Retorna apenas os registros que têm correspondência nas duas tabelas.",
+        "B) Retorna todos os registros da tabela da ESQUERDA, e apenas as correspondências da tabela da direita. Se não houver correspondência, preenche com NULL.",
         "C) Apaga as linhas duplicadas do lado esquerdo.",
-        "D) Multiplica todos os registos (Produto Cartesiano)."
+        "D) Multiplica todos os registros (Produto Cartesiano)."
       ],
       "correta": 1,
       "verso": "Alternativa B: Retorna todos da esquerda, independentemente da correspondência na direita.\n\nJustificativa: O LEFT JOIN é essencial quando queremos listar, por exemplo, todos os 'Clientes' e os seus 'Pedidos', incluindo na lista os clientes que ainda não fizeram nenhum pedido (NULL).",
       "dica": "Prioriza a tabela da Esquerda."
     },
     {
-      "frente": "(ENADE - Segurança) O que significa aplicar o princípio do 'Menor Privilégio' (Least Privilege) num sistema operativo ou base de dados?",
+      "frente": "(ENADE - Segurança) O que significa aplicar o princípio do 'Menor Privilégio' (Least Privilege) num sistema operacional ou banco de dados?",
       "opcoes": [
         "A) Dar acesso total de Admin a todos para evitar bloqueios de trabalho.",
-        "B) Fornecer a cada utilizador ou programa apenas as permissões e acessos estritamente necessários para realizar as suas tarefas, e nada mais.",
+        "B) Fornecer a cada usuário ou programa apenas as permissões e acessos estritamente necessários para realizar as suas tarefas, e nada mais.",
         "C) Remover as permissões de quem ganha o menor salário.",
         "D) Cobrar menos por assinaturas de software básicas."
       ],
       "correta": 1,
-      "verso": "Alternativa B: Fornecer apenas as permissões estritamente necessárias.\n\nJustificativa: É uma regra de ouro em segurança cibernética. Se a conta de um funcionário comum for pirateada, o atacante não conseguirá eliminar a base de dados central, pois a conta não tem esse privilégio.",
+      "verso": "Alternativa B: Fornecer apenas as permissões estritamente necessárias.\n\nJustificativa: É uma regra de ouro em segurança cibernética. Se a conta de um funcionário comum for pirateada, o atacante não conseguirá eliminar o banco de dados central, pois a conta não tem esse privilégio.",
       "dica": "Só dê a chave da porta que a pessoa precisa de abrir."
     },
     {
@@ -3202,8 +3202,8 @@ export const BANCO_DE_DADOS = {
         "D) Refatoração de Código"
       ],
       "correta": 2,
-      "verso": "Alternativa C: Levantamento e Análise de Requisitos.\n\nJustificativa: Os Casos de Uso (da UML) são ferramentas visuais para traduzir as necessidades do negócio e as interações entre os atores (utilizadores) e o sistema, antes de a equipa começar a programar.",
-      "dica": "É o planeamento antes do código."
+      "verso": "Alternativa C: Levantamento e Análise de Requisitos.\n\nJustificativa: Os Casos de Uso (da UML) são ferramentas visuais para traduzir as necessidades do negócio e as interações entre os atores (usuários) e o sistema, antes de a equipe começar a programar.",
+      "dica": "É o planejamento antes do código."
     },
     {
       "frente": "(ENADE - Versionamento) No Git, se um desenvolvedor quiser criar um caminho isolado para desenvolver uma nova funcionalidade sem interferir com o código principal, qual comando deverá usar?",
@@ -3230,7 +3230,7 @@ export const BANCO_DE_DADOS = {
       "dica": "Justifica o conteúdo na linha."
     },
     {
-      "frente": "(ENADE - Web) Numa API REST desenvolvida em NodeJS ou C#, se o cliente envia dados sigilosos, como uma palavra-passe, no corpo (body) de um formulário. Qual método HTTP está a ser utilizado?",
+      "frente": "(ENADE - Web) Numa API REST desenvolvida em NodeJS ou C#, se o cliente envia dados sigilosos, como uma senha, no corpo (body) de um formulário. Qual método HTTP está sendo utilizado?",
       "opcoes": [
         "A) GET",
         "B) OPTIONS",
@@ -3238,7 +3238,7 @@ export const BANCO_DE_DADOS = {
         "D) HEAD"
       ],
       "correta": 2,
-      "verso": "Alternativa C: POST.\n\nJustificativa: O verbo POST é usado para enviar dados sensíveis ou longos contidos no corpo (body) da requisição. O método GET anexa os dados no URL (na barra de endereço), o que expõe a password publicamente.",
+      "verso": "Alternativa C: POST.\n\nJustificativa: O verbo POST é usado para enviar dados sensíveis ou longos contidos no corpo (body) da requisição. O método GET anexa os dados no URL (na barra de endereço), o que expõe a senha publicamente.",
       "dica": "O GET mostra no URL, o POST oculta no Corpo."
     },
     {
@@ -3412,7 +3412,7 @@ export const BANCO_DE_DADOS = {
   "bonus2": [
     {
       "frente": "Bônus 02: O que foi o ENIAC (1946)?",
-      "verso": "O primeiro computador digital eletrónico de grande escala, construído com válvulas para calcular tabelas de artilharia militar.",
+      "verso": "O primeiro computador digital eletrônico de grande escala, construído com válvulas para calcular tabelas de artilharia militar.",
       "dica": "Ocupava uma sala inteira e pesava 30 toneladas."
     },
     {
@@ -3433,7 +3433,7 @@ export const BANCO_DE_DADOS = {
     {
       "frente": "Bônus 02: Qual foi o impacto da invenção do Transístor?",
       "verso": "Substituiu as válvulas, permitindo que os computadores se tornassem muito mais pequenos, baratos e não superaquecessem.",
-      "dica": "A base de toda a eletrónica moderna."
+      "dica": "A base de toda a eletrônica moderna."
     },
     {
       "frente": "Bônus 02: O que ditava a Lei de Moore (1965)?",
@@ -3447,12 +3447,12 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "Bônus 02: Quem inventou a World Wide Web (WWW)?",
-      "verso": "Tim Berners-Lee em 1989, trabalhando no CERN, com o objetivo de partilhar ficheiros HTML entre cientistas.",
+      "verso": "Tim Berners-Lee em 1989, trabalhando no CERN, com o objetivo de compartilhar arquivos HTML entre cientistas.",
       "dica": "Criou também o protocolo HTTP."
     },
     {
       "frente": "Bônus 02: Qual o papel de Margaret Hamilton na Missão Apollo 11?",
-      "verso": "Ela foi a Diretora de Engenharia de Software da NASA; o código da sua equipa impediu que o módulo lunar caísse na lua.",
+      "verso": "Ela foi a Diretora de Engenharia de Software da NASA; o código da sua equipe impediu que o módulo lunar caísse na lua.",
       "dica": "A mãe do termo 'Engenharia de Software'."
     },
     {
@@ -3472,11 +3472,11 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "Bônus 02: O que a Xerox PARC inventou que a Apple e a Microsoft copiaram?",
-      "verso": "A Interface Gráfica de Utilizador (GUI) com janelas e o Rato de computador.",
+      "verso": "A Interface Gráfica do Usuário (GUI) com janelas e o Mouse de computador.",
       "dica": "A Xerox não sabia comercializar a invenção."
     },
     {
-      "frente": "Bônus 02: O que foi o 'Bug do Milénio' (Y2K)?",
+      "frente": "Bônus 02: O que foi o 'Bug do Milênio' (Y2K)?",
       "verso": "O medo de que os computadores parassem no ano 2000, pois as datas eram guardadas apenas com os dois últimos dígitos (99 para 1999).",
       "dica": "Bilhões foram gastos em refatoração de código."
     },
@@ -3513,11 +3513,11 @@ export const BANCO_DE_DADOS = {
     {
       "frente": "Bônus 02: O que representou o lançamento do iPhone (2007)?",
       "verso": "Revolucionou a computação móvel ao eliminar os teclados físicos em favor do 'Multitouch' capacitivo e a entrada de lojas de apps.",
-      "dica": "Transformou os telemóveis em computadores de bolso."
+      "dica": "Transformou os celulares em computadores de bolso."
     },
     {
       "frente": "Bônus 02: Quem é o criador da linguagem C?",
-      "verso": "Dennis Ritchie, na década de 1970. A linguagem foi usada para reescrever o sistema operativo UNIX.",
+      "verso": "Dennis Ritchie, na década de 1970. A linguagem foi usada para reescrever o sistema operacional UNIX.",
       "dica": "A base da maioria dos sistemas modernos."
     },
     {
@@ -3527,7 +3527,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "Bônus 02: O que foi o sistema MS-DOS?",
-      "verso": "O sistema operativo em linha de comando da Microsoft que dominou os PCs na década de 1980.",
+      "verso": "O sistema operacional em linha de comando da Microsoft que dominou os PCs na década de 1980.",
       "dica": "Antecessor do Windows."
     },
     {
@@ -3546,7 +3546,7 @@ export const BANCO_DE_DADOS = {
       "dica": "AlphaGo."
     },
     {
-      "frente": "Bônus 02: O que significa o acrónimo 'CAPTCHA'?",
+      "frente": "Bônus 02: O que significa o acrônimo 'CAPTCHA'?",
       "verso": "Completely Automated Public Turing test to tell Computers and Humans Apart.",
       "dica": "Testes de semáforos e passadeiras de peões."
     },
@@ -3569,7 +3569,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "Bônus 03: Qual a linguagem de programação que foi para a Lua (Apollo 11)?",
-      "verso": "Assembly, escrito por Margaret Hamilton e a sua equipa.",
+      "verso": "Assembly, escrito por Margaret Hamilton e a sua equipe.",
       "dica": "O código era literalmente costurado em fios de cobre."
     },
     {
@@ -3578,13 +3578,13 @@ export const BANCO_DE_DADOS = {
       "dica": "Dita o ritmo da evolução do hardware mundial."
     },
     {
-      "frente": "Bônus 03: Qual a principal diferença entre um Júnior, um Pleno e um Sénior?",
-      "verso": "Júnior precisa de orientação. Pleno resolve problemas de forma independente. Sénior previne os problemas antes que eles aconteçam e orienta a equipa.",
+      "frente": "Bônus 03: Qual a principal diferença entre um Júnior, um Pleno e um Sênior?",
+      "verso": "Júnior precisa de orientação. Pleno resolve problemas de forma independente. Sênior previne os problemas antes que eles aconteçam e orienta a equipe.",
       "dica": "Evolução natural de carreira."
     },
     {
       "frente": "Bônus 03: O que são Hard Skills?",
-      "verso": "Habilidades técnicas e mensuráveis que podem ser aprendidas, como programar em C#, configurar redes ou gerir bases de dados.",
+      "verso": "Habilidades técnicas e mensuráveis que podem ser aprendidas, como programar em C#, configurar redes ou gerenciar bancos de dados.",
       "dica": "O que coloca no currículo."
     },
     {
@@ -3594,7 +3594,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "Bônus 03: O que é a Síndrome de Burnout?",
-      "verso": "Um estado de esgotamento físico e mental extremo causado por stress crónico e prolongado no ambiente de trabalho.",
+      "verso": "Um estado de esgotamento físico e mental extremo causado por stress crônico e prolongado no ambiente de trabalho.",
       "dica": "Muito comum em TI; a saúde mental vem primeiro."
     },
     {
@@ -3609,12 +3609,12 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "Bônus 03: O que é a Síndrome do Objeto Brilhante (Shiny Object Syndrome)?",
-      "verso": "A tendência de abandonar uma tecnologia ou linguagem que se está a aprender a meio, só porque surgiu um novo framework 'da moda'.",
+      "verso": "A tendência de abandonar uma tecnologia ou linguagem que ainda está aprendendo, só porque surgiu um novo framework 'da moda'.",
       "dica": "Foco vence o 'hype'."
     },
     {
       "frente": "Bônus 03: O que é um Hackathon?",
-      "verso": "Uma maratona de programação (geralmente de 24h a 48h) onde equipas competem para criar um protótipo de software que resolva um problema específico.",
+      "verso": "Uma maratona de programação (geralmente de 24h a 48h) onde equipes competem para criar um protótipo de software que resolva um problema específico.",
       "dica": "Excelente para networking e portfólio."
     },
     {
@@ -3635,26 +3635,26 @@ export const BANCO_DE_DADOS = {
     {
       "frente": "Bônus 03: O que é o 'Fit Cultural' numa entrevista de emprego?",
       "verso": "A avaliação feita pelos RH para saber se os valores, crenças e o comportamento do candidato estão alinhados com a cultura da empresa.",
-      "dica": "Não basta codar bem, tem de se dar bem com a equipa."
+      "dica": "Não basta codar bem, tem de se dar bem com a equipe."
     },
     {
       "frente": "Bônus 03: O que é o 'Mito do Programador 10x'?",
       "verso": "A ideia de que existe um programador 'lobo solitário' tão genial que produz dez vezes mais que uma pessoa normal.",
-      "dica": "O trabalho em equipa consistente supera sempre o talento isolado."
+      "dica": "O trabalho em equipe consistente supera sempre o talento isolado."
     },
     {
       "frente": "Bônus 03: O que é o Code Review (Revisão de Código)?",
-      "verso": "Prática onde outros programadores da equipa leem e analisam o seu código antes de ele ser fundido (merge) ao projeto principal.",
+      "verso": "Prática onde outros programadores da equipe leem e analisam o seu código antes de ele ser fundido (merge) ao projeto principal.",
       "dica": "A melhor forma de aprender a programar melhor."
     },
     {
       "frente": "Bônus 03: O que é Pair Programming (Programação em Par)?",
-      "verso": "Técnica Ágil onde dois programadores partilham o mesmo ecrã: um digita o código (Piloto) e o outro revê e pensa na estratégia (Navegador).",
+      "verso": "Técnica Ágil onde dois programadores compartilham o mesmo tela: um digita o código (Piloto) e o outro revê e pensa na estratégia (Navegador).",
       "dica": "Duas cabeças pensam melhor que uma."
     },
     {
       "frente": "Bônus 03: O que significa 'Networking' profissional?",
-      "verso": "A construção e manutenção de uma rede de contactos profissionais que trocam conhecimentos, indicações de vagas e experiências mútuas.",
+      "verso": "A construção e manutenção de uma rede de contatos profissionais que trocam conhecimentos, indicações de vagas e experiências mútuas.",
       "dica": "Quem não é visto não é lembrado."
     },
     {
@@ -3674,7 +3674,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "Bônus 03: O que é um teste de 'Live Coding' em processos seletivos?",
-      "verso": "Uma etapa da entrevista onde o candidato tem de partilhar o ecrã e resolver um problema de lógica em tempo real, enquanto o avaliador observa.",
+      "verso": "Uma etapa da entrevista onde o candidato tem de compartilhar a tela e resolver um problema de lógica em tempo real, enquanto o avaliador observa.",
       "dica": "Testa como lida com a pressão."
     },
     {
@@ -3684,22 +3684,22 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "Bônus 03: O que significa trabalhar 'Alocado' vs 'Outsourcing' (Terceirização)?",
-      "verso": "Alocado é ser contratado para a equipa interna. Outsourcing é trabalhar para uma empresa que o 'aluga' como consultor a outro cliente corporativo.",
+      "verso": "Alocado é ser contratado para a equipe interna. Outsourcing é trabalhar para uma empresa que o 'aluga' como consultor a outro cliente corporativo.",
       "dica": "Modelo muito comum em consultorias de TI."
     },
     {
       "frente": "Bônus 03: O que é uma Mentoria de Carreira?",
-      "verso": "Um relacionamento profissional onde uma pessoa experiente (mentor) orienta, partilha atalhos e aconselha um profissional menos experiente (mentorado).",
+      "verso": "Um relacionamento profissional onde uma pessoa experiente (mentor) orienta, compartilha atalhos e aconselha um profissional menos experiente (mentorado).",
       "dica": "Encurta a curva de aprendizagem."
     },
     {
       "frente": "Bônus 03: O que significa ter Inteligência Emocional no trabalho?",
-      "verso": "A capacidade de reconhecer e gerir as suas próprias emoções (não entrar em pânico perante bugs) e ter empatia com os colegas.",
+      "verso": "A capacidade de reconhecer e gerenciar as suas próprias emoções (não entrar em pânico perante bugs) e ter empatia com os colegas.",
       "dica": "Fundamental para liderar."
     },
     {
       "frente": "Bônus 03: O que é a síndrome do 'Not Invented Here' (Não Inventado Aqui)?",
-      "verso": "O preconceito nocivo de empresas ou equipas que recusam usar bibliotecas de terceiros excelentes, querendo criar tudo do zero internamente.",
+      "verso": "O preconceito nocivo de empresas ou equipes que recusam usar bibliotecas de terceiros excelentes, querendo criar tudo do zero internamente.",
       "dica": "Não reinvente a roda."
     },
     {
@@ -3811,7 +3811,7 @@ export const BANCO_DE_DADOS = {
     },
     {
       "frente": "Bônus 04: O que é Growth Hacking?",
-      "verso": "O uso de estratégias criativas de marketing com baixo custo, análise de dados rigorosa e engenharia de software para gerar um crescimento (growth) rápido de utilizadores.",
+      "verso": "O uso de estratégias criativas de marketing com baixo custo, análise de dados rigorosa e engenharia de software para gerar um crescimento (growth) rápido de usuários.",
       "dica": "Hackear o crescimento através da tecnologia."
     },
     {
@@ -3852,7 +3852,7 @@ export const BANCO_DE_DADOS = {
     {
       "frente": "Bônus 04: O que é Inovação Disruptiva?",
       "verso": "Uma tecnologia ou modelo de negócio que é criado na base do mercado, mais acessível e barato, e que eventualmente desaloja os gigantes e domina o mundo.",
-      "dica": "Ex: Câmaras digitais aniquilaram as de filme (Kodak)."
+      "dica": "Ex: Câmeras digitais aniquilaram as de filme (Kodak)."
     },
     {
       "frente": "Bônus 04: O que é um Acordo de Confidencialidade (NDA) para startups?",

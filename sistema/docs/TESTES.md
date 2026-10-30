@@ -10,15 +10,15 @@ As medições de cobertura, carga e usabilidade anteriores permanecem identifica
 
 | Suíte | Casos | Comando (na pasta `sistema/`) |
 | :--- | ---: | :--- |
-| API: unitários e integração | 220 | `npm test` |
+| API: unitários e integração | 221 | `npm test` |
 | API: **caixa preta** (regras de negócio pelas rotas) | 28 | idem (`CaixaPreta/`) |
 | API: **caixa branca** (caminhos do código) | 20 | idem (`CaixaBranca/`) |
 | API: concorrência (achado da carga) | 2 | idem (`Carga/`) |
-| **API, total** | **270** | `npm test` (5 deles só com `NEXTI_TEST_LOCALDB=1`) |
+| **API, total** | **271** | `npm test` (5 deles só com `NEXTI_TEST_LOCALDB=1`) |
 | Pacote compartilhado (inclui **carga**, assistente local e sessão vencida) | 124 | `npm run test:shared` |
 | App de celular | 26 | `npm run test:mobile` |
 | Nex_TI Desktop | 31 | `npm run test:desktop` |
-| **Total automatizado** | **451** | |
+| **Total automatizado** | **452** | |
 | **Carga da API** (requisições reais) | 6 cenários | `node tests/carga/carga-api.mjs` com a API no ar |
 | **Auditoria do código** (código morto, ARIA, depuração) | 5 checagens | `node scripts/auditoria-codigo.mjs` |
 | **Usabilidade** (7 tarefas, computador e celular, e 5 do menu no celular) | 19 execuções | roteiro na seção 6 |
@@ -26,7 +26,7 @@ As medições de cobertura, carga e usabilidade anteriores permanecem identifica
 Em 26/10/2026, as execuções complementares no mesmo código somaram **445 casos
 aprovados, sem falhas**. Em 30/10/2026, entraram 4 testes da sessão vencida
 (`packages/shared/tests/sessao.test.js`) e 2 do certificado (Admin em `fases-liberadas.test.js` e impressão em
-`certificado.test.js`), e o total passou a **451**: API 270, pacote
+`certificado.test.js`), e 1 da correção de texto das cartas (`BancoDeDadosTests.cs`); o total passou a **452**: API 271, pacote
 compartilhado 124, Mobile 26 e desktop 31.
 A execução inicial aprovou 440 e ignorou os cinco opcionais. Depois, esses cinco
 foram executados com `NEXTI_TEST_LOCALDB=1` e filtro específico: **5 aprovados, zero
