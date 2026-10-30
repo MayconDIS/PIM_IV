@@ -57,7 +57,7 @@ export default function SplashPage() {
         <div className="status-text" aria-hidden="true">{LOGS[passo]}</div>
 
         <p className="sr-only">
-          Aguarde. O sistema está a carregar módulos e irá redirecionar para o ecrã de autenticação em instantes.
+          Aguarde. O sistema está carregando os módulos e em instantes abre a tela de entrada.
         </p>
       </section>
     </main>

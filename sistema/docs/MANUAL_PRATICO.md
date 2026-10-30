@@ -63,7 +63,7 @@ progresso das cartas disponível na sessão.
 
 ### Nexor, assistente do Nex_TI
 No site, abra o balão no canto inferior direito; no celular, ele fica acima da
-barra de navegação. Digite uma pergunta de até 400 caracteres ou escolha uma
+barra de navegação e some enquanto uma fase está aberta, para não cobrir a carta. Digite uma pergunta de até 400 caracteres ou escolha uma
 sugestão, como **Como funciona o SM-2?**. O assistente busca nas cartas conceituais
 incluídas no projeto, no guia do ENADE e nas orientações de uso, mostrando as fontes.
 Questões de múltipla escolha não entram na busca, para evitar respostas com um

@@ -87,7 +87,7 @@ export function AssistenteNexTI() {
 
   if (bloqueado) return null;
   return (
-    <aside className={`assistente-nexti${janela.teclado > 120 ? ' assistente-com-teclado' : ''}${janela.altura < 480 ? ' assistente-compacto' : ''}`}
+    <aside className={`assistente-nexti${faseAtiva ? ' assistente-em-estudo' : ''}${janela.teclado > 120 ? ' assistente-com-teclado' : ''}${janela.altura < 480 ? ' assistente-compacto' : ''}`}
       data-assistente-nexti onKeyDown={aoTeclar}
       style={{ '--assistente-altura': `${janela.altura}px`, '--assistente-teclado': `${janela.teclado}px` }}>
       {!visivel && <button ref={botao} type="button" className="assistente-abrir" aria-label="Abrir Nexor"

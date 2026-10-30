@@ -74,6 +74,8 @@ body.high-contrast-mode .assistente-janela, body.high-contrast-mode .assistente-
   .assistente-entrada textarea { font-size: 16px; }
   .assistente-sugestoes button, .assistente-rodape button { min-height: 44px; }
   .assistente-com-teclado { --assistente-base: 10px; }
+  /* Com uma fase aberta, o botão cobria o texto da carta: some até sair da fase. */
+  .assistente-em-estudo .assistente-abrir { display: none; }
 }
 @media (max-height: 500px) {
   .assistente-cabecalho { padding-top: 6px; padding-bottom: 6px; }
