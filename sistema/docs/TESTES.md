@@ -15,16 +15,18 @@ As medições de cobertura, carga e usabilidade anteriores permanecem identifica
 | API: **caixa branca** (caminhos do código) | 20 | idem (`CaixaBranca/`) |
 | API: concorrência (achado da carga) | 2 | idem (`Carga/`) |
 | **API, total** | **270** | `npm test` (5 deles só com `NEXTI_TEST_LOCALDB=1`) |
-| Pacote compartilhado (inclui **carga** e assistente local) | 118 | `npm run test:shared` |
+| Pacote compartilhado (inclui **carga**, assistente local e sessão vencida) | 122 | `npm run test:shared` |
 | App de celular | 26 | `npm run test:mobile` |
 | Nex_TI Desktop | 31 | `npm run test:desktop` |
-| **Total automatizado** | **445** | |
+| **Total automatizado** | **449** | |
 | **Carga da API** (requisições reais) | 6 cenários | `node tests/carga/carga-api.mjs` com a API no ar |
 | **Auditoria do código** (código morto, ARIA, depuração) | 5 checagens | `node scripts/auditoria-codigo.mjs` |
 | **Usabilidade** (7 tarefas, computador e celular, e 5 do menu no celular) | 19 execuções | roteiro na seção 6 |
 
 Em 26/10/2026, as execuções complementares no mesmo código somaram **445 casos
-aprovados, sem falhas**: API 270, pacote compartilhado 118, Mobile 26 e desktop 31.
+aprovados, sem falhas**. Em 30/10/2026, entraram 4 testes da sessão vencida
+(`packages/shared/tests/sessao.test.js`) e o total passou a **449**: API 270, pacote
+compartilhado 122, Mobile 26 e desktop 31.
 A execução inicial aprovou 440 e ignorou os cinco opcionais. Depois, esses cinco
 foram executados com `NEXTI_TEST_LOCALDB=1` e filtro específico: **5 aprovados, zero
 falhas e zero ignorados**, usando bancos locais descartáveis. O comando padrão sem

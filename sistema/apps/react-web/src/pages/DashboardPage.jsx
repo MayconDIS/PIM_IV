@@ -1,8 +1,10 @@
 import React, { useEffect, useLayoutEffect, useRef } from 'react';
+import { EVENTO_SESSAO_EXPIRADA } from '@nexti/shared/sessao';
 import '@nexti/shared/css/global.css';
 import '@nexti/shared/css/dashboard.css';
 import { EstudoProvider, useEstudo } from '../context/EstudoContext';
 import { aplicarPreferencias } from '../lib/acessibilidade';
+import { encerrarSessaoVencida } from '../lib/sessao';
 import { Topo } from '../components/dashboard/Topo';
 import { PainelUsuario } from '../components/dashboard/PainelUsuario';
 import { Trilhas } from '../components/dashboard/Trilhas';
@@ -106,6 +108,16 @@ export default function DashboardPage() {
     aplicarPreferencias();
     // Posiciona depois das preferências e antes de exibir o painel, sem rolagem animada.
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, []);
+
+  // A API recusou o token (venceu ou a senha foi trocada em outro lugar): volta ao login.
+  useEffect(() => {
+    const aoExpirar = () => {
+      encerrarSessaoVencida();
+      window.location.reload();
+    };
+    window.addEventListener(EVENTO_SESSAO_EXPIRADA, aoExpirar);
+    return () => window.removeEventListener(EVENTO_SESSAO_EXPIRADA, aoExpirar);
   }, []);
 
   return (

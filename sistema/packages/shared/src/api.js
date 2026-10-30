@@ -7,6 +7,8 @@
 // SERVIÇO DE INTEGRAÇÃO COM A API (FETCH) — Nex_TI
 // ==========================================
 
+import { EVENTO_SESSAO_EXPIRADA } from './sessao.js';
+
 const API_CANDIDATE_URLS = [
     'http://localhost:5000/api',
     'https://localhost:5001/api',
@@ -28,6 +30,18 @@ const baseAtual = () => apiDetectada || apiConfigurada() || 'http://localhost:50
 function cabecalhoDeAutenticacao() {
     const token = typeof localStorage !== 'undefined' ? localStorage.getItem('quest_jwt_token') : null;
     return token ? { Authorization: `Bearer ${token}` } : {};
+}
+
+// fetch das rotas da API. Se a requisição levava o JWT e a API respondeu 401, o token venceu
+// ou foi revogado: avisa o site, que encerra a sessão e volta ao login. (Senha errada no login
+// também é 401, mas o login não manda token.)
+async function fetchDaApi(url, opcoes = {}) {
+    const response = await fetch(url, opcoes);
+    const levavaToken = Boolean(opcoes.headers?.Authorization ?? opcoes.headers?.authorization);
+    if (response.status === 401 && levavaToken && typeof globalThis.dispatchEvent === 'function' && typeof CustomEvent === 'function') {
+        globalThis.dispatchEvent(new CustomEvent(EVENTO_SESSAO_EXPIRADA));
+    }
+    return response;
 }
 
 // POST de login/cadastro. Falha de rede vira uma frase que a tela pode mostrar
@@ -100,7 +114,7 @@ const ApiService = {
     // 4. Busca o Usuário no Banco de Dados
     getUsuario: async (username) => {
         try {
-            const response = await fetch(`${baseAtual()}/usuarios/${encodeURIComponent(username)}`, { headers: cabecalhoDeAutenticacao() });
+            const response = await fetchDaApi(`${baseAtual()}/usuarios/${encodeURIComponent(username)}`, { headers: cabecalhoDeAutenticacao() });
             if (!response.ok) throw new Error("Usuário não encontrado");
             return await response.json();
         } catch (error) {
@@ -112,7 +126,7 @@ const ApiService = {
     // 4.1 Busca estatísticas detalhadas do usuário
     getEstatisticasDetalhadas: async (username) => {
         try {
-            const response = await fetch(`${baseAtual()}/usuarios/${encodeURIComponent(username)}/stats-detalhadas`, { headers: cabecalhoDeAutenticacao() });
+            const response = await fetchDaApi(`${baseAtual()}/usuarios/${encodeURIComponent(username)}/stats-detalhadas`, { headers: cabecalhoDeAutenticacao() });
             if (!response.ok) return null;
             return await response.json();
         } catch (error) {
@@ -124,7 +138,7 @@ const ApiService = {
     // 5. Busca todas as Fases cadastradas
     getFases: async () => {
         try {
-            const response = await fetch(`${baseAtual()}/fases`);
+            const response = await fetchDaApi(`${baseAtual()}/fases`);
             return await response.json();
         } catch (error) {
             console.error("Erro ao buscar fases:", error);
@@ -134,7 +148,7 @@ const ApiService = {
 
     // 6. Busca os Flashcards de uma Fase específica
     getFlashcardsPorFase: async (codigoFase) => {
-        const response = await fetch(`${baseAtual()}/fases/${encodeURIComponent(codigoFase)}/flashcards`);
+        const response = await fetchDaApi(`${baseAtual()}/fases/${encodeURIComponent(codigoFase)}/flashcards`);
         if (!response.ok) throw new Error("Não foi possível buscar as cartas desta fase.");
         return await response.json();
     },
@@ -143,7 +157,7 @@ const ApiService = {
     criarFlashcard: async (codigoFase, frente, verso, dica) => {
         const token = localStorage.getItem('quest_jwt_token');
         try {
-            const response = await fetch(`${baseAtual()}/flashcards`, {
+            const response = await fetchDaApi(`${baseAtual()}/flashcards`, {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -164,7 +178,7 @@ const ApiService = {
         const token = localStorage.getItem('quest_jwt_token');
         if (!token) return [];
         try {
-            const response = await fetch(`${baseAtual()}/progresso/usuario`, {
+            const response = await fetchDaApi(`${baseAtual()}/progresso/usuario`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (!response.ok) return [];
@@ -179,7 +193,7 @@ const ApiService = {
     atualizarProgresso: async (usuarioId, flashcardId, qualidade) => {
         const token = localStorage.getItem('quest_jwt_token');
         try {
-            const response = await fetch(`${baseAtual()}/progresso/atualizar`, {
+            const response = await fetchDaApi(`${baseAtual()}/progresso/atualizar`, {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -199,7 +213,7 @@ const ApiService = {
     updateUserStats: async (xp, moedas, nivel) => {
         const token = localStorage.getItem('quest_jwt_token');
         try {
-            const response = await fetch(`${baseAtual()}/usuarios/stats`, {
+            const response = await fetchDaApi(`${baseAtual()}/usuarios/stats`, {
                 method: 'PUT',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -218,7 +232,7 @@ const ApiService = {
     // 11. Busca todas as questões de simulados ENADE (UML)
     getSimuladoQuestoes: async () => {
         try {
-            const response = await fetch(`${baseAtual()}/simulados/questoes`);
+            const response = await fetchDaApi(`${baseAtual()}/simulados/questoes`);
             return await response.json();
         } catch (error) {
             console.error("Erro ao buscar questões de simulado:", error);
@@ -229,7 +243,7 @@ const ApiService = {
     // 12. Resumo de estatísticas globais
     getEstatisticasResumo: async () => {
         try {
-            const response = await fetch(`${baseAtual()}/estatisticas/resumo`);
+            const response = await fetchDaApi(`${baseAtual()}/estatisticas/resumo`);
             if (!response.ok) return null;
             return await response.json();
         } catch (error) {
@@ -262,7 +276,7 @@ const ApiService = {
 async function requisicaoAutenticada(metodo, rota, corpo) {
     let response;
     try {
-        response = await fetch(`${baseAtual()}${rota}`, {
+        response = await fetchDaApi(`${baseAtual()}${rota}`, {
             method: metodo,
             headers: { 'Content-Type': 'application/json', ...cabecalhoDeAutenticacao() },
             body: corpo === undefined ? undefined : JSON.stringify(corpo)
