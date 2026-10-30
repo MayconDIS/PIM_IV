@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { BONUS, FASES_INICIAIS, fasesDisponiveis, temAcessoCompleto } from '@nexti/shared';
+import { BONUS, FASES_INICIAIS, certificadoDisponivel, fasesDisponiveis, temAcessoCompleto } from '@nexti/shared';
 import { carregarDecks, gravaJson, leJson } from './apoio.js';
 
 /**
@@ -68,7 +68,7 @@ export function useProgresso(userKey) {
 
   return {
     perfil, definirPerfil, acessoCompleto: temAcessoCompleto(perfil),
-    xp, moedas, rank, diagnostico, setDiagnostico, srsData, decks, fasesDesbloqueadas, bonusDesbloqueados, certificadoLiberado, avatar, apiOnline, apiOnlineRef,
+    xp, moedas, rank, diagnostico, setDiagnostico, srsData, decks, fasesDesbloqueadas, bonusDesbloqueados, certificadoLiberado: certificadoDisponivel(certificadoLiberado, perfil), avatar, apiOnline, apiOnlineRef,
     setXp, setMoedas, definirRank, setSrsData, setDecks, setFasesDesbloqueadas, setBonusDesbloqueados,
     setCertificadoLiberado, trocarAvatar, definirApiOnline, faseLiberada, liberarFase,
   };

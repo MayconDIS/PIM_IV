@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 
 import { FASES, MODULOS } from '../src/content.js';
-import { ORDEM_FASES, fasesDisponiveis, fasesLiberadasNoServidor, preservarFasesLiberadas, temAcessoCompleto } from '../src/gamificacao.js';
+import { ORDEM_FASES, certificadoDisponivel, fasesDisponiveis, fasesLiberadasNoServidor, preservarFasesLiberadas, temAcessoCompleto } from '../src/gamificacao.js';
 
 // Progresso como a API devolve: uma linha por carta respondida, com a fase dela.
 const respondeuTudo = (faseId) => {
@@ -108,4 +108,11 @@ test('o rank do painel respeita o nivelamento: nível 3 com pouco XP já é Inte
   assert.equal(progressoDeNivel(150, 1).rotuloRank, 'Rank: Intermediário');
   assert.equal(progressoDeNivel(700, 6).rotuloRank, 'Rank: Mestre da Computação');
   assert.equal(progressoDeNivel(10, 6).rotuloRank, 'Rank: Expert');
+});
+
+test('só o Admin abre o certificado sem conquistá-lo; Tutor e Aluno precisam do teste do módulo 5', () => {
+  assert.equal(certificadoDisponivel(false, 'Admin'), true);
+  assert.equal(certificadoDisponivel(false, 'Tutor'), false);
+  assert.equal(certificadoDisponivel(false, 'Aluno'), false);
+  assert.equal(certificadoDisponivel(true, 'Aluno'), true);
 });
