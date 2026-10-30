@@ -7,6 +7,6 @@ cores e o design dos slides do PIM.
 
 - `slides.html`: 21 slides em A4 paisagem, com o mesmo visual dos slides do PIM (`../apresentacao`, de onde vem o CSS); abra no navegador e aperte **P** (setas, **F** tela cheia, **N** fala e tempo).
 - `Nex_TI - Plano de Negocios.pdf`: os mesmos slides em PDF. Para gerar de novo: `node gerar-pdf.mjs` nesta pasta.
-- Os números são uma **simulação**: premissas, contas e fontes dos preços em [`../PLANO_DE_NEGOCIOS.md`](../PLANO_DE_NEGOCIOS.md).
+- Os números são uma **simulação**: premissas, contas e fontes dos preços em [`PLANO_DE_NEGOCIOS.md`](PLANO_DE_NEGOCIOS.md).
 
 Os dois arquivos de referência pessoais desta pasta (portfólio e apresentação antiga) ficam fora do repositório (`.gitignore`).

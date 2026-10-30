@@ -9,10 +9,11 @@
       mesmo visual dos slides do PIM (../apresentacao/slides.html): a empresa, problema e solução, Canvas, SWOT,
       4 P's, organograma, investimento inicial, custo fixo, break even, meta de vendas, payback, rentabilidade,
       cenário com pró-labore, conclusão e experiência com a equipe.
-      - Os números são uma SIMULAÇÃO: premissas, contas e fontes em ../PLANO_DE_NEGOCIOS.md.
+      - Os números são uma SIMULAÇÃO: premissas, contas e fontes em PLANO_DE_NEGOCIOS.md (nesta pasta).
       - Para apresentar: abrir no navegador e apertar P. Setas trocam de slide, F tela cheia, N fala e tempo, Esc sai.
       - Para o PDF: nesta pasta, `node gerar-pdf.mjs`.
     -->
+    <link rel="icon" type="image/svg+xml" href="../../assets/branding/favicon-nexti.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700&family=Orbitron:wght@700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -327,6 +328,7 @@
         .roteiro-plano .num-grande { font-size: 18pt; margin: 0; min-width: 9mm; }
         .roteiro-plano span { font-size: 11.5pt; color: var(--nx-ink); font-weight: 600; }
         @media print { .resultado { background: none !important; -webkit-background-clip: border-box; background-clip: border-box; color: var(--nx-primary); } }
+        .icone-nexti { height: 22mm; width: auto; }
     </style>
 </head>
 <body>
@@ -461,7 +463,7 @@
             <div class="bloco relacao"><h3>Relação com clientes</h3><p>Tutor acompanhando; XP, moedas e níveis; o assistente Nexor.</p></div>
             <div class="bloco canais"><h3>Canais</h3><p>Site no navegador, app no celular e as instituições parceiras.</p></div>
             <div class="bloco segmentos"><h3>Segmento de clientes</h3><p>Ingressantes de TI (B2C) e instituições de ensino (B2B).</p></div>
-            <div class="bloco custos"><h3>Estrutura de custos</h3><p>Nuvem (API, banco e site), domínio, taxa de pagamento e divulgação; depois, curadoria e suporte. Custo fixo simulado: R$ 202 por mês.</p></div>
+            <div class="bloco custos"><h3>Estrutura de custos</h3><p>Nuvem (API, banco e site), domínio, taxa de pagamento e divulgação; depois, curadoria e suporte. Hoje R$ 0 (planos gratuitos); ao escalar, cerca de R$ 202 por mês (estimativa).</p></div>
             <div class="bloco receitas"><h3>Fontes de receita</h3><p>Licença por aluno para instituições (R$ 5,00/mês) e assinatura individual (R$ 9,90/mês).</p></div>
         </div>
     </div>
@@ -530,25 +532,25 @@
 <section id="slide-12" class="slide" aria-label="Slide 12: Investimento inicial">
     <header class="slide-header"><span class="slide-tag">Investimento inicial</span></header>
     <div class="slide-body">
-        <h2 class="slide-title">Investimento <span class="grad">inicial</span></h2>
+        <h2 class="slide-title">Investimento <span class="grad">para escalar (estimativa)</span></h2>
         <table class="dados"><thead><tr><th scope="col">Especificações</th><th scope="col" class="n">Valor (R$)</th></tr></thead><tbody><tr><td>1 Domínio .com.br (primeiro ano)</td><td class="n">40,00</td></tr><tr><td>2 Capital de giro (3 meses de custo fixo: 3 × R$ 202)</td><td class="n">606,00</td></tr><tr><td>3 Divulgação inicial</td><td class="n">300,00</td></tr><tr class="total"><td>Total</td><td class="n">946,00</td></tr></tbody></table>
-        <p class="slide-subtitle">O sistema já está pronto (feito no PIM): o investimento é só para começar a operar.</p>
+        <p class="slide-subtitle">Hoje o investimento foi R$ 0: o sistema foi feito no PIM, com planos gratuitos. Estes valores são estimativas para quando o Nex_TI crescer.</p>
     </div>
     <div class="slide-footer"><span>Nex_TI Educacional · Plano de Negócios</span><span>Slide 12 / 21</span></div>
     <div class="barra-slide" aria-hidden="true"><i style="width:57%"></i></div>
-    <aside class="notas">Não há estoque nem reforma: o produto é software.</aside>
+    <aside class="notas">Não há estoque nem reforma: o produto é software. É uma estimativa para escalar; hoje não houve gasto.</aside>
 </section>
 
 <section id="slide-13" class="slide" aria-label="Slide 13: Custo fixo">
     <header class="slide-header"><span class="slide-tag">Custo fixo</span></header>
     <div class="slide-body">
-        <h2 class="slide-title">Custo fixo <span class="grad">mensal</span></h2>
-        <table class="dados"><thead><tr><th scope="col">Item</th><th scope="col">Serviço</th><th scope="col" class="n">Valor (R$)</th></tr></thead><tbody><tr><td>API</td><td>Azure App Service B1 (US$ 13,14)</td><td class="n">68,33</td></tr><tr><td>Banco de dados</td><td>Azure SQL Basic (US$ 5)</td><td class="n">26,00</td></tr><tr><td>Site</td><td>Vercel Pro, 1 assento (US$ 20)</td><td class="n">104,00</td></tr><tr><td>Domínio</td><td>.com.br (R$ 40 por ano)</td><td class="n">3,33</td></tr><tr><td>Monitoramento</td><td>Application Insights, dentro da cota gratuita</td><td class="n">0,00</td></tr><tr class="total"><td>Total por mês</td><td></td><td class="n">≈ 202,00</td></tr></tbody></table>
-        <p class="slide-subtitle">Câmbio de US$ 1 = R$ 5,20; preços públicos dos serviços, para conferir antes de usar fora do PIM.</p>
+        <h2 class="slide-title">Custo fixo mensal: <span class="grad">hoje e ao escalar</span></h2>
+        <table class="dados"><thead><tr><th scope="col">Serviço</th><th scope="col">Hoje</th><th scope="col" class="n">Ao escalar (R$)</th></tr></thead><tbody><tr><td>API</td><td>Plano gratuito</td><td class="n">68,33</td></tr><tr><td>Banco de dados</td><td>Plano de aluno da faculdade (Azure)</td><td class="n">26,00</td></tr><tr><td>Site</td><td>Vercel gratuito</td><td class="n">104,00</td></tr><tr><td>Domínio</td><td>Ainda não comprado (endereço da Vercel)</td><td class="n">3,33</td></tr><tr class="total"><td>Total por mês</td><td>R$ 0,00</td><td class="n">≈ 202,00</td></tr></tbody></table>
+        <p class="slide-subtitle">Hoje o Nex_TI custa <b class="destaque">R$ 0</b>. Ao escalar, os planos pagos custariam cerca de R$ 202 por mês: <b class="destaque">estimativa</b> com preços públicos e US$ 1 = R$ 5,20.</p>
     </div>
     <div class="slide-footer"><span>Nex_TI Educacional · Plano de Negócios</span><span>Slide 13 / 21</span></div>
     <div class="barra-slide" aria-hidden="true"><i style="width:62%"></i></div>
-    <aside class="notas">Hoje o projeto roda em planos gratuitos; aqui está o custo dos planos pagos, que não "dormem".</aside>
+    <aside class="notas">Hoje não pagamos nada: API e site em planos gratuitos, banco no plano de aluno da faculdade e domínio .com.br ainda não comprado. Se o Nex_TI crescer, os planos pagos (que não "dormem") custariam cerca de R$ 202 por mês.</aside>
 </section>
 
 <section id="slide-14" class="slide" aria-label="Slide 14: Break even">
@@ -557,7 +559,7 @@
         <h2 class="slide-title">Break even: <span class="grad">o ponto de equilíbrio</span></h2>
         <div class="conta">PE = custo fixo ÷ margem por aluno<br>PE = 202,00 ÷ (5,00 × 0,96) = 202,00 ÷ 4,80 = 42,1</div>
         <p class="resultado">43 alunos de instituição</p>
-        <p class="slide-subtitle">A margem por aluno desconta 4% de taxa de pagamento. Em receita, o ponto de equilíbrio é de cerca de R$ 210 por mês.</p>
+        <p class="slide-subtitle">Cenário estimado, já nos planos pagos. A margem por aluno desconta 4% de taxa de pagamento. Em receita, o ponto de equilíbrio é de cerca de R$ 210 por mês.</p>
     </div>
     <div class="slide-footer"><span>Nex_TI Educacional · Plano de Negócios</span><span>Slide 14 / 21</span></div>
     <div class="barra-slide" aria-hidden="true"><i style="width:67%"></i></div>
@@ -624,7 +626,7 @@
             <div class="card verde"><h3>A favor</h3><ul><li>O produto já existe e está publicado.</li><li>O investimento para começar é pequeno: R$ 946.</li><li>A nuvem se paga com 43 alunos de uma instituição.</li></ul></div>
             <div class="card amarelo"><h3>O que falta provar</h3><ul><li>Para pagar a equipe, são cerca de 563 alunos (6 instituições).</li><li>Quanto as instituições aceitam pagar.</li><li>Quantos alunos usam de fato e o custo real da nuvem.</li></ul></div>
         </div>
-        <div class="card"><h3>Próximo passo</h3><p>Um piloto com uma turma, para trocar as premissas pelos números reais. Premissas, contas e fontes: relatorio/docs/PLANO_DE_NEGOCIOS.md.</p></div>
+        <div class="card"><h3>Próximo passo</h3><p>Um piloto com uma turma, para trocar as premissas pelos números reais. Premissas, contas e fontes: relatorio/docs/plano de negocios/PLANO_DE_NEGOCIOS.md.</p></div>
     </div>
     <div class="slide-footer"><span>Nex_TI Educacional · Plano de Negócios</span><span>Slide 19 / 21</span></div>
     <div class="barra-slide" aria-hidden="true"><i style="width:90%"></i></div>
@@ -655,6 +657,7 @@
 <section id="slide-21" class="slide obrigado" aria-label="Slide 21: Agradecimento">
     <header class="slide-header"><span class="slide-tag">Obrigado</span></header>
     <div class="slide-body">
+        <img class="icone-nexti" src="../../assets/branding/favicon-nexti.svg" alt="Ícone do Nex_TI">
         <img class="logo-unip grande" src="../../assets/branding/Logo UNIP.png" alt="UNIP – Universidade Paulista">
         <p class="obrigado-titulo">Obrigado!</p>
         <p class="slide-subtitle">Nex_<span class="grad">TI</span> Educacional · estudar TI no tempo certo</p>

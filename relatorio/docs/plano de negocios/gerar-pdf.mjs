@@ -62,8 +62,16 @@ try {
   }))`));
   const total = await js(`document.querySelectorAll('.slide').length`);
 
-  const { data } = await cdp('Page.printToPDF', { printBackground: true, preferCSSPageSize: true, marginTop: 0, marginBottom: 0, marginLeft: 0, marginRight: 0 });
-  writeFileSync(SAIDA, Buffer.from(data, 'base64'));
+  // O PDF vem em partes (stream): numa mensagem só, um PDF grande trava a conexão com o Chrome.
+  const { stream } = await cdp('Page.printToPDF', { printBackground: true, preferCSSPageSize: true, marginTop: 0, marginBottom: 0, marginLeft: 0, marginRight: 0, transferMode: 'ReturnAsStream' });
+  const partes = [];
+  for (let fim = false; !fim;) {
+    const r = await cdp('IO.read', { handle: stream, size: 1 << 20 });
+    partes.push(Buffer.from(r.data, r.base64Encoded ? 'base64' : 'utf8'));
+    fim = r.eof;
+  }
+  await cdp('IO.close', { handle: stream });
+  writeFileSync(SAIDA, Buffer.concat(partes));
   console.log(`PDF gravado: ${SAIDA} (${total} slides)`);
   if (problemas.length) {
     console.log('Atenção:');
