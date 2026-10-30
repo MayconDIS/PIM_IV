@@ -56,7 +56,7 @@ try {
   // Conteúdo fora da folha: algum elemento passa da borda do slide, ou alguma imagem não carregou.
   const problemas = JSON.parse(await js(`JSON.stringify([...document.querySelectorAll('.slide')].flatMap((s, i) => {
     const f = s.getBoundingClientRect();
-    const fora = [...s.querySelectorAll('.slide-body *:not(.ps):not(.ps > div), .rodape *')].filter((e) => { const r = e.getBoundingClientRect(); return r.height && (r.bottom > f.bottom - 4 || r.right > f.right - 4); });
+    const fora = [...s.querySelectorAll('.slide-body *, .rodape *')].filter((e) => { const r = e.getBoundingClientRect(); return r.height && (r.bottom > f.bottom - 4 || r.right > f.right - 4); });
     const sem = [...s.querySelectorAll('img')].filter((im) => !im.naturalWidth).map((im) => im.getAttribute('src'));
     return [...(fora.length ? ['slide ' + (i + 1) + ': conteúdo passou da borda'] : []), ...sem.map((src) => 'slide ' + (i + 1) + ': imagem não encontrada ' + src)];
   }))`));
