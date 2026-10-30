@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nex_TI Educacional — Plano de Negócios</title>
+    <!--
+      Plano de negócios da Nex_TI Educacional (empresa fictícia do PIM IV), 22 slides em 16:9, na estrutura do
+      modelo da equipe (plano de negócios da miniempresa): empresa, problema e solução, Canvas, SWOT, 4 P's,
+      organograma, investimento inicial, custo fixo, break even, meta de vendas, payback, rentabilidade,
+      conclusão e experiência com a equipe.
+      - Os números são uma SIMULAÇÃO: premissas, contas e fontes em ../PLANO_DE_NEGOCIOS.md.
+      - Para apresentar: abrir no navegador e apertar P. Setas trocam de slide, F tela cheia, N fala e tempo, Esc sai.
+      - Para o PDF: nesta pasta, `node gerar-pdf.mjs`.
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Righteous&display=swap" rel="stylesheet">
+    <style>
+        /* Cores e fontes do modelo da equipe: azul-marinho, faixa azul-clara e destaques quentes. */
+        :root {
+            --azul: #051934;
+            --faixa: #a3caf7;
+            --laranja: #eb573d;
+            --verde-agua: #5fa4ab;
+            --amarelo: #f8c379;
+            --salmao: #fa9778;
+            --caixa: #1f4e79;
+            --papel: #ffffff;
+            --cinza: #4a5568;
+            --linha: #d6e2ef;
+            --titulo: 'Righteous', 'Open Sans', Arial, sans-serif;
+            --texto: 'Open Sans', Arial, sans-serif;
+            --escala: 1;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        body { background: #2b2f36; font-family: var(--texto); color: var(--azul); display: flex; flex-direction: column; align-items: center; gap: 10mm; padding: 22mm 0 12mm; }
+
+        .barra { position: fixed; top: 0; left: 0; right: 0; z-index: 20; display: flex; align-items: center; gap: 12px; padding: 10px 16px; background: rgba(5, 25, 52, 0.95); color: #dbe7f5; font-size: 13px; }
+        .barra strong { font-family: var(--titulo); color: #fff; letter-spacing: 0.03em; }
+        .barra button { background: var(--amarelo); color: var(--azul); border: 0; border-radius: 6px; font: 700 13px var(--texto); padding: 8px 14px; cursor: pointer; }
+        .barra button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+        .barra kbd, .painel kbd { font-family: Consolas, monospace; font-size: 11px; border: 1px solid #6b7c93; border-radius: 4px; padding: 1px 5px; }
+
+        /* ── Folha 16:9, como no modelo ─────────────────────────────────────── */
+        .slide { position: relative; width: 338.67mm; height: 190.5mm; flex-shrink: 0; background: var(--papel); display: flex; flex-direction: column; overflow: hidden; border-radius: 6px; box-shadow: 0 16px 50px rgba(0, 0, 0, 0.45); }
+        .notas { display: none; }
+        .faixa { background: var(--faixa); padding: 8mm 16mm 6mm; }
+        .faixa h2 { font-family: var(--titulo); font-weight: 400; font-size: 26pt; color: var(--azul); line-height: 1.1; }
+        .slide-body { flex: 1; min-height: 0; padding: 7mm 16mm 9mm; display: flex; flex-direction: column; justify-content: center; gap: 4mm; }
+        .rodape { position: absolute; left: 16mm; right: 16mm; bottom: 3.5mm; display: flex; justify-content: space-between; font-size: 7.5pt; color: #8a98aa; }
+        .barra-slide { position: absolute; left: 0; bottom: 0; height: 3px; width: 100%; background: var(--linha); }
+        .barra-slide i { display: block; height: 100%; background: var(--laranja); }
+        p, li { font-size: 15pt; line-height: 1.55; color: var(--azul); }
+        b, strong { font-weight: 700; }
+        ul { padding-left: 5mm; display: grid; gap: 1.2mm; }
+        .obs { font-size: 12.5pt; color: var(--cinza); }
+        .destaque { color: var(--laranja); }
+
+        /* Capa e seções: fundo azul-marinho, título grande */
+        .capa, .secao { background: var(--azul); }
+        .capa .slide-body, .secao .slide-body { align-items: center; text-align: center; gap: 5mm; }
+        .marca { font-family: var(--titulo); font-size: 58pt; color: #fff; letter-spacing: 0.02em; line-height: 1; }
+        .marca span { color: var(--amarelo); }
+        .lema { font-size: 16pt; color: var(--faixa); }
+        .secao .marca { font-size: 48pt; }
+        .logo-unip { height: 22mm; width: auto; }
+        .capa .rodape, .secao .rodape { color: #7f93ad; }
+
+        /* Equipe */
+        .equipe { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4mm; }
+        .equipe div { border-top: 4px solid var(--verde-agua); padding-top: 3mm; font-size: 13.5pt; }
+        .equipe b { display: block; font-size: 15pt; }
+
+        /* Roteiro numerado (01, 02…) */
+        .roteiro { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6mm; text-align: center; }
+        .roteiro.longo { grid-template-columns: repeat(4, 1fr); row-gap: 5mm; text-align: left; }
+        .roteiro div b { display: block; font-family: var(--titulo); font-weight: 400; font-size: 46pt; color: var(--amarelo); line-height: 1.05; }
+        .roteiro.longo div b { font-size: 30pt; display: inline-block; width: 16mm; }
+        .roteiro div span { font-size: 14pt; font-weight: 700; text-transform: uppercase; color: var(--azul); }
+
+        /* Problema → solução (dois lados, como no modelo) */
+        .slide-body:has(> .ps) { padding: 0; }
+        .ps { display: grid; grid-template-columns: 1fr 1fr; flex: 1; }
+        .ps > div { padding: 12mm 14mm; display: flex; flex-direction: column; justify-content: center; gap: 4mm; }
+        .ps > div:first-child { background: var(--faixa); }
+        .ps h3 { font-family: var(--titulo); font-weight: 400; font-size: 24pt; text-align: center; }
+        .ps p, .ps li { text-align: justify; }
+
+        /* Caixas e tabelas */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5mm; }
+        .caixa { border: 1.5px solid var(--linha); border-left: 6px solid var(--verde-agua); border-radius: 6px; padding: 4mm 5mm; }
+        .caixa.laranja { border-left-color: var(--laranja); }
+        .caixa.amarelo { border-left-color: var(--amarelo); }
+        .caixa.azul { border-left-color: var(--faixa); }
+        .caixa h3 { font-family: var(--titulo); font-weight: 400; font-size: 18pt; margin-bottom: 1.5mm; }
+        table { width: 100%; border-collapse: collapse; font-size: 14.5pt; }
+        th, td { border: 1px solid var(--linha); padding: 2.4mm 4mm; text-align: left; }
+        th { background: var(--azul); color: #fff; font-weight: 700; }
+        td.n, th.n { text-align: right; white-space: nowrap; }
+        tr.total td { background: #eef4fb; font-weight: 700; }
+        .conta { font-family: Consolas, monospace; font-size: 17pt; background: #f4f8fd; border-left: 6px solid var(--laranja); padding: 4mm 6mm; line-height: 1.7; }
+        .grande { font-family: var(--titulo); font-size: 46pt; color: var(--laranja); line-height: 1.1; }
+
+        /* Canvas (os nove blocos, com o rótulo vertical do modelo) */
+        .com-rotulo { display: grid; grid-template-columns: 16mm 1fr; gap: 4mm; align-items: center; flex: 1; min-height: 0; }
+        .rotulo { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--titulo); font-size: 32pt; color: var(--azul); text-align: center; }
+        .canvas { display: grid; gap: 2mm; grid-template-columns: repeat(5, 1fr);
+            grid-template-areas: "par ati val rel seg" "par rec val can seg" "cus cus cus rec2 rec2"; }
+        .canvas div { border: 1.5px dashed var(--verde-agua); border-radius: 4px; padding: 2.5mm 3mm; }
+        .canvas h3 { font-size: 12pt; color: var(--laranja); margin-bottom: 1mm; }
+        .canvas p { font-size: 11.5pt; line-height: 1.4; }
+        .canvas .par { grid-area: par; } .canvas .ati { grid-area: ati; } .canvas .rec { grid-area: rec; } .canvas .val { grid-area: val; border-style: solid; border-color: var(--laranja); }
+        .canvas .rel { grid-area: rel; } .canvas .can { grid-area: can; } .canvas .seg { grid-area: seg; } .canvas .cus { grid-area: cus; } .canvas .rec2 { grid-area: rec2; }
+        .swot { display: grid; grid-template-columns: 1fr 1fr; border: 1.5px solid var(--azul); }
+        .swot > div { padding: 3mm 5mm; border: 1px solid var(--azul); }
+        .swot h3 { text-align: center; font-size: 15pt; margin-bottom: 1.5mm; }
+        .swot li { font-size: 13pt; line-height: 1.4; }
+
+        /* Organograma (formato do modelo: setas para as caixas, funções embaixo) */
+        .org { display: flex; flex-direction: column; align-items: center; }
+        .org .chefe, .org .membros > div { background: var(--caixa); color: #fff; border-radius: 3px; padding: 3mm 4mm; text-align: center; font-weight: 700; font-size: 15pt; }
+        .org .chefe { background: var(--laranja); }
+        .org small { display: block; font-weight: 400; font-size: 12pt; color: #dbe7f5; }
+        .org .ramos { width: 75%; border-top: 2px solid var(--caixa); margin-top: 5mm; position: relative; }
+        .org .ramos::before { content: ""; position: absolute; left: 50%; top: -5mm; height: 5mm; border-left: 2px solid var(--caixa); }
+        .org .membros { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5mm; width: 100%; margin-top: 7mm; }
+        .org .membros > div { position: relative; }
+        .org .membros > div::before { content: ""; position: absolute; left: 50%; top: -7mm; height: 5.5mm; border-left: 2px solid var(--caixa); }
+        .org .membros > div::after { content: ""; position: absolute; left: calc(50% - 1.6mm); top: -2mm; border-left: 1.6mm solid transparent; border-right: 1.6mm solid transparent; border-top: 2mm solid var(--caixa); }
+        .funcoes { list-style: none; padding: 0; gap: 1.5mm; }
+
+        /* ── Modo apresentação (só na tela) ──────────────────────────────────── */
+        .painel { display: none; }
+        @media screen {
+            body.apresentando { padding: 0; gap: 0; overflow: hidden; height: 100vh; background: #000; }
+            body.apresentando .barra { display: none; }
+            body.apresentando .slide { display: none; }
+            body.apresentando .slide.atual { display: flex; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(var(--escala)); border-radius: 0; box-shadow: none; }
+            body.apresentando.com-notas .slide.atual { top: calc(50% - 60px); }
+            body.apresentando.com-notas .painel { display: grid; grid-template-columns: 1fr auto; gap: 8px 20px; position: fixed; left: 0; right: 0; bottom: 0; height: 120px; z-index: 25; padding: 12px 20px 16px; background: #0d1117; color: #c5c6c7; font-size: 15px; line-height: 1.45; overflow: auto; }
+            .painel .lateral { text-align: right; font-family: Consolas, monospace; color: #fff; }
+            .painel .lateral .tempo { font-size: 26px; color: var(--amarelo); }
+            .painel .lateral small { display: block; color: #8b92a5; font-size: 12px; }
+        }
+        @page { size: 338.67mm 190.5mm; margin: 0; }
+        @media print {
+            body { background: none; padding: 0; gap: 0; display: block; }
+            .barra, .painel { display: none !important; }
+            .slide { border-radius: 0; box-shadow: none; page-break-after: always; break-after: page; }
+            .slide:last-of-type { page-break-after: auto; break-after: auto; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="barra" aria-label="Controles da apresentação">
+    <strong>Nex_TI · Plano de Negócios</strong>
+    <button type="button" id="btn-apresentar">▶ Apresentar</button>
+    <span>ou aperte <kbd>P</kbd> · no modo apresentação: <kbd>←</kbd> <kbd>→</kbd> trocam o slide, <kbd>F</kbd> tela cheia, <kbd>N</kbd> fala e tempo, <kbd>Esc</kbd> sai</span>
+</nav>
+
+<!-- Capa -->
+<section class="slide capa" aria-label="Capa">
+    <div class="slide-body">
+        <p class="marca">Nex_<span>TI</span> Educacional</p>
+        <p class="lema">Estudar TI no tempo certo.</p>
+        <img class="logo-unip" src="../../assets/branding/Logo UNIP.png" alt="UNIP – Universidade Paulista">
+    </div>
+    <aside class="notas">"Somos a Nex_TI Educacional, a empresa fictícia do nosso PIM IV. Vamos apresentar o plano de negócios dela."</aside>
+</section>
+
+<!-- Equipe -->
+<section class="slide" aria-label="A equipe">
+    <div class="faixa"><h2>A equipe</h2></div>
+    <div class="slide-body">
+        <div class="equipe">
+            <div><b>Gabriel Alves Moreira</b>RA H67HJI4</div>
+            <div><b>Maciel Costa da Silva</b>RA R280985</div>
+            <div><b>Maycon Douglas Inácio Silva</b>RA H719CD3</div>
+            <div><b>Miguel Angel Fernandez Ortiz</b>RA H7858F9</div>
+            <div><b>Rafael Mesquita</b>RA H6722I0</div>
+        </div>
+        <p>Análise e Desenvolvimento de Sistemas · Projeto Integrado Multidisciplinar <b>PIM IV</b> · 4º semestre · Disciplina: <b>Empreendedorismo em TI</b></p>
+        <p class="obs">UNIP · São José dos Campos · Novembro/2026</p>
+    </div>
+    <aside class="notas">Apresentar a equipe e a disciplina.</aside>
+</section>
+
+<!-- Seção: a empresa -->
+<section class="slide secao" aria-label="Seção: a empresa">
+    <div class="slide-body"><p class="marca">A empresa</p></div>
+    <aside class="notas">Primeira parte: quem é a Nex_TI e que problema ela resolve.</aside>
+</section>
+
+<!-- Roteiro -->
+<section class="slide" aria-label="Roteiro">
+    <div class="faixa"><h2>Roteiro</h2></div>
+    <div class="slide-body">
+        <div class="roteiro">
+            <div><b>01</b><span>Nome e produto</span></div>
+            <div><b>02</b><span>Problema e solução</span></div>
+            <div><b>03</b><span>Plano de negócios</span></div>
+            <div><b>04</b><span>Experiência com a equipe</span></div>
+        </div>
+    </div>
+    <aside class="notas">Os quatro passos da apresentação.</aside>
+</section>
+
+<!-- Nome e produto -->
+<section class="slide" aria-label="Nome e produto">
+    <div class="faixa"><h2>Nex_TI Educacional</h2></div>
+    <div class="slide-body">
+        <div class="grid-2">
+            <div class="caixa"><h3>Quem somos</h3><p>Uma EdTech (empresa de tecnologia educacional) fictícia, criada no PIM IV para apoiar o nivelamento de quem começa em TI.</p></div>
+            <div class="caixa laranja"><h3>O produto</h3><p>Uma plataforma no navegador e no celular: flashcards com revisão espaçada, Trilha com 31 disciplinas do curso, simulados do ENADE, XP e moedas, e o painel do Tutor.</p></div>
+            <div class="caixa amarelo"><h3>Para quem</h3><p>Ingressantes de cursos de TI (B2C) e instituições de ensino que fazem ações de nivelamento (B2B).</p></div>
+            <div class="caixa azul"><h3>Onde está</h3><p>No ar: o site na Vercel e a API e o banco no Azure; o app funciona até sem internet.</p></div>
+        </div>
+    </div>
+    <aside class="notas">O produto já existe e está publicado: é o sistema que fizemos no PIM.</aside>
+</section>
+
+<!-- Problema e solução -->
+<section class="slide" aria-label="Problema e solução">
+    <div class="slide-body">
+        <div class="ps">
+            <div><h3>Problema</h3><p>Quem começa um curso de TI encontra muitos termos técnicos, estuda sem um método e ninguém acompanha a revisão: o conteúdo some antes da prova.</p><p class="obs">São hipóteses: precisam ser confirmadas com alunos reais.</p></div>
+            <div><h3>Solução</h3><p>A Nex_TI traz a carta de volta no tempo certo (revisão espaçada SM-2), organiza o estudo por disciplina, prepara para o ENADE e deixa o tutor ver quem está ficando para trás.</p></div>
+        </div>
+    </div>
+    <aside class="notas">Ligar o problema do aluno à proposta de valor da empresa.</aside>
+</section>
+
+<!-- Seção: plano de negócios -->
+<section class="slide secao" aria-label="Seção: plano de negócios">
+    <div class="slide-body"><p class="marca">Plano de Negócios</p></div>
+    <aside class="notas">Segunda parte: o plano de negócios.</aside>
+</section>
+
+<!-- Roteiro do plano -->
+<section class="slide" aria-label="Roteiro do plano de negócios">
+    <div class="faixa"><h2>Roteiro</h2></div>
+    <div class="slide-body">
+        <div class="roteiro longo">
+            <div><b>1</b><span>Canvas</span></div>
+            <div><b>2</b><span>SWOT</span></div>
+            <div><b>3</b><span>4 P's</span></div>
+            <div><b>4</b><span>Organograma</span></div>
+            <div><b>5</b><span>Investimento inicial</span></div>
+            <div><b>6</b><span>Custo fixo</span></div>
+            <div><b>7</b><span>Break even</span></div>
+            <div><b>8</b><span>Meta de vendas</span></div>
+            <div><b>9</b><span>Payback</span></div>
+            <div><b>10</b><span>Rentabilidade</span></div>
+            <div><b>11</b><span>Com pró-labore</span></div>
+            <div><b>12</b><span>Conclusão</span></div>
+        </div>
+        <p class="obs">Os números são uma <b>simulação</b>: os custos vêm de preços públicos dos serviços que já usamos; o preço e o número de alunos são premissas da equipe, para o piloto confirmar.</p>
+    </div>
+    <aside class="notas">Avisar logo aqui que os números são uma simulação com premissas.</aside>
+</section>
+
+<!-- Canvas -->
+<section class="slide" aria-label="Canvas">
+    <div class="slide-body">
+        <div class="com-rotulo">
+            <p class="rotulo">Canvas</p>
+            <div class="canvas">
+                <div class="par"><h3>Parcerias principais</h3><p>Instituições de ensino com ações de nivelamento.</p></div>
+                <div class="ati"><h3>Atividades principais</h3><p>Curadoria pedagógica; desenvolvimento e operação; atendimento e inclusão.</p></div>
+                <div class="rec"><h3>Recursos principais</h3><p>Site, app, API e banco; 1198 cartas com fontes; nuvem (Vercel e Azure); a equipe.</p></div>
+                <div class="val"><h3>Proposta de valor</h3><p>Estudo ativo dos fundamentos de TI, revisão no tempo certo e acompanhamento do tutor, de forma acessível.</p></div>
+                <div class="rel"><h3>Relação com clientes</h3><p>Tutor acompanhando; XP, moedas e níveis; o assistente Nexor.</p></div>
+                <div class="can"><h3>Canais</h3><p>Site no navegador, app no celular e as instituições parceiras.</p></div>
+                <div class="seg"><h3>Segmento de clientes</h3><p>Ingressantes de TI (B2C) e instituições de ensino (B2B).</p></div>
+                <div class="cus"><h3>Estrutura de custos</h3><p>Nuvem (API, banco e site), domínio, taxa de pagamento, divulgação; depois, curadoria e suporte. Custo fixo simulado: R$ 202 por mês.</p></div>
+                <div class="rec2"><h3>Fontes de receita</h3><p>Licença por aluno para instituições (R$ 5,00/mês) e assinatura individual (R$ 9,90/mês).</p></div>
+            </div>
+        </div>
+    </div>
+    <aside class="notas">Os nove blocos do Canvas, como no modelo da equipe.</aside>
+</section>
+
+<!-- SWOT -->
+<section class="slide" aria-label="SWOT">
+    <div class="slide-body">
+        <div class="com-rotulo">
+            <p class="rotulo">SWOT</p>
+            <div class="swot">
+                <div><h3>Forças</h3><ul><li>Site e app com a mesma API e o mesmo banco.</li><li>Regras no servidor e 445 testes automáticos.</li><li>Estudo sem internet no app.</li><li>Conteúdo de 31 disciplinas, com fontes.</li></ul></div>
+                <div><h3>Fraquezas</h3><ul><li>Ainda sem uso por alunos reais.</li><li>Infraestrutura gratuita "dorme" sem uso.</li><li>Viabilidade econômica ainda não medida.</li><li>Curadoria administrativa e suporte formal a implementar.</li></ul></div>
+                <div><h3>Oportunidades</h3><ul><li>Organizar percursos de estudo.</li><li>Recursos acessíveis.</li><li>Continuidade entre computador e celular.</li><li>Ações de nivelamento das instituições.</li></ul></div>
+                <div><h3>Ameaças</h3><ul><li>Baixa adesão dos alunos.</li><li>Custos de operação.</li><li>Inconsistência entre dispositivos.</li><li>Necessidade de revisão pedagógica.</li></ul></div>
+            </div>
+        </div>
+    </div>
+    <aside class="notas">As ameaças são os riscos do relatório; a mitigação é um piloto limitado.</aside>
+</section>
+
+<!-- 4 P's -->
+<section class="slide" aria-label="4 P's">
+    <div class="faixa"><h2>4 P's</h2></div>
+    <div class="slide-body">
+        <p><b>COMPOSTO DE MARKETING: PRODUTO, PREÇO, PRAÇA, PROMOÇÃO</b></p>
+        <p><b>Produto:</b> plataforma Web e app de estudo de TI: flashcards com revisão espaçada, Trilha com 31 disciplinas, simulados do ENADE, gamificação e painel do Tutor.</p>
+        <p><b>Preço:</b> instituições pagam R$ 5,00 por aluno ativo por mês; alunos, R$ 9,90 por mês. O estudo básico continua gratuito, como na proposta social do projeto.</p>
+        <p><b>Praça:</b> no navegador e no celular, inclusive sem internet; venda direta a instituições com ações de nivelamento.</p>
+        <p><b>Promoção:</b> parcerias com cursos de TI, demonstração para coordenações, redes sociais e indicação entre alunos.</p>
+    </div>
+    <aside class="notas">O preço é premissa da equipe.</aside>
+</section>
+
+<!-- Organograma -->
+<section class="slide" aria-label="Organograma e funções de cada sócio">
+    <div class="faixa"><h2>Organograma e funções de cada sócio</h2></div>
+    <div class="slide-body">
+        <div class="org">
+            <div class="chefe">Maciel<small>Scrum Master</small></div>
+            <div class="ramos" aria-hidden="true"></div>
+            <div class="membros">
+                <div>Maycon<small>Desenvolvedor líder · full stack</small></div>
+                <div>Rafael<small>Desenvolvedor · banco de dados</small></div>
+                <div>Gabriel<small>Desenvolvedor · prototipação</small></div>
+                <div>Miguel<small>Desenvolvedor</small></div>
+            </div>
+        </div>
+        <ul class="funcoes">
+            <li><b>A - Scrum Master:</b> monta o quadro no Trello, organiza as sprints e acompanha as entregas.</li>
+            <li><b>B - Desenvolvedor líder:</b> API, site, app, banco, nuvem e testes; integra as entregas e cuida da documentação.</li>
+            <li><b>C - Desenvolvedores:</b> áreas definidas no planejamento: banco de dados (Rafael) e prototipação das telas (Gabriel).</li>
+        </ul>
+    </div>
+    <aside class="notas">Os papéis definidos pelo Scrum Master no começo do projeto.</aside>
+</section>
+
+<!-- Investimento inicial -->
+<section class="slide" aria-label="Investimento inicial">
+    <div class="faixa"><h2>Investimento Inicial</h2></div>
+    <div class="slide-body">
+        <table>
+            <thead><tr><th>Especificações</th><th class="n">Valor (R$)</th></tr></thead>
+            <tbody>
+                <tr><td>1 Domínio .com.br (primeiro ano)</td><td class="n">40,00</td></tr>
+                <tr><td>2 Capital de giro (3 meses de custo fixo: 3 × R$ 202)</td><td class="n">606,00</td></tr>
+                <tr><td>3 Divulgação inicial</td><td class="n">300,00</td></tr>
+                <tr class="total"><td>Total</td><td class="n">946,00</td></tr>
+            </tbody>
+        </table>
+        <p class="obs">O sistema já está pronto (feito no PIM): o investimento é só para começar a operar.</p>
+    </div>
+    <aside class="notas">Diferente da miniempresa, não há estoque nem reforma: o produto é software.</aside>
+</section>
+
+<!-- Custo fixo -->
+<section class="slide" aria-label="Custo fixo mensal">
+    <div class="faixa"><h2>Custo Fixo Mensal</h2></div>
+    <div class="slide-body">
+        <table>
+            <thead><tr><th>Item</th><th>Serviço</th><th class="n">Valor (R$)</th></tr></thead>
+            <tbody>
+                <tr><td>API</td><td>Azure App Service B1 (US$ 13,14)</td><td class="n">68,33</td></tr>
+                <tr><td>Banco de dados</td><td>Azure SQL Basic (US$ 5)</td><td class="n">26,00</td></tr>
+                <tr><td>Site</td><td>Vercel Pro, 1 assento (US$ 20)</td><td class="n">104,00</td></tr>
+                <tr><td>Domínio</td><td>.com.br (R$ 40 por ano)</td><td class="n">3,33</td></tr>
+                <tr><td>Monitoramento</td><td>Application Insights, dentro da cota gratuita</td><td class="n">0,00</td></tr>
+                <tr class="total"><td colspan="2">Total por mês</td><td class="n">≈ 202,00</td></tr>
+            </tbody>
+        </table>
+        <p class="obs">Câmbio de US$ 1 = R$ 5,20. Preços públicos dos serviços; conferir na calculadora da Azure e na Vercel antes de usar fora do PIM.</p>
+    </div>
+    <aside class="notas">Hoje o projeto roda em planos gratuitos; aqui está o custo dos planos pagos, que não "dormem".</aside>
+</section>
+
+<!-- Break even -->
+<section class="slide" aria-label="Break even">
+    <div class="faixa"><h2>Break even</h2></div>
+    <div class="slide-body">
+        <p><b>Ponto de equilíbrio (Break Even)</b></p>
+        <div class="conta">PE = custo fixo ÷ margem por aluno<br>PE = 202,00 ÷ (5,00 × 0,96) = 202,00 ÷ 4,80 = 42,1</div>
+        <p class="grande">43 alunos de instituição</p>
+        <p class="obs">Obs: a margem por aluno desconta 4% de taxa de pagamento. Em receita, o ponto de equilíbrio é de cerca de R$ 210 por mês.</p>
+    </div>
+    <aside class="notas">Com 43 alunos de uma instituição parceira, a nuvem se paga.</aside>
+</section>
+
+<!-- Meta de vendas -->
+<section class="slide" aria-label="Meta de vendas e lucro líquido">
+    <div class="faixa"><h2>Meta de vendas e Lucro líquido</h2></div>
+    <div class="slide-body">
+        <table>
+            <thead><tr><th>Meta do piloto (por mês)</th><th class="n">Valor (R$)</th></tr></thead>
+            <tbody>
+                <tr><td>1 instituição com 100 alunos × R$ 5,00</td><td class="n">500,00</td></tr>
+                <tr><td>30 assinantes individuais × R$ 9,90</td><td class="n">297,00</td></tr>
+                <tr class="total"><td>Faturamento mensal (100%)</td><td class="n">797,00</td></tr>
+                <tr><td>(−) Taxa de pagamento (4%)</td><td class="n">32,00</td></tr>
+                <tr><td>(−) Custo fixo</td><td class="n">202,00</td></tr>
+                <tr class="total"><td>Lucro líquido (70,6%)</td><td class="n">563,00</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <aside class="notas">A meta é a do piloto: uma turma de uma instituição e alguns assinantes.</aside>
+</section>
+
+<!-- Payback -->
+<section class="slide" aria-label="Payback">
+    <div class="faixa"><h2>Payback</h2></div>
+    <div class="slide-body">
+        <div class="conta">Payback = investimento inicial ÷ lucro líquido mensal<br>Payback = 946,00 ÷ 563,00 = 1,68</div>
+        <p class="grande">1,7 mês</p>
+        <p class="obs">Obs: menos de dois meses para recuperar o investimento inicial, no cenário do piloto.</p>
+    </div>
+    <aside class="notas">Payback rápido porque o investimento é pequeno: o software já existe.</aside>
+</section>
+
+<!-- Rentabilidade -->
+<section class="slide" aria-label="Rentabilidade">
+    <div class="faixa"><h2>Rentabilidade</h2></div>
+    <div class="slide-body">
+        <p><b>Rentabilidade (rendimento do capital aplicado na empresa)</b></p>
+        <div class="conta">Rentabilidade = lucro líquido ÷ investimento inicial × 100<br>Rentabilidade = 563,00 ÷ 946,00 × 100 = 59,5%</div>
+        <p class="grande">≈ 60% ao mês</p>
+        <p class="obs">Obs: é alta porque, no piloto, <b>ninguém da equipe recebe salário</b>. O próximo slide mostra a conta com pró-labore.</p>
+    </div>
+    <aside class="notas">Deixar claro que o número é alto por causa da premissa de não pagar a equipe.</aside>
+</section>
+
+<!-- Com pró-labore -->
+<section class="slide" aria-label="Cenário com pró-labore">
+    <div class="faixa"><h2>E se a equipe receber?</h2></div>
+    <div class="slide-body">
+        <div class="grid-2">
+            <div class="caixa laranja"><h3>Com pró-labore</h3><p>R$ 500 para cada um dos 5 sócios: R$ 2.500 por mês.</p><p>Custo fixo: 202 + 2.500 = <b>R$ 2.702 por mês</b>.</p></div>
+            <div class="caixa"><h3>Novo ponto de equilíbrio</h3><p>2.702 ÷ 4,80 = <b class="destaque">563 alunos de instituição</b>.</p><p>Cerca de <b>6 instituições</b> com 100 alunos cada.</p></div>
+        </div>
+        <p>O piloto se paga com uma turma; para virar empresa de verdade, a Nex_TI precisa de várias instituições parceiras.</p>
+    </div>
+    <aside class="notas">É a leitura honesta: a meta real é conquistar instituições.</aside>
+</section>
+
+<!-- Conclusão -->
+<section class="slide" aria-label="Conclusão">
+    <div class="faixa"><h2>Conclusão</h2></div>
+    <div class="slide-body">
+        <p><b>É um bom negócio?</b> Pode ser. O produto já existe e está publicado, o investimento para começar é pequeno (R$ 946) e a nuvem se paga com 43 alunos de uma instituição.</p>
+        <p>Mas o negócio só se sustenta com escala: para pagar a equipe, são cerca de 563 alunos, ou 6 instituições. Por isso o próximo passo é um <b>piloto</b> com uma turma, para confirmar quanto as instituições aceitam pagar, quantos alunos usam de fato e qual é o custo real da nuvem.</p>
+        <p class="obs">Premissas, contas e fontes dos preços: relatorio/docs/PLANO_DE_NEGOCIOS.md.</p>
+    </div>
+    <aside class="notas">Fechar com honestidade: viável no piloto, sustentável só com escala.</aside>
+</section>
+
+<!-- Experiência com a equipe -->
+<section class="slide" aria-label="Experiência com a equipe">
+    <div class="slide-body">
+        <div class="ps">
+            <div><h3>Problema</h3><ul><li>Trocar de tarefa custa tempo: com dois projetos ao mesmo tempo, cerca de 20% se perde na troca.</li><li>A integração do app não coube na Sprint 4.</li><li>A Sprint 5 concentrou entregas.</li></ul></div>
+            <div><h3>Solução</h3><ul><li>Um cartão por pessoa em andamento e entregas em sequência, um assunto por vez.</li><li>A sprint tem prazo fixo: o item voltou ao backlog e foi priorizado de novo.</li><li>Revisar a capacidade no planejamento de cada sprint e acompanhar o caminho crítico.</li></ul><p class="obs">O ponto principal não é não ter problema, e sim como a equipe lida com ele.</p></div>
+        </div>
+    </div>
+    <aside class="notas">Como no projeto da miniempresa: aprendizados para lidar com o trabalho em equipe.</aside>
+</section>
+
+<!-- Agradecimento -->
+<section class="slide capa" aria-label="Agradecimento">
+    <div class="slide-body">
+        <p class="marca">Obrigado pela atenção!</p>
+        <p class="lema">Nex_TI Educacional · estudar TI no tempo certo.</p>
+        <img class="logo-unip" src="../../assets/branding/Logo UNIP.png" alt="UNIP – Universidade Paulista">
+    </div>
+    <aside class="notas">Agradecer e abrir para perguntas.</aside>
+</section>
+
+<section class="painel" aria-label="Fala do apresentador" aria-live="polite">
+    <div class="fala" id="fala"></div>
+    <div class="lateral"><div class="tempo" id="tempo">00:00</div><small id="contador"></small><small><kbd>T</kbd> zera o tempo</small></div>
+</section>
+
+<script>
+    // Numera os slides (rodapé e barra) e liga o modo apresentação. Na impressão (PDF) o modo some.
+    const slides = [...document.querySelectorAll('.slide')];
+    const corpo = document.body;
+    slides.forEach((s, i) => {
+        s.id = `slide-${i + 1}`;
+        if (!s.classList.contains('capa') && !s.classList.contains('secao')) {
+            s.insertAdjacentHTML('beforeend', `<div class="rodape"><span>Nex_TI Educacional · Plano de Negócios</span><span>${i + 1} / ${slides.length}</span></div>`);
+        }
+        s.insertAdjacentHTML('beforeend', `<div class="barra-slide" aria-hidden="true"><i style="width:${((i + 1) / slides.length) * 100}%"></i></div>`);
+    });
+    let atual = 0;
+    let inicio = null;
+    const ajustarEscala = () => {
+        const folha = { largura: 338.67 * 96 / 25.4, altura: 190.5 * 96 / 25.4 };
+        const alturaLivre = innerHeight - (corpo.classList.contains('com-notas') ? 120 : 0);
+        document.documentElement.style.setProperty('--escala', Math.min(innerWidth / folha.largura, alturaLivre / folha.altura));
+    };
+    const mostrar = (i) => {
+        atual = Math.max(0, Math.min(slides.length - 1, i));
+        slides.forEach((s, n) => s.classList.toggle('atual', n === atual));
+        document.getElementById('fala').textContent = slides[atual].querySelector('.notas')?.textContent.trim() ?? '';
+        document.getElementById('contador').textContent = `slide ${atual + 1} de ${slides.length}`;
+        history.replaceState(null, '', `#slide-${atual + 1}`);
+    };
+    const apresentar = (ligar) => {
+        corpo.classList.toggle('apresentando', ligar);
+        if (ligar) { inicio ??= Date.now(); ajustarEscala(); mostrar(atual); }
+        else { slides[atual].scrollIntoView({ block: 'center' }); document.exitFullscreen?.().catch(() => {}); }
+    };
+    document.getElementById('btn-apresentar').addEventListener('click', () => apresentar(true));
+    addEventListener('resize', ajustarEscala);
+    addEventListener('keydown', (e) => {
+        const apresentando = corpo.classList.contains('apresentando');
+        if (!apresentando) { if (e.key === 'p' || e.key === 'P') apresentar(true); return; }
+        if (['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'].includes(e.key)) { e.preventDefault(); mostrar(atual + 1); }
+        else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].includes(e.key)) { e.preventDefault(); mostrar(atual - 1); }
+        else if (e.key === 'Home') mostrar(0);
+        else if (e.key === 'End') mostrar(slides.length - 1);
+        else if (e.key === 'Escape') apresentar(false);
+        else if (e.key === 'f' || e.key === 'F') { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); }
+        else if (e.key === 'n' || e.key === 'N') { corpo.classList.toggle('com-notas'); ajustarEscala(); }
+        else if (e.key === 't' || e.key === 'T') inicio = Date.now();
+    });
+    addEventListener('click', (e) => {
+        if (!corpo.classList.contains('apresentando') || e.target.closest('.painel')) return;
+        mostrar(atual + (e.clientX > innerWidth / 2 ? 1 : -1));
+    });
+    setInterval(() => {
+        if (!inicio) return;
+        const s = Math.floor((Date.now() - inicio) / 1000);
+        document.getElementById('tempo').textContent = `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+    }, 1000);
+    const pedido = Number(location.hash.replace('#slide-', ''));
+    if (pedido) atual = pedido - 1;
+</script>
+</body>
+</html>
