@@ -216,7 +216,8 @@ pela API e aplica essa permissão na consulta do acesso, sem gravá-la como fase
 conquistadas ou bônus comprados. Ao voltar ao perfil Aluno, voltam a valer os acessos
 obtidos pelo estudo e pelo diagnóstico.
 
-A permissão não cria respostas, conclusões, XP, moedas, nível ou certificado. Estudar e
+A permissão não cria respostas, conclusões, XP, moedas, nível ou certificado; no site, o
+Admin pode abrir o certificado para conferi-lo, sem gravar a conquista. Estudar e
 concluir uma fase continua seguindo as regras de revisão e recompensa. O diagnóstico
 permanece opcional para orientar Admin e Tutor; o Aluno mantém a trilha normal.
 A gestão dos perfis de usuários continua exclusiva do Admin.

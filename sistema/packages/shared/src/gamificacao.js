@@ -21,6 +21,9 @@ export const FASES_INICIAIS = Object.freeze(['fase1']);
 /** Acesso de acompanhamento: não representa estudo concluído nem liberações permanentes. */
 export const temAcessoCompleto = (perfil) => perfil === 'Admin' || perfil === 'Tutor';
 
+/** O Admin abre o certificado para conferir como ele sai; isso não vira conquista salva. */
+export const certificadoDisponivel = (conquistado, perfil) => Boolean(conquistado) || perfil === 'Admin';
+
 /** Permissão para abrir a trilha agora, separada do progresso que fica salvo. */
 export function fasesDisponiveis(liberadas, perfil) {
   return temAcessoCompleto(perfil) ? [...ORDEM_FASES] : preservarFasesLiberadas(liberadas);

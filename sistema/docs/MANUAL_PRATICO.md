@@ -21,6 +21,7 @@ Ao entrar com o perfil **Admin** ou **Tutor**, todos os módulos e disciplinas j
 disponíveis no site e no aplicativo. No site, isso também inclui bônus, testes e simulados.
 Não é preciso fazer o diagnóstico, concluir fases anteriores ou comprar bônus.
 Esse acesso não marca matérias como concluídas nem concede XP, moedas ou certificado.
+O Admin também pode abrir o certificado no site, só para conferir como ele sai.
 Admin e Tutor podem fazer o diagnóstico pelo menu se quiserem uma orientação de estudo.
 A gestão dos perfis de usuários continua exclusiva do Admin.
 

@@ -51,6 +51,7 @@ export {
   ORDEM_FASES,
   FASES_INICIAIS,
   temAcessoCompleto,
+  certificadoDisponivel,
   fasesDisponiveis,
   RANKS,
   isTeste,
