@@ -193,8 +193,8 @@ public class GerarDiagramasPimIV {
         p.put("Usuario", classe(d, pacote, "Usuario", 20, 200, new String[] {
             "Id : int", "Username : string", "Email : string", "SenhaHash : string", "Perfil : string = \"Aluno\"",
             "Nivel : int = 1", "XP : int = 0", "Moedas : int = 0", "DataCriacao : DateTime", "DiagnosticoJson : string [0..1]"}, new String[0]));
-        p.put("Aluno", classe(d, pacote, "Aluno", 20, 470, new String[0], new String[] {"EstudarFlashCard() : void"}));
-        p.put("Tutor", classe(d, pacote, "Tutor", 230, 470, new String[0], new String[] {"GerenciarConteudo() : void"}));
+        p.put("Aluno", classe(d, pacote, "Aluno", 20, 470, new String[0], new String[0]));
+        p.put("Tutor", classe(d, pacote, "Tutor", 230, 470, new String[0], new String[0]));
         p.put("Fase", classe(d, pacote, "Fase", 480, 40, new String[] {"CodigoFase : string", "Descricao : string"}, new String[0]));
         p.put("Flashcard", classe(d, pacote, "Flashcard", 460, 220, new String[] {
             "Id : int", "CodigoFase : string", "Frente : string", "Verso : string", "Dica : string [0..1]",
