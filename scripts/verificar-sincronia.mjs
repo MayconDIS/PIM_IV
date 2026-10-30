@@ -37,7 +37,7 @@ const DOCUMENTOS = [
   'README.md', 'sistema/README.md', 'sistema/docs/MANUAL_TECNICO.md', 'sistema/docs/MANUAL_PRATICO.md', 'modelagem-uml/README.md',
   'modelagem-uml/02_Modelagem_UML/gerador-astah/README.md', 'modelagem-uml/04_Banco_de_Dados/README.md',
   'relatorio/README.md', 'relatorio/index.html', 'sistema/docs/TESTES.md',
-  'relatorio/docs/README.md', 'relatorio/docs/apresentacao/slides.html', 'relatorio/docs/apresentacao/ROTEIRO_DO_PALESTRANTE.md',
+  'relatorio/docs/apresentacao/README.md', 'relatorio/docs/plano de negocios/README.md', 'relatorio/docs/apresentacao/slides.html', 'relatorio/docs/apresentacao/ROTEIRO_DO_PALESTRANTE.md',
 ].filter(existe);
 // A apresentação de P.A. em .NET é uma atividade à parte: fala só do Nex_TI Desktop e é conferida
 // com o próprio programa (seção 2b), não com os números do site e da API.

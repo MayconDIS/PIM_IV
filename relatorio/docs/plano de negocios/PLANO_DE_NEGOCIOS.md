@@ -7,7 +7,12 @@ investimento, ponto de equilíbrio, payback e rentabilidade).
 > **É uma simulação.** O relatório (seção 2.2) registra que a viabilidade econômica ainda não foi
 > demonstrada com dados. Os **custos** abaixo vêm de preços públicos dos serviços que o Nex_TI já usa;
 > o **preço** e o **número de alunos** são **premissas da equipe**, para serem trocadas pelos dados
-> do piloto. Mudou uma premissa? Refaça as contas da seção 4 e atualize os slides 11 e 12 da apresentação.
+> do piloto. Mudou uma premissa? Refaça as contas da seção 4 e atualize os slides do plano de negócios
+> (12 a 14 em `../apresentacao/` e os desta pasta).
+>
+> **Hoje o Nex_TI custa R$ 0:** a API e o site estão em planos gratuitos, o banco usa o plano de aluno
+> da faculdade no Azure e o domínio .com.br ainda não foi comprado (o site usa o endereço da Vercel).
+> Os custos abaixo são **estimativas** dos planos pagos, para quando o Nex_TI crescer.
 
 ## 1. Canvas, SWOT e organograma
 
