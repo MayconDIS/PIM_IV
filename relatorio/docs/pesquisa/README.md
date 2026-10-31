@@ -3,8 +3,8 @@
 Um questionário para colher **dados quantitativos e qualitativos** sobre o Nex_TI e sobre a
 apresentação e o relatório do PIM IV. Os resultados servem para:
 
-- **Relatório:** completar a elicitação (seção 2.2.3), que hoje registra que faltam entrevistas e um
-  questionário com usuários reais, e trazer números de usabilidade (nota SUS).
+- **Relatório:** completar a elicitação (seção 2.2.3), que registra o questionário publicado em 30/10/2026
+  e deixa as respostas e as entrevistas para o piloto, e trazer números de usabilidade (nota SUS).
 - **Plano de negócios:** conferir o preço de R$ 9,90 e a vontade de recomendar, que hoje são premissas, e
   os 4 P's: forma de pagamento, ofertas que fariam a pessoa assinar e onde ela gostaria de conhecer o Nex_TI.
 - **Apresentação:** saber o que ficou claro, o que confundiu e se o tempo foi bom.

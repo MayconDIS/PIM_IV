@@ -15,6 +15,14 @@ respostas; ele não prevê exatamente quando uma pessoa esquecerá um conteúdo.
 1. Na primeira visita aparece uma tela de abertura com o carregamento dos módulos.
 2. Na tela de entrada, crie uma conta (**Criar conta**) ou entre com seu nickname ou e-mail e senha (**Entrar**). Cadastro e login precisam da API disponível.
 3. No primeiro acesso do Aluno, o **diagnóstico** apresenta 20 perguntas, cinco de cada módulo do curso. Selecione uma alternativa e confirme, ou escolha **Não sei**. Ao terminar, veja o resultado por módulo e a sugestão de onde começar.
+4. O login vale **24 horas**. Depois disso, o site volta sozinho para a tela de entrada com o aviso
+   *"Sua sessão expirou"*: é só entrar de novo, e o seu progresso continua salvo.
+
+### Pesquisa do PIM
+No painel, logo abaixo do seu nome, o link **Responder a pesquisa do PIM (5 min)** abre o
+questionário da equipe no Google Forms, numa aba nova. A pesquisa é anônima (não pede nome,
+e-mail nem RA) e ajuda a melhorar o sistema. O mesmo questionário abre em
+<https://nexti-pim-iv.vercel.app/pesquisa>.
 
 ### Acesso do Administrador e do Tutor
 Ao entrar com o perfil **Admin** ou **Tutor**, todos os módulos e disciplinas já ficam
