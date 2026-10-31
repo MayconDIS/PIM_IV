@@ -218,7 +218,7 @@ Números (rotas, fases, cartas, testes) nunca vêm desta lista: tire do código.
 
 ## Seções do documento (referência)
 
-Páginas de 25/10/2026. Elas mudam: confira no `index.html` e rode `python atualizar-sumario.py`
+Páginas de 25/10/2026. Elas mudam: confira no `index.html` (em `relatorio/docs/Relatorio_PIM_IV_Nex_TI`) e rode `python atualizar-sumario.py`
 depois de incluir ou tirar página.
 
 | ID | Título | Página |
@@ -276,8 +276,8 @@ depois de incluir ou tirar página.
    (a menos que o usuário peça o arquivo completo).
 6. **Valide**: a página tem `num-pagina`? Os parágrafos usam `.paragrafo`?
    Nenhum `<strong>` foi usado para destacar novidade? O texto é corrido e orgânico?
-7. **Feche o ciclo**: `python atualizar-sumario.py` (páginas e sumário), confira que nenhuma página
-   passa de 29,7 cm, gere o Word (`relatorio/docs/word`: `npm run gerar`) e rode
+7. **Feche o ciclo**: `python atualizar-sumario.py` em `relatorio/docs/Relatorio_PIM_IV_Nex_TI` (páginas e sumário), confira que nenhuma página
+   passa de 29,7 cm, gere o Word (`relatorio/docs/Relatorio_PIM_IV_Nex_TI`: `npm run gerar`) e rode
    `node scripts/verificar-sincronia.mjs` na raiz.
 
 ---

@@ -49,7 +49,7 @@ repositórios distintos, vivem aqui como pastas de primeiro nível:
 | Pasta | Conteúdo |
 |---|---|
 | [`sistema/`](sistema) | Monorepo npm: `apps/react-web`, `apps/react-mobile`, `apps/api` (.NET), `apps/desktop` (.NET, Windows Forms), `packages/`, `database/`, `tests/` |
-| [`relatorio/`](relatorio) | Relatório ABNT em HTML/CSS, as imagens (`assets/`), `design_DNA/` e, em `docs/`, a versão em Word (`docs/word/`), a apresentação do PIM e o plano de negócios |
+| [`relatorio/`](relatorio) | Relatório ABNT em HTML/CSS e a versão em Word (em [`docs/Relatorio_PIM_IV_Nex_TI`](relatorio/docs/Relatorio_PIM_IV_Nex_TI)), as imagens (`assets/`), `design_DNA/` e, em `docs/`, a apresentação do PIM e o plano de negócios |
 | [`modelagem-uml/`](modelagem-uml) | `02_Modelagem_UML/` (o `.asta` e as imagens exportadas do Astah) e `04_Banco_de_Dados/` (MER, DER e modelo físico) |
 
 ## 🚀 Como executar o sistema

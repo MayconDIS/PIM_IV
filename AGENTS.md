@@ -16,7 +16,7 @@ juntou três que eram separados; hoje são três pastas **do mesmo projeto**:
 |---|---|---|
 | `sistema/` | O código: API .NET 10, site React, app Expo, pacote compartilhado, banco | Monorepo npm + .NET |
 | `modelagem-uml/` | Os diagramas (Astah) e o banco (MER, DER, modelo físico) | `.asta` + imagens exportadas |
-| `relatorio/` | O relatório ABNT, a versão em Word e as imagens que ele usa | HTML/CSS + `.docx` |
+| `relatorio/` | O relatório ABNT e a versão em Word (em `docs/Relatorio_PIM_IV_Nex_TI`), as imagens (`assets/`), os slides do PIM, o plano de negócios, a pesquisa e a publicação no LinkedIn (em `docs/`) | HTML/CSS + `.docx` |
 
 A apresentação de P.A. em .NET é uma **atividade à parte**: fala só do Nex_TI Desktop (`sistema/apps/desktop`). Os slides e o roteiro ficam em `sistema/apps/desktop/docs/apresentacao/` e usam só os diagramas de `docs/diagramas`, as telas de `docs/telas` e os números do próprio programa (fases da trilha, cartas e testes do desktop).
 
@@ -28,7 +28,7 @@ A ordem é sempre a mesma: **código → modelagem → relatório e Word** (e, n
 2. Os **diagramas** saem só do Astah, pelo gerador `modelagem-uml/02_Modelagem_UML/gerador-astah/`.
    Não usamos PlantUML. As imagens são exportadas pelo próprio Astah (`ExportarImagens.java`).
 3. O **relatório** copia as imagens da modelagem e os números do código; o **Word** é gerado do
-   relatório (`relatorio/docs/word`). Os **slides** do desktop copiam os diagramas e as telas do desktop.
+   relatório (`relatorio/docs/Relatorio_PIM_IV_Nex_TI`). Os **slides** do desktop copiam os diagramas e as telas do desktop.
 
 ## Se mudar X, atualize Y
 
@@ -36,12 +36,12 @@ A ordem é sempre a mesma: **código → modelagem → relatório e Word** (e, n
 |---|---|
 | Rota da API ou quem pode usá-la | `sistema/docs/MANUAL_TECNICO.md` (tabela de rotas), relatório 2.4.3 e regras/requisitos (2.2.2 e 2.2.3), número de rotas no README e no relatório, diagramas do caso de uso no gerador do Astah |
 | Regra de SM-2 ou de XP e moedas (`packages/shared`) | `npm run seed:api` (gera a tabela da API), testes compartilhados e da API, manual, relatório |
-| Fases ou cartas (`content.js`) | `npm run seed:api`, número de fases e cartas no README e no relatório; no desktop, o número de fases e cartas do README e dos slides dele |
+| Fases ou cartas (`content.js`) | `npm run seed:api`, número de fases e cartas no README e no relatório; no desktop, o número de fases e cartas do README e dos slides dele. Texto de carta que já existe: registre o antigo e o novo em `sistema/apps/api/Data/Seed/correcoes-texto.json` (o banco no ar só recebe cartas novas) |
 | Tabela ou entidade do banco | migration, `sistema/database/NexTI_DB.sql`, gerador do Astah (entidades, MER, DER, modelo físico), relatório Etapa 7 e dicionário de dados (2.7.6) |
 | Regra de negócio ou funcionalidade | relatório 2.2.2 (regras), 2.2.3 e 2.2.4 (requisitos), cartões RN, RF e RNF do Trello, caso de uso no gerador do Astah |
 | Qualquer diagrama | gerador do Astah → gerar o `.asta` → exportar imagens → copiar as principais para `02_Modelagem_UML` e `04_Banco_de_Dados` → copiar para `relatorio/assets` → Word |
 | Texto ou página do relatório | conferir que toda página cabe em A4 e gerar o Word de novo; resumo e abstract andam juntos; se mudou número, tela ou diagrama que aparece nos slides do PIM (`relatorio/docs/apresentacao`), atualizar os slides e o roteiro e gerar o PDF (`node gerar-pdf.mjs`) |
-| Tela do site | tirar nova foto para o Apêndice A do relatório |
+| Tela do site | tirar nova foto para o Apêndice A do relatório e, se a tela aparece nos slides do PIM ou na publicação do LinkedIn (`relatorio/docs/linkedin`), gerar o PDF ou as imagens de novo |
 | Programa desktop (`sistema/apps/desktop`) | testes do desktop, `GerarDiagramasDesktop.java` (o `.asta` fica em `docs/diagramas`) → exportar para `docs/diagramas/exportadas-astah` → copiar para `docs/diagramas`, fotos em `docs/telas`, README do desktop, slides e roteiro em `docs/apresentacao` → PDF dos slides |
 
 Antes de abrir um pull request, rode **`node scripts/verificar-sincronia.mjs`**. Ele confere se os
@@ -73,7 +73,8 @@ PIM (resumo e figuras) e se o PIM III só aparece nas melhorias. O GitHub roda a
 | Tabelas da API a partir do conteúdo | `sistema/`: `npm run seed:api` (e `npm run seed:api:check` para conferir) |
 | Gerar o `.asta` | ver `modelagem-uml/02_Modelagem_UML/gerador-astah/README.md` |
 | Exportar as imagens do Astah | idem (`ExportarImagens.java`) |
-| Gerar o Word do relatório | `relatorio/docs/word/`: `npm install` e `npm run gerar` |
+| Gerar o Word do relatório e refazer o sumário | `relatorio/docs/Relatorio_PIM_IV_Nex_TI/`: `npm install` e `npm run gerar`; `python atualizar-sumario.py` |
+| Gerar os PDFs dos slides do PIM e do plano de negócios | `relatorio/docs/apresentacao/` e `relatorio/docs/plano de negocios/`: `node gerar-pdf.mjs` |
 | Conferir a sincronia | raiz: `node scripts/verificar-sincronia.mjs` |
 
 O Live Server do editor usa a porta **5500** (para abrir o relatório); a 5501 é do site.

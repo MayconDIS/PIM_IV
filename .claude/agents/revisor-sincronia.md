@@ -11,8 +11,9 @@ Roteiro:
 1. `node scripts/verificar-sincronia.mjs --detalhes` na raiz. Cada ✗ vira um item da sua lista.
 2. Testes da parte que mudou (`sistema/`: `npm test`, `npm run test:shared`, `npm run test:mobile`,
    `npm run test:desktop`), `npm run seed:api:check` e `npm run auditoria`.
-3. Se o relatório mudou: toda página cabe em A4? O sumário bate com as páginas? O Word foi gerado de
-   novo? Se os slides do desktop mudaram: o PDF foi gerado de novo e tem o mesmo número de páginas?
+3. Se o relatório (`relatorio/docs/Relatorio_PIM_IV_Nex_TI`) mudou: toda página cabe em A4? O sumário bate com as páginas? O Word foi
+   gerado de novo e o PDF dele não tem folha em branco? Se os slides do PIM, do plano de negócios ou do
+   desktop mudaram: o PDF foi gerado de novo e o `gerar-pdf.mjs` não avisou conteúdo fora da folha?
 4. Leia o diff procurando: regra ou requisito que não bate com a API (quem pode usar cada rota),
    número escrito de memória, diagrama que não veio do Astah, menção ao
    PIM III fora das melhorias, texto com jargão, `TODO`.

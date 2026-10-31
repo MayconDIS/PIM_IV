@@ -32,11 +32,14 @@ const falhas = [];
 const ok = [];
 const checar = (nome, passou, detalhe) => (passou ? ok : falhas).push(`${nome}${detalhe ? ` — ${detalhe}` : ''}`);
 
+// O relatório (HTML, README e Word) fica nesta pasta; as imagens dele, em relatorio/assets.
+const PASTA_RELATORIO = 'relatorio/docs/Relatorio_PIM_IV_Nex_TI';
+
 // Documentos que falam do projeto: o que eles dizem tem de bater com o código.
 const DOCUMENTOS = [
   'README.md', 'sistema/README.md', 'sistema/docs/MANUAL_TECNICO.md', 'sistema/docs/MANUAL_PRATICO.md', 'modelagem-uml/README.md',
   'modelagem-uml/02_Modelagem_UML/gerador-astah/README.md', 'modelagem-uml/04_Banco_de_Dados/README.md',
-  'relatorio/README.md', 'relatorio/index.html', 'sistema/docs/TESTES.md',
+  `${PASTA_RELATORIO}/README.md`, `${PASTA_RELATORIO}/index.html`, 'sistema/docs/TESTES.md',
   'relatorio/docs/apresentacao/README.md', 'relatorio/docs/plano de negocios/README.md', 'relatorio/docs/apresentacao/slides.html', 'relatorio/docs/apresentacao/ROTEIRO_DO_PALESTRANTE.md',
 ].filter(existe);
 // A apresentação de P.A. em .NET é uma atividade à parte: fala só do Nex_TI Desktop e é conferida
@@ -78,7 +81,7 @@ for (const { doc, m } of citacoes(/\b(\d+) fases(?:,| e) (\d+) (?:cartas|flashca
 const diagnostico = JSON.parse(ler('sistema/apps/api/Data/Seed/diagnostico.json'));
 const modulosDiagnostico = new Set(diagnostico.perguntas.map((p) => p.modulo));
 const totalDiagnostico = modulosDiagnostico.size * diagnostico.perguntasPorModulo;
-for (const doc of ['sistema/docs/MANUAL_PRATICO.md', 'sistema/docs/MANUAL_TECNICO.md', 'relatorio/index.html']) {
+for (const doc of ['sistema/docs/MANUAL_PRATICO.md', 'sistema/docs/MANUAL_TECNICO.md', `${PASTA_RELATORIO}/index.html`]) {
   const texto = semTags(doc);
   checar(`quantidade do diagnóstico em ${doc}`, texto.includes(`${totalDiagnostico} perguntas`) && !/\b(?:10|dez) perguntas\b/i.test(texto),
     `a avaliação tem ${totalDiagnostico} perguntas`);
@@ -188,7 +191,7 @@ for (const caso of pastasCasos) {
 }
 
 // Toda imagem citada no relatório e nos slides existe.
-for (const [doc, base] of [['relatorio/index.html', 'relatorio'], ['sistema/apps/desktop/docs/apresentacao/slides.html', 'sistema/apps/desktop/docs/apresentacao']]) {
+for (const [doc, base] of [[`${PASTA_RELATORIO}/index.html`, PASTA_RELATORIO], ['sistema/apps/desktop/docs/apresentacao/slides.html', 'sistema/apps/desktop/docs/apresentacao']]) {
   if (!existe(doc)) continue;
   for (const m of ler(doc).matchAll(/<img[^>]+src="([^"]+)"/g)) {
     if (/^https?:/.test(m[1])) continue;
@@ -198,12 +201,12 @@ for (const [doc, base] of [['relatorio/index.html', 'relatorio'], ['sistema/apps
 }
 
 // --- 5. só PIM IV: o PIM III aparece apenas na comparação de melhorias -----------------------
-const PERMITIDOS = ['README.md', 'modelagem-uml/README.md', 'relatorio/README.md', 'relatorio/index.html',
+const PERMITIDOS = ['README.md', 'modelagem-uml/README.md', `${PASTA_RELATORIO}/README.md`, `${PASTA_RELATORIO}/index.html`,
   'sistema/apps/desktop/docs/apresentacao/slides.html', 'sistema/apps/desktop/docs/apresentacao/ROTEIRO_DO_PALESTRANTE.md'];
 // Os arquivos de regras (AGENTS.md, CLAUDE.md e os agentes) citam o PIM III para proibi-lo.
 const REGRAS = (f) => /(^|\/)(AGENTS|CLAUDE)\.md$/.test(f) || f.startsWith('.claude/');
 const comPim3 = arquivos('.', (c) => /\.(md|html|js|jsx|cs|java|json)$/.test(c))
-  .filter((f) => !PERMITIDOS.includes(f) && !REGRAS(f) && !f.startsWith('relatorio/docs/word/') && /PIM ?III/.test(ler(f)));
+  .filter((f) => !PERMITIDOS.includes(f) && !REGRAS(f) && !f.startsWith(`${PASTA_RELATORIO}/`) && /PIM ?III/.test(ler(f)));
 checar('PIM III só nas seções de melhorias', comPim3.length === 0, comPim3.join(', '));
 
 // --- 6. uma pasta de skills só ---------------------------------------------------------------
@@ -250,7 +253,7 @@ const sobramNoManual = [...rotasDoManual].filter((r) => !rotasDoCodigo.has(r));
 checar('rotas do manual técnico iguais às da API', !faltamNoManual.length && !sobramNoManual.length,
   [faltamNoManual.length && `faltam: ${faltamNoManual.join(', ')}`, sobramNoManual.length && `sobram: ${sobramNoManual.join(', ')}`].filter(Boolean).join('; '));
 
-const relatorio = ler('relatorio/index.html');
+const relatorio = ler(`${PASTA_RELATORIO}/index.html`);
 // Dicionário de dados (2.7.6) = tabelas do script do banco.
 // Só declarações: o conteúdo dos flashcards também pode mencionar "CREATE TABLE".
 const tabelasDoBanco = new Set([...ler('sistema/database/NexTI_DB.sql').matchAll(/^\s*CREATE TABLE \[?(\w+)\]?\s*\(/gm)]

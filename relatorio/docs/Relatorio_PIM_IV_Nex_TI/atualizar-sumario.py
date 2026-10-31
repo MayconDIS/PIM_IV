@@ -1,6 +1,6 @@
 """Refaz o sumário do relatório e numera as páginas.
 
-Uso (na pasta relatorio): python atualizar-sumario.py
+Uso (na pasta relatorio/docs/Relatorio_PIM_IV_Nex_TI): python atualizar-sumario.py
 Lê os títulos de cada página (seções, subseções numeradas e apêndices), dá uma âncora a quem não tem,
 renumera as páginas e monta o sumário com link e número de página em cada linha.
 """
