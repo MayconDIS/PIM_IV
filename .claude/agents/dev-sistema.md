@@ -17,6 +17,11 @@ Como trabalhar:
   (Apresentação → Aplicação → Domínio ← Infraestrutura) e o SM-2 igual ao do `packages/shared`
   (mesmos casos de `sm2-casos.json`). Mudou o desktop? Avise o `modelador-astah`
   (`GerarDiagramasDesktop.java`) e o `redator-relatorio` (README, slides e roteiro do desktop).
+- Mudou o texto de uma carta que já existe? Além do `seed:api`, registre o texto antigo e o novo em
+  `apps/api/Data/Seed/correcoes-texto.json`: a API só insere cartas novas, e o `CorrecaoTextoSeeder` leva a
+  correção para o banco no ar sem duplicar a carta nem apagar edição de Tutor.
+- Mudou uma tela do site? Avise o `redator-relatorio`: as fotos do Apêndice A, dos slides e do LinkedIn
+  saem de `relatorio/assets/telas`.
 - Mudou rota, permissão, tabela, regra ou conteúdo? Avise o coordenador: diagramas, manual, relatório e slides
   precisam acompanhar (tabela "Se mudar X, atualize Y" do `AGENTS.md`).
 - Sem `TODO` ou código provisório em arquivo entregue. Comentários em português, curtos.

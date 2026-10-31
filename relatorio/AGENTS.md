@@ -5,23 +5,26 @@ Aqui fica só o que é específico do relatório.
 
 ## O que tem aqui
 
-- `index.html` e `style.css`: o relatório, uma folha A4 por `<section class="page">`.
-- `docs/word/Relatorio_PIM_IV_Nex_TI.docx`: a versão em Word, gerada do HTML por `docs/word/gerar-docx.js`.
+- `docs/Relatorio_PIM_IV_Nex_TI/`: o relatório (`index.html` e `style.css`, uma folha A4 por
+  `<section class="page">`), o `atualizar-sumario.py` e a versão em Word (`Relatorio_PIM_IV_Nex_TI.docx`,
+  gerada do HTML pelo `gerar-docx.js`, com `npm run gerar` nessa pasta).
 - `assets/diagrams/` e `assets/casos-de-uso/`: cópias exatas das imagens exportadas do Astah.
-- `assets/telas/`: fotos das telas reais do site (Apêndice A).
+- `assets/telas/`: fotos das telas reais do site (Apêndice A e slides).
 - `assets/trello/`: prints do quadro do Trello (Etapa 9).
-- `docs/`: a apresentação do PIM IV (slides em HTML com modo apresentação, PDF e roteiro). Usa as
-  imagens de `assets/` e os números do relatório; depois de mudar, `node gerar-pdf.mjs` em
-  `docs/apresentacao`.
+- `docs/apresentacao/`: a apresentação do PIM IV (slides em HTML com modo apresentação, PDF e roteiro).
+  Usa as imagens de `assets/` e os números do relatório; depois de mudar, `node gerar-pdf.mjs` nessa pasta.
+- `docs/plano de negocios/`: o plano de negócios e os slides dele (`node gerar-pdf.mjs`).
+- `docs/pesquisa/`: a pesquisa no Google Forms e o `analisar-respostas.mjs`.
+- `docs/linkedin/`: a publicação para divulgar a pesquisa (`node gerar-imagens.mjs`).
 
 ## Regras do relatório
 
-- Nenhuma página passa de 29,7 cm. Incluiu ou tirou página ou título? Rode `python atualizar-sumario.py`:
+- Nenhuma página passa de 29,7 cm. Incluiu ou tirou página ou título? Rode `python atualizar-sumario.py` em `docs/Relatorio_PIM_IV_Nex_TI`:
   ele renumera as páginas e refaz o sumário, com link e página em cada linha.
 - Números e imagens vêm do código e da modelagem, nunca de memória.
 - Cada etapa cita o livro-texto da sua disciplina (seção 1.5), com referência ABNT.
 - O PIM III aparece só na seção 1.4 (melhorias) e nas referências.
-- Mudou o HTML? Gere o Word de novo (`docs/word/`: `npm run gerar`) e atualize o sumário no Word.
+- Mudou o HTML? Gere o Word de novo (`docs/Relatorio_PIM_IV_Nex_TI/`: `npm run gerar`) e atualize o sumário no Word.
   Confira no PDF exportado do Word que não sobrou folha em branco.
 - Modelo de PIM da UNIP: resumo num parágrafo só, no passado, com 200 a 250 palavras (o abstract é a
   tradução dele); conclusão sem citação, ligando o problema às soluções; figuras numeradas

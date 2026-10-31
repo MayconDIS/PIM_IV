@@ -1,5 +1,5 @@
-// Gera o relatório em Word (.docx) a partir do relatorio/index.html, no padrão ABNT.
-// Uso: node gerar-docx.js <pasta relatorio> <saida.docx>
+// Gera o relatório em Word (.docx) a partir do index.html desta pasta, no padrão ABNT.
+// Uso, nesta pasta: npm run gerar (ou node gerar-docx.js <pasta do index.html> <saida.docx>)
 const fs = require('fs');
 const path = require('path');
 const { parse } = require('node-html-parser');
