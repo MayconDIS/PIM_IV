@@ -158,6 +158,12 @@ para cada caso de uso, MER, DER (modelo lógico) e modelo físico. As imagens es
 | Fases liberadas, bônus comprados, Mapa Neural | Estado local no navegador (`localStorage`); conclusões da API também participam da liberação |
 | Conversa do Nexor, assistente do Nex_TI | Só na memória da tela; não vai para o servidor nem para `localStorage` |
 
+O JWT vale 24 horas. No site, toda chamada autenticada passa por `fetchDaApi`
+(`packages/shared/src/api.js`): uma resposta 401 dispara o evento `nexti:sessao-expirada`, e o painel
+apaga a sessão local e volta para a tela de entrada com o aviso de sessão expirada. Ao abrir, o site
+também confere a validade do token guardado (`packages/shared/src/sessao.js`) e descarta um vencido.
+O app de celular já encerrava a sessão ao receber 401.
+
 Para Aluno, a compra de bônus usa a API para conferir e descontar o saldo.
 Admin e Tutor acessam os bônus sem compra; se chamarem a rota de compra, a API devolve o saldo sem desconto. A conclusão de fase
 paga o prêmio no servidor uma única vez. O Web não tem fila de reenvio de respostas
